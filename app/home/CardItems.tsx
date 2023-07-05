@@ -8,7 +8,7 @@ type Props = {
 
 const Card = ({ text, icon }: Props) => {
   return (
-    <div className='flex items-center justify-center gap-4 border hover:border-[#7D55FA] bg-[#35363A] hover:bg-[#383454] border-[#525252] w-[260px] h-[80px] rounded-lg text-white text-base cursor-pointer font-medium'>
+    <div className='flex items-center justify-center gap-4 border hover:border-[#7D55FA] bg-[#35363A] hover:bg-[#383454] border-[#525252] w-[260px] max-sm:w-full h-[80px] rounded-lg text-white text-base cursor-pointer font-medium'>
       <Image src={icon} width={32} height={32} className='overflow-hidden' alt='icon' />
       {text}
     </div>

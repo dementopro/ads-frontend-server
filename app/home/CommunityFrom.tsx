@@ -42,7 +42,7 @@ const CommunityFrom = () => {
           tags.map(tag => (
             <button onClick={() => setCurrentTag(tag)} key={tag}
               className={
-                `flex items-center justify-center px-4 py-1 min-w-[64px] text-base hover:bg-[#7D55FA] hover:text-white rounded-lg 
+                `flex items-center justify-center px-4 py-1 min-w-[64px] text-base hover:bg-[#7D55FA] hover:text-white rounded-lg truncate
                 ${currentTag === tag ? 'bg-[#7D55FA] text-white' : 'bg-[#35363A] text-primary-gray'}
                 `
               }
