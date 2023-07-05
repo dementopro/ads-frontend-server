@@ -1,6 +1,6 @@
 .login-warpper {
   box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
-  @apply border p-8 rounded-lg mt-4;
+  @apply border py-8 px-10 rounded-lg mt-4;
 }
 
 .login-input {
