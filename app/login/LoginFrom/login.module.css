@@ -1,0 +1,18 @@
+.login-warpper {
+  box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+  @apply border p-8 rounded-lg mt-4;
+}
+
+.login-input {
+  @apply py-2 px-4 rounded sm:w-[370px] bg-[#f3f3ff];
+}
+
+.login-input:focus {
+  @apply outline-none;
+}
+
+
+.login-btn {
+  background: linear-gradient(203deg, #d634ff 0%, #4663ff 100%);
+  @apply text-white p-2 rounded hover:opacity-80;
+}
