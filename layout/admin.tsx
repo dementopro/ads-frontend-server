@@ -1,4 +1,5 @@
 import AdminSidebar from '@/components/admin/AdminSidebar'
+import ContentHeader from '@/components/admin/ContentHeader'
 import React from 'react'
 
 const AdminLayout = ({ children }: {
@@ -10,6 +11,7 @@ const AdminLayout = ({ children }: {
         <AdminSidebar />
       </div>
       <section className={`max-h-full w-full overflow-auto admin-content`}>
+        <ContentHeader />
         {children}
       </section>
     </div>

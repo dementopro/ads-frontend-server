@@ -8,8 +8,8 @@ type Props = {
 
 const Card = ({ text, icon }: Props) => {
   return (
-    <div className='flex flex-col items-center justify-center gap-5 border shadow border-[#D9D9D9] border-2px w-[222px] h-[154px] rounded-lg text-[#3A3A3A] text-[18px] cursor-pointer font-medium'>
-      <Image src={icon} width={46} height={40} className='overflow-hidden' alt='icon' />
+    <div className='flex items-center justify-center gap-4 border hover:border-[#7D55FA] bg-[#35363A] hover:bg-[#383454] border-[#525252] w-[260px] h-[80px] rounded-lg text-white text-base cursor-pointer font-medium'>
+      <Image src={icon} width={32} height={32} className='overflow-hidden' alt='icon' />
       {text}
     </div>
   )
@@ -37,7 +37,7 @@ const cards = [
 
 const CardItems = () => {
   return (
-    <div className='flex items-center justify-center gap-10'>
+    <div className='flex flex-wrap items-center gap-5'>
       {
         cards.map((card, index) => (
           <Card text={card.text} icon={card.icon} key={index} />
