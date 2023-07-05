@@ -1,0 +1,23 @@
+.register-warpper {
+  box-shadow: 0 0 37px rgba(8, 21, 66, .05);
+  @apply sm:border max-sm:shadow-none py-8 px-8 lg:px-10 rounded-lg mt-4;
+}
+
+.register-input {
+  @apply py-2 px-4 rounded sm:w-[370px] bg-[#f3f3ff];
+}
+
+.register-input:focus {
+  @apply outline-none;
+}
+
+
+.register-btn {
+  background: linear-gradient(203deg, #d634ff 0%, #4663ff 100%);
+  @apply text-white p-2 rounded hover:opacity-80;
+}
+
+.send-btn {
+  background: linear-gradient(203deg, #d634ff 0%, #4663ff 100%);
+  @apply absolute right-0 z-10 text-white py-2 px-4 rounded-r hover:opacity-80;
+}
