@@ -2,11 +2,23 @@
 
 web app for AdsGency AI
 
+### How to run
+
+```bash
+# install dependencies
+npm install
+
+# run
+npm run dev
+```
+
 #### source
 
-- ui: [figema](https://www.figma.com/file/10YLD7VIq0J2t7rqftyeGM/AdsGency-UX%2FUI?type=design&node-id=0-1&mode=design&t=mQRsdtWcLcKEEmeg-0)
+- ui: [figema](https://www.figma.com/file/ielljfGhpQifsFIhoyYuCJ/AdsGency-AI?node-id=0%3A1&mode=dev)
 
 ### tech stack
 
+- [nextjs](https://nextjs.org)
+- [tailwindcss](https://tailwindcss.com)
 - [headlessui](https://headlessui.dev)
 - [icons](https://icon-sets.iconify.design/mdi)
