@@ -19,5 +19,5 @@
 
 .send-btn {
   background: linear-gradient(203deg, #d634ff 0%, #4663ff 100%);
-  @apply absolute right-0 z-10 text-white py-2 px-4 rounded-r hover:opacity-80;
+  @apply absolute right-0 z-10 h-full text-white text-sm py-2 px-4 rounded-r hover:opacity-80;
 }

@@ -27,7 +27,7 @@ const LoginForm = () => {
           <input type="checkbox" id="remember" />
           <label className='text-[#898989] text-sm ml-2 select-none cursor-pointer' htmlFor="remember">Remember me</label>
         </div>
-        <button type="submit" className={styles['login-btn']}>Login</button>
+        <button type="submit" className={`${styles['login-btn']}`}>Login</button>
       </form>
       <div className='mt-8 flex flex-col items-center justify-center gap-4 text-[#898989] text-sm'>
         <p>Dont&apos;t have account? <Link className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>

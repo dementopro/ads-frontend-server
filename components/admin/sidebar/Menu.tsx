@@ -68,7 +68,7 @@ function MenuSigleBtn({ text, isActive, icon, href }: MenuSigleBtnProps) {
   return (
     <button
       onClick={handleClick}
-      className={`flex h-[50px] w-full items-center hover:text-white hover:bg-[#23252B] px-4 transition-all ${isActive ? 'bg-[#23252B] border-r-[#844FFF] text-white font-semibold border-r-[2px]' : 'bg-transparent text-[#ABABAB]'}`}
+      className={`flex h-[50px] w-full items-center hover:text-white hover:bg-[#23252B] px-4 transition-all ${isActive ? 'bg-[#23252B] border-r-primary-purple text-white font-semibold border-r-[2px]' : 'bg-transparent text-primary-gray'}`}
     >
       {icon && <Image src={icon} alt={text} width={20} height={20} className="mr-5" />}
       {text}
@@ -89,7 +89,7 @@ export default function Menu() {
               <Disclosure as="div" key={index}>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className={`flex h-[50px] w-full items-center justify-between bg-transparent text-[#ABABAB] px-4 hover:bg-[#23252B]`}>
+                    <Disclosure.Button className={`flex h-[50px] w-full items-center justify-between bg-transparent text-primary-gray px-4 hover:bg-[#23252B]`}>
                       <div className='flex items-center'>
                         {item.icon && <Image src={item.icon} alt={item.text} width={20} height={20} className="mr-5" />}
                         <span>{item.text}</span>
