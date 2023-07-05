@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -20,5 +22,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities, addComponents, e, config }) {
+      // Add your custom styles here
+      addUtilities({
+        '.bg-primary-gradient': {
+          background: 'linear-gradient(203deg, #d634ff 0%, #4663ff 100%)'
+        },
+      })
+    }),
+  ],
 }

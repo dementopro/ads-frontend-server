@@ -11,8 +11,6 @@
   @apply outline-none;
 }
 
-
 .login-btn {
-  background: linear-gradient(203deg, #d634ff 0%, #4663ff 100%);
-  @apply text-white p-2 rounded hover:opacity-80;
+  @apply text-white p-2 rounded hover:opacity-80 bg-primary-gradient;
 }

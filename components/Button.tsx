@@ -8,7 +8,7 @@ type Props = {
 
 const Button = ({ children, type, btnStyle }: Props) => {
   return (
-    <button type={type || 'button'} className={`text-white bg-gradient-to-r rounded-lg from-[#D634FF] to-[#4663FF] font-[700] hover:opacity-80 relative flex items-center justify-center ${btnStyle}`}>
+    <button type={type || 'button'} className={`text-white bg-primary-gradient rounded-lg font-[700] hover:opacity-80 relative flex items-center justify-center ${btnStyle}`}>
       {children}
     </button>
   )
