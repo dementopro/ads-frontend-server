@@ -7,5 +7,5 @@
 }
 
 .login-btn {
-  @apply text-white p-2 rounded hover:opacity-80 bg-primary-gradient;
+  @apply text-white p-2 flex items-center justify-center rounded hover:opacity-80 bg-primary-gradient;
 }
