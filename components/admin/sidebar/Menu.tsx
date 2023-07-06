@@ -20,8 +20,9 @@ const menuItems = [
   },
   {
     text: 'Planning',
+    href: '/planning',
     icon: '/images/sidebar/planning.svg',
-    activeIcon: '/images/sidebar/active/planning.svg'
+    activeIcon: '/images/sidebar/active/planning.svg',
   },
   {
     text: 'Generate',
