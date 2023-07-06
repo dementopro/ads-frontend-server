@@ -11,7 +11,7 @@ type props<T> = {
   options: T[]
 }
 
-const SelectCom = ({ options, selected, setSelected }: props<{ name: string }>) => {
+const SelectCom = ({ options, selected, setSelected }: props<{ name: string, value: string }>) => {
 
   return (
     <Listbox value={selected} onChange={setSelected}>

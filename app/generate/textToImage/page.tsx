@@ -1,7 +1,7 @@
 'use client'
 import HistoricalGenerations from '@/app/generate/textToImage/HistoricalGenerations'
 import SelectCom from '@/app/generate/textToImage/SelectCom'
-import { portraitOptions, qualityOptions } from '@/data/constant'
+import { typeOptions, modeOptions } from '@/data/constant'
 import AdminLayout from '@/layout/admin'
 import Image from 'next/image'
 import React, { ChangeEvent, useState } from 'react'
@@ -18,8 +18,8 @@ import checkboxMultipleMarked from '@iconify/icons-mdi/checkbox-multiple-marked'
 
 const TextToImagePage = () => {
 
-  const [quality, setQuality] = useState({ name: 'Medium quality' })
-  const [portrait, setPortrait] = useState({ name: 'Portrait' })
+  const [mode, setMode] = useState(modeOptions[0])
+  const [type, setType] = useState(typeOptions[0])
   const [propmt, setPropmt] = useState('')
 
   const p1 = 'Ethereal warrior dances amidst swirling mist and moonlight.'
@@ -55,8 +55,8 @@ const TextToImagePage = () => {
             <div className='border rounded-lg border-[#3A3A3A] bg-[#1B1C21] px-4 py-[18px] flex flex-col gap-[10px] justify-between'>
               <textarea onChange={handleChange} className='bg-transparent outline-none h-[90px] resize-none' placeholder='Write your prompt here...'>{propmt}</textarea>
               <div className='flex flex-wrap items-center justify-end gap-5'>
-                <SelectCom options={portraitOptions} selected={portrait} setSelected={setPortrait} />
-                <SelectCom options={qualityOptions} selected={quality} setSelected={setQuality} />
+                <SelectCom options={typeOptions} selected={type} setSelected={setType} />
+                <SelectCom options={modeOptions} selected={mode} setSelected={setMode} />
                 <button className='bg-primary-purple hover:opacity-80 flex items-center justify-center w-[152px] h-[44px] rounded-lg truncate'>Generate</button>
               </div>
             </div>
