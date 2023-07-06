@@ -9,20 +9,24 @@ const menuItems = [
   {
     text: 'Home',
     href: '/home',
-    icon: '/images/sidebar/home.svg'
+    icon: '/images/sidebar/home.svg',
+    activeIcon: '/images/sidebar/active/home.svg'
   },
   {
     text: 'Your Projects',
     href: '/projects',
-    icon: '/images/sidebar/projects.svg'
+    icon: '/images/sidebar/projects.svg',
+    activeIcon: '/images/sidebar/active/projects.svg'
   },
   {
     text: 'Planning',
     icon: '/images/sidebar/planning.svg',
+    activeIcon: '/images/sidebar/active/planning.svg'
   },
   {
     text: 'Generate',
     icon: '/images/sidebar/generate.svg',
+    activeIcon: '/images/sidebar/active/generate.svg',
     children: [
       {
         text: 'Text To Image',
@@ -37,15 +41,18 @@ const menuItems = [
   },
   {
     text: 'Social Insights',
-    icon: '/images/sidebar/social.svg',
+    icon: '/images/sidebar/social-joomla.svg',
+    activeIcon: '/images/sidebar/active/social-joomla.svg',
   },
   {
     text: 'Ads Management',
     icon: '/images/sidebar/manage.svg',
+    activeIcon: '/images/sidebar/active/manage.svg',
   },
   {
     text: 'Optimization Tools',
     icon: '/images/sidebar/opti.svg',
+    activeIcon: '/images/sidebar/active/opti.svg',
   }
 ]
 
@@ -53,10 +60,11 @@ type MenuSigleBtnProps = {
   text: string,
   isActive: boolean,
   icon?: string,
+  activeIcon?: string,
   href?: string
 }
 
-function MenuSigleBtn({ text, isActive, icon, href }: MenuSigleBtnProps) {
+function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnProps) {
   const router = useRouter()
 
   function handleClick() {
@@ -68,9 +76,13 @@ function MenuSigleBtn({ text, isActive, icon, href }: MenuSigleBtnProps) {
   return (
     <button
       onClick={handleClick}
-      className={`flex h-[50px] w-full items-center hover:text-white hover:bg-[#23252B] px-4 transition-all ${isActive ? 'bg-[#23252B] border-r-primary-purple text-white font-semibold border-r-[2px]' : 'bg-transparent text-primary-gray'}`}
+      className={`flex h-[44px] text-[15px] w-full items-center hover:text-white hover:bg-[#383454] px-8 transition-all ${isActive ? 'bg-[#35363A] border-r-primary-purple text-white border-r-[3px]' : 'bg-transparent text-primary-gray'}`}
     >
-      {icon && <Image src={icon} alt={text} width={20} height={20} className="mr-5" />}
+      {
+        icon
+          ? <Image src={isActive ? activeIcon! : icon} alt={text} width={20} height={20} className="mr-5" />
+          : <span className='ml-6' />
+      }
       {text}
     </button>
   )
@@ -81,7 +93,7 @@ export default function Menu() {
   const pathname = usePathname()
 
   return (
-    <div className="mx-auto w-full rounded-2x">
+    <div className="mx-auto w-full rounded-2x flex flex-col gap-[18px]">
       {
         menuItems.map((item, index) => {
           return (
@@ -89,7 +101,7 @@ export default function Menu() {
               <Disclosure as="div" key={index}>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className={`flex h-[50px] w-full items-center justify-between bg-transparent text-primary-gray px-4 hover:bg-[#23252B]`}>
+                    <Disclosure.Button className={`flex text-[15px] h-[44px] w-full items-center justify-between bg-transparent text-primary-gray px-8 hover:bg-[#383454] hover:text-white`}>
                       <div className='flex items-center'>
                         {item.icon && <Image src={item.icon} alt={item.text} width={20} height={20} className="mr-5" />}
                         <span>{item.text}</span>
@@ -98,7 +110,7 @@ export default function Menu() {
                         className={`${open ? 'rotate-180 transform' : ''}`}
                       />
                     </Disclosure.Button>
-                    <Disclosure.Panel className="">
+                    <Disclosure.Panel className="mt-[18px]">
                       {
                         item.children?.map((child, index) => {
                           return (
@@ -112,7 +124,7 @@ export default function Menu() {
               </Disclosure>
               :
               <Disclosure as="div" key={index}>
-                <MenuSigleBtn text={item.text} icon={item.icon} isActive={pathname === item.href} href={item.href} />
+                <MenuSigleBtn text={item.text} icon={item.icon} activeIcon={item.activeIcon} isActive={pathname === item.href} href={item.href} />
               </Disclosure>
           )
         })

@@ -3,14 +3,12 @@ import Link from 'next/link'
 import React from 'react'
 
 
-
-
 const ContentHeader = () => {
   return (
     <div className='flex justify-between items-center px-8 h-[64px] bg-[#1B1C21] border-b border-b-[#3A3A3A]'>
       <div className='w-[260px]'>
         <Link href={'/home'}>
-          <Image className='ml-8' src={'/images/sidebar/logo.svg'} width={132} height={28} alt='logo' />
+          <Image src={'/images/sidebar/logo.svg'} width={132} height={28} alt='logo' />
         </Link>
       </div>
       <div className='flex justify-between items-center flex-1'>

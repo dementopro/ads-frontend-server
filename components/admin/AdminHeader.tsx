@@ -32,11 +32,6 @@ const navItems = [
   }
 ]
 
-function RenderIcon(icon: any) {
-  'use client'
-  return <Icon icon={icon} className='mr-[30px] cursor-pointer w-[32px]' />
-}
-
 const AdminHeader = () => {
   return (
     <header className={`${styles.header} h-[126px] w-full flex items-center pl-[33px] pr-[18px] justify-between`}>
