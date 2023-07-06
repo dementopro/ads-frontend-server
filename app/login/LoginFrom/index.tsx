@@ -11,27 +11,29 @@ const LoginForm = () => {
   }
 
   return (
-    <div className={styles['login-warpper']}>
-      <h1 className='font-bold text-2xl'>Hey, hello! 👋</h1>
-      <p className='text-sm text-[#898989] mb-6 mt-1'>Your marketing just got an AI upgrade.</p>
-      <form className='flex flex-col gap-4' onSubmit={onLogin}>
+    <div className={'mt-9'}>
+      <h1 className='font-bold text-3xl text-center text-white'>Welcome to Adsgency AI</h1>
+      <p className='text-[18px] text-center text-white mt-[10px]'>Like Ad management, this will be quick ⚡</p>
+      <form className='flex flex-col gap-4 mt-8' onSubmit={onLogin}>
         <div className='flex flex-col gap-1'>
-          <label className='text-gray-800 text-sm' htmlFor="email">Email</label>
+          <label className='text-primary-gray mb-2 text-base' htmlFor="email">Email</label>
           <input type="email" placeholder='Enter your email' id="email" className={styles['login-input']} />
         </div>
         <div className='flex flex-col gap-1'>
-          <label className='text-gray-800 text-sm' htmlFor="password">Password</label>
+          <label className='text-primary-gray mb-2 text-base' htmlFor="password">Password</label>
           <input type="password" placeholder='Enter your password' id="password" className={styles['login-input']} />
         </div>
-        <div className='flex items-center'>
-          <input type="checkbox" id="remember" />
-          <label className='text-[#898989] text-sm ml-2 select-none cursor-pointer' htmlFor="remember">Remember me</label>
+        <div className="flex items-center justify-between">
+          <div className='flex items-center'>
+            <input type="checkbox" id="remember" />
+            <label className='text-white text-base ml-2 select-none cursor-pointer' htmlFor="remember">Remember me</label>
+          </div>
+          <Link className='text-[#7366ff] font-base' href={'/forgetPwd'}>Forgot Password?</Link>
         </div>
-        <button type="submit" className={`${styles['login-btn']}`}>Login</button>
+        <button type="submit" className={`${styles['login-btn']}`}>Sign up</button>
       </form>
-      <div className='mt-8 flex flex-col items-center justify-center gap-4 text-[#898989] text-sm'>
+      <div className='mt-8 flex flex-col items-center justify-center gap-4 text-primary-gray text-sm'>
         <p>Dont&apos;t have account? <Link className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>
-        <p>Forget passowrd? <Link className='text-[#7366ff] font-semibold' href={'/forgetPwd'} >Reset Password 💜</Link></p>
       </div>
     </div>
   )

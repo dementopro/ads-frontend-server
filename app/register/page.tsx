@@ -8,7 +8,7 @@ export const metadata = {
 
 const RegisterPage = () => {
   return (
-    <div className='flex flex-col lg:flex-row w-full h-screen'>
+    <div className='flex flex-col lg:flex-row w-full h-screen bg-[#121212]'>
       <Landing />
       <div className='flex-1 flex flex-col items-center justify-center'>
         <RegisterForm />

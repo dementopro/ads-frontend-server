@@ -9,10 +9,10 @@ export const metadata = {
 
 const LoginPage = () => {
   return (
-    <div className='flex flex-col lg:flex-row w-full h-screen'>
+    <div className='flex flex-col lg:flex-row w-full h-screen bg-[#121212]'>
       <Landing />
       <div className='flex-1 flex flex-col items-center justify-center'>
-        <Image width={100} height={100} src={'/images/login/logo.png'} alt='logo' />
+        <Image width={84} height={78} src={'/images/login-logo.svg'} alt='logo' />
         <LoginFrom />
       </div>
     </div>

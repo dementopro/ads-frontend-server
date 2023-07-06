@@ -1,0 +1,5 @@
+.landing-txt {
+  background: linear-gradient(243deg,#D634FF, #4663FF);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

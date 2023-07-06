@@ -1,14 +1,9 @@
-.login-warpper {
-  box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
-  @apply border py-8 px-10 rounded-lg mt-4;
-}
-
 .login-input {
-  @apply py-2 px-4 rounded sm:w-[370px] bg-[#f3f3ff];
+  @apply py-2 px-4 rounded sm:w-[370px] bg-transparent border-[#383838] border-2 text-white;
 }
 
 .login-input:focus {
-  @apply outline-none;
+  @apply outline-none border-primary-purple;
 }
 
 .login-btn {
