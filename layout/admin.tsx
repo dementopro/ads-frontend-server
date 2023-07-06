@@ -6,14 +6,18 @@ const AdminLayout = ({ children }: {
   children: React.ReactNode
 }) => {
   return (
-    <div className='flex h-screen max-h-screen min-w-full'>
-      <div className='flex-1 h-full'>
-        <AdminSidebar />
-      </div>
-      <section className={`max-h-full w-full overflow-auto admin-content`}>
+    <div className='flex flex-col h-screen max-h-screen min-w-full'>
+      <div className='h-min'>
         <ContentHeader />
-        {children}
-      </section>
+      </div>
+      <div className='flex flex-1 h-full overflow-auto'>
+        <div className='w-min'>
+          <AdminSidebar />
+        </div>
+        <div className='admin-content max-h-full w-full overflow-auto'>
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
