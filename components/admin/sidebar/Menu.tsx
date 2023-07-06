@@ -30,6 +30,10 @@ const menuItems = [
     children: [
       {
         text: 'Text To Image',
+        href: '/generate/textToImage',
+      },
+      {
+        text: 'Image To Image',
       },
       {
         text: 'Product Description',
@@ -68,6 +72,7 @@ function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnPr
   const router = useRouter()
 
   function handleClick() {
+    console.log('href', href)
     if (href) {
       router.push(href)
     }
@@ -98,7 +103,7 @@ export default function Menu() {
         menuItems.map((item, index) => {
           return (
             item.children?.length ?
-              <Disclosure as="div" key={index}>
+              <Disclosure defaultOpen={item.children.map(child => child.href).includes(pathname)} key={index}>
                 {({ open }) => (
                   <>
                     <Disclosure.Button className={`flex text-[15px] h-[44px] w-full items-center justify-between bg-transparent text-primary-gray px-8 hover:bg-[#383454] hover:text-white`}>
@@ -110,11 +115,11 @@ export default function Menu() {
                         className={`${open ? 'rotate-180 transform' : ''}`}
                       />
                     </Disclosure.Button>
-                    <Disclosure.Panel className="mt-[18px]">
+                    <Disclosure.Panel className="">
                       {
                         item.children?.map((child, index) => {
                           return (
-                            <MenuSigleBtn isActive={pathname === item.href} text={child.text} key={index} />
+                            <MenuSigleBtn href={child.href} isActive={pathname === child.href} text={child.text} key={index} />
                           )
                         })
                       }
