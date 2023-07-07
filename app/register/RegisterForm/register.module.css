@@ -8,7 +8,7 @@
 
 
 .register-btn {
-  @apply text-white p-2 rounded hover:opacity-80 bg-primary-gradient;
+  @apply flex items-center justify-center text-white p-2 rounded hover:opacity-80 bg-primary-gradient;
 }
 
 .send-btn {
