@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/Breadcrumb'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -12,7 +13,7 @@ const ContentHeader = () => {
         </Link>
       </div>
       <div className='flex justify-between items-center flex-1'>
-        <div className='text-primary-gray text-base'>Home</div>
+        <Breadcrumb />
         <div className='cursor-pointer'>
           <Image src={'/images/admin/avatar.svg'} width={32} height={32} alt='user avatar' />
         </div>
