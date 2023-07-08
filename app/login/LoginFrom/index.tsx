@@ -40,8 +40,9 @@ const LoginForm = () => {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Login success');
           // redirect to home
+          // NOTE: need to fresh the page to get the new cookie
           setTimeout(() => {
-            router.push('/home')
+            window.location.href = '/home'
           }, 1000)
         } else {
           messageApi.error(data.message || 'Something went wrong');
