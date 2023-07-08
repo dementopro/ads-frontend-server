@@ -15,13 +15,11 @@ const Breadcrumb = () => {
         Home
       </Link>
       {
-        breadCrumbMap[pathname].map((item, index) => (
-          <>
+        breadCrumbMap[pathname]?.map((item) => (
+          <div key={item} className='flex items-center gap-6'>
             <Icon icon={chevronRight} />
-            <span key={`${pathname}-${item}-${index}`}>
-              {item}
-            </span>
-          </>
+            <span>{item}</span>
+          </div>
         ))
       }
     </div>
