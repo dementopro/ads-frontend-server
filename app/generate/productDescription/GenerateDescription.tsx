@@ -26,7 +26,8 @@ const GenerateDescription = () => {
   return (
     <Spin spinning={isGenerating} wrapperClassName='text-base rounded-lg'>
       <div className='flex flew-wrap max-lg:flex-col gap-[18px]'>
-        <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col items-end'>
+        {/* left */}
+        <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col gap-4 items-end justify-between'>
           <div className='w-full h-[220px]'>
             <textarea value={propmt} onChange={handleChange} className='w-full h-full text-xl flex-1 bg-transparent outline-none resize-none' placeholder='Write your prompt here...' />
           </div>
@@ -34,7 +35,8 @@ const GenerateDescription = () => {
             {isGenerating ? 'Generating...' : 'Generate'}
           </button>
         </div>
-        <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col gap-4 items-end'>
+        {/* right */}
+        <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col gap-4 items-end justify-between'>
           <div className='w-full h-[220px] overflow-auto text-xl'>
             {content}
             {
@@ -45,7 +47,6 @@ const GenerateDescription = () => {
               )
             }
           </div>
-
           <div className='w-full flex text-primary-gray items-center justify-between'>
             <div className='text-xs'>
               <span>
