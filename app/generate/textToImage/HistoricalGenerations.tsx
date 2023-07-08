@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 
 
 async function getImageList() {
-  const res = await fetch(`/api/generate/list`, {
+  const res = await fetch(`/api/generate/textToImage/list`, {
     method: 'GET',
   })
   if (!res.ok) {
