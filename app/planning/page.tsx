@@ -76,7 +76,7 @@ const PlanningPage = () => {
         </h1>
         <Spin spinning={isGenerating} wrapperClassName='text-base'>
           <div className='border rounded-lg border-[#3A3A3A] bg-[#1B1C21] px-4 py-[18px] flex flex-col gap-[10px] justify-between'>
-            <input type='text' value={prompt} onChange={handleChange} className='bg-transparent outline-none  resize-none h-[30px]' placeholder='What are you selling?' />
+            <input type='text' value={prompt} onChange={handleChange} className='bg-transparent outline-none text-xl resize-none h-[30px]' placeholder='What are you selling?' />
             <div className='flex flex-wrap items-center justify-end gap-5'>
               <button onClick={onGenerate} className='bg-primary-purple hover:opacity-80 flex items-center justify-center w-[152px] h-[44px] rounded-lg truncate'>
                 {isGenerating ? 'Generating...' : 'Generate'}
