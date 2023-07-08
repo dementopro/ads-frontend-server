@@ -38,9 +38,7 @@ const menuItems = [
       },
       {
         text: 'Product Description',
-      },
-      {
-        text: 'Product Email',
+        href: '/generate/productDescription',
       },
     ]
   },
