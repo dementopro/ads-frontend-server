@@ -7,8 +7,8 @@ import React from 'react'
 const HomePage = () => {
   return (
     <AdminLayout>
-      <section className='flex flex-col justify-center mx-8'>
-        <h1 className='text-white font-medium text-2xl my-6'>
+      <section className='flex flex-col justify-center'>
+        <h1 className='text-white font-medium text-2xl mb-6'>
           What advertising tasks do you have today?
         </h1>
         <CardItems />

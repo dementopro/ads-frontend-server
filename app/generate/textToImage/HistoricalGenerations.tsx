@@ -35,7 +35,7 @@ const HistoricalGenerations = () => {
       <h2 className='text-white font-medium text-xl my-6'>
         Historical Generations({imageList.length})
       </h2>
-      <div className='flex flex-wrap gap-5 mb-8'>
+      <div className='flex flex-wrap gap-5'>
         {
           !imageList.length
             ? <div className='w-full flex items-center justify-center'>

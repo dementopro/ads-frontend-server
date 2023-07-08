@@ -24,7 +24,7 @@ const SavedCopy = () => {
       <h2 className='text-white font-medium text-xl my-6'>
         Saved copy({copyList.length})
       </h2>
-      <div className='flex flex-wrap gap-5 mb-8'>
+      <div className='flex flex-wrap gap-5'>
         {
           !copyList.length
             ?

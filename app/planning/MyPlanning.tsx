@@ -7,7 +7,7 @@ type Props = {
 
 const MyPlanning = ({ plan }: Props) => {
   return (
-    <div className='mb-8'>
+    <>
       <h2 className='text-white font-medium text-xl my-8'>
         My planning
       </h2>
@@ -33,7 +33,7 @@ const MyPlanning = ({ plan }: Props) => {
           ))
         }
       </div>
-    </div>
+    </>
   )
 }
 
