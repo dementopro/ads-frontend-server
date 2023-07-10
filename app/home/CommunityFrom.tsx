@@ -33,7 +33,7 @@ const CommunityFrom = () => {
   })
 
   return (
-    <div className='my-12 w-full overflow-auto'>
+    <div className='mt-12 w-full overflow-auto'>
       <h2 className='text-white font-medium text-2xl'>
         Get inspired from the community
       </h2>

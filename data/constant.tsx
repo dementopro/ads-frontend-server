@@ -13,3 +13,12 @@ export const modeOptions = [
   { name: 'Medium Quality', value: 'quality' },
   { name: 'Multi-Model', value: 'multi' },
 ]
+
+export const breadCrumbMap: Record<string, string[]> = {
+  '/home': [],
+  '/planning': ['Planning'],
+  '/generate/textToImage': ['Generate', 'Text to Image'],
+  '/generate/imageToImage': ['Generate', 'Image to Image'],
+  '/generate/productDescription': ['Generate', 'Product Description'],
+  '/projects': ['Your Projects'],
+}

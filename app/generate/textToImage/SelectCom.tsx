@@ -17,7 +17,7 @@ const SelectCom = ({ options, selected, setSelected }: props<{ name: string, val
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative">
         <Listbox.Button className="cursor-pointer hover:opacity-80 relative w-full rounded-lg bg-[#35363A] text-primary-gray h-[44px] pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-primary-purple focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-purple sm:text-sm">
-          <span className="block truncate">{selected.name}</span>
+          <span className="block truncate text-base">{selected.name}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <Icon icon={chevronDown} className='text-primary-gray' width={20} height={20} />
           </span>

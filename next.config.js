@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['placekitten.com']
-  }
+  experimental: {
+    serverActions: true,
+  },
 }
 
 module.exports = nextConfig

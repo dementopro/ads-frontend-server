@@ -15,7 +15,7 @@ body {
 
 .admin-content {
   background-color: #15161A;
-  @apply text-white;
+  @apply text-white p-8;
 }
 
 
