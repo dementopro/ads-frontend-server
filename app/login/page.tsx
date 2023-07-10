@@ -1,6 +1,5 @@
 import LoginFrom from '@/app/login/LoginFrom'
 import Landing from '@/components/Landing'
-import Image from 'next/image'
 import React from 'react'
 
 export const metadata = {
@@ -12,10 +11,16 @@ const LoginPage = () => {
     <div className='flex flex-col lg:flex-row w-full h-screen bg-[#121212]'>
       <Landing />
       <div className='flex-1 flex flex-col items-center justify-center'>
-        <Image width={84} height={78} src={'/images/login-logo.svg'} alt='logo' />
-        <h1 className='font-bold text-3xl text-center text-white mt-9'>Welcome to Adsgency AI</h1>
-        <p className='text-[18px] text-center text-white mt-[10px]'>Like Ad management, this will be quick ⚡</p>
-        <LoginFrom />
+        <div
+          className='px-16 p-12'
+          style={{
+            boxShadow: '0px 0px 66px 0px rgba(132, 79, 255, 0.46)'
+          }}
+        >
+          <h1 className='font-bold text-3xl text-white mt-9'>Hey, hello！👋</h1>
+          <p className='text-[18px] text-white mt-[10px]'>Your marketing just got an AI upgrade.</p>
+          <LoginFrom />
+        </div>
       </div>
     </div>
   )

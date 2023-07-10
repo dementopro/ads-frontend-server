@@ -1,6 +1,6 @@
 type Method = 'GET' | 'POST'
 
-export async function request(url: string, method: Method, data: Record<string, any> = {}) {
+export async function request(url: string, method: Method, data: Record<string, any> = {}, headers = {}) {
   try {
     url = process.env.API_BASE_URL + url
     // TODO: change to use application/json
@@ -11,6 +11,7 @@ export async function request(url: string, method: Method, data: Record<string, 
     const response = await fetch(url, {
       method,
       body: formData,
+      headers,
     })
     return response
   } catch (error) {
