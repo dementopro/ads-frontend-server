@@ -13,7 +13,12 @@ export async function POST(req: Request) {
     body: `email=${email}`,
   })
   const data = await res.json()
-  return NextResponse.json(data, {
+  const response = NextResponse.json(data, {
     status: res.status,
   })
+  const setCookie = res.headers.get('set-cookie')
+  if (setCookie) {
+    response.headers.append('set-cookie', setCookie)
+  }
+  return response
 }
