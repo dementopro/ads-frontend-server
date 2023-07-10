@@ -5,6 +5,7 @@ import contentSaveOutline from '@iconify/icons-mdi/content-save-outline';
 import contentCopy from '@iconify/icons-mdi/content-copy';
 import { Icon } from '@iconify/react';
 import { copyText } from '@/utils/copy';
+import Empty from '@/components/Empty';
 
 const GenerateDescription = () => {
   const [propmt, setPropmt] = useState('')
@@ -39,13 +40,7 @@ const GenerateDescription = () => {
         <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col gap-4 items-end justify-between'>
           <div className='w-full h-[220px] overflow-auto text-xl'>
             {content}
-            {
-              !content && (
-                <div className='flex items-center justify-center w-full h-full text-primary-gray text-base'>
-                  No content has been generated yet
-                </div>
-              )
-            }
+            {!content && <Empty />}
           </div>
           <div className='w-full flex text-primary-gray items-center justify-between'>
             <div className='text-xs'>

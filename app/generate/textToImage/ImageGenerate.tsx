@@ -1,6 +1,7 @@
 'use client'
 import GenerateContext from '@/app/generate/textToImage/GenerateContext'
 import SelectCom from '@/app/generate/textToImage/SelectCom';
+import Empty from '@/components/Empty';
 import { SUCCESS_CODE, modeOptions, typeOptions } from '@/data/constant';
 import { Spin, message } from 'antd'
 import Image from 'next/image';
@@ -75,10 +76,8 @@ const ImageGenerate = () => {
             {
               !title.length || !description.length
                 ?
-                <div
-                  className='flex items-center justify-center w-full h-[200px] bg-[#1B1C21] text-primary-gray text-base rounded-lg'
-                >
-                  No content has been generated yet
+                <div className='w-full h-[200px] bg-[#1B1C21] rounded-lg'>
+                  <Empty />
                 </div>
                 :
                 <GenerateContext title={title} description={description} />
@@ -86,12 +85,12 @@ const ImageGenerate = () => {
           </div>
           <div className='relative max-w-[420px] h-max min-h-[400px] rounded-lg overflow-hidden flex items-center justify-center bg-[#1B1C21]'>
             {image
-              ? <Image src={image} alt='generate image' width={420} height={426} />
-              : <p
-                className='px-24 text-center text-base w-full h-full text-primary-gray'
-              >
-                No content has been<br /> generated yet
-              </p>}
+              ?
+              <Image src={image} alt='generate image' width={420} height={426} />
+              :
+              <div className='flex items-center justify-center w-[420px]'>
+                <Empty />
+              </div>}
           </div>
         </div>
       </Spin>

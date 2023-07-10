@@ -1,4 +1,5 @@
 'use client'
+import Empty from '@/components/Empty'
 import { SUCCESS_CODE } from '@/data/constant'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -38,9 +39,7 @@ const HistoricalGenerations = () => {
       <div className='flex flex-wrap gap-5'>
         {
           !imageList.length
-            ? <div className='w-full flex items-center justify-center'>
-              <span className='text-primary-gray'>No content has been generated yet</span>
-            </div>
+            ? <Empty />
             : imageList.map((image, index) => (
               <div key={index} className='flex gap-3 flex-col p-4 bg-[#1E1F22] rounded-lg border border-[#3A3A3A]'>
                 <Image src={image} alt='generate image' width={228} height={228} />

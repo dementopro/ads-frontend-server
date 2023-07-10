@@ -1,3 +1,4 @@
+import Empty from '@/components/Empty'
 import { IPlan } from '@/types/planning'
 import React from 'react'
 
@@ -11,14 +12,7 @@ const MyPlanning = ({ plan }: Props) => {
       <h2 className='text-white font-medium text-xl my-8'>
         My planning
       </h2>
-      {
-        !plan &&
-        <div className='w-full flex items-center justify-center'>
-          <span className='text-primary-gray'>
-            No planning has been generated yet
-          </span>
-        </div>
-      }
+      {!plan && <Empty />}
       <div className='flex flex-wrap gap-5'>
         {
           plan && Object.entries(plan).map(([name, contents], index) => (

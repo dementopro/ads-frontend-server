@@ -5,6 +5,7 @@ import contentCopy from '@iconify/icons-mdi/content-copy';
 import { Icon } from '@iconify/react';
 import { copyText } from '@/utils/copy';
 import { message } from 'antd';
+import Empty from '@/components/Empty';
 
 const SavedCopy = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -28,9 +29,7 @@ const SavedCopy = () => {
         {
           !copyList.length
             ?
-            <div className='w-full flex items-center justify-center'>
-              <span className='text-primary-gray'>No content has been generated yet</span>
-            </div>
+            <Empty />
             :
             copyList.map((item, index) => (
               <div key={index} className='flex cursor-pointer w-[354px] min-h-[310px] gap-5 flex-col py-5 px-[18px] bg-[#1B1C21] group hover:bg-[#27282F] rounded-lg border border-[#3A3A3A]'>
