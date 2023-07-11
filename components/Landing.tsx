@@ -4,7 +4,7 @@ import styles from './Landing.module.css'
 
 const Landing = () => {
   return (
-    <div className='w-full h-full flex flex-col items-center justify-center max-lg:hidden lg:max-w-[660px] bg-[#1B1C21] px-8 py-[28px] relative select-none'>
+    <div className='w-full h-full flex flex-col items-center justify-center max-lg:hidden lg:max-w-[660px] bg-[#121212] px-8 py-[28px] relative select-none'>
       <Image alt='logo' className='max-lg:mb-5 lg:absolute top-[28px] left-8' width={130} height={28} src={'/logo.svg'} />
       <div className='flex flex-col gap-[28px] max-w-[440px]'>
         <div className={`text-5xl lg:text-6xl font-bold`}>
