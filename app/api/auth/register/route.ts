@@ -4,7 +4,9 @@ import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
   const body = await req.json() as Partial<RegisterForm>
-  const res = await request('/signup_api', 'POST', body)
+  const res = await request('/signup_api', 'POST', body, {
+    'cookie': req.headers.get('cookie') || '',
+  })
   const data = await res.json()
   return NextResponse.json(data, {
     status: res.status,
