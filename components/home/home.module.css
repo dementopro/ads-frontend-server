@@ -1,0 +1,11 @@
+.landing-title {
+  background: linear-gradient(243deg,#D634FF, #4663FF);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-bg {
+  background-image: url(/images/home/landing-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
