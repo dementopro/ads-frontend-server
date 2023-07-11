@@ -1,3 +1,4 @@
+import Empty from "@/components/Empty"
 import { IPlan } from "@/types/planning"
 
 type Props = {
@@ -38,14 +39,7 @@ const ListPlanning = ({ planList }: Props) => {
             </div>
           ))
         }
-        {
-          !planList.length &&
-          <div className='w-full mt-4 flex items-center justify-center'>
-            <span className='text-primary-gray'>
-              No planning has been generated yet
-            </span>
-          </div>
-        }
+        {!planList.length && <Empty />}
       </div>
     </div>
   )

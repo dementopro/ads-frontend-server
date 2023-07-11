@@ -1,4 +1,5 @@
 'use client'
+import Empty from '@/components/Empty'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -60,13 +61,7 @@ const CommunityFrom = () => {
             </div>
           ))
         }
-        {
-          !showImages.length && (
-            <div className='w-full flex items-center justify-center'>
-              <span className='text-primary-gray'>No cases found</span>
-            </div>
-          )
-        }
+        {!showImages.length && <Empty text='No cases found.' />}
       </div>
     </div>
   )
