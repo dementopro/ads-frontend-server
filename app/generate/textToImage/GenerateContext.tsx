@@ -8,21 +8,22 @@ import downloadIcon from '@iconify/icons-mdi/download';
 import scanHelper from '@iconify/icons-mdi/scan-helper';
 import contentCopy from '@iconify/icons-mdi/content-copy';
 import checkboxMultipleMarked from '@iconify/icons-mdi/checkbox-multiple-marked';
-import { copyText } from '@/utils/copy';
+import { copyText, downloadImage } from '@/utils';
 
 type Props = {
   title: string
   description: string
+  image: string
 }
 
-const GenerateContext = ({ title, description }: Props) => {
+const GenerateContext = ({ title, description, image }: Props) => {
 
   const [isCopyed, setIsCopyed] = useState({
     title: false,
     description: false,
   })
 
-  function handleCopy(key: 'description' | 'title', ctx: string) {
+  function onCopy(key: 'description' | 'title', ctx: string) {
     const flag = copyText(ctx)
     if (flag) {
       setIsCopyed({ ...isCopyed, [key]: true })
@@ -30,6 +31,10 @@ const GenerateContext = ({ title, description }: Props) => {
         setIsCopyed({ ...isCopyed, [key]: false })
       }, 1000);
     }
+  }
+
+  function onDownload() {
+    downloadImage(image, title)
   }
 
   return (
@@ -40,7 +45,7 @@ const GenerateContext = ({ title, description }: Props) => {
         </div>
         {
           !isCopyed.title ?
-            <Icon onClick={() => handleCopy('title', title)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
+            <Icon onClick={() => onCopy('title', title)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
             :
             <Icon className='text-primary-purple cursor-pointer' icon={checkboxMultipleMarked} width={24} height={24} />
         }
@@ -51,13 +56,13 @@ const GenerateContext = ({ title, description }: Props) => {
         </div>
         {
           !isCopyed.description ?
-            <Icon onClick={() => handleCopy('description', description)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
+            <Icon onClick={() => onCopy('description', description)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
             :
             <Icon className='text-primary-purple cursor-pointer' icon={checkboxMultipleMarked} width={24} height={24} />
         }
       </div>
       <div className='justify-end text-primary-gray flex items-center gap-[14px]'>
-        <Icon className='hover:text-white cursor-pointer' icon={downloadIcon} width={24} height={24} />
+        <Icon onClick={() => onDownload()} className='hover:text-white cursor-pointer' icon={downloadIcon} width={24} height={24} />
         <Icon className='hover:text-white cursor-pointer' icon={scanHelper} width={20} height={20} />
         <Icon className='hover:text-white cursor-pointer' icon={pinterestIcon} width={24} height={24} />
         <Icon className='hover:text-white cursor-pointer' icon={facebookIcon} width={24} height={24} />

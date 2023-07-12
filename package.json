@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.2",
     "next": "13.4.9",
     "postcss": "8.4.25",
@@ -37,6 +38,7 @@
     "@iconify/icons-ri": "^1.2.9",
     "@iconify/icons-tabler": "^1.2.81",
     "@iconify/react": "^4.1.1",
+    "@types/file-saver": "^2.0.5",
     "@types/react": "^18.2.14",
     "@types/react-slick": "^0.23.10"
   }

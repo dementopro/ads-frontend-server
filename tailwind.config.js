@@ -27,7 +27,7 @@ module.exports = {
       // Add your custom styles here
       addUtilities({
         '.bg-primary-gradient': {
-          background: 'linear-gradient(203deg, #d634ff 0%, #4663ff 100%)'
+          background: 'linear-gradient(90deg, #6859FF 0%, #AF41FF 100%);'
         },
       })
     }),

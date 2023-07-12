@@ -1,5 +1,4 @@
-interface IResponse<T = any> {
-  data?: T;
+interface IResponse {
   status: 0 | 1;
   message: string;
 }
