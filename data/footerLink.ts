@@ -1,54 +1,32 @@
 export const footerLinks = [
   {
-    title: 'For developers',
+    title: 'Product',
     links: [
-      'Go Pro!',
-      'Explore development work',
-      'Development blog',
-      'Code podcast',
-      'Open-source projects',
+      'Start a Trial',
+      'How It Works',
+      'Features',
+      'Pricing',
+      'Watch Demo',
 
     ],
   },
   {
-    title: 'Hire developers',
+    title: 'Resources',
     links: [
-      'Post a job opening',
-      'Post a freelance project',
-      'Search for developers',
-      'Refer a Friend',
-      'Code of conduct',
-    ],
-  },
-  {
-    title: 'Brands',
-    links: [
-      'Advertise with us',
-      'API',
-      'Terms of service',
-      'Privacy policy',
-      'Cookie policy',
+      'All Resources',
+      'Blog',
+      'FAQs',
+      'Help Center',
     ],
   },
   {
     title: 'Company',
     links: [
-      'About',
+      'About Us',
+      'Contact Us',
+      'Privacy Policy',
       'Careers',
-      'Support',
-      'Media kit',
-      'Testimonials',
-    ],
-  },
-  {
-    title: 'Development Resources',
-    links: [
-      'Freelancing',
-      'Development Hiring',
-      'Development Portfolio',
-      'Development Education',
-      'Creative Process',
-      'Development Industry Trends',
+      'Partners',
     ],
   },
 ];
