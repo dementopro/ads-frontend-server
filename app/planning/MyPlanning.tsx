@@ -12,7 +12,7 @@ const MyPlanning = ({ plan }: Props) => {
       <h2 className='text-white font-medium text-xl my-8'>
         My planning
       </h2>
-      {!plan && <Empty />}
+      {!plan && <Empty text="No plan has been loaded yet." />}
       <div className='flex flex-wrap gap-5'>
         {
           plan && Object.entries(plan).map(([name, contents], index) => (

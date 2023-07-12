@@ -3,10 +3,12 @@ import ListPlanning from '@/app/planning/ListPlanning'
 import MyPlanning from '@/app/planning/MyPlanning'
 import { SUCCESS_CODE } from '@/data/constant'
 import AdminLayout from '@/layout/admin'
+import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
-
+async function getHistory(): Promise<IPlanningObj[]>;
+async function getHistory(id: number): Promise<IPlanningObj>;
 async function getHistory(id?: number) {
   const res = await fetch(`/api/planning/history?id=${id}`, {
     method: 'GET',
@@ -14,12 +16,15 @@ async function getHistory(id?: number) {
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-  const data = await res.json()
+  const data: IPlanningHistory = await res.json()
   if (data.status === SUCCESS_CODE) {
-    return data.planning_list as any
+    if (id) {
+      return data.planning
+    }
+    return data.planning_list
   } else {
     console.log('data', data)
-    return null
+    return []
   }
 }
 
@@ -27,22 +32,38 @@ const PlanningPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [prompt, setPrompt] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
-  const [plan, setPlan] = useState(null)
+  const [plan, setPlan] = useState<IPlan | null>(null)
+  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null)
+  const [planId, setPlanId] = useState<number | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState(false)
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value)
   }
 
-  const [planList, setPlanList] = useState<any[]>([])
   useEffect(() => {
+    setIsLoading(true)
     getHistory().then((res) => {
       setPlanList(res)
+      setIsLoading(false)
     })
   }, [])
+
+  useEffect(() => {
+    if (planId) {
+      messageApi.loading('Loading plan...', 1)
+      getHistory(planId).then((res) => {
+        setPlan(res.plan)
+        messageApi.success('Load plan successfully')
+      })
+    }
+  }, [planId])
+
 
   async function onGenerate() {
     try {
       setIsGenerating(true)
+      messageApi.loading('Generating plan...', 1)
       const res = await fetch(`/api/planning/generate?prompt=${prompt}`, {
         method: 'GET',
       })
@@ -52,7 +73,11 @@ const PlanningPage = () => {
           console.log('data', data)
           messageApi.success(data.msg || 'Generate successfully')
           setPlan(data.planning_obj[0].plan)
-          setPlanList([data.planning_obj[0], ...planList])
+          if (!planList) {
+            setPlanList([data.planning_obj[0]])
+          } else {
+            setPlanList([data.planning_obj[0], ...planList])
+          }
         } else {
           console.log('data', data)
           messageApi.error(data.msg || 'Generate failed')
@@ -84,7 +109,7 @@ const PlanningPage = () => {
             </div>
           </div>
         </Spin>
-        <ListPlanning planList={planList} />
+        <ListPlanning planList={planList} setPlanId={setPlanId} />
         <MyPlanning plan={plan} />
       </section>
     </AdminLayout>
