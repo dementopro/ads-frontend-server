@@ -35,6 +35,7 @@ const menuItems = [
       },
       {
         text: 'Image To Image',
+        href: '/generate/imageToImage',
       },
       {
         text: 'Product Description',
