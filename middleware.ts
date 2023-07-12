@@ -7,8 +7,7 @@ import Cookies from 'universal-cookie';
 export async function middleware(request: NextRequest) {
   const cookies = new Cookies(request.headers.get('cookie'))
   const session = cookies.get('session')
-  const email = cookies.get('email')
-  if (!session || !email) {
+  if (!session) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 }
