@@ -1,9 +1,15 @@
 import DescriptionContent from '@/app/generate/productDescription/DescriptionContent'
 import SavedCopy from '@/app/generate/productDescription/SavedCopy'
 import AdminLayout from '@/layout/admin'
+import { IGeneTextForm } from '@/types/generate'
 import React from 'react'
 
-const ProductDescriptionPage = () => {
+export const metadata = {
+  title: 'Product Description - AdsGency AI',
+}
+
+const ProductDescriptionPage = ({ searchParams }: { searchParams: { mode?: IGeneTextForm['mode'] } }) => {
+
   return (
     <AdminLayout>
       <section className='flex flex-col justify-center'>
@@ -11,7 +17,7 @@ const ProductDescriptionPage = () => {
           Product Description
         </h1>
         <DescriptionContent />
-        <SavedCopy />
+        <SavedCopy mode={searchParams.mode} />
       </section>
     </AdminLayout>
   )

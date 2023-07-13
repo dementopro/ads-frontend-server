@@ -2,20 +2,32 @@
 import React, { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import GenerateDescription from '@/app/generate/productDescription/GenerateDescription'
+import { useRouter, useSearchParams } from 'next/navigation'
 // import GenerateEmail from '@/app/generate/productDescription/GenerateEmail'
 
 
 const DescriptionContent = () => {
 
+  const router = useRouter()
   const [categories] = useState({
-    Description: <GenerateDescription />,
-    Email: <GenerateDescription />,
+    Description: <GenerateDescription mode='description' />,
+    Email: <GenerateDescription mode='email' />,
   })
+  const params = useSearchParams()
+
+  function handleChange(index: number) {
+    // url 添加 mode 参数
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+    searchParams.set('mode', index === 0 ? 'description' : 'email');
+    url.search = searchParams.toString();
+    router.replace(url.toString())
+  }
 
   return (
     <div>
       <div className="w-full">
-        <Tab.Group>
+        <Tab.Group defaultIndex={params.get('mode') === 'email' ? 1 : 0} onChange={(index) => handleChange(index)}>
           <Tab.List className="flex gap-5">
             {Object.keys(categories).map((category) => (
               <Tab

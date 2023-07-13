@@ -15,6 +15,22 @@ export async function request(url: string, method: Method, data: Record<string, 
     })
     return response
   } catch (error) {
+    console.log('error', error)
+    throw new Error(error as any)
+  }
+}
+
+export async function requestJson(url: string, method: Method, data: Record<string, any> = {}, headers = {}) {
+  try {
+    url = process.env.API_BASE_URL + url
+    const response = await fetch(url, {
+      method,
+      body: JSON.stringify(data),
+      headers,
+    })
+    return response
+  } catch (error) {
+    console.log('error', error)
     throw new Error(error as any)
   }
 }
