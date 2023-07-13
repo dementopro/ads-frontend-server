@@ -9,9 +9,9 @@ import linkedinWordmark from '@iconify/icons-devicon-plain/linkedin-wordmark'
 
 const IndustryLeader = () => {
   return (
-    <div className='w-full h-[78px] bg-[#1B1C21] px-[60px] flex items-center gap-[42px]'>
-      <span className='text-white font-semibold text-base'>Backed by Industry Leaders</span>
-      <div className='flex items-center gap-8'>
+    <div className='w-full max-sm:mb-4 sm:h-[78px] bg-[#1B1C21] px-[60px] flex max-sm:flex-col items-center sm:gap-[42px]'>
+      <span className='text-white font-semibold text-base max-sm:py-4'>Backed by Industry Leaders</span>
+      <div className='flex max-sm:flex-col items-center max-sm:gap-2 gap-8'>
         <Icon height={40} color='white' icon={openaiFill} />
         <Icon height={50} color='white' icon={awsIcon} />
         <Icon width={40} icon={googlecloudIcon} />
