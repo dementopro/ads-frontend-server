@@ -12,7 +12,7 @@ const HomePage = () => {
           What advertising tasks do you have today?
         </h1>
         <CardItems />
-        <RecentProjects />
+        {/* <RecentProjects /> */}
         <CommunityFrom />
       </section>
     </AdminLayout>

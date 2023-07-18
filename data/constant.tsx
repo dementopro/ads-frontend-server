@@ -21,4 +21,5 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/generate/imageToImage': ['Generate', 'Image to Image'],
   '/generate/productDescription': ['Generate', 'Product Description'],
   '/projects': ['Your Projects'],
+  '/pricing': ['Pricing'],
 }
