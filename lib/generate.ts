@@ -83,7 +83,7 @@ export async function getGenerateImageHistoryList() {
   if (data.status === SUCCESS_CODE) {
     const imageList = data.image_data?.map(item => ({
       ...item,
-      img_path: `${process.env.NEXT_PUBLIC_API_URL}/${item.img_path}/${item.filename}`,
+      img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.img_path}/${item.filename}`,
     })) || []
     return imageList as NewImage[]
   } else {

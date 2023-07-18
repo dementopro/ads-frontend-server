@@ -21,7 +21,7 @@ const PickItem = ({ item, isActive, setOption, pickType }: PickImageProps) => {
           ?
           <div className='flex flex-col items-center gap-3'>
             <div onClick={setOption} className={`${isActive ? 'border-primary-purple' : 'border-[#15161a]'} overflow-hidden cursor-pointer hover:opacity-90 border-2 w-[150px] h-[150px] relative rounded-lg bg-primary-gray`}>
-              <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.image_path}`} alt={item.name} width={150} height={150} />
+              <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image_path}`} alt={item.name} width={150} height={150} />
               <Image src={'/images/admin/img2img/checked.svg'} alt='portrait' width={24} height={24} className={`absolute right-2 top-2 ${isActive ? 'flex' : 'hidden'}`} />
             </div>
             {pickType === 'background' && <span>{item.name}</span>}
@@ -116,7 +116,7 @@ const PreTrainedPick = () => {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
             ...item,
-            img_path: `${process.env.NEXT_PUBLIC_API_URL}/${data.file_path}/${item.filename}`
+            img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
           }))
           updateGeneratedImage(result)
           router.refresh()

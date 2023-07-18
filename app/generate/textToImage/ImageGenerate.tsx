@@ -45,7 +45,7 @@ const ImageGenerate = () => {
           const image = data.image_list[0]
           setTitle(image.prompt)
           setDescription(image.description)
-          setImage(`${process.env.NEXT_PUBLIC_API_URL}${data.file_path}/${image.filename}`)
+          setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
           router.refresh()
         } else {
           console.log('data', data)

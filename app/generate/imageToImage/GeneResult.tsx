@@ -38,7 +38,7 @@ const GeneResult = () => {
         </div>
         <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
           <div className='flex items-center gap-3'>
-            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${faceImg}`} alt={preTrainedOption.face} width={24} height={24} className='rounded-[2px]' />
+            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${faceImg}`} alt={preTrainedOption.face} width={24} height={24} className='rounded-[2px]' />
             <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].background_mode || preTrainedOption.background)}</div>
             <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].style || preTrainedOption.style)}</div>
           </div>

@@ -22,7 +22,7 @@ async function getImageList(): Promise<IGeneImage[]> {
     const filePath = data.file_path
     const imageList = data.image_list.map((image) => ({
       ...image,
-      filename: `${process.env.NEXT_PUBLIC_API_URL}${filePath}/${image.filename}`
+      filename: `${process.env.NEXT_PUBLIC_IMG_URL}${filePath}/${image.filename}`
     }))
     return imageList
   } else {
