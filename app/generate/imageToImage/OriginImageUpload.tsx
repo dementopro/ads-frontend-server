@@ -19,6 +19,7 @@ const OriginImageUpload = () => {
     updateMaskFileName,
     updateMaskFilePath,
     updateImgSeg,
+    updateImageId,
   } = useContext(GeneImageContext)
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -64,6 +65,7 @@ const OriginImageUpload = () => {
             updateMaskFileName(data.mask_file_name)
             updateMaskFilePath(data.mask_file_path)
             updateImgSeg(data.img_seg)
+            updateImageId(data._id)
           } else {
             messageApi.error(data.message || 'Upload failed')
           }

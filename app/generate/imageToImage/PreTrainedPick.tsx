@@ -81,6 +81,7 @@ const PreTrainedPick = () => {
     file_name, file_path, mask_file_name, mask_file_path,
     updateIsGenerating,
     updateGeneratedImage,
+    imageId
   } = useContext(GeneImageContext)
 
   async function onGenerateImage() {
@@ -100,6 +101,7 @@ const PreTrainedPick = () => {
           mode_type: modeType,
           face_prompt: '',
           background_prompt: '',
+          _id: imageId,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +116,7 @@ const PreTrainedPick = () => {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
             ...item,
-            img_path: `${process.env.NEXT_PUBLIC_API_URL}/${data.file_path}/${item}`
+            img_path: `${process.env.NEXT_PUBLIC_API_URL}/${data.file_path}/${item.filename}`
           }))
           updateGeneratedImage(result)
           router.refresh()

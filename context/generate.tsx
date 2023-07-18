@@ -38,6 +38,8 @@ export const GeneImageContext = createContext<{
   updateGeneratedImage: (newGeneratedImage: NewImage[] | null) => void
   resetCtx: () => void
   updateImgSeg: (newImgSeg: ImageSegmentation[]) => void
+  imageId: string
+  updateImageId: (newImageId: string) => void
 }>({
   modeType: 'product',
   preTrainedStep: 'image',
@@ -82,6 +84,8 @@ export const GeneImageContext = createContext<{
   updateGeneratedImage: () => { },
   resetCtx: () => { },
   updateImgSeg: () => { },
+  imageId: '',
+  updateImageId: () => { },
 })
 
 export const GeneImageProvider = ({ children }: { children: React.ReactNode }) => {
@@ -112,9 +116,14 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   const [showCrop, setShowCrop] = useState(false)
   const [isCrop, setIsCrop] = useState(false)
   const [img_seg, setImgSeg] = useState<ImageSegmentation[]>([])
+  const [imageId, setImageId] = useState<string>('')
 
   const updateLabel = (newLabel: 'Background' | 'Face') => {
     setLabel(newLabel);
+  }
+
+  const updateImageId = (newImageId: string) => {
+    setImageId(newImageId);
   }
 
   const updateIsGenerating = (newIsGenerating: boolean) => {
@@ -210,6 +219,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     updateMaskFilePath('')
     updateIsGenerating(false)
     updateGeneratedImage(null)
+    updateImageId('')
   }
 
   return (
@@ -231,7 +241,8 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
       isGenerating, updateIsGenerating,
       generatedImage, updateGeneratedImage,
       img_seg, updateImgSeg,
-      resetCtx
+      resetCtx,
+      imageId, updateImageId,
     }}>
       {children}
     </GeneImageContext.Provider>
