@@ -79,7 +79,7 @@ export async function getGenerateImageHistoryList() {
     throw new Error('Something went wrong')
   }
   const data: IGeneImageHistoryResp = await response.json()
-  console.log('data', data)
+  console.log('getGenerateImageHistoryList', data)
   if (data.status === SUCCESS_CODE) {
     const imageList = data.image_data?.map(item => ({
       ...item,
