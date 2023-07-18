@@ -16,10 +16,6 @@ const images = [
     tag: 'All',
   },
   {
-    url: '/images/admin/home/cover.png',
-    tag: 'All',
-  },
-  {
     url: '/images/admin/home/cover2.png',
     tag: 'Top 10',
   },
@@ -29,7 +25,7 @@ const CommunityFrom = () => {
 
   const [currentTag, setCurrentTag] = useState('All')
 
-  const showImages = images.concat(...images).concat(...images).filter(image => {
+  const showImages = images.filter(image => {
     return image.tag === currentTag || currentTag === 'All'
   })
 
@@ -38,7 +34,7 @@ const CommunityFrom = () => {
       <h2 className='text-white font-medium text-2xl'>
         Get inspired from the community
       </h2>
-      <div className='flex items-center gap-4 mt-6'>
+      {/* <div className='flex items-center gap-4 mt-6'>
         {
           tags.map(tag => (
             <button onClick={() => setCurrentTag(tag)} key={tag}
@@ -52,7 +48,7 @@ const CommunityFrom = () => {
             </button>
           ))
         }
-      </div>
+      </div> */}
       <div className='mt-8 flex flex-wrap items-center gap-5'>
         {
           showImages.map((image, index) => (

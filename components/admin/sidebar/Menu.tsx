@@ -12,12 +12,12 @@ const menuItems = [
     icon: '/images/sidebar/home.svg',
     activeIcon: '/images/sidebar/active/home.svg'
   },
-  {
-    text: 'Your Projects',
-    href: '/projects',
-    icon: '/images/sidebar/projects.svg',
-    activeIcon: '/images/sidebar/active/projects.svg'
-  },
+  // {
+  //   text: 'Your Projects',
+  //   href: '/projects',
+  //   icon: '/images/sidebar/projects.svg',
+  //   activeIcon: '/images/sidebar/active/projects.svg'
+  // },
   {
     text: 'Planning',
     href: '/planning',
@@ -43,21 +43,21 @@ const menuItems = [
       },
     ]
   },
-  {
-    text: 'Social Insights',
-    icon: '/images/sidebar/social-joomla.svg',
-    activeIcon: '/images/sidebar/active/social-joomla.svg',
-  },
-  {
-    text: 'Ads Management',
-    icon: '/images/sidebar/manage.svg',
-    activeIcon: '/images/sidebar/active/manage.svg',
-  },
-  {
-    text: 'Optimization Tools',
-    icon: '/images/sidebar/opti.svg',
-    activeIcon: '/images/sidebar/active/opti.svg',
-  }
+  // {
+  //   text: 'Social Insights',
+  //   icon: '/images/sidebar/social-joomla.svg',
+  //   activeIcon: '/images/sidebar/active/social-joomla.svg',
+  // },
+  // {
+  //   text: 'Ads Management',
+  //   icon: '/images/sidebar/manage.svg',
+  //   activeIcon: '/images/sidebar/active/manage.svg',
+  // },
+  // {
+  //   text: 'Optimization Tools',
+  //   icon: '/images/sidebar/opti.svg',
+  //   activeIcon: '/images/sidebar/active/opti.svg',
+  // }
 ]
 
 type MenuSigleBtnProps = {
