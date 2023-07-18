@@ -41,3 +41,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--c-scrollbar-hover);
 }
+
+.ant-image-img {
+  height: inherit !important;
+  width: inherit !important;
+}
