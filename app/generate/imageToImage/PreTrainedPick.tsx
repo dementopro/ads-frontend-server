@@ -117,6 +117,7 @@ const PreTrainedPick = () => {
           const result = data.new_image.map(item => ({
             ...item,
             img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
+            // img_path: item.file!
           }))
           updateGeneratedImage(result)
           router.refresh()

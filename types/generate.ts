@@ -65,6 +65,7 @@ export interface IUploadImageResp extends IResponse {
   mask_file_path: string
   img_seg: ImageSegmentation[]
   _id: string
+  file?: string
 }
 
 export interface IGeneImageResp extends IResponse {
@@ -85,6 +86,7 @@ export interface NewImage {
   mode_type: string
   style: string
   task_label: string[]
+  file?: string
 }
 
 export interface IGeneImageHistoryResp extends IResponse {

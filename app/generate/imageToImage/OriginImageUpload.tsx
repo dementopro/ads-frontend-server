@@ -57,8 +57,9 @@ const OriginImageUpload = () => {
           if (data.status === SUCCESS_CODE) {
             messageApi.success(data.message || 'Upload successfully')
             updateOriginalImage(file)
-            const newUrl = `${process.env.NEXT_PUBLIC_IMG_URL}/${data.img_path}`
-            updateCropImage(newUrl)
+            // const newUrl = `${process.env.NEXT_PUBLIC_IMG_URL}/${data.img_path}`
+            // updateCropImage(newUrl)
+            updateCropImage(`data:image/png;base64, ${data.file}`)
             updateIsCrop(false)
             updateFileName(data.file_name)
             updateFilePath(data.file_path)
