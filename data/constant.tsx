@@ -19,7 +19,7 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/planning': ['Planning'],
   '/generate/textToImage': ['Generate', 'Text to Image'],
   '/generate/imageToImage': ['Generate', 'Image to Image'],
-  '/generate/productDescription': ['Generate', 'Product Description'],
+  '/generate/productDescription': ['Generate', 'Text to Copies'],
   '/projects': ['Your Projects'],
   '/pricing': ['Pricing'],
 }

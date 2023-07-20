@@ -27,6 +27,7 @@ const OriginImageUpload = () => {
 
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const element = e.target as HTMLInputElement
     if (e.target.files) {
       const file = e.target.files[0]
       if (file?.type === 'image/gif') {
@@ -39,7 +40,6 @@ const OriginImageUpload = () => {
         return
       }
 
-      updateOriginalImage(file)
       updateCropImage(null)
       updateIsCrop(false)
 
@@ -78,6 +78,7 @@ const OriginImageUpload = () => {
         messageApi.error('Upload failed')
       } finally {
         setLoading(false)
+        element.value = ''
       }
     }
   }
@@ -117,10 +118,7 @@ const OriginImageUpload = () => {
                   </div>
                 </>
             }
-            {
-              !originalImageUrl?.length &&
-              <input type='file' accept='image/*' className='absolute top-0 left-0 right-0 bottom-0 w-full h-full z-2 opacity-0 cursor-pointer' onChange={handleChange} />
-            }
+            <input type='file' accept='image/*' className='absolute top-0 left-0 right-0 bottom-0 w-full h-full z-2 opacity-0 cursor-pointer' onChange={handleChange} />
           </div>
         </Spin>
         <div className='text-primary-gray'>Original image</div>

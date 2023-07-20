@@ -10,7 +10,7 @@ const UserTestimonials = () => {
   return (
     <div className='flex flex-col w-full py-12 overflow-hidden'>
       <h3 className='text-3xl max-sm:text-center sm:px-[74px]'>User Testimonials</h3>
-      <Slider arrows={false} variableWidth infinite autoplay speed={5000} cssEase='linear' centerMode swipeToSlide={false}
+      <Slider arrows={false} variableWidth autoplay pauseOnHover={false} autoplaySpeed={0} speed={5000} cssEase='linear' centerMode swipeToSlide={false}
         centerPadding={'60px'} className='mt-8 max-sm:h-[200px]'>
         {userTestimonials.map((item, index) => (
           <div key={index}>

@@ -42,11 +42,7 @@ const PlanningPage = () => {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    getHistory().then((res) => {
-      setPlanList(res)
-      setIsLoading(false)
-    })
+    updateList()
   }, [])
 
   useEffect(() => {
@@ -58,6 +54,14 @@ const PlanningPage = () => {
       })
     }
   }, [planId])
+
+
+  async function updateList() {
+    setIsLoading(true)
+    const res = await getHistory();
+    setPlanList(res || [])
+    setIsLoading(false)
+  }
 
 
   async function onGenerate() {
@@ -76,7 +80,7 @@ const PlanningPage = () => {
           if (!planList) {
             setPlanList([data.planning_obj[0]])
           } else {
-            setPlanList([data.planning_obj[0], ...planList])
+            setPlanList([data.planning_obj[0], ...planList.slice(0, 4)])
           }
         } else {
           console.log('data', data)
@@ -109,7 +113,7 @@ const PlanningPage = () => {
             </div>
           </div>
         </Spin>
-        <ListPlanning planList={planList} setPlanId={setPlanId} />
+        <ListPlanning planList={planList} setPlanId={setPlanId} updateList={updateList} />
         <MyPlanning plan={plan} />
       </section>
     </AdminLayout>

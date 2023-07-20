@@ -24,7 +24,7 @@ const PickItem = ({ item, isActive, setOption, pickType }: PickImageProps) => {
               <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image_path}`} alt={item.name} width={150} height={150} />
               <Image src={'/images/admin/img2img/checked.svg'} alt='portrait' width={24} height={24} className={`absolute right-2 top-2 ${isActive ? 'flex' : 'hidden'}`} />
             </div>
-            {pickType === 'background' && <span>{item.name}</span>}
+            <span>{item.name}</span>
           </div>
           :
           <button
@@ -116,8 +116,8 @@ const PreTrainedPick = () => {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
             ...item,
-            img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
-            // img_path: item.file!
+            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
+            img_path: `data:image/png;base64, ${item.file}`
           }))
           updateGeneratedImage(result)
           router.refresh()
@@ -145,34 +145,34 @@ const PreTrainedPick = () => {
         <div className='flex justify-between items-center'>
           <div className='flex flex-wrap items-center text-primary-gray'>
             <OptionBtn
+              onClick={() => updatePreTrainStep('background')}
+              isActive={preTrainedStep === 'background'}
+              isChecked={preTrainedOption.background !== ''}
+              isDisabled={preTrainedOption.image === ''}
+              text='Background'
+              step={1}
+            />
+            <OptionBtn
               onClick={() => updatePreTrainStep('face')}
               isActive={preTrainedStep === 'face'}
               isChecked={preTrainedOption.face !== ''}
               isDisabled={preTrainedOption.image === ''}
               text='Model faces'
-              step={1}
-            />
-            <OptionBtn
-              onClick={() => updatePreTrainStep('background')}
-              isActive={preTrainedStep === 'background'}
-              isChecked={preTrainedOption.background !== ''}
-              isDisabled={preTrainedOption.face === ''}
-              text='Background'
               step={2}
             />
             <OptionBtn
               onClick={() => updatePreTrainStep('style')}
               isActive={preTrainedStep === 'style'}
               isChecked={preTrainedOption.style !== ''}
-              isDisabled={preTrainedOption.background === ''}
+              isDisabled={preTrainedOption.image === ''}
               text='Style'
               step={3}
             />
           </div>
           <button
             onClick={onGenerateImage}
-            disabled={preTrainedOption.style === ''}
-            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${preTrainedOption.style === '' ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}
+            disabled={Object.values(preTrainedOption).some(item => item === '')}
+            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${Object.values(preTrainedOption).some(item => item === '') ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}
           >
             Generate
           </button>
@@ -180,7 +180,7 @@ const PreTrainedPick = () => {
       </div>
       <div className='flex flex-wrap gap-5 mt-8 relative'>
         {
-          (pretrainList[`${preTrainedStep}List`] || pretrainList.faceList)
+          pretrainList[`${preTrainedStep}List`]
             ?.map((item, index) => (
               <PickItem
                 pickType={preTrainedStep}
@@ -190,10 +190,10 @@ const PreTrainedPick = () => {
               />
             ))
         }
-        {
+        {/* {
           preTrainedStep === 'image' &&
           <div className='w-full h-full z-10 rounded-lg bg-[#000000b5] absolute top-0 left-0 right-0 bottom-0' />
-        }
+        } */}
       </div>
     </>
   )

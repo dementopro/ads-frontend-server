@@ -30,15 +30,15 @@ const menuItems = [
     activeIcon: '/images/sidebar/active/generate.svg',
     children: [
       {
-        text: 'Text To Image',
+        text: 'Text to Image',
         href: '/generate/textToImage',
       },
       {
-        text: 'Image To Image',
+        text: 'Image to Image',
         href: '/generate/imageToImage',
       },
       {
-        text: 'Product Description',
+        text: 'Text to Copies',
         href: '/generate/productDescription',
       },
     ]

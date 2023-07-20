@@ -25,7 +25,7 @@ const CropImage = () => {
   function onConfrom() {
     updateIsCrop(true)
     updateShowCrop(false)
-    updatePreTrainStep('face')
+    updatePreTrainStep('background')
     updatePreTrainedOption({
       image: cropImage || ''
     })

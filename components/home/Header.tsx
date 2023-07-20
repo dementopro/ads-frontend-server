@@ -2,6 +2,7 @@
 import { SUCCESS_CODE } from '@/data/constant';
 import { Form, Input, Modal, message } from 'antd';
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 interface ContactUsFrom {
@@ -17,6 +18,7 @@ const Header = () => {
   const [form] = Form.useForm<ContactUsFrom>();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const router = useRouter();
 
 
   async function onFinish(values: ContactUsFrom) {
@@ -56,7 +58,7 @@ const Header = () => {
         <Image src={'/logo.svg'} width={131} height={28} alt='logo' />
         <div className='flex items-center sm:gap-4'>
           <button
-            onClick={() => window.open('https://adsgency.ai/login')}
+            onClick={() => router.push('/login')}
             className='flex items-center justify-center h-[44px] rounded-lg bg-primary-purple text-white cursor-pointer hover:opacity-80 px-4 truncate max-sm:hidden'>
             Try AdsGency
           </button>

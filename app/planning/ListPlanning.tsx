@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation"
 type Props = {
   planList: IPlanningObj[] | null,
   setPlanId: (id: number) => void
+  updateList: () => void
 }
 
-const ListPlanning = ({ planList, setPlanId }: Props) => {
+const ListPlanning = ({ planList, setPlanId, updateList }: Props) => {
   const router = useRouter()
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -31,6 +32,7 @@ const ListPlanning = ({ planList, setPlanId }: Props) => {
           console.log('data', data)
           messageApi.success(data.msg || 'Saved successfully')
           router.refresh()
+          updateList()
         } else {
           messageApi.error(data.msg || 'Saved failed')
         }

@@ -1,3 +1,4 @@
+import ImageSegmentationCanvasView from '@/app/generate/imageToImage/ImageSegmentationCanvasView'
 import { GeneImageContext } from '@/context/generate'
 import Image from 'next/image'
 import React, { useContext } from 'react'
@@ -8,7 +9,8 @@ const MaskImage = () => {
     updateShowCrop,
     isCrop,
     cropImage,
-    originalImageUrl
+    originalImageUrl,
+    img_seg
   } = useContext(GeneImageContext)
 
   function handleCrop() {
@@ -24,7 +26,7 @@ const MaskImage = () => {
           onClick={() => handleCrop()}
           className='rounded-lg bg-[#1B1C21] w-full h-[340px] overflow-hidden relative group'>
           {
-            cropImage &&
+            cropImage && !isCrop &&
             <>
               <Image alt='image' fill src={cropImage} className='h-full w-full object-contain' />
               <div className={`cursor-pointer w-full h-full absolute right-0 top-0 left-0 bottom-0  group-hover:flex flex-col items-center justify-center bg-black/60 border-2  border-primary-purple rounded-lg ${!isCrop ? 'flex' : 'hidden'}`}>
@@ -40,6 +42,12 @@ const MaskImage = () => {
                 </p>
               </div>
             </>
+          }
+          {
+            isCrop && cropImage &&
+            <div className='rounded-md overflow-hidden relative w-[340px] h-[340px]'>
+              <ImageSegmentationCanvasView imgSrc={cropImage} imgSegmentation={img_seg} />
+            </div>
           }
         </div>
         <div className='text-primary-gray'>Select area</div>

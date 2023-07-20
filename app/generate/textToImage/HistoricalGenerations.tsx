@@ -41,15 +41,17 @@ const HistoricalGenerations = async () => {
       <h2 className='text-white font-medium text-xl my-6'>
         Historical Generations({imageList.length})
       </h2>
-      <div className='flex flex-wrap gap-5'>
+      <div className='grid grid-flow-row grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5'>
         {
           !imageList.length
             ? <Empty />
             : imageList.map((image, index) => (
-              <div key={index} className='flex max-w-[260px] gap-3 flex-col p-4 bg-[#1E1F22] rounded-lg border border-[#3A3A3A]'>
+              <div key={index} className='flex items-center gap-3 max-md:max-w-[260px] flex-col p-4 bg-[#1E1F22] rounded-lg border border-[#3A3A3A]'>
                 <Image src={image.filename} alt='generate image' width={228} height={228} />
-                <div title={image.prompt} className='text-base line-clamp-1'>{image.prompt}</div>
-                <div title={image.description} className='text-xs text-primary-gray line-clamp-2'>{image.description}</div>
+                <div className='flex flex-col gap-3'>
+                  <div title={image.prompt} className='text-base line-clamp-1'>{image.prompt}</div>
+                  <div title={image.description} className='text-xs text-primary-gray line-clamp-2'>{image.description}</div>
+                </div>
               </div>
             ))
         }

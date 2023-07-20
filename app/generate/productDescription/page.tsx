@@ -5,7 +5,7 @@ import { IGeneTextForm } from '@/types/generate'
 import React from 'react'
 
 export const metadata = {
-  title: 'Product Description - AdsGency AI',
+  title: 'Text to Copies - AdsGency AI',
 }
 
 const ProductDescriptionPage = ({ searchParams }: { searchParams: { mode?: IGeneTextForm['mode'] } }) => {
@@ -14,7 +14,7 @@ const ProductDescriptionPage = ({ searchParams }: { searchParams: { mode?: IGene
     <AdminLayout>
       <section className='flex flex-col justify-center'>
         <h1 className='text-white font-medium text-2xl mb-6'>
-          Product Description
+          Text to Copies
         </h1>
         <DescriptionContent />
         <SavedCopy mode={searchParams.mode} />
