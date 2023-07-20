@@ -9,7 +9,8 @@ import { GeneImageContext } from '@/context/generate'
 
 
 const HistoryItem = ({
-  _id, img_path, filename, date, email, face_mode, background_mode, style, task_label, mode_type
+  _id, img_path, filename, date, email, face_mode,
+  background_mode, style, task_label, mode_type, file
 }: NewImage) => {
 
   const { updateGeneratedImage, updatePreTrainedOption } = useContext(GeneImageContext)
@@ -18,7 +19,7 @@ const HistoryItem = ({
     // load image
     updateGeneratedImage([{
       _id,
-      img_path,
+      img_path: `data:image/png;base64, ${file}`,
       filename,
       date,
       email,
