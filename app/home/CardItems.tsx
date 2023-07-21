@@ -36,7 +36,7 @@ const cards = [
   {
     text: 'Content Creation',
     icon: '/images/admin/home/icon2.png',
-    href: '/generate/imageToImage'
+    href: '/generate/textToImage'
   },
   {
     text: 'Social Analytics',

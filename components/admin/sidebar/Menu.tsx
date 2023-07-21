@@ -70,11 +70,13 @@ type MenuSigleBtnProps = {
 
 function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnProps) {
   const router = useRouter()
+  const pathname = usePathname()
 
   function handleClick() {
-    console.log('href', href)
-    if (href) {
-      router.push(href)
+    if (pathname === href) {
+      window.location.reload()
+    } else {
+      router.push(href!)
     }
   }
 

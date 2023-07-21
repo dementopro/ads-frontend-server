@@ -19,12 +19,14 @@ const PickItem = ({ item, isActive, setOption, pickType }: PickImageProps) => {
       {
         pickType !== 'style'
           ?
-          <div className='flex flex-col items-center gap-3'>
+          <div className='flex flex-col items-center gap-3 w-[150px]'>
             <div onClick={setOption} className={`${isActive ? 'border-primary-purple' : 'border-[#15161a]'} overflow-hidden cursor-pointer hover:opacity-90 border-2 w-[150px] h-[150px] relative rounded-lg bg-primary-gray`}>
               <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image_path}`} alt={item.name} width={150} height={150} />
               <Image src={'/images/admin/img2img/checked.svg'} alt='portrait' width={24} height={24} className={`absolute right-2 top-2 ${isActive ? 'flex' : 'hidden'}`} />
             </div>
-            <span>{item.name}</span>
+            <div title={item.name} className='max-w-[150px] truncate text-center inline'>
+              {item.name}
+            </div>
           </div>
           :
           <button
