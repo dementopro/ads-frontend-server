@@ -6,6 +6,10 @@ import AdminLayout from '@/layout/admin'
 import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
+import ReactGA from "react-ga4"
+
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/planning", title: "Planning - AdsGency AI" });
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;

@@ -1,10 +1,14 @@
 import LoginFrom from '@/app/login/LoginFrom'
 import Landing from '@/components/Landing'
 import React from 'react'
+import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Login - AdsGency AI',
 }
+
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/login", title: metadata.title });
 
 const LoginPage = () => {
   return (

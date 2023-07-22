@@ -1,10 +1,13 @@
 import RegisterForm from '@/app/register/RegisterForm'
 import Landing from '@/components/Landing'
 import React from 'react'
+import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Register - AdsGency AI',
 }
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/register", title: metadata.title });
 
 const RegisterPage = () => {
   return (

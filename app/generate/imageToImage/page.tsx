@@ -5,10 +5,14 @@ import AdminLayout from '@/layout/admin'
 import { getGenerateImageHistoryList, getPretrainBackgroundList, getPretrainFaceList, getPretrainStyleList } from '@/lib/generate'
 import React from 'react'
 
+import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Image to Image - AdsGency AI',
 }
+
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/generate/imageToImage", title: metadata.title });
 
 const ImageToImagePage = async () => {
 

@@ -3,10 +3,14 @@ import SavedCopy from '@/app/generate/productDescription/SavedCopy'
 import AdminLayout from '@/layout/admin'
 import { IGeneTextForm } from '@/types/generate'
 import React from 'react'
+import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Text to Copies - AdsGency AI',
 }
+
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/generate/productDescription", title: metadata.title });
 
 const ProductDescriptionPage = ({ searchParams }: { searchParams: { mode?: IGeneTextForm['mode'] } }) => {
 

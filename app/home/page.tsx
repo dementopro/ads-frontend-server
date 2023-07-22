@@ -3,6 +3,13 @@ import CommunityFrom from '@/app/home/CommunityFrom'
 import RecentProjects from '@/app/home/RecentProjects'
 import AdminLayout from '@/layout/admin'
 import React from 'react'
+import ReactGA from "react-ga4"
+
+export const metadata = {
+    title: 'User Home - AdsGency AI',
+}
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/home", title: metadata.title });
 
 const HomePage = () => {
   return (
