@@ -2,31 +2,70 @@ export const footerLinks = [
   {
     title: 'Product',
     links: [
-      'Start a Trial',
-      'How It Works',
-      'Features',
-      'Pricing',
-      'Watch Demo',
-
+      {
+        label: 'Start a Trial',
+        href: '/login',
+      },
+      {
+        label: 'How It Works',
+        href: '/',
+      },
+      {
+        label: 'Features',
+        href: '/',
+      },
+      {
+        label: 'Pricing',
+        href: '/pricing',
+      },
+      {
+        label: 'Watch Demo',
+        href: '/',
+      }
     ],
   },
   {
     title: 'Resources',
     links: [
-      'All Resources',
-      'Blog',
-      'FAQs',
-      'Help Center',
+      {
+        label: 'All Resources',
+        href: '/',
+      },
+      {
+        label: 'Blog',
+        href: '/',
+      },
+      {
+        label: 'FAQs',
+        href: '/',
+      },
+      {
+        label: 'Help Center',
+        href: '/',
+      }
     ],
   },
   {
     title: 'Company',
     links: [
-      'About Us',
-      'Contact Us',
-      'Privacy Policy',
-      'Careers',
-      'Partners',
+      {
+        label: 'About Us',
+        href: '/',
+      },
+      {
+        label: 'Contact Us',
+        href: '/',
+      },
+      {
+        label: 'Privacy Policy',
+        href: '/',
+      }, {
+        label: 'Careers',
+        href: '/',
+      }, {
+        label: 'Partners',
+        href: '/',
+      }
     ],
   },
 ];

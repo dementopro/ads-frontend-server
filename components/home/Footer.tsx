@@ -12,7 +12,10 @@ import { footerLinks } from '@/data/footerLink';
 
 type ColumnProps = {
   title: string;
-  links: Array<string>;
+  links: Array<{
+    label: string;
+    href: string;
+  }>;
 };
 
 const FooterColumn = ({ title, links }: ColumnProps) => (
@@ -20,8 +23,8 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
     <h4 className="font-semibold uppercase">{title}</h4>
     <ul className="flex flex-col gap-3 text-sm font-normal text-primary-gray">
       {links.map((link) => (
-        <Link href="/" key={link} className='hover:text-white'>
-          {link}
+        <Link href={link.href} key={link.label} className='hover:text-white'>
+          {link.label}
         </Link>
       ))}
     </ul>

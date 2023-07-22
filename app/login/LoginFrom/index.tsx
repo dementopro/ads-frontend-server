@@ -89,7 +89,7 @@ const LoginForm = () => {
             />
             <label className='text-white text-xs ml-2 select-none cursor-pointer' htmlFor="remember">Remember me</label>
           </div>
-          <Link className='text-[#7366ff] text-xs font-semibold' href={'/forgetPwd'}>Forgot Password?</Link>
+          {/* <Link className='text-[#7366ff] text-xs font-semibold' href={'/forgetPwd'}>Forgot Password?</Link> */}
         </div>
         <button type="submit" disabled={isLoading} className={`${styles['login-btn']}`}>
           {isLoading && <Icon icon={loadingIcon} className='mr-2' />}
