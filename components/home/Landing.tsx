@@ -3,6 +3,13 @@ import React from 'react'
 import styles from './home.module.css'
 import Button from '@/components/Button'
 import { useRouter } from 'next/navigation'
+import ReactGA from "react-ga4"
+
+export const metadata = {
+    title: 'Landing Page- AdsGency AI',
+}
+ReactGA.initialize("G-NQ34MWCQDB");
+ReactGA.send({ hitType: "pageview", page: "/home", title: metadata.title });
 
 const Landing = () => {
   const router = useRouter()

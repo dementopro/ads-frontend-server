@@ -14,7 +14,7 @@ export const metadata = {
   title: 'Home - AdsGency AI',
 }
 ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.ga({ hitType: "pageview", page: "/", title: metadata.title });
+ReactGA.send({ hitType: "pageview", page: "/", title: metadata.title });
 
 export default function Home() {
   return (
