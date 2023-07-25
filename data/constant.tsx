@@ -22,4 +22,5 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/generate/productDescription': ['Generate', 'Text to Copies'],
   '/projects': ['Your Projects'],
   '/pricing': ['Pricing'],
+  '/socialInsights': ['Social Insights'],
 }

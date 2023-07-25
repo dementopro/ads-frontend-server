@@ -19,6 +19,7 @@ export const config = {
     '/planning/:path*',
     '/projects/:path*',
     '/generate/:path*',
+    '/socialInsights/:path*',
     '/auth/:path*',
   ],
 }

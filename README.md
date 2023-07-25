@@ -24,3 +24,4 @@ npm run dev
 - [icons](https://icon-sets.iconify.design/mdi)
 - [formik](https://formik.org)
 - [antd](https://ant.design)
+- [d3.js](https://d3js.org)

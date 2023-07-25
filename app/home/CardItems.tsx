@@ -40,7 +40,8 @@ const cards = [
   },
   {
     text: 'Social Analytics',
-    icon: '/images/admin/home/icon3.png'
+    icon: '/images/admin/home/icon3.png',
+    href: '/socialInsights'
   },
   {
     text: 'Ads Managment',

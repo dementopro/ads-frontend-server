@@ -1,0 +1,24 @@
+.wrapper {
+  font-size: 16px;
+  color: #333;
+  padding: 25px;
+}
+
+.wrapper  svg {
+  overflow: visible;
+}
+
+.wrapper  text {
+  fill: #838383;
+  color: #838383;
+  font-size: 16px;
+}
+
+
+.xAxis text {
+  font-size: 12px;
+}
+
+.yAxis text {
+  font-size: 12px;
+}

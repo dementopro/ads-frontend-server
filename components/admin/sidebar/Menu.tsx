@@ -43,11 +43,12 @@ const menuItems = [
       },
     ]
   },
-  // {
-  //   text: 'Social Insights',
-  //   icon: '/images/sidebar/social-joomla.svg',
-  //   activeIcon: '/images/sidebar/active/social-joomla.svg',
-  // },
+  {
+    text: 'Social Insights',
+    icon: '/images/sidebar/social-joomla.svg',
+    activeIcon: '/images/sidebar/active/social-joomla.svg',
+    href: '/socialInsights'
+  },
   // {
   //   text: 'Ads Management',
   //   icon: '/images/sidebar/manage.svg',
