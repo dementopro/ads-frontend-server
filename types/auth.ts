@@ -11,3 +11,11 @@ export interface RegisterForm {
   verification_code: string;
   referral_code?: string;
 }
+
+export interface PaymentForm {
+  card_number: string;
+  card_holder: string;
+  country: string;
+  expiration: string;
+  cvc: string;
+}

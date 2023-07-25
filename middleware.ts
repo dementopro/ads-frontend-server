@@ -18,6 +18,7 @@ export const config = {
     '/home/:path*',
     '/planning/:path*',
     '/projects/:path*',
-    '/generate/:path*'
+    '/generate/:path*',
+    '/auth/:path*',
   ],
 }

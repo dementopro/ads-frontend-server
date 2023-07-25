@@ -32,24 +32,31 @@ const LoginForm = () => {
     actions.setSubmitting(false);
     try {
       setIsLoading(true)
-      const res = await fetch('/api/auth/login', {
+      // TODO: change to use application/json
+      const formData = new FormData()
+      for (const [key, value] of Object.entries(values)) {
+        formData.append(key, value)
+      }
+      const response = await fetch('/fapi/login_api', {
         method: 'POST',
-        body: JSON.stringify(values),
+        body: formData,
       })
-      const data = await res.json()
-      if (res.ok) {
+      if (response.ok) {
+        const data = await response.json()
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Login success');
           // redirect to home
           // NOTE: need to fresh the page to get the new cookie
-          setTimeout(() => {
-            window.location.href = '/home'
-          }, 1000)
+          window.location.href = '/home'
+        }
+        else if (data.status === 0) {
+          messageApi.success('Login success');
+          window.location.href = '/auth/payment'
         } else {
           messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('error: ', data)
+        console.log('error: ', response.statusText)
       }
     } catch (error) {
       console.log('error: ', error)
