@@ -21,8 +21,6 @@ const ImageToImagePage = async () => {
   const styleList = await getPretrainStyleList()
   const historyList = await getGenerateImageHistoryList()
 
-  console.log('historyList', historyList)
-
 
   return (
     <AdminLayout>
