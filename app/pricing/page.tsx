@@ -6,16 +6,22 @@ import checkIcon from '@iconify/icons-mdi/check';
 import closeIcon from '@iconify/icons-mdi/close';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
-import ReactGA from "react-ga4"
+import ReactGATag from '@/components/ReactGATag';
 
-ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.send({ hitType: "pageview", page: "/pricing", title: "Pricing - AdsGency AI" });
+
 const PricingPage = () => {
 
   const [plan, setPlan] = useState(Pricing[0].plan)
 
   return (
     <AdminLayout>
+      <ReactGATag
+        fieldObject={{
+          hitType: "pageview",
+          page: "/pricing",
+          title: "Pricing - AdsGency AI"
+        }}
+      />
       <div>
         <div className='flex items-center gap-4 '>
           {

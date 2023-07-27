@@ -1,3 +1,4 @@
+import ReactGATag from '@/components/ReactGATag'
 import DesciptionAndVideo from '@/components/home/DesciptionAndVideo'
 import FeaturedOn from '@/components/home/FeaturedOn'
 import Footer from '@/components/home/Footer'
@@ -8,17 +9,19 @@ import IntroTwo from '@/components/home/IntroTwo'
 import Landing from '@/components/home/Landing'
 import OurSolutions from '@/components/home/OurSolutions'
 import UserTestimonials from '@/components/home/UserTestimonials'
-import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Home - AdsGency AI',
 }
-ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.send({ hitType: "pageview", page: "/", title: metadata.title });
 
 export default function Home() {
   return (
     <main className="overflow-hidden flex min-h-screen flex-col bg-[#121212] text-white">
+      <ReactGATag fieldObject={{
+        hitType: "pageview",
+        page: "/",
+        title: metadata.title
+      }} />
       <Header />
       <Landing />
       <IndustryLeader />

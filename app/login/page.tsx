@@ -1,18 +1,23 @@
 import LoginFrom from '@/app/login/LoginFrom'
 import Landing from '@/components/Landing'
+import ReactGATag from '@/components/ReactGATag'
 import React from 'react'
-import ReactGA from "react-ga4"
 
 export const metadata = {
   title: 'Login - AdsGency AI',
 }
 
-ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.send({ hitType: "pageview", page: "/login", title: metadata.title });
 
 const LoginPage = () => {
   return (
     <div className='flex flex-col lg:flex-row w-full h-screen bg-[#121212]'>
+      <ReactGATag
+        fieldObject={{
+          hitType: "pageview",
+          page: "/login",
+          title: metadata.title
+        }}
+      />
       <Landing />
       <div className='flex-1 flex flex-col items-center justify-center'>
         <div

@@ -1,15 +1,13 @@
 'use client'
 import ListPlanning from '@/app/planning/ListPlanning'
 import MyPlanning from '@/app/planning/MyPlanning'
+import ReactGATag from '@/components/ReactGATag'
 import { SUCCESS_CODE } from '@/data/constant'
 import AdminLayout from '@/layout/admin'
 import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import ReactGA from "react-ga4"
 
-ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.send({ hitType: "pageview", page: "/planning", title: "Planning - AdsGency AI" });
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -103,6 +101,13 @@ const PlanningPage = () => {
   return (
     <AdminLayout>
       {contextHolder}
+      <ReactGATag
+        fieldObject={{
+          hitType: "pageview",
+          page: "/planning",
+          title: "Planning - AdsGency AI"
+        }}
+      />
       <section className='flex flex-col justify-center'>
         <h1 className='text-white font-medium text-2xl mb-6'>
           Planning
