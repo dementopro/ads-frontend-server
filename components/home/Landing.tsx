@@ -21,7 +21,6 @@ const Landing = () => {
         <span>platform without limits</span>
       </h1>
       <p className='text-center max-sm:text-base text-2xl text-white'>We are an enabler, Not a disrupter</p>
-      <Button onClick={() => router.push('/login')} btnStyle='w-[90%] lg:w-[406px] h-12 text-semibold'>Try AdsGency</Button>
       <div className='text-white text-[26px] text-center mt-[30px] flex items-center max-sm:flex-col'>
         Trusted by <span className='px-4 font-extrabold text-5xl'>10,000+</span> businesses cross <span className='px-4 font-extrabold text-5xl'>145+</span> countries
       </div>

@@ -58,11 +58,10 @@ const Header = () => {
         <Image src={'/logo.svg'} width={131} height={28} alt='logo' />
         <div className='flex items-center sm:gap-4'>
           <button
-            onClick={() => router.push('/login')}
+            onClick={() => setModalOpen(true)}
             className='flex items-center justify-center h-[44px] rounded-lg bg-primary-purple text-white cursor-pointer hover:opacity-80 px-4 truncate max-sm:hidden'>
-            Try AdsGency
+            Request Demo
           </button>
-          <div onClick={() => setModalOpen(true)} className='px-4 h-[44px] flex items-center cursor-pointer hover:opacity-80 text-primary-gray text-base truncate'>Contact Us</div>
         </div>
       </div>
       <Modal
@@ -77,7 +76,7 @@ const Header = () => {
         style={{ maxWidth: '900px' }}
         destroyOnClose
       >
-        <h2 className='text-3xl font-semibold'>Contact Us</h2>
+        <h2 className='text-3xl font-semibold'>Request Demo</h2>
         <p className='my-2 sm:mb-6 sm:text-xl'>Our friendly team would love to hear from you!</p>
         <Form
           form={form}
