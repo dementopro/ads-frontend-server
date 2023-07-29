@@ -2,11 +2,10 @@ import ReactGATag from '@/components/ReactGATag'
 import DesciptionAndVideo from '@/components/home/DesciptionAndVideo'
 import FeaturedOn from '@/components/home/FeaturedOn'
 import Footer from '@/components/home/Footer'
-import Header from '@/components/home/Header'
 import IndustryLeader from '@/components/home/IndustryLeader'
 import IntroOne from '@/components/home/IntroOne'
 import IntroTwo from '@/components/home/IntroTwo'
-import Landing from '@/components/home/Landing'
+import MainLanding from '@/components/home/MainLanding'
 import OurSolutions from '@/components/home/OurSolutions'
 import UserTestimonials from '@/components/home/UserTestimonials'
 
@@ -22,8 +21,7 @@ export default function Home() {
         page: "/",
         title: metadata.title
       }} />
-      <Header />
-      <Landing />
+      <MainLanding />
       <IndustryLeader />
       <FeaturedOn />
       <DesciptionAndVideo />

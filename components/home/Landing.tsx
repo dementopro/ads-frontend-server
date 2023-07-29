@@ -1,18 +1,13 @@
-'use client'
 import React from 'react'
 import styles from './home.module.css'
 import Button from '@/components/Button'
-import { useRouter } from 'next/navigation'
-import ReactGA from "react-ga4"
 
-export const metadata = {
-    title: 'Landing Page- AdsGency AI',
+
+type LandingProps = {
+  setModalOpen: (open: boolean) => void;
 }
-ReactGA.initialize("G-NQ34MWCQDB");
-ReactGA.send({ hitType: "pageview", page: "/home", title: metadata.title });
 
-const Landing = () => {
-  const router = useRouter()
+const Landing = ({ setModalOpen }: LandingProps) => {
 
   return (
     <div className={`w-full h-[calc(100vh-64px)] bg-[#1B1C21] flex flex-col items-center justify-center gap-7 ${styles['home-bg']}`}>
@@ -24,6 +19,7 @@ const Landing = () => {
       <div className='text-white text-[26px] text-center mt-[30px] flex items-center max-sm:flex-col'>
         Trusted by <span className='px-4 font-extrabold text-5xl'>10,000+</span> businesses cross <span className='px-4 font-extrabold text-5xl'>145+</span> countries
       </div>
+      <Button onClick={() => setModalOpen(true)} btnStyle='w-[90%] lg:w-[406px] h-12 text-semibold'>Request Demo</Button>
     </div>
   )
 }

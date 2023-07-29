@@ -4,7 +4,7 @@ export const footerLinks = [
     links: [
       {
         label: 'Start a Trial',
-        href: '/login',
+        href: '/',
       },
       {
         label: 'How It Works',

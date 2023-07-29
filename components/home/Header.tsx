@@ -2,7 +2,6 @@
 import { SUCCESS_CODE } from '@/data/constant';
 import { Form, Input, Modal, message } from 'antd';
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 interface ContactUsFrom {
@@ -13,12 +12,16 @@ interface ContactUsFrom {
   title?: string;
 }
 
-const Header = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+type HeaderProps = {
+  modalOpen: boolean;
+  setModalOpen: (open: boolean) => void;
+}
+
+const Header = ({ modalOpen, setModalOpen }: HeaderProps) => {
+
   const [form] = Form.useForm<ContactUsFrom>();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const router = useRouter();
 
 
   async function onFinish(values: ContactUsFrom) {
@@ -59,7 +62,7 @@ const Header = () => {
         <div className='flex items-center sm:gap-4'>
           <button
             onClick={() => setModalOpen(true)}
-            className='flex items-center justify-center h-[44px] rounded-lg bg-primary-purple text-white cursor-pointer hover:opacity-80 px-4 truncate max-sm:hidden'>
+            className='flex items-center justify-center h-[44px] rounded-lg bg-primary-purple text-white cursor-pointer hover:opacity-80 px-4 truncate'>
             Request Demo
           </button>
         </div>
@@ -103,10 +106,13 @@ const Header = () => {
               <Input placeholder='Your company name' />
             </Form.Item>
           </div>
-          <div className='w-full'>
-            <Form.Item name="title" label="Title" rules={[]}>
-              <Input.TextArea placeholder='Your title' autoSize={{ minRows: 1, maxRows: 1 }} />
-            </Form.Item>
+          <div className='w-full flex gap-2'>
+            <div className='flex-1'>
+              <Form.Item name="title" label="Title" rules={[]}>
+                <Input placeholder='Your title' />
+              </Form.Item>
+            </div>
+            <div className='max-sm:hidden flex-1'></div>
           </div>
           <div className='mx-auto flex gap-4'>
             <button type='submit' disabled={loading} className='w-[100px] justify-center h-[40px] flex items-center cursor-pointer hover:opacity-80 bg-primary-purple rounded-lg text-white text-base truncate'>
