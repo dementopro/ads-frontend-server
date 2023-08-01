@@ -13,6 +13,8 @@ import { SUCCESS_CODE } from '@/data/constant';
 import { AccountContext } from '@/context/account';
 import { PricingPlan } from '@/types/pricing';
 import { SubscriptionResp } from '@/types/account';
+import ConfirmModal from '@/app/pricing/ConfirmModal';
+import PayResult from '@/app/pricing/PayResult';
 
 type SubscriptionButtonProps = {
   plan: PricingPlan,
@@ -49,10 +51,10 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
   return (
     <button
       onClick={() => onSubscription(plan.planId)}
-      disabled={planId === plan.planId}
+      disabled={planId === plan.planId && isSubscribed}
       className={
         `rounded-lg w-[132px] flex items-center justify-center py-2
-        ${planId === plan.planId ? 'bg-[#201641] text-primary-purple' : 'bg-primary-gradient text-white cursor-pointer hover:opacity-80'}
+        ${planId === plan.planId && isSubscribed ? 'bg-[#201641] text-primary-purple' : 'bg-primary-gradient text-white cursor-pointer hover:opacity-80'}
         `
       }>
       {formatBtnText()}
@@ -64,10 +66,14 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
 const PricingPage = () => {
 
   const { updateAccount, planId } = useContext(AccountContext)
+  const [buyPlanId, setBuyPlanId] = useState(0)
 
   const [plan, setPlan] = useState(Pricing[~~((planId - 1) / 3)].plan)
   const [loading, setLoading] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
+  const [confirmVisible, setConfirmVisible] = useState(false)
+  const [payResultVisible, setPayResultVisible] = useState(false)
+  const [payResultMessage, setPayResultMessage] = useState('')
 
   async function onSubscription(planId: number) {
     try {
@@ -85,7 +91,9 @@ const PricingPage = () => {
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'Subscription successfully')
+          setPayResultMessage(data.message || 'Subscription successfully')
+          setPayResultVisible(true)
+          setConfirmVisible(false)
           updateAccount()
         } else {
           messageApi.error(data.message || 'Something went wrong')
@@ -115,7 +123,9 @@ const PricingPage = () => {
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
         if (data.status === SUCCESS_CODE || data.status === 'active') {
-          messageApi.success(data.message || 'Downgrade successfully')
+          setPayResultMessage(data.message || 'Downgrade successfully')
+          setPayResultVisible(true)
+          setConfirmVisible(false)
           updateAccount()
         } else {
           messageApi.error(data.message || 'Something went wrong')
@@ -146,7 +156,9 @@ const PricingPage = () => {
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'Upgrade successfully')
+          setPayResultMessage(data.message || 'Upgrade successfully')
+          setPayResultVisible(true)
+          setConfirmVisible(false)
           updateAccount()
         } else {
           messageApi.error(data.message || 'Something went wrong')
@@ -168,6 +180,8 @@ const PricingPage = () => {
       onDowngrade(clickPlanId)
     } else if (clickPlanId > planId) {
       onUpgrade(clickPlanId)
+    } else {
+      onSubscription(clickPlanId)
     }
   }
 
@@ -182,7 +196,23 @@ const PricingPage = () => {
           title: "Pricing - AdsGency AI"
         }}
       />
-      <Loading loading={loading} />
+      <ConfirmModal
+        planId={buyPlanId}
+        visible={confirmVisible}
+        onCancel={() => setConfirmVisible(false)}
+        onOk={() => {
+          handleSubscription(buyPlanId)
+        }}
+        loading={loading}
+      />
+      <PayResult
+        visible={payResultVisible}
+        onClose={() => {
+          setPayResultVisible(false)
+          setPayResultMessage('')
+        }}
+        message={payResultMessage}
+      />
       <div className='flex items-center gap-4'>
         {
           Pricing.map(price => (
@@ -216,7 +246,10 @@ const PricingPage = () => {
                     </div>
                     <SubscriptionButton
                       plan={item}
-                      onSubscription={handleSubscription}
+                      onSubscription={(planId) => {
+                        setBuyPlanId(planId)
+                        setConfirmVisible(true)
+                      }}
                     />
                   </div>
                 ))

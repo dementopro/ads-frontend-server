@@ -8,6 +8,7 @@ import { AccountContext } from '@/context/account';
 import { useRouter } from 'next/navigation';
 import vipOne from '@iconify/icons-icon-park-solid/vip-one';
 import { SUCCESS_CODE } from '@/data/constant';
+import { Pricing } from '@/data/pricing';
 
 const SubscriptionInfo = () => {
 
@@ -20,7 +21,11 @@ const SubscriptionInfo = () => {
     trialDays,
     isSubscribed,
     updateAccount,
+    trialDateAt,
+    planId
   } = useContext(AccountContext)
+
+  const currentPlan = Pricing[~~((planId - 1) / 3)].plans.find(p => p.planId === planId)
 
 
   useEffect(() => {
@@ -85,15 +90,23 @@ const SubscriptionInfo = () => {
         }}
       >
         <div className='flex items-center gap-2 text-base text-white font-semibold'>
-          <span>Upgrade plan</span>
+          <span>{currentPlan?.title || 'Upgrade plan'}</span>
           <Icon width={24} height={24} icon={vipOne} inline />
         </div>
-        <div className='flex items-center justify-between text-white text-xs'>
-          <div>Expires After</div>
-          <div className='flex items-center'>
-            <span className='bg-white/30 rounded p-1 mx-2 min-w-5 h-5 flex items-center justify-center font-bold text-white'>{trialDays}</span> Days
-          </div>
-        </div>
+        {
+          isSubscribed ?
+            <div className='flex items-center justify-between text-white text-xs'>
+              <div>Expires After</div>
+              <div className='flex items-center'>
+                <span className='bg-white/30 rounded p-1 mx-2 min-w-5 h-5 flex items-center justify-center font-bold text-white'>{trialDays}</span> Days
+              </div>
+            </div>
+            :
+            <div className='flex items-center justify-between text-white text-xs'>
+              <div>Last date at</div>
+              <span className='bg-white/30 rounded p-1 min-w-5 h-5 flex items-center justify-center font-bold text-white'>{trialDateAt}</span>
+            </div>
+        }
         <div className='flex items-center justify-between text-white text-sm'>
           <span className='font-semibold'>Credits</span>
           <div><span className='font-semibold'>{credits}</span></div>
@@ -112,7 +125,7 @@ const SubscriptionInfo = () => {
             :
             <button onClick={toPricing} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition-all'>
               <Icon icon={bellIcon} />
-              <span>Subscribe</span>
+              <span>Goto Subscribe</span>
             </button>
         }
       </div>

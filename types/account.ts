@@ -14,7 +14,7 @@ export interface SubscriptionInfo {
   subscribe_end_time: number;
   subscription_id: string;
   subscription_plan_id: number;
-  subscription_status: 'active' | 'cancel';
+  subscription_status: 'active' | 'cancel' | '';
   credit_num: number;
   old_credit_num: number;
   downgrade_subscription: string;
