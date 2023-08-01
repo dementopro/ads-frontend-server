@@ -42,14 +42,11 @@ export function paymentValidate(values: PaymentForm) {
   if (!values.cvc) {
     errors.cvc = 'CVC is required'
   }
-  if (values.cvc.length !== 3) {
-    errors.cvc = 'CVC must be 3 digits'
+  if (values.cvc.length !== 3 && values.cvc.length !== 4) {
+    errors.cvc = 'CVC must be 3 or 4 digits'
   }
   if (!values.expiration) {
     errors.expiration = 'Expiration is required'
-  }
-  if (values.expiration.length !== 4) {
-    errors.expiration = 'Expiration must be 4 digits'
   }
   return errors
 }

@@ -9,7 +9,7 @@ import CCInput from '@/components/CCInput';
 import ReactFlagsSelect from 'react-flags-select';
 import loadingIcon from '@iconify/icons-eos-icons/loading';
 import { useRouter } from 'next/navigation';
-import { message } from 'antd';
+import { DatePicker, message } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
 
 const PaymentForm = () => {
@@ -36,7 +36,11 @@ const PaymentForm = () => {
       setIsLoading(true);
       const response = await fetch('/fapi/add_credit_api', {
         method: 'POST',
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          year: +values.expiration.split('-')[0],
+          month: +values.expiration.split('-')[1],
+        }),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -63,33 +67,23 @@ const PaymentForm = () => {
     }
   }
 
-  const handleChangeExpiration = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    // 检查输入是否为整数
-    if (!Number.isInteger(Number(value))) {
-      return;
-    }
-    // 检查输入的长度是否为4
-    if (value.length > 4) {
-      return;
-    }
-    // 更新输入的值
-    formikForPayment.setFieldValue('expiration', value);
-  };
-
   const handleChangeCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // 检查输入是否为整数
     if (!Number.isInteger(Number(value))) {
       return;
     }
-    // 检查输入的长度是否为3
-    if (value.length > 3) {
+    // 检查输入的长度是否为4位
+    if (value.length > 4) {
       return;
     }
     // 更新输入的值
     formikForPayment.setFieldValue('cvc', value);
   };
+
+  function onChangeExpiration(date: any, dateString: string) {
+    formikForPayment.setFieldValue('expiration', dateString);
+  }
 
   return (
     <>
@@ -121,14 +115,11 @@ const PaymentForm = () => {
             <label className='text-primary-gray text-sm' htmlFor="expiration">
               Expiration
             </label>
-            <input
-              type="text"
-              placeholder='MM / YY'
-              id="expiration"
-              value={formikForPayment.values.expiration}
-              onChange={handleChangeExpiration}
-              className={`${styles['payment-input']} ${styles.half} !sm:w-[180px] !max-sm:w-full ${formikForPayment.errors.expiration && formikForPayment.touched.expiration ? '!border-rose-600' : ''}`}
-            />
+            <DatePicker
+              className={`${styles['payment-input']} ${styles.half} ${styles['date-input']} !sm:w-[180px] !max-sm:w-full ${formikForPayment.errors.expiration ? '!border-rose-600' : ''}`}
+              allowClear={false}
+              onChange={onChangeExpiration}
+              picker="month" />
           </div>
           <div className='flex flex-col gap-1 max-sm:w-1/2'>
             <label className='text-primary-gray text-sm' htmlFor="cvc">

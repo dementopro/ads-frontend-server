@@ -46,3 +46,19 @@ body {
   height: inherit !important;
   width: inherit !important;
 }
+
+.ant-picker-input input {
+  @apply !text-white !text-base;
+}
+
+.ant-picker:hover {
+  @apply !border-primary-purple;
+}
+
+.ant-picker-input input::placeholder {
+  @apply !text-primary-gray;
+}
+
+.ant-picker-suffix {
+  @apply !text-primary-gray;
+}
