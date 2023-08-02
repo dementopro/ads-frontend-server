@@ -5,6 +5,7 @@ export async function GET(req: Request) {
   const response = await fetch(`${process.env.API_BASE_URL}/fb_callback?code=${code}`, {
     headers: {
       'cookie': req.headers.get('cookie') || '',
+      'Access-Control-Allow-Origin': '*',
     }
   })
   console.log('response.status', response.status)
