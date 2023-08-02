@@ -1,5 +1,4 @@
 import { SocialInsightsContext } from '@/context/socialInsights'
-import { SUCCESS_CODE } from '@/data/constant'
 import { capitalize } from '@/lib/format'
 import { PlatformType } from '@/types/socialInsights'
 import { Icon } from '@iconify/react'
@@ -11,10 +10,27 @@ const SocialAccountsList = () => {
 
   async function onConnect(platform: PlatformType | "all") {
     switch (platform) {
-      case "facebook":
-        await connectFacebook()
-        updateConnectedStatus(platform, true)
+      case "facebook": {
+        const url = await connectFacebook()
+        console.log('url', url)
+        if (!url) return
+        try {
+          const response = await fetch(url, {
+            method: 'GET',
+          })
+          console.log('response', response)
+          if (response.ok) {
+            const data = await response.json()
+            console.log('data', data)
+          } else {
+            console.log('error')
+          }
+        } catch (error) {
+          console.log('error', error)
+        }
+        // updateConnectedStatus(platform, true)
         break;
+      }
       default:
         break;
     }
@@ -59,16 +75,11 @@ async function connectFacebook() {
     })
     if (response.ok) {
       const data = await response.json()
-      window.open(data.fb_auth_url, '_blank')
-      // if (data.status === SUCCESS_CODE) {
-      //   window.open(data.fb_url, '_blank')
-      // } else {
-      //   console.log(data.message)
-      // }
+      // window.open(data.fb_auth_url, '_blank')
+      return data.fb_auth_url as string
     } else {
       console.log('error')
     }
-    console.log('response', response)
   } catch (error) {
     console.log('error', error)
   }
