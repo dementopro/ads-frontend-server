@@ -11,23 +11,7 @@ const SocialAccountsList = () => {
   async function onConnect(platform: PlatformType | "all") {
     switch (platform) {
       case "facebook": {
-        const url = await connectFacebook()
-        console.log('url', url)
-        if (!url) return
-        try {
-          const response = await fetch(url, {
-            method: 'GET',
-          })
-          console.log('response', response)
-          if (response.ok) {
-            const data = await response.json()
-            console.log('data', data)
-          } else {
-            console.log('error')
-          }
-        } catch (error) {
-          console.log('error', error)
-        }
+        await connectFacebook()
         // updateConnectedStatus(platform, true)
         break;
       }
@@ -75,8 +59,7 @@ async function connectFacebook() {
     })
     if (response.ok) {
       const data = await response.json()
-      // window.open(data.fb_auth_url, '_blank')
-      return data.fb_auth_url as string
+      window.open(data.fb_auth_url, '_blank')
     } else {
       console.log('error')
     }
