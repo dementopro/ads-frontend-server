@@ -42,11 +42,7 @@ async function connectFacebook() {
     })
     if (response.ok) {
       const data = await response.json()
-      if (data.status === SUCCESS_CODE) {
-        window.open(data.fb_url, '_blank')
-      } else {
-        console.log(data.message)
-      }
+      window.open(data.fb_auth_url)
     } else {
       console.log('error')
     }
