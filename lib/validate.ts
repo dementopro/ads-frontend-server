@@ -1,4 +1,4 @@
-import { LoginForm, PaymentForm, RegisterForm } from "@/types/auth"
+import { LoginForm, PaymentForm, RegisterForm, ResetPasswordForm } from "@/types/auth"
 
 export function loginValidate(values: LoginForm) {
   const errors = {} as LoginForm
@@ -47,6 +47,22 @@ export function paymentValidate(values: PaymentForm) {
   }
   if (!values.expiration) {
     errors.expiration = 'Expiration is required'
+  }
+  return errors
+}
+
+export function resetPasswordValidate(values: ResetPasswordForm) {
+  const errors = {} as ResetPasswordForm
+  if (!values.password) {
+    errors.password = 'Password is required'
+  }
+  if (!values.re_password) {
+    errors.re_password = 'Confirm password is required'
+  } else if (values.password !== values.re_password) {
+    errors.re_password = 'Confirm password must match password'
+  }
+  if (!values.verification_code) {
+    errors.verification_code = 'Verification code is required'
   }
   return errors
 }
