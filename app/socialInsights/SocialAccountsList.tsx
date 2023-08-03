@@ -6,13 +6,12 @@ import React, { useContext } from 'react'
 
 const SocialAccountsList = () => {
 
-  const { platforms, updateConnectedStatus } = useContext(SocialInsightsContext)
+  const { platforms } = useContext(SocialInsightsContext)
 
   async function onConnect(platform: PlatformType) {
     switch (platform) {
       case "facebook": {
         await connectFacebook()
-        // updateConnectedStatus(platform, true)
         break;
       }
       default:

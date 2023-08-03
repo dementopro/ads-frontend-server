@@ -6,7 +6,7 @@ import linkedinIcon from '@iconify/icons-logos/linkedin-icon';
 import tiktokIcon from '@iconify/icons-logos/tiktok-icon';
 import pinterestIcon from '@iconify/icons-logos/pinterest';
 import instagramIcon from '@iconify/icons-skill-icons/instagram';
-
+import { checkFacebookIsConnected } from "@/lib/socialInsights";
 
 
 export const SocialInsightsContext = createContext<{
@@ -15,7 +15,7 @@ export const SocialInsightsContext = createContext<{
   dateRange: DateRange
   dataMetric: DataMetric
   topTab: 'social' | 'click' | 'follower'
-  updateConnectedStatus: (platformName: PlatformType, isConnected: boolean) => void
+  updatePlatformStatus: (platformName: PlatformType, config: Partial<Platform>) => void
   setCurrentPlatform: (platformName: PlatformType) => void
   setDateRange: (dateRange: DateRange) => void
   setDataMetric: (dataMetric: DataMetric) => void
@@ -26,7 +26,7 @@ export const SocialInsightsContext = createContext<{
   dateRange: 'last_day',
   dataMetric: 'page',
   topTab: 'social',
-  updateConnectedStatus: () => { },
+  updatePlatformStatus: () => { },
   setCurrentPlatform: () => { },
   setDateRange: () => { },
   setDataMetric: () => { },
@@ -39,32 +39,38 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     {
       name: 'facebook',
       icon: facebookIcon,
-      isConnected: false
+      isConnected: false,
+      loading: true,
     },
     {
       name: 'linkedin',
       icon: linkedinIcon,
-      isConnected: false
+      isConnected: false,
+      loading: false,
     },
     {
       name: 'twitter',
       icon: twitterIcon,
-      isConnected: false
+      isConnected: false,
+      loading: false,
     },
     {
       name: 'tiktok',
       icon: tiktokIcon,
-      isConnected: false
+      isConnected: false,
+      loading: false,
     },
     {
       name: 'pinterest',
       icon: pinterestIcon,
-      isConnected: false
+      isConnected: false,
+      loading: false,
     },
     {
       name: 'instagram',
       icon: instagramIcon,
       isConnected: false,
+      loading: false,
     },
   ])
   const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
@@ -76,12 +82,29 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     setDateRange('last_day')
   }, [topTab])
 
-  function updateConnectedStatus(platformName: PlatformType, isConnected: boolean) {
+  useEffect(() => {
+    updateConnectStatus()
+  }, [currentPlatform])
+
+  async function updateConnectStatus() {
+    if (currentPlatform === 'facebook') {
+      updatePlatformStatus('facebook', {
+        loading: true,
+      })
+      const isConnect = await checkFacebookIsConnected()
+      updatePlatformStatus('facebook', {
+        isConnected: isConnect,
+        loading: false,
+      })
+    }
+  }
+
+  function updatePlatformStatus(platformName: PlatformType, config: Partial<Platform>) {
     const updatedPlatforms = platforms.map(platform => {
       if (platform.name === platformName) {
         return {
           ...platform,
-          isConnected
+          ...config,
         }
       }
       return platform
@@ -91,7 +114,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
 
   return (
     <SocialInsightsContext.Provider value={{
-      platforms, updateConnectedStatus,
+      platforms, updatePlatformStatus,
       currentPlatform, setCurrentPlatform,
       dateRange, setDateRange,
       dataMetric, setDataMetric,

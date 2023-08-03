@@ -1,33 +1,49 @@
 import { SocialInsightsContext } from '@/context/socialInsights'
-import { SUCCESS_CODE } from '@/data/constant'
 import { capitalize } from '@/lib/format'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
 const ConnectPlatform = () => {
 
-  const { currentPlatform, updateConnectedStatus } = useContext(SocialInsightsContext)
-
-  const imgUrl = `/images/socialInsights/${currentPlatform}_connect.svg`
+  const { currentPlatform, platforms } = useContext(SocialInsightsContext)
 
   async function onConnect() {
     switch (currentPlatform) {
       case "facebook":
         await connectFacebook()
-        updateConnectedStatus(currentPlatform, true)
         break;
       default:
         break;
     }
   }
 
+  const logo = platforms.find(platform => platform.name === currentPlatform)?.icon!
+
   return (
-    <div className='mx-auto flex flex-col items-center justify-center pt-[80px] gap-12'>
+    <div className='mx-auto flex flex-col items-center justify-center mt-5 py-5 gap-10'>
       <h2 className='text-[18px]'>Add {capitalize(currentPlatform)} account</h2>
-      <Image src={imgUrl} alt={currentPlatform} width={320} height={320} />
-      <button
-        onClick={onConnect}
-        className='bg-primary-purple text-white rounded-lg w-[132px] flex items-center justify-center py-2 hover:opacity-80'>Add account</button>
+      <div className='flex items-center justify-between gap-10'>
+        <Icon icon={logo} width={54} height={54} />
+        <Image src={'/images/socialInsights/link.svg'} alt={currentPlatform} width={130} height={34} />
+        <Image src={'/images/socialInsights/logo.svg'} alt={currentPlatform} width={54} height={54} />
+      </div>
+      <Image src='/images/socialInsights/man.svg' alt='man' width={204} height={176} />
+      {
+        currentPlatform === 'facebook' ?
+          <button
+            onClick={onConnect}
+            className='bg-primary-purple text-white rounded-lg flex items-center justify-center py-2 px-4 hover:opacity-80'>
+            <Icon icon='mdi-link' width={18} className='mr-2 rotate-[135deg]' />
+            Add account
+          </button>
+          :
+          <div
+            className='bg-primary-gray text-white rounded-lg flex items-center justify-center py-2 px-4 select-none'>
+            <Icon icon='mdi-lock' width={18} className='mr-2' />
+            Comming soon
+          </div>
+      }
     </div>
   )
 }
@@ -42,7 +58,8 @@ async function connectFacebook() {
     })
     if (response.ok) {
       const data = await response.json()
-      window.open(data.fb_auth_url)
+      // 替换当前 url 为 data.fb_auth_url
+      window.location.replace(data.fb_auth_url)
     } else {
       console.log('error')
     }
