@@ -49,7 +49,7 @@ const Footer = () => {
               () => window.open('https://twitter.com/AdsGency_AI', '_blank')
             } className='hover:text-[#1DA1F2] cursor-pointer' width={24} height={24} icon={twitterIcon} />
             <Icon onClick={
-              () => window.open('mailto:xinrliu@adsgency.ai', '_blank')
+              () => window.open('mailto:contactus@adsgency.ai', '_blank')
             } className='hover:text-[#0F9D58] cursor-pointer' width={24} height={24} icon={gmailIcon} />
             <Icon onClick={
               () => window.open('https://www.youtube.com/@AdsGencyAI', '_blank')
@@ -59,7 +59,7 @@ const Footer = () => {
             } className='hover:text-[#0077b5] cursor-pointer' width={24} height={24} icon={linkedinIcon} />
           </div>
         </div>
-        <div className="flex flex-wrap gap-20">
+        <div className="hidden flex-wrap gap-20">
           {
             footerLinks.map(item => (
               <FooterColumn

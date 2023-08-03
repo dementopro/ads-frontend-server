@@ -239,7 +239,7 @@ const PricingPage = () => {
                   <div key={item.title}
                     className='w-[240px] flex flex-col justify-center items-center bg-[#27282F] rounded-lg p-4 border border-[#3A3A3A] gap-2'
                   >
-                    <div className='text-primary-purple'>{item.title}</div>
+                    <div className='text-primary-purple uppercase'>{item.title}</div>
                     <div className='flex items-center text-primary-gray text-sm'>
                       <span className='text-white text-3xl mr-3'>{item.price}</span>
                       <span>/month</span>

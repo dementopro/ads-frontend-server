@@ -125,7 +125,7 @@ const SubscriptionInfo = () => {
             :
             <button onClick={toPricing} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition-all'>
               <Icon icon={bellIcon} />
-              <span>Goto Subscribe</span>
+              <span>Subscribe Here</span>
             </button>
         }
       </div>

@@ -4,17 +4,17 @@ export const Pricing = [
     icon: 'plan1.svg',
     plans: [
       {
-        title: 'ANALYTICS TIER 1',
+        title: 'Starter',
         price: '$39',
         planId: 1,
       },
       {
-        title: 'SERVICES TIER 2',
+        title: 'Advanced',
         price: '$69',
         planId: 2,
       },
       {
-        title: 'SERVICES TIER 3',
+        title: 'Premium',
         price: '$99',
         planId: 3,
       },
@@ -37,21 +37,21 @@ export const Pricing = [
     ]
   },
   {
-    plan: 'Professional Plan',
+    plan: 'Businesses Plan',
     icon: 'plan2.svg',
     plans: [
       {
-        title: 'ANALYTICS TIER 1',
+        title: 'Starter',
         price: '$199',
         planId: 4,
       },
       {
-        title: 'SERVICES TIER 2',
+        title: 'Advanced',
         price: '$279',
         planId: 5,
       },
       {
-        title: 'SERVICES TIER 3',
+        title: 'Premium',
         price: '$399',
         planId: 6,
       },
@@ -78,17 +78,17 @@ export const Pricing = [
     icon: 'plan3.svg',
     plans: [
       {
-        title: 'ANALYTICS TIER 1',
+        title: 'Starter',
         price: '$599',
         planId: 7,
       },
       {
-        title: 'SERVICES TIER 2',
+        title: 'Advanced',
         price: '$899',
         planId: 8
       },
       {
-        title: 'SERVICES TIER 3',
+        title: 'Premium',
         price: '$1199',
         planId: 9,
       },
