@@ -39,7 +39,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     {
       name: 'facebook',
       icon: facebookIcon,
-      isConnected: true
+      isConnected: false
     },
     {
       name: 'linkedin',
@@ -70,7 +70,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
   const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
   const [dateRange, setDateRange] = useState<DateRange>('last_day')
   const [dataMetric, setDataMetric] = useState<DataMetric>('page')
-  const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('follower')
+  const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
 
   useEffect(() => {
     setDateRange('last_day')

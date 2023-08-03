@@ -5,11 +5,9 @@ import { SUCCESS_CODE } from '@/data/constant'
 import { BarData, IDashboardResp, LineData } from '@/types/socialInsights'
 import { Spin, message } from 'antd'
 import React, { useContext, useEffect, useState } from 'react'
-import GeoMap from '@/components/d3/GeoMap'
 import BarChart from '@/components/d3/BarChart'
 import { timeParse } from 'd3'
 import Choropleth from '@/components/d3/Geo/Choropleth'
-import { useWorldAtlas } from '@/hooks/useWorldAtlas'
 import { useGeoData } from '@/hooks/useGeoData'
 
 type DashCardProps = {
