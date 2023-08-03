@@ -19,10 +19,3 @@ export interface PaymentForm {
   expiration: string;
   cvc: string;
 }
-
-export interface ResetPasswordForm {
-  email: string;
-  password: string;
-  re_password: string;
-  verification_code: string;
-}

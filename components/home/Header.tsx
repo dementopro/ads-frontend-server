@@ -37,7 +37,7 @@ const Header = () => {
           </button>
           <button
             onClick={toContactUs}
-            className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate max-sm:hidden`}>
+            className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
             Contact Us
           </button>
         </div>

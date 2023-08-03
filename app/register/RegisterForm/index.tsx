@@ -1,5 +1,5 @@
 'use client'
-import { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import styles from './register.module.css'
 import Link from 'next/link'
 import { FormikHelpers, useFormik } from 'formik'
@@ -11,6 +11,7 @@ import { SUCCESS_CODE } from '@/data/constant'
 import { Icon } from '@iconify/react'
 import loadingIcon from '@iconify/icons-eos-icons/loading';
 import leftIcon from '@iconify/icons-mdi/arrow-left';
+
 import ReactFlagsSelect from "react-flags-select";
 import CCInput from '@/components/CCInput'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
@@ -77,8 +78,8 @@ const RegisterForm = () => {
           'Content-Type': 'application/json'
         }
       })
+      const data = await response.json()
       if (response.ok) {
-        const data = await response.json()
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Register success');
           setTimeout(() => {
@@ -89,7 +90,7 @@ const RegisterForm = () => {
           messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        messageApi.error(response.statusText || 'Something went wrong');
+        console.log('error: ', data)
       }
     } catch (error) {
       console.log('error: ', error)
@@ -120,31 +121,30 @@ const RegisterForm = () => {
         return
       }
       setIsSending(true)
+      // TODO: fix keep disabled when refresh page
+      setTimeout(() => {
+        setIsSending(false)
+      }, 10000);
       messageApi.loading('Sending verification code...')
-      const response = await fetch('/fapi/send_verification_email', {
+      const res = await fetch('/fapi/send_verification_email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `email=${email}`,
       })
-      if (response.ok) {
-        const data = await response.json()
+      const data = await res.json()
+      if (res.ok) {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Send verification code success');
         } else {
           messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        messageApi.error(response.statusText || 'Something went wrong');
+        console.log('error: ', data)
       }
     } catch (error) {
       console.log('error: ', error)
-    } finally {
-      // TODO: fix keep disabled when refresh page
-      setTimeout(() => {
-        setIsSending(false)
-      }, 30 * 1000);
     }
   }
 
@@ -165,9 +165,11 @@ const RegisterForm = () => {
     });
   }
 
+
   function onChangeExpiration(date: any, dateString: string) {
     formikForPayment.setFieldValue('expiration', dateString);
   }
+
 
   return (
     <>
