@@ -1,20 +1,23 @@
 'use client'
+import ConnectPlatform from '@/app/socialInsights/ConnectPlatform'
 import Dashboard from '@/app/socialInsights/Dashboard'
 import Header from '@/app/socialInsights/Header'
-import SocialAccountsList from '@/app/socialInsights/SocialAccountsList'
 import { SocialInsightsContext, SocialInsightsProvider } from '@/context/socialInsights'
 import React, { useContext } from 'react'
 
 
 const Layout = () => {
 
-  const { currentPlatform } = useContext(SocialInsightsContext)
+  const { currentPlatform, platforms } = useContext(SocialInsightsContext)
 
   return (
     <>
       <Header />
-      {currentPlatform === 'all' && <SocialAccountsList />}
-      {currentPlatform !== 'all' && <Dashboard />}
+      {
+        platforms.find(platform => platform.name === currentPlatform)?.isConnected
+          ? <Dashboard />
+          : <ConnectPlatform />
+      }
     </>
   )
 }

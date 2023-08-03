@@ -8,7 +8,7 @@ const SocialAccountsList = () => {
 
   const { platforms, updateConnectedStatus } = useContext(SocialInsightsContext)
 
-  async function onConnect(platform: PlatformType | "all") {
+  async function onConnect(platform: PlatformType) {
     switch (platform) {
       case "facebook": {
         await connectFacebook()

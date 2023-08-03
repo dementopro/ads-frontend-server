@@ -1,5 +1,5 @@
 import { DataMetric, DateRange, Platform, PlatformType } from "@/types/socialInsights";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import twitterIcon from '@iconify/icons-logos/twitter';
 import facebookIcon from '@iconify/icons-logos/facebook';
 import linkedinIcon from '@iconify/icons-logos/linkedin-icon';
@@ -11,22 +11,26 @@ import instagramIcon from '@iconify/icons-skill-icons/instagram';
 
 export const SocialInsightsContext = createContext<{
   platforms: Platform[]
-  currentPlatform: PlatformType | 'all'
+  currentPlatform: PlatformType
   dateRange: DateRange
   dataMetric: DataMetric
-  updateConnectedStatus: (platformName: PlatformType | 'all', isConnected: boolean) => void
-  setCurrentPlatform: (platformName: PlatformType | 'all') => void
+  topTab: 'social' | 'click' | 'follower'
+  updateConnectedStatus: (platformName: PlatformType, isConnected: boolean) => void
+  setCurrentPlatform: (platformName: PlatformType) => void
   setDateRange: (dateRange: DateRange) => void
   setDataMetric: (dataMetric: DataMetric) => void
+  setTopTab: (topTab: 'social' | 'click' | 'follower') => void
 }>({
   platforms: [],
-  currentPlatform: 'all',
+  currentPlatform: 'facebook',
   dateRange: 'last_day',
   dataMetric: 'page',
+  topTab: 'social',
   updateConnectedStatus: () => { },
   setCurrentPlatform: () => { },
   setDateRange: () => { },
   setDataMetric: () => { },
+  setTopTab: () => { },
 })
 
 export const SocialInsightsProvider = ({ children }: { children: React.ReactNode }) => {
@@ -35,7 +39,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     {
       name: 'facebook',
       icon: facebookIcon,
-      isConnected: false
+      isConnected: true
     },
     {
       name: 'linkedin',
@@ -63,11 +67,16 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       isConnected: false,
     },
   ])
-  const [currentPlatform, setCurrentPlatform] = useState<PlatformType | 'all'>('all')
+  const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
   const [dateRange, setDateRange] = useState<DateRange>('last_day')
   const [dataMetric, setDataMetric] = useState<DataMetric>('page')
+  const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('follower')
 
-  function updateConnectedStatus(platformName: PlatformType | 'all', isConnected: boolean) {
+  useEffect(() => {
+    setDateRange('last_day')
+  }, [topTab])
+
+  function updateConnectedStatus(platformName: PlatformType, isConnected: boolean) {
     const updatedPlatforms = platforms.map(platform => {
       if (platform.name === platformName) {
         return {
@@ -86,6 +95,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       currentPlatform, setCurrentPlatform,
       dateRange, setDateRange,
       dataMetric, setDataMetric,
+      topTab, setTopTab,
     }}>
       {children}
     </SocialInsightsContext.Provider>

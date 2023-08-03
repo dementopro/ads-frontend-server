@@ -1,0 +1,23 @@
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  @apply py-2 px-4 bg-primary-purple text-white flex flex-col rounded-lg shadow;
+  animation: fade-in 0.25s ease;
+}
+
+.tooltip__title {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translate(-0.5em, -0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
