@@ -221,7 +221,7 @@ const PricingPage = () => {
               key={price.plan}
               className={`${price.plan === plan ? 'border-primary-purple text-white' : 'border-transparent text-primary-gray'} border-2 rounded-lg bg-[#35363A] py-3 px-4 text-[18px] cursor-pointer flex items-center justify-center gap-2`}
             >
-              <Image src={`/images/home/pricing/${price.icon}`} width={24} height={24} alt={price.plan} />
+              <Image src={`/images/home/pricing/${price.plan === plan ? price.activeIcon : price.icon}`} width={24} height={24} alt={price.plan} />
               <span>{price.plan}</span>
             </div>
           ))

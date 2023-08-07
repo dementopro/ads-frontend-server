@@ -1,6 +1,7 @@
+import { Blogs } from '@/data/blogs';
 import { MetadataRoute } from 'next'
 
-const urls = [
+const links = [
   {
     url: '/',
   },
@@ -11,7 +12,7 @@ const urls = [
     url: '/bookMeeting',
   },
   {
-    url: '/pricing',
+    url: '/public/pricing',
   },
   {
     url: '/requestDemo',
@@ -22,11 +23,21 @@ const urls = [
   {
     url: '/register',
   },
+  {
+    url: '/blog',
+  },
 ]
+
+const blogs = Blogs.map(blog => {
+  return {
+    url: `/blog/${blog.id}`,
+  }
+})
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   const baseUrl = 'https://adsgency.ai'
+  const urls = [...links, ...blogs]
   return urls.map(url => {
     return {
       ...url,
