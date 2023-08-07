@@ -1,0 +1,6 @@
+.landing-txt {
+  background: linear-gradient(243deg,#D634FF, #4663FF);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @apply text-3xl sm:text-4xl font-bold text-center;
+}
