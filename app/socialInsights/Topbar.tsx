@@ -30,19 +30,19 @@ const Topbar = () => {
         onClick={() => setTopTab('social')}
         isActivated={topTab === 'social'}>
         <Image src='/images/socialInsights/toptab/icon1.svg' alt={'Social Metrics'} width={24} height={24} />
-        <span>Social Metrics</span>
+        <span className='truncate' title='Social Metrics'>Social Metrics</span>
       </Button>
       <Button
         onClick={() => setTopTab('click')}
         isActivated={topTab === 'click'}>
         <Image src='/images/socialInsights/toptab/icon2.svg' alt={'Social Metrics'} width={24} height={24} />
-        <span>Click Metrics</span>
+        <span className='truncate' title='Click Metrics'>Click Metrics</span>
       </Button>
       <Button
         onClick={() => setTopTab('follower')}
         isActivated={topTab === 'follower'}>
         <Image src='/images/socialInsights/toptab/icon3.svg' alt={'Social Metrics'} width={24} height={24} />
-        <span>Follower Profile</span>
+        <span className='truncate' title='Follower Profile'>Follower Profile</span>
       </Button>
     </div>
   )

@@ -1,4 +1,4 @@
-import { DateRange } from '@/app/socialInsights/FilterBtns'
+import { DateRangeBtns } from '@/app/socialInsights/FilterBtns'
 import LineChart from '@/components/d3/LineChart'
 import { SocialInsightsContext } from '@/context/socialInsights'
 import { SUCCESS_CODE } from '@/data/constant'
@@ -102,7 +102,7 @@ const FollowerProfile = () => {
         <h2 className='text-lg'>
           <span className='font-semibold'>{followersNum.toLocaleString()}</span> Followers profile
         </h2>
-        <DateRange />
+        <DateRangeBtns />
         <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
           <DashCard
             title='Unfollowers'

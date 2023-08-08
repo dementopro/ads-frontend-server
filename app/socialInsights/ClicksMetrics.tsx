@@ -1,4 +1,4 @@
-import { DateRange } from '@/app/socialInsights/FilterBtns';
+import { DateRangeBtns } from '@/app/socialInsights/FilterBtns';
 import AreaChart from '@/components/d3/AreaChart';
 import { SocialInsightsContext } from '@/context/socialInsights';
 import { areaData } from '@/data/socialInsights';
@@ -79,7 +79,7 @@ const ClicksMetrics = () => {
       <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
         {contextHolder}
         <h2 className='text-lg'>Clicks Metrics</h2>
-        <DateRange />
+        <DateRangeBtns />
         <Spin spinning={loading}>
           <div className='w-full mx-auto mt-8 p-8 bg-black/20 rounded-lg'>
             <div className='flex gap-3 justify-end mb-3'>

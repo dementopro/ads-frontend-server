@@ -13,7 +13,7 @@ const Button = ({ isActive, onClick, text }: ButtonProps) => {
   </button>
 }
 
-const DateRange = () => {
+const DateRangeBtns = () => {
   const { dateRange, setDateRange } = useContext(SocialInsightsContext)
 
   return (
@@ -40,4 +40,4 @@ const DataMetrics = () => {
   )
 }
 
-export { DateRange, DataMetrics }
+export { DateRangeBtns, DataMetrics }

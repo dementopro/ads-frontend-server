@@ -38,3 +38,22 @@ export interface IDashboardResp extends IResponse {
   metrics_mode: DataMetric;
   time_mode: DateRange;
 }
+
+export interface IAdsFbManagementResp extends IResponse {
+  data: IAdsFbManagementData
+  mode: 'all' | 'facebook' | 'ins'
+}
+
+export interface IAdsFbManagementData {
+  accound_id: string;
+  account_name: string;
+  clicks: string;
+  cpc: string;
+  cpm: string;
+  ctr: string;
+  date_start: string;
+  date_stop: string;
+  impressions: string;
+  reach: string;
+  spend: string;
+}
