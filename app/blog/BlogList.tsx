@@ -27,7 +27,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
             {blog.title}
           </Link>
           <p className='text-xs text-primary-gray line-clamp-2'>
-            {blog.content}
+            {blog.content.filter(p => !p.startsWith('img:'))}
           </p>
           <div className='text-sm text-white flex justify-between items-center group-hover:opacity-0 transition-all font-mono'>
             <div className='flex items-center gap-1 text-white'>
@@ -56,7 +56,7 @@ const BlogList = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full px-8 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-[1200px] px-8 gap-4'>
         {
           blogs.map((blog) => (
             <BlogCard blog={blog} key={blog.id} />

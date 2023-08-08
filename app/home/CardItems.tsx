@@ -1,4 +1,6 @@
 'use client'
+import { Icon } from '@iconify/react'
+import { message } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -12,18 +14,23 @@ type Props = {
 const Card = ({ text, icon, href }: Props) => {
 
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage()
 
   function handleClick() {
     if (href) {
       router.push(href)
+    } else {
+      messageApi.warning('This feature is coming soon.')
     }
   }
 
   return (
-    <div onClick={handleClick} className='flex items-center justify-center gap-4 border hover:border-[#7D55FA] bg-[#35363A] hover:bg-[#383454] border-[#525252] w-[260px] max-sm:w-full h-[80px] rounded-lg text-white text-base cursor-pointer font-medium'>
+    <button onClick={handleClick} className='flex items-center justify-center gap-4 border hover:border-[#7D55FA] bg-[#35363A] hover:bg-[#383454] border-[#525252] w-[260px] max-sm:w-full h-[80px] rounded-lg text-white text-base cursor-pointer font-medium'>
       <Image src={icon} width={32} height={32} className='overflow-hidden' alt='icon' />
-      {text}
-    </div>
+      <span>{text}</span>
+      {!href && <Icon icon='mdi:lock' width={20} className='text-[#7D55FA]' />}
+      {contextHolder}
+    </button>
   )
 }
 

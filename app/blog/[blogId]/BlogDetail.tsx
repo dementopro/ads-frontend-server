@@ -13,9 +13,9 @@ type Props = {
 const BlogDetail = ({ blog }: Props) => {
   return (
     <div className='my-8 flex flex-col w-full mx-auto container selection:bg-primary-purple'>
-      <div className='mx-auto max-w-[1000px] px-8 flex flex-col items-center justify-center gap-2 w-full relative my-8'>
+      <div className='mx-auto sm:max-w-[1000px] px-8 flex flex-col items-center justify-center gap-2 w-full relative my-8'>
         <Link href='/blog' title='Go back to blogs'>
-          <Icon icon='mdi:arrow-left' width={24} height={24} className='text-white hover:opacity-80 absolute left-3 top-[50%] translate-y-[-50%]' />
+          <Icon icon='mdi:arrow-left' width={24} height={24} className='text-white hover:opacity-80 sm:absolute left-3 top-[50%] translate-y-[-50%]' />
         </Link>
         <div className='text-white/80'>
           <time>{blog.publishDate}</time> - Release
@@ -24,24 +24,23 @@ const BlogDetail = ({ blog }: Props) => {
         <span className='text-primary-gray text-sm'>@{blog.publisher}</span>
       </div>
       <div className='text-base mx-auto max-w-[1000px] relative'>
-        <div className='relative w-[600px] mx-auto my-8'>
-          <Image src={blog.images[0]} alt={blog.title} width={600} height={600} className='rounded-md max-w-full h-auto' />
-        </div>
-        {blog.content.map((paragraph, index) => (
-          <p key={index} className='my-4 text-white/80'>
-            {paragraph}
-          </p>
-        ))}
-        <div className='flex flex-col gap-8 my-12'>
-          {
-            blog.images.slice(1).map((image, index) => (
-              <div key={index} className='relative w-[600px] mx-auto'>
-                <Image src={image} alt={blog.title} width={600} height={600} className='rounded-md max-w-full h-auto' />
+        {blog.content.map((paragraph, index) => {
+          if (paragraph.startsWith('img:')) {
+            const image = paragraph.replace('img:', '')
+            return (
+              <div key={index} className='relative w-full sm:w-[600px] mx-auto my-4 sm:my-12'>
+                <Image src={image} alt={blog.title} width={600} height={600} className='sm:rounded-md max-w-full h-auto' />
               </div>
-            ))
+            )
+          } else {
+            return (
+              <p key={index} className='p-4 text-white/80'>
+                {paragraph}
+              </p>
+            )
           }
-        </div>
-        <p className='text-primary-gray/80 text-center'>
+        })}
+        <p className='max-sm:mt-8 text-primary-gray/80 text-center'>
           - End -
         </p>
       </div>

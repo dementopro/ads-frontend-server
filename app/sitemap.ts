@@ -26,6 +26,9 @@ const links = [
   {
     url: '/blog',
   },
+  {
+    url: '/careers',
+  }
 ]
 
 const blogs = Blogs.map(blog => {

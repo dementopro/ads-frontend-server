@@ -4,68 +4,70 @@ export const footerLinks = [
     links: [
       {
         label: 'Start a Trial',
-        href: '/',
+        href: '/requestDemo',
       },
-      {
-        label: 'How It Works',
-        href: '/',
-      },
-      {
-        label: 'Features',
-        href: '/',
-      },
+      // {
+      //   label: 'How It Works',
+      //   href: '/',
+      // },
+      // {
+      //   label: 'Features',
+      //   href: '/',
+      // },
       {
         label: 'Pricing',
-        href: '/pricing',
+        href: '/public/pricing',
       },
-      {
-        label: 'Watch Demo',
-        href: '/',
-      }
+      // {
+      //   label: 'Watch Demo',
+      //   href: '/',
+      // }
     ],
   },
   {
     title: 'Resources',
     links: [
-      {
-        label: 'All Resources',
-        href: '/',
-      },
+      // {
+      //   label: 'All Resources',
+      //   href: '/',
+      // },
       {
         label: 'Blog',
-        href: '/',
+        href: '/blog',
       },
-      {
-        label: 'FAQs',
-        href: '/',
-      },
-      {
-        label: 'Help Center',
-        href: '/',
-      }
+      // {
+      //   label: 'FAQs',
+      //   href: '/',
+      // },
+      // {
+      //   label: 'Help Center',
+      //   href: '/',
+      // }
     ],
   },
   {
     title: 'Company',
     links: [
-      {
-        label: 'About Us',
-        href: '/',
-      },
+      // {
+      //   label: 'About Us',
+      //   href: '/',
+      // },
       {
         label: 'Contact Us',
-        href: '/',
+        href: '/contactUs',
       },
+      // {
+      //   label: 'Privacy Policy',
+      //   href: '/',
+      // },
       {
-        label: 'Privacy Policy',
-        href: '/',
-      }, {
         label: 'Careers',
-        href: '/',
-      }, {
-        label: 'Partners',
-        href: '/',
-      }
+        href: '/careers',
+      },
+      // {
+      //   label: 'Partners',
+      //   href: '/',
+      // }
     ],
   },
 ];

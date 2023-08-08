@@ -19,8 +19,8 @@ type ColumnProps = {
 };
 
 const FooterColumn = ({ title, links }: ColumnProps) => (
-  <div className="flex flex-col gap-6">
-    <h4 className="font-semibold uppercase">{title}</h4>
+  <div className="flex flex-col gap-4">
+    <h4 className="font-semibold uppercase text-white">{title}</h4>
     <ul className="flex flex-col gap-3 text-sm font-normal text-primary-gray">
       {links.map((link) => (
         <Link href={link.href} key={link.label} className='hover:text-white'>
@@ -59,7 +59,7 @@ const Footer = () => {
             } className='hover:text-[#0077b5] cursor-pointer' width={24} height={24} icon={linkedinIcon} />
           </div>
         </div>
-        <div className="hidden flex-wrap gap-20">
+        <div className="flex flex-wrap gap-20">
           {
             footerLinks.map(item => (
               <FooterColumn

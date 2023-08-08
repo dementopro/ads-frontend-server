@@ -5,5 +5,4 @@ export interface IBlog {
   publishDate: string;
   publisher: string;
   coverImage: string;
-  images: string[];
 }

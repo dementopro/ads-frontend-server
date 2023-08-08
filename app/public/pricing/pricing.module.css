@@ -46,3 +46,10 @@
   color: white;
   border: 2px solid #83219E;
 }
+
+.landing-txt {
+  background: linear-gradient(to right,#D634FF, #4663FF);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @apply text-3xl sm:text-4xl font-bold text-center;
+}
