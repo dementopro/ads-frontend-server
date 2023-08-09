@@ -32,12 +32,12 @@ const Topbar = () => {
         <Image src='/images/socialInsights/toptab/icon1.svg' alt={'Social Metrics'} width={24} height={24} />
         <span className='truncate' title='Social Metrics'>Social Metrics</span>
       </Button>
-      <Button
+      {/* <Button
         onClick={() => setTopTab('click')}
         isActivated={topTab === 'click'}>
         <Image src='/images/socialInsights/toptab/icon2.svg' alt={'Social Metrics'} width={24} height={24} />
         <span className='truncate' title='Click Metrics'>Click Metrics</span>
-      </Button>
+      </Button> */}
       <Button
         onClick={() => setTopTab('follower')}
         isActivated={topTab === 'follower'}>

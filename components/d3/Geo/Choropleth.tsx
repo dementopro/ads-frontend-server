@@ -1,70 +1,63 @@
 import { ResponsiveChoropleth } from '@nivo/geo';
-import { select } from 'd3';
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { countries } from '@/data/world'
 
-type ChoroplethProps = {
-  data: any
+export interface ChoroplethProps {
+  data: {
+    id: string
+    value: number
+  }[]
 }
 
 const Choropleth = ({ data }: ChoroplethProps) => {
-  const ref = useRef<HTMLDivElement>(null);
 
-  const [width, setWidth] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const margin = { top: 20, right: 20, bottom: 20, left: 60 };
-
-  const getSvgContainerSize = () => {
-    if (!ref.current) return;
-
-    const newWidth = (ref.current?.clientWidth || 0) - margin.left - margin.right;
-    const newHeight = (ref.current?.clientHeight || 0) - margin.top - margin.bottom;
-
-    setWidth(newWidth);
-    setHeight(newHeight);
-  };
-
-  useEffect(() => {
-    getSvgContainerSize()
-    window.addEventListener("resize", getSvgContainerSize);
-    // cleanup event listener
-    return () => window.removeEventListener("resize", getSvgContainerSize);
-  }, [])
+  const max = data.map(({ value }) => value).reduce((a, b) => Math.max(a, b), 0)
 
   return (
-    <div
-      className='overflow-visible w-full h-[300px] text-black rounded-lg'
-      style={{
-        width: `${width}px)`,
-        height: `${height}px)`,
-      }}
-      ref={ref}>
+    <>
       <ResponsiveChoropleth
         data={data}
-        domain={[0, 1000000]}
+        colors='nivo'
+        theme={{
+          textColor: '#eee',
+          tooltip: {
+            container: {
+              background: '#222',
+              color: '#fff'
+            }
+          },
+        }}
         features={countries.features}
-        colors="purples"
-        unknownColor="#DCE1E6"
+        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        domain={[0, max]}
+        unknownColor="#666"
         label="properties.name"
         valueFormat=".2s"
-        enableGraticule={false}
+        projectionTranslation={[0.5, 0.5]}
+        projectionRotation={[0, 0, 0]}
+        enableGraticule={true}
+        graticuleLineColor="#555"
+        borderWidth={0.5}
+        borderColor="#152538"
         legends={[
           {
-            anchor: "bottom-left",
-            direction: "column",
+            anchor: 'bottom-left',
+            direction: 'column',
             justify: true,
+            translateX: 50,
+            translateY: -100,
             itemsSpacing: 0,
             itemWidth: 94,
             itemHeight: 18,
-            itemDirection: "left-to-right",
-            itemTextColor: "#fff",
+            itemDirection: 'left-to-right',
+            itemTextColor: '#ddd',
             itemOpacity: 0.85,
             symbolSize: 18,
             effects: [
               {
-                on: "hover",
+                on: 'hover',
                 style: {
-                  itemTextColor: "#fff",
+                  itemTextColor: '#fff',
                   itemOpacity: 1
                 }
               }
@@ -72,7 +65,7 @@ const Choropleth = ({ data }: ChoroplethProps) => {
           }
         ]}
       />
-    </div>
+    </>
   )
 }
 

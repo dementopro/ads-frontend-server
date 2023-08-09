@@ -74,12 +74,12 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     },
   ])
   const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
-  const [dateRange, setDateRange] = useState<DateRange>('last_day')
+  const [dateRange, setDateRange] = useState<DateRange>('last_week')
   const [dataMetric, setDataMetric] = useState<DataMetric>('page')
   const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
 
   useEffect(() => {
-    setDateRange('last_day')
+    setDateRange('last_week')
   }, [topTab])
 
   useEffect(() => {

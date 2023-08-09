@@ -11,6 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@nivo/geo": "^0.83.0",
+    "@nivo/line": "^0.83.0",
+    "@nivo/pie": "^0.83.0",
     "@types/node": "20.4.2",
     "@types/react-dom": "18.2.7",
     "antd": "^5.7.1",

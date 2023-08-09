@@ -57,3 +57,24 @@ export interface IAdsFbManagementData {
   reach: string;
   spend: string;
 }
+
+export interface IFbChartResp extends IResponse {
+  data: IFbOriginChartData
+}
+
+export interface IFbOriginChartData {
+  clicks: number[];
+  impressions: number[];
+  reaches: number[];
+  start_dates: string[];
+}
+
+export interface IFbFollowersResp extends IResponse {
+  data: IFbFollowersData
+}
+
+export interface IFbFollowersData {
+  age: [string, number][]
+  gender: [string, number][]
+  country: [string, number][]
+}

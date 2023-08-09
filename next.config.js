@@ -4,6 +4,7 @@ const nextConfig = {
     domains: [
       'localhost',
       '35.88.150.139',
+      '18.246.37.168',
       'adsgency.ai',
     ],
   },

@@ -3,26 +3,23 @@ import { SocialInsightsContext } from '@/context/socialInsights'
 import React, { useContext, useEffect, useState } from 'react'
 import arrowUpBoldCircleOutline from '@iconify/icons-mdi/arrow-up-bold-circle-outline';
 import { Icon } from '@iconify/react';
-import LineChart from '@/components/d3/LineChart';
-import * as d3 from 'd3';
-import { DateRange, IAdsFbManagementData, IAdsFbManagementResp, IDashboardResp, LineData } from '@/types/socialInsights';
-import { Spin, message } from 'antd';
+import { DateRange, IAdsFbManagementData, IAdsFbManagementResp, IFbChartResp } from '@/types/socialInsights';
+import { Spin } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
 import { DateRangeBtns } from '@/app/socialInsights/FilterBtns';
 import { capitalize } from '@/lib/format';
+import TheResponsiveLine, { TheResponsiveLineProps } from '@/components/d3/TheResponsiveLine';
 
 
 type DashCardProps = {
   title: string
   value: number
   interpolation?: number
-  isActivated?: boolean
-  onClick: () => void
 }
 
-const DashCard = ({ title, value, interpolation, isActivated, onClick }: DashCardProps) => {
+const DashCard = ({ title, value, interpolation }: DashCardProps) => {
   return (
-    <button onClick={onClick} className={`w-[244px] rounded-xl p-4 flex flex-col gap-2 border cursor-pointer hover:bg-[#35363A] ${isActivated ? 'border-primary-gray bg-[#35363A]' : 'border-transparent bg-[#27282F]'}`}>
+    <div className={`w-[244px] rounded-xl p-4 flex flex-col gap-2 border cursor-pointer hover:bg-[#35363A] border-transparent bg-[#27282F]`}>
       <div className='text-lg font-semibold'>
         {value.toLocaleString('en')}
       </div>
@@ -45,35 +42,30 @@ const DashCard = ({ title, value, interpolation, isActivated, onClick }: DashCar
           )
         }
       </div>
-    </button>
+    </div>
   )
+}
+
+const dateMap: Record<DateRange, number> = {
+  last_day: 1,
+  last_week: 7,
+  last_month: 30,
 }
 
 const SocialMetrics = () => {
 
-  const { dateRange, dataMetric } = useContext(SocialInsightsContext)
-  const [currActive, setCurrActive] = useState(0)
+  const { dateRange } = useContext(SocialInsightsContext)
   const [adsFbManagementData, setAdsFbManagementData] = useState<Partial<IAdsFbManagementData> | null>(null)
-  const [loading, setLoading] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
-  const [title, setTitle] = useState('Impressions');
   const [loadingData, setLoadingData] = useState(false);
-  const [data, setData] = useState<LineData[]>([]);
+  const [loadingChart, setLoadingChart] = useState(false);
+  const [lineData, setLineData] = useState<TheResponsiveLineProps['data'] | null>(null);
 
   useEffect(() => {
     fetchAdsData()
+    fetchChartData()
   }, [dateRange]);
 
-  useEffect(() => {
-    getData()
-  }, [dataMetric, dateRange, currActive]);
-
   async function fetchAdsData() {
-    const dateMap: Record<DateRange, number> = {
-      last_day: 1,
-      last_week: 7,
-      last_month: 30,
-    }
     try {
       setLoadingData(true)
       const response = await fetch('/fapi/ads_fb_management', {
@@ -109,63 +101,65 @@ const SocialMetrics = () => {
     }
   }
 
-  async function getData() {
+  async function fetchChartData() {
     try {
-      setLoading(true);
-      const response = await fetch('/fapi/facebook/page_engagement_metrics', {
+      setLoadingChart(true)
+      const response = await fetch('/fapi/get_charts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          time_mode: dateRange,
-          metrics_mode: dataMetric,
+          mode: 'all',
+          date_range: dateMap[dateRange]
         })
       })
       if (response.ok) {
-        const data: IDashboardResp = await response.json()
+        const data: IFbChartResp = await response.json()
         if (data.status === SUCCESS_CODE) {
-          const parseTime = d3.timeParse("%Y-%m-%d");
-          let lineData = data.data
-            .reverse().map((item) => {
-              return {
-                date: parseTime(item.date)!,
-                value: item.value,
-              }
-            })
-          setData(lineData);
-        } else {
-          messageApi.error(data.message, 2);
+          console.log('data', data)
+          const { clicks, impressions, reaches, start_dates } = data.data
+          const rLineData = [
+            {
+              id: 'Clicks',
+              color: '#3CAFA4',
+              data: clicks.map((click, i) => ({ x: start_dates[i], y: click }))
+            },
+            {
+              id: 'Impressions',
+              color: '#EF8F8F',
+              data: impressions.map((impression, i) => ({ x: start_dates[i], y: impression }))
+            },
+            {
+              id: 'Reaches',
+              color: '#F9D34E',
+              data: reaches.map((reach, i) => ({ x: start_dates[i], y: reach }))
+            }
+          ]
+          setLineData(rLineData)
+          console.log('rLineData', rLineData)
         }
       } else {
-        messageApi.error(response.status, 2);
+        console.log('response', response.statusText)
       }
     } catch (error) {
-      messageApi.error(error as string, 2)
       console.log('error', error)
     } finally {
-      setLoading(false)
+      setLoadingChart(false)
     }
   }
 
   return (
     <>
       <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
-        {contextHolder}
         <h2 className='text-lg'>Social Metrics</h2>
         <DateRangeBtns />
-        {/* <DataMetrics /> */}
         <Spin spinning={loadingData}>
           <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
             {
               adsFbManagementData && Object.entries(adsFbManagementData).map(([key, value], index) => (
                 <DashCard
                   key={index}
-                  isActivated={currActive === index}
-                  onClick={() => {
-                    setCurrActive(index)
-                    setTitle(key)
-                  }}
                   title={capitalize(key)}
                   value={+value}
                 />
@@ -173,9 +167,9 @@ const SocialMetrics = () => {
             }
           </div>
         </Spin>
-        <Spin spinning={loading}>
-          <div className='w-full mx-auto mt-16 bg-black/20 rounded-lg min-h-[400px]'>
-            <LineChart data={data} title={title} />
+        <Spin spinning={loadingChart}>
+          <div className='w-full mx-auto mt-6 bg-black/20 rounded-lg h-[400px]'>
+            {!loadingChart && lineData && <TheResponsiveLine data={lineData} />}
           </div>
         </Spin>
       </section>
