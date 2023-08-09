@@ -29,6 +29,9 @@ const Header = () => {
           <Link href='/blog' className={`flex items-center justify-center bg-transparent text-white cursor-pointer min-w-[80px] px-4 py-1 truncate hover:bg-primary-purple/70 rounded transition-all duration-300`}>
             Blog
           </Link>
+          <Link href='/features' className={`flex items-center justify-center bg-transparent text-white cursor-pointer min-w-[80px] px-4 py-1 truncate hover:bg-primary-purple/70 rounded transition-all duration-300`}>
+            Features
+          </Link>
           <Link href='/public/pricing' className={`flex items-center justify-center bg-transparent text-white cursor-pointer min-w-[80px] px-4 py-1 truncate hover:bg-primary-purple/70 rounded transition-all duration-300`}>
             Pricing
           </Link>

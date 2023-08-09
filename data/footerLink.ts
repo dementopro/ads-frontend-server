@@ -10,10 +10,10 @@ export const footerLinks = [
       //   label: 'How It Works',
       //   href: '/',
       // },
-      // {
-      //   label: 'Features',
-      //   href: '/',
-      // },
+      {
+        label: 'Features',
+        href: '/features',
+      },
       {
         label: 'Pricing',
         href: '/public/pricing',

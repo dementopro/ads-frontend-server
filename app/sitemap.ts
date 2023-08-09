@@ -28,6 +28,9 @@ const links = [
   },
   {
     url: '/careers',
+  },
+  {
+    url: '/features',
   }
 ]
 
