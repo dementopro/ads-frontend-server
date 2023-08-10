@@ -51,33 +51,32 @@ const HistoryItem = ({
 
 const Sidebar = () => {
 
-  const { resetCtx } = useContext(GeneImageContext)
+  const { resetCtx, reload } = useContext(GeneImageContext)
 
   const [history, setHistory] = useState<NewImage[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getHistory()
-  }, [])
+  }, [reload])
 
   async function getHistory() {
     try {
       setLoading(true)
       const response = await fetch(`/fapi/generate_image/check_task?limit=10`, {
-        method: 'POST',
+        method: 'GET',
+        cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          limit: 10,
-        }),
       })
       if (response.ok) {
         const data: IGeneImageHistoryResp = await response.json()
         if (data.status === SUCCESS_CODE) {
           const imageList = data.image_data?.map(item => ({
             ...item,
-            img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.img_path}/${item.filename}`,
+            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.img_path}/${item.filename}`,
+            img_path: `data:image/png;base64, ${item.file}`,
           })) || []
           setHistory(imageList)
         }

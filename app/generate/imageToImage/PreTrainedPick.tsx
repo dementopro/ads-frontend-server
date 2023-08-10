@@ -80,11 +80,68 @@ const PreTrainedPick = () => {
     preTrainedOption, updatePreTrainedOption,
     pretrainList,
     label, modeType,
-    file_name, file_path, mask_file_name, mask_file_path,
+    file, file_name, file_path, mask_file_name, mask_file_path,
     updateIsGenerating,
     updateGeneratedImage,
+    updateReload,
     imageId
   } = useContext(GeneImageContext)
+
+  function onGenerate() {
+    switch (modeType) {
+      case 'portrait':
+        onGenerateImage()
+        break;
+      case 'product':
+        onReplaceBackground()
+        break;
+      default:
+        break;
+    }
+  }
+
+  async function onReplaceBackground() {
+    updateIsGenerating(true)
+    try {
+      const response = await fetch(`/fapi/generate_image/replace_pro_background_v2`, {
+        method: 'POST',
+        body: JSON.stringify({
+          _id: imageId,
+          img_path: file_path,
+          file_name,
+          background_style: preTrainedOption.background,
+          back_ground_mask: file
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (response.ok) {
+        const data: IGeneImageResp = await response.json()
+        if (data.status === SUCCESS_CODE) {
+          messageApi.success('Generate image successfully!')
+          const result = data.new_image.map(item => ({
+            ...item,
+            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
+            img_path: `data:image/png;base64, ${item.file}`
+          }))
+          updateGeneratedImage(result)
+          updateReload()
+          router.refresh()
+        } else {
+          messageApi.error(data.message || 'Something went wrong!')
+        }
+      } else {
+        console.log('response', response)
+        messageApi.error(response.statusText || 'Something went wrong!')
+      }
+    } catch (error) {
+      messageApi.error('Something went wrong!')
+      console.log('error', error)
+    } finally {
+      updateIsGenerating(false)
+    }
+  }
 
   async function onGenerateImage() {
     updateIsGenerating(true)
@@ -110,10 +167,8 @@ const PreTrainedPick = () => {
         },
         keepalive: true,
       })
-      console.log('response', response)
       if (response.ok) {
         const data: IGeneImageResp = await response.json()
-        console.log('data', data)
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
@@ -122,6 +177,7 @@ const PreTrainedPick = () => {
             img_path: `data:image/png;base64, ${item.file}`
           }))
           updateGeneratedImage(result)
+          updateReload()
           router.refresh()
         } else {
           messageApi.error(data.message || 'Something went wrong!')
@@ -154,27 +210,39 @@ const PreTrainedPick = () => {
               text='Background'
               step={1}
             />
-            <OptionBtn
-              onClick={() => updatePreTrainStep('face')}
-              isActive={preTrainedStep === 'face'}
-              isChecked={preTrainedOption.face !== ''}
-              isDisabled={preTrainedOption.image === ''}
-              text='Model faces'
-              step={2}
-            />
-            <OptionBtn
-              onClick={() => updatePreTrainStep('style')}
-              isActive={preTrainedStep === 'style'}
-              isChecked={preTrainedOption.style !== ''}
-              isDisabled={preTrainedOption.image === ''}
-              text='Style'
-              step={3}
-            />
+            {
+              modeType === 'portrait' && (
+                <>
+                  <OptionBtn
+                    onClick={() => updatePreTrainStep('face')}
+                    isActive={preTrainedStep === 'face'}
+                    isChecked={preTrainedOption.face !== ''}
+                    isDisabled={preTrainedOption.image === ''}
+                    text='Model faces'
+                    step={2}
+                  />
+                  <OptionBtn
+                    onClick={() => updatePreTrainStep('style')}
+                    isActive={preTrainedStep === 'style'}
+                    isChecked={preTrainedOption.style !== ''}
+                    isDisabled={preTrainedOption.image === ''}
+                    text='Style'
+                    step={3}
+                  />
+                </>
+              )
+            }
           </div>
           <button
-            onClick={onGenerateImage}
-            disabled={Object.values(preTrainedOption).some(item => item === '')}
-            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${Object.values(preTrainedOption).some(item => item === '') ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}
+            onClick={onGenerate}
+            disabled={
+              modeType === 'portrait' ?
+                Object.values(preTrainedOption).some(item => item === '') :
+                preTrainedOption.background === ''
+            }
+            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${(modeType === 'portrait' ?
+              Object.values(preTrainedOption).some(item => item === '') :
+              preTrainedOption.background === '') ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}
           >
             Generate
           </button>

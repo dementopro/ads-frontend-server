@@ -14,6 +14,7 @@ export const GeneImageContext = createContext<{
   showCrop: boolean,
   isCrop: boolean,
   label: 'Background' | 'Face'
+  file: string,
   file_name: string,
   file_path: string,
   mask_file_name: string,
@@ -30,6 +31,7 @@ export const GeneImageContext = createContext<{
   updateShowCrop: (newShowCrop: boolean) => void
   updateIsCrop: (newIsCrop: boolean) => void
   updateLabel: (newLabel: 'Background' | 'Face') => void
+  updateFile: (newFile: string) => void
   updateFileName: (newFileName: string) => void
   updateFilePath: (newFilePath: string) => void
   updateMaskFileName: (newMaskFileName: string) => void
@@ -40,6 +42,8 @@ export const GeneImageContext = createContext<{
   updateImgSeg: (newImgSeg: ImageSegmentation[]) => void
   imageId: string
   updateImageId: (newImageId: string) => void
+  reload: number
+  updateReload: () => void
 }>({
   modeType: 'product',
   preTrainedStep: 'image',
@@ -62,11 +66,13 @@ export const GeneImageContext = createContext<{
   showCrop: false,
   isCrop: false,
   label: 'Background',
+  file: '',
   file_name: '',
   file_path: '',
   mask_file_name: '',
   mask_file_path: '',
   img_seg: [],
+  reload: 0,
   updateModeType: () => { },
   updatePreTrainStep: () => { },
   updatePreTrainedOption: () => { },
@@ -76,6 +82,7 @@ export const GeneImageContext = createContext<{
   updateShowCrop: () => { },
   updateIsCrop: () => { },
   updateLabel: () => { },
+  updateFile: () => { },
   updateFileName: () => { },
   updateFilePath: () => { },
   updateMaskFileName: () => { },
@@ -86,6 +93,7 @@ export const GeneImageContext = createContext<{
   updateImgSeg: () => { },
   imageId: '',
   updateImageId: () => { },
+  updateReload: () => { },
 })
 
 export const GeneImageProvider = ({ children }: { children: React.ReactNode }) => {
@@ -93,6 +101,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   const [modeType, setModeType] = useState<'portrait' | 'product'>('portrait')
   const [preTrainedStep, setPreTrainedStep] = useState<keyof IGeneImageOption>('image')
   const [label, setLabel] = useState<'Background' | 'Face'>('Background')
+  const [file, setFile] = useState<string>('')
   const [file_name, setFileName] = useState<string>('')
   const [file_path, setFilePath] = useState<string>('')
   const [mask_file_name, setMaskFileName] = useState<string>('')
@@ -117,6 +126,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   const [isCrop, setIsCrop] = useState(false)
   const [img_seg, setImgSeg] = useState<ImageSegmentation[]>([])
   const [imageId, setImageId] = useState<string>('')
+  const [reload, setReload] = useState<number>(0)
 
   const updateLabel = (newLabel: 'Background' | 'Face') => {
     setLabel(newLabel);
@@ -170,6 +180,14 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     } else {
       setOriginalImageUrl('');
     }
+  }
+
+  const updateFile = (newFile: string) => {
+    setFile(newFile);
+  }
+
+  const updateReload = () => {
+    setReload(reload + 1);
   }
 
   const updateCropImage = (newImage: string | null) => {
@@ -234,6 +252,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
       showCrop, updateShowCrop,
       isCrop, updateIsCrop,
       label, updateLabel,
+      file, updateFile,
       file_name, updateFileName,
       file_path, updateFilePath,
       mask_file_name, updateMaskFileName,
@@ -243,6 +262,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
       img_seg, updateImgSeg,
       resetCtx,
       imageId, updateImageId,
+      reload, updateReload,
     }}>
       {children}
     </GeneImageContext.Provider>

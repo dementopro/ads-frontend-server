@@ -1,7 +1,6 @@
 import { GeneImageContext } from '@/context/generate'
 import { capitalize } from '@/lib/format'
 import { Icon } from '@iconify/react'
-import Image from 'next/image'
 import { Image as ImageView } from 'antd';
 import React, { useContext } from 'react'
 import downloadIcon from '@iconify/icons-mdi/download';
@@ -12,12 +11,7 @@ const GeneResult = () => {
   const {
     generatedImage,
     preTrainedOption,
-    pretrainList,
   } = useContext(GeneImageContext)
-
-  const { faceList } = pretrainList
-
-  const faceImg = faceList?.find(item => item.name === preTrainedOption.face || item.name === generatedImage?.[0].face_mode)?.image_path
 
   function onDownload() {
     downloadImage(generatedImage?.[0].img_path!, 'generated image')
@@ -38,9 +32,15 @@ const GeneResult = () => {
         </div>
         <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
           <div className='flex items-center gap-3'>
-            <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].face_mode || preTrainedOption.face)}</div>
-            <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].background_mode || preTrainedOption.background)}</div>
             <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].style || preTrainedOption.style)}</div>
+            {
+              generatedImage?.[0].mode_type === 'portrait' && (
+                <>
+                  <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].background_mode || preTrainedOption.background)}</div>
+                  <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].face_mode || preTrainedOption.face)}</div>
+                </>
+              )
+            }
           </div>
         </div>
         <div className='mt-8 w-[254px] h-[254px] relative bg-primary-gray/5 rounded-lg overflow-hidden'>

@@ -10,16 +10,20 @@ import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'
 const OriginImageUpload = () => {
 
   const {
+    modeType,
     originalImageUrl,
     updateOriginalImage,
     updateCropImage,
     updateIsCrop,
+    updateFile,
     updateFileName,
     updateFilePath,
     updateMaskFileName,
     updateMaskFilePath,
     updateImgSeg,
     updateImageId,
+    updatePreTrainStep,
+    updatePreTrainedOption
   } = useContext(GeneImageContext)
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -48,6 +52,7 @@ const OriginImageUpload = () => {
         messageApi.loading('Uploading...')
         const formData = new FormData()
         formData.append('file', file)
+        formData.append('mode', modeType)
         const response = await fetch(`/fapi/generate_image/upload_image`, {
           method: 'POST',
           body: formData
@@ -59,6 +64,7 @@ const OriginImageUpload = () => {
             updateOriginalImage(file)
             // const newUrl = `${process.env.NEXT_PUBLIC_IMG_URL}/${data.img_path}`
             // updateCropImage(newUrl)
+            updateFile(data.file)
             updateCropImage(`data:image/png;base64, ${data.file}`)
             updateIsCrop(false)
             updateFileName(data.file_name)
@@ -67,6 +73,12 @@ const OriginImageUpload = () => {
             updateMaskFilePath(data.mask_file_path)
             updateImgSeg(data.img_seg)
             updateImageId(data._id)
+            if (modeType === 'product') {
+              updatePreTrainStep('background')
+              updatePreTrainedOption({
+                image: data.file || ''
+              })
+            }
           } else {
             messageApi.error(data.message || 'Upload failed')
           }

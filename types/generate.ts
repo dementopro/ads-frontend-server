@@ -65,7 +65,9 @@ export interface IUploadImageResp extends IResponse {
   mask_file_path: string
   img_seg: ImageSegmentation[]
   _id: string
-  file?: string
+  file: string
+  mode: 'product' | 'portrait'
+  email: string
 }
 
 export interface IGeneImageResp extends IResponse {
