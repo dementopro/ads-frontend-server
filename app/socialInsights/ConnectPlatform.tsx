@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
-const Platform = ['facebook','tiktok']
+const Platform = ['facebook', 'tiktok']
 
 const ConnectPlatform = () => {
 
@@ -81,8 +81,8 @@ async function connectTikTok() {
     })
     if (response.ok) {
       const data = await response.json()
-      // 替换当前 url 为 data.fb_auth_url
-      window.open(data.url)
+      // 替换当前 url 为 data.url
+      window.location.replace(data.url)
     } else {
       console.log('error')
     }

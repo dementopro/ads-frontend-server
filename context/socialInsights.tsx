@@ -43,6 +43,12 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       loading: true,
     },
     {
+      name: 'tiktok',
+      icon: tiktokIcon,
+      isConnected: false,
+      loading: false,
+    },
+    {
       name: 'linkedin',
       icon: linkedinIcon,
       isConnected: false,
@@ -51,12 +57,6 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     {
       name: 'twitter',
       icon: twitterIcon,
-      isConnected: false,
-      loading: false,
-    },
-    {
-      name: 'tiktok',
-      icon: tiktokIcon,
       isConnected: false,
       loading: false,
     },
