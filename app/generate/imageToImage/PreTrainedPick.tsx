@@ -1,6 +1,6 @@
 import { GeneImageContext } from '@/context/generate'
 import { SUCCESS_CODE } from '@/data/constant'
-import { PretrainItem, IGeneImageOption, IGeneImageResp, NewImage } from '@/types/generate'
+import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate'
 import { message } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'

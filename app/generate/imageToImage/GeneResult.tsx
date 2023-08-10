@@ -28,7 +28,7 @@ const GeneResult = () => {
       <div className='flex flex-col'>
         <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
           <div className='flex items-center gap-4'>
-            <div className='text-xl'>Mission {generatedImage?.[0]._id.slice(-6)}</div>
+            <div className='text-xl'>Task {generatedImage?.[0]._id}</div>
             <div className='text-primary-gray text-sm'>{new Date(generatedImage?.[0].date!).toLocaleString()} Saved</div>
           </div>
           {/* <div className='flex items-center justify-center gap-2 text-primary-gray hover:text-white cursor-pointer'>
@@ -38,7 +38,7 @@ const GeneResult = () => {
         </div>
         <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
           <div className='flex items-center gap-3'>
-            <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${faceImg}`} alt={preTrainedOption.face} width={24} height={24} className='rounded-[2px]' />
+            <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].face_mode || preTrainedOption.face)}</div>
             <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].background_mode || preTrainedOption.background)}</div>
             <div className='bg-[#35363A] rounded-[2px] text-sm text-primary-gray px-2 py-[2px]'>{capitalize(generatedImage?.[0].style || preTrainedOption.style)}</div>
           </div>

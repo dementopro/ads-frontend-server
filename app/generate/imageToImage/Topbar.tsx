@@ -13,8 +13,6 @@ const Topbar = () => {
   return (
     <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
       <div className='flex items-center gap-4'>
-        {/* <div className='text-xl'>Mission 786636</div>
-        <div className='text-primary-gray text-sm'>2023-7-14 11:09:43 Saved</div> */}
         <div className='text-xl'>Image to Image</div>
       </div>
       <div className='flex items-center justify-between border border-[#35363A] bg-[#1B1C21] p-[6px] rounded-lg'>

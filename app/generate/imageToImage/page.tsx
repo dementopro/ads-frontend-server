@@ -3,7 +3,7 @@
 import { WithContext } from '@/app/generate/imageToImage/WithContext'
 import ReactGATag from '@/components/ReactGATag'
 import AdminLayout from '@/layout/admin'
-import { getGenerateImageHistoryList, getPretrainBackgroundList, getPretrainFaceList, getPretrainStyleList } from '@/lib/generate'
+import { getPretrainBackgroundList, getPretrainFaceList, getPretrainStyleList } from '@/lib/generate'
 import React from 'react'
 
 
@@ -14,10 +14,11 @@ export const metadata = {
 
 const ImageToImagePage = async () => {
 
-  const faceList = await getPretrainFaceList()
-  const backgroundList = await getPretrainBackgroundList()
-  const styleList = await getPretrainStyleList()
-  const historyList = await getGenerateImageHistoryList()
+  const [faceList, backgroundList, styleList] = await Promise.all([
+    getPretrainFaceList(),
+    getPretrainBackgroundList(),
+    getPretrainStyleList(),
+  ]);
 
 
   return (
@@ -32,7 +33,6 @@ const ImageToImagePage = async () => {
           faceList={faceList}
           backgroundList={backgroundList}
           styleList={styleList}
-          historyList={historyList}
         />
       </section>
     </AdminLayout>

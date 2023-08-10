@@ -10,7 +10,6 @@ type Props = {
   faceList: PretrainItem[]
   backgroundList: PretrainItem[]
   styleList: PretrainItem[]
-  historyList: NewImage[]
 }
 
 export const WithContext = (props: Props) => {
@@ -24,7 +23,7 @@ export const WithContext = (props: Props) => {
           <UploadImage {...props} />
         </div>
       </div>
-      <Sidebar historyList={props.historyList} />
+      <Sidebar />
     </GeneImageProvider>
   )
 }
