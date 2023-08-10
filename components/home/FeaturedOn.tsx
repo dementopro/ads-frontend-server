@@ -8,7 +8,7 @@ import { Icon } from '@iconify/react';
 
 const FeaturedOn = () => {
   return (
-    <div className='flex flex-wrap gap-7 my-4 sm:my-10 lg:px-20 items-center justify-evenly w-full'>
+    <div className='flex flex-wrap gap-7 mt-8 mb-4 sm:my-10 lg:px-20 items-center justify-evenly w-full'>
       <a href='https://www.futurepedia.io/tool/adsgency-ai' target='_blank' className='cursor-pointer max-sm:w-[80%] border border-primary-purple rounded-lg py-4 px-8 gap-3 flex items-center'>
         <Image alt='futurepedia' src={'/images/home/futurepedia.png'} width={50} height={50} />
         <div className='flex flex-col'>

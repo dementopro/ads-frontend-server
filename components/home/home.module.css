@@ -9,3 +9,13 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.new-home-bg {
+  background-image: url(/images/home/new-landing-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.request-demo-btn {
+  @apply text-white p-8 py-4 font-semibold text-lg flex items-center justify-center gap-3 rounded hover:opacity-80 bg-primary-gradient;
+}
