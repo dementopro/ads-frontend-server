@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
+const Platform = ['facebook','tiktok']
+
 const ConnectPlatform = () => {
 
   const { currentPlatform, platforms } = useContext(SocialInsightsContext)
@@ -12,6 +14,9 @@ const ConnectPlatform = () => {
     switch (currentPlatform) {
       case "facebook":
         await connectFacebook()
+        break;
+      case "tiktok":
+        await connectTikTok()
         break;
       default:
         break;
@@ -30,7 +35,7 @@ const ConnectPlatform = () => {
       </div>
       <Image src='/images/socialInsights/man.svg' alt='man' width={204} height={176} />
       {
-        currentPlatform === 'facebook' ?
+        Platform.includes(currentPlatform) ?
           <button
             onClick={onConnect}
             className='bg-primary-purple text-white rounded-lg flex items-center justify-center py-2 px-4 hover:opacity-80'>
@@ -60,6 +65,24 @@ async function connectFacebook() {
       const data = await response.json()
       // 替换当前 url 为 data.fb_auth_url
       window.location.replace(data.fb_auth_url)
+    } else {
+      console.log('error')
+    }
+    console.log('response', response)
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
+async function connectTikTok() {
+  try {
+    const response = await fetch('/fapi/tiktok_login', {
+      method: 'GET',
+    })
+    if (response.ok) {
+      const data = await response.json()
+      // 替换当前 url 为 data.fb_auth_url
+      window.open(data.url)
     } else {
       console.log('error')
     }
