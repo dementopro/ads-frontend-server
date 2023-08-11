@@ -56,10 +56,10 @@ export const footerLinks = [
         label: 'Contact Us',
         href: '/contactUs',
       },
-      // {
-      //   label: 'Privacy Policy',
-      //   href: '/',
-      // },
+      {
+        label: 'Privacy Policy',
+        href: '/privacy',
+      },
       {
         label: 'Careers',
         href: '/careers',

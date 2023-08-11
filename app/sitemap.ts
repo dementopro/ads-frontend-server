@@ -31,6 +31,9 @@ const links = [
   },
   {
     url: '/features',
+  },
+  {
+    url: 'privacy',
   }
 ]
 
