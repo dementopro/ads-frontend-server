@@ -6,7 +6,7 @@ import linkedinIcon from '@iconify/icons-logos/linkedin-icon';
 import tiktokIcon from '@iconify/icons-logos/tiktok-icon';
 import pinterestIcon from '@iconify/icons-logos/pinterest';
 import instagramIcon from '@iconify/icons-skill-icons/instagram';
-import { checkFacebookIsConnected } from "@/lib/socialInsights";
+import { checkFacebookIsConnected, checkTikTokIsConnected } from "@/lib/socialInsights";
 
 
 export const SocialInsightsContext = createContext<{
@@ -15,110 +15,116 @@ export const SocialInsightsContext = createContext<{
   dateRange: DateRange
   dataMetric: DataMetric
   topTab: 'social' | 'click' | 'follower'
-  updatePlatformStatus: (platformName: PlatformType, config: Partial<Platform>) => void
   setCurrentPlatform: (platformName: PlatformType) => void
   setDateRange: (dateRange: DateRange) => void
   setDataMetric: (dataMetric: DataMetric) => void
   setTopTab: (topTab: 'social' | 'click' | 'follower') => void
+  isFacebookConnected: boolean
+  isTikTokConnected: boolean
+  setIsFacebookConnected: (isConnected: boolean) => void
+  setIsTikTokConnected: (isConnected: boolean) => void
+  checkConnectStatus: (platformName: PlatformType) => boolean
+  isLoading: boolean
+  setIsLoading: (isLoading: boolean) => void
 }>({
   platforms: [],
   currentPlatform: 'facebook',
   dateRange: 'last_day',
   dataMetric: 'page',
   topTab: 'social',
-  updatePlatformStatus: () => { },
   setCurrentPlatform: () => { },
   setDateRange: () => { },
   setDataMetric: () => { },
   setTopTab: () => { },
+  isFacebookConnected: false,
+  isTikTokConnected: false,
+  setIsFacebookConnected: () => { },
+  setIsTikTokConnected: () => { },
+  checkConnectStatus: () => false,
+  isLoading: false,
+  setIsLoading: () => { },
 })
 
 export const SocialInsightsProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [platforms, setPlatforms] = useState<Platform[]>([
-    {
-      name: 'facebook',
-      icon: facebookIcon,
-      isConnected: false,
-      loading: true,
-    },
-    {
-      name: 'tiktok',
-      icon: tiktokIcon,
-      isConnected: false,
-      loading: false,
-    },
-    {
-      name: 'linkedin',
-      icon: linkedinIcon,
-      isConnected: false,
-      loading: false,
-    },
-    {
-      name: 'twitter',
-      icon: twitterIcon,
-      isConnected: false,
-      loading: false,
-    },
-    {
-      name: 'pinterest',
-      icon: pinterestIcon,
-      isConnected: false,
-      loading: false,
-    },
-    {
-      name: 'instagram',
-      icon: instagramIcon,
-      isConnected: false,
-      loading: false,
-    },
-  ])
+
   const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
   const [dateRange, setDateRange] = useState<DateRange>('last_week')
   const [dataMetric, setDataMetric] = useState<DataMetric>('page')
   const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
+  const [isFacebookConnected, setIsFacebookConnected] = useState(false)
+  const [isTikTokConnected, setIsTikTokConnected] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [platforms, setPlatforms] = useState<Platform[]>([
+    {
+      name: 'facebook',
+      icon: facebookIcon,
+    },
+    {
+      name: 'tiktok',
+      icon: tiktokIcon,
+    },
+    {
+      name: 'linkedin',
+      icon: linkedinIcon,
+    },
+    {
+      name: 'twitter',
+      icon: twitterIcon,
+    },
+    {
+      name: 'pinterest',
+      icon: pinterestIcon,
+    },
+    {
+      name: 'instagram',
+      icon: instagramIcon,
+    },
+  ])
+
+  function checkConnectStatus(platformName: PlatformType) {
+    switch (platformName) {
+      case 'facebook':
+        return isFacebookConnected
+      case 'tiktok':
+        return isTikTokConnected
+      default:
+        return false
+    }
+  }
+
 
   useEffect(() => {
     setDateRange('last_week')
   }, [topTab])
 
   useEffect(() => {
-    updateConnectStatus()
-  }, [currentPlatform])
+    updateAllConnectStatus()
+  }, [])
 
-  async function updateConnectStatus() {
-    if (currentPlatform === 'facebook') {
-      updatePlatformStatus('facebook', {
-        loading: true,
-      })
-      const isConnect = await checkFacebookIsConnected()
-      updatePlatformStatus('facebook', {
-        isConnected: isConnect,
-        loading: false,
-      })
-    }
-  }
-
-  function updatePlatformStatus(platformName: PlatformType, config: Partial<Platform>) {
-    const updatedPlatforms = platforms.map(platform => {
-      if (platform.name === platformName) {
-        return {
-          ...platform,
-          ...config,
-        }
-      }
-      return platform
+  async function updateAllConnectStatus() {
+    setIsLoading(true)
+    Promise.all([
+      checkFacebookIsConnected(),
+      checkTikTokIsConnected(),
+    ]).then(([facebookConnect, tiktokConnect]) => {
+      setIsFacebookConnected(facebookConnect)
+      setIsTikTokConnected(tiktokConnect)
+      setIsLoading(false)
     })
-    setPlatforms(updatedPlatforms)
   }
 
   return (
     <SocialInsightsContext.Provider value={{
-      platforms, updatePlatformStatus,
+      platforms,
       currentPlatform, setCurrentPlatform,
       dateRange, setDateRange,
       dataMetric, setDataMetric,
       topTab, setTopTab,
+      isFacebookConnected, isTikTokConnected,
+      setIsFacebookConnected, setIsTikTokConnected,
+      checkConnectStatus,
+      isLoading, setIsLoading,
     }}>
       {children}
     </SocialInsightsContext.Provider>

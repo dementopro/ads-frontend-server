@@ -5,7 +5,7 @@ import { capitalize } from '@/lib/format';
 import { Platform } from '@/types/socialInsights';
 
 const Header = () => {
-  const { platforms, currentPlatform, setCurrentPlatform } = useContext(SocialInsightsContext)
+  const { platforms, currentPlatform, setCurrentPlatform, checkConnectStatus } = useContext(SocialInsightsContext)
 
   function onPlatformClick(platform: Platform) {
     setCurrentPlatform(platform.name)
@@ -14,8 +14,7 @@ const Header = () => {
   return (
     <div className='flex items-center w-full border-b border-[#27282F]'>
       {
-        [...platforms]
-          .sort((a, b) => +b.isConnected - +a.isConnected)
+        platforms
           .map(platform => (
             <button
               onClick={() => onPlatformClick(platform)}
@@ -23,10 +22,10 @@ const Header = () => {
               className={`
             w-[128px] p-2 border-b-2 flex items-center justify-center gap-2 cursor-pointer
             ${currentPlatform === platform.name ? 'border-primary-purple bg-[#35363A] rounded-t-lg' : 'border-transparent'}
-            ${platform.isConnected ? '' : 'text-primary-gray'}
+            ${checkConnectStatus(platform.name) ? '' : 'text-primary-gray'}
             `}
             >
-              <Icon className={`${!platform.isConnected ? 'filter grayscale' : ''}`} icon={platform.icon} />
+              <Icon className={`${!checkConnectStatus(platform.name) ? 'filter grayscale' : ''}`} icon={platform.icon} />
               <span>{capitalize(platform.name)}</span>
             </button>
           ))

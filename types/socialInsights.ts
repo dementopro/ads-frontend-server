@@ -6,8 +6,6 @@ export type PlatformType = 'facebook' | 'instagram' | 'twitter' | 'youtube' | 't
 export interface Platform {
   icon: IconifyIcon;
   name: PlatformType;
-  isConnected: boolean;
-  loading: boolean;
 }
 
 export type DateRange = 'last_day' | 'last_week' | 'last_month'
