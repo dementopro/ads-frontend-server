@@ -65,20 +65,20 @@ const FollowerProfile = () => {
         const data: IFbFollowersResp = await response.json()
         if (data.status === SUCCESS_CODE) {
           const { gender, age, country } = data.data
-          const genderData = gender.map(([label, value]) => ({
+          const genderData = gender?.map(([label, value]) => ({
             id: label,
             label,
             value,
-          }))
-          const ageData = age.map(([label, value]) => ({
+          })) || []
+          const ageData = age?.map(([label, value]) => ({
             id: label,
             label,
             value,
-          }))
-          const countryData = country.map(([label, value]) => ({
+          })) || []
+          const countryData = country?.map(([label, value]) => ({
             id: getCountryISO3(label),
             value,
-          }))
+          })) || []
           setGenderData(genderData)
           setAgeData(ageData)
           setCountryData(countryData)
@@ -102,13 +102,14 @@ const FollowerProfile = () => {
       {contextHolder}
       <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
         <h2 className='text-lg'>
-          <span className='font-semibold'>{followersNum.toLocaleString()}</span> Followers profile
+          {/* <span className='font-semibold'>{followersNum.toLocaleString()}</span> */}
+          Followers profile
         </h2>
         <DateRangeBtns />
-        <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
+        {/* <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
           <DashCard title='Unfollowers' value={123} />
           <DashCard title='New followers' value={9999} />
-        </div>
+        </div> */}
       </section>
       <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
         <h2 className='text-lg'>
