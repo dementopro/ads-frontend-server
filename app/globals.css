@@ -62,3 +62,7 @@ body {
 .ant-picker-suffix {
   @apply !text-primary-gray;
 }
+
+.ant-select-selector {
+  @apply !text-white !text-base !border-none !bg-[#27282F] !rounded-lg;
+}

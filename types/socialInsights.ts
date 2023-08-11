@@ -1,3 +1,5 @@
+import { TheResponsiveBarProps } from "@/components/d3/TheResponsiveBar";
+import { TheResponsiveLineProps } from "@/components/d3/TheResponsiveLine";
 import { IconifyIcon } from "@iconify/react";
 
 export type PlatformType = 'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok' | 'linkedin' | 'pinterest' | 'google';
@@ -38,33 +40,41 @@ export interface IDashboardResp extends IResponse {
 }
 
 export interface IAdsFbManagementResp extends IResponse {
-  data: IAdsFbManagementData
+  data: {
+    [key in keyof FbChartsDataSet]: number | string
+  } & IAdsFbManagementData
   mode: 'all' | 'facebook' | 'ins'
 }
 
 export interface IAdsFbManagementData {
   accound_id: string;
   account_name: string;
-  clicks: string;
-  cpc: string;
-  cpm: string;
-  ctr: string;
   date_start: string;
   date_stop: string;
-  impressions: string;
-  reach: string;
-  spend: string;
 }
 
 export interface IFbChartResp extends IResponse {
   data: IFbOriginChartData
+  mode: string
 }
 
 export interface IFbOriginChartData {
+  start_dates: string[];
+  date_start: string[];
   clicks: number[];
   impressions: number[];
-  reaches: number[];
-  start_dates: string[];
+  reach: number[];
+  cpc: number[];
+  cpp: number[];
+  cpm: number[];
+  ctr: number[];
+  spend: number[];
+  website_ctr: number[];
+  video_avg_time_watched_actions: number[];
+  cost_per_conversion: number[];
+  cost_per_unique_click: number[];
+  conversions: number[];
+  purchase_roas: number[];
 }
 
 export interface IFbFollowersResp extends IResponse {
@@ -75,4 +85,30 @@ export interface IFbFollowersData {
   age: [string, number][]
   gender: [string, number][]
   country: [string, number][]
+}
+
+export interface ICampaignsResp extends IResponse {
+  data: ICampaignsData[]
+}
+
+export interface ICampaignsData {
+  id: string;
+  name: string;
+}
+
+export interface FbChartsDataSet {
+  spend: TheResponsiveBarProps['data']; // 花费
+  impressions: TheResponsiveLineProps['data']; // 曝光次数
+  clicks: TheResponsiveLineProps['data']; // 点击次数
+  ctr: TheResponsiveLineProps['data']; // 点击率
+  reach: TheResponsiveLineProps['data']; // 预估覆盖人数
+  cpc: TheResponsiveLineProps['data']; // 平均点击成本
+  cpm: TheResponsiveLineProps['data']; // 1,000 次展示的平均费用
+  cpp: TheResponsiveLineProps['data'];
+  purchase_roas: TheResponsiveLineProps['data'];
+  website_ctr: TheResponsiveLineProps['data'];
+  video_avg_time_watched_actions: TheResponsiveLineProps['data'];
+  cost_per_conversion: TheResponsiveLineProps['data'];
+  cost_per_unique_click: TheResponsiveLineProps['data'];
+  conversions: TheResponsiveLineProps['data'];
 }

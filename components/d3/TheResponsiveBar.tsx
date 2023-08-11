@@ -1,13 +1,19 @@
-import { ResponsiveLine, Serie } from '@nivo/line'
+import { ResponsiveBar } from '@nivo/bar'
+import { Serie } from '@nivo/line'
+import React from 'react'
 
-export interface TheResponsiveLineProps {
-  data: Serie[]
+
+export interface TheResponsiveBarProps {
+  data: Serie[] | {
+    Date: string
+    Spend: number
+  }[]
 }
 
-const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
+const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
   return (
     <>
-      <ResponsiveLine
+      <ResponsiveBar
         theme={{
           textColor: '#eee',
           tooltip: {
@@ -29,30 +35,33 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
             }
           }
         }}
-        data={data}
-        colors={{ scheme: 'nivo' }}
+        data={data as Serie[]}
         margin={{ top: 50, right: 40, bottom: 80, left: 50 }}
-        xScale={{ type: 'point' }}
-        yScale={{
-          type: 'linear',
-          min: 'auto',
-          max: 'auto',
-          stacked: true,
-          reverse: false,
+        padding={0.3}
+        valueScale={{ type: 'linear' }}
+        indexScale={{ type: 'band', round: true }}
+        colors={{ scheme: 'nivo' }}
+        borderColor={{
+          from: 'color',
+          modifiers: [
+            [
+              'darker',
+              1.6
+            ]
+          ]
         }}
-        yFormat=" >-.2f"
         axisTop={null}
         axisRight={null}
         axisBottom={{
           tickSize: 5,
           tickPadding: 16,
           tickRotation: -45,
-          tickValues: data[0]?.data?.map((d, index) => {
-            if (data[0]?.data?.length <= 10) {
-              return d.x
+          tickValues: data?.map((d, index) => {
+            if (data?.length <= 10) {
+              return d.Date
             }
             if (index % 2 === 0) {
-              return d.x
+              return d.Date
             } else {
               return ''
             }
@@ -66,35 +75,40 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: '',
-          legendOffset: -60,
           legendPosition: 'middle',
+          legendOffset: -40,
         }}
-        pointSize={2}
-        pointColor={{ theme: 'background' }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: 'serieColor' }}
-        pointLabelYOffset={-12}
-        useMesh={true}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+        labelTextColor={{
+          from: 'color',
+          modifiers: [
+            [
+              'darker',
+              1.6
+            ]
+          ]
+        }}
+        indexBy="Date"
+        keys={['Spend']}
         legends={[
           {
+            dataFrom: 'keys',
             anchor: 'top',
             direction: 'column',
             justify: false,
             translateX: 0,
             translateY: -40,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
+            itemsSpacing: 2,
+            itemWidth: 100,
             itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
+            itemDirection: 'left-to-right',
+            itemOpacity: 0.85,
+            symbolSize: 20,
             effects: [
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
                   itemOpacity: 1
                 }
               }
@@ -106,4 +120,4 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
   )
 }
 
-export default TheResponsiveLine
+export default TheResponsiveBar

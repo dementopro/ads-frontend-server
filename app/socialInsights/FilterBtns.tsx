@@ -1,4 +1,6 @@
 import { SocialInsightsContext } from '@/context/socialInsights'
+import { ICampaignsData } from '@/types/socialInsights'
+import { Select } from 'antd'
 import React, { useContext } from 'react'
 
 type ButtonProps = {
@@ -40,4 +42,32 @@ const DataMetrics = () => {
   )
 }
 
-export { DateRangeBtns, DataMetrics }
+type CampaignsSelectProps = {
+  selectedCampaign: string
+  campaigns: ICampaignsData[]
+  onChange: (value: string) => void
+}
+
+const CampaignsSelect = ({ selectedCampaign, campaigns, onChange }: CampaignsSelectProps) => {
+
+  const options = campaigns.map(campaign => ({
+    label: campaign.name,
+    value: campaign.id,
+  }))
+
+  return (
+    <div className='mt-4 flex items-center gap-3'>
+      <div className='text-primary-gray'>Campaigns</div>
+      <Select
+        defaultValue={selectedCampaign}
+        style={{
+          width: 280,
+        }}
+        onChange={onChange}
+        options={[{ label: 'All', value: 'all' }, ...options]}
+      />
+    </div>
+  )
+}
+
+export { DateRangeBtns, DataMetrics, CampaignsSelect }
