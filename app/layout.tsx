@@ -1,8 +1,8 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Varela } from 'next/font/google'
 import WithProviders from '@/app/WithProviders'
 
-const inter = Inter({ subsets: ['latin'] })
+const varela = Varela({ subsets: ['latin'], weight: "400" })
 
 export const metadata = {
   title: 'AdsGency AI',
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} w-full h-screen`}>
+      <body className={`${varela.className} w-full h-screen`}>
         <WithProviders>
           {children}
         </WithProviders>

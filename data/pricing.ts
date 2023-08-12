@@ -6,17 +6,17 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$39',
+        price: '$10',
         planId: 1,
       },
       {
         title: 'Advanced',
-        price: '$69',
+        price: '$20',
         planId: 2,
       },
       {
         title: 'Premium',
-        price: '$99',
+        price: '$30',
         planId: 3,
       },
     ],
@@ -44,17 +44,17 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$199',
+        price: '$60',
         planId: 4,
       },
       {
         title: 'Advanced',
-        price: '$279',
+        price: '$88',
         planId: 5,
       },
       {
         title: 'Premium',
-        price: '$399',
+        price: '$130',
         planId: 6,
       },
     ],
@@ -82,17 +82,17 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$599',
+        price: '$200',
         planId: 7,
       },
       {
         title: 'Advanced',
-        price: '$899',
+        price: '$320',
         planId: 8
       },
       {
         title: 'Premium',
-        price: '$1199',
+        price: '$450',
         planId: 9,
       },
     ],

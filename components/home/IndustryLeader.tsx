@@ -35,12 +35,6 @@ const IndustryLeader = () => {
       </div>
       <div className={'flex flex-col items-center justify-between w-[80px] h-[80px] gap-2'}>
         <div className='w-10 h-10 flex items-center justify-center'>
-          <Image src='/images/home/icon/esty.png' width={40} height={40} alt='Esty' />
-        </div>
-        <span className='text-center line-clamp-1 w-[160px]'>Esty</span>
-      </div>
-      <div className={'flex flex-col items-center justify-between w-[80px] h-[80px] gap-2'}>
-        <div className='w-10 h-10 flex items-center justify-center'>
           <Image src='/images/home/icon/google.svg' width={40} height={40} alt='Google' />
         </div>
         <span className='text-center line-clamp-1 w-[160px]'>Google</span>

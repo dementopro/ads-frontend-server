@@ -22,7 +22,7 @@ const GeneResult = () => {
       <div className='flex flex-col'>
         <div className='flex flex-wrap gap-2 justify-between items-center mb-4'>
           <div className='flex items-center gap-4'>
-            <div className='text-xl'>Task {generatedImage?.[0]._id}</div>
+            <div className='text-xl'>Task</div>
             <div className='text-primary-gray text-sm'>{new Date(generatedImage?.[0].date!).toLocaleString()} Saved</div>
           </div>
           {/* <div className='flex items-center justify-center gap-2 text-primary-gray hover:text-white cursor-pointer'>

@@ -8,7 +8,7 @@ import IndustryLeader from '@/components/home/IndustryLeader'
 
 const NewLanding = () => {
   return (
-    <div className={`pt-[72px] w-full h-[calc(100vh-64px)] sm:h-[860px] flex flex-col items-center text-center ${styles['new-home-bg']} overflow-hidden relative`}>
+    <div className={`pt-[72px] w-full h-[calc(100vh-64px)] sm:h-[960px] flex flex-col items-center text-center ${styles['new-home-bg']} overflow-hidden relative`}>
       <div className='flex flex-col items-center justify-center gap-7 max-sm:w-[80%]'>
         <h1 className={`max-sm:text-3xl text-5xl font-extrabold text-center flex flex-wrap justify-center`}>
           One Stop
@@ -36,19 +36,19 @@ const NewLanding = () => {
         </span>
         <IndustryLeader />
       </div>
-      <div className='relative sm:mt-8 flex justify-center border rounded-2xl border-primary-purple/80 p-2 w-[720px] h-[600px] bg-primary-purple/10 max-sm:scale-50'>
+      <div className='relative sm:mt-12 flex justify-center border rounded-2xl border-primary-purple/80 p-2 w-[800px] h-[600px] bg-primary-purple/10 max-sm:scale-50'>
         <Image
           className='rounded-2xl overflow-hidden'
-          src='/images/home/demo.png' width={720} height={600} alt='demo' />
-        <div className='absolute left-[-28%] top-[25%] border rounded-2xl border-primary-purple/80 p-2 w-[188px] h-[180px] bg-primary-purple/10'>
+          src='/images/home/demo.png' width={800} height={600} alt='demo' />
+        <div className='absolute left-[-28%] top-[25%] border rounded-2xl border-primary-purple/80 p-2 w-[220px] h-[220px] bg-primary-purple/10'>
           <Image
             className='rounded-2xl overflow-hidden'
-            src='/images/home/left-demo.png' width={188} height={180} alt='demo' />
+            src='/images/home/left-demo.png' width={220} height={220} alt='demo' />
         </div>
-        <div className='absolute right-[-28%] top-[16%] border rounded-2xl border-primary-purple/80 p-2 w-[430px] h-[250px] bg-primary-purple/10'>
+        <div className='absolute right-[-28%] top-[16%] border rounded-2xl border-primary-purple/80 p-2 w-[460px] h-[270px] bg-primary-purple/10'>
           <Image
             className='rounded-2xl overflow-hidden'
-            src='/images/home/right-demo.png' width={430} height={250} alt='demo' />
+            src='/images/home/right-demo.png' width={460} height={270} alt='demo' />
         </div>
       </div>
     </div>
