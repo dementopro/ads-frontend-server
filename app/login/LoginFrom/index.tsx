@@ -10,7 +10,8 @@ import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
 import { message } from 'antd';
-import { SUCCESS_CODE } from '@/data/constant';
+import { NO_CREDIT_CARD, SUCCESS_CODE } from '@/data/constant';
+import { onLogin } from '@/lib/auth';
 
 const LoginForm = () => {
 
@@ -47,10 +48,12 @@ const LoginForm = () => {
           messageApi.success(data.message || 'Login success');
           // redirect to home
           // NOTE: need to fresh the page to get the new cookie
+          onLogin()
           window.location.href = '/home'
         }
-        else if (data.status === 0) {
+        else if (data.status === NO_CREDIT_CARD) {
           messageApi.success('Login success');
+          onLogin()
           window.location.href = '/auth/payment'
         } else {
           messageApi.error(data.message || 'Something went wrong');

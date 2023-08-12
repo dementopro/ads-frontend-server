@@ -63,6 +63,50 @@ body {
   @apply !text-primary-gray;
 }
 
+.small-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.small-scrollbar::-webkit-scrollbar:horizontal {
+  height: 4px;
+}
+
+.small-scrollbar::-webkit-scrollbar-track,
+.small-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb {
+  background: #35363A;
+  border-radius: 10px;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+/* for profile member list style */
+.table .ant-table-thead .ant-table-cell {
+  @apply !bg-[#1B1C21] !border-b-0 !text-[#848484] !text-sm !font-medium;
+}
+
+.table .ant-table-thead .ant-table-cell::before {
+  @apply !w-0;
+} 
+
+.table-row {
+  @apply !bg-[#27282F] text-white text-sm;
+}
+
+.table-row > td.ant-table-cell {
+  border-bottom: none !important;
+}
+
+.table-row > td.ant-table-cell.ant-table-cell-row-hover {
+  @apply !bg-[#444549] text-white;
+}
+
 .ant-select-selector {
   @apply !text-white !text-base !border-none !bg-[#27282F] !rounded-lg;
 }

@@ -1,7 +1,8 @@
 import { SUCCESS_CODE } from "@/data/constant";
+import { isUserLogin } from "@/lib/auth";
 import { calculateExpireDays } from "@/lib/date";
 import { Account, QueryAccountResp } from "@/types/account";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AccountContext = createContext<{
   totalCredits: number;
@@ -14,6 +15,7 @@ export const AccountContext = createContext<{
   updateAccount: () => void;
   setTrialDateAt: (trialDateAt: string) => void;
 } & Account>({
+  isLogin: false,
   planId: 0,
   credits: 0,
   trialDays: 0,
@@ -36,8 +38,15 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [totalCredits, setTotalCredits] = useState(10)
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [trialDateAt, setTrialDateAt] = useState('')
+  const [isLogin, setIsLogin] = useState(false)
+
+  useEffect(() => {
+    setIsLogin(isUserLogin())
+    updateAccount()
+  }, [])
 
   async function updateAccount() {
+    if (!isLogin) return
     try {
       const response = await fetch('/fapi/inquiry_subscription_api', {
         method: 'GET',
@@ -81,7 +90,8 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
       totalCredits, setTotalCredits,
       isSubscribed, setIsSubscribed,
       planId, updateAccount,
-      trialDateAt, setTrialDateAt
+      trialDateAt, setTrialDateAt,
+      isLogin,
     }}>
       {children}
     </AccountContext.Provider>

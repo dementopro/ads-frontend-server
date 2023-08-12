@@ -21,5 +21,6 @@ export const config = {
     '/generate/:path*',
     '/socialInsights/:path*',
     '/auth/:path*',
+    '/profile/:path*',
   ],
 }

@@ -1,0 +1,15 @@
+.input {
+  @apply bg-[#212228] border border-[#383838] w-full flex-1 h-[44px] text-white rounded-sm px-6 py-4;
+}
+
+.input::placeholder {
+  @apply text-[#5F6368];
+}
+
+.input:hover {
+  @apply border-primary-purple;
+}
+
+.form {
+  @apply max-sm:!shadow-none flex flex-wrap gap-x-5 flex-col rounded-lg max-w-[540px] px-4 sm:px-[50px] max-sm:mx-4 w-full relative z-50;
+}

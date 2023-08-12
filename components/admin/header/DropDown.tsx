@@ -1,53 +1,84 @@
-import React, { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import styles from './dropdown.module.css'
+import { SUCCESS_CODE } from '@/data/constant'
+import { onLogout } from '@/lib/auth'
+import chevronDown from '@iconify/icons-mdi/chevron-down'
+import { Icon } from '@iconify/react'
+import { Dropdown, MenuProps, message } from 'antd'
 import Image from 'next/image'
-import chevronDown from '@iconify/icons-mdi/chevron-down';
-import { Icon } from '@iconify/react';
+import { useRouter } from 'next/navigation'
 
-
-const links = [
-  { href: '/account-settings', label: 'Account settings' },
-  { href: '/support', label: 'Support' },
-  { href: '/license', label: 'License' },
-  { href: '/sign-out', label: 'Sign out' },
-]
 
 const DropDown = () => {
+
+  const router = useRouter()
+  const [messageApi, contextHolder] = message.useMessage()
+
+  const items: MenuProps['items'] = [
+    {
+      key: 'profile',
+      label: (
+        <button
+          onClick={toProfilePage}
+          className='text-center flex items-center justify-between gap-2 w-full'
+        >
+          <Icon icon='mdi:account' width={18} height={18} inline className='text-primary-gray' />
+          <span className='flex-1 text-center'>User profile</span>
+        </button>
+      ),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: 'signOut',
+      label: (
+        <button
+          onClick={handleLogout}
+          className='text-center flex items-center justify-between gap-2 w-full'
+        >
+          <Icon icon='mdi:logout-variant' width={18} height={18} inline className='text-primary-gray' />
+          <span className='flex-1 text-center'>Sign out</span>
+        </button>
+      ),
+    },
+  ]
+
+  function toProfilePage() {
+    router.push('/profile')
+  }
+
+  async function handleLogout() {
+    try {
+      messageApi.loading('Logout...')
+      const response = await fetch(`/api/auth/logout`)
+      if (response.ok) {
+        const data: IResponse = await response.json()
+        if (data.status === SUCCESS_CODE) {
+          messageApi.success('Logout success')
+          onLogout()
+          setTimeout(() => {
+            router.push('/login')
+          }, 1000)
+        } else {
+          messageApi.error('Logout failed')
+        }
+      } else {
+        messageApi.error('Logout failed')
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
   return (
-    <Menu as={'div'} className={'relative'}>
-      {({ open }) => (
-        <>
-          <Menu.Button className={`bg-white text-[#484848] border border-[#D2D2D2] h-[46px] px-4 flex items-center justify-between ${styles.dropDownBtn}`}>
-            <Image src="/images/avatar.png" width={30} height={30} alt="avatar" className="rounded-full inline-block" />
-            <span className="text-sm mx-2">John Doe</span>
-            <Icon icon={chevronDown} inline />
-          </Menu.Button>
-          <Transition
-            show={open}
-            enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
-          >
-            <Menu.Items static as='div' className={'absolute bg-red p-2 border right-0 mt-2 z-2 shadow bg-white flex flex-col gap-1 rounded'}>
-              {links.map((link) => (
-                <Menu.Item
-                  as="a"
-                  key={link.href}
-                  href={link.href}
-                  className="text-[#000] hover:bg-[#d634ff] hover:text-white px-2 py-1 w-[160px] truncate text-center rounded"
-                >
-                  {link.label}
-                </Menu.Item>
-              ))}
-            </Menu.Items>
-          </Transition>
-        </>
-      )}
-    </Menu>
+    <>
+      {contextHolder}
+      <Dropdown menu={{ items }} arrow>
+        <a className='h-[46px] flex items-center justify-center gap-4 cursor-pointer' onClick={(e) => e.preventDefault()}>
+          <Image src={'/images/admin/avatar.svg'} width={30} height={30} alt="avatar" className="rounded-full inline-block" />
+          <Icon icon={chevronDown} inline className='text-primary-gray' />
+        </a>
+      </Dropdown>
+    </>
   )
 }
 

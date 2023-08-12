@@ -2,6 +2,7 @@ export interface Account {
   planId: number;
   credits: number;
   trialDays: number;
+  isLogin: boolean;
 }
 
 export interface QueryAccountResp extends IResponse {
@@ -29,4 +30,17 @@ export interface SubscriptionResp {
   start_time: number
   status: 'active' | 'canceled' | 1 | 0
   subscription_id: string
+}
+
+export interface IUserProfileResp extends IResponse {
+  data: UserProfile
+}
+
+export interface UserProfile {
+  email: string
+  username: string
+  timestamp: string
+  credit: number
+  subscription_plan_id?: number
+  subscription_start?: string
 }

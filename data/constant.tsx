@@ -1,5 +1,5 @@
 export const SUCCESS_CODE = 1
-export const ERROR_CODE = 1
+export const NO_CREDIT_CARD = 2
 
 export const typeOptions = [
   { name: 'Portrait', value: 'portrait' },
@@ -23,4 +23,5 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/projects': ['Your Projects'],
   '/pricing': ['Pricing'],
   '/socialInsights': ['Social Insights'],
+  '/profile': ['User Profile'],
 }

@@ -26,3 +26,10 @@ export interface ResetPasswordForm {
   re_password: string;
   verification_code: string;
 }
+
+export interface ProfileForm {
+  username: string;
+  email: string;
+  title: string;
+  company: string;
+}

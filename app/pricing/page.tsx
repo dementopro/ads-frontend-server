@@ -7,7 +7,6 @@ import closeIcon from '@iconify/icons-mdi/close';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import ReactGATag from '@/components/ReactGATag';
-import Loading from '@/components/Loading';
 import { message } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
 import { AccountContext } from '@/context/account';
@@ -15,6 +14,7 @@ import { PricingPlan } from '@/types/pricing';
 import { SubscriptionResp } from '@/types/account';
 import ConfirmModal from '@/app/pricing/ConfirmModal';
 import PayResult from '@/app/pricing/PayResult';
+import { useRouter } from 'next/navigation';
 
 type SubscriptionButtonProps = {
   plan: PricingPlan,
@@ -65,9 +65,9 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
 
 const PricingPage = () => {
 
-  const { updateAccount, planId } = useContext(AccountContext)
+  const { updateAccount, planId, isLogin } = useContext(AccountContext)
   const [buyPlanId, setBuyPlanId] = useState(0)
-
+  const router = useRouter()
   const [plan, setPlan] = useState(Pricing[~~((planId - 1) / 3)].plan)
   const [loading, setLoading] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
@@ -247,6 +247,10 @@ const PricingPage = () => {
                     <SubscriptionButton
                       plan={item}
                       onSubscription={(planId) => {
+                        if (!isLogin) {
+                          router.push('/login')
+                          return
+                        }
                         setBuyPlanId(planId)
                         setConfirmVisible(true)
                       }}
