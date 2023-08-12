@@ -4,7 +4,6 @@ web app for AdsGency AI
 
 ### How to run
 
-
 ```bash
 # install dependencies
 npm install
@@ -12,10 +11,6 @@ npm install
 # run
 npm run dev
 ```
-
-### Frontend access local backend
-
-Rename the `.env.local.example` to `.env.local`.
 
 #### source
 
