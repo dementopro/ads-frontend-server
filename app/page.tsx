@@ -23,8 +23,8 @@ export default function Home() {
       <NewLanding />
       <FeaturedOn />
       <DesciptionAndVideo />
-      <IntroOne />
       <IntroTwo />
+      <IntroOne />
       <UserTestimonials />
       <OurSolutions />
     </DefaultLayout>

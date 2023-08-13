@@ -33,7 +33,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 
 const Footer = () => {
   return (
-    <footer className='px-6 sm:px-20 pt-10 bg-[black]'>
+    <footer className='px-6 sm:px-20 pt-10 bg-[#121534]'>
       <div className='flex flex-wrap gap-8 justify-between'>
         <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />
@@ -71,7 +71,7 @@ const Footer = () => {
           }
         </div>
       </div>
-      <div className='border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/50 py-4'>
+      <div className='border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
         <span>&copy; 2023 AdsGency AI. All rights reserved.</span>
       </div>
     </footer >

@@ -14,9 +14,16 @@
   background-image: url(/images/home/new-landing-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: top left;
 }
 
 .request-demo-btn {
-  @apply text-white p-8 py-4 font-semibold text-lg flex items-center justify-center gap-3 rounded hover:opacity-80 bg-primary-gradient;
+  @apply text-black italic px-6 py-3 font-semibold text-lg flex items-center justify-center gap-3 rounded hover:opacity-80;
+  background: linear-gradient(to right,#4ef596, #1ee5eb);
+}
+
+.enabler-text {
+  background: linear-gradient(to right,#4ef596, #1ee5eb);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
