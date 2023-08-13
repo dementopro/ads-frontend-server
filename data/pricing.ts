@@ -6,22 +6,22 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$10',
+        price: '$39',
         planId: 1,
       },
       {
         title: 'Advanced',
-        price: '$20',
+        price: '$69',
         planId: 2,
       },
       {
         title: 'Premium',
-        price: '$30',
+        price: '$99',
         planId: 3,
       },
     ],
     features: [
-      ['Credits', 10, 20, 50],
+      ['Credits', 10, 20, 30],
       // ['Brand', 1, 2, 2],
       // ['User', 1, 2, 2],
       // ['Platforms integration', 1, 2, 2],
@@ -44,22 +44,22 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$60',
+        price: '$199',
         planId: 4,
       },
       {
         title: 'Advanced',
-        price: '$88',
+        price: '$279',
         planId: 5,
       },
       {
         title: 'Premium',
-        price: '$130',
+        price: '$399',
         planId: 6,
       },
     ],
     features: [
-      ['Credits', 80, 100, 200],
+      ['Credits', 60, 88, 130],
       // ['Brand', 3, 4, 8],
       // ['User', 3, 4, 5],
       // ['Platforms integration', 'Unlimited', 'Unlimited', 'Unlimited'],
@@ -82,22 +82,22 @@ export const Pricing = [
     plans: [
       {
         title: 'Starter',
-        price: '$200',
+        price: '$599',
         planId: 7,
       },
       {
         title: 'Advanced',
-        price: '$320',
+        price: '$899',
         planId: 8
       },
       {
         title: 'Premium',
-        price: '$450',
+        price: '$1199',
         planId: 9,
       },
     ],
     features: [
-      ['Credits', 500, 800, 1000],
+      ['Credits', 200, 320, 450],
       // ['Brand', 20, 50, 80],
       // ['User', 8, 10, 20],
       // ['Platforms integration', 'Unlimited', 'Unlimited', 'Unlimited'],
