@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
-const openedPlatforms = ['tiktok']
+const openedPlatforms = ['tiktok', 'pinterest']
 
 const ConnectPlatform = () => {
 
@@ -17,6 +17,9 @@ const ConnectPlatform = () => {
         break;
       case "tiktok":
         await connectTikTok()
+        break;
+      case "pinterest":
+        await connectPinterest()
         break;
       default:
         break;
@@ -77,6 +80,24 @@ async function connectFacebook() {
 async function connectTikTok() {
   try {
     const response = await fetch('/fapi/tiktok_login', {
+      method: 'GET',
+    })
+    if (response.ok) {
+      const data = await response.json()
+      // 替换当前 url 为 data.url
+      window.location.replace(data.url)
+    } else {
+      console.log('error')
+    }
+    console.log('response', response)
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
+async function connectPinterest() {
+  try {
+    const response = await fetch('/fapi/pinterest_login', {
       method: 'GET',
     })
     if (response.ok) {

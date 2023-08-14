@@ -31,3 +31,19 @@ export async function checkTikTokIsConnected() {
     return false;
   }
 }
+
+export async function checkPinterestIsConnected() {
+  try {
+    const response = await fetch('/fapi/inquiry_pt_link_status', {
+      method: 'GET',
+    })
+    if (response.ok) {
+      const data: IResponse = await response.json();
+      return data.status === SUCCESS_CODE;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+}

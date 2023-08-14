@@ -6,7 +6,7 @@ import linkedinIcon from '@iconify/icons-logos/linkedin-icon';
 import tiktokIcon from '@iconify/icons-logos/tiktok-icon';
 import pinterestIcon from '@iconify/icons-logos/pinterest';
 import instagramIcon from '@iconify/icons-skill-icons/instagram';
-import { checkFacebookIsConnected, checkTikTokIsConnected } from "@/lib/socialInsights";
+import { checkFacebookIsConnected, checkPinterestIsConnected, checkTikTokIsConnected } from "@/lib/socialInsights";
 
 
 export const SocialInsightsContext = createContext<{
@@ -21,8 +21,10 @@ export const SocialInsightsContext = createContext<{
   setTopTab: (topTab: 'social' | 'click' | 'follower') => void
   isFacebookConnected: boolean
   isTikTokConnected: boolean
+  isPinterestConnected: boolean
   setIsFacebookConnected: (isConnected: boolean) => void
   setIsTikTokConnected: (isConnected: boolean) => void
+  setIsPinterestConnected: (isConnected: boolean) => void
   checkConnectStatus: (platformName: PlatformType) => boolean
   isLoading: boolean
   setIsLoading: (isLoading: boolean) => void
@@ -38,8 +40,10 @@ export const SocialInsightsContext = createContext<{
   setTopTab: () => { },
   isFacebookConnected: false,
   isTikTokConnected: false,
+  isPinterestConnected: false,
   setIsFacebookConnected: () => { },
   setIsTikTokConnected: () => { },
+  setIsPinterestConnected: () => { },
   checkConnectStatus: () => false,
   isLoading: false,
   setIsLoading: () => { },
@@ -51,6 +55,10 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     {
       name: 'tiktok',
       icon: tiktokIcon,
+    },
+    {
+      name: 'pinterest',
+      icon: pinterestIcon,
     },
     {
       name: 'facebook',
@@ -65,10 +73,6 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       icon: twitterIcon,
     },
     {
-      name: 'pinterest',
-      icon: pinterestIcon,
-    },
-    {
       name: 'instagram',
       icon: instagramIcon,
     },
@@ -79,6 +83,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
   const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
   const [isFacebookConnected, setIsFacebookConnected] = useState(false)
   const [isTikTokConnected, setIsTikTokConnected] = useState(false)
+  const [isPinterestConnected, setIsPinterestConnected] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
 
@@ -88,6 +93,8 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
         return isFacebookConnected
       case 'tiktok':
         return isTikTokConnected
+      case 'pinterest':
+        return isPinterestConnected
       default:
         return false
     }
@@ -107,9 +114,11 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     Promise.all([
       checkFacebookIsConnected(),
       checkTikTokIsConnected(),
-    ]).then(([facebookConnect, tiktokConnect]) => {
+      checkPinterestIsConnected(),
+    ]).then(([facebookConnect, tiktokConnect, pinterestConnect]) => {
       setIsFacebookConnected(facebookConnect)
       setIsTikTokConnected(tiktokConnect)
+      setIsPinterestConnected(pinterestConnect)
       setIsLoading(false)
     })
   }
@@ -123,6 +132,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       topTab, setTopTab,
       isFacebookConnected, isTikTokConnected,
       setIsFacebookConnected, setIsTikTokConnected,
+      isPinterestConnected, setIsPinterestConnected,
       checkConnectStatus,
       isLoading, setIsLoading,
     }}>

@@ -7,7 +7,7 @@ const SocialAccounts = () => {
 
   const { platforms, checkConnectStatus } = useContext(SocialInsightsContext)
 
-  const enablePlatforms = ['facebook', 'tiktok']
+  const enablePlatforms = ['tiktok', 'pinterest']
 
   return (
     <>
