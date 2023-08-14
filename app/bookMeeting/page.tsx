@@ -25,7 +25,7 @@ const BookMeetingPage = () => {
         </h2>
         <BookMeetingView />
         <div className={`${styles['pop']} ${styles['pop1']}`}>
-          {`We've delivered over 77000+ Ads content for clients`}
+          {`We've delivered over 229K+ ad content for clients`}
         </div>
         <div className={`${styles['pop']} ${styles['pop2']}`}>
           {`Saving time from training marketers, hiring agencies and conducting analysis.`}

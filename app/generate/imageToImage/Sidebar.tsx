@@ -12,7 +12,7 @@ import { Spin } from 'antd'
 const HistoryItem = ({
   img_path, filename, date, email, face_mode,
   background_mode, style, task_label, mode_type, file,
-  index
+  index, isSample
 }: NewImage & { index: number }) => {
 
   const { updateGeneratedImage, updatePreTrainedOption } = useContext(GeneImageContext)
@@ -21,7 +21,7 @@ const HistoryItem = ({
     // load image
     updateGeneratedImage([{
       _id: `${index + 1}`,
-      img_path: `data:image/png;base64, ${file}`,
+      img_path: isSample ? img_path : `data:image/png;base64, ${file}`,
       filename,
       date,
       email,
@@ -30,6 +30,7 @@ const HistoryItem = ({
       style,
       task_label,
       mode_type,
+      isSample,
     }])
     updatePreTrainedOption({
     })
@@ -42,12 +43,42 @@ const HistoryItem = ({
           <div className='w-8 h-8 rounded-lg overflow-hidden relative bg-primary-gray'>
             <Image alt={filename} src={img_path} width={32} height={32} className='w-full h-full object-cover rounded-lg' />
           </div>
-          <div className='text-primary-gray text-[15px]'>Task {index + 1}</div>
+          <div className='text-primary-gray text-[15px]'>
+            {isSample ? 'Sample' : 'Task'} {index + 1}
+          </div>
         </div>
       </div>
     </div>
   )
 }
+
+const samples: NewImage[] = [
+  {
+    _id: '1',
+    img_path: '/images/sample/1.png',
+    filename: 'sample1.png',
+    date: '',
+    email: '',
+    background_mode: 'Seaside',
+    face_mode: 'Asian Woman',
+    style: 'Peaceful',
+    task_label: [],
+    mode_type: 'portrait',
+  },
+  {
+    _id: '2',
+    img_path: '/images/sample/2.png',
+    filename: 'sample2.png',
+    date: '',
+    email: '',
+    background_mode: '',
+    face_mode: '',
+    style: 'Seaside',
+    task_label: [],
+    mode_type: 'product',
+  },
+]
+
 
 const Sidebar = () => {
 
@@ -100,14 +131,18 @@ const Sidebar = () => {
         <Icon icon={plusIcon} width={16} height={16} />
         <span>New assignment</span>
       </button>
+      <div className='my-4 text-primary-gray text-[15px]'>Sample</div>
+      <div className='flex flex-col gap-4 mx-auto'>
+        {samples.map((item, index) => (
+          <HistoryItem key={item.filename} {...item} isSample index={index} />
+        ))}
+      </div>
       <div className='my-4 text-primary-gray text-[15px]'>History</div>
       <Spin spinning={loading}>
         <div className='flex flex-col gap-4 mx-auto'>
-          {
-            history.map((item, index) => (
-              <HistoryItem key={item._id} {...item} index={index} />
-            ))
-          }
+          {history.map((item, index) => (
+            <HistoryItem key={item._id} {...item} index={index} />
+          ))}
           {
             history.length === 0 &&
             <div className='flex items-center justify-center text-primary-gray text-center text-sm my-3 h-[300px]'>No history</div>

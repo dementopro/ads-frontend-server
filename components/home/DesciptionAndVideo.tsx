@@ -12,7 +12,7 @@ const DesciptionAndVideo = () => {
           >
             <div className='text-4xl sm:text-5xl'>🦄</div>
             <div className='max-w-[320px] flex items-center'>
-              {`We've delivered over 77000+ Ads content for clients`}
+              {`We've delivered over 229K+ ad content for clients`}
             </div>
           </div>
           <div className='flex gap-5 items-center p-6 rounded-lg'
@@ -32,7 +32,7 @@ const DesciptionAndVideo = () => {
           >
             <div className='text-4xl sm:text-5xl'>☎️</div>
             <div className='max-w-[320px] flex items-center'>
-              One-Click deployment + real time fine tuning on models
+              Real time data analytics on content and ad performances for users from 145+ countries
             </div>
           </div>
         </div>

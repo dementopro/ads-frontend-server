@@ -6,10 +6,11 @@ import contentCopy from '@iconify/icons-mdi/content-copy';
 import { Icon } from '@iconify/react';
 import Empty from '@/components/Empty';
 import { message } from 'antd'
-import { SUCCESS_CODE } from '@/data/constant';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
 import { copyText } from '@/utils';
 import { IGeneTextForm } from '@/types/generate';
 import { useRouter } from 'next/navigation';
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 
 type Props = {
   mode: IGeneTextForm['mode']
@@ -22,6 +23,7 @@ const GenerateDescription = ({ mode }: Props) => {
   const [isSaving, setIsSaving] = useState(false)
   const [messageApi, contextHolder] = message.useMessage()
   const router = useRouter()
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
 
   async function onGenerate() {
     try {
@@ -40,6 +42,8 @@ const GenerateDescription = ({ mode }: Props) => {
         if (data.status === SUCCESS_CODE) {
           setContent(data.text)
           messageApi.success('Generated successfully')
+        } else if (data.status === NOT_ENOUGH_CREDIT) {
+          setShowNotEnoughCredits(true)
         } else {
           messageApi.error(data.msg || 'Something went wrong')
         }
@@ -103,6 +107,9 @@ const GenerateDescription = ({ mode }: Props) => {
   return (
     <>
       {contextHolder}
+      <NotEnoughtCredits
+        show={showNotEnoughCredits}
+        setShow={() => setShowNotEnoughCredits(false)} />
       <Spin spinning={isGenerating || isSaving} wrapperClassName='text-base rounded-lg'>
         <div className='flex flew-wrap max-lg:flex-col gap-[18px]'>
           {/* left */}

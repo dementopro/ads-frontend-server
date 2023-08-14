@@ -8,7 +8,7 @@ import IndustryLeader from '@/components/home/IndustryLeader'
 
 const NewLanding = () => {
   return (
-    <div className={`w-full h-[calc(100vh-64px)] flex items-center justify-center text-center ${styles['new-home-bg']} overflow-hidden`}>
+    <div className={`w-full h-[calc(100vh)] flex items-center justify-center text-center ${styles['new-home-bg']} overflow-hidden`}>
       <div className='flex flex-col items-center relative w-full max-w-[1100px] mx-auto'>
         <h1 className={`mt-[120px] sm:mt-16 max-sm:text-3xl text-5xl self-start italic font-extrabold text-left flex flex-col gap-2 uppercase max-sm:text-center max-sm:w-full`}>
           <div className='text-white max-sm:flex max-sm:flex-col'>
@@ -18,7 +18,7 @@ const NewLanding = () => {
           <div className='text-white'>Without Limits</div>
         </h1>
         <div className='flex items-center justify-between w-full mt-[-20px] max-sm:flex-col max-sm:mt-8'>
-          <div className='flex flex-col gap-7'>
+          <div className='flex flex-col gap-7 max-sm:items-center'>
             <h2 className={`max-sm:text-lg text-2xl text-left flex flex-col justify-center items-baseline max-sm:items-center`}>
               <div className='flex items-baseline'>
                 <span>We are an</span>
@@ -33,8 +33,13 @@ const NewLanding = () => {
                 clipPath: 'polygon(0% 28%, 6% 0px, 100% 0px, 100% 72%, 94% 100%, 0px 100%)'
               }}
               className={`${styles['request-demo-btn']}`}>
-              <span>Request Demo</span>
+              <span>Enterprise Inquiry</span>
               <Icon icon='akar-icons:arrow-right' className='text-2xl' />
+            </Link>
+            <Link href='/register'
+              className={`w-[140px] flex items-center justify-center gap-3 bg-primary-gradient py-3 rounded-lg hover:opacity-80 italic`}>
+              <span>Sign Up</span>
+              <Icon icon='mdi:login' className='text-2xl' />
             </Link>
           </div>
           <div className='relative sm:mt-12 flex justify-center rounded-2xl p-2 w-[540px] h-[300px] bg-primary-purple/10 max-sm:scale-50'>
@@ -54,6 +59,9 @@ const NewLanding = () => {
           </div>
         </div>
         <div className='max-sm:hidden mt-10 w-full flex flex-col items-center justify-center '>
+          <span className='text-white font-semibold text-lg'>
+            Backed by Industry Leaders
+          </span>
           <IndustryLeader />
         </div>
       </div>

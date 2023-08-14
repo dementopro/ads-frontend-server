@@ -1,8 +1,9 @@
 'use client'
 import ListPlanning from '@/app/planning/ListPlanning'
 import MyPlanning from '@/app/planning/MyPlanning'
+import NotEnoughtCredits from '@/components/NotEnoughtCredits'
 import ReactGATag from '@/components/ReactGATag'
-import { SUCCESS_CODE } from '@/data/constant'
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
 import AdminLayout from '@/layout/admin'
 import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
@@ -38,6 +39,7 @@ const PlanningPage = () => {
   const [planList, setPlanList] = useState<IPlanningObj[] | null>(null)
   const [planId, setPlanId] = useState<number | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(false)
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value)
@@ -67,6 +69,10 @@ const PlanningPage = () => {
 
 
   async function onGenerate() {
+    if (!prompt) {
+      messageApi.error('Please enter your prompt')
+      return
+    }
     try {
       setIsGenerating(true)
       messageApi.loading('Generating plan...', 1)
@@ -84,6 +90,8 @@ const PlanningPage = () => {
           } else {
             setPlanList([data.planning_obj[0], ...planList.slice(0, 4)])
           }
+        } else if (data.status === NOT_ENOUGH_CREDIT) {
+          setShowNotEnoughCredits(true)
         } else {
           console.log('data', data)
           messageApi.error(data.msg || 'Generate failed')
@@ -108,6 +116,9 @@ const PlanningPage = () => {
           title: "Planning - AdsGency AI"
         }}
       />
+      <NotEnoughtCredits
+        show={showNotEnoughCredits}
+        setShow={() => setShowNotEnoughCredits(false)} />
       <section className='flex flex-col justify-center'>
         <h1 className='text-white font-medium text-2xl mb-6'>
           Planning

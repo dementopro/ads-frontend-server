@@ -4,8 +4,8 @@ import DefaultLayout from '@/layout/default';
 import styles from './RequestDemo.module.css';
 
 export const metadata = {
-  title: 'Request Demo - AdsGency AI',
-  description: 'Request Demo',
+  title: 'Enterprise Inquiry - AdsGency AI',
+  description: 'Enterprise Inquiry',
 }
 
 const RequestDemoPage = () => {
@@ -25,7 +25,7 @@ const RequestDemoPage = () => {
         </h2>
         <RequestDemoForm />
         <div className={`${styles['pop']} ${styles['pop1']}`}>
-          {`We've delivered over 77000+ Ads content for clients`}
+          {`We've delivered over 229K+ ad content for clients`}
         </div>
         <div className={`${styles['pop']} ${styles['pop2']}`}>
           {`Saving time from training marketers, hiring agencies and conducting analysis.`}

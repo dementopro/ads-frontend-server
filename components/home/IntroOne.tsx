@@ -10,9 +10,9 @@ const IntroOne = () => {
             One click deployment to public or on-premise cloud
           </h2>
           <div className='text-primary-gray max-sm:text-center flex flex-col gap-4 max-w-[540px] text-sm'>
-            <p>Advanced Automation: PrecisionML implements end-to-end automated workflows, freeing up your data science teams to focus on crafting superior ML models instead of toiling with routine tasks.</p>
-            <p>Intelligent Monitoring: With PrecisionML, you&apos;ll receive real-time performance metrics of your models. Our software continuously monitors these metrics, ensuring that any drift or anomaly is promptly identified and notified for immediate attention.</p>
-            <p>Seamless Integration: PrecisionML easily integrates with your existing tech stack. Whether you&apos;re using AWS, GCP, Azure, or any other platform, our software molds itself to your environment, providing seamless operations.</p>
+            <p>Advanced Automation: AdsGency AI delivers complete automated workflows, liberating your data science team to concentrate on crafting top-notch ML models rather than mundane tasks.</p>
+            <p>Intelligent Monitoring: With AdsGency AI, gain access to real-time metrics of your models. Our software persistently oversees these indicators, promptly detecting any drift or anomaly and alerting you for immediate action.</p>
+            <p>{`Seamless Integration: AdsGency AI smoothly fits into your existing tech environment, whether you're using AWS, GCP, Azure, or other platforms, adapting to your needs and ensuring uninterrupted operations.`}</p>
           </div>
         </div>
         <div className='relative flex items-center justify-center'>

@@ -1,5 +1,6 @@
 export const SUCCESS_CODE = 1
 export const NO_CREDIT_CARD = 2
+export const NOT_ENOUGH_CREDIT = 3
 
 export const typeOptions = [
   { name: 'Portrait', value: 'portrait' },

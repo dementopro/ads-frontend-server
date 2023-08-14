@@ -1,5 +1,6 @@
+import NotEnoughtCredits from '@/components/NotEnoughtCredits'
 import { GeneImageContext } from '@/context/generate'
-import { SUCCESS_CODE } from '@/data/constant'
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
 import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate'
 import { message } from 'antd'
 import Image from 'next/image'
@@ -86,13 +87,22 @@ const PreTrainedPick = () => {
     updateReload,
     imageId
   } = useContext(GeneImageContext)
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = React.useState(false)
 
   function onGenerate() {
     switch (modeType) {
       case 'portrait':
+        if (Object.values(preTrainedOption).some(item => item === '')) {
+          messageApi.warning('You need to upload image and select all three steps to generate!')
+          return
+        }
         onGenerateImage()
         break;
       case 'product':
+        if (preTrainedOption.background === '') {
+          messageApi.warning('You need to upload image and select background!')
+          return
+        }
         onReplaceBackground()
         break;
       default:
@@ -128,6 +138,8 @@ const PreTrainedPick = () => {
           updateGeneratedImage(result)
           updateReload()
           router.refresh()
+        } else if (data.status === NOT_ENOUGH_CREDIT) {
+          setShowNotEnoughCredits(true)
         } else {
           messageApi.error(data.message || 'Something went wrong!')
         }
@@ -179,6 +191,8 @@ const PreTrainedPick = () => {
           updateGeneratedImage(result)
           updateReload()
           router.refresh()
+        } else if (data.status === NOT_ENOUGH_CREDIT) {
+          setShowNotEnoughCredits(true)
         } else {
           messageApi.error(data.message || 'Something went wrong!')
         }
@@ -199,6 +213,9 @@ const PreTrainedPick = () => {
   return (
     <>
       {contextHolder}
+      <NotEnoughtCredits
+        show={showNotEnoughCredits}
+        setShow={() => setShowNotEnoughCredits(false)} />
       <div className='flex flex-col mt-10'>
         <div className='flex justify-between items-center'>
           <div className='flex flex-wrap items-center text-primary-gray'>
@@ -235,14 +252,9 @@ const PreTrainedPick = () => {
           </div>
           <button
             onClick={onGenerate}
-            disabled={
-              modeType === 'portrait' ?
-                Object.values(preTrainedOption).some(item => item === '') :
-                preTrainedOption.background === ''
-            }
             className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${(modeType === 'portrait' ?
               Object.values(preTrainedOption).some(item => item === '') :
-              preTrainedOption.background === '') ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}
+              preTrainedOption.background === '') ? 'opacity-50' : 'opacity-100'}`}
           >
             Generate
           </button>

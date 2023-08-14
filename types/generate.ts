@@ -89,6 +89,7 @@ export interface NewImage {
   style: string
   task_label: string[]
   file?: string
+  isSample?: boolean
 }
 
 export interface IGeneImageHistoryResp extends IResponse {

@@ -138,7 +138,7 @@ export const PublicPricing = [
       },
     ],
     features: [
-      ['Credits', 10, 20, 50],
+      ['Credits', 10, 20, 30],
       // ['Brand', 1, 2, 2],
       // ['User', 1, 2, 2],
       ['Platforms integration', 1, 2, 2],
@@ -176,7 +176,7 @@ export const PublicPricing = [
       },
     ],
     features: [
-      ['Credits', 80, 100, 200],
+      ['Credits', 60, 88, 130],
       // ['Brand', 3, 4, 8],
       // ['User', 3, 4, 5],
       ['Platforms integration', 'Unlimited', 'Unlimited', 'Unlimited'],
@@ -214,7 +214,7 @@ export const PublicPricing = [
       },
     ],
     features: [
-      ['Credits', 500, 800, 1000],
+      ['Credits', 200, 320, 450],
       // ['Brand', 20, 50, 80],
       // ['User', 8, 10, 20],
       ['Platforms integration', 'Unlimited', 'Unlimited', 'Unlimited'],

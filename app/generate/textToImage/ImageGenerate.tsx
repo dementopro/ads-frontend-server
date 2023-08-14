@@ -2,7 +2,8 @@
 import GenerateContext from '@/app/generate/textToImage/GenerateContext'
 import SelectCom from '@/app/generate/textToImage/SelectCom';
 import Empty from '@/components/Empty';
-import { SUCCESS_CODE, modeOptions, typeOptions } from '@/data/constant';
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE, modeOptions, typeOptions } from '@/data/constant';
 import { IGeneImageResp } from '@/types/generate';
 import { Spin, message } from 'antd'
 import Image from 'next/image';
@@ -20,6 +21,7 @@ const ImageGenerate = () => {
   const [description, setDescription] = useState('')
   const [image, setImage] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
 
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setPrompt(e.target.value)
@@ -32,14 +34,14 @@ const ImageGenerate = () => {
         return
       }
       setIsGenerating(true)
-      const res = await fetch('/api/generate/textToImage', {
+      const response = await fetch('/api/generate/textToImage', {
         method: 'POST',
         body: JSON.stringify({
           mode: mode.value, prompt: prompt, type: type.value
         }),
       })
-      const data: IGeneImageResp = await res.json()
-      if (res.ok) {
+      const data: IGeneImageResp = await response.json()
+      if (response.ok) {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Generate successfully')
           const image = data.image_list[0]
@@ -47,6 +49,8 @@ const ImageGenerate = () => {
           setDescription(image.description)
           setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
           router.refresh()
+        } else if (data.status === NOT_ENOUGH_CREDIT) {
+          setShowNotEnoughCredits(true)
         } else {
           console.log('data', data)
           messageApi.error(data.message || 'Generate failed')
@@ -64,6 +68,9 @@ const ImageGenerate = () => {
   return (
     <>
       {contextHolder}
+      <NotEnoughtCredits
+        show={showNotEnoughCredits}
+        setShow={() => setShowNotEnoughCredits(false)} />
       <Spin spinning={isGenerating}>
         <div className='flex gap-4 max-md:flex-col'>
           <div className='flex flex-col gap-4 flex-1'>

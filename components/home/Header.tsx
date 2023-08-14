@@ -39,16 +39,16 @@ const Header = () => {
             Contact Us
           </Link>
           <Link
-            href={'/requestDemo'}
+            href={'/login'}
             className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
-            Request Demo
+            Sign in
           </Link>
         </div>
         <div className='sm:hidden items-center sm:gap-4'>
           <Link
-            href={'/requestDemo'}
+            href={'/login'}
             className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
-            Request Demo
+            Sign in
           </Link>
         </div>
       </div>

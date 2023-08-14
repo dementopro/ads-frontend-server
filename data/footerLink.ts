@@ -4,12 +4,8 @@ export const footerLinks = [
     links: [
       {
         label: 'Start a Trial',
-        href: '/requestDemo',
+        href: '/register',
       },
-      // {
-      //   label: 'How It Works',
-      //   href: '/',
-      // },
       {
         label: 'Features',
         href: '/features',
@@ -55,6 +51,10 @@ export const footerLinks = [
       {
         label: 'Contact Us',
         href: '/contactUs',
+      },
+      {
+        label: 'Enterprise Inquiry',
+        href: '/requestDemo',
       },
       {
         label: 'Privacy Policy',
