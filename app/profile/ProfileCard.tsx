@@ -21,7 +21,6 @@ const ProfileCard = () => {
       })
       if (response.ok) {
         const data: IUserProfileResp = await response.json()
-        console.log(data)
         if (data.status === SUCCESS_CODE) {
           setUserProfile(data.data)
         } else {
@@ -43,7 +42,12 @@ const ProfileCard = () => {
 
   return (
     <>
-      <EditProfile show={showEditProfile} setShow={setShowEditProfile} />
+      <EditProfile
+        username={userProfile?.username}
+        show={showEditProfile}
+        setShow={setShowEditProfile}
+        onUpdated={getUserProfile}
+      />
       <Spin spinning={loading}>
         <div className='h-full px-6 py-8 bg-[#1B1C21] border border-[#27282F] rounded-xl flex justify-between'>
           <div className='flex gap-10'>
@@ -91,7 +95,7 @@ const ProfileCard = () => {
           </div>
           <button
             onClick={() => setShowEditProfile(true)}
-            className='hover:opacity-90 h-[40px] px-4 text-primary-purple hidden items-center justify-center gap-2'>
+            className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
             <Icon icon='akar-icons:edit' width={16} height={16} />
             <span className='text-base'>Edit profile</span>
           </button>

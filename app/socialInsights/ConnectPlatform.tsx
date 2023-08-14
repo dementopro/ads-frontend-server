@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
-const openedPlatforms = ['tiktok', 'pinterest']
+const openedPlatforms = ['tiktok']
 
 const ConnectPlatform = () => {
 

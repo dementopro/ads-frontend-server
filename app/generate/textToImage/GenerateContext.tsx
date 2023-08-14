@@ -61,7 +61,7 @@ const GenerateContext = ({ title, description, image }: Props) => {
             <Icon className='text-primary-purple cursor-pointer' icon={checkboxMultipleMarked} width={24} height={24} />
         }
       </div>
-      <div className='justify-end text-primary-gray flex items-center gap-[14px]'>
+      <div className='hidden justify-end text-primary-gray items-center gap-[14px]'>
         <Icon onClick={() => onDownload()} className='hover:text-white cursor-pointer' icon={downloadIcon} width={24} height={24} />
         <Icon className='hover:text-white cursor-pointer' icon={scanHelper} width={20} height={20} />
         <Icon className='hover:text-white cursor-pointer' icon={pinterestIcon} width={24} height={24} />

@@ -28,6 +28,7 @@ export const SocialInsightsContext = createContext<{
   checkConnectStatus: (platformName: PlatformType) => boolean
   isLoading: boolean
   setIsLoading: (isLoading: boolean) => void
+  updateAllConnectStatus: () => void
 }>({
   platforms: [],
   currentPlatform: 'facebook',
@@ -47,6 +48,7 @@ export const SocialInsightsContext = createContext<{
   checkConnectStatus: () => false,
   isLoading: false,
   setIsLoading: () => { },
+  updateAllConnectStatus: () => { }
 })
 
 export const SocialInsightsProvider = ({ children }: { children: React.ReactNode }) => {
@@ -135,6 +137,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       isPinterestConnected, setIsPinterestConnected,
       checkConnectStatus,
       isLoading, setIsLoading,
+      updateAllConnectStatus,
     }}>
       {children}
     </SocialInsightsContext.Provider>
