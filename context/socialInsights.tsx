@@ -47,22 +47,14 @@ export const SocialInsightsContext = createContext<{
 
 export const SocialInsightsProvider = ({ children }: { children: React.ReactNode }) => {
 
-
-  const [currentPlatform, setCurrentPlatform] = useState<PlatformType>('facebook')
-  const [dateRange, setDateRange] = useState<DateRange>('last_week')
-  const [dataMetric, setDataMetric] = useState<DataMetric>('page')
-  const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
-  const [isFacebookConnected, setIsFacebookConnected] = useState(false)
-  const [isTikTokConnected, setIsTikTokConnected] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const [platforms, setPlatforms] = useState<Platform[]>([
-    {
-      name: 'facebook',
-      icon: facebookIcon,
-    },
     {
       name: 'tiktok',
       icon: tiktokIcon,
+    },
+    {
+      name: 'facebook',
+      icon: facebookIcon,
     },
     {
       name: 'linkedin',
@@ -81,6 +73,14 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
       icon: instagramIcon,
     },
   ])
+  const [currentPlatform, setCurrentPlatform] = useState<PlatformType>(platforms[0].name)
+  const [dateRange, setDateRange] = useState<DateRange>('last_week')
+  const [dataMetric, setDataMetric] = useState<DataMetric>('page')
+  const [topTab, setTopTab] = useState<'social' | 'click' | 'follower'>('social')
+  const [isFacebookConnected, setIsFacebookConnected] = useState(false)
+  const [isTikTokConnected, setIsTikTokConnected] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
 
   function checkConnectStatus(platformName: PlatformType) {
     switch (platformName) {

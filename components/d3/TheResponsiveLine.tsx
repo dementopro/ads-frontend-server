@@ -1,6 +1,6 @@
 import { ResponsiveLine, Serie } from '@nivo/line'
 
-export interface TheResponsiveLineProps {
+type TheResponsiveLineProps = {
   data: Serie[]
 }
 
@@ -30,7 +30,7 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
           }
         }}
         data={data}
-        colors={{ scheme: 'nivo' }}
+        colors={{ datum: 'color' }}
         margin={{ top: 50, right: 40, bottom: 80, left: 50 }}
         xScale={{ type: 'point' }}
         yScale={{

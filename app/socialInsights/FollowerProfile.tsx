@@ -2,11 +2,12 @@ import { DateRangeBtns } from '@/app/socialInsights/FilterBtns'
 import { SocialInsightsContext } from '@/context/socialInsights'
 import { SUCCESS_CODE } from '@/data/constant'
 import { DateRange, IFbFollowersResp } from '@/types/socialInsights'
-import { Spin, message } from 'antd'
+import { Empty, Spin, message } from 'antd'
 import React, { useContext, useEffect, useState } from 'react'
-import Choropleth, { ChoroplethProps } from '@/components/d3/Geo/Choropleth'
-import TheResponsivePie, { TheResponsivePieProps } from '@/components/d3/TheResponsivePie'
+import Choropleth from '@/components/d3/Geo/Choropleth'
+import TheResponsivePie from '@/components/d3/TheResponsivePie'
 import { getCountryISO3 } from '@/utils'
+import { MayHaveLabel } from '@nivo/pie'
 
 type DashCardProps = {
   title: string
@@ -40,9 +41,12 @@ const FollowerProfile = () => {
   const [loading, setLoading] = useState(false);
   const { dateRange } = useContext(SocialInsightsContext)
   const [messageApi, contextHolder] = message.useMessage();
-  const [genderData, setGenderData] = useState<TheResponsivePieProps['data'] | null>(null)
-  const [ageData, setAgeData] = useState<TheResponsivePieProps['data'] | null>(null)
-  const [countryData, setCountryData] = useState<ChoroplethProps['data'] | null>(null)
+  const [genderData, setGenderData] = useState<MayHaveLabel[] | null>(null)
+  const [ageData, setAgeData] = useState<MayHaveLabel[] | null>(null)
+  const [countryData, setCountryData] = useState<{
+    id: string,
+    value: number
+  }[] | null>(null)
 
   useEffect(() => {
     fetchData()
@@ -110,50 +114,47 @@ const FollowerProfile = () => {
           <DashCard title='Unfollowers' value={123} />
           <DashCard title='New followers' value={9999} />
         </div> */}
-      </section>
-      <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
-        <h2 className='text-lg'>
-          Geographical Distribution
-        </h2>
-        <div className='grid grid-flow-row grid-cols-1 mt-6'>
-          <div className='flex flex-col gap-6'>
-            <span className='text-base'>
-              Followers by courty
-            </span>
-
-            <Spin spinning={loading}>
-              <div className='w-full mx-auto h-[360px]'>
+        <Spin spinning={loading}>
+          <div className='w-full mx-auto mt-6 rounded-lg flex flex-col gap-4'>
+            <div className='grid grid-flow-row grid-cols-1 gap-4'>
+              <ChartCard title='Followers by courty' isEmpty={!countryData?.length}>
                 {countryData && <Choropleth data={countryData} />}
-              </div>
-            </Spin>
+              </ChartCard>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
-        <div className='grid grid-flow-row grid-cols-2 gap-4'>
-          <div className='flex flex-col gap-6'>
-            <span className='text-base'>
-              Followers by gender
-            </span>
-            <Spin spinning={loading}>
-              <div className='w-full mx-auto h-[360px]'>
+        </Spin>
+        <Spin spinning={loading}>
+          <div className='w-full mx-auto mt-4 rounded-lg flex flex-col gap-4'>
+            <div className='grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-4'>
+              <ChartCard title='Followers by gender' isEmpty={!genderData?.length}>
                 {genderData && <TheResponsivePie data={genderData} />}
-              </div>
-            </Spin>
-          </div>
-          <div className='flex flex-col gap-6'>
-            <span className='text-base'>
-              Followers by age
-            </span>
-            <Spin spinning={loading}>
-              <div className='w-full mx-auto h-[360px]'>
+              </ChartCard>
+              <ChartCard title='Followers by age' isEmpty={!ageData?.length}>
                 {ageData && <TheResponsivePie data={ageData} />}
-              </div>
-            </Spin>
+              </ChartCard>
+            </div>
           </div>
-        </div>
+        </Spin>
       </section>
     </>
+  )
+}
+
+const ChartCard = ({ title, children, isEmpty }: { title: string, children: React.ReactNode, isEmpty?: boolean }) => {
+  return (
+    <div className='flex flex-col p-4 bg-[#27282F] rounded-lg'>
+      <span className='text-base text-primary-gray pl-4'>
+        {title}
+      </span>
+      <div className='w-full mx-auto h-[300px] flex items-center justify-center'>
+        {isEmpty
+          ? <Empty
+            image="/images/empty.svg"
+            description={<span className='text-primary-gray'>No Data</span>}
+          />
+          : children}
+      </div>
+    </div>
   )
 }
 

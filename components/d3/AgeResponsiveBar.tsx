@@ -5,12 +5,16 @@ import React from 'react'
 
 type TheResponsiveBarProps = {
   data: Serie[] | {
-    Date: string
-    Spend: number
+    // Date: string
+    // Spend: number
+    [key: string]: any
   }[]
+  xLabel?: string
+  yLabel?: string
 }
 
-const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
+const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
+
   return (
     <>
       <ResponsiveBar
@@ -33,14 +37,15 @@ const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
                 fill: '#aaa'
               }
             }
-          }
+          },
         }}
         data={data as Serie[]}
-        margin={{ top: 50, right: 40, bottom: 80, left: 50 }}
+        margin={{ top: 50, right: 0, bottom: 60, left: 50 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={['#844fff']}
+        colors={{ scheme: 'nivo' }}
+        colorBy='indexValue'
         borderColor={{
           from: 'color',
           modifiers: [
@@ -55,13 +60,13 @@ const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 16,
-          tickRotation: -45,
+          tickRotation: 0,
           tickValues: data?.map((d, index) => {
             if (data?.length <= 10) {
-              return d.Date
+              return d[xLabel || 'Date']
             }
             if (index % 2 === 0) {
-              return d.Date
+              return d[xLabel || 'Date']
             } else {
               return ''
             }
@@ -89,18 +94,18 @@ const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
             ]
           ]
         }}
-        indexBy="Date"
-        keys={['Spend']}
+        indexBy={xLabel || 'Date'}
+        keys={[yLabel || 'Spend']}
         legends={[
           {
-            dataFrom: 'keys',
+            dataFrom: 'indexes',
             anchor: 'top',
-            direction: 'column',
+            direction: 'row',
             justify: false,
             translateX: 0,
             translateY: -40,
             itemsSpacing: 2,
-            itemWidth: 100,
+            itemWidth: 60,
             itemHeight: 20,
             itemDirection: 'left-to-right',
             itemOpacity: 0.85,

@@ -2,7 +2,7 @@
 import ConnectPlatform from '@/app/socialInsights/ConnectPlatform'
 import Dashboard from '@/app/socialInsights/Dashboard'
 import Header from '@/app/socialInsights/Header'
-import Comming from '@/app/socialInsights/TikTok/Comming'
+import TikTokDashboard from '@/app/socialInsights/TikTok/Dashboard'
 import { SocialInsightsContext, SocialInsightsProvider } from '@/context/socialInsights'
 import { PlatformType } from '@/types/socialInsights'
 import { Spin } from 'antd'
@@ -13,7 +13,7 @@ const PlatformDashboard = (platform: PlatformType) => {
     case 'facebook':
       return <Dashboard />
     case 'tiktok':
-      return <Comming />
+      return <TikTokDashboard />
     default:
       return <ConnectPlatform />
   }

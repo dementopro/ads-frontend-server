@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import arrowUpBoldCircleOutline from '@iconify/icons-mdi/arrow-up-bold-circle-outline';
 import { Icon } from '@iconify/react';
 import { DateRange, FbChartsDataSet, IAdsFbManagementResp, ICampaignsData, ICampaignsResp, IFbChartResp } from '@/types/socialInsights';
-import { Spin } from 'antd';
+import { Empty, Spin } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
 import { CampaignsSelect, DateRangeBtns } from '@/app/socialInsights/FilterBtns';
 import { capitalize } from '@/lib/format';
@@ -70,7 +70,7 @@ const SocialMetrics = () => {
   }, []);
 
   useEffect(() => {
-    fetchAdsData()
+    // fetchAdsData()
     fetchChartData()
   }, [dateRange, selectedCampaign]);
 
@@ -136,64 +136,77 @@ const SocialMetrics = () => {
         const data: IFbChartResp = await response.json()
         if (data.status === SUCCESS_CODE) {
           const { clicks, impressions, reach, start_dates, conversions, cost_per_conversion, cost_per_unique_click, cpc, cpm, cpp, ctr, purchase_roas, spend, video_avg_time_watched_actions, website_ctr } = data.data
-          const clicksData = [{
+          const clicksData = clicks ? [{
             id: 'Clicks',
-            data: clicks.length > 0 ? clicks.map((click, i) => ({ x: start_dates[i], y: click })) : []
-          }]
-          const impressionsData = [{
+            color: '#844fff',
+            data: clicks.map((click, i) => ({ x: start_dates[i], y: click }))
+          }] : []
+          const impressionsData = impressions ? [{
             id: 'Impressions',
-            data: impressions.length > 0 ? impressions.map((impression, i) => ({ x: start_dates[i], y: impression })) : []
-          }]
-          const reachData = [{
+            color: '#844fff',
+            data: impressions.map((impression, i) => ({ x: start_dates[i], y: impression }))
+          }] : []
+          const reachData = reach ? [{
             id: 'Reach',
-            data: reach.length > 0 ? reach.map((reach, i) => ({ x: start_dates[i], y: reach })) : []
-          }]
-          const conversionsData = [{
+            color: '#844fff',
+            data: reach.map((reach, i) => ({ x: start_dates[i], y: reach }))
+          }] : []
+          const conversionsData = conversions ? [{
             id: 'Conversions',
-            data: conversions.length > 0 ? conversions.map((conversion, i) => ({ x: start_dates[i], y: conversion })) : []
-          }]
-          const costPerConversionData = [{
+            color: '#844fff',
+            data: conversions.map((conversion, i) => ({ x: start_dates[i], y: conversion }))
+          }] : []
+          const costPerConversionData = cost_per_conversion ? [{
             id: 'Cost Per Conversion',
-            data: cost_per_conversion.length > 0 ? cost_per_conversion.map((costPerConversion, i) => ({ x: start_dates[i], y: costPerConversion })) : []
-          }]
-          const costPerUniqueClickData = [{
+            color: '#844fff',
+            data: cost_per_conversion.map((costPerConversion, i) => ({ x: start_dates[i], y: costPerConversion }))
+          }] : []
+          const costPerUniqueClickData = cost_per_unique_click ? [{
             id: 'Cost Per Unique Click',
-            data: cost_per_unique_click.length > 0 ? cost_per_unique_click.map((costPerUniqueClick, i) => ({ x: start_dates[i], y: costPerUniqueClick })) : []
-          }]
-          const cpcData = [{
+            color: '#844fff',
+            data: cost_per_unique_click.map((costPerUniqueClick, i) => ({ x: start_dates[i], y: costPerUniqueClick }))
+          }] : []
+          const cpcData = cpc ? [{
             id: 'CPC',
-            data: cpc.length > 0 ? cpc.map((cpc, i) => ({ x: start_dates[i], y: cpc })) : []
-          }]
-          const cpmData = [{
+            color: '#844fff',
+            data: cpc.map((cpc, i) => ({ x: start_dates[i], y: cpc }))
+          }] : []
+          const cpmData = cpm ? [{
             id: 'CPM',
-            data: cpm.length > 0 ? cpm.map((cpm, i) => ({ x: start_dates[i], y: cpm })) : []
-          }]
-          const cppData = [{
+            color: '#844fff',
+            data: cpm.map((cpm, i) => ({ x: start_dates[i], y: cpm }))
+          }] : []
+          const cppData = cpp ? [{
             id: 'CPP',
-            data: cpp.length > 0 ? cpp.map((cpp, i) => ({ x: start_dates[i], y: cpp })) : []
-          }]
-          const ctrData = [{
+            color: '#844fff',
+            data: cpp.map((cpp, i) => ({ x: start_dates[i], y: cpp }))
+          }] : []
+          const ctrData = ctr ? [{
             id: 'CTR',
-            data: ctr.length > 0 ? ctr.map((ctr, i) => ({ x: start_dates[i], y: ctr })) : []
-          }]
-          const purchaseRoasData = [{
+            color: '#844fff',
+            data: ctr.map((ctr, i) => ({ x: start_dates[i], y: ctr }))
+          }] : []
+          const purchaseRoasData = purchase_roas ? [{
             id: 'Purchase ROAS',
-            data: purchase_roas.length > 0 ? purchase_roas.map((purchaseRoas, i) => ({ x: start_dates[i], y: purchaseRoas })) : []
-          }]
-          const spendData = start_dates.map((item, index) => {
+            color: '#844fff',
+            data: purchase_roas.map((purchaseRoas, i) => ({ x: start_dates[i], y: purchaseRoas }))
+          }] : []
+          const spendData = spend ? start_dates.map((item, index) => {
             return {
               Date: item,
-              Spend: spend[index]
+              Spend: spend[index],
             }
-          })
-          const videoAvgTimeWatchedActionsData = [{
+          }) : []
+          const videoAvgTimeWatchedActionsData = video_avg_time_watched_actions ? [{
             id: 'Video Avg Time Watched Actions',
-            data: video_avg_time_watched_actions.length > 0 ? video_avg_time_watched_actions.map((videoAvgTimeWatchedActions, i) => ({ x: start_dates[i], y: videoAvgTimeWatchedActions })) : []
-          }]
-          const websiteCtrData = [{
+            color: '#844fff',
+            data: video_avg_time_watched_actions.map((videoAvgTimeWatchedActions, i) => ({ x: start_dates[i], y: videoAvgTimeWatchedActions }))
+          }] : []
+          const websiteCtrData = website_ctr ? [{
             id: 'Website CTR',
-            data: website_ctr.length > 0 ? website_ctr.map((websiteCtr, i) => ({ x: start_dates[i], y: websiteCtr })) : []
-          }]
+            color: '#844fff',
+            data: website_ctr.map((websiteCtr, i) => ({ x: start_dates[i], y: websiteCtr }))
+          }] : []
           setFbChartsDataSet({
             clicks: clicksData,
             impressions: impressionsData,
@@ -258,7 +271,7 @@ const SocialMetrics = () => {
           }}
         />
         <DateRangeBtns />
-        <Spin spinning={loadingData}>
+        {/* <Spin spinning={loadingData}>
           <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
             {
               adsFbManagementData && Object.entries(adsFbManagementData).map(([key, value], index) => (
@@ -270,52 +283,52 @@ const SocialMetrics = () => {
               ))
             }
           </div>
-        </Spin>
+        </Spin> */}
         <Spin spinning={loadingChart}>
           <div className='w-full mx-auto mt-6 rounded-lg flex flex-col gap-4'>
             <div className='grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-4'>
-              <ChartCard title='Clicks'>
+              <ChartCard title='Clicks' isEmpty={!fbChartsDataSet?.clicks?.length}>
                 {fbChartsDataSet?.clicks && <TheResponsiveLine data={fbChartsDataSet?.clicks} />}
               </ChartCard>
-              <ChartCard title='Impressions'>
+              <ChartCard title='Impressions' isEmpty={!fbChartsDataSet?.impressions?.length}>
                 {fbChartsDataSet?.impressions && <TheResponsiveLine data={fbChartsDataSet?.impressions} />}
               </ChartCard>
-              <ChartCard title='Spend'>
+              <ChartCard title='Spend' isEmpty={!fbChartsDataSet?.spend?.length}>
                 {fbChartsDataSet?.spend && <TheResponsiveBar data={fbChartsDataSet?.spend} />}
               </ChartCard>
-              <ChartCard title='Reach'>
+              <ChartCard title='Reach' isEmpty={!fbChartsDataSet?.reach?.length}>
                 {fbChartsDataSet?.reach && <TheResponsiveLine data={fbChartsDataSet?.reach} />}
               </ChartCard>
-              <ChartCard title='Conversions'>
+              <ChartCard title='Conversions' isEmpty={!fbChartsDataSet?.conversions?.length}>
                 {fbChartsDataSet?.conversions && <TheResponsiveLine data={fbChartsDataSet?.conversions} />}
               </ChartCard>
-              <ChartCard title='Cost Per Conversion'>
+              <ChartCard title='Cost Per Conversion' isEmpty={!fbChartsDataSet?.cost_per_conversion?.length}>
                 {fbChartsDataSet?.cost_per_conversion && <TheResponsiveLine data={fbChartsDataSet?.cost_per_conversion} />}
               </ChartCard>
-              <ChartCard title='Cost Per Unique Click'>
+              <ChartCard title='Cost Per Unique Click' isEmpty={!fbChartsDataSet?.clicks?.length}>
                 {fbChartsDataSet?.cost_per_unique_click && <TheResponsiveLine data={fbChartsDataSet?.cost_per_unique_click} />}
               </ChartCard>
-              <ChartCard title='CPC'>
+              <ChartCard title='CPC' isEmpty={!fbChartsDataSet?.cpc?.length}>
                 {fbChartsDataSet?.cpc && <TheResponsiveLine data={fbChartsDataSet?.cpc} />}
               </ChartCard>
-              <ChartCard title='CPM'>
+              <ChartCard title='CPM' isEmpty={!fbChartsDataSet?.cpm?.length}>
                 {fbChartsDataSet?.cpm && <TheResponsiveLine data={fbChartsDataSet?.cpm} />}
               </ChartCard>
-              <ChartCard title='CPP'>
+              <ChartCard title='CPP' isEmpty={!fbChartsDataSet?.cpp?.length}>
                 {fbChartsDataSet?.cpp && <TheResponsiveLine data={fbChartsDataSet?.cpp} />}
               </ChartCard>
-              <ChartCard title='CTR'>
+              <ChartCard title='CTR' isEmpty={!fbChartsDataSet?.ctr?.length}>
                 {fbChartsDataSet?.ctr && <TheResponsiveLine data={fbChartsDataSet?.ctr} />}
               </ChartCard>
-              <ChartCard title='Purchase ROAS'>
+              <ChartCard title='Purchase ROAS' isEmpty={!fbChartsDataSet?.purchase_roas?.length}>
                 {fbChartsDataSet?.purchase_roas && <TheResponsiveLine data={fbChartsDataSet?.purchase_roas} />}
               </ChartCard>
-              <ChartCard title='Video Avg Time Watched Actions'>
+              <ChartCard title='Video Avg Time Watched Actions' isEmpty={!fbChartsDataSet?.video_avg_time_watched_actions?.length}>
                 {fbChartsDataSet?.video_avg_time_watched_actions && <TheResponsiveLine data={fbChartsDataSet?.video_avg_time_watched_actions} />}
               </ChartCard>
-              <ChartCard title='Website CTR'>
+              {/* <ChartCard title='Website CTR' isEmpty={!fbChartsDataSet?.website_ctr?.length}>
                 {fbChartsDataSet?.website_ctr && <TheResponsiveLine data={fbChartsDataSet?.website_ctr} />}
-              </ChartCard>
+              </ChartCard> */}
             </div>
           </div>
         </Spin>
@@ -324,14 +337,19 @@ const SocialMetrics = () => {
   )
 }
 
-const ChartCard = ({ title, children }: { title: string, children: React.ReactNode }) => {
+const ChartCard = ({ title, children, isEmpty }: { title: string, children: React.ReactNode, isEmpty?: boolean }) => {
   return (
     <div className='flex flex-col p-4 bg-[#27282F] rounded-lg'>
       <span className='text-base text-primary-gray pl-4'>
         {title}
       </span>
-      <div className='w-full mx-auto h-[300px]'>
-        {children}
+      <div className='w-full mx-auto h-[300px] flex items-center justify-center'>
+        {isEmpty
+          ? <Empty
+            image="/images/empty.svg"
+            description={<span className='text-primary-gray'>No Data</span>}
+          />
+          : children}
       </div>
     </div>
   )

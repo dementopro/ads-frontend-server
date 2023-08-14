@@ -2,7 +2,7 @@ import { ResponsiveChoropleth } from '@nivo/geo';
 import React from 'react'
 import { countries } from '@/data/world'
 
-export interface ChoroplethProps {
+type ChoroplethProps = {
   data: {
     id: string
     value: number

@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
-const Platform = ['facebook', 'tiktok']
+const openedPlatforms = ['tiktok']
 
 const ConnectPlatform = () => {
 
@@ -35,7 +35,7 @@ const ConnectPlatform = () => {
       </div>
       <Image src='/images/socialInsights/man.svg' alt='man' width={204} height={176} />
       {
-        Platform.includes(currentPlatform) ?
+        openedPlatforms.includes(currentPlatform) ?
           <button
             onClick={onConnect}
             className='bg-primary-purple text-white rounded-lg flex items-center justify-center py-2 px-4 hover:opacity-80'>

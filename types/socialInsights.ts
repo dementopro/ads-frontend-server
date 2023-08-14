@@ -1,6 +1,5 @@
-import { TheResponsiveBarProps } from "@/components/d3/TheResponsiveBar";
-import { TheResponsiveLineProps } from "@/components/d3/TheResponsiveLine";
 import { IconifyIcon } from "@iconify/react";
+import { Serie } from "@nivo/line";
 
 export type PlatformType = 'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok' | 'linkedin' | 'pinterest' | 'google';
 
@@ -97,18 +96,21 @@ export interface ICampaignsData {
 }
 
 export interface FbChartsDataSet {
-  spend: TheResponsiveBarProps['data']; // 花费
-  impressions: TheResponsiveLineProps['data']; // 曝光次数
-  clicks: TheResponsiveLineProps['data']; // 点击次数
-  ctr: TheResponsiveLineProps['data']; // 点击率
-  reach: TheResponsiveLineProps['data']; // 预估覆盖人数
-  cpc: TheResponsiveLineProps['data']; // 平均点击成本
-  cpm: TheResponsiveLineProps['data']; // 1,000 次展示的平均费用
-  cpp: TheResponsiveLineProps['data'];
-  purchase_roas: TheResponsiveLineProps['data'];
-  website_ctr: TheResponsiveLineProps['data'];
-  video_avg_time_watched_actions: TheResponsiveLineProps['data'];
-  cost_per_conversion: TheResponsiveLineProps['data'];
-  cost_per_unique_click: TheResponsiveLineProps['data'];
-  conversions: TheResponsiveLineProps['data'];
+  spend: Serie[] | {
+    Date: string
+    Spend: number
+  }[]; // 花费
+  impressions: Serie[]; // 曝光次数
+  clicks: Serie[]; // 点击次数
+  ctr: Serie[]; // 点击率
+  reach: Serie[]; // 预估覆盖人数
+  cpc: Serie[]; // 平均点击成本
+  cpm: Serie[]; // 1,000 次展示的平均费用
+  cpp: Serie[];
+  purchase_roas: Serie[];
+  website_ctr: Serie[];
+  video_avg_time_watched_actions: Serie[];
+  cost_per_conversion: Serie[];
+  cost_per_unique_click: Serie[];
+  conversions: Serie[];
 }

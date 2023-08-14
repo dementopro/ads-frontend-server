@@ -52,7 +52,7 @@ const CampaignsSelect = ({ selectedCampaign, campaigns, onChange }: CampaignsSel
 
   const options = campaigns.map(campaign => ({
     label: campaign.name,
-    value: campaign.id,
+    value: campaign.name,
   }))
 
   return (

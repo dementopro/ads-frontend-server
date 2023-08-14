@@ -1,6 +1,6 @@
 import { MayHaveLabel, ResponsivePie } from '@nivo/pie'
 
-export interface TheResponsivePieProps {
+type TheResponsivePieProps = {
   data: MayHaveLabel[]
 }
 
