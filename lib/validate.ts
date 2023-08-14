@@ -28,7 +28,7 @@ export function registerValidate(values: RegisterForm) {
   return errors
 }
 
-export function paymentValidate(values: PaymentForm) {
+export async function paymentValidate(values: PaymentForm) {
   const errors = {} as PaymentForm
   if (!values.card_holder) {
     errors.card_holder = 'Card holder is required'
@@ -39,11 +39,31 @@ export function paymentValidate(values: PaymentForm) {
   if (values.card_number.length !== 16) {
     errors.card_number = 'Card number must be 16 digits'
   }
+  const response = await fetch(`/fapi/verify_credit_card_num?credit_card_num=${values.card_number}`, {
+    method: 'GET',
+  });
+  // Convert the response to JSON
+  const responseData =  await response.json();
+
+// Check the isValid property
+  if (!responseData.isValid) {
+    errors.card_number = 'Card number is invalid'
+  } 
   if (!values.cvc) {
     errors.cvc = 'CVC is required'
   }
   if (values.cvc.length !== 3 && values.cvc.length !== 4) {
     errors.cvc = 'CVC must be 3 or 4 digits'
+  }
+  const date = new Date();
+  let month = ("0" + (date.getMonth() + 1)).slice(-2)
+  let year = date.getFullYear();
+  const expYear = parseInt(values.expiration.slice(0,4), 10);
+  const expMonth = parseInt(values.expiration.slice(5,7), 10);
+  let monthNum =  parseInt(month, 10);
+  if (expYear < year || (expYear === year && expMonth < monthNum)) {
+      errors.expiration = 'Expiration is invalid';
+      console.log('error!');
   }
   if (!values.expiration) {
     errors.expiration = 'Expiration is required'
