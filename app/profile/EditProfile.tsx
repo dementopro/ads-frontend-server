@@ -32,7 +32,15 @@ const EditProfile = ({ show, setShow, username, onUpdated }: Props) => {
                     alt='avatar'
                   />
                 </div>
-                <EditProfileForm username={username} onUpdated={onUpdated} />
+                <EditProfileForm
+                  username={username}
+                  onUpdated={() => {
+                    onUpdated()
+                    setTimeout(() => {
+                      setShow(false)
+                    }, 1000)
+                  }}
+                />
               </div>
             </div>
           </div>

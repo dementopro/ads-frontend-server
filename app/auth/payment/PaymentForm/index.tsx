@@ -30,8 +30,12 @@ const PaymentForm = () => {
     validate: paymentValidate,
   })
 
-  async function onSubmitPayment(values: PaymentForm, actions: FormikHelpers<PaymentForm>) {
-    actions.setSubmitting(false);
+  async function onSubmitPayment(values: PaymentForm) {
+    const errors = Object.values(formikForPayment.errors)
+    if (errors.length > 0) {
+      messageApi.error(errors[0])
+      return
+    }
     try {
       setIsLoading(true);
       const response = await fetch('/fapi/add_credit_api', {
@@ -50,7 +54,7 @@ const PaymentForm = () => {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Add credit successfully');
           setTimeout(() => {
-            router.push('/home')
+            router.push('/profile')
           }, 500);
         } else {
           messageApi.error(data.message || 'Something went wrong');
@@ -149,7 +153,9 @@ const PaymentForm = () => {
           />
         </div>
         <div className='flex items-center justify-between gap-2'>
-          <button type="submit" className={`${styles['payment-btn']} flex-1`}>
+          <button
+            onClick={() => onSubmitPayment(formikForPayment.values)}
+            className={`${styles['payment-btn']} flex-1`}>
             {isLoading && <Icon icon={loadingIcon} className='mr-2' />}
             <span>
               {isLoading ? 'Loading...' : 'Complete'}

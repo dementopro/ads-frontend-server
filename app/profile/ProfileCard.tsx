@@ -5,6 +5,7 @@ import { IUserProfileResp, UserProfile } from '@/types/account'
 import { Icon } from '@iconify/react'
 import { Spin } from 'antd'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 const ProfileCard = () => {
@@ -88,17 +89,25 @@ const ProfileCard = () => {
               </div>
               {
                 userProfile?.subscription_start &&
-                <p className='mt-3 text-primary-gray text-xs'> Subscription starts on {userProfile?.timestamp}</p>
+                <p className='mt-3 text-primary-gray text-xs'> Subscription starts on {userProfile?.subscription_start}</p>
               }
               {/* <p className='mt-3 text-primary-gray text-xs'>Opted in on {userProfile?.timestamp}</p> */}
             </div>
           </div>
-          <button
-            onClick={() => setShowEditProfile(true)}
-            className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
-            <Icon icon='akar-icons:edit' width={16} height={16} />
-            <span className='text-base'>Edit profile</span>
-          </button>
+          <div className='flex flex-col items-end'>
+            <button
+              onClick={() => setShowEditProfile(true)}
+              className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
+              <Icon icon='akar-icons:edit' width={16} height={16} />
+              <span className='text-base'>Edit profile</span>
+            </button>
+            <Link
+              href='/auth/payment'
+              className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
+              <Icon icon='akar-icons:edit' width={16} height={16} />
+              <span className='text-base'>Update Payment Info</span>
+            </Link>
+          </div>
         </div>
       </Spin>
     </>
