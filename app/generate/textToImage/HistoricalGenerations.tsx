@@ -2,22 +2,21 @@ import Empty from '@/components/Empty'
 import { SUCCESS_CODE } from '@/data/constant'
 import { IGeneImage, IGeneImageHistory } from '@/types/generate'
 import { headers } from 'next/headers'
-import Image from 'next/image'
-import React from 'react'
+import { Image } from 'antd';
 
 
 async function getImageList(): Promise<IGeneImage[]> {
   const cookie = headers().get('cookie') || ''
-  const res = await fetch(`${process.env.API_BASE_URL}/get_image_list_api`, {
+  const response = await fetch(`${process.env.API_BASE_URL}/get_image_list_api`, {
     method: 'GET',
     headers: {
       cookie
     },
   })
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error('Failed to fetch data')
   }
-  const data: IGeneImageHistory = await res.json()
+  const data: IGeneImageHistory = await response.json()
   if (data.status === SUCCESS_CODE) {
     const filePath = data.file_path
     const imageList = data.image_list.map((image) => ({
@@ -47,7 +46,7 @@ const HistoricalGenerations = async () => {
             ? <Empty />
             : imageList.map((image, index) => (
               <div key={index} className='flex items-center gap-3 max-md:max-w-[260px] flex-col p-4 bg-[#1E1F22] rounded-lg border border-[#3A3A3A]'>
-                <Image src={image.filename} alt='generate image' width={228} height={228} />
+                <Image alt='generated image' sizes='contain' src={'/_next/image?url=' + image.filename + '&w=1080&q=75'} className='w-full h-full object-contain' rootClassName='w-full h-full' />
                 <div className='flex flex-col gap-3'>
                   <div title={image.prompt} className='text-base line-clamp-1'>{image.prompt}</div>
                   <div title={image.description} className='text-xs text-primary-gray line-clamp-2'>{image.description}</div>

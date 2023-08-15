@@ -12,7 +12,7 @@ export const modeOptions = [
   { name: 'High quality', value: 'quality' },
   { name: 'Hight Speed', value: 'speed' },
   { name: 'Medium Quality', value: 'quality' },
-  { name: 'Multi-Model', value: 'multi' },
+  // { name: 'Multi-Model', value: 'multi' },
 ]
 
 export const breadCrumbMap: Record<string, string[]> = {
