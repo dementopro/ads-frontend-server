@@ -2,7 +2,7 @@
 import { ChangeEvent, useState } from 'react'
 import styles from './register.module.css'
 import Link from 'next/link'
-import { FormikHelpers, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import { PaymentForm, RegisterForm } from '@/types/auth'
 import { paymentValidate, registerValidate } from '@/lib/validate'
 import { useRouter } from 'next/navigation'
@@ -47,8 +47,12 @@ const RegisterForm = () => {
   })
 
 
-  async function onSubmitRegister(values: RegisterForm, actions: FormikHelpers<RegisterForm>) {
-    actions.setSubmitting(false);
+  async function onSubmitRegister(values: RegisterForm) {
+    const errors = Object.values(formikForRegister.errors)
+    if (errors.length > 0) {
+      messageApi.error(errors[0])
+      return
+    }
     if (!isAgree) {
       messageApi.error('You need to agree with privacy policy first')
       return
@@ -56,8 +60,12 @@ const RegisterForm = () => {
     setStep(2)
   }
 
-  async function onSubmitPayment(values: PaymentForm, actions: FormikHelpers<PaymentForm>) {
-    actions.setSubmitting(false);
+  async function onSubmitPayment(values: PaymentForm) {
+    const errors = Object.values(formikForPayment.errors)
+    if (errors.length > 0) {
+      messageApi.error(errors[0])
+      return
+    }
     onRegister()
   }
 
@@ -216,7 +224,9 @@ const RegisterForm = () => {
               </button>
             </div>
           </div>
-          <button type="submit" disabled={isSignUpLoading} className={styles['register-btn']}>
+          <button
+            onClick={() => onSubmitRegister(formikForRegister.values)}
+            disabled={isSignUpLoading} className={styles['register-btn']}>
             {isSignUpLoading && <Icon icon={loadingIcon} className='mr-2' />}
             <span>Sign up</span>
           </button>
@@ -225,7 +235,10 @@ const RegisterForm = () => {
       {
         step === 2 &&
         <>
-          <h1 className='text-xl text-center text-white mt-6 mb-3'>Payment Details</h1>
+          {/* <h1 className='text-xl text-center text-white mt-6'>Payment Details</h1> */}
+          <p className='text-sm sm:text-[18px] max-w-[300px] my-4 text-center text-white'>
+            {`We won't charge you, this is for verification purpose only`}
+          </p>
           <form className='flex flex-col gap-4 max-sm:w-full max-sm:px-4' onSubmit={formikForPayment.handleSubmit}>
             <div className='flex flex-col gap-1'>
               <label className='text-primary-gray text-sm' htmlFor="card_holder">
@@ -293,7 +306,9 @@ const RegisterForm = () => {
                 <Icon icon={leftIcon} className='mr-2' />
                 <span>Back</span>
               </button>
-              <button type="submit" disabled={isSignUpLoading} className={`${styles['register-btn']} flex-1`}>
+              <button
+                onClick={() => onSubmitPayment(formikForPayment.values)}
+                disabled={isSignUpLoading} className={`${styles['register-btn']} flex-1`}>
                 {isSignUpLoading && <Icon icon={loadingIcon} className='mr-2' />}
                 <span>
                   {isSignUpLoading ? 'Loading...' : 'Complete'}

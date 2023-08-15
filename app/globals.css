@@ -110,3 +110,9 @@ body {
 .ant-select-selector {
   @apply !text-white !text-base !border-none !bg-[#27282F] !rounded-lg;
 }
+
+.landing-txt {
+  background: linear-gradient(243deg,#D634FF, #4663FF);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
