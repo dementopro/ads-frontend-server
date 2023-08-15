@@ -16,7 +16,7 @@ type Props = {
   mode: IGeneTextForm['mode']
 }
 
-const GenerateDescription = ({ mode }: Props) => {
+const GenerateContent = ({ mode }: Props) => {
   const [prompt, setPrompt] = useState('')
   const [content, setContent] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
@@ -148,4 +148,4 @@ const GenerateDescription = ({ mode }: Props) => {
   )
 }
 
-export default GenerateDescription
+export default GenerateContent

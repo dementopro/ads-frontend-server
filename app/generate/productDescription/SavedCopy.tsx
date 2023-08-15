@@ -7,9 +7,9 @@ import { SUCCESS_CODE } from '@/data/constant';
 import { IGeneText, IGeneTextForm, IGeneTextResp } from '@/types/generate';
 
 
-async function getCopyList(mode: IGeneTextForm['mode'] = 'description'): Promise<IGeneText[]> {
+async function getCopyList(mode: IGeneTextForm['mode'] = 'description') {
   const cookie = headers().get('cookie') || ''
-  const res = await fetch(`${process.env.API_BASE_URL}/inquiry_text_api`, {
+  const response = await fetch(`${process.env.API_BASE_URL}/inquiry_text_api`, {
     method: 'POST',
     headers: {
       cookie,
@@ -17,10 +17,12 @@ async function getCopyList(mode: IGeneTextForm['mode'] = 'description'): Promise
     },
     body: JSON.stringify({ mode })
   })
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+  if (!response.ok) {
+    // throw new Error('Failed to fetch data')
+    console.log('error', response)
+    return []
   }
-  const data: IGeneTextResp = await res.json()
+  const data: IGeneTextResp = await response.json()
   if (data.status === SUCCESS_CODE) {
     return data.data
   } else {

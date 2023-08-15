@@ -1,33 +1,43 @@
 'use client'
-import React, { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import GenerateDescription from '@/app/generate/productDescription/GenerateDescription'
+import GenerateContent from '@/app/generate/productDescription/GenerateContent'
 import { useRouter, useSearchParams } from 'next/navigation'
-// import GenerateEmail from '@/app/generate/productDescription/GenerateEmail'
+import { IGeneTextForm } from '@/types/generate'
+import { capitalize } from '@/lib/format'
 
 
 const DescriptionContent = () => {
 
   const router = useRouter()
-  const [categories] = useState({
-    Description: <GenerateDescription mode='description' />,
-    Email: <GenerateDescription mode='email' />,
-  })
+  const categories: Record<IGeneTextForm['mode'], JSX.Element> = {
+    description: <GenerateContent mode='description' />,
+    email: <GenerateContent mode='email' />,
+    Instagram: <GenerateContent mode='Instagram' />,
+    LinkedIn: <GenerateContent mode='LinkedIn' />,
+    Twitter: <GenerateContent mode='Twitter' />,
+  }
+  const modes = Object.keys(categories)
   const params = useSearchParams()
 
   function handleChange(index: number) {
     // url 添加 mode 参数
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
-    searchParams.set('mode', index === 0 ? 'description' : 'email');
+    searchParams.set('mode', modes[index]);
     url.search = searchParams.toString();
     router.replace(url.toString())
+  }
+
+  function getIndex() {
+    const mode = params.get('mode')
+    const index = modes.findIndex((el) => el === mode)
+    return index === -1 ? 0 : index
   }
 
   return (
     <div>
       <div className="w-full">
-        <Tab.Group defaultIndex={params.get('mode') === 'email' ? 1 : 0} onChange={(index) => handleChange(index)}>
+        <Tab.Group defaultIndex={getIndex()} onChange={(index) => handleChange(index)}>
           <Tab.List className="flex gap-5">
             {Object.keys(categories).map((category) => (
               <Tab
@@ -38,7 +48,7 @@ const DescriptionContent = () => {
                   ${selected ? 'text-white border border-[#848484]' : ''}`
                 }
               >
-                {category}
+                {capitalize(category)}
               </Tab>
             ))}
           </Tab.List>

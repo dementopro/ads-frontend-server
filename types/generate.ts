@@ -16,7 +16,7 @@ export interface IGeneImageHistory extends IResponse {
 
 export interface IGeneTextForm {
   prompt: string;
-  mode: 'description' | 'email',
+  mode: 'description' | 'email' | 'LinkedIn' | 'Twitter' | 'Instagram',
   text?: string;
 }
 

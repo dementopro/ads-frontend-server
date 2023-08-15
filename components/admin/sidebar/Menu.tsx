@@ -39,7 +39,7 @@ const menuItems = [
       },
       {
         text: 'Text to Copies',
-        href: '/generate/productDescription',
+        href: '/generate/productDescription?mode=description',
       },
     ]
   },
