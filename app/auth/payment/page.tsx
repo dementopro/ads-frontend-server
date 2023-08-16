@@ -20,11 +20,12 @@ const PaymentPage = () => {
       />
       <Landing />
       <div className='flex-1 flex flex-col items-center justify-center max-sm:px-4'>
-        <h1 className='font-bold text-2xl sm:text-4xl text-center text-white'>
-          Payment Details
+        <h1 className={`font-bold text-2xl sm:text-3xl text-center text-white landing-txt`}
+        >
+          Welcome to Adsgency AI
         </h1>
         <p className='text-sm sm:text-[18px] max-w-[300px] text-center leading-6 text-primary-gray mt-[10px]'>
-          This is to verify your account, you will not be charged.
+          {`We won't charge you, this is for verification purpose only`}
         </p>
         <PaymentForm />
       </div>

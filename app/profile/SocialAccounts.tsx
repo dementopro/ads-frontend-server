@@ -64,7 +64,7 @@ const SocialAccounts = () => {
           {
             platforms.map(platform => (
               <div key={platform.name} className={`p-4 flex items-center justify-between w-full rounded-lg hover:bg-[#35363A]`}>
-                <div className={`flex items-center gap-7 ${!checkConnectStatus(platform.name) ? 'filter grayscale' : ''}`}>
+                <div className={`flex items-center gap-7 ${!enablePlatforms.includes(platform.name) || !checkConnectStatus(platform.name) ? 'filter grayscale' : ''}`}>
                   <Icon width={22} height={22} icon={platform.icon} />
                   <span className='text-base'>{capitalize(platform.name)}</span>
                 </div>
@@ -72,14 +72,14 @@ const SocialAccounts = () => {
                   enablePlatforms.includes(platform.name) &&
                   <div className='flex items-center gap-3'>
                     <div
-                      className='px-2 rounded-full text-primary-purple'>
+                      className='px-4 py-1 rounded-lg text-primary-purple'>
                       {checkConnectStatus(platform.name) ? 'Connected' : 'Not connected'}
                     </div>
                     {
                       checkConnectStatus(platform.name) &&
                       <button
                         onClick={ask}
-                        className='hover:opacity-80 px-2 rounded-full text-primary-purple bg-[#201641]'>
+                        className='hover:opacity-80 px-4 py-1 rounded-lg bg-primary-purple text-white'>
                         Disconnect
                       </button>
                     }
@@ -87,7 +87,7 @@ const SocialAccounts = () => {
                 }
                 {
                   !enablePlatforms.includes(platform.name) &&
-                  <button className='px-2 rounded-full text-[#5F6368] border border-[#5F6368]'>
+                  <button className='px-4 py-1 rounded-lg text-[#5F6368] border border-[#5F6368]'>
                     Coming soon
                   </button>
                 }

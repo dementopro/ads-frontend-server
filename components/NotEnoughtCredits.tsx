@@ -5,9 +5,10 @@ import React from 'react'
 type Props = {
   show: boolean
   setShow: (show: boolean) => void
+  tips?: string
 }
 
-const NotEnoughtCredits = ({ show, setShow }: Props) => {
+const NotEnoughtCredits = ({ show, setShow, tips }: Props) => {
   return (
     <>
       {
@@ -24,6 +25,11 @@ const NotEnoughtCredits = ({ show, setShow }: Props) => {
                 <p className='mt-4 max-w-[300px] text-center'>
                   {`You don't have enough credits to use this feature.`}
                 </p>
+                {tips && (
+                  <p className='max-w-[300px] text-center'>
+                    {tips}
+                  </p>
+                )}
                 <Icon icon='game-icons:pay-money' className='text-primary-gray' width={60} height={60} />
                 <Link
                   href={'/pricing'}

@@ -1,5 +1,5 @@
 import { IGeneImageOption, ImageSegmentation, NewImage, PretrainItem } from "@/types/generate";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export type IPretrainList = Partial<Record<`${keyof IGeneImageOption}List`, PretrainItem[]>>
 
@@ -128,6 +128,10 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   const [imageId, setImageId] = useState<string>('')
   const [reload, setReload] = useState<number>(0)
 
+  useEffect(() => {
+    resetCtx()
+  }, [modeType])
+
   const updateLabel = (newLabel: 'Background' | 'Face') => {
     setLabel(newLabel);
   }
@@ -217,7 +221,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   }
 
   const resetCtx = () => {
-    updateModeType('portrait')
+    // updateModeType('portrait')
     updatePreTrainStep('image')
     updateImgSeg([])
     updatePreTrainedOption({

@@ -57,7 +57,8 @@ const RegisterForm = () => {
       messageApi.error('You need to agree with privacy policy first')
       return
     }
-    setStep(2)
+    // setStep(2)
+    onRegister()
   }
 
   async function onSubmitPayment(values: PaymentForm) {
@@ -74,9 +75,9 @@ const RegisterForm = () => {
       setIsSignUpLoading(true)
       const form = {
         ...formikForRegister.values,
-        ...formikForPayment.values,
-        year: +formikForPayment.values.expiration.slice(0, 4),
-        month: +formikForPayment.values.expiration.slice(5, 7),
+        // ...formikForPayment.values,
+        // year: +formikForPayment.values.expiration.slice(0, 4),
+        // month: +formikForPayment.values.expiration.slice(5, 7),
       }
       const response = await fetch('/fapi/signup_api', {
         method: 'POST',

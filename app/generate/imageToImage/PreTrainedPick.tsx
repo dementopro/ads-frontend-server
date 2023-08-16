@@ -215,6 +215,7 @@ const PreTrainedPick = () => {
       {contextHolder}
       <NotEnoughtCredits
         show={showNotEnoughCredits}
+        tips='It requires 3 credits to use image to image feature.'
         setShow={() => setShowNotEnoughCredits(false)} />
       <div className='flex flex-col mt-10'>
         <div className='flex justify-between items-center'>
