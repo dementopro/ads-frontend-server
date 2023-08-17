@@ -1,9 +1,37 @@
+'use client'
 import Image from 'next/image'
-import React from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const IntroOne = () => {
+
+  const main = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context((self) => {
+      const boxes: Array<HTMLDivElement> = self.selector?.('.box');
+      boxes.forEach((box) => {
+        gsap.to(box, {
+          opacity: 1,
+          scale: 1,
+          scrollTrigger: {
+            trigger: box,
+            start: 'bottom bottom',
+            end: 'top 40%',
+            scrub: true,
+          },
+        });
+      });
+    }, main); // <- Scope!
+    return () => ctx.revert(); // <- Cleanup!
+  }, []);
+
+
   return (
-    <div className='w-full mx-auto max-sm:p-4 py-2 sm:py-20 bg-[#050a2a]'>
+    <div className='w-full mx-auto max-sm:p-4 py-2 sm:py-20 bg-[#050a2a]' ref={main}>
       <div className='mx-auto max-w-[1100px] flex items-center justify-between max-sm:flex-col'>
         <div className='flex flex-col gap-8 max-sm:mb-6'>
           <h2 className='italic text-3xl max-sm:text-center max-w-[500px]'>
@@ -15,7 +43,7 @@ const IntroOne = () => {
             <p>{`Seamless Integration: AdsGency AI smoothly fits into your existing tech environment, whether you're using AWS, GCP, Azure, or other platforms, adapting to your needs and ensuring uninterrupted operations.`}</p>
           </div>
         </div>
-        <div className='relative flex items-center justify-center'>
+        <div className='box scale-50 opacity-50 relative flex items-center justify-center'>
           <div className='z-50 p-2 rounded-lg bg-[#9f70be] w-full h-full'>
             <Image src={'/images/home/base.png'} width={480} height={360} alt='intro' />
           </div>
