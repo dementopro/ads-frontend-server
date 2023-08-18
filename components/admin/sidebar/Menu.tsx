@@ -41,6 +41,10 @@ const menuItems = [
         text: 'Text to Copies',
         href: '/generate/productDescription?mode=description',
       },
+      {
+        text: 'Remix Tool',
+        href: '/generate/remixTool',
+      }
     ]
   },
   {

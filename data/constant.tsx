@@ -21,6 +21,7 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/generate/textToImage': ['Generate', 'Text to Image'],
   '/generate/imageToImage': ['Generate', 'Image to Image'],
   '/generate/productDescription': ['Generate', 'Text to Copies'],
+  '/generate/remixTool': ['Generate', 'Remix Tool'],
   '/projects': ['Your Projects'],
   '/pricing': ['Pricing'],
   '/socialInsights': ['Social Insights'],

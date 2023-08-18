@@ -116,3 +116,15 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.ant-input-number-input {
+  color: white !important;
+}
+
+.ant-slider-rail {
+  @apply !bg-primary-gray;
+}
+
+.ant-slider-track {
+  @apply !bg-primary-purple;
+}

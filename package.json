@@ -31,6 +31,7 @@
     "react-dom": "18.2.0",
     "react-flags-select": "^2.2.3",
     "react-ga4": "^2.1.0",
+    "react-image-crop": "^10.1.5",
     "react-share": "^4.4.1",
     "react-slick": "^0.29.0",
     "sharp": "^0.32.3",
