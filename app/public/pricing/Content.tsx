@@ -110,7 +110,7 @@ const Content = () => {
           <button
             onClick={requestDemo}
             className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-8 truncate`}>
-            Enterprise Inquiry
+            Request Demo
           </button>
         </div>
       </section>

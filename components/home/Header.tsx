@@ -38,19 +38,19 @@ const Header = () => {
           <Link href='/contactUs' className={`flex items-center justify-center bg-transparent text-white cursor-pointer min-w-[80px] px-4 py-1 truncate hover:bg-primary-purple/70 rounded transition-all duration-300`}>
             Contact Us
           </Link>
+          {/* <Link
+            href={'/login'}
+            className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
+            Sign in
+          </Link> */}
+        </div>
+        {/* <div className='sm:hidden items-center sm:gap-4'>
           <Link
             href={'/login'}
             className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
             Sign in
           </Link>
-        </div>
-        <div className='sm:hidden items-center sm:gap-4'>
-          <Link
-            href={'/login'}
-            className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-4 truncate`}>
-            Sign in
-          </Link>
-        </div>
+        </div> */}
       </div>
     </>
   )

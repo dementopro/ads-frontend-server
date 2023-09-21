@@ -33,14 +33,14 @@ const NewLanding = () => {
                 clipPath: 'polygon(0% 28%, 6% 0px, 100% 0px, 100% 72%, 94% 100%, 0px 100%)'
               }}
               className={`${styles['request-demo-btn']}`}>
-              <span>Enterprise Inquiry</span>
+              <span>Request Demo</span>
               <Icon icon='akar-icons:arrow-right' className='text-2xl' />
             </Link>
-            <Link href='/register'
+            {/* <Link href='/register'
               className={`w-[140px] flex items-center justify-center gap-3 bg-primary-gradient py-3 rounded-lg hover:opacity-80 italic`}>
               <span>Sign Up</span>
               <Icon icon='mdi:login' className='text-2xl' />
-            </Link>
+            </Link> */}
           </div>
           <div className='relative sm:mt-12 flex justify-center rounded-2xl p-2 w-[540px] h-[300px] bg-primary-purple/10 max-sm:scale-50'>
             <Image

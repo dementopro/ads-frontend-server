@@ -5,7 +5,7 @@ import styles from './RequestDemo.module.css';
 
 export const metadata = {
   title: 'Enterprise Inquiry - AdsGency AI',
-  description: 'Enterprise Inquiry',
+  description: 'Request Demo',
 }
 
 const RequestDemoPage = () => {

@@ -69,7 +69,7 @@ const RequestDemoForm = () => {
         preserve={false}
       >
         <h3 className='text-white text-center text-3xl font-bold mb-7'>
-          Enterprise Inquiry
+          Request Demo
         </h3>
         <div className='flex-1 flex gap-2 justify-between max-sm:flex-col'>
           <Form.Item
@@ -143,7 +143,7 @@ const RequestDemoForm = () => {
           </Form.Item>
         </div>
         <button type='submit' disabled={loading} className='mt-4 w-full justify-center h-[44px] flex items-center cursor-pointer hover:opacity-80 rounded bg-primary-gradient text-white text-base font-medium truncate'>
-          {loading ? 'Sending...' : 'Enterprise Inquiry'}
+          {loading ? 'Sending...' : 'Request Demo'}
         </button>
         <div className='mt-10 flex flex-col justify-center items-center'>
           <p className='text-primary-gray text-base'>For technical issues and general inquires, please</p>

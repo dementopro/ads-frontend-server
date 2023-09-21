@@ -50,11 +50,11 @@ const LoginForm = () => {
           // NOTE: need to fresh the page to get the new cookie
           onLogin()
           window.location.href = '/home'
-        }
-        else if (data.status === NO_CREDIT_CARD) {
-          messageApi.success('Login success');
-          onLogin()
-          window.location.href = '/auth/payment'
+        // }
+        // else if (data.status === NO_CREDIT_CARD) {
+        //   messageApi.success('Login success');
+        //   onLogin()
+        //   window.location.href = '/auth/payment'
         } else {
           messageApi.error(data.message || 'Something went wrong');
         }

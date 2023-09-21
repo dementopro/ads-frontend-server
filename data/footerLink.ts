@@ -53,7 +53,7 @@ export const footerLinks = [
         href: '/contactUs',
       },
       {
-        label: 'Enterprise Inquiry',
+        label: 'Request Demo',
         href: '/requestDemo',
       },
       {
