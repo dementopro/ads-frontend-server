@@ -1,104 +1,110 @@
-import { GeneImageContext } from '@/context/generate'
-import { SUCCESS_CODE } from '@/data/constant'
-import { IUploadImageResp } from '@/types/generate'
-import { message, Spin } from 'antd'
-import Image from 'next/image'
-import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'
+import { GeneImageContext } from '@/context/generate'; // Importing the GeneImageContext from context
+import { SUCCESS_CODE } from '@/data/constant'; // Importing a constant for success code
+import { IUploadImageResp } from '@/types/generate'; // Importing a type for image upload response
+import { message, Spin } from 'antd'; // Importing message and Spin components from antd library
+import Image from 'next/image'; // Importing the Image component from Next.js
+import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'; // Importing React and necessary hooks
 
-
-
+// OriginImageUpload component
 const OriginImageUpload = () => {
-
+  // Accessing gene image context data using useContext hook
   const {
-    modeType,
-    originalImageUrl,
-    updateOriginalImage,
-    updateCropImage,
-    updateIsCrop,
-    updateFile,
-    updateFileName,
-    updateFilePath,
-    updateMaskFileName,
-    updateMaskFilePath,
-    updateImgSeg,
-    updateImageId,
-    updatePreTrainStep,
-    updatePreTrainedOption
-  } = useContext(GeneImageContext)
+    modeType,                 // Type of image mode (portrait or other)
+    originalImageUrl,         // URL of the original image
+    updateOriginalImage,      // Function to update the original image URL
+    updateCropImage,          // Function to update the cropped image URL
+    updateIsCrop,             // Function to update whether cropping is active
+    updateFile,               // Function to update the uploaded file data
+    updateFileName,           // Function to update the uploaded file name
+    updateFilePath,           // Function to update the uploaded file path
+    updateMaskFileName,       // Function to update the mask file name
+    updateMaskFilePath,       // Function to update the mask file path
+    updateImgSeg,             // Function to update image segmentation data
+    updateImageId,            // Function to update the image ID
+    updatePreTrainStep,       // Function to update the pre-training step
+    updatePreTrainedOption    // Function to update pre-trained options
+  } = useContext(GeneImageContext);
 
-  const [messageApi, contextHolder] = message.useMessage();
-  const [loading, setLoading] = useState(false)
+  const [messageApi, contextHolder] = message.useMessage(); // Creating message API and context holder
+  const [loading, setLoading] = useState(false); // State for loading spinner
 
-
+  // Function to handle image file selection
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const element = e.target as HTMLInputElement
+    const element = e.target as HTMLInputElement;
     if (e.target.files) {
-      const file = e.target.files[0]
+      const file = e.target.files[0];
+
       if (file?.type === 'image/gif') {
-        messageApi.error('Gif is not supported')
-        return
+        messageApi.error('Gif is not supported');
+        return;
       }
+
       // Size not more than 10MB
       if (file?.size > 10 * 1024 * 1024) {
-        messageApi.error('File size is too large')
-        return
+        messageApi.error('File size is too large');
+        return;
       }
 
-      updateCropImage(null)
-      updateIsCrop(false)
+      // Clear crop image and disable cropping
+      updateCropImage(null);
+      updateIsCrop(false);
 
       try {
-        setLoading(true)
-        messageApi.loading('Uploading...')
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('mode', modeType)
+        setLoading(true);
+        messageApi.loading('Uploading...');
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('mode', modeType);
+
         const response = await fetch(`/fapi/generate_image/upload_image`, {
           method: 'POST',
           body: formData
-        })
+        });
+
         if (response.ok) {
-          const data: IUploadImageResp = await response.json()
+          const data: IUploadImageResp = await response.json();
+
           if (data.status === SUCCESS_CODE) {
-            messageApi.success(data.message || 'Upload successfully')
-            updateOriginalImage(file)
-            // const newUrl = `${process.env.NEXT_PUBLIC_IMG_URL}/${data.img_path}`
-            // updateCropImage(newUrl)
-            updateFile(data.file)
-            updateCropImage(`data:image/png;base64, ${data.file}`)
-            updateIsCrop(false)
-            updateFileName(data.file_name)
-            updateFilePath(data.file_path)
-            updateMaskFileName(data.mask_file_name)
-            updateMaskFilePath(data.mask_file_path)
-            updateImgSeg(data.img_seg)
-            updateImageId(data._id)
+            messageApi.success(data.message || 'Upload successfully');
+            updateOriginalImage(file);
+            updateFile(data.file);
+            updateCropImage(`data:image/png;base64, ${data.file}`);
+            updateIsCrop(false);
+            updateFileName(data.file_name);
+            updateFilePath(data.file_path);
+            updateMaskFileName(data.mask_file_name);
+            updateMaskFilePath(data.mask_file_path);
+            updateImgSeg(data.img_seg);
+            updateImageId(data._id);
+
             if (modeType === 'product') {
-              updatePreTrainStep('background')
+              updatePreTrainStep('background');
               updatePreTrainedOption({
                 image: data.file || ''
-              })
+              });
             }
           } else {
-            messageApi.error(data.message || 'Upload failed')
+            messageApi.error(data.message || 'Upload failed');
           }
         } else {
-          console.log('response', response)
-          messageApi.error('Upload failed')
+          messageApi.error('Upload failed');
         }
       } catch (error) {
-        messageApi.error('Upload failed')
+        messageApi.error('Upload failed');
       } finally {
-        setLoading(false)
-        element.value = ''
+        setLoading(false);
+        element.value = '';
       }
     }
   }
 
+  // Function to handle drag events
   function handleDrag(e: DragEvent<HTMLDivElement>) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
+  // Render the component
   return (
     <>
       {contextHolder}
@@ -110,10 +116,9 @@ const OriginImageUpload = () => {
             ${!!originalImageUrl ? 'border-transparent' : 'border-primary-purple'}`}
           >
             {
-              originalImageUrl
-                ?
+              originalImageUrl ? (
                 <Image alt='uploaded image' fill sizes='contain' src={originalImageUrl} className='w-full h-full object-contain' />
-                :
+              ) : (
                 <>
                   <div className='absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-white/10 z-1 hidden group-hover:flex' />
                   <div className='flex flex-col items-center justify-center'>
@@ -129,6 +134,7 @@ const OriginImageUpload = () => {
                     </p>
                   </div>
                 </>
+              )
             }
             <input type='file' accept='image/*' className='absolute top-0 left-0 right-0 bottom-0 w-full h-full z-2 opacity-0 cursor-pointer' onChange={handleChange} />
           </div>
@@ -136,7 +142,8 @@ const OriginImageUpload = () => {
         <div className='text-primary-gray'>Original image</div>
       </div>
     </>
-  )
+  );
 }
 
-export default OriginImageUpload
+// Export the OriginImageUpload component
+export default OriginImageUpload;

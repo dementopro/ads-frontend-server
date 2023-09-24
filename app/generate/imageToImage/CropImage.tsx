@@ -1,11 +1,11 @@
-import ImageSegmentationCanvas from '@/app/generate/imageToImage/ImageSegmentationCanvas'
-import { GeneImageContext } from '@/context/generate'
-import Image from 'next/image'
-import React, { MouseEvent, useContext } from 'react'
-
+// Import necessary components and modules.
+import ImageSegmentationCanvas from '@/app/generate/imageToImage/ImageSegmentationCanvas';
+import { GeneImageContext } from '@/context/generate';
+import Image from 'next/image';
+import React, { MouseEvent, useContext } from 'react';
 
 const CropImage = () => {
-
+  // Accessing context for managing image cropping
   const {
     updateShowCrop,
     cropImage,
@@ -14,30 +14,34 @@ const CropImage = () => {
     updatePreTrainedOption,
     updateLabel,
     img_seg
-  } = useContext(GeneImageContext)
+  } = useContext(GeneImageContext);
 
+  // Function to handle click outside the cropping area
   function handleClick(e: MouseEvent<HTMLDivElement>) {
     if (e.target === e.currentTarget) {
-      updateShowCrop(false)
+      updateShowCrop(false);
     }
   }
 
+  // Function to confirm the cropped image
   function onConfrom() {
-    updateIsCrop(true)
-    updateShowCrop(false)
-    updatePreTrainStep('background')
+    updateIsCrop(true);
+    updateShowCrop(false);
+    updatePreTrainStep('background');
     updatePreTrainedOption({
       image: cropImage || ''
-    })
+    });
   }
 
+  // Function to cancel cropping
   function onCancel() {
-    updateShowCrop(false)
-    updateLabel('Background')
+    updateShowCrop(false);
+    updateLabel('Background');
   }
 
+  // Function to reset the cropping
   function onReset() {
-    updateLabel('Background')
+    updateLabel('Background');
   }
 
   return (
@@ -47,10 +51,7 @@ const CropImage = () => {
           Click on all areas in the image that you want to change.
         </p>
         <div className='rounded-md overflow-hidden relative w-[510px] h-[510px]'>
-          {
-            cropImage && img_seg.length > 0 &&
-            <ImageSegmentationCanvas imgSrc={cropImage} imgSegmentation={img_seg} />
-          }
+          {cropImage && img_seg.length > 0 && <ImageSegmentationCanvas imgSrc={cropImage} imgSegmentation={img_seg} />}
         </div>
         <div className='h-[66px] flex items-center justify-center bg-[#23252B] rounded-lg text-2xl'>
           <button onClick={onReset} className='h-full px-4 bg-transparent text-white font-medium hover:opacity-80 flex items-center justify-center gap-4'>
@@ -75,7 +76,7 @@ const CropImage = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CropImage
+export default CropImage;

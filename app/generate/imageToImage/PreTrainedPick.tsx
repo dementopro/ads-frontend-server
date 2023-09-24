@@ -1,25 +1,29 @@
-import NotEnoughtCredits from '@/components/NotEnoughtCredits'
-import { GeneImageContext } from '@/context/generate'
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
-import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate'
-import { message } from 'antd'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
+// Import necessary dependencies and components
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import { GeneImageContext } from '@/context/generate';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
+import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate';
+import { message } from 'antd';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { useContext } from 'react';
 
+// Define the props for the PickItem component
 type PickImageProps = {
-  item: PretrainItem
-  isActive?: boolean
-  setOption: () => void
-  pickType?: keyof IGeneImageOption
-}
+  item: PretrainItem;
+  isActive?: boolean;
+  setOption: () => void;
+  pickType?: keyof IGeneImageOption;
+};
 
+// PickItem Component: Represents an item that users can pick
 const PickItem = ({ item, isActive, setOption, pickType }: PickImageProps) => {
   return (
     <>
       {
-        pickType !== 'style'
-          ?
+        // Render different components based on the 'pickType'
+        pickType !== 'style' ?
+          // If not 'style', render an image item
           <div className='flex flex-col items-center gap-3 w-[150px]'>
             <div onClick={setOption} className={`${isActive ? 'border-primary-purple' : 'border-[#15161a]'} overflow-hidden cursor-pointer hover:opacity-90 border-2 w-[150px] h-[150px] relative rounded-lg bg-primary-gray`}>
               <Image src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.image_path}`} alt={item.name} fill className='object-cover' />
@@ -30,52 +34,58 @@ const PickItem = ({ item, isActive, setOption, pickType }: PickImageProps) => {
             </div>
           </div>
           :
+          // If 'style', render a button item
           <button
             onClick={setOption}
-            className={`h-[44px] px-4 flex items-center justify-center   rounded-lg hover:text-white ${isActive ? 'bg-[#5F6368] text-white' : 'bg-[#35363A] text-primary-gray'}`}
+            className={`h-[44px] px-4 flex items-center justify-center rounded-lg hover:text-white ${isActive ? 'bg-[#5F6368] text-white' : 'bg-[#35363A] text-primary-gray'}`}
           >
             {item.name}
           </button>
       }
     </>
-  )
-}
+  );
+};
 
+// Define the props for the OptionBtn component
 type OptionBtnProps = {
-  onClick: () => void
-  isActive: boolean
-  isChecked: boolean
-  isDisabled: boolean
-  text: string
-  step: number
-}
+  onClick: () => void;
+  isActive: boolean;
+  isChecked: boolean;
+  isDisabled: boolean;
+  text: string;
+  step: number;
+};
 
+// OptionBtn Component: Represents a button for selecting options
 const OptionBtn = ({ onClick, isActive, isChecked, isDisabled, text, step }: OptionBtnProps) => {
   return (
     <button
       onClick={() => {
         if (!isDisabled) {
-          onClick()
+          onClick();
         }
       }}
       className={`border-transparent ${isActive ? 'text-white rounded-t-lg bg-[#35363A] !border-primary-purple' : ''} ${isDisabled ? '' : ''} ${isChecked ? '!border-primary-purple' : ''} px-4 h-[44px] min-w-[160px] flex items-center justify-center gap-3 border-b-2`}
     >
       {
         isChecked ?
+          // Render a checkmark icon if the option is checked
           <Image src={'/images/admin/img2img/checked.svg'} alt='checked' width={18} height={18} />
           :
+          // Render the step number if not checked
           <span className={`flex items-center justify-center rounded-full border text-sm w-[18px] h-[18px] ${isActive ? 'text-primary-purple border-primary-purple' : ''}`}>{step}</span>
       }
       <span className={`truncate`}>{text}</span>
     </button>
-  )
-}
+  );
+};
 
-
+// PreTrainedPick Component: Manages selection and generation of pre-trained elements
 const PreTrainedPick = () => {
-
   const [messageApi, contextHolder] = message.useMessage();
-  const router = useRouter()
+  const router = useRouter();
+
+  // Access context and state variables
   const {
     preTrainedStep, updatePreTrainStep,
     preTrainedOption, updatePreTrainedOption,
@@ -86,33 +96,39 @@ const PreTrainedPick = () => {
     updateGeneratedImage,
     updateReload,
     imageId
-  } = useContext(GeneImageContext)
-  const [showNotEnoughCredits, setShowNotEnoughCredits] = React.useState(false)
+  } = useContext(GeneImageContext);
 
+  // State to manage display of "Not Enough Credits" message
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = React.useState(false);
+
+  // Function to handle image generation
   function onGenerate() {
     switch (modeType) {
       case 'portrait':
         if (Object.values(preTrainedOption).some(item => item === '')) {
-          messageApi.warning('You need to upload image and select all three steps to generate!')
-          return
+          messageApi.warning('You need to upload an image and select all three steps to generate!');
+          return;
         }
-        onGenerateImage()
+        onGenerateImage();
         break;
       case 'product':
         if (preTrainedOption.background === '') {
-          messageApi.warning('You need to upload image and select background!')
-          return
+          messageApi.warning('You need to upload an image and select a background!');
+          return;
         }
-        onReplaceBackground()
+        onReplaceBackground();
         break;
       default:
         break;
     }
   }
 
+  // Function to replace the background
   async function onReplaceBackground() {
-    updateIsGenerating(true)
+    // Set the loading state while making the API request
+    updateIsGenerating(true);
     try {
+      // Make an API request to replace the background
       const response = await fetch(`/fapi/generate_image/replace_pro_background_v2`, {
         method: 'POST',
         body: JSON.stringify({
@@ -125,39 +141,42 @@ const PreTrainedPick = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      })
+      });
       if (response.ok) {
-        const data: IGeneImageResp = await response.json()
+        const data: IGeneImageResp = await response.json();
         if (data.status === SUCCESS_CODE) {
-          messageApi.success('Generate image successfully!')
+          messageApi.success('Generate image successfully!');
           const result = data.new_image.map(item => ({
             ...item,
-            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
             img_path: `data:image/png;base64, ${item.file}`
-          }))
-          updateGeneratedImage(result)
-          updateReload()
-          router.refresh()
+          }));
+          updateGeneratedImage(result);
+          updateReload();
+          router.refresh();
         } else if (data.status === NOT_ENOUGH_CREDIT) {
-          setShowNotEnoughCredits(true)
+          setShowNotEnoughCredits(true);
         } else {
-          messageApi.error(data.message || 'Something went wrong!')
+          messageApi.error(data.message || 'Something went wrong!');
         }
       } else {
-        console.log('response', response)
-        messageApi.error(response.statusText || 'Something went wrong!')
+        console.log('response', response);
+        messageApi.error(response.statusText || 'Something went wrong!');
       }
     } catch (error) {
-      messageApi.error('Something went wrong!')
-      console.log('error', error)
+      messageApi.error('Something went wrong!');
+      console.log('error', error);
     } finally {
-      updateIsGenerating(false)
+      // Reset the loading state
+      updateIsGenerating(false);
     }
   }
 
+  // Function to generate an image based on selections
   async function onGenerateImage() {
-    updateIsGenerating(true)
+    // Set the loading state while making the API request
+    updateIsGenerating(true);
     try {
+      // Make an API request to generate an image
       const response = await fetch(`/fapi/generate_image/image_to_image`, {
         method: 'POST',
         body: JSON.stringify({
@@ -178,41 +197,40 @@ const PreTrainedPick = () => {
           'Content-Type': 'application/json',
         },
         keepalive: true,
-      })
+      });
       if (response.ok) {
-        const data: IGeneImageResp = await response.json()
+        const data: IGeneImageResp = await response.json();
         if (data.status === SUCCESS_CODE) {
-          messageApi.success('Generate image successfully!')
+          messageApi.success('Generate image successfully!');
           const result = data.new_image.map(item => ({
             ...item,
-            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${data.file_path}/${item.filename}`
             img_path: `data:image/png;base64, ${item.file}`
-          }))
-          updateGeneratedImage(result)
-          updateReload()
-          router.refresh()
+          }));
+          updateGeneratedImage(result);
+          updateReload();
+          router.refresh();
         } else if (data.status === NOT_ENOUGH_CREDIT) {
-          setShowNotEnoughCredits(true)
+          setShowNotEnoughCredits(true);
         } else {
-          messageApi.error(data.message || 'Something went wrong!')
+          messageApi.error(data.message || 'Something went wrong!');
         }
       } else {
-        console.log('response', response)
-        messageApi.error(response.statusText || 'Something went wrong!')
+        console.log('response', response);
+        messageApi.error(response.statusText || 'Something went wrong!');
       }
     } catch (error) {
-      messageApi.error('Something went wrong!')
-      console.log('error', error)
+      messageApi.error('Something went wrong!');
+      console.log('error', error);
     } finally {
-      updateIsGenerating(false)
+      // Reset the loading state
+      updateIsGenerating(false);
     }
   }
-
-
 
   return (
     <>
       {contextHolder}
+      {/* Display a message if user doesn't have enough credits */}
       <NotEnoughtCredits
         show={showNotEnoughCredits}
         tips='It requires 3 credits to use image to image feature.'
@@ -220,6 +238,7 @@ const PreTrainedPick = () => {
       <div className='flex flex-col mt-10'>
         <div className='flex justify-between items-center'>
           <div className='flex flex-wrap items-center text-primary-gray'>
+            {/* Buttons for selecting steps (background, face, style) */}
             <OptionBtn
               onClick={() => updatePreTrainStep('background')}
               isActive={preTrainedStep === 'background'}
@@ -228,58 +247,53 @@ const PreTrainedPick = () => {
               text='Background'
               step={1}
             />
-            {
-              modeType === 'portrait' && (
-                <>
-                  <OptionBtn
-                    onClick={() => updatePreTrainStep('face')}
-                    isActive={preTrainedStep === 'face'}
-                    isChecked={preTrainedOption.face !== ''}
-                    isDisabled={preTrainedOption.image === ''}
-                    text='Model faces'
-                    step={2}
-                  />
-                  <OptionBtn
-                    onClick={() => updatePreTrainStep('style')}
-                    isActive={preTrainedStep === 'style'}
-                    isChecked={preTrainedOption.style !== ''}
-                    isDisabled={preTrainedOption.image === ''}
-                    text='Style'
-                    step={3}
-                  />
-                </>
-              )
-            }
+            {modeType === 'portrait' && (
+              <>
+                <OptionBtn
+                  onClick={() => updatePreTrainStep('face')}
+                  isActive={preTrainedStep === 'face'}
+                  isChecked={preTrainedOption.face !== ''}
+                  isDisabled={preTrainedOption.image === ''}
+                  text='Model faces'
+                  step={2}
+                />
+                <OptionBtn
+                  onClick={() => updatePreTrainStep('style')}
+                  isActive={preTrainedStep === 'style'}
+                  isChecked={preTrainedOption.style !== ''}
+                  isDisabled={preTrainedOption.image === ''}
+                  text='Style'
+                  step={3}
+                />
+              </>
+            )}
           </div>
+          {/* Generate button */}
           <button
             onClick={onGenerate}
-            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${(modeType === 'portrait' ?
-              Object.values(preTrainedOption).some(item => item === '') :
-              preTrainedOption.background === '') ? 'opacity-50' : 'opacity-100'}`}
+            className={`bg-primary-purple hover:opacity-80 text-base flex items-center justify-center w-[150px] h-[44px] rounded-lg truncate ${
+              (modeType === 'portrait'
+                ? Object.values(preTrainedOption).some(item => item === '')
+                : preTrainedOption.background === '') ? 'opacity-50' : 'opacity-100'
+            }`}
           >
             Generate
           </button>
         </div>
       </div>
       <div className='flex flex-wrap gap-5 mt-8 relative'>
-        {
-          pretrainList[`${preTrainedStep}List`]
-            ?.map((item, index) => (
-              <PickItem
-                pickType={preTrainedStep}
-                item={item}
-                key={index} isActive={item.name === preTrainedOption[preTrainedStep]}
-                setOption={() => updatePreTrainedOption({ [preTrainedStep]: item.name })}
-              />
-            ))
-        }
-        {/* {
-          preTrainedStep === 'image' &&
-          <div className='w-full h-full z-10 rounded-lg bg-[#000000b5] absolute top-0 left-0 right-0 bottom-0' />
-        } */}
+        {/* Render the list of pre-trained items that users can select */}
+        {pretrainList[`${preTrainedStep}List`]?.map((item, index) => (
+          <PickItem
+            pickType={preTrainedStep}
+            item={item}
+            key={index} isActive={item.name === preTrainedOption[preTrainedStep]}
+            setOption={() => updatePreTrainedOption({ [preTrainedStep]: item.name })}
+          />
+        ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PreTrainedPick
+export default PreTrainedPick;

@@ -1,4 +1,5 @@
 'use client'
+// Imports
 import { paymentValidate } from '@/lib/validate';
 import { PaymentForm } from '@/types/auth';
 import { Icon } from '@iconify/react';
@@ -13,11 +14,12 @@ import { DatePicker, message } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
 
 const PaymentForm = () => {
-
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [isLoading, setIsLoading] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
+  
+  // Define formikForPayment using useFormik hook for handling form state.
   const formikForPayment = useFormik<PaymentForm>({
     initialValues: {
       card_number: '',
@@ -26,15 +28,16 @@ const PaymentForm = () => {
       cvc: '',
       country: 'US',
     },
-    onSubmit: onSubmitPayment,
-    validate: paymentValidate,
-  })
+    onSubmit: onSubmitPayment, // Function to handle form submission.
+    validate: paymentValidate, // Validation function for form fields.
+  });
 
+  // Function to handle form submission.
   async function onSubmitPayment(values: PaymentForm) {
-    const errors = Object.values(formikForPayment.errors)
+    const errors = Object.values(formikForPayment.errors);
     if (errors.length > 0) {
-      messageApi.error(errors[0])
-      return
+      messageApi.error(errors[0]);
+      return;
     }
     try {
       setIsLoading(true);
@@ -46,45 +49,47 @@ const PaymentForm = () => {
           month: +values.expiration.split('-')[1],
         }),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Add credit successfully');
           setTimeout(() => {
-            router.push('/profile')
+            router.push('/profile');
           }, 500);
         } else {
           messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('error: ', response.statusText)
+        console.log('error: ', response.statusText);
         messageApi.error(response.statusText || 'Something went wrong');
       }
     } catch (error) {
-      console.log('error: ', error)
+      console.log('error: ', error);
       messageApi.error(error as any || 'Something went wrong');
     } finally {
       setIsLoading(false);
     }
   }
 
+  // Function to handle change in CVC input.
   const handleChangeCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    // 检查输入是否为整数
+    // Check if the input is an integer.
     if (!Number.isInteger(Number(value))) {
       return;
     }
-    // 检查输入的长度是否为4位
+    // Check if the input length is not more than 4 characters.
     if (value.length > 4) {
       return;
     }
-    // 更新输入的值
+    // Update the input value.
     formikForPayment.setFieldValue('cvc', value);
   };
 
+  // Function to handle change in expiration date.
   function onChangeExpiration(date: any, dateString: string) {
     formikForPayment.setFieldValue('expiration', dateString);
   }
@@ -104,7 +109,8 @@ const PaymentForm = () => {
             className={`${styles['payment-input']} ${formikForPayment.errors.card_holder && formikForPayment.touched.card_holder ? '!border-rose-600' : ''}`} {...formikForPayment.getFieldProps('card_holder')}
           />
         </div>
-        {/* card number */}
+
+        {/* Card Number */}
         <div className='flex flex-col gap-1'>
           <label className='text-primary-gray text-sm' htmlFor="card_number">
             Card number
@@ -114,7 +120,10 @@ const PaymentForm = () => {
             formikForPayment.setFieldValue('card_number', value.replaceAll(' ', ''));
           }} isError={!!formikForPayment.errors.card_number} />
         </div>
+
+        {/* Expiration Date and CVC */}
         <div className='flex gap-1 justify-between'>
+          {/* Expiration Date */}
           <div className='flex flex-col gap-1 max-sm:w-1/2'>
             <label className='text-primary-gray text-sm' htmlFor="expiration">
               Expiration
@@ -125,6 +134,7 @@ const PaymentForm = () => {
               onChange={onChangeExpiration}
               picker="month" />
           </div>
+          {/* CVC */}
           <div className='flex flex-col gap-1 max-sm:w-1/2'>
             <label className='text-primary-gray text-sm' htmlFor="cvc">
               CVC
@@ -139,9 +149,10 @@ const PaymentForm = () => {
             />
           </div>
         </div>
-        {/* country */}
+
+        {/* Country Selection */}
         <div className='flex flex-col gap-1'>
-          <label className='text-primary-gray text-sm' htmlFor="country">Country</label>
+        <label className='text-primary-gray text-sm' htmlFor="country">Country</label>
           <ReactFlagsSelect
             className={`${styles.flag} ${formikForPayment.errors.country && formikForPayment.touched.country ? '!border-rose-600' : ''}`}
             selected={formikForPayment.values.country}
@@ -152,6 +163,7 @@ const PaymentForm = () => {
             countries={["US"]}
           />
         </div>
+        {/* Submit Button */}
         <div className='flex items-center justify-between gap-2'>
           <button
             onClick={() => onSubmitPayment(formikForPayment.values)}

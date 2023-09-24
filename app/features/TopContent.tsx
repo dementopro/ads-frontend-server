@@ -1,7 +1,7 @@
-'use client'
 import React from 'react'
 import styles from './features.module.css'
 
+// Define the TopContent component
 const TopContent = () => {
   return (
     <div className='flex flex-col items-center justify-center mt-16 mb-8 pb-12 border-b border-primary-purple/50'>
@@ -14,6 +14,7 @@ const TopContent = () => {
       <div className='flex items-center'>
         <button
           onClick={() => {
+            // Scroll to the 'features' section when the button is clicked
             const features = document.getElementById('features')
             features?.scrollIntoView({ behavior: 'smooth' })
           }}
@@ -25,4 +26,5 @@ const TopContent = () => {
   )
 }
 
+// Export the TopContent component as the default export
 export default TopContent
