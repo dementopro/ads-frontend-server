@@ -65,7 +65,13 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
 
 const PricingPage = () => {
 
-  const { updateAccount, planId, isLogin } = useContext(AccountContext)
+  const { updateAccount,
+    planId,
+    isLogin,
+    creditInfo,
+    setNextPage,
+    setSelectedPlan,
+    selectedPlan} = useContext(AccountContext)
   const [buyPlanId, setBuyPlanId] = useState(0)
   const router = useRouter()
   const [plan, setPlan] = useState(Pricing[~~((planId - 1) / 3)].plan)
@@ -74,6 +80,13 @@ const PricingPage = () => {
   const [confirmVisible, setConfirmVisible] = useState(false)
   const [payResultVisible, setPayResultVisible] = useState(false)
   const [payResultMessage, setPayResultMessage] = useState('')
+
+  if(selectedPlan){
+
+    setBuyPlanId(selectedPlan)
+    setConfirmVisible(true)
+
+  }
 
   async function onSubscription(planId: number) {
     try {
@@ -95,6 +108,8 @@ const PricingPage = () => {
           setPayResultVisible(true)
           setConfirmVisible(false)
           updateAccount()
+          setSelectedPlan(null)
+          setNextPage(null)
         } else {
           messageApi.error(data.message || 'Something went wrong')
         }
@@ -249,6 +264,12 @@ const PricingPage = () => {
                       onSubscription={(planId) => {
                         if (!isLogin) {
                           router.push('/login')
+                          return
+                        }
+                        if(!creditInfo){
+                          setSelectedPlan(planId)
+                          setNextPage("/pricing")
+                          router.push('/auth/payment')
                           return
                         }
                         setBuyPlanId(planId)

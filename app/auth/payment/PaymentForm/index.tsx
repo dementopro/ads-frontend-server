@@ -4,13 +4,14 @@ import { paymentValidate } from '@/lib/validate';
 import { PaymentForm } from '@/types/auth';
 import { Icon } from '@iconify/react';
 import { FormikHelpers, useFormik } from 'formik';
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useContext } from 'react'
 import styles from './payment.module.css'
 import CCInput from '@/components/CCInput';
 import ReactFlagsSelect from 'react-flags-select';
 import loadingIcon from '@iconify/icons-eos-icons/loading';
 import { useRouter } from 'next/navigation';
 import { DatePicker, message } from 'antd';
+import { AccountContext } from '@/context/account';
 import { SUCCESS_CODE } from '@/data/constant';
 
 const PaymentForm = () => {
@@ -18,7 +19,9 @@ const PaymentForm = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isLoading, setIsLoading] = useState(false);
   const [cardNumber, setCardNumber] = useState('');
-  
+
+  const { nextPage, setCreditInfo } = useContext(AccountContext)
+
   // Define formikForPayment using useFormik hook for handling form state.
   const formikForPayment = useFormik<PaymentForm>({
     initialValues: {
@@ -57,7 +60,13 @@ const PaymentForm = () => {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Add credit successfully');
           setTimeout(() => {
-            router.push('/profile');
+            setCreditInfo(true)
+            if(nextPage){
+              router.push(nextPage)
+            }
+            else{
+              router.push('/profile');
+            }
           }, 500);
         } else {
           messageApi.error(data.message || 'Something went wrong');

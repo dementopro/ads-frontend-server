@@ -21,7 +21,10 @@ export const AccountContext = createContext<{
   trialDays: 0,
   totalCredits: 0,
   isSubscribed: false,
+  creditInfo: false,
   trialDateAt: '',
+  nextPage: null,
+  selectedPlan: null,
   setCredits: () => { },
   setTrialDays: () => { },
   setTotalCredits: () => { },
@@ -39,6 +42,9 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [trialDateAt, setTrialDateAt] = useState('')
   const [isLogin, setIsLogin] = useState(false)
+  const [creditInfo, setCreditInfo] = useState(false)
+  const [nextPage, setNextPage] = useState(null)
+  const [selectedPlan, setSelectedPlan] = useState(null)
 
   useEffect(() => {
     setIsLogin(isUserLogin())
@@ -59,12 +65,14 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
               credit_num,
               subscribe_end_time,
               subscription_plan_id,
-              subscription_status
+              subscription_status,
+              credit_info
             } = data.data
             setPlanId(subscription_plan_id)
             setTrialDays(calculateExpireDays(subscribe_end_time))
             setIsSubscribed(subscription_status === 'active' ? true : false)
             setCredits(credit_num || 0)
+            setCreditInfo(credit_info)
             setTrialDateAt(new Date(subscribe_end_time * 1000).toLocaleDateString())
           } else {
             setIsSubscribed(false)
@@ -91,10 +99,10 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
       isSubscribed, setIsSubscribed,
       planId, updateAccount,
       trialDateAt, setTrialDateAt,
-      isLogin,
+      isLogin, creditInfo, setCreditInfo,nextPage,
+      setNextPage, selectedPlan, setSelectedPlan
     }}>
       {children}
     </AccountContext.Provider>
   )
 }
-
