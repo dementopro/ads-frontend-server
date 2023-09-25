@@ -1,4 +1,5 @@
 // Import the necessary dependencies
+'use client'
 import Image from 'next/image'
 import React from 'react'
 
