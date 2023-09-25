@@ -1,4 +1,5 @@
 // Import React, styles, and data.
+'use client'
 import React, { useState } from 'react';
 import { jobs } from '@/data/jobs';
 import { IJob } from '@/types/jobs';

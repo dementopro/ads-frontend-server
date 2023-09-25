@@ -1,4 +1,4 @@
-// Import necessary components and dependencies
+'use client'
 import CropImage from '@/app/generate/imageToImage/CropImage'; // Component for cropping an image
 import GeneResult from '@/app/generate/imageToImage/GeneResult'; // Component to display generated images
 import MaskImage from '@/app/generate/imageToImage/MaskImage'; // Component to mask an image

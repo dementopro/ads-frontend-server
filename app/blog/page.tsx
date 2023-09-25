@@ -9,7 +9,6 @@ import BlogList from '@/app/blog/BlogList';
 export const metadata = {
   title: 'Blog - AdsGency AI',
 };
-
 // Define the BlogPage component.
 const BlogPage = () => {
   return (

@@ -61,7 +61,7 @@ const PaymentForm = () => {
           messageApi.success(data.message || 'Add credit successfully');
           setTimeout(() => {
             setCreditInfo(true)
-            if(nextPage){
+            if(nextPage && nextPage.length){
               router.push(nextPage)
             }
             else{

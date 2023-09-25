@@ -1,4 +1,5 @@
 // Import necessary modules and components.
+'use client'
 import { IBlog } from '@/types/blog';
 import React from 'react';
 import { Blogs } from '@/data/blogs';

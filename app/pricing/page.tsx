@@ -82,7 +82,7 @@ const PricingPage = () => {
   const [payResultMessage, setPayResultMessage] = useState('')
 
   useEffect(() => {
-    if(selectedPlan && creditInfo){
+    if(selectedPlan && selectedPlan!==-1 && creditInfo){
       setBuyPlanId(selectedPlan)
       setConfirmVisible(true)
     }
@@ -108,8 +108,8 @@ const PricingPage = () => {
           setPayResultVisible(true)
           setConfirmVisible(false)
           updateAccount()
-          setSelectedPlan(null)
-          setNextPage(null)
+          setSelectedPlan(-1)
+          setNextPage("")
         } else {
           messageApi.error(data.message || 'Something went wrong')
         }

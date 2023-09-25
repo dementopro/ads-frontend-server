@@ -1,3 +1,4 @@
+'use client'
 // Import necessary components and dependencies
 import Sidebar from '@/app/generate/imageToImage/Sidebar'; // Sidebar component
 import UploadImage from '@/app/generate/imageToImage/UploadImage'; // Component for image uploading and generation

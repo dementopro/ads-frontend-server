@@ -1,3 +1,4 @@
+'use client'
 import { IGeneImageOption, ImageSegmentation, NewImage, PretrainItem } from "@/types/generate";
 import { createContext, useEffect, useState } from "react";
 
@@ -272,4 +273,3 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     </GeneImageContext.Provider>
   )
 }
-

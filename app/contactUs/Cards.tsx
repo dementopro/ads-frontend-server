@@ -1,3 +1,4 @@
+'use client'
 // Import necessary dependencies.
 import { Icon } from '@iconify/react';
 

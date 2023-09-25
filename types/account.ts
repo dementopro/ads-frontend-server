@@ -20,6 +20,7 @@ export interface SubscriptionInfo {
   old_credit_num: number;
   downgrade_subscription: string;
   sub_expired: 0 | 1
+  credit_info:boolean
 }
 
 export interface SubscriptionResp {

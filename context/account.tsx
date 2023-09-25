@@ -8,6 +8,12 @@ export const AccountContext = createContext<{
   totalCredits: number;
   isSubscribed: boolean;
   trialDateAt: string;
+  nextPage: string;
+  creditInfo:boolean;
+  setNextPage:(nextPage:string) => void;
+  setSelectedPlan:(selectedPlan:number) => void;
+  selectedPlan:number;
+  setCreditInfo:(creditInfo:boolean) => void;
   setCredits: (credits: number) => void;
   setTrialDays: (trialDays: number) => void;
   setTotalCredits: (totalCredits: number) => void;
@@ -23,13 +29,16 @@ export const AccountContext = createContext<{
   isSubscribed: false,
   creditInfo: false,
   trialDateAt: '',
-  nextPage: null,
-  selectedPlan: null,
+  nextPage: "",
+  selectedPlan: -1,
   setCredits: () => { },
   setTrialDays: () => { },
   setTotalCredits: () => { },
   setIsSubscribed: () => { },
   setTrialDateAt: () => { },
+  setSelectedPlan:() => {},
+  setCreditInfo:()=>{},
+  setNextPage:() => {},
   updateAccount: () => { },
 })
 
@@ -43,8 +52,8 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [trialDateAt, setTrialDateAt] = useState('')
   const [isLogin, setIsLogin] = useState(false)
   const [creditInfo, setCreditInfo] = useState(false)
-  const [nextPage, setNextPage] = useState(null)
-  const [selectedPlan, setSelectedPlan] = useState(null)
+  const [nextPage, setNextPage] = useState("")
+  const [selectedPlan, setSelectedPlan] = useState(-1)
 
   useEffect(() => {
     setIsLogin(isUserLogin())
