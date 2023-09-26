@@ -35,7 +35,7 @@ const ImageGenerate = () => {
         return
       }
       setIsGenerating(true)
-      const response = await fetch('/api/generate_image/text_to_img_v4', {
+      const response = await fetch('/api/generate/textToImage', {
         method: 'POST',
         body: JSON.stringify({
           mode: mode.value, prompt: prompt, type: type.value
@@ -43,8 +43,9 @@ const ImageGenerate = () => {
       })
       const data: any = await response.blob();
       if (response.ok) {
-        if (data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'Generate successfully')
+        console.log(response.status)
+        if (response.status === 200) {
+          messageApi.success(data.message || 'Generate succesfully')
           // console.log("Data:::",data)
           // const image = data.image_list[0]
           setTitle(prompt)
@@ -52,7 +53,7 @@ const ImageGenerate = () => {
           // setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
           setImage(URL.createObjectURL(data))
           router.refresh()
-        } else if (data.status === NOT_ENOUGH_CREDIT) {
+        } else if (response.status === NOT_ENOUGH_CREDIT) {
           setShowNotEnoughCredits(true)
         } else {
           console.log('data', data)

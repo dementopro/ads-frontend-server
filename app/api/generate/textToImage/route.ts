@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   console.log('formData', formData.toString());
 
   // Send a POST request to an external API to generate an image.
-  const res = await fetch(`${process.env.API_BASE_URL}/generate_image_api`, {
+  const res = await fetch(`${process.env.API_BASE_URL}/generate_image/text_to_img_v4`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded', // Set the content type to URL-encoded form data.
@@ -28,11 +28,5 @@ export async function POST(req: Request) {
     body: formData.toString(), // Convert the formData to a string and include it as the request body.
   });
 
-  // Parse the response data as JSON.
-  const data = await res.json();
-
-  // Return a Next.js JSON response with the same status code as the external API response.
-  return NextResponse.json(data, {
-    status: res.status,
-  });
+  return res
 }
