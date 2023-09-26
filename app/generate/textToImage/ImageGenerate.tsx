@@ -29,25 +29,28 @@ const ImageGenerate = () => {
 
   async function onGenerate() {
     try {
+      console.log("Prompt:::",prompt)
       if (!prompt) {
         messageApi.error('Please enter prompt')
         return
       }
       setIsGenerating(true)
-      const response = await fetch('/api/generate/textToImage', {
+      const response = await fetch('/api/generate_image/text_to_img_v4', {
         method: 'POST',
         body: JSON.stringify({
           mode: mode.value, prompt: prompt, type: type.value
         }),
       })
-      const data: IGeneImageResp = await response.json()
+      const data: any = await response.blob();
       if (response.ok) {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Generate successfully')
-          const image = data.image_list[0]
-          setTitle(image.prompt)
-          setDescription(image.description)
-          setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
+          // console.log("Data:::",data)
+          // const image = data.image_list[0]
+          setTitle(prompt)
+          setDescription('')
+          // setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
+          setImage(URL.createObjectURL(data))
           router.refresh()
         } else if (data.status === NOT_ENOUGH_CREDIT) {
           setShowNotEnoughCredits(true)
