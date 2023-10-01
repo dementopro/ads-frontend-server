@@ -10,10 +10,10 @@ export const footerLinks = [
         label: 'Features',
         href: '/features',
       },
-      {
-        label: 'Pricing',
-        href: '/public/pricing',
-      },
+      // {
+      //   label: 'Pricing',
+      //   href: '/public/pricing',
+      // },
       // {
       //   label: 'Watch Demo',
       //   href: '/',
