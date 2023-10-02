@@ -12,6 +12,7 @@ import NewLanding from '@/components/home/NewLanding'
 import OurSolutions from '@/components/home/OurSolutions'
 import Testimonials from '@/components/home/Testimonials'
 import DefaultLayout from '@/layout/default'
+import Features from '@/components/home/Features'
 
 // Metadata for the page
 export const metadata = {
@@ -37,6 +38,7 @@ export default function Home() {
       <SimplifyAds />
       <Sales />
       <Statistics />
+      <Features />
     </DefaultLayout>
   )
 }
