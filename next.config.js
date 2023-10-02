@@ -8,7 +8,6 @@ const nextConfig = {
       '54.203.149.67',
       '35.91.9.232',
       'adsgency.ai',
-      '127.0.0.1'
     ],
   },
   async rewrites() {
@@ -21,6 +20,7 @@ const nextConfig = {
   },
   experimental: {
     proxyTimeout: 10 * 60 * 1000,
+    appDir: true,
   }
 }
 

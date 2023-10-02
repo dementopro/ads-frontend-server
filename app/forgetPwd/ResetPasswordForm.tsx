@@ -1,4 +1,3 @@
-// Import necessary components and modules.
 'use client'
 import { SUCCESS_CODE } from '@/data/constant';
 import { resetPasswordValidate } from '@/lib/validate';
@@ -13,7 +12,6 @@ import styles from './resetPassword.module.css'
 
 const ResetPasswordForm = () => {
 
-  // Initialize formik for form handling
   const formik = useFormik<ResetPasswordForm>({
     initialValues: {
       email: '',
@@ -24,17 +22,10 @@ const ResetPasswordForm = () => {
     onSubmit,
     validate: resetPasswordValidate,
   });
-
-  // State for loading spinner during form submission
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Ant Design message API
+  const [isLoading, setIsLoading] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
+  const [isSending, setIsSending] = useState(false)
 
-  // State for sending verification code
-  const [isSending, setIsSending] = useState(false);
-
-  // Handle form submission
   async function onSubmit(values: ResetPasswordForm) {
     const errors = Object.values(formik.errors)
     if (errors.length > 0) {
@@ -67,7 +58,6 @@ const ResetPasswordForm = () => {
     }
   }
 
-  // Handle sending verification code
   async function onSendCode() {
     const { email } = formik.values
     if (!email) {
@@ -103,6 +93,7 @@ const ResetPasswordForm = () => {
       }, 30 * 1000);
     }
   }
+
 
   return (
     <>

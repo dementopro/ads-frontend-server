@@ -1,18 +1,15 @@
-// Import necessary modules and types.
-'use client';
-import { IBlog } from '@/types/blog';
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import React from 'react';
-import styles from '@/app/blog/blog.module.css';
-import Image from 'next/image';
+'use client'
+import { IBlog } from '@/types/blog'
+import { Icon } from '@iconify/react'
+import Link from 'next/link'
+import React from 'react'
+import styles from '@/app/blog/blog.module.css'
+import Image from 'next/image'
 
-// Define the Props type for the BlogDetail component.
 type Props = {
-  blog: IBlog;
-};
+  blog: IBlog
+}
 
-// Define the BlogDetail component.
 const BlogDetail = ({ blog }: Props) => {
   return (
     <div className='my-8 flex flex-col w-full mx-auto container selection:bg-primary-purple'>
@@ -29,18 +26,18 @@ const BlogDetail = ({ blog }: Props) => {
       <div className='text-base mx-auto max-w-[1000px] relative'>
         {blog.content.map((paragraph, index) => {
           if (paragraph.startsWith('img:')) {
-            const image = paragraph.replace('img:', '');
+            const image = paragraph.replace('img:', '')
             return (
               <div key={index} className='relative w-full sm:w-[600px] mx-auto my-4 sm:my-12'>
                 <Image src={image} alt={blog.title} width={600} height={600} className='sm:rounded-md max-w-full h-auto' />
               </div>
-            );
+            )
           } else {
             return (
               <p key={index} className='p-4 text-white/80'>
                 {paragraph}
               </p>
-            );
+            )
           }
         })}
         <p className='max-sm:mt-8 text-primary-gray/80 text-center'>
@@ -48,7 +45,7 @@ const BlogDetail = ({ blog }: Props) => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BlogDetail;
+export default BlogDetail

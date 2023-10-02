@@ -3,8 +3,8 @@ export const footerLinks = [
     title: 'Product',
     links: [
       {
-        label: 'Start a Trial',
-        href: '/register',
+        label: 'Request Demo',
+        href: '/requestDemo',
       },
       {
         label: 'Features',

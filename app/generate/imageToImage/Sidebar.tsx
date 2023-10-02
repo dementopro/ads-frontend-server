@@ -1,25 +1,24 @@
-// Import necessary dependencies and components
 'use client'
-import { Icon } from '@iconify/react';
-import plusIcon from '@iconify/icons-mdi/plus';
-import React, { useContext, useEffect, useState } from 'react';
-import { IGeneImageHistoryResp, NewImage } from '@/types/generate';
-import Image from 'next/image';
-import { GeneImageContext } from '@/context/generate';
-import { SUCCESS_CODE } from '@/data/constant';
-import { Spin } from 'antd';
+import { Icon } from '@iconify/react'
+import plusIcon from '@iconify/icons-mdi/plus'
+import React, { useContext, useEffect, useState } from 'react'
+import { IGeneImageHistoryResp, NewImage } from '@/types/generate'
+import Image from 'next/image'
+import { GeneImageContext } from '@/context/generate'
+import { SUCCESS_CODE } from '@/data/constant'
+import { Spin } from 'antd'
 
-// HistoryItem Component: Represents an item in the history or sample section
+
 const HistoryItem = ({
   img_path, filename, date, email, face_mode,
   background_mode, style, task_label, mode_type, file,
   index, isSample
 }: NewImage & { index: number }) => {
 
-  const { updateGeneratedImage, updatePreTrainedOption } = useContext(GeneImageContext);
+  const { updateGeneratedImage, updatePreTrainedOption } = useContext(GeneImageContext)
 
   function handleClick() {
-    // Load image and update context
+    // load image
     updateGeneratedImage([{
       _id: `${index + 1}`,
       img_path: isSample ? img_path : `data:image/png;base64, ${file}`,
@@ -32,9 +31,9 @@ const HistoryItem = ({
       task_label,
       mode_type,
       isSample,
-    }]);
+    }])
     updatePreTrainedOption({
-    });
+    })
   }
 
   return (
@@ -53,7 +52,6 @@ const HistoryItem = ({
   )
 }
 
-// Sample data for pre-defined samples
 const samples: NewImage[] = [
   {
     _id: '1',
@@ -81,56 +79,52 @@ const samples: NewImage[] = [
   },
 ]
 
-// Sidebar Component: Manages the sidebar with history and samples
+
 const Sidebar = () => {
 
-  const { resetCtx, reload } = useContext(GeneImageContext);
+  const { resetCtx, reload } = useContext(GeneImageContext)
 
-  const [history, setHistory] = useState<NewImage[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState<NewImage[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // Fetch history data when 'reload' state changes
-    getHistory();
-  }, [reload]);
+    getHistory()
+  }, [reload])
 
-  // Function to fetch user history
   async function getHistory() {
     try {
-      setLoading(true);
+      setLoading(true)
       const response = await fetch(`/fapi/generate_image/check_task?limit=10`, {
         method: 'GET',
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      })
       if (response.ok) {
-        const data: IGeneImageHistoryResp = await response.json();
+        const data: IGeneImageHistoryResp = await response.json()
         if (data.status === SUCCESS_CODE) {
-          // Convert image data to the required format and update state
           const imageList = data.image_data?.map(item => ({
             ...item,
+            // img_path: `${process.env.NEXT_PUBLIC_IMG_URL}/${item.img_path}/${item.filename}`,
             img_path: `data:image/png;base64, ${item.file}`,
-          })) || [];
-          setHistory(imageList);
+          })) || []
+          setHistory(imageList)
         }
       }
     } catch (error) {
-      console.log('error', error);
+      console.log('error', error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
-  // Function to reload the page and reset context
   function reloadPage() {
-    resetCtx();
+    resetCtx()
   }
 
   return (
     <div className='mt-[-32px] h-[calc(100vh-64px)] w-[282px] bg-[#1B1C21] flex flex-col py-8 px-4 border-l border-[#35363A] overflow-y-auto'>
-      {/* Button to create a new assignment */}
       <button
         onClick={reloadPage}
         className='w-[240px] flex items-center justify-center py-[10px] gap-1 rounded-lg border border-[#2f2a45] bg-[#232528] hover:opacity-80 hover:border-primary-purple'>
@@ -139,16 +133,13 @@ const Sidebar = () => {
       </button>
       <div className='my-4 text-primary-gray text-[15px]'>Sample</div>
       <div className='flex flex-col gap-4 mx-auto'>
-        {/* Render pre-defined sample items */}
         {samples.map((item, index) => (
           <HistoryItem key={item.filename} {...item} isSample index={index} />
         ))}
       </div>
       <div className='my-4 text-primary-gray text-[15px]'>History</div>
-      {/* Display loading spinner while fetching history */}
       <Spin spinning={loading}>
         <div className='flex flex-col gap-4 mx-auto'>
-          {/* Render user history items */}
           {history.map((item, index) => (
             <HistoryItem key={item._id} {...item} index={index} />
           ))}
@@ -162,4 +153,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar;
+export default Sidebar

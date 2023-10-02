@@ -1,3 +1,4 @@
+'use client'
 import { breadCrumbMap } from '@/data/constant'
 import { Icon } from '@iconify/react'
 import { usePathname } from 'next/navigation'

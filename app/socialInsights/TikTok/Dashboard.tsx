@@ -1,16 +1,14 @@
-// Import necessary dependencies and components
 import SocialMetrics from '@/app/socialInsights/TikTok/SocialMetrics'
 import Image from 'next/image'
 import React from 'react'
 
-// Define the Props type for the Button component
+
 type Props = {
   children: React.ReactNode
   isActivated?: boolean
   onClick?: () => void
 }
 
-// Define the Button component
 const Button = ({ children, isActivated, onClick }: Props) => {
   return (
     <button
@@ -21,11 +19,9 @@ const Button = ({ children, isActivated, onClick }: Props) => {
   )
 }
 
-// Define the TikTokDashboard component
 const TikTokDashboard = () => {
   return (
     <>
-      {/* Display a button for Social Metrics */}
       <div className='mt-6 flex items-center gap-4'>
         <Button
           isActivated={true}>
@@ -33,11 +29,9 @@ const TikTokDashboard = () => {
           <span className='truncate' title='Social Metrics'>Social Metrics</span>
         </Button>
       </div>
-      {/* Include the SocialMetrics component */}
       <SocialMetrics />
     </>
   )
 }
 
-// Export the TikTokDashboard component as the default export
 export default TikTokDashboard

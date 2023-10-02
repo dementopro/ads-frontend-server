@@ -1,4 +1,3 @@
-// Imports
 import Content from "@/app/public/pricing/Content"
 import ReactGATag from "@/components/ReactGATag"
 import DefaultLayout from "@/layout/default"

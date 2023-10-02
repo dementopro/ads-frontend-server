@@ -1,11 +1,10 @@
-// Import necessary dependencies and components
+'use client'
 import { SUCCESS_CODE } from '@/data/constant';
 import { Form, Input, message } from 'antd'
 import React, { useState } from 'react'
 import styles from './RequestDemo.module.css'
 import { useRouter } from 'next/navigation';
 
-// Define the shape of the form values
 interface ContactUsFrom {
   firstName: string;
   lastName: string;
@@ -14,7 +13,6 @@ interface ContactUsFrom {
   title: string;
 }
 
-// Define the RequestDemoForm component
 const RequestDemoForm = () => {
 
   const [form] = Form.useForm<ContactUsFrom>();
@@ -22,12 +20,10 @@ const RequestDemoForm = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
 
-  // Function to navigate to the Contact Us page
   function toContactUs() {
     router.push('/contactUs');
   }
 
-  // Function to handle form submission
   async function onFinish(values: ContactUsFrom) {
     try {
       setLoading(true);
@@ -76,7 +72,6 @@ const RequestDemoForm = () => {
           Request Demo
         </h3>
         <div className='flex-1 flex gap-2 justify-between max-sm:flex-col'>
-          {/* Input fields for first name and last name */}
           <Form.Item
             name="first_name"
             rules={[{ required: true, message: 'First name is required' }]}
@@ -105,7 +100,6 @@ const RequestDemoForm = () => {
           </Form.Item>
         </div>
         <div className='flex-1'>
-          {/* Input field for email */}
           <Form.Item
             name="email"
             label={
@@ -121,7 +115,6 @@ const RequestDemoForm = () => {
           </Form.Item>
         </div>
         <div className='flex-1 flex gap-2 justify-between max-sm:flex-col'>
-          {/* Input fields for job title and company name */}
           <Form.Item
             name="title"
             label={
@@ -149,13 +142,11 @@ const RequestDemoForm = () => {
             />
           </Form.Item>
         </div>
-        {/* Submit button */}
         <button type='submit' disabled={loading} className='mt-4 w-full justify-center h-[44px] flex items-center cursor-pointer hover:opacity-80 rounded bg-primary-gradient text-white text-base font-medium truncate'>
           {loading ? 'Sending...' : 'Request Demo'}
         </button>
         <div className='mt-10 flex flex-col justify-center items-center'>
           <p className='text-primary-gray text-base'>For technical issues and general inquires, please</p>
-          {/* Button to navigate to the Contact Us page */}
           <button type='button' onClick={toContactUs} className='text-primary-purple underline text-base'>
             contact us
           </button>
@@ -165,5 +156,4 @@ const RequestDemoForm = () => {
   )
 }
 
-// Export the RequestDemoForm component as the default export
 export default RequestDemoForm

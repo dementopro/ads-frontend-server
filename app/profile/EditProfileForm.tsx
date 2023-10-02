@@ -7,9 +7,10 @@ import { Icon } from '@iconify/react';
 import { SUCCESS_CODE } from '@/data/constant';
 
 const EditProfileForm = ({ username, onUpdated }: {
-  username?: string, // Optional username
-  onUpdated: () => void // Function to handle profile updates
+  username?: string,
+  onUpdated: () => void
 }) => {
+
   const [form] = Form.useForm<Partial<ProfileForm>>();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -18,7 +19,6 @@ const EditProfileForm = ({ username, onUpdated }: {
     setLoading(true);
     const { username } = values;
     try {
-      // Send a request to update the user's profile
       const response = await fetch('/fapi/update_user_profile_api', {
         method: 'POST',
         body: JSON.stringify({ username }),
@@ -27,19 +27,18 @@ const EditProfileForm = ({ username, onUpdated }: {
         }
       })
       if (response.ok) {
-        const data: IResponse = await response.json();
+        const data: IResponse = await response.json()
         if (data.status === SUCCESS_CODE) {
-          messageApi.success('Profile updated successfully');
-          // Call the onUpdated callback function to handle the update
-          onUpdated();
+          messageApi.success('Profile updated successfully')
+          onUpdated()
         } else {
-          messageApi.error(data.message || 'Something went wrong');
+          messageApi.error(data.message || 'Something went wrong')
         }
       }
     } catch (error) {
-      console.log('error', error);
+      console.log('error', error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -65,9 +64,7 @@ const EditProfileForm = ({ username, onUpdated }: {
             }
             rules={[{ required: true, message: 'Username is required' }]}
           >
-            <Input
-              type='text'
-              placeholder='Your username'
+            <Input type='text' placeholder='Your username'
               classNames={{
                 input: styles['input'],
               }}
@@ -82,9 +79,7 @@ const EditProfileForm = ({ username, onUpdated }: {
             }
             rules={[{ required: true, message: 'Email is required' }]}
           >
-            <Input
-              type='email'
-              placeholder='Your email address'
+            <Input type='email' placeholder='Your email address'
               classNames={{
                 input: styles['input'],
               }}
@@ -99,8 +94,7 @@ const EditProfileForm = ({ username, onUpdated }: {
             }
             rules={[{ required: true, message: 'Your job title is required' }]}
           >
-            <Input
-              placeholder='Your Job Title'
+            <Input placeholder='Your Job Title'
               classNames={{
                 input: styles['input'],
               }}
@@ -113,8 +107,7 @@ const EditProfileForm = ({ username, onUpdated }: {
             }
             rules={[{ required: true, message: 'Your company name is required' }]}
           >
-            <Input
-              placeholder='Your Company Name'
+            <Input placeholder='Your Company Name'
               classNames={{
                 input: styles['input'],
               }}
@@ -124,8 +117,7 @@ const EditProfileForm = ({ username, onUpdated }: {
         <button
           onClick={() => onFinish(form.getFieldsValue())}
           disabled={loading}
-          className='mt-4 w-full justify-center h-[44px] flex items-center cursor-pointer hover:opacity-80 rounded bg-primary-gradient text-white text-base font-medium truncate'
-        >
+          className='mt-4 w-full justify-center h-[44px] flex items-center cursor-pointer hover:opacity-80 rounded bg-primary-gradient text-white text-base font-medium truncate'>
           {loading && <Icon icon='eos-icons:loading' className="mr-2" width={20} height={20} />}
           {loading ? 'Saving...' : 'Change'}
         </button>

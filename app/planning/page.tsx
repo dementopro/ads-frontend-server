@@ -1,111 +1,108 @@
 'use client'
-import ListPlanning from '@/app/planning/ListPlanning';
-import MyPlanning from '@/app/planning/MyPlanning';
-import NotEnoughtCredits from '@/components/NotEnoughtCredits';
-import ReactGATag from '@/components/ReactGATag';
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import AdminLayout from '@/layout/admin';
-import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning';
-import { message, Spin } from 'antd';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import ListPlanning from '@/app/planning/ListPlanning'
+import MyPlanning from '@/app/planning/MyPlanning'
+import NotEnoughtCredits from '@/components/NotEnoughtCredits'
+import ReactGATag from '@/components/ReactGATag'
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
+import AdminLayout from '@/layout/admin'
+import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
+import { message, Spin } from 'antd'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
-// Function to fetch planning history from the server
+
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
 async function getHistory(id?: number) {
   const res = await fetch(`/api/planning/history?id=${id}`, {
     method: 'GET',
-  });
+  })
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Failed to fetch data')
   }
-  const data: IPlanningHistory = await res.json();
+  const data: IPlanningHistory = await res.json()
   if (data.status === SUCCESS_CODE) {
     if (id) {
-      return data.planning;
+      return data.planning
     }
-    return data.planning_list;
+    return data.planning_list
   } else {
-    console.log('data', data);
-    return [];
+    console.log('data', data)
+    return []
   }
 }
 
 const PlanningPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [prompt, setPrompt] = useState('');
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [plan, setPlan] = useState<IPlan | null>(null);
-  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null);
-  const [planId, setPlanId] = useState<number | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false);
+  const [prompt, setPrompt] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [plan, setPlan] = useState<IPlan | null>(null)
+  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null)
+  const [planId, setPlanId] = useState<number | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState(false)
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
 
-  // Function to handle input change for the planning prompt
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setPrompt(e.target.value);
+    setPrompt(e.target.value)
   }
 
-  // Fetch the planning history when the component mounts
   useEffect(() => {
-    updateList();
-  }, []);
+    updateList()
+  }, [])
 
-  // Fetch and load a plan when the planId changes
   useEffect(() => {
     if (planId) {
-      messageApi.loading('Loading plan...', 1);
+      messageApi.loading('Loading plan...', 1)
       getHistory(planId).then((res) => {
-        setPlan(res.plan);
-        messageApi.success('Load plan successfully');
-      });
+        setPlan(res.plan)
+        messageApi.success('Load plan successfully')
+      })
     }
-  }, [planId]);
+  }, [planId])
 
-  // Function to update the planning list
+
   async function updateList() {
-    setIsLoading(true);
+    setIsLoading(true)
     const res = await getHistory();
-    setPlanList(res || []);
-    setIsLoading(false);
+    setPlanList(res || [])
+    setIsLoading(false)
   }
 
-  // Function to generate a new plan
+
   async function onGenerate() {
     if (!prompt) {
-      messageApi.error('Please enter your prompt');
-      return;
+      messageApi.error('Please enter your prompt')
+      return
     }
     try {
-      setIsGenerating(true);
-      messageApi.loading('Generating plan...', 1);
+      setIsGenerating(true)
+      messageApi.loading('Generating plan...', 1)
       const res = await fetch(`/api/planning/generate?prompt=${prompt}`, {
         method: 'GET',
-      });
-      const data = await res.json();
+      })
+      const data = await res.json()
       if (res.ok) {
         if (data.status === SUCCESS_CODE) {
-          console.log('data', data);
-          messageApi.success(data.msg || 'Generate successfully');
-          setPlan(data.planning_obj[0].plan);
+          console.log('data', data)
+          messageApi.success(data.msg || 'Generate successfully')
+          setPlan(data.planning_obj[0].plan)
           if (!planList) {
-            setPlanList([data.planning_obj[0]]);
+            setPlanList([data.planning_obj[0]])
           } else {
-            setPlanList([data.planning_obj[0], ...planList.slice(0, 4)]);
+            setPlanList([data.planning_obj[0], ...planList.slice(0, 4)])
           }
         } else if (data.status === NOT_ENOUGH_CREDIT) {
-          setShowNotEnoughCredits(true);
+          setShowNotEnoughCredits(true)
         } else {
-          console.log('data', data);
-          messageApi.error(data.msg || 'Generate failed');
+          console.log('data', data)
+          messageApi.error(data.msg || 'Generate failed')
         }
       } else {
-        console.log('error: ', data);
+        console.log('error: ', data)
       }
     } catch (error) {
-      console.log('error: ', error);
+      console.log('error: ', error)
     } finally {
-      setIsGenerating(false);
+      setIsGenerating(false)
     }
   }
 
@@ -140,7 +137,7 @@ const PlanningPage = () => {
         <MyPlanning plan={plan} />
       </section>
     </AdminLayout>
-  );
+  )
 }
 
-export default PlanningPage;
+export default PlanningPage

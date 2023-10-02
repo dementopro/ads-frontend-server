@@ -9,11 +9,8 @@ type Props = {
 const Scale = ({ scale, setScale }: Props) => {
   return (
     <>
-      {/* Container for the scale control */}
       <div className='flex items-center gap-3 my-6'>
-        {/* Label for the scale control */}
         <div className='text-primary-gray w-[60px]'>Scale</div>
-        {/* Slider input for adjusting the scale */}
         <Slider
           min={-0}
           max={5}
@@ -29,7 +26,6 @@ const Scale = ({ scale, setScale }: Props) => {
           }}
           value={typeof scale === 'number' ? scale : 0}
         />
-        {/* Input field for manual scale input */}
         <InputNumber
           min={-0}
           max={5}

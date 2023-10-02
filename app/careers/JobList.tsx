@@ -1,16 +1,18 @@
-// Import React, styles, and data.
-
 'use client'
+import { jobs } from '@/data/jobs'
+import { IJob } from '@/types/jobs'
+import { Icon } from '@iconify/react'
+import { useState } from 'react'
 
-import React, { useState } from 'react';
-import { jobs } from '@/data/jobs';
-import { IJob } from '@/types/jobs';
-import { Icon } from '@iconify/react';
+type JobCardProps = {
+  job: IJob
+}
 
-// Define the JobCard component.
-const JobCard = ({ job }: { job: IJob }) => {
+const JobCard = ({ job }: JobCardProps) => {
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false)
+
+
 
   return (
     <div
@@ -60,7 +62,50 @@ const JobCard = ({ job }: { job: IJob }) => {
       {
         isExpanded && (
           <div className='w-full flex flex-col gap-3 transition-all duration-300'>
-            {/* Job details */}
+            <div className='flex flex-col gap-2'>
+              <h3 className='text-lg font-semibold'>
+                Position Overview:
+              </h3>
+              <p className='text-sm text-white/70'>
+                {job.overview}
+              </p>
+            </div>
+            <div className='flex flex-col gap-2'>
+              <h3 className='text-lg font-semibold'>
+                Responsibilities:
+              </h3>
+              <div className='text-sm text-white/70 flex flex-col gap-2'>
+                {
+                  job.responsibilities.map((responsibility, index) => (
+                    <div key={index} className='flex gap-2'>
+                      <span>{index + 1}. {responsibility}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div className='flex flex-col gap-2'>
+              <h3 className='text-lg font-semibold'>
+                Education and Experience:
+              </h3>
+              <p className='text-sm text-white/70'>
+                {job.requirements}
+              </p>
+            </div>
+            <div className='flex flex-col gap-2'>
+              <h3 className='text-lg font-semibold'>
+                Technical Skills:
+              </h3>
+              <div className='text-sm text-white/70 flex flex-col gap-2'>
+                {
+                  job.skills.map((skill, index) => (
+                    <div key={index} className='flex gap-2'>
+                      <span>{index + 1}. {skill}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         )
       }
@@ -68,7 +113,7 @@ const JobCard = ({ job }: { job: IJob }) => {
   )
 }
 
-// Define the JobList component.
+
 const JobList = () => {
   return (
     <>
@@ -86,6 +131,4 @@ const JobList = () => {
   )
 }
 
-
-export default JobList;
-
+export default JobList

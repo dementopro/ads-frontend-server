@@ -24,13 +24,11 @@ export default function Home() {
   return (
     // Wrap the content with the DefaultLayout component
     <DefaultLayout>
-      {/* Add Google Analytics tracking tag */}
       <ReactGATag fieldObject={{
         hitType: "pageview",
         page: "/",
         title: metadata.title
       }} />
-      {/* Render various components to build the home page */}
       <NewLanding />
       <Growth />
       <Testimonials />
