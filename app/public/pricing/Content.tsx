@@ -1,30 +1,34 @@
-'use client'
-import { PublicPricing } from '@/data/pricing'
-import React, { useContext, useState } from 'react'
+import { PublicPricing } from '@/data/pricing';
+import React, { useContext, useState } from 'react';
 import checkIcon from '@iconify/icons-mdi/check';
 import closeIcon from '@iconify/icons-mdi/close';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import { AccountContext } from '@/context/account';
 import { useRouter } from 'next/navigation';
-import styles from './pricing.module.css'
+import styles from './pricing.module.css';
 
 const Content = () => {
 
-  const { planId } = useContext(AccountContext)
-  const router = useRouter()
+  // Accessing the planId from the AccountContext and the router
+  const { planId } = useContext(AccountContext);
+  const router = useRouter();
 
-  const [plan, setPlan] = useState(PublicPricing[~~((planId - 1) / 3)].plan)
+  // State to keep track of the selected plan
+  const [plan, setPlan] = useState(PublicPricing[~~((planId - 1) / 3)].plan);
 
+  // Function to navigate to the requestDemo page
   function requestDemo() {
-    router.push('/requestDemo')
+    router.push('/requestDemo');
   }
 
   return (
     <>
+      {/* Pricing section */}
       <section className='max-lg:w-full overflow-auto flex flex-col justify-center items-center py-8 mx-auto'>
         <div className='flex items-center gap-4 max-sm:flex-col'>
           {
+            // Mapping through pricing plans and displaying plan options
             PublicPricing.map((price, index) => (
               <div
                 onClick={() => setPlan(price.plan)}
@@ -37,6 +41,7 @@ const Content = () => {
             ))
           }
         </div>
+        {/* Pricing details */}
         <div
           className='mt-6 p-5 w-full h-min border border-[#27282F] rounded-[12px]'
           style={{
@@ -47,6 +52,7 @@ const Content = () => {
             <div className='w-full flex max-sm:flex-col justify-evenly items-center gap-5 mb-5'>
               <div className='max-sm:hidden w-[160px]' />
               {
+                // Mapping through pricing plans and displaying plan details
                 PublicPricing
                   .find(item => item.plan === plan)!
                   .plans
@@ -64,6 +70,7 @@ const Content = () => {
               }
             </div>
             {
+              // Mapping through plan features and displaying them
               PublicPricing
                 .find(item => item.plan === plan)!
                 ?.features
@@ -90,6 +97,7 @@ const Content = () => {
                   </div>
                 ))
             }
+            {/* Placeholder */}
             <div
               className='w-full mt-4 hidden justify-evenly items-center text-sm rounded-lg'
             >
@@ -107,6 +115,7 @@ const Content = () => {
           </div>
         </div>
         <div className='flex items-center mt-8'>
+          {/* Button to request a demo */}
           <button
             onClick={requestDemo}
             className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-8 truncate`}>
@@ -118,4 +127,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default Content;

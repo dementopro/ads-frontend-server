@@ -1,6 +1,8 @@
-'use client'
-import { Icon } from '@iconify/react'
-import React, { useContext, useEffect } from 'react'
+'use client';
+
+// Import necessary modules and components
+import { Icon } from '@iconify/react';
+import React, { useContext, useEffect } from 'react';
 import bellCancel from '@iconify/icons-mdi/bell-cancel';
 import bellIcon from '@iconify/icons-mdi/bell';
 import { Modal, message } from 'antd';
@@ -10,12 +12,14 @@ import vipOne from '@iconify/icons-icon-park-solid/vip-one';
 import { SUCCESS_CODE } from '@/data/constant';
 import { Pricing } from '@/data/pricing';
 
+// Define the SubscriptionInfo component
 const SubscriptionInfo = () => {
+  // Initialize hooks and context
+  const [modal, modalContextHolder] = Modal.useModal();
+  const [messageApi, messageContextHolder] = message.useMessage();
+  const router = useRouter();
 
-  const [modal, modalContextHolder] = Modal.useModal()
-  const [messageApi, messageContextHolder] = message.useMessage()
-  const router = useRouter()
-
+  // Access account-related data from context
   const {
     credits,
     trialDays,
@@ -23,15 +27,17 @@ const SubscriptionInfo = () => {
     updateAccount,
     trialDateAt,
     planId
-  } = useContext(AccountContext)
+  } = useContext(AccountContext);
 
-  const currentPlan = Pricing[~~((planId - 1) / 3)].plans.find(p => p.planId === planId)
+  // Find the current plan based on planId
+  const currentPlan = Pricing[~~((planId - 1) / 3)].plans.find(p => p.planId === planId);
 
-
+  // useEffect to update the account
   useEffect(() => {
-    updateAccount()
-  }, [])
+    updateAccount();
+  }, []);
 
+  // Function to handle cancellation
   function onCancel() {
     modal.confirm({
       title: 'Are you sure you want to unsubscribe?',
@@ -48,37 +54,40 @@ const SubscriptionInfo = () => {
       maskClosable: true,
       centered: true,
       async onOk() {
-        await cancelSubscription()
+        await cancelSubscription();
       }
-    })
+    });
   }
 
+  // Function to cancel the subscription
   async function cancelSubscription() {
     try {
       const response = await fetch('/fapi/cancel_subscription_api', {
         method: 'GET',
-      })
+      });
       if (response.ok) {
-        const data: IResponse = await response.json()
+        const data: IResponse = await response.json();
         if (data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'You have successfully unsubscribed.')
+          messageApi.success(data.message || 'You have successfully unsubscribed.');
         } else {
-          messageApi.error(data.message || 'Something went wrong.')
+          messageApi.error(data.message || 'Something went wrong.');
         }
       } else {
-        messageApi.error('Something went wrong.')
+        messageApi.error('Something went wrong.');
       }
     } catch (error) {
-      console.log('error', error)
+      console.log('error', error);
     } finally {
-      updateAccount()
+      updateAccount();
     }
   }
 
+  // Function to navigate to pricing page
   function toPricing() {
-    router.push('/pricing')
+    router.push('/pricing');
   }
 
+  // Render the SubscriptionInfo component
   return (
     <>
       {modalContextHolder}
@@ -111,11 +120,6 @@ const SubscriptionInfo = () => {
           <span className='font-semibold'>Credits</span>
           <div><span className='font-semibold'>{credits}</span></div>
         </div>
-        {/* <div className='w-full h-[4px] bg-[#3A3A3A] rounded-lg'>
-          <div className={`h-full bg-white rounded-lg`} style={{
-            width: `${credits / totalCredits * 100}%`
-          }}></div>
-        </div> */}
         {
           isSubscribed ?
             <button onClick={onCancel} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition-all'>
@@ -130,7 +134,8 @@ const SubscriptionInfo = () => {
         }
       </div>
     </>
-  )
+  );
 }
 
-export default SubscriptionInfo
+// Export the SubscriptionInfo component
+export default SubscriptionInfo;

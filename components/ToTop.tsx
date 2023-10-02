@@ -1,8 +1,11 @@
 'use client'
+// Importing necessary modules and components
 import { Icon } from "@iconify/react"
 
+// Define the ToTop component
 const ToTop = () => {
 
+  // Function to scroll to the top of the page smoothly
   function toTop() {
     window.scrollTo({
       top: 0,
@@ -13,6 +16,7 @@ const ToTop = () => {
   return (
     <>
       {
+        // Render a button that triggers the toTop function when clicked
         <div className={`fixed bottom-8 right-8 z-50 max-sm:hidden`}>
           <button
             onClick={toTop} title='To Top'

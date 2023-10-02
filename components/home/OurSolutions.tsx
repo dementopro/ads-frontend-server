@@ -32,7 +32,6 @@ const OurSolutions = () => {
     return () => ctx.revert(); // <- Cleanup!
   }, []);
 
-
   return (
     <div className='sm:px-[74px] max-sm:items-center bg-[#050a2a] flex flex-col w-full sm:py-12 overflow-hidden' ref={main}>
       <h3 className='text-3xl sm:text-4xl text-center italic font-semibold uppercase'>Our solutions</h3>
@@ -52,8 +51,7 @@ const OurSolutions = () => {
             </div>
             <p className='text-[#D9D9D9] text-base text-right'>{item.description}</p>
           </div>
-        ))
-        }
+        ))}
       </div>
     </div>
   )

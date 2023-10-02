@@ -1,37 +1,37 @@
-'use client'
-import { Tab } from '@headlessui/react'
-import GenerateContent from '@/app/generate/productDescription/GenerateContent'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { IGeneTextForm } from '@/types/generate'
-import { capitalize } from '@/lib/format'
+// Import necessary components and modules
+import { Tab } from '@headlessui/react';
+import GenerateContent from '@/app/generate/productDescription/GenerateContent';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { IGeneTextForm } from '@/types/generate';
+import { capitalize } from '@/lib/format';
 
-
+// DescriptionContent Component: Renders a tabbed interface for different content modes
 const DescriptionContent = () => {
-
-  const router = useRouter()
+  const router = useRouter();
   const categories: Record<IGeneTextForm['mode'], JSX.Element> = {
+    // Define content categories for different modes
     description: <GenerateContent mode='description' />,
     email: <GenerateContent mode='email' />,
     Instagram: <GenerateContent mode='Instagram' />,
     LinkedIn: <GenerateContent mode='LinkedIn' />,
     Twitter: <GenerateContent mode='Twitter' />,
-  }
-  const modes = Object.keys(categories)
-  const params = useSearchParams()
+  };
+  const modes = Object.keys(categories);
+  const params = useSearchParams();
 
   function handleChange(index: number) {
-    // url 添加 mode 参数
+    // Update the 'mode' parameter in the URL based on the selected tab
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
     searchParams.set('mode', modes[index]);
     url.search = searchParams.toString();
-    router.replace(url.toString())
+    router.replace(url.toString()); // Replace the current URL with the updated URL
   }
 
   function getIndex() {
-    const mode = params.get('mode')
-    const index = modes.findIndex((el) => el === mode)
-    return index === -1 ? 0 : index
+    const mode = params.get('mode');
+    const index = modes.findIndex((el) => el === mode);
+    return index === -1 ? 0 : index;
   }
 
   return (
@@ -64,7 +64,7 @@ const DescriptionContent = () => {
         </Tab.Group>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DescriptionContent
+export default DescriptionContent;

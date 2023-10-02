@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import { DateRangeBtns } from '@/app/socialInsights/FilterBtns'
 import { SocialInsightsContext } from '@/context/socialInsights'
 import { SUCCESS_CODE } from '@/data/constant'
@@ -9,6 +10,7 @@ import TheResponsivePie from '@/components/d3/TheResponsivePie'
 import { getCountryISO3 } from '@/utils'
 import { MayHaveLabel } from '@nivo/pie'
 
+// Define a component for individual dashboard cards
 type DashCardProps = {
   title: string
   value: number
@@ -29,14 +31,16 @@ const DashCard = ({ title, value }: DashCardProps) => {
   )
 }
 
+// Define a mapping of date range options to their respective day counts
 const dateMap: Record<DateRange, number> = {
   last_day: 1,
   last_week: 7,
   last_month: 30,
 }
 
+// Main component for follower profile
 const FollowerProfile = () => {
-
+  // Define states to manage data fetching, loading, and retrieved data
   const [followersNum, setFollowersNum] = useState(199780)
   const [loading, setLoading] = useState(false);
   const { dateRange } = useContext(SocialInsightsContext)
@@ -48,10 +52,12 @@ const FollowerProfile = () => {
     value: number
   }[] | null>(null)
 
+  // Fetch data when the date range changes
   useEffect(() => {
     fetchData()
   }, [dateRange]);
 
+  // Function to fetch follower data
   async function fetchData() {
     try {
       setLoading(true);
@@ -100,24 +106,20 @@ const FollowerProfile = () => {
     }
   }
 
-
+  // Render the follower profile section
   return (
     <>
       {contextHolder}
       <section className='mt-8 p-7 bg-[#1B1C21] border border-[#27282F] rounded-xl'>
         <h2 className='text-lg'>
-          {/* <span className='font-semibold'>{followersNum.toLocaleString()}</span> */}
           Followers profile
         </h2>
         <DateRangeBtns />
-        {/* <div className='mt-4 flex flex-wrap items-center gap-[18px]'>
-          <DashCard title='Unfollowers' value={123} />
-          <DashCard title='New followers' value={9999} />
-        </div> */}
         <Spin spinning={loading}>
+          {/* Rendering charts */}
           <div className='w-full mx-auto mt-6 rounded-lg flex flex-col gap-4'>
             <div className='grid grid-flow-row grid-cols-1 gap-4'>
-              <ChartCard title='Followers by courty' isEmpty={!countryData?.length}>
+              <ChartCard title='Followers by country' isEmpty={!countryData?.length}>
                 {countryData && <Choropleth data={countryData} />}
               </ChartCard>
             </div>
@@ -140,6 +142,7 @@ const FollowerProfile = () => {
   )
 }
 
+// Chart card component to display a chart with title
 const ChartCard = ({ title, children, isEmpty }: { title: string, children: React.ReactNode, isEmpty?: boolean }) => {
   return (
     <div className='flex flex-col p-4 bg-[#27282F] rounded-lg'>

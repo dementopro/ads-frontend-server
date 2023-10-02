@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import { SUCCESS_CODE } from '@/data/constant'
 import { onLogout } from '@/lib/auth'
 import chevronDown from '@iconify/icons-mdi/chevron-down'
@@ -6,12 +7,14 @@ import { Dropdown, MenuProps, message } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-
+// Define the DropDown component
 const DropDown = () => {
-
+  // Access the router for navigation
   const router = useRouter()
+  // Use the message API from Ant Design for displaying messages
   const [messageApi, contextHolder] = message.useMessage()
 
+  // Define menu items for the dropdown
   const items: MenuProps['items'] = [
     {
       key: 'profile',
@@ -42,26 +45,32 @@ const DropDown = () => {
     },
   ]
 
+  // Function to navigate to the user profile page
   function toProfilePage() {
     router.push('/profile')
   }
 
+  // Async function to handle user logout
   async function handleLogout() {
     try {
+      // Display a loading message
       messageApi.loading('Logout...')
       const response = await fetch(`/api/auth/logout`)
       if (response.ok) {
         const data: IResponse = await response.json()
         if (data.status === SUCCESS_CODE) {
+          // Display a success message, perform logout, and redirect to the login page
           messageApi.success('Logout success')
           onLogout()
           setTimeout(() => {
             router.push('/login')
           }, 1000)
         } else {
+          // Display an error message if logout fails
           messageApi.error('Logout failed')
         }
       } else {
+        // Display an error message if logout fails
         messageApi.error('Logout failed')
       }
     } catch (error) {
@@ -72,7 +81,9 @@ const DropDown = () => {
   return (
     <>
       {contextHolder}
+      {/* Create a dropdown menu with specified items */}
       <Dropdown menu={{ items }} arrow>
+        {/* Render the dropdown trigger */}
         <a className='h-[46px] flex items-center justify-center gap-4 cursor-pointer' onClick={(e) => e.preventDefault()}>
           <Image src={'/images/admin/avatar.svg'} width={30} height={30} alt="avatar" className="rounded-full inline-block" />
           <Icon icon={chevronDown} inline className='text-primary-gray' />
@@ -82,4 +93,5 @@ const DropDown = () => {
   )
 }
 
+// Export the DropDown component
 export default DropDown

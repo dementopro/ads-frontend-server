@@ -1,4 +1,5 @@
 // Import necessary modules and components.
+
 'use client'
 import { IBlog } from '@/types/blog';
 import React from 'react';
@@ -82,3 +83,4 @@ const BlogList = () => {
 };
 
 export default BlogList;
+

@@ -1,4 +1,3 @@
-'use client'
 import { breadCrumbMap } from '@/data/constant'
 import { Icon } from '@iconify/react'
 import { usePathname } from 'next/navigation'
@@ -7,17 +6,22 @@ import chevronRight from '@iconify/icons-mdi/chevron-right'
 import Link from 'next/link'
 
 const Breadcrumb = () => {
+  // Get the current pathname using the `usePathname` hook from Next.js
+  const pathname = usePathname();
 
-  const pathname = usePathname()
   return (
     <div className='flex items-center text-primary-gray gap-6'>
+      {/* Link to the home page */}
       <Link href={'/home'} className='text-white hover:opacity-80'>
         Home
       </Link>
+      {/* Generate breadcrumb items based on the current pathname */}
       {
         breadCrumbMap[pathname]?.map((item) => (
           <div key={item} className='flex items-center gap-6'>
+            {/* Chevron icon */}
             <Icon icon={chevronRight} />
+            {/* Breadcrumb item text */}
             <span>{item}</span>
           </div>
         ))

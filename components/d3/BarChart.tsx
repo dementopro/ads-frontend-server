@@ -1,12 +1,12 @@
-import AxisBottom from '@/components/d3/BarChart/AxisBottom'
-import AxisLeft from '@/components/d3/BarChart/AxisLeft'
-import Bars from '@/components/d3/BarChart/Bars'
-import { BarData } from '@/types/socialInsights'
-import { scaleBand, scaleLinear } from 'd3'
-import React, { useEffect, useRef, useState } from 'react'
-import styles from '@/components/d3/BarChart/BarChart.module.css'
+import AxisBottom from '@/components/d3/BarChart/AxisBottom';
+import AxisLeft from '@/components/d3/BarChart/AxisLeft';
+import Bars from '@/components/d3/BarChart/Bars';
+import { BarData } from '@/types/socialInsights';
+import { scaleBand, scaleLinear } from 'd3';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from '@/components/d3/BarChart/BarChart.module.css';
 
-
+// Define the tooltip type
 type Tooltip = {
   x: number;
   y: number;
@@ -14,16 +14,16 @@ type Tooltip = {
 }
 
 type BarChartProps = {
-  data: BarData[]
+  data: BarData[];
 }
 
 const BarChart = ({ data }: BarChartProps) => {
-
   const svgRef = useRef<SVGSVGElement>(null);
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const margin = { top: 20, right: 20, bottom: 20, left: 60 };
 
+  // Function to get the size of the SVG container
   const getSvgContainerSize = () => {
     if (!svgRef.current) return;
 
@@ -35,12 +35,11 @@ const BarChart = ({ data }: BarChartProps) => {
   };
 
   useEffect(() => {
-    getSvgContainerSize()
+    getSvgContainerSize();
     window.addEventListener("resize", getSvgContainerSize);
-    // cleanup event listener
+    // Cleanup event listener
     return () => window.removeEventListener("resize", getSvgContainerSize);
-  }, [])
-
+  }, []);
 
   const scaleX = scaleBand()
     .domain(data.map(({ label }) => label))
@@ -62,12 +61,17 @@ const BarChart = ({ data }: BarChartProps) => {
         height={height + margin.top + margin.bottom}
       >
         <g transform={`translate(${margin.left}, ${margin.top})`}>
+          {/* Render X-axis */}
           <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
+          {/* Render Y-axis */}
           <AxisLeft scale={scaleY} />
+          {/* Render bars */}
           <Bars
             data={data}
             height={height}
-            scaleX={scaleX} scaleY={scaleY}
+            scaleX={scaleX}
+            scaleY={scaleY}
+            // Handle mouse enter event for tooltips
             mouseEnter={(event, index: number) => {
               setTooltip({
                 x: event.clientX,
@@ -75,20 +79,20 @@ const BarChart = ({ data }: BarChartProps) => {
                 index
               });
             }}
+            // Handle mouse leave event to hide tooltips
             mouseLeave={() => setTooltip(null)}
           />
         </g>
       </svg>
-      {
-        !!tooltip ?
-          <div className={styles['tooltip']} style={{ top: tooltip.y, left: tooltip.x }}>
-            <span className="tooltip__title">{data[tooltip.index].label}</span>
-            <span>{data[tooltip.index].value}</span>
-          </div>
-          : null
-      }
+      {/* Render tooltips when hovering over bars */}
+      {tooltip ? (
+        <div className={styles['tooltip']} style={{ top: tooltip.y, left: tooltip.x }}>
+          <span className="tooltip__title">{data[tooltip.index].label}</span>
+          <span>{data[tooltip.index].value}</span>
+        </div>
+      ) : null}
     </>
-  )
+  );
 }
 
-export default BarChart
+export default BarChart;

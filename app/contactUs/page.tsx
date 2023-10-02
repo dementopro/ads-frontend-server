@@ -32,4 +32,6 @@ const ContactUsPage = () => {
 };
 
 // Export the ContactUsPage component as the default export
+
 export default ContactUsPage;
+

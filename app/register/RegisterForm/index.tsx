@@ -15,8 +15,12 @@ import ReactFlagsSelect from "react-flags-select";
 import CCInput from '@/components/CCInput'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
 
+// Define the RegisterForm component
 const RegisterForm = () => {
+  // Initialize React Router's router hook
   const router = useRouter()
+
+  // Set up a useFormik form for user registration
   const formikForRegister = useFormik<RegisterForm>({
     initialValues: {
       email: '',
@@ -28,12 +32,22 @@ const RegisterForm = () => {
     onSubmit: onSubmitRegister,
     validate: registerValidate,
   });
+
+  // Set up message and loading state
   const [messageApi, contextHolder] = message.useMessage();
   const [isSending, setIsSending] = useState(false)
   const [isSignUpLoading, setIsSignUpLoading] = useState(false)
+
+  // Define the step state for multi-step form
   const [step, setStep] = useState<1 | 2>(1)
+
+  // Initialize card number state
   const [cardNumber, setCardNumber] = useState('');
+
+  // Initialize state for agreeing to the privacy policy
   const [isAgree, setIsAgree] = useState(false);
+
+  // Set up a useFormik form for payment details
   const formikForPayment = useFormik<PaymentForm>({
     initialValues: {
       card_number: '',
@@ -46,38 +60,41 @@ const RegisterForm = () => {
     validate: paymentValidate,
   })
 
-
+  // Function to handle user registration submission
   async function onSubmitRegister(values: RegisterForm) {
+    // Validate form fields
     const errors = Object.values(formikForRegister.errors)
     if (errors.length > 0) {
       messageApi.error(errors[0])
       return
     }
+    // Check if the user has agreed to the privacy policy
     if (!isAgree) {
-      messageApi.error('You need to agree with privacy policy first')
+      messageApi.error('You need to agree with the privacy policy first')
       return
     }
-    // setStep(2)
+    // Call the onRegister function to complete registration
     onRegister()
   }
 
+  // Function to handle payment details submission
   async function onSubmitPayment(values: PaymentForm) {
+    // Validate form fields
     const errors = Object.values(formikForPayment.errors)
     if (errors.length > 0) {
       messageApi.error(errors[0])
       return
     }
+    // Call the onRegister function to complete registration
     onRegister()
   }
 
+  // Function to complete user registration
   async function onRegister() {
     try {
       setIsSignUpLoading(true)
       const form = {
         ...formikForRegister.values,
-        // ...formikForPayment.values,
-        // year: +formikForPayment.values.expiration.slice(0, 4),
-        // month: +formikForPayment.values.expiration.slice(5, 7),
       }
       const response = await fetch('/fapi/signup_api', {
         method: 'POST',
@@ -91,7 +108,7 @@ const RegisterForm = () => {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Register success');
           setTimeout(() => {
-            // redirect to login
+            // Redirect to login page after successful registration
             router.push('/login')
           }, 500);
         } else {
@@ -107,20 +124,22 @@ const RegisterForm = () => {
     }
   }
 
+  // Function to handle changes in the CVC input
   const handleChangeCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    // 检查输入是否为整数
+    // Check if input is an integer
     if (!Number.isInteger(Number(value))) {
       return;
     }
-    // 检查输入的长度是否为4
+    // Check input length
     if (value.length > 4) {
       return;
     }
-    // 更新输入的值
+    // Update the formik value for CVC
     formikForPayment.setFieldValue('cvc', value);
   };
 
+  // Function to send a verification code via email
   async function onSendCode() {
     try {
       const { email } = formikForRegister.values
@@ -150,13 +169,13 @@ const RegisterForm = () => {
     } catch (error) {
       console.log('error: ', error)
     } finally {
-      // TODO: fix keep disabled when refresh page
       setTimeout(() => {
         setIsSending(false)
       }, 30 * 1000);
     }
   }
 
+  // Function to show the Privacy Policy in a modal
   function showPrivacyPolicy() {
     Modal.info({
       title: '',
@@ -174,6 +193,7 @@ const RegisterForm = () => {
     });
   }
 
+  // Function to handle expiration date change
   function onChangeExpiration(date: any, dateString: string) {
     formikForPayment.setFieldValue('expiration', dateString);
   }
@@ -184,18 +204,22 @@ const RegisterForm = () => {
       {
         step === 1 &&
         <form className='flex flex-col gap-4 max-sm:w-full max-sm:px-4 mt-8' onSubmit={formikForRegister.handleSubmit}>
+          {/* Username */}
           <div className='flex flex-col gap-1'>
             <label className='text-primary-gray text-sm' htmlFor="username">Your Name</label>
             <input type="text" placeholder='Enter your name' id="username" className={`${styles['register-input']} ${formikForRegister.errors.username && formikForRegister.touched.username ? '!border-rose-600' : ''}`} {...formikForRegister.getFieldProps('username')} />
           </div>
+          {/* Email */}
           <div className='flex flex-col gap-1'>
             <label className='text-primary-gray text-sm' htmlFor="email">Email Address</label>
             <input type="email" placeholder='Enter your email' id="email" className={`${styles['register-input']} ${formikForRegister.errors.email && formikForRegister.touched.email ? '!border-rose-600' : ''}`} {...formikForRegister.getFieldProps('email')} />
           </div>
+          {/* Password */}
           <div className='flex flex-col gap-1'>
             <label className='text-primary-gray text-sm' htmlFor="password">Password</label>
             <input type="password" placeholder='Enter your password' id="password" className={`${styles['register-input']} ${formikForRegister.errors.password && formikForRegister.touched.password ? '!border-rose-600' : ''}`} {...formikForRegister.getFieldProps('password')} />
           </div>
+          {/* Verification Code */}
           <div className='flex flex-col gap-1'>
             <label className='text-primary-gray text-sm' htmlFor="code">Verification Code</label>
             <div className='flex items-center relative'>
@@ -208,10 +232,12 @@ const RegisterForm = () => {
               }
             </div>
           </div>
+          {/* Referral Code */}
           <div className='flex flex-col gap-1'>
             <label className='text-primary-gray text-sm' htmlFor="rcode">Referral Code</label>
             <input type="text" placeholder='Optional' id="rcode" className={styles['register-input']} {...formikForRegister.getFieldProps('referral_code')} />
           </div>
+          {/* Privacy Policy Agreement */}
           <div className='flex items-center'>
             <input type="checkbox" id="agree" checked={isAgree} onChange={() => setIsAgree(!isAgree)} />
             <div className='flex items-center text-sm'>
@@ -225,6 +251,7 @@ const RegisterForm = () => {
               </button>
             </div>
           </div>
+          {/* Register Button */}
           <button
             onClick={() => onSubmitRegister(formikForRegister.values)}
             disabled={isSignUpLoading} className={styles['register-btn']}>
@@ -236,11 +263,12 @@ const RegisterForm = () => {
       {
         step === 2 &&
         <>
-          {/* <h1 className='text-xl text-center text-white mt-6'>Payment Details</h1> */}
+          {/* Payment Details */}
           <p className='text-sm sm:text-[18px] max-w-[300px] my-4 text-center text-white'>
             {`We won't charge you, this is for verification purpose only`}
           </p>
           <form className='flex flex-col gap-4 max-sm:w-full max-sm:px-4' onSubmit={formikForPayment.handleSubmit}>
+            {/* Card Holder Name */}
             <div className='flex flex-col gap-1'>
               <label className='text-primary-gray text-sm' htmlFor="card_holder">
                 Card Holder Full Name
@@ -252,7 +280,7 @@ const RegisterForm = () => {
                 className={`${styles['register-input']} ${formikForPayment.errors.card_holder && formikForPayment.touched.card_holder ? '!border-rose-600' : ''}`} {...formikForPayment.getFieldProps('card_holder')}
               />
             </div>
-            {/* card number */}
+            {/* Card Number */}
             <div className='flex flex-col gap-1'>
               <label className='text-primary-gray text-sm' htmlFor="card_number">
                 Card number
@@ -262,6 +290,7 @@ const RegisterForm = () => {
                 formikForPayment.setFieldValue('card_number', value.replaceAll(' ', ''));
               }} isError={!!formikForPayment.errors.card_number} />
             </div>
+            {/* Expiration Date and CVC */}
             <div className='flex gap-1 justify-between'>
               <div className='flex flex-col gap-1 max-sm:w-1/2'>
                 <label className='text-primary-gray text-sm' htmlFor="expiration">
@@ -287,7 +316,7 @@ const RegisterForm = () => {
                 />
               </div>
             </div>
-            {/* country */}
+            {/* Country */}
             <div className='flex flex-col gap-1'>
               <label className='text-primary-gray text-sm' htmlFor="country">Country</label>
               <ReactFlagsSelect
@@ -300,6 +329,7 @@ const RegisterForm = () => {
                 countries={["US"]}
               />
             </div>
+            {/* Back and Complete Buttons */}
             <div className='flex items-center justify-between gap-2'>
               <button
                 onClick={() => setStep(1)}
@@ -319,6 +349,7 @@ const RegisterForm = () => {
           </form>
         </>
       }
+      {/* Sign In Link */}
       <div className='mt-8 flex flex-col items-center justify-center gap-4 text-primary-gray text-sm'>
         <p>
           Already have an account? <Link className='text-[#7366ff] font-semibold' href={'/login'} >Sign in 💜</Link>
@@ -328,4 +359,5 @@ const RegisterForm = () => {
   )
 }
 
+// Export the RegisterForm component as the default export
 export default RegisterForm

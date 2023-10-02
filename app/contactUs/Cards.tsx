@@ -1,4 +1,6 @@
+
 'use client'
+
 // Import necessary dependencies.
 import { Icon } from '@iconify/react';
 
@@ -49,4 +51,6 @@ const Cards = () => {
   )
 }
 
+
 export default Cards;
+

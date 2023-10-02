@@ -1,33 +1,34 @@
-import { ResponsiveLine, Serie } from '@nivo/line'
+import { ResponsiveLine, Serie } from '@nivo/line';
 
 type TheResponsiveLineProps = {
-  data: Serie[]
-}
+  data: Serie[];
+};
 
 const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
   return (
     <>
+      {/* The ResponsiveLine component from the Nivo library */}
       <ResponsiveLine
         theme={{
           textColor: '#eee',
           tooltip: {
             container: {
               background: '#222222',
-              color: '#ffffff'
-            }
+              color: '#ffffff',
+            },
           },
           grid: {
             line: {
               stroke: 'none',
-            }
+            },
           },
           axis: {
             ticks: {
               text: {
-                fill: '#aaa'
-              }
-            }
-          }
+                fill: '#aaa',
+              },
+            },
+          },
         }}
         data={data}
         colors={{ datum: 'color' }}
@@ -48,18 +49,19 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
           tickPadding: 16,
           tickRotation: -45,
           tickValues: data[0]?.data?.map((d, index) => {
+            // Customize tick values based on data length
             if (data[0]?.data?.length <= 10) {
-              return d.x
+              return d.x;
             }
             if (index % 2 === 0) {
-              return d.x
+              return d.x;
             } else {
-              return ''
+              return '';
             }
           }),
           legend: '',
           legendOffset: 36,
-          legendPosition: 'end'
+          legendPosition: 'end',
         }}
         axisLeft={{
           tickSize: 5,
@@ -95,15 +97,15 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
                 on: 'hover',
                 style: {
                   itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
         ]}
       />
     </>
-  )
-}
+  );
+};
 
-export default TheResponsiveLine
+export default TheResponsiveLine;

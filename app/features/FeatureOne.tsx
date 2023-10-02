@@ -1,5 +1,7 @@
 // Import the necessary dependencies
+
 'use client'
+
 import Image from 'next/image'
 import React from 'react'
 
@@ -48,4 +50,6 @@ const FeatureOne = ({ isReverse, feature }: Props) => {
 }
 
 // Export the FeatureOne component as the default export
+
 export default FeatureOne
+

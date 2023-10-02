@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 'use client'
 import Breadcrumb from '@/components/Breadcrumb'
 import DropDown from '@/components/admin/header/DropDown'
@@ -6,21 +7,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-
+// Define the ContentHeader component
 const ContentHeader = () => {
-
+  // Access the 'isLogin' variable from the 'AccountContext'
   const { isLogin } = useContext(AccountContext)
 
   return (
     <>
       <div className='flex justify-between items-center px-8 h-[64px] bg-[#1B1C21] border-b border-b-[#3A3A3A]'>
         <div className='w-[260px]'>
+          {/* Create a link to the '/home' route with a logo */}
           <Link href={'/home'}>
             <Image src={'/images/sidebar/logo.svg'} width={132} height={28} alt='logo' />
           </Link>
         </div>
         <div className='flex justify-between items-center flex-1'>
+          {/* Render the Breadcrumb component */}
           <Breadcrumb />
+          {/* Render the DropDown component if the user is logged in */}
           {isLogin && <DropDown />}
         </div>
       </div>
@@ -28,4 +32,5 @@ const ContentHeader = () => {
   )
 }
 
+// Export the ContentHeader component
 export default ContentHeader

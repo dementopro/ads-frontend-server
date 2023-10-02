@@ -1,21 +1,22 @@
-'use client'
-import SubscriptionInfo from '@/components/admin/SubscriptionInfo'
-import Menu from '@/components/admin/sidebar/Menu'
-import { useRouter } from 'next/navigation'
+'use client';
+
+// Import necessary modules and components
+import SubscriptionInfo from '@/components/admin/SubscriptionInfo';
+import Menu from '@/components/admin/sidebar/Menu';
+import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import creditCardMarkerOutline from '@iconify/icons-mdi/credit-card-marker-outline';
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { AccountContext } from '@/context/account';
 
 const AdminSidebar = () => {
-
-  const router = useRouter()
+  const router = useRouter();
 
   function toPricing() {
-    router.push('/pricing')
+    router.push('/pricing');
   }
 
-  const { isLogin } = useContext(AccountContext)
+  const { isLogin } = useContext(AccountContext);
 
   return (
     <aside className='max-lg:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6'>
@@ -34,4 +35,4 @@ const AdminSidebar = () => {
   )
 }
 
-export default AdminSidebar
+export default AdminSidebar;

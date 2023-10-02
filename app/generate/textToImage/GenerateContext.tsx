@@ -1,45 +1,54 @@
 'use client'
-import React, { useState } from 'react'
+
+// Import necessary libraries and icons
+import React, { useState } from 'react';
 import twitterIcon from '@iconify/icons-mdi/twitter';
-import { Icon } from '@iconify/react'
+import { Icon } from '@iconify/react';
 import facebookIcon from '@iconify/icons-mdi/facebook';
 import pinterestIcon from '@iconify/icons-mdi/pinterest';
 import downloadIcon from '@iconify/icons-mdi/download';
 import scanHelper from '@iconify/icons-mdi/scan-helper';
 import contentCopy from '@iconify/icons-mdi/content-copy';
 import checkboxMultipleMarked from '@iconify/icons-mdi/checkbox-multiple-marked';
+
+// Import utility functions
 import { copyText, downloadImage } from '@/utils';
+
+// Import components from Ant Design
 import { Image, message } from 'antd';
 import { FacebookShareButton, PinterestShareButton, TwitterShareButton } from 'react-share';
 
+// Define the Props type
 type Props = {
-  title: string
-  description: string
-  image: string
-}
+  title: string;
+  description: string;
+  image: string;
+};
 
 const GenerateContext = ({ title, description, image }: Props) => {
-
+  // Initialize state variables
   const [messageApi, contextHolder] = message.useMessage();
   const [isCopyed, setIsCopyed] = useState({
     title: false,
     description: false,
-  })
+  });
   const [visible, setVisible] = useState(false);
 
+  // Function to handle copying text
   function onCopy(key: 'description' | 'title', ctx: string) {
-    const flag = copyText(ctx)
+    const flag = copyText(ctx);
     if (flag) {
-      setIsCopyed({ ...isCopyed, [key]: true })
+      setIsCopyed({ ...isCopyed, [key]: true });
       setTimeout(() => {
-        setIsCopyed({ ...isCopyed, [key]: false })
+        setIsCopyed({ ...isCopyed, [key]: false });
       }, 1000);
     }
   }
 
+  // Function to handle image download
   function onDownload() {
-    messageApi.loading('Downloading...')
-    downloadImage('/_next/image?url=' + image + '&w=1080&q=75', title)
+    messageApi.loading('Downloading...');
+    downloadImage('/_next/image?url=' + image + '&w=1080&q=75', title);
   }
 
   return (
@@ -50,6 +59,7 @@ const GenerateContext = ({ title, description, image }: Props) => {
           {title}
         </div>
         {
+          // Render copy icon or checkmark based on copy state
           !isCopyed.title ?
             <Icon onClick={() => onCopy('title', title)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
             :
@@ -61,6 +71,7 @@ const GenerateContext = ({ title, description, image }: Props) => {
           {description}
         </div>
         {
+          // Render copy icon or checkmark based on copy state
           !isCopyed.description ?
             <Icon onClick={() => onCopy('description', description)} className='hover:text-white cursor-pointer' icon={contentCopy} width={24} height={24} />
             :
@@ -109,7 +120,7 @@ const GenerateContext = ({ title, description, image }: Props) => {
         }}
       />
     </div>
-  )
+  );
 }
 
-export default GenerateContext
+export default GenerateContext;

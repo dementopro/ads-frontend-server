@@ -33,7 +33,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 
 const Footer = () => {
   return (
-    <footer className='px-6 sm:px-20 pt-10 bg-[#121534]'>
+    <footer className='px-6 sm:px-20 pt-10 bg-black'>
       <div className='flex flex-wrap gap-8 justify-between'>
         <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />

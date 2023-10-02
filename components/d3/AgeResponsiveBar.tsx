@@ -1,18 +1,17 @@
-import { ResponsiveBar } from '@nivo/bar'
-import { Serie } from '@nivo/line'
-import React from 'react'
+import { ResponsiveBar } from '@nivo/bar';
+import { Serie } from '@nivo/line';
+import React from 'react';
 
-
+// Define the props interface for TheResponsiveBar component
 type TheResponsiveBarProps = {
   data: Serie[] | {
-    // Date: string
-    // Spend: number
-    [key: string]: any
-  }[]
-  xLabel?: string
-  yLabel?: string
+    [key: string]: any; // Data can have dynamic keys
+  }[];
+  xLabel?: string; // Label for the X-axis
+  yLabel?: string; // Label for the Y-axis
 }
 
+// Define the TheResponsiveBar functional component
 const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
 
   return (
@@ -39,7 +38,7 @@ const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
             }
           },
         }}
-        data={data as Serie[]}
+        data={data as Serie[]} // Cast data to Serie[] type
         margin={{ top: 50, right: 0, bottom: 60, left: 50 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
@@ -63,12 +62,12 @@ const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
           tickRotation: 0,
           tickValues: data?.map((d, index) => {
             if (data?.length <= 10) {
-              return d[xLabel || 'Date']
+              return d[xLabel || 'Date'];
             }
             if (index % 2 === 0) {
-              return d[xLabel || 'Date']
+              return d[xLabel || 'Date'];
             } else {
-              return ''
+              return '';
             }
           }),
           legend: '',
@@ -125,4 +124,5 @@ const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
   )
 }
 
-export default TheResponsiveBar
+// Export the TheResponsiveBar component
+export default TheResponsiveBar;

@@ -1,3 +1,4 @@
+// Import necessary modules and types
 import { DataMetric, DateRange, Platform, PlatformType } from "@/types/socialInsights";
 import { createContext, useEffect, useState } from "react";
 import twitterIcon from '@iconify/icons-logos/twitter';
@@ -8,7 +9,7 @@ import pinterestIcon from '@iconify/icons-logos/pinterest';
 import instagramIcon from '@iconify/icons-skill-icons/instagram';
 import { checkFacebookIsConnected, checkPinterestIsConnected, checkTikTokIsConnected } from "@/lib/socialInsights";
 
-
+// Create a context for managing social insights-related data
 export const SocialInsightsContext = createContext<{
   platforms: Platform[]
   currentPlatform: PlatformType
@@ -51,8 +52,10 @@ export const SocialInsightsContext = createContext<{
   updateAllConnectStatus: () => { }
 })
 
+// Create a SocialInsightsProvider component
 export const SocialInsightsProvider = ({ children }: { children: React.ReactNode }) => {
 
+  // Define state variables to manage social insights data
   const [platforms, setPlatforms] = useState<Platform[]>([
     {
       name: 'tiktok',
@@ -88,7 +91,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
   const [isPinterestConnected, setIsPinterestConnected] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-
+  // Function to check the connection status for a given platform
   function checkConnectStatus(platformName: PlatformType) {
     switch (platformName) {
       case 'facebook':
@@ -102,15 +105,17 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     }
   }
 
-
+  // Update the date range when the top tab changes
   useEffect(() => {
     setDateRange('last_week')
   }, [topTab])
 
+  // Update connection status for all platforms when the component mounts
   useEffect(() => {
     updateAllConnectStatus()
   }, [])
 
+  // Function to update the connection status for all platforms
   async function updateAllConnectStatus() {
     setIsLoading(true)
     Promise.all([
@@ -143,4 +148,3 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     </SocialInsightsContext.Provider>
   )
 }
-

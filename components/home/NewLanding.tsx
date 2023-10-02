@@ -5,67 +5,181 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import IndustryLeader from '@/components/home/IndustryLeader'
+import Header from '@/components/home/Header'
+
 
 const NewLanding = () => {
   return (
-    <div className={`w-full h-[calc(100vh)] flex items-center justify-center text-center ${styles['new-home-bg']} overflow-hidden`}>
-      <div className='flex flex-col items-center relative w-full max-w-[1100px] mx-auto'>
-        <h1 className={`mt-[120px] sm:mt-16 max-sm:text-3xl text-5xl self-start italic font-extrabold text-left flex flex-col gap-2 uppercase max-sm:text-center max-sm:w-full`}>
-          <div className='text-white max-sm:flex max-sm:flex-col'>
-            <span>One Stop</span>
-            <span className={`${styles['landing-title']} px-6`}>Ad Platform</span>
-          </div>
-          <div className='text-white'>Without Limits</div>
-        </h1>
-        <div className='flex items-center justify-between w-full mt-[-20px] max-sm:flex-col max-sm:mt-8'>
-          <div className='flex flex-col gap-7 max-sm:items-center'>
-            <h2 className={`max-sm:text-lg text-2xl text-left flex flex-col justify-center items-baseline max-sm:items-center`}>
-              <div className='flex items-baseline'>
-                <span>We are an</span>
-                <span className={`${styles['enabler-text']} text-4xl px-2`}
-                >Enabler</span>
+    <div className="AboveTheFold w-full h-screen relative">
+      <div className="px-[100px] py-[100px] Hero w-full h-screen bg-gradient-to-br from-[#3A2966] to-[#010101]">
+        <Header />
+        <div className='mt-[80px] flex-col flex lg:flex-row'>
+          <div className="Introtext w-1/2 flex-col justify-start items-start gap-8 inline-flex">
+            <div className="Headline text-open-sans h-9 flex-row justify-start items-start gap-2 flex">
+              <div className="WeAreAn text-center text-white text-2xl leading-normal">
+                We are an
+              </div>
+              <div className="Enabler text-center flex-row justify-start items-start gap-0 flex">
+                <span className="text-fuchsia-500 text-4xl font-semibold leading-9 bg-gradient-to-r from-[#D336FF] to-[#FD8CFF] text-transparent bg-clip-text">
+                  enabler
+                </span>
                 <Image src='/images/home/sparkles.svg' width={36} height={36} alt='sparkles' />
               </div>
-              <div>Not a disrupter</div>
-            </h2>
-            <Link href='/requestDemo'
-              style={{
-                clipPath: 'polygon(0% 28%, 6% 0px, 100% 0px, 100% 72%, 94% 100%, 0px 100%)'
-              }}
-              className={`${styles['request-demo-btn']}`}>
-              <span>Request Demo</span>
-              <Icon icon='akar-icons:arrow-right' className='text-2xl' />
+              <div className="NotADisrupter text-center text-white text-2xl font-medium leading-normal">
+                , Not a disrupter
+              </div>
+            </div>
+            <div className="text-poppins flex-col justify-start items-start gap-5 flex">
+              <div className="text-white text-[64px] font-semibold leading-[70px]">
+                One Stop
+                <span className="px-[5px] text-[64px] font-semibold bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
+                  Ad Platform
+                </span>
+                <br />Without Limits
+              </div>
+            </div>
+            <div className="text-stone-300 text-2xl font-normal font-open-sans leading-8">
+              Marketing agencies save time & money with our one-stop ads AI platform
+            </div>
+
+            <Link href={'/'} className="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
+              <div className="text-white text-base font-semibold leading-[19px]">
+                Request Demo
+              </div>
+              <div className="w-[18px] h-4 relative">
+                <Image
+                  title='arrow'
+                  className='cursor-pointer'
+                  src={'/images/elements/ep_right.svg'} width={18} height={4} alt='arrow'
+                />
+              </div>
             </Link>
-            {/* <Link href='/register'
-              className={`w-[140px] flex items-center justify-center gap-3 bg-primary-gradient py-3 rounded-lg hover:opacity-80 italic`}>
-              <span>Sign Up</span>
-              <Icon icon='mdi:login' className='text-2xl' />
-            </Link> */}
           </div>
-          <div className='relative sm:mt-12 flex justify-center rounded-2xl p-2 w-[540px] h-[300px] bg-primary-purple/10 max-sm:scale-50'>
-            <Image
-              className='rounded-2xl overflow-hidden'
-              src='/images/home/demo.png' width={540} height={300} alt='demo' />
-            <div className='absolute left-[-16%] top-[25%] rounded-2xl border-[#1ce8eb] border-2 w-[110px] h-[110px] bg-primary-purple/10 flex items-center justify-center'>
-              <Image
-                className='rounded-2xl overflow-hidden'
-                src='/images/home/left-demo.png' width={110} height={110} alt='left' />
+
+          <div className="IntroImages font-poppins w-1/2 flex-row gap-5 inline-flex">
+            <div className='w-45 flex-col justify-center items-center flex'>
+              <div className="BeforeAdsgencyAi text-zinc-500 text-base font-semibold">
+                Before AdsGency AI
+              </div>
+
+              <div className="Before mt-[10px] px-[14px] pt-[13px] pb-[23px] bg-zinc-800 rounded-[18px] shadow flex-col justify-start items-center gap-[24.93px] inline-flex">
+                <div className="self-stretch justify-start items-start gap-[8px] inline-flex">
+                  <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-1.png" />
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-3.png" />
+                  </div>
+                  <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
+                    <img className="obejct-cover relative rounded-md" src="images/home/landing-images/image-2.png" />
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-4.png" />
+                  </div>
+                </div>
+                <div className="flex-col justify-start items-center gap-[23px] inline-flex">
+                  <div className="NonOptimizedAds text-white text-lg font-bold leading-[17.75px]">
+                    Non Optimized Ads
+                  </div>
+                  <div className='flex-col justifu-start items-start gap-[8px] inline-flex'>
+                    <div className="justify-start items-center gap-[8px] inline-flex">
+                      <div className="px-[7px] py-[7px] relative bg-neutral-700 text-zinc-500 rounded-full">
+                        <Image
+                          title='cross'
+                          className='cursor-pointer'
+                          src={'/images/elements/cross.svg'} width={16} height={16} alt='arrow'
+                        />
+                      </div>
+                      <div className="LowQualityImagery text-zinc-500 text-xs font-medium">
+                        Low Quality Imagery
+                      </div>
+                    </div>
+
+                    <div className="justify-start items-center gap-[8px] inline-flex">
+                      <div className="px-[7px] py-[7px] relative bg-neutral-700 text-zinc-500 rounded-full">
+                        <Image
+                          title='cross'
+                          className='cursor-pointer'
+                          src={'/images/elements/cross.svg'} width={16} height={16} alt='arrow'
+                        />
+                      </div>
+                      <div className="LowQualityImagery text-zinc-500 text-xs font-medium">
+                        Lacking Brand Vision
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className='absolute right-[-18%] top-[-28%] max-sm:top-1/4 rounded-2xl border-[#1ce8eb] border-2 w-[300px] h-[180px] bg-primary-purple/10 flex items-center justify-center'>
-              <Image
-                className='rounded-2xl overflow-hidden'
-                src='/images/home/right-demo.png' width={300} height={180} alt='right' />
+
+            <div className='w-55 flex-col justify-center items-center flex'>
+              <div className="AfterAdsgencyAi text-zinc-500 text-base font-semibold">
+                <Image
+                  className='cursor-pointer'
+                  title='Home'
+                  src={'/logo.svg'} width={131} height={28} alt='logo'
+                />
+              </div>
+
+              <div className="Before mt-[10px] px-[14px] pt-[13px] pb-[23px] bg-zinc-800 rounded-[18px] shadow flex-col justify-start items-center gap-[24.93px] inline-flex">
+                <div className="justify-start items-start gap-[8px] inline-flex">
+                  <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-5.png" />
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-7.png" />
+                  </div>
+                  <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
+                    <img className="obejct-cover relative rounded-md" src="images/home/landing-images/image-6.png" />
+                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-8.png" />
+                  </div>
+                </div>
+                <div className="flex-col justify-start items-center gap-[23px] inline-flex">
+                  <div className="NonOptimizedAds text-white text-lg font-bold leading-[17.75px]">
+                    Ads Optimization
+                  </div>
+                  <div className='flex-col justifu-start items-start gap-[8px] inline-flex'>
+                    <div className="justify-start items-center gap-[8px] inline-flex">
+                      <div className="px-[7px] py-[7px] relative bg-violet-500 text-zinc-500 rounded-full">
+                        <Image
+                          title='cross'
+                          className='cursor-pointer'
+                          src={'/images/elements/correct.svg'} width={20} height={20} alt='arrow'
+                        />
+                      </div>
+                      <div className="LowQualityImagery text-white text-xs font-medium">
+                        High resolution visuals
+                      </div>
+                    </div>
+
+                    <div className="justify-start items-center gap-[8px] inline-flex">
+                      <div className="px-[7px] py-[7px] relative bg-violet-500 text-zinc-500 rounded-full">
+                        <Image
+                          title='cross'
+                          className='cursor-pointer'
+                          src={'/images/elements/correct.svg'} width={20} height={20} alt='arrow'
+                        />
+                      </div>
+                      <div className="LowQualityImagery text-white text-xs font-medium">
+                        Based on real-time data
+                      </div>
+                    </div>
+
+                    <div className="justify-start items-center gap-[8px] inline-flex">
+                      <div className="px-[7px] py-[7px] relative bg-violet-500 text-zinc-500 rounded-full">
+                        <Image
+                          title='cross'
+                          className='cursor-pointer'
+                          src={'/images/elements/correct.svg'} width={20} height={20} alt='arrow'
+                        />
+                      </div>
+                      <div className="LowQualityImagery text-white text-xs font-medium">
+                        No more hiring Photographers
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
-        <div className='max-sm:hidden mt-10 w-full flex flex-col items-center justify-center '>
-          <span className='text-white font-semibold text-lg'>
-            Backed by Industry Leaders
-          </span>
-          <IndustryLeader />
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

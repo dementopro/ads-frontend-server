@@ -1,18 +1,21 @@
 import { ResponsiveChoropleth } from '@nivo/geo';
-import React from 'react'
-import { countries } from '@/data/world'
+import React from 'react';
+import { countries } from '@/data/world';
 
+// Define the props interface for the Choropleth component
 type ChoroplethProps = {
   data: {
-    id: string
-    value: number
-  }[]
+    id: string;
+    value: number;
+  }[];
 }
 
+// Define the Choropleth functional component
 const Choropleth = ({ data }: ChoroplethProps) => {
+  // Calculate the maximum value from the data
+  const max = data.map(({ value }) => value).reduce((a, b) => Math.max(a, b), 0);
 
-  const max = data.map(({ value }) => value).reduce((a, b) => Math.max(a, b), 0)
-
+  // Render the ResponsiveChoropleth component from nivo
   return (
     <>
       <ResponsiveChoropleth
@@ -66,7 +69,8 @@ const Choropleth = ({ data }: ChoroplethProps) => {
         ]}
       />
     </>
-  )
+  );
 }
 
-export default Choropleth
+// Export the Choropleth component
+export default Choropleth;

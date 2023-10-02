@@ -1,10 +1,12 @@
 'use client'
+// Import necessary modules and components
 import { Disclosure } from '@headlessui/react'
 import chevronDown from '@iconify/icons-mdi/chevron-down';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation'
 
+// Define an array of menu items with their properties
 const menuItems = [
   {
     text: 'Home',
@@ -65,23 +67,26 @@ const menuItems = [
   // }
 ]
 
+// Define the MenuSigleBtnProps type
 type MenuSigleBtnProps = {
   text: string,
   isActive: boolean,
   icon?: string,
   activeIcon?: string,
   href?: string
-}
+};
 
+// Define the MenuSigleBtn component
 function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnProps) {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
+  // Handle button click
   function handleClick() {
     if (pathname === href) {
-      window.location.reload()
+      window.location.reload();
     } else {
-      router.push(href!)
+      router.push(href!);
     }
   }
 
@@ -97,12 +102,12 @@ function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnPr
       }
       {text}
     </button>
-  )
+  );
 }
 
+// Define the Menu component
 export default function Menu() {
-
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div className="mx-auto w-full rounded-2x flex flex-col gap-[18px]">
@@ -142,5 +147,5 @@ export default function Menu() {
         })
       }
     </div>
-  )
+  );
 }

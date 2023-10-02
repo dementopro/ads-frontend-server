@@ -1,38 +1,45 @@
-import { SocialInsightsContext } from '@/context/socialInsights'
-import { SUCCESS_CODE } from '@/data/constant'
-import { capitalize } from '@/lib/format'
-import { Icon } from '@iconify/react'
-import { Modal, message } from 'antd'
-import React, { useContext } from 'react'
+import { SocialInsightsContext } from '@/context/socialInsights';
+import { SUCCESS_CODE } from '@/data/constant';
+import { capitalize } from '@/lib/format';
+import { Icon } from '@iconify/react';
+import { Modal, message } from 'antd';
+import React, { useContext } from 'react';
 
 const SocialAccounts = () => {
 
-  const { platforms, checkConnectStatus, updateAllConnectStatus } = useContext(SocialInsightsContext)
-  const [modal, modalContextHolder] = Modal.useModal()
+  // Accessing the SocialInsightsContext to get platform information and connection status
+  const { platforms, checkConnectStatus, updateAllConnectStatus } = useContext(SocialInsightsContext);
+
+  // Creating instances of the Modal and Message components from antd
+  const [modal, modalContextHolder] = Modal.useModal();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const enablePlatforms = ['tiktok']
+  // List of platforms that can be enabled
+  const enablePlatforms = ['tiktok'];
 
+  // Function to disconnect from TikTok
   async function disconnectTikTok() {
     try {
       const response = await fetch('/fapi/tiktok_logout', {
         method: 'GET'
-      })
+      });
       if (response.ok) {
-        const data: IResponse = await response.json()
+        const data: IResponse = await response.json();
         if (data.status === SUCCESS_CODE) {
-          messageApi.success('Successfully disconnected')
+          messageApi.success('Successfully disconnected');
         } else {
-          messageApi.error(data.message || 'Something went wrong')
+          messageApi.error(data.message || 'Something went wrong');
         }
       }
     } catch (error) {
-      console.log('error', error)
+      console.log('error', error);
     } finally {
-      updateAllConnectStatus()
+      // Update connection status for all platforms
+      updateAllConnectStatus();
     }
   }
 
+  // Function to ask the user for confirmation before disconnecting
   function ask() {
     modal.confirm({
       title: 'Are you sure you want to disconnect?',
@@ -49,15 +56,17 @@ const SocialAccounts = () => {
       maskClosable: true,
       centered: true,
       async onOk() {
-        await disconnectTikTok()
+        // Disconnect from TikTok
+        await disconnectTikTok();
       }
-    })
+    });
   }
 
   return (
     <>
       {modalContextHolder}
       {contextHolder}
+      {/* Displaying the social accounts */}
       <div className='px-6 py-5 bg-[#1B1C21] border border-[#27282F] rounded-lg flex justify-between flex-col min-h-[280px]'>
         <h2 className='text-primary-gray text-sm'>Social accounts</h2>
         <div className='flex flex-col mt-3 overflow-auto pr-4 small-scrollbar'>
@@ -97,7 +106,7 @@ const SocialAccounts = () => {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default SocialAccounts
+export default SocialAccounts;

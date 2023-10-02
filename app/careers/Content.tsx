@@ -1,5 +1,7 @@
 // Import React and styles.
+
 'use client'
+
 import React from 'react';
 import styles from './careers.module.css';
 import JobList from '@/app/careers/JobList';
@@ -36,5 +38,6 @@ const Content = () => {
     </>
   );
 }
+
 
 export default Content;

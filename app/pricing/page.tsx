@@ -16,37 +16,39 @@ import ConfirmModal from '@/app/pricing/ConfirmModal';
 import PayResult from '@/app/pricing/PayResult';
 import { useRouter } from 'next/navigation';
 
+// Define the SubscriptionButton component
 type SubscriptionButtonProps = {
   plan: PricingPlan,
   onSubscription: (planId: number) => void,
 }
 
 const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) => {
+  // Get user account information and plan status from context
+  const { planId, isSubscribed } = useContext(AccountContext);
 
-  const { planId, isSubscribed } = useContext(AccountContext)
-
+  // Format the button text based on user's plan status
   const formatBtnText = () => {
     if (planId === 0) {
-      return 'Buy now'
+      return 'Buy now';
     }
     if (!isSubscribed) {
       if (planId !== plan.planId) {
-        return 'Buy now'
+        return 'Buy now';
       } else {
-        return 'Activate'
+        return 'Activate';
       }
     } else {
       if (planId === plan.planId) {
-        return 'Current plan'
+        return 'Current plan';
       }
       if (planId > plan.planId) {
-        return 'Downgrade'
+        return 'Downgrade';
       }
       if (planId < plan.planId) {
-        return 'Upgrade'
+        return 'Upgrade';
       }
     }
-  }
+  };
 
   return (
     <button
@@ -59,12 +61,11 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
       }>
       {formatBtnText()}
     </button>
-  )
+  );
 }
 
-
+// Define the PricingPage component
 const PricingPage = () => {
-
   const { updateAccount,
     planId,
     isLogin,
@@ -76,10 +77,11 @@ const PricingPage = () => {
   const router = useRouter()
   const [plan, setPlan] = useState(Pricing[~~((planId - 1) / 3)].plan)
   const [loading, setLoading] = useState(false)
+
   const [messageApi, contextHolder] = message.useMessage();
-  const [confirmVisible, setConfirmVisible] = useState(false)
-  const [payResultVisible, setPayResultVisible] = useState(false)
-  const [payResultMessage, setPayResultMessage] = useState('')
+  const [confirmVisible, setConfirmVisible] = useState(false);
+  const [payResultVisible, setPayResultVisible] = useState(false);
+  const [payResultMessage, setPayResultMessage] = useState('');
 
   useEffect(() => {
     if(selectedPlan && selectedPlan!==-1 && creditInfo){
@@ -90,7 +92,7 @@ const PricingPage = () => {
 
   async function onSubscription(planId: number) {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch('/fapi/subscription_api', {
         method: 'POST',
         headers: {
@@ -100,9 +102,9 @@ const PricingPage = () => {
           plan_id: planId,
           mode: 'subscribe'
         })
-      })
+      });
       if (response.ok) {
-        const data: SubscriptionResp = await response.json()
+        const data: SubscriptionResp = await response.json();
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
           setPayResultMessage(data.message || 'Subscription successfully')
           setPayResultVisible(true)
@@ -110,22 +112,24 @@ const PricingPage = () => {
           updateAccount()
           setSelectedPlan(-1)
           setNextPage("")
+
         } else {
-          messageApi.error(data.message || 'Something went wrong')
+          messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('response', response.statusText)
+        console.log('response', response.statusText);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
+  // Function to handle plan downgrade action
   async function onDowngrade(planId: number) {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch('/fapi/downgrade_subscription_api', {
         method: 'POST',
         headers: {
@@ -134,30 +138,31 @@ const PricingPage = () => {
         body: JSON.stringify({
           plan_id: planId,
         })
-      })
+      });
       if (response.ok) {
-        const data: SubscriptionResp = await response.json()
+        const data: SubscriptionResp = await response.json();
         if (data.status === SUCCESS_CODE || data.status === 'active') {
-          setPayResultMessage(data.message || 'Downgrade successfully')
-          setPayResultVisible(true)
-          setConfirmVisible(false)
-          updateAccount()
+          setPayResultMessage(data.message || 'Downgrade successfully');
+          setPayResultVisible(true);
+          setConfirmVisible(false);
+          updateAccount();
         } else {
-          messageApi.error(data.message || 'Something went wrong')
+          messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('response', response.statusText)
+        console.log('response', response.statusText);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
+  // Function to handle plan upgrade action
   async function onUpgrade(planId: number) {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch('/fapi/subscription_api', {
         method: 'POST',
         headers: {
@@ -167,36 +172,37 @@ const PricingPage = () => {
           plan_id: planId,
           mode: 'upgrade'
         })
-      })
+      });
       if (response.ok) {
-        const data: SubscriptionResp = await response.json()
+        const data: SubscriptionResp = await response.json();
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
-          setPayResultMessage(data.message || 'Upgrade successfully')
-          setPayResultVisible(true)
-          setConfirmVisible(false)
-          updateAccount()
+          setPayResultMessage(data.message || 'Upgrade successfully');
+          setPayResultVisible(true);
+          setConfirmVisible(false);
+          updateAccount();
         } else {
-          messageApi.error(data.message || 'Something went wrong')
+          messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('response', response.statusText)
+        console.log('response', response.statusText);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
+  // Function to handle subscription based on plan status
   function handleSubscription(clickPlanId: number) {
     if (planId === 0) {
-      onSubscription(clickPlanId)
+      onSubscription(clickPlanId);
     } else if (clickPlanId < planId) {
-      onDowngrade(clickPlanId)
+      onDowngrade(clickPlanId);
     } else if (clickPlanId > planId) {
-      onUpgrade(clickPlanId)
+      onUpgrade(clickPlanId);
     } else {
-      onSubscription(clickPlanId)
+      onSubscription(clickPlanId);
     }
   }
 
@@ -330,4 +336,4 @@ const PricingPage = () => {
   )
 }
 
-export default PricingPage
+export default PricingPage;

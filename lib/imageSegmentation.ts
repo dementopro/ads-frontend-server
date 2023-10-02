@@ -1,5 +1,6 @@
 import { COLORS } from "@/data/colors";
 
+// Function to create ImageData from a mask image
 function getImageData(maskImg: CanvasImageSource, imgW: number, imgH: number): ImageData {
   const tmpCanvas = document.createElement("canvas");
   tmpCanvas.width = imgW;
@@ -10,6 +11,7 @@ function getImageData(maskImg: CanvasImageSource, imgW: number, imgH: number): I
   return segmentData;
 }
 
+// Function to convert a hex color code to an RGB array
 function hexToRgb(hex: string): number[] {
   return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
     , (_, r, g, b) => '#' + r + r + g + g + b + b)
@@ -17,13 +19,14 @@ function hexToRgb(hex: string): number[] {
     ?.map(x => parseInt(x, 16)) || [0, 0, 0];
 }
 
+// Convert color hex codes to RGB and create a mapping
 const colorToRgb = COLORS.reduce((acc, clr) => {
   const [r, g, b]: number[] = hexToRgb(clr.hex);
   const clrWithRgb = { ...clr, r, g, b };
   return { ...acc, [clr.color]: clrWithRgb };
 }, {}) as Record<string, { r: number, g: number, b: number }>;
 
-
+// Interface for ImageSegment
 export interface ImageSegment {
   label: string;
   score: number;
@@ -33,6 +36,7 @@ export interface ImageSegment {
   bitmap?: ImageBitmap;
 }
 
+// Function to add ImageData to an ImageSegment
 async function addOutputCanvasData(
   imgSegment: ImageSegment, width: number, height: number
 ): Promise<ImageSegment> {
@@ -40,7 +44,6 @@ async function addOutputCanvasData(
 
   const maskImg = new Image();
   maskImg.src = `data:image/png;base64, ${mask}`;
-  // await image.onload
   await new Promise((resolve, _) => {
     maskImg.onload = () => resolve(maskImg);
   });
@@ -62,19 +65,20 @@ async function addOutputCanvasData(
   return { ...imgSegment, imgData, bitmap };
 }
 
+// Function to calculate modulo of a number
 function mod(a: number, n: number): number {
   return ((a % n) + n) % n;
 }
 
+// Function to assign colors to ImageSegments based on an index
 function addOutputColor(imgSegment: ImageSegment, idx: number) {
   const hash = mod(idx, COLORS.length);
   const { color } = COLORS[hash];
   return { ...imgSegment, color };
 }
 
-
+// Function to process ImageSegments and add colors and ImageData
 export async function getOutput(imageSegmentation: ImageSegment[], width: number, height: number) {
-
   const output = await Promise.all(
     imageSegmentation
       .map((o, idx) => addOutputColor(o, idx))
@@ -85,7 +89,10 @@ export async function getOutput(imageSegmentation: ImageSegment[], width: number
 }
 
 /**
- *  Returns a function that clamps input value to range [min <= x <= max].
+ * Returns a function that clamps input value to the specified range.
+ * @param x Input value
+ * @param min Minimum value in the range
+ * @param max Maximum value in the range
  */
 export function clamp(x: number, min: number, max: number): number {
   return Math.max(min, Math.min(x, max));

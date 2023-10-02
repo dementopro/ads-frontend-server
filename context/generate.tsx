@@ -1,9 +1,13 @@
+
 'use client'
+
 import { IGeneImageOption, ImageSegmentation, NewImage, PretrainItem } from "@/types/generate";
 import { createContext, useEffect, useState } from "react";
 
+// Define a type for a list of pretrain items
 export type IPretrainList = Partial<Record<`${keyof IGeneImageOption}List`, PretrainItem[]>>
 
+// Create a context for managing gene image-related data
 export const GeneImageContext = createContext<{
   modeType: 'product' | 'portrait'
   preTrainedStep: keyof IGeneImageOption,
@@ -97,8 +101,10 @@ export const GeneImageContext = createContext<{
   updateReload: () => { },
 })
 
+// Create a GeneImageProvider component
 export const GeneImageProvider = ({ children }: { children: React.ReactNode }) => {
 
+  // Define state variables to manage gene image data
   const [modeType, setModeType] = useState<'portrait' | 'product'>('portrait')
   const [preTrainedStep, setPreTrainedStep] = useState<keyof IGeneImageOption>('image')
   const [label, setLabel] = useState<'Background' | 'Face'>('Background')
@@ -133,6 +139,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     resetCtx()
   }, [modeType])
 
+  // Define functions to update state variables
   const updateLabel = (newLabel: 'Background' | 'Face') => {
     setLabel(newLabel);
   }
@@ -164,7 +171,6 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   const updateGeneratedImage = (newGeneratedImage: NewImage[] | null) => {
     setGeneratedImage(newGeneratedImage);
   }
-
 
   const updateModeType = (newModeType: 'product' | 'portrait') => {
     setModeType(newModeType);
@@ -222,7 +228,6 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
   }
 
   const resetCtx = () => {
-    // updateModeType('portrait')
     updatePreTrainStep('image')
     updateImgSeg([])
     updatePreTrainedOption({
@@ -273,3 +278,4 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     </GeneImageContext.Provider>
   )
 }
+

@@ -19,6 +19,7 @@ export async function POST(req: Request) {
   console.log('formData', formData.toString());
 
   // Send a POST request to an external API to generate an image.
+
   const res = await fetch(`${process.env.API_BASE_URL}/generate_image/text_to_img_v4`, {
     method: 'POST',
     headers: {
@@ -29,4 +30,3 @@ export async function POST(req: Request) {
   });
 
   return res
-}

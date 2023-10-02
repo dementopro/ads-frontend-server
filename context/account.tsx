@@ -1,9 +1,11 @@
+// Import necessary modules and constants
 import { SUCCESS_CODE } from "@/data/constant";
 import { isUserLogin } from "@/lib/auth";
 import { calculateExpireDays } from "@/lib/date";
 import { Account, QueryAccountResp } from "@/types/account";
 import { createContext, useEffect, useState } from "react";
 
+// Create a context for managing user account-related data
 export const AccountContext = createContext<{
   totalCredits: number;
   isSubscribed: boolean;
@@ -40,10 +42,12 @@ export const AccountContext = createContext<{
   setCreditInfo:()=>{},
   setNextPage:() => {},
   updateAccount: () => { },
-})
+});
 
+// Create an AccountProvider component
 export const AccountProvider = ({ children }: { children: React.ReactNode }) => {
 
+  // Define state variables to manage user account data
   const [planId, setPlanId] = useState(0)
   const [credits, setCredits] = useState(0)
   const [trialDays, setTrialDays] = useState(0)
@@ -55,11 +59,13 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [nextPage, setNextPage] = useState("")
   const [selectedPlan, setSelectedPlan] = useState(-1)
 
+  // useEffect to check user login status and update account data
   useEffect(() => {
     setIsLogin(isUserLogin())
     updateAccount()
   }, [])
 
+  // Function to fetch and update user account data
   async function updateAccount() {
     if (!isLogin) return
     try {
@@ -100,6 +106,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     }
   }
 
+  // Provide the account data through the context to child components
   return (
     <AccountContext.Provider value={{
       credits, setCredits,
@@ -115,3 +122,4 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     </AccountContext.Provider>
   )
 }
+

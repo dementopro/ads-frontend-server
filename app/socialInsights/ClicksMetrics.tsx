@@ -1,28 +1,31 @@
+// Import necessary dependencies and components
 import { DateRangeBtns } from '@/app/socialInsights/FilterBtns';
 import AreaChart from '@/components/d3/AreaChart';
 import { SocialInsightsContext } from '@/context/socialInsights';
 import { areaData } from '@/data/socialInsights';
 import { AreaData, ClicksMetricLabel } from '@/types/socialInsights';
 import { Spin, message } from 'antd';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 
-
+// Define props for the LabelSelect component
 type LabelSelectProps = {
-  text: ClicksMetricLabel
-  color: string
-  selectedSet: Set<ClicksMetricLabel>
-  setSelectedSet: (set: Set<ClicksMetricLabel>) => void
-}
+  text: ClicksMetricLabel;
+  color: string;
+  selectedSet: Set<ClicksMetricLabel>;
+  setSelectedSet: (set: Set<ClicksMetricLabel>) => void;
+};
 
+// Define the LabelSelect component for selecting metric labels
 const LabelSelect = ({ text, color, selectedSet, setSelectedSet }: LabelSelectProps) => {
 
+  // Function to handle label selection/deselection
   function onClick() {
     if (selectedSet.has(text)) {
-      selectedSet.delete(text)
+      selectedSet.delete(text);
     } else {
-      selectedSet.add(text)
+      selectedSet.add(text);
     }
-    setSelectedSet(new Set(selectedSet))
+    setSelectedSet(new Set(selectedSet));
   }
 
   return (
@@ -42,21 +45,24 @@ const LabelSelect = ({ text, color, selectedSet, setSelectedSet }: LabelSelectPr
   )
 }
 
-const colors = ['#80B4FF', '#FFC775', '#34A853', '#844FFF', '#EE77A2'] as const
+// Define colors for the metric labels
+const colors = ['#80B4FF', '#FFC775', '#34A853', '#844FFF', '#EE77A2'] as const;
 
+// Define the ClicksMetrics component
 const ClicksMetrics = () => {
 
-  const { dateRange } = useContext(SocialInsightsContext)
+  // Get the date range from the context
+  const { dateRange } = useContext(SocialInsightsContext);
   const [messageApi, contextHolder] = message.useMessage();
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<AreaData[]>(areaData)
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<AreaData[]>(areaData);
   const [colorMap, setColorMap] = useState<Record<ClicksMetricLabel, string>>({
     'Email link clicks': colors[0],
     'Website clicks': colors[1],
     'Phone call clicks': colors[2],
     'Text message clicks': colors[3],
     'Profile link clicks': colors[4]
-  })
+  });
 
   const [selectedSet, setSelectedSet] = useState<Set<ClicksMetricLabel>>(new Set([
     'Email link clicks',
@@ -64,15 +70,16 @@ const ClicksMetrics = () => {
     'Phone call clicks',
     'Text message clicks',
     'Profile link clicks'
-  ]))
+  ]));
 
+  // Simulate loading data
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      setData(areaData())
-      setLoading(false)
-    }, 1000)
-  }, [dateRange])
+      setData(areaData());
+      setLoading(false);
+    }, 1000);
+  }, [dateRange]);
 
   return (
     <>
@@ -84,6 +91,7 @@ const ClicksMetrics = () => {
           <div className='w-full mx-auto mt-8 p-8 bg-black/20 rounded-lg'>
             <div className='flex gap-3 justify-end mb-3'>
               {
+                // Render LabelSelect components for metric labels
                 Object.entries(colorMap).map(([key, value]) => (
                   <LabelSelect key={key} selectedSet={selectedSet} setSelectedSet={setSelectedSet} text={key as ClicksMetricLabel} color={value} />
                 ))
@@ -97,4 +105,5 @@ const ClicksMetrics = () => {
   )
 }
 
+// Export the ClicksMetrics component as the default export
 export default ClicksMetrics

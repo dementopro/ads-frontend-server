@@ -1,5 +1,7 @@
 // Import necessary modules and components.
+
 'use client'
+
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import styles from './BookMeeting.module.css';
@@ -63,5 +65,6 @@ const BookMeetingView = () => {
     </>
   );
 };
+
 
 export default BookMeetingView;

@@ -1,33 +1,38 @@
-'use client'
-import { Listbox, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+// Import necessary components and modules
+import { Listbox, Transition } from '@headlessui/react';
+import React, { Fragment } from 'react';
 import chevronDown from '@iconify/icons-mdi/chevron-down';
 import { Icon } from '@iconify/react';
 
-
+// Define the props type for SelectCom
 type props<T> = {
-  selected: T
-  setSelected: (value: T) => void
-  options: T[]
-}
+  selected: T;
+  setSelected: (value: T) => void;
+  options: T[];
+};
 
+// Define the SelectCom component
 const SelectCom = ({ options, selected, setSelected }: props<{ name: string, value: string }>) => {
 
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative">
+        {/* Listbox Button */}
         <Listbox.Button className="cursor-pointer hover:opacity-80 relative w-full rounded-lg bg-[#35363A] text-primary-gray h-[44px] pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-primary-purple focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-purple sm:text-sm">
           <span className="block truncate text-base">{selected.name}</span>
+          {/* Dropdown Icon */}
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <Icon icon={chevronDown} className='text-primary-gray' width={20} height={20} />
           </span>
         </Listbox.Button>
+        {/* Transition for Options */}
         <Transition
           as={Fragment}
           leave="transition ease-in duration-100"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
+          {/* Listbox Options */}
           <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#35363A] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {options.map((person, personIdx) => (
               <Listbox.Option
@@ -40,6 +45,7 @@ const SelectCom = ({ options, selected, setSelected }: props<{ name: string, val
               >
                 {({ selected }) => (
                   <>
+                    {/* Display selected or normal font style based on selection */}
                     <span
                       className={`block truncate ${selected ? 'font-medium' : 'font-normal'
                         }`}
@@ -54,7 +60,7 @@ const SelectCom = ({ options, selected, setSelected }: props<{ name: string, val
         </Transition>
       </div>
     </Listbox>
-  )
+  );
 }
 
-export default SelectCom
+export default SelectCom;

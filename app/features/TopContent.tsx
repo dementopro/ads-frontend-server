@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import styles from './features.module.css'
 
@@ -28,4 +27,6 @@ const TopContent = () => {
 }
 
 // Export the TopContent component as the default export
+
 export default TopContent
+
