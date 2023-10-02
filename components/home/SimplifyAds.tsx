@@ -111,7 +111,7 @@ const SimplifyAds = () => {
                     </div>
                 </div>
             </div>
-            <Link href={'/'} className="w-[250px] px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
+            <Link href='/requestDemo' className="w-[250px] px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
                 <div className="text-white text-base font-semibold leading-[19px]">
                     Request Demo
                 </div>

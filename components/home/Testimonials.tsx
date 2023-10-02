@@ -55,12 +55,12 @@ const Testimonials = () => {
                 <div className="text-white text-xl font-medium font-open-sans leading-tight">
                     Here's what they have to say about us
                 </div>
-                <div className='w-full flex-col justify-center items-center gap-[10px] inline-flex'>
-                    <Slider arrows={true} variableWidth autoplay={false} pauseOnHover={false} autoplaySpeed={0} speed={5000} cssEase='linear' centerMode swipeToSlide={false}
-                        centerPadding={'6px'}>
+                <div className='w-full flex-col justify-center items-center !gap-[10px] inline-flex'>
+                    <Slider 
+                    arrows={true} infinite={true} variableWidth autoplay={true} pauseOnHover={true} autoplaySpeed={0} speed={8000} cssEase='linear' centerMode swipeToSlide={false}>
                         {userTestimonials.map((item, index) => (
 
-                            <div key={index} className="Card w-[350px] pt-[50px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[5px] inline-flex overflow-hidden">
+                            <div key={index} className="!w-[350px] h-[400px] mx-[50px] pt-[50px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[5px] !inline-flex overflow-hidden">
                                 <div className="w-full px-[30px] justify-start items-center grow shrink basis-0 text-white text-[78px] font-extrabold font-open-sans leading-[50px]">
                                     “
                                 </div>
@@ -76,13 +76,13 @@ const Testimonials = () => {
                                 </div>
                                 <div className="w-full pl-8 py-[12px] bg-[#171717] justify-start items-center inline-flex">
                                     <div className=" justify-start items-center gap-[30px] inline-flex">
-                                        <img alt={item.name} src={`/images/home/avatar/${index + 1}.jpg`} className="w-[42px] h-[42px] rounded-full border border-white" />
+                                        <img alt={item.name} src={`/images/home/testimonial/${item.image}.png`} className="w-[42px] h-[42px] rounded-full border border-white" />
                                         <div className="flex-col justify-center items-start gap-1 inline-flex">
                                             <div className="text-white text-sm font-semibold font-poppins">
                                                 {item.name}
                                             </div>
                                             <div className="text-zinc-400 text-xs font-normal font-open-sans leading-[19px]">
-                                                designation
+                                                {item.designation}
                                             </div>
                                         </div>
                                     </div>

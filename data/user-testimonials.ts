@@ -1,42 +1,32 @@
 export const userTestimonials = [
   {
-    name: 'Ethan Anderson',
-    testimonial: 'One Stop AI has revolutionized our approach to ad campaigns. The precision and efficiency we\'ve achieved with their platform is beyond anything we had previously.'
+    name: 'David Saadioui',
+    designation: 'Founder @ PRKD',
+    testimonial: 'As a marketer myself, I appreciate the value of effortlessly creating engaging ads, maximizing ROI, and gaining data-driven insights for multichannel marketing.',
+    image: 'image-0',
   },
   {
-    name: 'Benjamin Carter',
-    testimonial: 'One Stop AI software is exceptional. The level of customization and insights it provides us is second to none. It\'s been a key player in taking our marketing efforts to new heights.'
+    name: 'Jade',
+    designation: 'Product Manager',
+    testimonial: 'One of the things I love most about this software is its ability to analyze large amounts of data and provide insightful metrics. This has helped me to uncover hidden patterns and trends that I would never have been able to see on my own.',
+    image: 'image-1',
   },
   {
-    name: 'Olivia Johnson',
-    testimonial: 'One Stop AI is a game-changer. Its AI-driven insights help us optimize our ad strategies on the fly. Its real-time feedback is a feature we can\'t do without anymore.'
+    name: 'Ardash Benny',
+    designation: 'SaaS Marketer',
+    testimonial: 'As a fellow marketer, I understand the struggle of creating ads that effectively resonate with our target audience. AdsGency sounds like the perfect solution to this pain point. I can not wait to give it a try and see how the AI-generated ads perform.',
+    image: 'image-2',
   },
   {
-    name: 'Emily Martinez',
-    testimonial: 'The efficiency and the depth of insights provided by One Stop AI are unparalleled. It\'s as if we have our own in-house team of data scientists working round the clock to perfect our ad campaigns.'
+    name: 'Alexey Yurkevich',
+    designation: 'Software Engineer',
+    testimonial: 'Im really inspired by AdsGency AI’s product and it’s one of the most promising companies I’ve seen!',
+    image: 'image-3',
   },
   {
-    name: 'James Evans',
-    testimonial: 'The difference One Stop AI has made to our marketing strategies is tremendous. The software is incredibly intuitive and packed with features that have simplified our ad operations and maximized our ROI.'
+    name: 'Niroshan Ranapathi',
+    designation: 'Software Engineer',
+    testimonial: 'Finally, a tool that does not just throw spaghetti at the wall, but carefully selects the strands for a perfect al dente performance.  AdsGency AI is like the dream sidekick for marketers!',
+    image: 'image-4',
   },
-  {
-    name: 'William Parker',
-    testimonial: 'We were looking for an AI-driven ad software that could handle our complex requirements. With One Stop AI, we got that and much more. The ad optimization, in particular, is out of this world!'
-  },
-  {
-    name: 'Alexander Mitchell',
-    testimonial: 'One Stop AI has made managing our ad operations a breeze. The real-time feedback, AI-driven insights, and automation capabilities are unmatched. It\'s the best advertising tool we\'ve used till date.'
-  },
-  {
-    name: 'Ava Thompson',
-    testimonial: 'I\'m blown away by the power of One Stop AI. It\'s transformed our ad performance metrics and given us insights that have been pivotal in our strategy sessions.'
-  },
-  {
-    name: 'Noah Turner',
-    testimonial: 'We\'ve seen a significant increase in ad effectiveness and ROI since implementing One Stop AI. It\'s the perfect balance of simplicity and advanced AI-driven features.'
-  },
-  {
-    name: 'Daniel Foster',
-    testimonial: 'As a tech startup, we needed a solution that was scalable and intuitive. One Stop AI delivered on all fronts. Our team has been able to execute and analyze complex ad campaigns like never before.'
-  }
 ]

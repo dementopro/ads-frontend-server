@@ -32,8 +32,8 @@ const Features = () => {
                 </div>
                 <div className="w-4/5 h-20 px-2 py-2 bg-zinc-800 rounded-[50px] justify-start items-center gap-5 inline-flex">
                     <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 0 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(0)}>
-                        <div className="h-10 w-10 bg-white rounded-[360px] justify-center items-center flex">
-                            <div className=" text-center text-violet-500 text-2xl font-semibold font-poppins">
+                        <div className={`h-10 w-10 ${activeButtonIndex === 0 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 0 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
                                 1
                             </div>
                         </div>
@@ -43,8 +43,8 @@ const Features = () => {
                     </button>
 
                     <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 1 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(1)}>
-                        <div className="h-10 w-10 bg-white rounded-[360px] justify-center items-center flex">
-                            <div className=" text-center text-violet-500 text-2xl font-semibold font-poppins">
+                        <div className={`h-10 w-10 ${activeButtonIndex === 1 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 1 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
                                 2
                             </div>
                         </div>
@@ -54,8 +54,8 @@ const Features = () => {
                     </button>
 
                     <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 2 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(2)}>
-                        <div className="h-10 w-10 bg-white rounded-[360px] justify-center items-center flex">
-                            <div className=" text-center text-violet-500 text-2xl font-semibold font-poppins">
+                        <div className={`h-10 w-10 ${activeButtonIndex === 2 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 2 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
                                 3
                             </div>
                         </div>
@@ -65,8 +65,8 @@ const Features = () => {
                     </button>
 
                     <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 3 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(3)}>
-                        <div className="h-10 w-10 bg-white rounded-[360px] justify-center items-center flex">
-                            <div className=" text-center text-violet-500 text-2xl font-semibold font-poppins">
+                        <div className={`h-10 w-10 ${activeButtonIndex === 3 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 3 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
                                 4
                             </div>
                         </div>
