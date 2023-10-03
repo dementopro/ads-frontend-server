@@ -34,20 +34,26 @@ const Header = () => {
             <Link href='/features' className="text-white text-[15px] font-medium leading-tight">
               Features
             </Link>
-            <Link href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
+            {/* <Link href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
               Pricing
-            </Link>
+            </Link> */}
             <Link href='/blog' className="text-white text-[15px] font-medium leading-tight">
               Blog
+            </Link>
+            <Link href='/careers' className="text-white text-[15px] font-medium leading-tight">
+              Careers
+            </Link>
+            <Link href='/contactUs' className="text-white text-[15px] font-medium leading-tight">
+              Contact Us
             </Link>
           </div>
         </div>
         <div className="justify-start items-center gap-4 flex">
-          <Link href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-zinc-900 justify-center items-center gap-4 flex">
+          {/* <Link href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-zinc-900 justify-center items-center gap-4 flex">
             <div className="w-[120px] text-center text-white text-base font-medium leading-[29.12px]">
               Sign In
             </div>
-          </Link>
+          </Link> */}
           <Link href='/requestDemo' className="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
             <div className="text-white text-base font-semibold leading-[19px]">
               Request Demo
