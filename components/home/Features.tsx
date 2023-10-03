@@ -19,7 +19,7 @@ const Features = () => {
         'socialinsights.png',
       ];
     
-      const handleButtonClick = (index) => {
+      const handleButtonClick = (index: React.SetStateAction<number>) => {
         setSelectedImageIndex(index);
         setActiveButtonIndex(index);
       };

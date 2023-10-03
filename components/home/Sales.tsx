@@ -16,6 +16,7 @@ const Sales = () => {
                     <div className="w-full flex-row justify-center items-center gap-[20px] inline-flex">
                         <div className="w-full flex-col justify-start items-start gap-[30px] inline-flex">
                             <div className="text-white text-[42px] font-bold font-open-sans">
+                                {/* eslint-disable-next-line react/no-unescaped-entities */}
                                 Don't know where to start?
                             </div>
                             <div className="text-white text-xl font-medium font-open-sans leading-tight">

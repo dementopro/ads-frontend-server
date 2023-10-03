@@ -53,6 +53,7 @@ const Testimonials = () => {
                     </div>
                 </div>
                 <div className="text-white text-xl font-medium font-open-sans leading-tight">
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                     Here's what they have to say about us
                 </div>
                 <div className='w-full flex-col justify-center items-center !gap-[10px] inline-flex'>
