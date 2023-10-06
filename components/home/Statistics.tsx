@@ -21,7 +21,7 @@ const Statistics = () => {
     }, []);
 
     return (
-        <div className='w-full py-[100px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
+        <div className='w-full my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
             <div className="w-full flex-col justify-center items-center gap-[50px] inline-flex">
                 <div className='text-white text-[42px] font-bold font-open-sans'>
                     <span className="bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">

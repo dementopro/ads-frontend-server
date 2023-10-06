@@ -10,9 +10,9 @@ import Link from 'next/link';
 
 const Sales = () => {
     return (
-        <div className='w-full py-[100px] bg-black'>
+        <div className='w-full my-[60px] bg-black'>
             <div className="w-full flex-col justify-center items-center gap-8 inline-flex">
-                <div className="w-4/5 py-[50px] px-[50px] relative bg-neutral-900 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
+                <div className="w-[1036px] py-[32px] px-[36px] relative bg-[#27252D] border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
                     <div className="w-full flex-row justify-center items-center gap-[20px] inline-flex">
                         <div className="w-full flex-col justify-start items-start gap-[30px] inline-flex">
                             <div className="text-white text-[42px] font-bold font-open-sans">
@@ -25,7 +25,7 @@ const Sales = () => {
                             <div className="w-full flex-row justify-start items-start gap-[8px] inline-flex">
                                 <div className="w-full flex-col justify-start items-start gap-[1px] inline-flex">
                                     <div className="bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text text-[30px] font-semibold font-poppins">
-                                        % 93
+                                        93 %
                                     </div>
                                     <div className="text-xl font-semibold font-poppins">
                                         Time
@@ -60,8 +60,8 @@ const Sales = () => {
                                 </div>
                             </div>
 
-                            <Link href={'/contactUs'} className="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
-                                <div className="text-white text-base font-semibold leading-[19px]">
+                            <Link href='/requestDemo' className="px-[32px] py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex">
+                                <div>
                                     Contact Sales
                                 </div>
                                 <div className="w-[18px] h-4 relative">

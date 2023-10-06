@@ -13,6 +13,7 @@ import OurSolutions from '@/components/home/OurSolutions'
 import Testimonials from '@/components/home/Testimonials'
 import DefaultLayout from '@/layout/default'
 import Features from '@/components/home/Features'
+import AboveFooter from '@/components/home/AboveFooter'
 
 // Metadata for the page
 export const metadata = {
@@ -37,6 +38,7 @@ export default function Home() {
       <Sales />
       <Statistics />
       <Features />
+      <AboveFooter />
     </DefaultLayout>
   )
 }

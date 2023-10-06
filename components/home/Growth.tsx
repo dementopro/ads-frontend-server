@@ -11,13 +11,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Growth = () => {
   return (
-    <div className='w-full py-[100px] bg-black'>
+    <div className='w-full my-[60px] bg-black'>
       <div className="w-full flex-col justify-center items-center gap-[60px] inline-flex">
         <div className="text-white text-2xl font-bold font-poppins leading-normal">
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Enabling our Customer's Growth
         </div>
-        <Slider arrows={false} variableWidth autoplay={true} pauseOnHover={false} autoplaySpeed={0} speed={5000} cssEase='linear' centerMode swipeToSlide={false}>
+        <Slider arrows={false} variableWidth autoplay={true} pauseOnHover={false} autoplaySpeed={0} speed={8000} cssEase='linear' centerMode swipeToSlide={false}>
           <img className="h-[60px] w-auto px-[50px] object-cover rounded" src="images/home/customer-logos/digitz.svg" />
           <img className="h-[60px] w-auto px-[50px] object-cover rounded" src="images/home/customer-logos/enigma.svg" />
           <img className="h-[60px] w-auto px-[50px] object-cover rounded" src="images/home/customer-logos/fullstockwoo.svg" />

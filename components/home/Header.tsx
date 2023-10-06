@@ -16,56 +16,58 @@ const Header = () => {
 
   return (
     <>
-      <div className="NavBar w-full px-8 py-4 bg-zinc-900 rounded-[25px] shadow justify-start items-center gap-8 inline-flex z-10">
+      <div className="w-[1240px] relative bg-zinc-900 rounded-[25px]">
         <Banner />
-        <div className="w-[130px] h-[28px] relative">
-          <Image
-            onClick={toHome}
-            className='cursor-pointer'
-            title='Home'
-            src={'/logo.svg'} width={131} height={28} alt='logo'
-          />
-        </div>
-        <div className="grow shrink basis-0 h-11 justify-start items-center gap-4 flex">
-          <div className="px-4 py-1.5 justify-center items-center gap-8 flex">
-            <Link href='/' className="text-white text-[15px] font-medium leading-tight">
-              Home
-            </Link>
-            <Link href='/features' className="text-white text-[15px] font-medium leading-tight">
-              Features
-            </Link>
-            {/* <Link href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
-              Pricing
-            </Link> */}
-            <Link href='/blog' className="text-white text-[15px] font-medium leading-tight">
-              Blog
-            </Link>
-            <Link href='/careers' className="text-white text-[15px] font-medium leading-tight">
-              Careers
-            </Link>
-            <Link href='/contactUs' className="text-white text-[15px] font-medium leading-tight">
-              Contact Us
-            </Link>
+        <div className="w-full h-[70px] relative px-[32px] bg-zinc-900 rounded-[25px] shadow justify-start items-center gap-[32px] inline-flex z-10">
+          <div className="lg:w-[130px] sm:w-[80px] relative">
+            <Image
+              onClick={toHome}
+              className='cursor-pointer'
+              title='Home'
+              src={'/logo.svg'} width={130} height={28} alt='logo'
+            />
           </div>
-        </div>
-        <div className="justify-start items-center gap-4 flex">
-          {/* <Link href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-zinc-900 justify-center items-center gap-4 flex">
+          <div className="flex-grow justify-start items-center gap-4 flex">
+            <div className="justify-center items-center gap-[32px] flex text-white text-[15px] font-medium">
+              <Link href='/'>
+                Home
+              </Link>
+              <Link href='/features'>
+                Features
+              </Link>
+              {/* <Link href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
+              Pricing
+              </Link> */}
+              <Link href='/blog'>
+                Blog
+              </Link>
+              <Link href='/careers'>
+                Careers
+              </Link>
+              <Link href='/contactUs'>
+                Contact Us
+              </Link>
+            </div>
+          </div>
+          <div className="w-auto justify-end items-end gap-4 flex text-white text-[16px] text-semibold">
+            {/* <Link href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-zinc-900 justify-center items-center gap-4 flex">
             <div className="w-[120px] text-center text-white text-base font-medium leading-[29.12px]">
               Sign In
             </div>
-          </Link> */}
-          <Link href='/requestDemo' className="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-2 flex">
-            <div className="text-white text-base font-semibold leading-[19px]">
-              Request Demo
-            </div>
-            <div className="w-[18px] h-4 relative">
-              <Image
-                title='arrow'
-                className='cursor-pointer'
-                src={'/images/elements/ep_right.svg'} width={18} height={4} alt='arrow'
-              />
-            </div>
-          </Link>
+            </Link> */}
+            <Link href='/requestDemo' className="w-full px-[32px] py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex">
+              <div>
+                Request Demo
+              </div>
+              <div className="w-[18px] h-4 relative">
+                <Image
+                  title='arrow'
+                  className='cursor-pointer'
+                  src={'/images/elements/ep_right.svg'} width={18} height={4} alt='arrow'
+                />
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </>

@@ -13,10 +13,10 @@ const Features = () => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [activeButtonIndex, setActiveButtonIndex] = useState(0);
     const images = [
-        'planning.png',
-        'imagetoimage.png',
-        'texttoimage.png',
-        'socialinsights.png',
+        'planning.svg',
+        'imagetoimage.svg',
+        'texttoimage.svg',
+        'socialinsights.svg',
       ];
     
       const handleButtonClick = (index: React.SetStateAction<number>) => {
@@ -25,12 +25,12 @@ const Features = () => {
       };
     
     return (
-        <div className='w-full py-[100px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
-            <div className="w-full flex-col justify-center items-center gap-[50px] inline-flex">
+        <div className='w-full my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
+            <div className="w-full flex-col justify-center items-center gap-[32px] inline-flex">
                 <div className='text-white text-[42px] font-bold font-open-sans'>
                     Features
                 </div>
-                <div className="w-4/5 h-20 px-2 py-2 bg-zinc-800 rounded-[50px] justify-start items-center gap-5 inline-flex">
+                <div className="w-[1036px] h-20 px-2 py-2 bg-zinc-800 rounded-[50px] justify-start items-center gap-5 inline-flex">
                     <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 0 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(0)}>
                         <div className={`h-10 w-10 ${activeButtonIndex === 0 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
                             <div className={`text-center ${activeButtonIndex === 0 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
@@ -77,7 +77,7 @@ const Features = () => {
                     
                 </div>
 
-                <div className="w-4/5 rounded-[10px]">
+                <div className="w-[845px] rounded-[10px]">
                     <img className="w-full h-auto object-cover rounded" src={`images/home/features/${images[selectedImageIndex]}`} />
                 </div>
             </div>

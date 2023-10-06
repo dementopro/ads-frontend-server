@@ -10,7 +10,7 @@ import { Icon } from '@iconify/react';
 
 const Testimonials = () => {
     const [text, setText] = useState('');
-    const textOptions = ['Transoformation', 'Strategic Planning', 'Content Generation', 'Ads Optimization', 'Insights'];
+    const textOptions = ['Transformation', 'Strategic Planning', 'Content Generation', 'Ads Optimization', 'Insights'];
     const animationDuration = 2000;
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Testimonials = () => {
     const getDynamicClasses = () => {
         // Define CSS classes based on the current text
         switch (text) {
-            case 'Transoformation':
+            case 'Transformation':
                 return 'bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text';
             case 'Strategic Planning':
                 return 'text-violet-400';
@@ -42,7 +42,7 @@ const Testimonials = () => {
 
     const dynamicClasses = getDynamicClasses();
     return (
-        <div className='w-full py-[100px] bg-black'>
+        <div className='w-full my-[60px] bg-black'>
             <div className="w-full flex-col justify-center items-center gap-8 inline-flex">
                 <div className='flex-row justify-center items-center gap-[10px] inline-flex'>
                     <div className="text-white text-[42px] font-bold font-poppins">
@@ -57,23 +57,25 @@ const Testimonials = () => {
                     Here's what they have to say about us
                 </div>
                 <div className='w-full flex-col justify-center items-center !gap-[10px] inline-flex'>
-                    <Slider 
-                    arrows={true} infinite={true} variableWidth autoplay={true} pauseOnHover={true} autoplaySpeed={0} speed={8000} cssEase='linear' centerMode swipeToSlide={false}>
+                    <Slider
+                        arrows={true} infinite={true} variableWidth autoplay={true} pauseOnHover={true} autoplaySpeed={0} speed={8000} cssEase='linear' centerMode swipeToSlide={false}>
                         {userTestimonials.map((item, index) => (
 
-                            <div key={index} className="!w-[350px] h-[400px] mx-[50px] pt-[50px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[5px] !inline-flex overflow-hidden">
-                                <div className="w-full px-[30px] justify-start items-center grow shrink basis-0 text-white text-[78px] font-extrabold font-open-sans leading-[50px]">
-                                    “
+                            <div key={index} className="!w-[299px] h-[333px] mx-[50px] pt-[32px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[16px] !inline-flex overflow-hidden">
+                                <div className="w-full px-[32px] justify-start items-center">
+                                    <Image alt='quote' src='/images/elements/quote.svg' width={40} height={40} />
                                 </div>
-                                <div className="justify-start items-start gap-[8px] inline-flex">
-                                    <Image alt='user' src='/images/home/star.svg' width={30} height={30} className='rounded-full' />
-                                    <Image alt='user' src='/images/home/star.svg' width={30} height={30} className='rounded-full' />
-                                    <Image alt='user' src='/images/home/star.svg' width={30} height={30} className='rounded-full' />
-                                    <Image alt='user' src='/images/home/star.svg' width={30} height={30} className='rounded-full' />
-                                    <Image alt='user' src='/images/home/star.svg' width={30} height={30} className='rounded-full' />
+                                <div className="w-full justify-center items-start gap-[8px] inline-flex">
+                                    <Image alt='user' src='/images/elements/star.svg' width={25} height={25} className='rounded-full' />
+                                    <Image alt='user' src='/images/elements/star.svg' width={25} height={25} className='rounded-full' />
+                                    <Image alt='user' src='/images/elements/star.svg' width={25} height={25} className='rounded-full' />
+                                    <Image alt='user' src='/images/elements/star.svg' width={25} height={25} className='rounded-full' />
+                                    <Image alt='user' src='/images/elements/star.svg' width={25} height={25} className='rounded-full' />
                                 </div>
-                                <div className="px-[30px] py-[30px] grow shrink basis-0 text-center text-white text-base font-normal font-open-sans leading-[19px]">
-                                    {item.testimonial}
+                                <div className="px-[32px] h-full justify-center item-center text-center text-white text-[13px] font-normal font-open-sans leading-[19px] inline-flex">
+                                    <div className='justify-center item-center'>
+                                        {item.testimonial}
+                                    </div>
                                 </div>
                                 <div className="w-full pl-8 py-[12px] bg-[#171717] justify-start items-center inline-flex">
                                     <div className=" justify-start items-center gap-[30px] inline-flex">
