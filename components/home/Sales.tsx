@@ -12,10 +12,10 @@ const Sales = () => {
     return (
         <div className='w-full my-[60px] bg-black'>
             <div className="w-full flex-col justify-center items-center gap-8 inline-flex">
-                <div className="w-[1036px] py-[32px] px-[36px] relative bg-[#27252D] border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
+                <div className="ipad:w-[862px] desktop:w-[1036px] py-[32px] px-[36px] relative bg-[#27252D] border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
                     <div className="w-full flex-row justify-center items-center gap-[20px] inline-flex">
                         <div className="w-full flex-col justify-start items-start gap-[30px] inline-flex">
-                            <div className="text-white text-[42px] font-bold font-open-sans">
+                            <div className="text-white ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans">
                                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                                 Don't know where to start?
                             </div>
@@ -60,15 +60,15 @@ const Sales = () => {
                                 </div>
                             </div>
 
-                            <Link href='/requestDemo' className="px-[32px] py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex">
+                            <Link href='/contactUs' className="ipad:px-[25px] desktop:px-[32px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex ipad:text-[14px] desktop:text-[16px]">
                                 <div>
-                                    Contact Sales
+                                   Contact Sales
                                 </div>
-                                <div className="w-[18px] h-4 relative">
-                                    <Image
+                                <div className="relative">
+                                    <img
                                         title='arrow'
-                                        className='cursor-pointer'
-                                        src={'/images/elements/ep_right.svg'} width={18} height={4} alt='arrow'
+                                        className='cursor-pointer ipad:w-[15px] desktop:w-[18px] ipad:h-auto desktop:h-auto'
+                                        src={'/images/elements/ep_right.svg'} alt='arrow'
                                     />
                                 </div>
                             </Link>

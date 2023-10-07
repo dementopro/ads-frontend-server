@@ -40,7 +40,7 @@ const HistoricalGenerations = async () => {
       <h2 className='text-white font-medium text-xl my-6'>
         Historical Generations({imageList.length})
       </h2>
-      <div className='grid grid-flow-row grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5'>
+      <div className='grid grid-flow-row grid-cols-1 md:grid-cols-3 ipad:grid-cols-4 2xl:grid-cols-5 gap-5'>
         {
           !imageList.length
             ? <Empty />

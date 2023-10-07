@@ -22,7 +22,7 @@ const Content = () => {
 
   return (
     <>
-      <section className='max-lg:w-full overflow-auto flex flex-col justify-center items-center py-8 mx-auto'>
+      <section className='max-ipad:w-full overflow-auto flex flex-col justify-center items-center py-8 mx-auto'>
         <div className='flex items-center gap-4 max-sm:flex-col'>
           {
             PublicPricing.map((price, index) => (

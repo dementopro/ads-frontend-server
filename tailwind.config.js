@@ -11,6 +11,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'desktop': '1440px',
+        'ipad': '1024px',
+        'ipadmini': '768px',
+        'android': '360px',
+      },
       backgroundImage: {
         'hero-pattern': "url('/images/landing-bg.svg')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

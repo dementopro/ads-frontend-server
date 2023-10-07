@@ -10,7 +10,7 @@ export const metadata = {
 
 const PaymentPage = () => {
   return (
-    <div className='flex flex-col lg:flex-row w-full h-screen bg-[#121212]'>
+    <div className='flex flex-col ipad:flex-row w-full h-screen bg-[#121212]'>
       <ReactGATag
         fieldObject={{
           hitType: 'pageview',

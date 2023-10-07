@@ -12,19 +12,19 @@ const AboveFooter = () => {
 
     return (
         <div className="w-full my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex overflow-hidden">
-            <div className="w-[1036px] h-[214px] relative bg-[#3A3A3A] bg-opacity-20 rounded-3xl shadow">
+            <div className="ipad:w-[862px] desktop:w-[1036px] h-[214px] relative bg-[#3A3A3A] bg-opacity-20 rounded-3xl shadow">
                 <img className="w-full h-auto left-0 top-0 absolute object-cover rounded z-neg-1" src="images/home/above-footer-vector.svg" />
                 <div className="h-full px-[50px] relative justify-start items-center flex-row flex z-10">
                     <div className="justify-start items-start flex-col flex gap-[20px]">
-                        <Link href='/requestDemo' className="px-[32px] py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex">
+                        <Link href='/requestDemo' className="ipad:px-[25px] desktop:px-[32px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center gap-[8px] flex ipad:text-[14px] desktop:text-[16px]">
                             <div>
                                 Request Demo
                             </div>
-                            <div className="w-[18px] h-4 relative">
-                                <Image
+                            <div className="relative">
+                                <img
                                     title='arrow'
-                                    className='cursor-pointer'
-                                    src={'/images/elements/ep_right.svg'} width={18} height={4} alt='arrow'
+                                    className='cursor-pointer ipad:w-[15px] desktop:w-[18px] ipad:h-auto desktop:h-auto'
+                                    src={'/images/elements/ep_right.svg'} alt='arrow'
                                 />
                             </div>
                         </Link>

@@ -19,7 +19,7 @@ const AdminSidebar = () => {
   const { isLogin } = useContext(AccountContext);
 
   return (
-    <aside className='max-lg:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6'>
+    <aside className='max-ipad:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6'>
       <div className='flex flex-col w-full'>
         <Menu />
       </div>

@@ -43,20 +43,20 @@ const Testimonials = () => {
     const dynamicClasses = getDynamicClasses();
     return (
         <div className='w-full my-[60px] bg-black'>
-            <div className="w-full flex-col justify-center items-center gap-8 inline-flex">
+            <div className="w-full flex-col justify-center items-center ipad:gap-[16px] desktop:gap-[32px] inline-flex">
                 <div className='flex-row justify-center items-center gap-[10px] inline-flex'>
-                    <div className="text-white text-[42px] font-bold font-poppins">
+                    <div className="text-white ipad:text-[34px] desktop:text-[42px] font-bold font-poppins">
                         We Help our Clients Achieve
                     </div>
-                    <div className={`${dynamicClasses} text-[42px] font-bold font-poppins`}>
+                    <div className={`${dynamicClasses} ipad:text-[34px] desktop:text-[42px] font-bold font-poppins`}>
                         {text}
                     </div>
                 </div>
-                <div className="text-white text-xl font-medium font-open-sans leading-tight">
+                <div className="text-white ipad:text-[16px] desktop:text-[20px] font-medium font-open-sans leading-tight">
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     Here's what they have to say about us
                 </div>
-                <div className='w-full flex-col justify-center items-center !gap-[10px] inline-flex'>
+                <div className='w-full ipad:mt-[16px] desktop:mt-[0px] flex-col justify-center items-center !gap-[10px] inline-flex'>
                     <Slider
                         arrows={true} infinite={true} variableWidth autoplay={true} pauseOnHover={true} autoplaySpeed={0} speed={8000} cssEase='linear' centerMode swipeToSlide={false}>
                         {userTestimonials.map((item, index) => (

@@ -111,7 +111,7 @@ const GenerateContent = ({ mode }: Props) => {
         show={showNotEnoughCredits}
         setShow={() => setShowNotEnoughCredits(false)} />
       <Spin spinning={isGenerating || isSaving} wrapperClassName='text-base rounded-lg'>
-        <div className='flex flew-wrap max-lg:flex-col gap-[18px]'>
+        <div className='flex flew-wrap max-ipad:flex-col gap-[18px]'>
           {/* left */}
           <div className='flex-1 rounded-lg py-4 px-5 border border-[#3A3A3A] bg-[#1B1C21] flex flex-col gap-4 items-end justify-between'>
             <div className='w-full h-[220px]'>

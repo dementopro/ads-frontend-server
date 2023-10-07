@@ -56,7 +56,7 @@ const BlogList = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-[1200px] px-8 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 ipad:grid-cols-3 w-full max-w-[1200px] px-8 gap-4'>
         {
           blogs.map((blog) => (
             <BlogCard blog={blog} key={blog.id} />

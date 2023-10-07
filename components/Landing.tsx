@@ -12,21 +12,21 @@ const Landing = () => {
   }
 
   return (
-    <div className='w-full h-full flex flex-col items-center justify-center max-lg:hidden lg:max-w-[660px] bg-[#121212] px-8 py-[28px] relative select-none'>
+    <div className='w-full h-full flex flex-col items-center justify-center max-ipad:hidden ipad:max-w-[660px] bg-[#121212] px-8 py-[28px] relative select-none'>
       <Image
         title='Home - AdsGency AI'
         onClick={toHome}
         alt='logo'
-        className='cursor-pointer max-lg:mb-5 lg:absolute top-[28px] left-8'
+        className='cursor-pointer max-ipad:mb-5 ipad:absolute top-[28px] left-8'
         width={130}
         height={28}
         src={'/logo.svg'}
       />
       <div className='flex flex-col gap-[28px] max-w-[440px]'>
-        <div className={`text-5xl lg:text-6xl font-bold`}>
+        <div className={`text-5xl ipad:text-6xl font-bold`}>
           🚀 <span className={`${styles['landing-txt']}`}>One-Stop Ads Platform without limits</span>
         </div>
-        <p className='text-[#E0E0E0] text-lg lg:text-xl'>
+        <p className='text-[#E0E0E0] text-lg ipad:text-xl'>
           Generative AI models empowered omnichannel management for Creative Ads
         </p>
         <div className='text-xs text-[#F6F6F6]'>Made with 💜 in San Francisco</div>
