@@ -11,7 +11,7 @@ const Breadcrumb = () => {
   const pathname = usePathname();
 
   return (
-    <div className='flex items-center text-primary-gray gap-6'>
+    <div className='flex items-center text-primary-gray gap-0 android:gap-4 ipadmini:gap-6'>
       {/* Link to the home page */}
       <Link href={'/home'} className='text-white hover:opacity-80'>
         Home
@@ -19,7 +19,7 @@ const Breadcrumb = () => {
       {/* Generate breadcrumb items based on the current pathname */}
       {
         breadCrumbMap[pathname]?.map((item) => (
-          <div key={item} className='flex items-center gap-6'>
+          <div key={item} className='flex items-center gap-0 android:gap-4 ipadmini:gap-6'>
             {/* Chevron icon */}
             <Icon icon={chevronRight} />
             {/* Breadcrumb item text */}

@@ -84,7 +84,7 @@ const DropDown = () => {
       {/* Create a dropdown menu with specified items */}
       <Dropdown menu={{ items }} arrow>
         {/* Render the dropdown trigger */}
-        <a className='h-[46px] flex items-center justify-center gap-4 cursor-pointer' onClick={(e) => e.preventDefault()}>
+        <a className='h-[46px] flex items-center justify-center gap-0 android:gap-4 cursor-pointer' onClick={(e) => e.preventDefault()}>
           <Image src={'/images/admin/avatar.svg'} width={30} height={30} alt="avatar" className="rounded-full inline-block" />
           <Icon icon={chevronDown} inline className='text-primary-gray' />
         </a>

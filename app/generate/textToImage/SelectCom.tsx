@@ -41,7 +41,7 @@ const SelectCom = ({ options, selected, setSelected }: props<{ name: string, val
                 {({ selected }) => (
                   <>
                     <span
-                      className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                      className={`block truncate ${selected ? 'font-medium' : 'font-regular'
                         }`}
                     >
                       {person.name}

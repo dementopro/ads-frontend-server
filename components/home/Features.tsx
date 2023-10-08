@@ -25,59 +25,59 @@ const Features = () => {
       };
     
     return (
-        <div className='w-full my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
-            <div className="w-full flex-col justify-center items-center gap-[32px] inline-flex">
-                <div className='text-white ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
+        <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black flex-col android:gap-[16px] ipad:gap-[32px] inline-flex'>
+            <div className="w-full flex-col android:justify-start ipadmini:justify-center items-center android:gap-[16px] ipad:gap-[32px] inline-flex">
+                <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
                     Features
                 </div>
-                <div className="ipad:w-[862px] desktop:w-[1036px] h-20 px-2 py-2 bg-zinc-800 rounded-[50px] justify-start items-center gap-5 inline-flex">
-                    <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 0 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(0)}>
-                        <div className={`h-10 w-10 ${activeButtonIndex === 0 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
-                            <div className={`text-center ${activeButtonIndex === 0 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
+                <div className="android:w-[328px] ipadmini:w-[583px] ipad:w-[862px] desktop:w-[1036px] ipad:h-[68px] android:p-[4px] ipad:p-[7px] bg-zinc-800 android:rounded-[20px] ipadmini:rounded-[50px] justify-start items-center android:gap-[8px] ipad:gap-[16px] android:flex-col ipadmini:flex-row inline-flex">
+                    <button className={`android:h-[26px] ipad:h-[54px] android:w-full ipadmini:w-1/4 android:p-[3px] ipad:p-[12px] ${activeButtonIndex === 0 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center android:gap-[7px] ipad:gap-[14px] flex`} onClick={() => handleButtonClick(0)}>
+                        <div className={`android:h-[20px] ipad:h-[35px] android:w-[20px] ipad:w-[35px] ${activeButtonIndex === 0 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 0 ? 'text-violet-500' : 'text-zinc-500'} android:text-[12px] ipad:text-[20px] font-semibold font-poppins`}>
                                 1
                             </div>
                         </div>
-                        <div className="text-white text-base font-medium font-poppins">
+                        <div className="text-white android:text-[9px] ipad:text-[13px] font-medium font-poppins">
                             Planning
                         </div>
                     </button>
 
-                    <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 1 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(1)}>
-                        <div className={`h-10 w-10 ${activeButtonIndex === 1 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
-                            <div className={`text-center ${activeButtonIndex === 1 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
+                    <button className={`android:h-[26px] ipad:h-[54px] android:w-full ipadmini:w-1/4 android:p-[3px] ipad:p-[12px] ${activeButtonIndex === 1 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center android:gap-[7px] ipad:gap-[14px] flex`} onClick={() => handleButtonClick(1)}>
+                        <div className={`android:h-[20px] ipad:h-[35px] android:w-[20px] ipad:w-[35px] ${activeButtonIndex === 1 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 1 ? 'text-violet-500' : 'text-zinc-500'} android:text-[12px] ipad:text-[20px] font-semibold font-poppins`}>
                                 2
                             </div>
                         </div>
-                        <div className="text-white text-base font-medium font-poppins">
+                        <div className="text-white android:text-[9px] ipad:text-[13px] font-medium font-poppins">
                             Image to Image
                         </div>
                     </button>
 
-                    <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 2 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(2)}>
-                        <div className={`h-10 w-10 ${activeButtonIndex === 2 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
-                            <div className={`text-center ${activeButtonIndex === 2 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
+                    <button className={`android:h-[26px] ipad:h-[54px] android:w-full ipadmini:w-1/4 android:p-[3px] ipad:p-[12px] ${activeButtonIndex === 2 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center android:gap-[7px] ipad:gap-[14px] flex`} onClick={() => handleButtonClick(2)}>
+                        <div className={`android:h-[20px] ipad:h-[35px] android:w-[20px] ipad:w-[35px] ${activeButtonIndex === 2 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 2 ? 'text-violet-500' : 'text-zinc-500'} android:text-[12px] ipad:text-[20px] font-semibold font-poppins`}>
                                 3
                             </div>
                         </div>
-                        <div className="text-white text-base font-medium font-poppins">
+                        <div className="text-white android:text-[9px] ipad:text-[13px] font-medium font-poppins">
                             Text to Image
                         </div>
                     </button>
 
-                    <button className={`h-16 w-1/4 px-3 py-3 ${activeButtonIndex === 3 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center gap-4 flex`} onClick={() => handleButtonClick(3)}>
-                        <div className={`h-10 w-10 ${activeButtonIndex === 3 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
-                            <div className={`text-center ${activeButtonIndex === 3 ? 'text-violet-500' : 'text-zinc-500'} text-2xl font-semibold font-poppins`}>
+                    <button className={`android:h-[26px] ipad:h-[54px] android:w-full ipadmini:w-1/4 android:p-[3px] ipad:p-[12px] ${activeButtonIndex === 3 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center android:gap-[7px] ipad:gap-[14px] flex`} onClick={() => handleButtonClick(3)}>
+                        <div className={`android:h-[20px] ipad:h-[35px] android:w-[20px] ipad:w-[35px] ${activeButtonIndex === 3 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
+                            <div className={`text-center ${activeButtonIndex === 3 ? 'text-violet-500' : 'text-zinc-500'} android:text-[12px] ipad:text-[20px] font-semibold font-poppins`}>
                                 4
                             </div>
                         </div>
-                        <div className="text-white text-base font-medium font-poppins">
+                        <div className="text-white android:text-[9px] ipad:text-[13px] font-medium font-poppins">
                             Social Insights
                         </div>
                     </button>
                     
                 </div>
 
-                <div className="ipad:w-[862px] desktop:w-[862px] rounded-[10px]">
+                <div className="android:w-[328px] ipadmini:w-[540px] ipad:w-[862px] desktop:w-[862px] rounded-[10px]">
                     <img className="w-full h-auto object-cover rounded" src={`images/home/features/${images[selectedImageIndex]}`} />
                 </div>
             </div>

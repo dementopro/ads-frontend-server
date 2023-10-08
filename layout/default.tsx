@@ -11,7 +11,7 @@ const DefaultLayout = ({ children }: {
 }) => {
   return (
     <NextUIProvider>
-      <main className="overflow-hidden flex min-h-screen flex-col bg-black text-white">
+      <main className="overflow-hidden flex flex-col bg-black text-white">
         {/* Render the children components, which represent the content of the pages */}
         {children}
       </main>

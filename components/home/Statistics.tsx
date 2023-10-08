@@ -21,18 +21,18 @@ const Statistics = () => {
     }, []);
 
     return (
-        <div className='w-full my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
+        <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
             <div className="w-full flex-col justify-center items-center gap-[50px] inline-flex">
-                <div className='text-white ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
+                <div className='text-center android:w-3/5 ipadmini:w-full ipad:w-full desktop:w-full text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
                     <span className="bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
                         Unlock
                     </span> the  Advantages of  AI  for your Business
                 </div>
-                <div className="w-full h-full ipad:px-[80px] desktop:px-[100px] flex-row justify-center items-center gap-[10px] inline-flex">
-                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center gap-[15px] inline-flex border-r-2 border-[#838383] border-opacity-45">
+                <div className="w-full h-full ipad:px-[80px] desktop:px-[100px] android:flex-col ipad:flex-row justify-center android:items-center ipad:items-start android:gap-[50px] ipad:gap-[10px] inline-flex">
+                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center android:gap-[8px] ipad:gap-[15px] inline-flex ipad:border-r-2 ipad:border-[#838383] ipad:border-opacity-45">
                         <CircularProgress
                             classNames={{
-                                svg: "w-36 h-36 drop-shadow-md",
+                                svg: "android:w-[115px] android:h-[115px] ipad:w-[150px] ipad:h-[150px] drop-shadow-md",
                                 indicator: "stroke-violet-500",
                                 track: "stroke-indigo-300/10",
                                 value: "text-3xl font-semibold text-white",
@@ -41,18 +41,17 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="text-xl font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Decrease Cost
                         </div>
-                        <div className="mt-[20px] text-center text-base font-normal font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
                             Reduce adsmanagement cost by 80%
                         </div>
                     </div>
-
-                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center gap-[15px] inline-flex border-r-2 border-[#838383] border-opacity-45">
+                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center android:gap-[8px] ipad:gap-[15px] inline-flex ipad:border-r-2 ipad:border-[#838383] ipad:border-opacity-45">
                         <CircularProgress
                             classNames={{
-                                svg: "w-36 h-36 drop-shadow-md",
+                                svg: "android:w-[115px] android:h-[115px] ipad:w-[150px] ipad:h-[150px] drop-shadow-md",
                                 indicator: "stroke-violet-500",
                                 track: "stroke-indigo-300/10",
                                 value: "text-3xl font-semibold text-white",
@@ -61,18 +60,17 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="text-xl font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Increase Efficiency
                         </div>
-                        <div className="mt-[20px] text-center text-base font-normal font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
                             Generate ad content 10x faster
                         </div>
                     </div>
-
-                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center gap-[15px] inline-flex">
+                    <div className="w-full h-full ipad:px-[30px] desktop:px-[20px] flex-col justify-center items-center android:gap-[8px] ipad:gap-[15px] inline-flex">
                         <CircularProgress
                             classNames={{
-                                svg: "w-36 h-36 drop-shadow-md",
+                                svg: "android:w-[115px] android:h-[115px] ipad:w-[150px] ipad:h-[150px] drop-shadow-md",
                                 indicator: "stroke-violet-500",
                                 track: "stroke-indigo-300/10",
                                 value: "text-3xl font-semibold text-white",
@@ -81,10 +79,10 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="text-xl font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Increase ROI
                         </div>
-                        <div className="mt-[20px] text-center text-base font-normal font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
                             32% Improvement on ad performance
                         </div>
                     </div>
