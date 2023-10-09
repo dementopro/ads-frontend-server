@@ -83,7 +83,6 @@ const OriginImageUpload = () => {
             messageApi.error(data.message || 'Upload failed')
           }
         } else {
-          console.log('response', response)
           messageApi.error('Upload failed')
         }
       } catch (error) {

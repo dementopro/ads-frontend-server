@@ -60,7 +60,6 @@ const PaymentForm = () => {
           messageApi.error(data.message || 'Something went wrong');
         }
       } else {
-        console.log('error: ', response.statusText)
         messageApi.error(response.statusText || 'Something went wrong');
       }
     } catch (error) {

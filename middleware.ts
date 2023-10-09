@@ -1,16 +1,15 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import Cookies from 'universal-cookie';
+import { withAuth } from "next-auth/middleware";
 
-
-// This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest) {
-  const cookies = new Cookies(request.headers.get('cookie'))
-  const session = cookies.get('session')
-  if (!session) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-}
+export default withAuth({
+  
+  pages: {
+    signIn: '/login',
+    signOut: '/logout',
+    error: '/login', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
+});
 
 // See "Matching Paths" below to learn more
 export const config = {

@@ -1,6 +1,7 @@
 import './globals.css'
 import { Poppins } from 'next/font/google'
 import WithProviders from '@/app/WithProviders'
+import SessionProvider from '@/context/sessionprovider';
 
 const poppins = Poppins({ subsets: ['latin'], weight: "400" })
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="w-full" >
-        <WithProviders>
-          {children}
-        </WithProviders>
+        <SessionProvider>
+          <WithProviders>
+            {children}
+          </WithProviders>
+        </SessionProvider>
       </body>
     </html>
   )

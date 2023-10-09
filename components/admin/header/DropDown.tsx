@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react'
 import { Dropdown, MenuProps, message } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import {signOut} from 'next-auth/react'
 
 // Define the DropDown component
 const DropDown = () => {
@@ -55,24 +56,25 @@ const DropDown = () => {
     try {
       // Display a loading message
       messageApi.loading('Logout...')
-      const response = await fetch(`/api/auth/logout`)
-      if (response.ok) {
-        const data: IResponse = await response.json()
-        if (data.status === SUCCESS_CODE) {
-          // Display a success message, perform logout, and redirect to the login page
-          messageApi.success('Logout success')
-          onLogout()
-          setTimeout(() => {
-            router.push('/login')
-          }, 1000)
-        } else {
-          // Display an error message if logout fails
-          messageApi.error('Logout failed')
-        }
-      } else {
-        // Display an error message if logout fails
-        messageApi.error('Logout failed')
-      }
+      await signOut ({callbackUrl: '/login'})
+      // const response = await fetch(`/api/auth/signout`)
+      // if (response.ok) {
+      //   const data: IResponse = await response.json()
+      //   if (data.status === SUCCESS_CODE) {
+      //     // Display a success message, perform logout, and redirect to the login page
+      //     messageApi.success('Logout success')
+      //     onLogout()
+      //     setTimeout(() => {
+      //       router.push('/login')
+      //     }, 1000)
+      //   } else {
+      //     // Display an error message if logout fails
+      //     messageApi.error('Logout failed')
+      //   }
+      // } else {
+      //   // Display an error message if logout fails
+      //   messageApi.error('Logout failed')
+      // }
     } catch (error) {
       console.log('error', error)
     }

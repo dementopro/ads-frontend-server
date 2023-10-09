@@ -1,7 +1,8 @@
 'use client'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './login.module.css'
 import Link from 'next/link'
+import { useRouter, redirect } from 'next/navigation';
 import { FormikHelpers, useFormik } from 'formik';
 import { LoginForm } from '@/types/auth';
 import { loginValidate } from '@/lib/validate';
@@ -10,10 +11,14 @@ import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
 import { message } from 'antd';
-import { NO_CREDIT_CARD, SUCCESS_CODE } from '@/data/constant';
-import { onLogin } from '@/lib/auth';
+
+import {signIn, signOut} from 'next-auth/react'
+import { useAuthContext } from '@/context/auth';
+
 
 const LoginForm = () => {
+
+  const {user, loading:authLoading} = useAuthContext ()
 
   const formik = useFormik<LoginForm>({
     initialValues: {
@@ -28,39 +33,27 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
   const [showPwd, setShowPwd] = useState(false)
+  const router = useRouter();
+
+  useEffect (()=>{
+    if (authLoading) setIsLoading (authLoading)
+    else {
+      if (user) {
+        router.push ('/home')
+      }
+      setIsLoading (false)
+    }
+  },[authLoading, user])
 
   async function onSubmit(values: LoginForm, actions: FormikHelpers<LoginForm>) {
     actions.setSubmitting(false);
     try {
       setIsLoading(true)
-      // TODO: change to use application/json
-      const formData = new FormData()
-      for (const [key, value] of Object.entries(values)) {
-        formData.append(key, value)
-      }
-      const response = await fetch('/fapi/login_api', {
-        method: 'POST',
-        body: formData,
+      signIn ('credentials',{
+        email: values.email,
+        password: values.password,
+        callbackUrl: '/home',
       })
-      if (response.ok) {
-        const data = await response.json()
-        if (data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'Login success');
-          // redirect to home
-          // NOTE: need to fresh the page to get the new cookie
-          onLogin()
-          window.location.href = '/home'
-        // }
-        // else if (data.status === NO_CREDIT_CARD) {
-        //   messageApi.success('Login success');
-        //   onLogin()
-        //   window.location.href = '/auth/payment'
-        } else {
-          messageApi.error(data.message || 'Something went wrong');
-        }
-      } else {
-        messageApi.error(response.statusText || 'Something went wrong');
-      }
     } catch (error) {
       console.log('error: ', error)
     } finally {

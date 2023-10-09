@@ -1,9 +1,11 @@
 // Import necessary modules and constants
 import { SUCCESS_CODE } from "@/data/constant";
-import { isUserLogin } from "@/lib/auth";
+import { isUserLogin, onLogin, onLogout } from "@/lib/auth";
 import { calculateExpireDays } from "@/lib/date";
 import { Account, QueryAccountResp } from "@/types/account";
 import { createContext, useEffect, useState } from "react";
+import { getCookie } from "@/lib/cookies";
+import { useAuthContext } from "./auth";
 
 // Create a context for managing user account-related data
 export const AccountContext = createContext<{
@@ -59,17 +61,23 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [nextPage, setNextPage] = useState("")
   const [selectedPlan, setSelectedPlan] = useState(-1)
 
-  // useEffect to check user login status and update account data
-  useEffect(() => {
-    setIsLogin(isUserLogin())
-    updateAccount()
-  }, [])
+  const {loading, user} = useAuthContext ()
+  // }, [])
+
+  useEffect (()=>{
+    if (user) {
+      setIsLogin (true)
+      updateAccount ()
+    } else {
+      setIsLogin (false)
+    }
+  },[loading, user])
 
   // Function to fetch and update user account data
   async function updateAccount() {
     if (!isLogin) return
     try {
-      const response = await fetch('/fapi/inquiry_subscription_api', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fapi/inquiry_subscription_api`, {
         method: 'GET',
       })
       if (response.ok) {

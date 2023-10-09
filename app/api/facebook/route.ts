@@ -8,7 +8,7 @@ export async function GET(req: Request) {
       'Access-Control-Allow-Origin': '*',
     }
   })
-  console.log('response.status', response.status)
+
   const data = await response.json()
   return NextResponse.json(data, {
     status: 200,

@@ -247,10 +247,6 @@ const PricingPage = () => {
                     <SubscriptionButton
                       plan={item}
                       onSubscription={(planId) => {
-                        if (!isLogin) {
-                          router.push('/login')
-                          return
-                        }
                         setBuyPlanId(planId)
                         setConfirmVisible(true)
                       }}

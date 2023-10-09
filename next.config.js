@@ -28,7 +28,7 @@ domains: [
     },
 experimental: {
 proxyTimeout: 10 * 60 * 1000,
-appDir: true,
+serverActions: true,
 }
 }
 module.exports = nextConfig
