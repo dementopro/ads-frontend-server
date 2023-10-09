@@ -23,7 +23,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
     <h4 className="font-semibold uppercase text-white">{title}</h4>
     <ul className="flex flex-col gap-3 text-sm font-regular text-primary-gray">
       {links.map((link) => (
-        <Link href={link.href} key={link.label} className='hover:text-white'>
+        <Link target="_blank"  href={link.href} key={link.label} className='hover:text-white'>
           {link.label}
         </Link>
       ))}

@@ -13,7 +13,7 @@ const Growth = () => {
   return (
     <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black'>
       <div className="w-full flex-col justify-center items-center android:gap-[30px] ipadmini:gap-[40px] ipad:gap-[50px] desktop:gap-[60px] inline-flex">
-        <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[20px] desktop:text-[24px] font-bold font-poppins leading-normal">
+        <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[20px] desktop:text-[24px] font-bold font-Poppins leading-normal">
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Enabling our Customer's Growth
         </div>

@@ -38,13 +38,13 @@ const AdminHeader = () => {
       <div className='flex items-center'>
         <Icon icon={menuIcon} className='cursor-pointer w-[40px] h-[32px] mr-[10px]' />
         {/* TODO: change logo to svg */}
-        <Link href={'/'} className='hidden ipad:flex'>
+        <Link target="_blank"  href={'/'} className='hidden ipad:flex'>
           <Image src='/logo.png' alt='Logo' width={200} height={46} />
         </Link>
         <nav className='flex items-center gap-[20px] ipad:gap-[38px] ipad:ml-[28px]'>
           {
             navItems.map((item, index) => (
-              <Link href={item.href} key={index} className='text-[#3a3a3a] hover:text-[#D634FF] font-[400] text-base ipad:text-[20px] truncate'>{item.name}</Link>
+              <Link target="_blank"  href={item.href} key={index} className='text-[#3a3a3a] hover:text-[#D634FF] font-[400] text-base ipad:text-[20px] truncate'>{item.name}</Link>
             ))
           }
         </nav>

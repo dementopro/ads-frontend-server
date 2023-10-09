@@ -10,14 +10,14 @@ const Banner = () => {
 
     return (
         <>
-            <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-full ipad:h-[73px] desktop:h-[73px] left-0 top-[-50px] font-poppins absolute bg-gradient-to-r from-indigo-500 to-purple-500 rounded-tl-[25px] rounded-tr-[25px] shadow z-neg-1">
+            <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-full ipad:h-[73px] desktop:h-[73px] left-0 top-[-50px] font-Poppins absolute bg-gradient-to-r from-indigo-500 to-purple-500 rounded-tl-[25px] rounded-tr-[25px] shadow z-neg-1">
                 <div className="w-full ipad:h-[50px] desktop:h-[50px] px-[32px] py-2 justify-start items-center flex text-white ipad:text-[13px] desktop:text-[15px]">
-                    <div className="w-full font-semibold">
-                        We’ve just launched a new feature!
+                    <div className="w-3/4 font-semibold">
+                        Exciting News! AdsGency AI selected to participate in the TechStars Accelerator Program 🚀
                     </div>
-                    <div className="w-full justify-end items-end gap-[16px] flex">
+                    <Link target="_blank"  href='https://www.linkedin.com/posts/bolbi-liu-6aa0b4ab_techstarsforlife-startuplife-founders-activity-7117202850144800768-lSwq?utm_source=share&utm_medium=member_desktop' className="w-1/4 justify-end items-end gap-[16px] flex">
                         <div className="font-medium underline">
-                            See Feature Now
+                            See Details
                         </div>
                         <div className="w-[18px] h-4 relative">
                             <img
@@ -26,7 +26,7 @@ const Banner = () => {
                                 src={'/images/elements/close.svg'} alt='arrow'
                             />
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </>

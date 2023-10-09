@@ -32,7 +32,7 @@ const NotEnoughtCredits = ({ show, setShow, tips }: Props) => {
                   </p>
                 )}
                 <Icon icon='game-icons:pay-money' className='text-primary-gray' width={60} height={60} />
-                <Link
+                <Link target="_blank" 
                   href={'/pricing'}
                   className={`mt-9 w-[300px] flex items-center justify-center py-2 text-white cursor-pointer hover:opacity-80 overflow-hidden rounded-lg border-2 bg-[#1B1C21]`}
                 >

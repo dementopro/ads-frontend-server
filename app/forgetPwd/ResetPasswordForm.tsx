@@ -147,7 +147,7 @@ const ResetPasswordForm = () => {
         </button>
       </form>
       <div className='mt-6 flex flex-col items-center justify-center gap-4 text-primary-gray text-sm'>
-        <p>Already have an account? <Link className='text-[#7366ff] font-semibold' href={'/login'} >Sign in 💜</Link></p>
+        <p>Already have an account? <Link target="_blank"  className='text-[#7366ff] font-semibold' href={'/login'} >Sign in 💜</Link></p>
       </div>
     </>
   )

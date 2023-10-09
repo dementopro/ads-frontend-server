@@ -101,7 +101,7 @@ const ProfileCard = () => {
               <Icon icon='akar-icons:edit' width={16} height={16} />
               <span className='text-base'>Edit profile</span>
             </button>
-            <Link
+            <Link target="_blank" 
               href='/auth/payment'
               className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
               <Icon icon='akar-icons:edit' width={16} height={16} />

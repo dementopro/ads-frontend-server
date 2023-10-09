@@ -14,7 +14,7 @@ const BlogDetail = ({ blog }: Props) => {
   return (
     <div className='my-8 flex flex-col w-full mx-auto container selection:bg-primary-purple'>
       <div className='mx-auto sm:max-w-[1000px] px-8 flex flex-col items-center justify-center gap-2 w-full relative my-8'>
-        <Link href='/blog' title='Go back to blogs'>
+        <Link target="_blank"  href='/blog' title='Go back to blogs'>
           <Icon icon='mdi:arrow-left' width={24} height={24} className='text-white hover:opacity-80 sm:absolute left-3 top-[50%] translate-y-[-50%]' />
         </Link>
         <div className='text-white/80'>

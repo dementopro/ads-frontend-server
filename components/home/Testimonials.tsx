@@ -45,14 +45,14 @@ const Testimonials = () => {
         <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black'>
             <div className="w-full flex-col justify-center items-center android:gap-[32px] ipadmini:gap-[32px] ipad:gap-[16px] desktop:gap-[32px] inline-flex">
                 <div className='android:flex-col ipadmini:flex-row ipad:flex-row desktop:flex-row justify-center items-center android:gap-[0px] ipadmini:gap-[6px] ipad:gap-[8px] desktop:gap-[10px] inline-flex'>
-                    <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-poppins">
+                    <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-Poppins">
                         We Help our Clients Achieve
                     </div>
-                    <div className={`${dynamicClasses} android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-poppins`}>
+                    <div className={`${dynamicClasses} android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-Poppins`}>
                         {text}
                     </div>
                 </div>
-                <div className="text-white android:text-[12px] ipadmini:text-[14px] ipad:text-[16px] desktop:text-[20px] font-medium font-open-sans leading-tight">
+                <div className="text-white android:text-[12px] ipadmini:text-[14px] ipad:text-[16px] desktop:text-[20px] font-medium font-Open+Sans leading-tight">
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     Here's what they have to say about us
                 </div>
@@ -84,7 +84,7 @@ const Testimonials = () => {
                                         alt='quote' src='/images/elements/star.svg'
                                     />
                                 </div>
-                                <div className="android:px-[18px] ipadmini:px-[20px] ipad:px-[32px] desktop:px-[32px] h-full justify-center item-center text-center text-white android:text-[10px] ipadmini:text-[12px] ipad:text-[13px] desktop:text-[13px] font-regular font-open-sans leading-[19px] inline-flex">
+                                <div className="android:px-[18px] ipadmini:px-[20px] ipad:px-[32px] desktop:px-[32px] h-full justify-center item-center text-center text-white android:text-[10px] ipadmini:text-[12px] ipad:text-[13px] desktop:text-[13px] font-regular font-Open+Sans leading-[19px] inline-flex">
                                     <div className='justify-center item-center'>
                                         {item.testimonial}
                                     </div>
@@ -93,10 +93,10 @@ const Testimonials = () => {
                                     <div className=" justify-start items-center android:gap-[14px] ipadmini:gap-[16px] ipad:gap-[30px] desktop:gap-[30px] inline-flex">
                                         <img alt={item.name} src={`/images/home/testimonial/${item.image}.png`} className="android:w-[27px] ipadmni:w-[32px] ipad:w-[42px] desktop:w-[42px] android:h-[27px] ipadmni:h-[32px] ipad:h-[42px] desktop:h-[42px] rounded-full border border-white" />
                                         <div className="flex-col justify-center items-start android:gap-[0px] ipadmini:gap-[4px] ipad:gap-[5px] desktop:gap-[5px] inline-flex">
-                                            <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[12px] desktop:text-[12px] font-semibold font-poppins">
+                                            <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[12px] desktop:text-[12px] font-semibold font-Poppins">
                                                 {item.name}
                                             </div>
-                                            <div className="text-zinc-400 android:text-[7px] ipadmini:text-[9px] ipad:text-[11px] desktop:text-[11px] font-regular font-open-sans leading-[19px]">
+                                            <div className="text-zinc-400 android:text-[7px] ipadmini:text-[9px] ipad:text-[11px] desktop:text-[11px] font-regular font-Open+Sans leading-[19px]">
                                                 {item.designation}
                                             </div>
                                         </div>

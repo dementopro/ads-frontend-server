@@ -23,7 +23,7 @@ const Statistics = () => {
     return (
         <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex'>
             <div className="w-full flex-col justify-center items-center gap-[50px] inline-flex">
-                <div className='text-center android:w-3/5 ipadmini:w-full ipad:w-full desktop:w-full text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
+                <div className='text-center android:w-3/5 ipadmini:w-full ipad:w-full desktop:w-full text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-Open+Sans'>
                     <span className="bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
                         Unlock
                     </span> the  Advantages of  AI  for your Business
@@ -41,10 +41,10 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-Poppins">
                             Decrease Cost
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-Open+Sans">
                             Reduce adsmanagement cost by 80%
                         </div>
                     </div>
@@ -60,10 +60,10 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-Poppins">
                             Increase Efficiency
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-Open+Sans">
                             Generate ad content 10x faster
                         </div>
                     </div>
@@ -79,10 +79,10 @@ const Statistics = () => {
                             strokeWidth={10}
                             showValueLabel={true}
                         />
-                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
+                        <div className="android:text-[18px] ipad:text-[24px] font-semibold font-Poppins">
                             Increase ROI
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-Open+Sans">
                             32% Improvement on ad performance
                         </div>
                     </div>

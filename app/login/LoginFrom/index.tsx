@@ -92,7 +92,7 @@ const LoginForm = () => {
             />
             <label className='text-white text-xs ml-2 select-none cursor-pointer' htmlFor="remember">Remember me</label>
           </div>
-          <Link className='text-[#7366ff] text-xs font-semibold' href={'/forgetPwd'}>Forgot Password?</Link>
+          <Link target="_blank"  className='text-[#7366ff] text-xs font-semibold' href={'/forgetPwd'}>Forgot Password?</Link>
         </div>
         <button type="submit" disabled={isLoading} className={`${styles['login-btn']}`}>
           {isLoading && <Icon icon={loadingIcon} className='mr-2' />}
@@ -100,7 +100,7 @@ const LoginForm = () => {
         </button>
       </form>
       <div className='mt-12 flex flex-col items-center justify-center gap-4 text-primary-gray text-sm'>
-        <p>Dont&apos;t have account? <Link className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>
+        <p>Dont&apos;t have account? <Link target="_blank"  className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>
       </div>
     </>
   )

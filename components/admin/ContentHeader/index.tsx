@@ -18,7 +18,7 @@ const ContentHeader = () => {
       <div className='flex justify-between items-center px-4 android:px-8 h-[64px] bg-[#1B1C21] border-b border-b-[#3A3A3A]'>
         <div className='w-[150px] android:w-[170px] ipadmini:w-[260px]'>
           {/* Create a link to the '/home' route with a logo */}
-          <Link href={'/home'}>
+          <Link target="_blank"  href={'/home'}>
             <Image src={'/images/sidebar/logo.svg'} width={132} height={28} alt='logo' />
           </Link>
         </div>

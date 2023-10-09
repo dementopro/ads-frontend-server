@@ -13,7 +13,7 @@ const Breadcrumb = () => {
   return (
     <div className='flex items-center text-primary-gray gap-0 android:gap-4 ipadmini:gap-6'>
       {/* Link to the home page */}
-      <Link href={'/home'} className='text-white hover:opacity-80'>
+      <Link target="_blank"  href={'/home'} className='text-white hover:opacity-80'>
         Home
       </Link>
       {/* Generate breadcrumb items based on the current pathname */}

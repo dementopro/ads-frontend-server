@@ -19,11 +19,11 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           background: 'linear-gradient(180deg, #1B1C21 0%, #251F32 100%)'
         }}
       >
-        <Link href={`/blog/${blog.id}`} className='w-full h-48 bg-gray-300 relative overflow-hidden'>
+        <Link target="_blank"  href={`/blog/${blog.id}`} className='w-full h-48 bg-gray-300 relative overflow-hidden'>
           <Image src={blog.coverImage} alt={blog.title} layout='fill' className='object-cover hover:scale-125 transition-all duration-600 cursor-pointer' />
         </Link>
         <div className='flex flex-col gap-3 p-4'        >
-          <Link href={`/blog/${blog.id}`} className='cursor-pointer text-lg font-bold line-clamp-2 hover:text-primary-purple' title={blog.title}>
+          <Link target="_blank"  href={`/blog/${blog.id}`} className='cursor-pointer text-lg font-bold line-clamp-2 hover:text-primary-purple' title={blog.title}>
             {blog.title}
           </Link>
           <p className='text-xs text-primary-gray line-clamp-2'>
@@ -39,7 +39,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
               <span>{blog.publisher}</span>
             </div>
           </div>
-          <Link href={`/blog/${blog.id}`} className='mx-auto text-center cursor-pointer text-base underline underline-offset-8 transition-all duration-300 delay-600 hover:underline-offset-2 line-clamp-2 text-primary-purple hidden group-hover:flex absolute bottom-4 right-4' title={blog.title}>
+          <Link target="_blank"  href={`/blog/${blog.id}`} className='mx-auto text-center cursor-pointer text-base underline underline-offset-8 transition-all duration-300 delay-600 hover:underline-offset-2 line-clamp-2 text-primary-purple hidden group-hover:flex absolute bottom-4 right-4' title={blog.title}>
             Read More...
           </Link>
         </div>
