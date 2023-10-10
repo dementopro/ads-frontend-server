@@ -1,19 +1,27 @@
+import { createContext, useContext, useEffect, useState } from "react";
+import { usePathname, useRouter } from 'next/navigation';
+
 // Import necessary modules and constants
 import { SUCCESS_CODE } from "@/data/constant";
 import { isUserLogin, onLogin, onLogout } from "@/lib/auth";
 import { calculateExpireDays } from "@/lib/date";
 import { Account, QueryAccountResp } from "@/types/account";
-import { createContext, useEffect, useState } from "react";
 import { getCookie } from "@/lib/cookies";
-import { useAuthContext } from "./auth";
+
+export interface AccountInterface {
+  email: string;
+  username?: string;
+}
 
 // Create a context for managing user account-related data
 export const AccountContext = createContext<{
+  account: AccountInterface | null,
   totalCredits: number;
   isSubscribed: boolean;
   trialDateAt: string;
   nextPage: string;
   creditInfo:boolean;
+  setAccount: (account: AccountInterface | null) => void,
   setNextPage:(nextPage:string) => void;
   setSelectedPlan:(selectedPlan:number) => void;
   selectedPlan:number;
@@ -25,6 +33,10 @@ export const AccountContext = createContext<{
   updateAccount: () => void;
   setTrialDateAt: (trialDateAt: string) => void;
 } & Account>({
+  account: {
+    email: '',
+    username: ''
+  },
   isLogin: false,
   planId: 0,
   credits: 0,
@@ -35,6 +47,7 @@ export const AccountContext = createContext<{
   trialDateAt: '',
   nextPage: "",
   selectedPlan: -1,
+  setAccount: () => { },
   setCredits: () => { },
   setTrialDays: () => { },
   setTotalCredits: () => { },
@@ -46,10 +59,13 @@ export const AccountContext = createContext<{
   updateAccount: () => { },
 });
 
+export const useAccountContext = () => useContext(AccountContext);
+
 // Create an AccountProvider component
 export const AccountProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Define state variables to manage user account data
+  const [account, setAccount] = useState<AccountInterface | null>(null);
   const [planId, setPlanId] = useState(0)
   const [credits, setCredits] = useState(0)
   const [trialDays, setTrialDays] = useState(0)
@@ -59,19 +75,11 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [isLogin, setIsLogin] = useState(false)
   const [creditInfo, setCreditInfo] = useState(false)
   const [nextPage, setNextPage] = useState("")
-  const [selectedPlan, setSelectedPlan] = useState(-1)
+  const [selectedPlan, setSelectedPlan] = useState(-1);
+  const pathname: string = usePathname();
+  const router = useRouter();
 
-  const {loading, user} = useAuthContext ()
   // }, [])
-
-  useEffect (()=>{
-    if (user) {
-      setIsLogin (true)
-      updateAccount ()
-    } else {
-      setIsLogin (false)
-    }
-  },[loading, user])
 
   // Function to fetch and update user account data
   async function updateAccount() {
@@ -113,9 +121,24 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     }
   }
 
+  useEffect(() => {
+    const isLogin = isUserLogin();
+    if (isLogin) {
+      setAccount(isLogin as AccountInterface);
+      if (pathname === '/login' || pathname === '/register') {
+        router.push('/home');
+      }
+    } else {
+      setAccount(null);
+      if (!(pathname === '/login' || pathname === '/register'))
+        router.push('/login');
+    }
+  }, []);
+
   // Provide the account data through the context to child components
   return (
     <AccountContext.Provider value={{
+      account, setAccount,
       credits, setCredits,
       trialDays, setTrialDays,
       totalCredits, setTotalCredits,

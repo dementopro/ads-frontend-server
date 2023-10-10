@@ -1,19 +1,27 @@
 // 'use server'
+import jwt_decode from 'jwt-decode';
 import { cookies } from 'next/headers'
 import { setCookie } from './cookie'
 import { getCookie } from './cookies'
 
-export async function isUserLogin() {
+export function isUserLogin() {
   if (typeof window === 'undefined') return false
-  return localStorage.getItem('Authorization') === 'true'
-  // if (await getCookie ('session') == 'success') return true
-  // return false
+  
+  const jwtToken: string | null = localStorage.getItem('Authorization');
+  if (!jwtToken) return false;
+
+  try {
+    const decoded = jwt_decode(jwtToken);
+    return decoded;
+  } catch (_err) {
+    return false;
+  }
 }
 
-export async function onLogin() {
-  localStorage.setItem('Authorization', 'true')
+export async function onLogin(token: string) {
+  localStorage.setItem('Authorization', token);
   setCookie({
-    session: 'success'
+    jwtToken: token
   })
 }
 

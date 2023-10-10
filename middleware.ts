@@ -1,15 +1,4 @@
-import { withAuth } from "next-auth/middleware";
-
-export default withAuth({
-  
-  pages: {
-    signIn: '/login',
-    signOut: '/logout',
-    error: '/login', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // (used for check email message)
-    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  },
-});
+import { NextRequest } from 'next/server'
 
 // See "Matching Paths" below to learn more
 export const config = {
@@ -23,3 +12,16 @@ export const config = {
     '/profile/:path*',
   ],
 }
+
+export function middleware(request: NextRequest) {
+  // Call our authentication function to check the request
+  // if (!isAuthenticated(request)) {
+  //   // Respond with JSON indicating an error message
+  //   return Response.json(
+  //     { success: false, message: 'authentication failed' },
+  //     { status: 401 }
+  //   )
+  // }
+}
+
+export default config;

@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { getSession } from "next-auth/react";
 import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'
 import { message, Spin } from 'antd'
 
@@ -55,10 +54,6 @@ const OriginImageUpload = () => {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('mode', modeType)
-        const session = await getSession();
-        const token = await getCookie('csrf') ?? ''
-        const jwt = await getCookie('jwt') ?? ''
-        console.log(axios.defaults.headers.common['Authorization']);
         const response = await axios({
           url: "/fapi/generate_image/upload_image",
           method: 'POST',

@@ -1,25 +1,24 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
-import styles from './login.module.css'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, redirect } from 'next/navigation';
 import { FormikHelpers, useFormik } from 'formik';
-import { LoginForm } from '@/types/auth';
-import { loginValidate } from '@/lib/validate';
+import { message } from 'antd';
 import loadingIcon from '@iconify/icons-eos-icons/loading';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
-import { message } from 'antd';
 
-import {signIn, signOut} from 'next-auth/react'
-import { useAuthContext } from '@/context/auth';
+import styles from './login.module.css'
+import { LoginForm } from '@/types/auth';
+import { onLogin } from '@/lib/auth';
+import { loginValidate } from '@/lib/validate';
+import axios from '@/lib/axios';
+
+import { useAccountContext, type AccountInterface } from '@/context/account';
 
 
 const LoginForm = () => {
-
-  const {user, loading:authLoading} = useAuthContext ()
-
   const formik = useFormik<LoginForm>({
     initialValues: {
       email: '',
@@ -30,32 +29,44 @@ const LoginForm = () => {
     validate: loginValidate,
   });
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [showPwd, setShowPwd] = useState(false)
+  const [showPwd, setShowPwd] = useState(false);
+  const { account, setAccount } = useAccountContext();
   const router = useRouter();
 
-  useEffect (()=>{
-    if (authLoading) setIsLoading (authLoading)
-    else {
-      if (user) {
-        router.push ('/home')
-      }
-      setIsLoading (false)
+  useEffect(() => {
+    if (account) {
+      setIsLoading(true);
+      router.push('/home');
+    } else {
+      setIsLoading(false);
     }
-  },[authLoading, user])
+  }, [account]);
 
   async function onSubmit(values: LoginForm, actions: FormikHelpers<LoginForm>) {
     actions.setSubmitting(false);
     try {
-      setIsLoading(true)
-      signIn ('credentials',{
-        email: values.email,
-        password: values.password,
-        callbackUrl: '/home',
-      })
-    } catch (error) {
-      console.log('error: ', error)
+      setIsLoading(true);
+
+      const { data } = await axios({
+        url: "/fapi/login_api",
+        method: 'POST',
+        data: {
+          email: values.email,
+          password: values.password,
+        }
+      });
+      if (data.status) {
+        messageApi.success('Login successful!');
+        onLogin(data.token);
+        router.push(data.redirect);
+        setAccount({ email: values.email });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      messageApi.error((err as Error).message);
     } finally {
       setIsLoading(false)
     }

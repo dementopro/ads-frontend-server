@@ -11,7 +11,7 @@ import React, { useContext } from 'react'
 // Define the ContentHeader component
 const ContentHeader = () => {
   // Access the 'isLogin' variable from the 'AccountContext'
-  const { isLogin } = useContext(AccountContext)
+  const { account } = useContext(AccountContext)
 
   return (
     <>
@@ -26,7 +26,7 @@ const ContentHeader = () => {
           {/* Render the Breadcrumb component */}
           <Breadcrumb />
           {/* Render the DropDown component if the user is logged in */}
-          {isLogin && <DropDown />}
+          {account && <DropDown />}
         </div>
       </div>
     </>
