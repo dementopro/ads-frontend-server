@@ -30,7 +30,6 @@ export default function RootLayout({
       </head>
       <body className="w-full overflow-y-hidden" >
         <WithProviders>
-          <Announcement />
           {children}
         </WithProviders>
       </body>
