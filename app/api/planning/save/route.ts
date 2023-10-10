@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   const planning_obj = await req.json() as IPlanningObj
   const body = {
     planning_obj,
-    email: getCookie('email')?.replace(/"/g, ''),
+    email: (await getCookie('email'))?.replace(/"/g, ''),
   }
   const res = await fetch(`${process.env.API_BASE_URL}/save_planning_api`, {
     method: 'POST',
