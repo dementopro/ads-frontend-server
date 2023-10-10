@@ -37,6 +37,7 @@ export interface IGeneImageOption {
   face: string,
   background: string,
   style: string,
+  prompt: string
 }
 
 export interface PretrainItem {

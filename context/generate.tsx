@@ -57,6 +57,7 @@ export const GeneImageContext = createContext<{
     face: '',
     background: '',
     style: '',
+    prompt: '',
   },
   pretrainList: {
     faceList: [],
@@ -120,6 +121,7 @@ export const GeneImageProvider = ({ children }: { children: React.ReactNode }) =
     background: '',
     style: '',
     image: '',
+    prompt: '',
   })
   const [pretrainList, setPretrainList] = useState<IPretrainList>({
     faceList: [],

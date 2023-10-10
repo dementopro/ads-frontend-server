@@ -1,11 +1,13 @@
+import React, { useContext, useState, ChangeEvent } from 'react'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { message } from 'antd'
+
 import NotEnoughtCredits from '@/components/NotEnoughtCredits'
 import { GeneImageContext } from '@/context/generate'
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
+import axios from '@/lib/axios';
 import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate'
-import { message } from 'antd'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
 
 type PickImageProps = {
   item: PretrainItem
@@ -87,22 +89,32 @@ const PreTrainedPick = () => {
     updateReload,
     imageId
   } = useContext(GeneImageContext)
-  const [showNotEnoughCredits, setShowNotEnoughCredits] = React.useState(false)
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState<boolean>(false)
+  const [prompt, setPrompt] = useState<string>('');
+
+  const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setPrompt(e.target.value);
+  };
 
   function onGenerate() {
+    if (prompt === '') {
+      messageApi.warning('You need to type prompt!');
+      return;
+    }
+
     switch (modeType) {
       case 'portrait':
-        if (Object.values(preTrainedOption).some(item => item === '')) {
-          messageApi.warning('You need to upload image and select all three steps to generate!')
-          return
-        }
+        // if (Object.values(preTrainedOption).some(item => item === '')) {
+        //   messageApi.warning('You need to upload image and select all three steps to generate!')
+        //   return
+        // }
         onGenerateImage()
         break;
       case 'product':
-        if (preTrainedOption.background === '') {
-          messageApi.warning('You need to upload image and select background!')
-          return
-        }
+        // if (preTrainedOption.background === '') {
+        //   messageApi.warning('You need to upload image and select background!')
+        //   return
+        // }
         onReplaceBackground()
         break;
       default:
@@ -158,29 +170,31 @@ const PreTrainedPick = () => {
   async function onGenerateImage() {
     updateIsGenerating(true)
     try {
-      const response = await fetch(`/fapi/generate_image/image_to_image`, {
+      const response = await axios({
+        url: "/fapi/generate_image/image_to_image_prompt",
         method: 'POST',
-        body: JSON.stringify({
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
           segment_mask: [{ label }],
           file_name,
-          file_path,
+          prompt,
+          file_path: file_path.replace("v3/", ""),
           mask_file_name,
           mask_file_path,
-          face_mode: preTrainedOption.face,
-          background_mode: preTrainedOption.background,
-          style: preTrainedOption.style,
+          // face_mode: preTrainedOption.face,
+          // background_mode: preTrainedOption.background,
+          // style: preTrainedOption.style,
           mode_type: modeType,
           face_prompt: '',
           background_prompt: '',
           _id: imageId,
         }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        keepalive: true,
       })
-      if (response.ok) {
-        const data: IGeneImageResp = await response.json()
+
+      if (response.status === 200) {
+        const data: IGeneImageResp = await response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
@@ -207,8 +221,6 @@ const PreTrainedPick = () => {
       updateIsGenerating(false)
     }
   }
-
-
 
   return (
     <>
@@ -250,6 +262,14 @@ const PreTrainedPick = () => {
                 </>
               )
             }
+            <OptionBtn
+              onClick={() => updatePreTrainStep('prompt')}
+              isActive={preTrainedStep === 'prompt'}
+              isChecked={preTrainedOption.prompt !== ''}
+              isDisabled={false}
+              text='Custom'
+              step={4}
+            />
           </div>
           <button
             onClick={onGenerate}
@@ -272,6 +292,13 @@ const PreTrainedPick = () => {
                 setOption={() => updatePreTrainedOption({ [preTrainedStep]: item.name })}
               />
             ))
+        }
+        {
+          preTrainedStep === 'prompt' && (
+            <div className='w-full border rounded-lg border-[#3A3A3A] bg-[#1B1C21] px-4 py-[18px] flex flex-col gap-[10px] justify-between'>
+              <textarea className='text-xl bg-transparent outline-none h-[90px] resize-none' onChange={handlePromptChange} placeholder='Write your prompt here...' />
+            </div>
+          )
         }
         {/* {
           preTrainedStep === 'image' &&

@@ -23,12 +23,15 @@ export default function AuthContextProvider ({children}:{children:React.ReactNod
     const [user, setUser] = useState<AuthUserInterface| null> ()
     const [loading, setLoading] = useState (true)
     const {data: session, status} = useSession ()
+    const [jwt, setJwt] = useState('');
+
     useEffect (()=>{
         if (status == 'authenticated') {
             setLoading (false)
             setUser ({
                 email: session.user?.email,
-            })
+            });
+            // setJwt (session.user.)
         } else if (status == 'loading') {
             setLoading (true)
             setUser (null)

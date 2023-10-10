@@ -77,7 +77,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   async function updateAccount() {
     if (!isLogin) return
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/fapi/inquiry_subscription_api`, {
+      const response = await fetch(`/fapi/inquiry_subscription_api`, {
         method: 'GET',
       })
       if (response.ok) {
@@ -104,7 +104,6 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
             setCredits(0)
           }
         } else {
-          console.log(data)
         }
       } else {
         console.log(response.statusText)

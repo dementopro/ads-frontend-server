@@ -1,11 +1,13 @@
+import Image from 'next/image'
+import { getSession } from "next-auth/react";
+import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'
+import { message, Spin } from 'antd'
+
 import { GeneImageContext } from '@/context/generate'
 import { SUCCESS_CODE } from '@/data/constant'
 import { IUploadImageResp } from '@/types/generate'
-import { message, Spin } from 'antd'
-import Image from 'next/image'
-import React, { ChangeEvent, DragEvent, useContext, useState } from 'react'
-
-
+import { getCookie } from '@/lib/cookies'
+import axios from '@/lib/axios';
 
 const OriginImageUpload = () => {
 
@@ -53,12 +55,17 @@ const OriginImageUpload = () => {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('mode', modeType)
-        const response = await fetch(`/fapi/generate_image/upload_image`, {
+        const session = await getSession();
+        const token = await getCookie('csrf') ?? ''
+        const jwt = await getCookie('jwt') ?? ''
+        console.log(axios.defaults.headers.common['Authorization']);
+        const response = await axios({
+          url: "/fapi/generate_image/upload_image",
           method: 'POST',
-          body: formData
-        })
-        if (response.ok) {
-          const data: IUploadImageResp = await response.json()
+          data: formData
+        });
+        if (response.status === 200) {
+          const data: IUploadImageResp = await response.data;
           if (data.status === SUCCESS_CODE) {
             messageApi.success(data.message || 'Upload successfully')
             updateOriginalImage(file)
