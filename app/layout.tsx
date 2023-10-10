@@ -1,7 +1,7 @@
 import './globals.css'
 import { Poppins } from 'next/font/google'
 import WithProviders from '@/app/WithProviders'
-import SessionProvider from '@/context/sessionprovider';
+import Announcement from '@/components/home/Announcement';
 
 const poppins = Poppins({ subsets: ['latin'], weight: "400" })
 
@@ -29,12 +29,10 @@ export default function RootLayout({
         />
       </head>
       <body className="w-full overflow-y-hidden" >
-        
-        <SessionProvider>
-          <WithProviders>
-            {children}
-          </WithProviders>
-        </SessionProvider>
+        <WithProviders>
+          <Announcement />
+          {children}
+        </WithProviders>
       </body>
     </html>
   )

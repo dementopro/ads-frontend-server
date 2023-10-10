@@ -7,7 +7,6 @@ export async function POST(req: Request) {
   formData.append('prompt', prompt);
   formData.append('type', type);
   formData.append('mode', mode);
-  console.log('formData', formData.toString())
   const res = await fetch(`${process.env.API_BASE_URL}/generate_image_api`, {
     method: 'POST',
     headers: {

@@ -13,21 +13,26 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
 async function getHistory(id?: number) {
-  const res = await fetch(`/api/planning/history?id=${id}`, {
-    method: 'GET',
-  })
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  const data: IPlanningHistory = await res.json()
-  if (data.status === SUCCESS_CODE) {
-    if (id) {
-      return data.planning
+  try {
+    const res = await fetch(`/api/planning/history?id=${id}`, {
+      method: 'GET',
+    })
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
     }
-    return data.planning_list
-  } else {
-    console.log('data', data)
-    return []
+    const data: IPlanningHistory = await res.json()
+    if (data.status === SUCCESS_CODE) {
+      if (id) {
+        return data.planning
+      }
+      return data.planning_list
+    } else {
+      console.log('data', data)
+      return []
+    }
+  } catch (err) {
+    console.log("error: ", err);
+    return [];
   }
 }
 

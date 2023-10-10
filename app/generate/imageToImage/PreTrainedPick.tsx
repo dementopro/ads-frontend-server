@@ -1,4 +1,4 @@
-import React, { useContext, useState, ChangeEvent } from 'react'
+import React, { useContext, useState, ChangeEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { message } from 'antd'
@@ -89,6 +89,7 @@ const PreTrainedPick = () => {
     updateReload,
     imageId
   } = useContext(GeneImageContext)
+
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState<boolean>(false)
   const [prompt, setPrompt] = useState<string>('');
 
@@ -171,7 +172,7 @@ const PreTrainedPick = () => {
     updateIsGenerating(true)
     try {
       const response = await axios({
-        url: "/fapi/generate_image/image_to_image_prompt",
+        url: "/fapi/generate_image/image_to_image",
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -183,9 +184,9 @@ const PreTrainedPick = () => {
           file_path: file_path.replace("v3/", ""),
           mask_file_name,
           mask_file_path,
-          // face_mode: preTrainedOption.face,
-          // background_mode: preTrainedOption.background,
-          // style: preTrainedOption.style,
+          face_mode: preTrainedOption.face,
+          background_mode: preTrainedOption.background,
+          style: preTrainedOption.style,
           mode_type: modeType,
           face_prompt: '',
           background_prompt: '',

@@ -28,5 +28,5 @@ export async function onLogin(token: string) {
 export async function onLogout() {
   localStorage.removeItem('Authorization')
   // return cookies().delete('session')
-  return setCookie ({session: null})
+  return setCookie ({jwtToken: null})
 }

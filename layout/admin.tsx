@@ -1,11 +1,33 @@
+'use client';
 import AdminSidebar from '@/components/admin/AdminSidebar'; // Importing the AdminSidebar component
 import ContentHeader from '@/components/admin/ContentHeader'; // Importing the ContentHeader component
-import React from 'react';
-
+import { isUserLogin } from '@/lib/auth';
+import { useAccountContext, type AccountInterface } from '@/context/account';
+import React, { useEffect } from 'react';
+import { usePathname, useRouter, redirect } from 'next/navigation';
 // Define the AdminLayout component
 const AdminLayout = ({ children }: {
   children: React.ReactNode;
 }) => {
+  const { account, isLoading, setAccount } = useAccountContext();
+  const pathname: string = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) {
+
+    } else {
+      if (!account)
+        redirect ('/login')
+    }
+    console.log ({account, isLoading})
+  }, [account, isLoading]);
+
+  if (isLoading) {
+    return <div className='flex flex-col h-screen max-h-screen min-w-full admin-content'>
+      
+      </div>
+  }
 
   return (
     <div className='flex flex-col h-screen max-h-screen min-w-full'>

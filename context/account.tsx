@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, redirect } from 'next/navigation';
 
 // Import necessary modules and constants
 import { SUCCESS_CODE } from "@/data/constant";
@@ -16,12 +16,14 @@ export interface AccountInterface {
 // Create a context for managing user account-related data
 export const AccountContext = createContext<{
   account: AccountInterface | null,
+  isLoading: boolean,
   totalCredits: number;
   isSubscribed: boolean;
   trialDateAt: string;
   nextPage: string;
   creditInfo:boolean;
   setAccount: (account: AccountInterface | null) => void,
+  setIsLoading: (isLoading: boolean) => void,
   setNextPage:(nextPage:string) => void;
   setSelectedPlan:(selectedPlan:number) => void;
   selectedPlan:number;
@@ -37,6 +39,7 @@ export const AccountContext = createContext<{
     email: '',
     username: ''
   },
+  isLoading: false,
   isLogin: false,
   planId: 0,
   credits: 0,
@@ -48,6 +51,7 @@ export const AccountContext = createContext<{
   nextPage: "",
   selectedPlan: -1,
   setAccount: () => { },
+  setIsLoading: () => { },
   setCredits: () => { },
   setTrialDays: () => { },
   setTotalCredits: () => { },
@@ -66,6 +70,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
 
   // Define state variables to manage user account data
   const [account, setAccount] = useState<AccountInterface | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [planId, setPlanId] = useState(0)
   const [credits, setCredits] = useState(0)
   const [trialDays, setTrialDays] = useState(0)
@@ -122,16 +127,17 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   }
 
   useEffect(() => {
+    setIsLoading (true)
     const isLogin = isUserLogin();
     if (isLogin) {
       setAccount(isLogin as AccountInterface);
+      setIsLoading (false)
       if (pathname === '/login' || pathname === '/register') {
-        router.push('/home');
+        redirect ('/home');
       }
     } else {
       setAccount(null);
-      if (!(pathname === '/login' || pathname === '/register'))
-        router.push('/login');
+      setIsLoading (false)
     }
   }, []);
 
@@ -139,6 +145,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   return (
     <AccountContext.Provider value={{
       account, setAccount,
+      isLoading, setIsLoading,
       credits, setCredits,
       trialDays, setTrialDays,
       totalCredits, setTotalCredits,

@@ -2,6 +2,7 @@
 const nextConfig = {
     images: {
         domains: [
+            '127.0.0.1',
             'localhost',
             '35.88.150.139',
             '18.246.37.168',
