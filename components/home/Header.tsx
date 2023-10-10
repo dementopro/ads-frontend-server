@@ -37,22 +37,22 @@ const Header = () => {
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex flex-grow justify-start items-center gap-4">
             <div className="justify-center items-center ipad:gap-[25px] desktop:gap-[32px] flex text-white ipad:text-[13px] desktop:text-[15px] desktop:font-regular desktop:font-medium">
-              <Link target="_blank"  href='/'>
+              <Link href='/'>
                 Home
               </Link>
-              <Link target="_blank"  href='/features'>
+              <Link href='/features'>
                 Features
               </Link>
               {/* <Link target="_blank"  href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
               Pricing
               </Link> */}
-              <Link target="_blank"  href='/blog'>
+              <Link href='/blog'>
                 Blog
               </Link>
-              <Link target="_blank"  href='/careers'>
+              <Link href='/careers'>
                 Careers
               </Link>
-              <Link target="_blank"  href='/contactUs'>
+              <Link href='/contactUs'>
                 Contact Us
               </Link>
             </div>
@@ -63,7 +63,7 @@ const Header = () => {
               Sign In
             </div>
             </Link> */}
-            <Link target="_blank"  href='/requestDemo' className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px]">
+            <Link target="_blank"  href='/requestDemo' className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-[#6859FF] to-[#AF41FF] rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px]">
               <div>
                 Request Demo
               </div>

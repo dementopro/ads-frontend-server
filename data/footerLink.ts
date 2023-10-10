@@ -53,10 +53,6 @@ export const footerLinks = [
         href: '/contactUs',
       },
       {
-        label: 'Request Demo',
-        href: '/requestDemo',
-      },
-      {
         label: 'Privacy Policy',
         href: '/privacy',
       },

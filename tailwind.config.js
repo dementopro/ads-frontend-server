@@ -18,7 +18,7 @@ module.exports = {
         'android': '360px',
       },
       backgroundImage: {
-        'hero-pattern': "url('/images/landing-bg.svg')",
+        'hero-pattern': 'radial-gradient(at left top, #3D296D, #000000 80%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

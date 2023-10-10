@@ -30,7 +30,7 @@ const Features = () => {
                 <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-Open+Sans'>
                     Features
                 </div>
-                <div className="android:w-[328px] ipadmini:w-[583px] ipad:w-[862px] desktop:w-[1036px] ipad:h-[68px] android:p-[4px] ipad:p-[7px] bg-zinc-800 android:rounded-[20px] ipadmini:rounded-[50px] justify-start items-center android:gap-[8px] ipad:gap-[16px] android:flex-col ipadmini:flex-row inline-flex">
+                <div className="android:w-[328px] ipadmini:w-[583px] ipad:w-[862px] desktop:w-[1036px] ipad:h-[68px] android:p-[4px] ipad:p-[7px] bg-zinc-800 android:rounded-[12px] ipadmini:rounded-[50px] justify-start items-center android:gap-[8px] ipad:gap-[16px] android:flex-col ipadmini:flex-row inline-flex">
                     <button className={`android:h-[26px] ipad:h-[54px] android:w-full ipadmini:w-1/4 android:p-[3px] ipad:p-[12px] ${activeButtonIndex === 0 ? 'bg-violet-500' : ''} rounded-[50px] shadow justify-start items-center android:gap-[7px] ipad:gap-[14px] flex`} onClick={() => handleButtonClick(0)}>
                         <div className={`android:h-[20px] ipad:h-[35px] android:w-[20px] ipad:w-[35px] ${activeButtonIndex === 0 ? 'bg-white' : 'bg-zinc-600'} rounded-[360px] justify-center items-center flex`}>
                             <div className={`text-center ${activeButtonIndex === 0 ? 'text-violet-500' : 'text-zinc-500'} android:text-[12px] ipad:text-[20px] font-semibold font-Poppins`}>

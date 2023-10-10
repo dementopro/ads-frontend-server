@@ -28,5 +28,5 @@
   width: 100%;
   height: 100%;
   z-index: -1; /* 设置层级为1，确保在图片上方显示 */
-  @apply bg-purple-500/10;
+  @apply bg-[#7D55FA]/10;
 }

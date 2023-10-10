@@ -39,6 +39,9 @@ const Supporters = () => {
           <Link target="_blank"  href="https://www.theinformation.com/articles/inside-apples-decision-to-blow-up-the-digital-ads-business">
             <img className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src="images/home/pr-logos/information.svg" />
           </Link>
+          <Link target="_blank"  href="https://www.techstars.com/newsroom/meet-the-24-companies-joining-techstars-seattle-class-of-2023">
+            <img className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src="images/home/pr-logos/techstars.svg" />
+          </Link>
         </Slider>
       </div>
     </div>
