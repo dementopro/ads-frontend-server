@@ -4,6 +4,7 @@ import { IPlanningObj } from "@/types/planning"
 import { formatDate, getToday } from "@/utils"
 import { message } from "antd"
 import { useRouter } from "next/navigation"
+import axios from '@/lib/axios'
 
 type Props = {
   planList: IPlanningObj[] | null,
@@ -22,12 +23,13 @@ const ListPlanning = ({ planList, setPlanId, updateList }: Props) => {
     }
     try {
       messageApi.loading('Saving plan...')
-      const res = await fetch(`/api/planning/save`, {
+      const res = await axios({
+        url: `/api/planning/save`,
         method: 'POST',
-        body: JSON.stringify(plan),
+        data: JSON.stringify(plan),
       })
-      const data = await res.json()
-      if (res.ok) {
+      const data = res.data;
+      if (res.status === 200) {
         if (data.status === SUCCESS_CODE) {
           console.log('data', data)
           messageApi.success(data.msg || 'Saved successfully')

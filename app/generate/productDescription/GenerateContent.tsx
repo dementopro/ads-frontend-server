@@ -12,6 +12,8 @@ import { IGeneTextForm } from '@/types/generate';
 import { useRouter } from 'next/navigation';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 
+import axios from '@/lib/axios';
+
 type Props = {
   mode: IGeneTextForm['mode']
 }
@@ -33,12 +35,13 @@ const GenerateContent = ({ mode }: Props) => {
       }
       setIsGenerating(true)
       messageApi.loading('Generating...')
-      const res = await fetch('/api/generate/text/generate', {
+      const res = await axios({
+        url: '/api/generate/text/generate',
         method: 'POST',
-        body: JSON.stringify({ prompt, mode }),
+        data: JSON.stringify({ prompt, mode }),
       })
-      if (res.ok) {
-        const data = await res.json()
+      if (res.status === 200) {
+        const data = res.data;
         if (data.status === SUCCESS_CODE) {
           setContent(data.text)
           messageApi.success('Generated successfully')
@@ -65,12 +68,13 @@ const GenerateContent = ({ mode }: Props) => {
       }
       setIsSaving(true)
       messageApi.loading('Saving...')
-      const res = await fetch('/api/generate/text/save', {
+      const res = await axios({
+        url: '/api/generate/text/save',
         method: 'POST',
-        body: JSON.stringify({ prompt, mode, text: content }),
+        data: JSON.stringify({ prompt, mode, text: content }),
       })
-      if (res.ok) {
-        const data = await res.json()
+      if (res.status === 200) {
+        const data = res.data;
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Saved successfully')
           router.refresh()

@@ -7,6 +7,7 @@ import { isUserLogin, onLogin, onLogout } from "@/lib/auth";
 import { calculateExpireDays } from "@/lib/date";
 import { Account, QueryAccountResp } from "@/types/account";
 import { getCookie } from "@/lib/cookies";
+import axios from '@/lib/axios';
 
 export interface AccountInterface {
   email: string;
@@ -90,11 +91,12 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   async function updateAccount() {
     if (!isLogin) return
     try {
-      const response = await fetch(`/fapi/inquiry_subscription_api`, {
+      const response = await axios({
+        url: `/fapi/inquiry_subscription_api`,
         method: 'GET',
       })
-      if (response.ok) {
-        const data: QueryAccountResp = await response.json()
+      if (response.status === 200) {
+        const data: QueryAccountResp = response.data
         if (data.status === SUCCESS_CODE) {
           if (data.data) {
             const {
@@ -132,9 +134,9 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     if (isLogin) {
       setAccount(isLogin as AccountInterface);
       setIsLoading (false)
-      if (pathname === '/login' || pathname === '/register') {
-        redirect ('/home');
-      }
+      // if (pathname === '/login' || pathname === '/register') {
+      //   redirect ('/home');
+      // }
     } else {
       setAccount(null);
       setIsLoading (false)

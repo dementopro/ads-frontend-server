@@ -3,20 +3,21 @@ import { SUCCESS_CODE } from '@/data/constant'
 import { IGeneImage, IGeneImageHistory } from '@/types/generate'
 import { headers } from 'next/headers'
 import { Image } from 'antd';
-
+import axios from '@/lib/axios';
 
 async function getImageList(): Promise<IGeneImage[]> {
   const cookie = headers().get('cookie') || ''
-  const response = await fetch(`${process.env.API_BASE_URL}/get_image_list_api`, {
+  const response = await axios({
+    url: `${process.env.API_BASE_URL}/get_image_list_api`,
     method: 'GET',
     headers: {
       cookie
     },
   })
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error('Failed to fetch data')
   }
-  const data: IGeneImageHistory = await response.json()
+  const data: IGeneImageHistory = response.data
   if (data.status === SUCCESS_CODE) {
     const filePath = data.file_path
     const imageList = data.image_list.map((image) => ({

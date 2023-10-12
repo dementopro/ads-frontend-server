@@ -1,17 +1,19 @@
+import axios from '@/lib/axios';
 import { SUCCESS_CODE } from "@/data/constant";
 
 // Function to check if Facebook is connected
 export async function checkFacebookIsConnected() {
   try {
     // Send a GET request to inquire about Facebook link status
-    const response = await fetch('/fapi/inquiry_fb_link_status', {
+    const response = await axios({
+      url: '/fapi/inquiry_fb_link_status',
       method: 'GET',
     });
 
     // Check if the response is OK (status code 200)
-    if (response.ok) {
+    if (response.status === 200) {
       // Parse the response as JSON
-      const data: IResponse = await response.json();
+      const data: IResponse = response.data;
       
       // Check if the status in the response matches the success code
       return data.status === SUCCESS_CODE;
@@ -29,14 +31,15 @@ export async function checkFacebookIsConnected() {
 export async function checkTikTokIsConnected() {
   try {
     // Send a GET request to inquire about TikTok link status
-    const response = await fetch('/fapi/inquiry_tt_link_status', {
+    const response = await axios({
+      url: '/fapi/inquiry_tt_link_status',
       method: 'GET',
     });
 
     // Check if the response is OK (status code 200)
-    if (response.ok) {
+    if (response.status === 200) {
       // Parse the response as JSON
-      const data: IResponse = await response.json();
+      const data: IResponse = response.data;
       
       // Check if the status in the response matches the success code
       return data.status === SUCCESS_CODE;
@@ -54,14 +57,15 @@ export async function checkTikTokIsConnected() {
 export async function checkPinterestIsConnected() {
   try {
     // Send a GET request to inquire about Pinterest link status
-    const response = await fetch('/fapi/inquiry_pt_link_status', {
+    const response = await axios({
+      url: '/fapi/inquiry_pt_link_status',
       method: 'GET',
     });
 
     // Check if the response is OK (status code 200)
-    if (response.ok) {
+    if (response.status === 200) {
       // Parse the response as JSON
-      const data: IResponse = await response.json();
+      const data: IResponse = response.data;
       
       // Check if the status in the response matches the success code
       return data.status === SUCCESS_CODE;

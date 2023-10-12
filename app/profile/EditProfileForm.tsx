@@ -5,6 +5,7 @@ import { useState } from 'react';
 import styles from './EditProfileForm.module.css';
 import { Icon } from '@iconify/react';
 import { SUCCESS_CODE } from '@/data/constant';
+import axios from '@/lib/axios';
 
 const EditProfileForm = ({ username, onUpdated }: {
   username?: string,
@@ -19,15 +20,16 @@ const EditProfileForm = ({ username, onUpdated }: {
     setLoading(true);
     const { username } = values;
     try {
-      const response = await fetch('/fapi/update_user_profile_api', {
+      const response = await axios({
+        url: '/fapi/update_user_profile_api',
         method: 'POST',
-        body: JSON.stringify({ username }),
+        data: JSON.stringify({ username }),
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      if (response.ok) {
-        const data: IResponse = await response.json()
+      if (response.status === 200) {
+        const data: IResponse = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Profile updated successfully')
           onUpdated()

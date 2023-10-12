@@ -9,6 +9,8 @@ import TheResponsivePie from '@/components/d3/TheResponsivePie'
 import { getCountryISO3 } from '@/utils'
 import { MayHaveLabel } from '@nivo/pie'
 
+import axios from '@/lib/axios'
+
 type DashCardProps = {
   title: string
   value: number
@@ -55,18 +57,18 @@ const FollowerProfile = () => {
   async function fetchData() {
     try {
       setLoading(true);
-      const response = await fetch('/fapi/get_fb_reach_by', {
+      const response = await axios('/fapi/get_fb_reach_by', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        data: JSON.stringify({
           mode: 'all',
           date_range: dateMap[dateRange],
         })
       })
-      if (response.ok) {
-        const data: IFbFollowersResp = await response.json()
+      if (response.status === 200) {
+        const data: IFbFollowersResp = response.data
         if (data.status === SUCCESS_CODE) {
           const { gender, age, country } = data.data
           const genderData = gender?.map(([label, value]) => ({

@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import vipOne from '@iconify/icons-icon-park-solid/vip-one';
 import { SUCCESS_CODE } from '@/data/constant';
 import { Pricing } from '@/data/pricing';
+import axios from '@/lib/axios';
 
 // Define the SubscriptionInfo component
 const SubscriptionInfo = () => {
@@ -62,11 +63,12 @@ const SubscriptionInfo = () => {
   // Function to cancel the subscription
   async function cancelSubscription() {
     try {
-      const response = await fetch('/fapi/cancel_subscription_api', {
+      const response = await axios({
+        url: '/fapi/cancel_subscription_api',
         method: 'GET',
       });
-      if (response.ok) {
-        const data: IResponse = await response.json();
+      if (response.status === 200) {
+        const data: IResponse = response.data;
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'You have successfully unsubscribed.');
         } else {

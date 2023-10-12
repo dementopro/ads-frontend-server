@@ -60,7 +60,7 @@ const OriginImageUpload = () => {
           data: formData
         });
         if (response.status === 200) {
-          const data: IUploadImageResp = await response.data;
+          const data: IUploadImageResp = response.data;
           if (data.status === SUCCESS_CODE) {
             messageApi.success(data.message || 'Upload successfully')
             updateOriginalImage(file)

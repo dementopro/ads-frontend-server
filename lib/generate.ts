@@ -15,7 +15,7 @@ export async function getPretrainFaceList() {
   if (response.status !== 200) {
     throw new Error('Something went wrong')
   }
-  const data: IPretrainListResp = await response.data
+  const data: IPretrainListResp = response.data
   if (data.status === SUCCESS_CODE) {
     return data.data
   } else {
@@ -34,7 +34,7 @@ export async function getPretrainBackgroundList() {
   if (response.status !== 200) {
     throw new Error('Something went wrong')
   }
-  const data: IPretrainListResp = await response.data
+  const data: IPretrainListResp = response.data
   if (data.status === SUCCESS_CODE) {
     return data.data
   } else {
@@ -53,7 +53,7 @@ export async function getPretrainStyleList(): Promise<PretrainItem[]> {
   if (response.status !== 200) {
     throw new Error('Something went wrong')
   }
-  const data = await response.data
+  const data = response.data
   if (data.status === SUCCESS_CODE) {
     return data.data.map((item: string) => {
       return {

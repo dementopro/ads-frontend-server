@@ -8,19 +8,20 @@ import AdminLayout from '@/layout/admin'
 import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
-
+import axios from '@/lib/axios';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
 async function getHistory(id?: number) {
   try {
-    const res = await fetch(`/api/planning/history?id=${id}`, {
+    const res = await axios({
+      url: `/api/planning/history?id=${id}`,
       method: 'GET',
     })
-    if (!res.ok) {
+    if (res.status !== 200) {
       throw new Error('Failed to fetch data')
     }
-    const data: IPlanningHistory = await res.json()
+    const data: IPlanningHistory = res.data
     if (data.status === SUCCESS_CODE) {
       if (id) {
         return data.planning
@@ -81,11 +82,12 @@ const PlanningPage = () => {
     try {
       setIsGenerating(true)
       messageApi.loading('Generating plan...', 1)
-      const res = await fetch(`/api/planning/generate?prompt=${prompt}`, {
+      const res = await axios({
+        url: `/api/planning/generate?prompt=${prompt}`,
         method: 'GET',
       })
-      const data = await res.json()
-      if (res.ok) {
+      const data = res.data
+      if (res.status === 200) {
         if (data.status === SUCCESS_CODE) {
           console.log('data', data)
           messageApi.success(data.msg || 'Generate successfully')

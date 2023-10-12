@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { GeneImageContext } from '@/context/generate'
 import { SUCCESS_CODE } from '@/data/constant'
 import { Spin } from 'antd'
-
+import axios from '@/lib/axios';
 
 const HistoryItem = ({
   img_path, filename, date, email, face_mode,
@@ -94,15 +94,15 @@ const Sidebar = () => {
   async function getHistory() {
     try {
       setLoading(true)
-      const response = await fetch(`/fapi/generate_image/check_task?limit=10`, {
+      const response = await axios({
+        url: `/fapi/generate_image/check_task?limit=10`,
         method: 'GET',
-        cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      if (response.ok) {
-        const data: IGeneImageHistoryResp = await response.json()
+      if (response.status === 200) {
+        const data: IGeneImageHistoryResp = response.data
         if (data.status === SUCCESS_CODE) {
           const imageList = data.image_data?.map(item => ({
             ...item,

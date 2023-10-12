@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 
+import axios from '@/lib/axios'
+
 const openedPlatforms = ['tiktok']
 
 const ConnectPlatform = () => {
@@ -61,11 +63,12 @@ export default ConnectPlatform
 
 async function connectFacebook() {
   try {
-    const response = await fetch('/fapi/fb_login', {
+    const response = await axios({
+      url: '/fapi/fb_login',
       method: 'GET',
     })
-    if (response.ok) {
-      const data = await response.json()
+    if (response.status === 200) {
+      const data = response.data
       // 替换当前 url 为 data.fb_auth_url
       window.location.replace(data.fb_auth_url)
     } else {
@@ -79,11 +82,12 @@ async function connectFacebook() {
 
 async function connectTikTok() {
   try {
-    const response = await fetch('/fapi/tiktok_login', {
+    const response = await axios({
+      url: '/fapi/tiktok_login',
       method: 'GET',
     })
-    if (response.ok) {
-      const data = await response.json()
+    if (response.status === 200) {
+      const data = response.data
       // 替换当前 url 为 data.url
       window.location.replace(data.url)
     } else {
@@ -97,11 +101,12 @@ async function connectTikTok() {
 
 async function connectPinterest() {
   try {
-    const response = await fetch('/fapi/pinterest_login', {
+    const response = await axios({
+      url: '/fapi/pinterest_login',
       method: 'GET',
     })
-    if (response.ok) {
-      const data = await response.json()
+    if (response.status === 200) {
+      const data = response.data
       // 替换当前 url 为 data.url
       window.location.replace(data.url)
     } else {

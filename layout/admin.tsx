@@ -20,7 +20,6 @@ const AdminLayout = ({ children }: {
       if (!account)
         redirect ('/login')
     }
-    console.log ({account, isLoading})
   }, [account, isLoading]);
 
   if (isLoading) {

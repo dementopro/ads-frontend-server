@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     'cookie': req.headers.get('cookie') || '',
     'content-type': 'application/json'
   })
-  const data = await res.json()
+  const data = res.data
   return NextResponse.json(data, {
     status: res.status,
   })

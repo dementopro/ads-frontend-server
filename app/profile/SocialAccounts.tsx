@@ -4,22 +4,24 @@ import { capitalize } from '@/lib/format'
 import { Icon } from '@iconify/react'
 import { Modal, message } from 'antd'
 import React, { useContext } from 'react'
+import axios from '@/lib/axios'
 
 const SocialAccounts = () => {
 
   const { platforms, checkConnectStatus, updateAllConnectStatus } = useContext(SocialInsightsContext)
   const [modal, modalContextHolder] = Modal.useModal()
-  const [messageApi, contextHolder] = message.useMessage();
+  const [messageApi, contextHolder] = message.useMessage()
 
   const enablePlatforms = ['tiktok']
 
   async function disconnectTikTok() {
     try {
-      const response = await fetch('/fapi/tiktok_logout', {
+      const response = await axios({
+        url: '/fapi/tiktok_logout',
         method: 'GET'
       })
-      if (response.ok) {
-        const data: IResponse = await response.json()
+      if (response.status === 200) {
+        const data: IResponse = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Successfully disconnected')
         } else {

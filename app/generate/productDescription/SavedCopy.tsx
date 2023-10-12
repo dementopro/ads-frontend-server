@@ -6,23 +6,25 @@ import { headers } from 'next/headers';
 import { SUCCESS_CODE } from '@/data/constant';
 import { IGeneText, IGeneTextForm, IGeneTextResp } from '@/types/generate';
 
+import axios from '@/lib/axios';
 
 async function getCopyList(mode: IGeneTextForm['mode'] = 'description') {
   const cookie = headers().get('cookie') || ''
-  const response = await fetch(`${process.env.API_BASE_URL}/inquiry_text_api`, {
+  const response = await axios({
+    url: `${process.env.API_BASE_URL}/inquiry_text_api`,
     method: 'POST',
     headers: {
       cookie,
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ mode })
+    data: JSON.stringify({ mode })
   })
-  if (!response.ok) {
+  if (response.status !== 200) {
     // throw new Error('Failed to fetch data')
-    console.log('error', response)
+    console.log('error', response.data)
     return []
   }
-  const data: IGeneTextResp = await response.json()
+  const data: IGeneTextResp = response.data
   if (data.status === SUCCESS_CODE) {
     return data.data
   } else {

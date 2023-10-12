@@ -14,6 +14,7 @@ import leftIcon from '@iconify/icons-mdi/arrow-left';
 import ReactFlagsSelect from "react-flags-select";
 import CCInput from '@/components/CCInput'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
+import axios from '@/lib/axios'
 
 const RegisterForm = () => {
   const router = useRouter()
@@ -79,15 +80,16 @@ const RegisterForm = () => {
         // year: +formikForPayment.values.expiration.slice(0, 4),
         // month: +formikForPayment.values.expiration.slice(5, 7),
       }
-      const response = await fetch('/fapi/signup_api', {
+      const response = await axios({
+        url: '/fapi/signup_api',
         method: 'POST',
-        body: JSON.stringify(form),
+        data: JSON.stringify(form),
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      if (response.ok) {
-        const data = await response.json()
+      if (response.status === 200) {
+        const data = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Register success');
           setTimeout(() => {
@@ -130,15 +132,16 @@ const RegisterForm = () => {
       }
       setIsSending(true)
       messageApi.loading('Sending verification code...')
-      const response = await fetch('/fapi/send_verification_email', {
+      const response = await axios({
+        url: '/fapi/send_verification_email',
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `email=${email}`,
+        data: `email=${email}`,
       })
-      if (response.ok) {
-        const data = await response.json()
+      if (response.status === 200) {
+        const data = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Send verification code success');
         } else {

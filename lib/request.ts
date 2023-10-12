@@ -1,3 +1,5 @@
+import axios from '@/lib/axios';
+
 type Method = 'GET' | 'POST'
 
 export async function request(url: string, method: Method, data: Record<string, any> = {}, headers = {}) {
@@ -8,9 +10,10 @@ export async function request(url: string, method: Method, data: Record<string, 
     for (const key in data) {
       formData.append(key, data[key])
     }
-    const response = await fetch(url, {
+    const response = await axios({
+      url,
       method,
-      body: formData,
+      data: formData,
       headers,
     })
     return response
@@ -23,9 +26,10 @@ export async function request(url: string, method: Method, data: Record<string, 
 export async function requestJson(url: string, method: Method, data: Record<string, any> = {}, headers = {}) {
   try {
     url = process.env.API_BASE_URL + url
-    const response = await fetch(url, {
+    const response = await axios({
+      url,
       method,
-      body: JSON.stringify(data),
+      data: JSON.stringify(data),
       headers,
     })
     return response

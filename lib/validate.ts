@@ -1,4 +1,5 @@
 import { LoginForm, PaymentForm, RegisterForm, ResetPasswordForm } from "@/types/auth"
+import axios from '@/lib/axios';
 
 export function loginValidate(values: LoginForm) {
   const errors = {} as LoginForm
@@ -39,11 +40,12 @@ export async function paymentValidate(values: PaymentForm) {
   if (values.card_number.length !== 16) {
     errors.card_number = 'Card number must be 16 digits'
   }
-  const response = await fetch(`/fapi/verify_credit_card_num?credit_card_num=${values.card_number}`, {
+  const response = await axios({
+    url: `/fapi/verify_credit_card_num?credit_card_num=${values.card_number}`,
     method: 'GET',
   });
   // Convert the response to JSON
-  const responseData =  await response.json();
+  const responseData = response.data;
 
 // Check the isValid property
   if (!responseData.isValid) {

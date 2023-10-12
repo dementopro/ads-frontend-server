@@ -11,6 +11,7 @@ import loadingIcon from '@iconify/icons-eos-icons/loading';
 import { useRouter } from 'next/navigation';
 import { DatePicker, message } from 'antd';
 import { SUCCESS_CODE } from '@/data/constant';
+import axios from '@/lib/axios';
 
 const PaymentForm = () => {
 
@@ -38,29 +39,32 @@ const PaymentForm = () => {
     }
     try {
       setIsLoading(true);
-      const response = await fetch('/fapi/add_credit_api', {
-        method: 'POST',
-        body: JSON.stringify({
-          ...values,
-          year: +values.expiration.split('-')[0],
-          month: +values.expiration.split('-')[1],
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      if (response.ok) {
-        const data = await response.json()
-        if (data.status === SUCCESS_CODE) {
-          messageApi.success(data.message || 'Add credit successfully');
-          setTimeout(() => {
-            router.push('/profile')
-          }, 500);
+      if (!isLoading) {
+        const response = await axios({
+          url: '/fapi/add_credit_api',
+          method: 'POST',
+          data: JSON.stringify({
+            ...values,
+            year: +values.expiration.split('-')[0],
+            month: +values.expiration.split('-')[1],
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        if (response.status === 200) {
+          const data = response.data
+          if (data.status === SUCCESS_CODE) {
+            messageApi.success(data.message || 'Add credit successfully');
+            setTimeout(() => {
+              router.push('/profile')
+            }, 500);
+          } else {
+            messageApi.error(data.message || 'Something went wrong');
+          }
         } else {
-          messageApi.error(data.message || 'Something went wrong');
+          messageApi.error(response.statusText || 'Something went wrong');
         }
-      } else {
-        messageApi.error(response.statusText || 'Something went wrong');
       }
     } catch (error) {
       console.log('error: ', error)

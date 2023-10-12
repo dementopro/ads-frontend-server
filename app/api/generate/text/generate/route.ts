@@ -2,11 +2,14 @@ import { request, requestJson } from "@/lib/request"
 import { IGeneTextForm } from "@/types/generate"
 import { NextResponse } from "next/server"
 
+import axios from "@/lib/axios";
+
 export async function POST(req: Request) {
   const body = await req.json() as IGeneTextForm
-  const res = await fetch(`${process.env.API_BASE_URL}/generate_text_api`, {
+  const res = await axios({
+    url: `${process.env.API_BASE_URL}/generate_text_api`,
     method: 'POST',
-    body: JSON.stringify({
+    data: JSON.stringify({
       ...body,
       platform: 'amazon',
     }),
@@ -15,7 +18,7 @@ export async function POST(req: Request) {
       'content-type': 'application/json',
     }
   })
-  const data = await res.json()
+  const data = res.data
   return NextResponse.json(data, {
     status: res.status,
   })

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useState } from 'react'
 import loadingIcon from '@iconify/icons-eos-icons/loading';
 import styles from './resetPassword.module.css'
+import axios from '@/lib/axios';
 
 const ResetPasswordForm = () => {
 
@@ -34,15 +35,16 @@ const ResetPasswordForm = () => {
     }
     try {
       setIsLoading(true)
-      const response = await fetch('/fapi/reset_pwd_api', {
+      const response = await axios({
+        url: '/fapi/reset_pwd_api',
         method: 'POST',
-        body: JSON.stringify(values),
+        data: JSON.stringify(values),
         headers: {
           'Content-Type': 'application/json',
         }
       })
-      if (response.ok) {
-        const data: IResponse = await response.json()
+      if (response.status === 200) {
+        const data: IResponse = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Reset password success');
         } else {
@@ -67,15 +69,16 @@ const ResetPasswordForm = () => {
     try {
       setIsSending(true)
       messageApi.loading('Sending verification code...')
-      const response = await fetch('/fapi/send_verification_email', {
+      const response = await axios({
+        url: '/fapi/send_verification_email',
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `email=${email}`,
+        data: `email=${email}`,
       })
-      if (response.ok) {
-        const data = await response.json()
+      if (response.status == 200) {
+        const data = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Send verification code success');
         } else {

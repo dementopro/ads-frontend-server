@@ -8,7 +8,7 @@ import { TTChartsDataSet, TikTokReportsBasic, TikTokReportsBasicResp, TikTokRepo
 import { getDateListBetween, getDateRange } from '@/utils'
 import { Empty, Spin } from 'antd'
 import { useContext, useEffect, useState } from 'react'
-
+import axios from '@/lib/axios'
 
 const dateMap: Record<DateRange, number> = {
   last_day: 1,
@@ -45,19 +45,20 @@ const SocialMetrics = () => {
     try {
       setLoadingBasic(true)
       const [start, end] = getDateRange(dateMap[dateRange])
-      const response = await fetch('/fapi/get_tt_reports_api', {
+      const response = await axios({
+        url: '/fapi/get_tt_reports_api',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        data: JSON.stringify({
           start_date: start,
           end_date: end,
           report_type: 'BASIC',
         })
       })
-      if (response.ok) {
-        const data: TikTokReportsBasicResp = await response.json()
+      if (response.status === 20) {
+        const data: TikTokReportsBasicResp = response.data
         if (data.status === SUCCESS_CODE) {
           setTikTokBasicDataSet(data.data)
         } else {
@@ -77,19 +78,20 @@ const SocialMetrics = () => {
     try {
       setLoadingChart(true)
       const [start, end] = getDateRange(dateMap[dateRange])
-      const response = await fetch('/fapi/get_tt_reports_api', {
+      const response = await axios({
+        url: '/fapi/get_tt_reports_api',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        data: JSON.stringify({
           start_date: start,
           end_date: end,
           report_type: 'AUDIENCE',
         })
       })
-      if (response.ok) {
-        const data: TikTokReportsResp = await response.json()
+      if (response.status === 200) {
+        const data: TikTokReportsResp = response.data
         if (data.status === SUCCESS_CODE) {
           const { clicks, impressions, ctr, spend, age, conversion, cpc } = data.data
           const start_dates = getDateListBetween(start, end)

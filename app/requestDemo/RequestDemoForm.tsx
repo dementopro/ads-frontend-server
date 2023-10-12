@@ -5,6 +5,8 @@ import React, { useState } from 'react'
 import styles from './RequestDemo.module.css'
 import { useRouter } from 'next/navigation';
 
+import axios from '@/lib/axios'
+
 interface ContactUsFrom {
   firstName: string;
   lastName: string;
@@ -28,15 +30,16 @@ const RequestDemoForm = () => {
     try {
       setLoading(true);
       messageApi.loading('Sending message...');
-      const res = await fetch(`/fapi/contacts_api`, {
+      const res = await axios({
+        url: `/fapi/contacts_api`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values)
+        data: JSON.stringify(values)
       })
-      if (res.ok) {
-        const data = await res.json() as IResponse
+      if (res.status === 200) {
+        const data = res.data as IResponse
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Message sent successfully');
           router.push('/bookMeeting')

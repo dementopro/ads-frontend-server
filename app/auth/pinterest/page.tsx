@@ -3,6 +3,8 @@ import { SUCCESS_CODE } from '@/data/constant'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
+import axios from '@/lib/axios';
+
 const AuthPinterest = () => {
 
   const router = useRouter()
@@ -13,16 +15,17 @@ const AuthPinterest = () => {
     try {
       setLoading(true)
       if (!code) return false
-      const response = await fetch(`/fapi/pinterest_callback?code=${code}`, {
+      const response = await axios({
+        url: `/fapi/pinterest_callback?code=${code}`,
         method: 'GET',
         headers: {
           'Access-Control-Allow-Origin': '*',
         }
       })
-      if (!response.ok) {
+      if (response.status !== 200) {
         return false
       }
-      const data: IResponse = await response.json()
+      const data: IResponse = response.data
       return data.status === SUCCESS_CODE
     } catch (error) {
       return false

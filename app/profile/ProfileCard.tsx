@@ -8,6 +8,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+import axios from '@/lib/axios';
+
 const ProfileCard = () => {
 
   const [showEditProfile, setShowEditProfile] = useState(false)
@@ -17,11 +19,12 @@ const ProfileCard = () => {
   async function getUserProfile() {
     try {
       setLoading(true)
-      const response = await fetch('/fapi/user_profile_api', {
+      const response = await axios({
+        url: '/fapi/user_profile_api',
         method: 'GET',
       })
-      if (response.ok) {
-        const data: IUserProfileResp = await response.json()
+      if (response.status === 200) {
+        const data: IUserProfileResp = response.data
         if (data.status === SUCCESS_CODE) {
           setUserProfile(data.data)
         } else {

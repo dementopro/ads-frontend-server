@@ -9,7 +9,7 @@ import { Spin, message } from 'antd'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useState } from 'react'
-
+import axios from '@/lib/axios';
 
 const ImageGenerate = () => {
   const router = useRouter()
@@ -34,14 +34,15 @@ const ImageGenerate = () => {
         return
       }
       setIsGenerating(true)
-      const response = await fetch('/api/generate/textToImage', {
+      const response = await axios({
+        url: '/api/generate/textToImage',
         method: 'POST',
-        body: JSON.stringify({
+        data: JSON.stringify({
           mode: mode.value, prompt: prompt, type: type.value
         }),
       })
-      const data: IGeneImageResp = await response.json()
-      if (response.ok) {
+      const data: IGeneImageResp = response.data
+      if (response.status === 200) {
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Generate successfully')
           const image = data.image_list[0]

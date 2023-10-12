@@ -3,6 +3,8 @@ import { SUCCESS_CODE } from '@/data/constant'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
+import axios from '@/lib/axios';
+
 const AuthFacebook = () => {
 
   const router = useRouter()
@@ -13,16 +15,17 @@ const AuthFacebook = () => {
     try {
       setLoading(true)
       if (!code) return false
-      const response = await fetch(`/fapi/fb_callback_api?code=${code}`, {
+      const response = await axios({
+        url: `/fapi/fb_callback_api?code=${code}`,
         method: 'GET',
         headers: {
           'Access-Control-Allow-Origin': '*',
         }
       })
-      if (!response.ok) {
+      if (response.status !== 200) {
         return false
       }
-      const data: IResponse = await response.json()
+      const data: IResponse = response.data
       return data.status === SUCCESS_CODE
     } catch (error) {
       return false

@@ -126,9 +126,10 @@ const PreTrainedPick = () => {
   async function onReplaceBackground() {
     updateIsGenerating(true)
     try {
-      const response = await fetch(`/fapi/generate_image/replace_pro_background_v2`, {
+      const response = await axios({
+        url: "/fapi/generate_image/replace_pro_background_v2",
         method: 'POST',
-        body: JSON.stringify({
+        data: JSON.stringify({
           _id: imageId,
           img_path: file_path,
           file_name,
@@ -139,8 +140,8 @@ const PreTrainedPick = () => {
           'Content-Type': 'application/json',
         },
       })
-      if (response.ok) {
-        const data: IGeneImageResp = await response.json()
+      if (response.status === 200) {
+        const data: IGeneImageResp = response.data;
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({
@@ -181,7 +182,7 @@ const PreTrainedPick = () => {
           segment_mask: [{ label }],
           file_name,
           prompt,
-          file_path: file_path.replace("v3/", ""),
+          file_path: file_path,
           mask_file_name,
           mask_file_path,
           face_mode: preTrainedOption.face,
@@ -195,7 +196,7 @@ const PreTrainedPick = () => {
       })
 
       if (response.status === 200) {
-        const data: IGeneImageResp = await response.data
+        const data: IGeneImageResp = response.data
         if (data.status === SUCCESS_CODE) {
           messageApi.success('Generate image successfully!')
           const result = data.new_image.map(item => ({

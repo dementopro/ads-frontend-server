@@ -10,7 +10,7 @@ import { CampaignsSelect, DateRangeBtns } from '@/app/socialInsights/FilterBtns'
 import { capitalize } from '@/lib/format';
 import TheResponsiveLine from '@/components/d3/TheResponsiveLine';
 import TheResponsiveBar from '@/components/d3/TheResponsiveBar';
-
+import axios from '@/lib/axios';
 
 type DashCardProps = {
   title: string
@@ -77,20 +77,21 @@ const SocialMetrics = () => {
   async function fetchAdsData() {
     try {
       setLoadingData(true)
-      const response = await fetch('/fapi/ads_fb_management', {
+      const response = await axios({
+        url: '/fapi/ads_fb_management',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        data: JSON.stringify({
           mode: selectedCampaign,
           date_range: dateMap[dateRange]
         })
       })
-      if (response.ok) {
+      if (response.status === 200) {
         const data: IAdsFbManagementResp & {
           [key in keyof FbChartsDataSet]: number | string
-        } = await response.json()
+        } = response.data
         if (data.status === SUCCESS_CODE) {
           setAdsFbManagementData({
             clicks: data.data.clicks,
@@ -122,18 +123,19 @@ const SocialMetrics = () => {
   async function fetchChartData() {
     try {
       setLoadingChart(true)
-      const response = await fetch('/fapi/get_charts', {
+      const response = await axios({
+        url: '/fapi/get_charts',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        data: JSON.stringify({
           mode: selectedCampaign,
           date_range: dateMap[dateRange]
         })
       })
-      if (response.ok) {
-        const data: IFbChartResp = await response.json()
+      if (response.status === 200) {
+        const data: IFbChartResp = response.data
         if (data.status === SUCCESS_CODE) {
           const { clicks, impressions, reach, start_dates, conversions, cost_per_conversion, cost_per_unique_click, cpc, cpm, cpp, ctr, purchase_roas, spend, video_avg_time_watched_actions, website_ctr } = data.data
           const clicksData = clicks ? [{
@@ -238,14 +240,15 @@ const SocialMetrics = () => {
   async function getCampaigns() {
     try {
       setLoadingData(true)
-      const response = await fetch('/fapi/get_campaigns', {
+      const response = await axios({
+        url: '/fapi/get_campaigns',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
       })
-      if (response.ok) {
-        const data: ICampaignsResp = await response.json()
+      if (response.status === 200) {
+        const data: ICampaignsResp = response.data
         if (data.status === SUCCESS_CODE) {
           setCampaigns(data.data)
         }
