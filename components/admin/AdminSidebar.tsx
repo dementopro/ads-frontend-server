@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import creditCardMarkerOutline from '@iconify/icons-mdi/credit-card-marker-outline';
 import React, { useContext } from 'react';
 import { AccountContext } from '@/context/account';
+import { isUserLogin } from '@/lib/auth';
 
 const AdminSidebar = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const AdminSidebar = () => {
     router.push('/pricing');
   }
 
-  const { isLogin } = useContext(AccountContext);
+  const isLogin = isUserLogin() ? true : false;
 
   return (
     <aside className='max-ipad:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6'>

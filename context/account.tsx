@@ -89,6 +89,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
 
   // Function to fetch and update user account data
   async function updateAccount() {
+    const isLogin = isUserLogin()
     if (!isLogin) return
     try {
       const response = await axios({
