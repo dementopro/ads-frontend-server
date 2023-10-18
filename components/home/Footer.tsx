@@ -8,7 +8,7 @@ import gmailIcon from '@iconify/icons-mdi/gmail';
 import youtubeIcon from '@iconify/icons-mdi/youtube';
 import linkedinIcon from '@iconify/icons-mdi/linkedin';
 import Link from 'next/link';
-import { footerLinks } from '@/data/footerLink';
+import { footerLinks } from '@/data/footerLinks';
 
 type ColumnProps = {
   title: string;
@@ -23,7 +23,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
     <h4 className="font-semibold uppercase text-white">{title}</h4>
     <ul className="flex flex-col gap-3 text-sm font-regular text-primary-gray">
       {links.map((link) => (
-        <Link  href={link.href} key={link.label} className='hover:text-white'>
+        <Link  href={link.href} key={link.label} className="hover:text-[#9D93FF]">
           {link.label}
         </Link>
       ))}
@@ -34,7 +34,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 const Footer = () => {
   return (
     <footer className='px-6 sm:px-20 pt-10 bg-black'>
-      <div className='flex flex-wrap gap-8 justify-between'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] flex flex-wrap gap-8 justify-between'>
         <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />
           <span className='text-sm text-primary-gray'>
@@ -71,7 +71,7 @@ const Footer = () => {
           }
         </div>
       </div>
-      <div className='border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
         <span>&copy; 2023 AdsGency AI. All rights reserved.</span>
       </div>
     </footer >

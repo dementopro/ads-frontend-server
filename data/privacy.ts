@@ -1,4 +1,4 @@
-export const PRIVACY = [
+export const privacy = [
     {
         title: 'Introduction',
         description: 'AdsGency AI (the "Company") values the privacy of its users ("User" or "you") and has developed this Privacy Policy to demonstrate its commitment to protecting your privacy. This Privacy Policy describes the types of information we may collect from you or that you may provide when you use our Services, and our practices for collecting, using, maintaining, protecting, and disclosing that information.'

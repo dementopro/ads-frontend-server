@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Header from '@/components/home/Header'
-import Announcement from '@/components/home/Announcement'
+import PrimaryButton from '@/components/PrimaryButton'
 
 
 const NewLanding = () => {
@@ -14,7 +14,7 @@ const NewLanding = () => {
 
       <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[0px] ipadmini:pt-[0px] ipad:pt-[82px] desktop:pt-[82px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
         <Header />
-        <div className="ipad:w-full desktop:w-full h-full android:mt-[16px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center flex android:flex-col ipadmini:flex-col ipad:flex-row desktop:flex-row android:gap-[32px] ipad:gap-[32px]">
+        <div className="desktop:w-[1240px] ipad:w-full m-auto h-full android:mt-[16px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center flex android:flex-col ipadmini:flex-col ipad:flex-row desktop:flex-row android:gap-[32px] ipad:gap-[32px]">
           <div className="android:w-full ipadmini:w-full ipad:w-full desktop:w-7/12 flex-col android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start android:items-center ipadmini:items-center ipad:items-start desktop:items-start android:gap-[12px] ipadmini:gap-[14px] ipad:gap-[16px] desktop:gap-[16px] inline-flex">
             <div className="w-full text-open-sans flex-row android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start items-end flex android:gap-[5px] ipadmini:gap-[6px] ipad:gap-[7px] desktop:gap-[8px] text-center text-white">
               <div className="android:text-[14px] ipad:text-[18px] desktop:text-[22px] font-medium leading-normal">
@@ -30,8 +30,8 @@ const NewLanding = () => {
                 , Not a disrupter
               </div>
             </div>
-            <div className="w-full text-poppins flex-col justify-start items-start flex android:text-[34px] ipad:text-[43px] desktop:text-[48px] font-semibold">
-              <div className="w-full text-white android:leading-[30px] ipadmini:leading-[40px] ipad:leading-[50px] desktop:leading-[70px] android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
+            <div className="w-full text-poppins flex-col justify-start items-start flex android:text-[34px] ipad:text-[43px] desktop:text-[48px] font-bold">
+              <div className="w-full text-white tracking-tight android:leading-[34px] ipadmini:leading-[50px] ipad:leading-[40px] desktop:leading-[56px] android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
                 One Stop
                 <span className="android:px-[4px] ipadmini:px-[6px] ipad:px-[8px] desktop:px-[10px] bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
                   Ad Platform
@@ -39,25 +39,14 @@ const NewLanding = () => {
                 Without Limits
               </div>
             </div>
-            <div className="mt-[16px] w-full text-stone-300 android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-Open+Sans font-regular android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
+            <div className="mt-[16px] w-full text-stone-300 android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
               Marketing agencies save time & money with our one-stop ads AI platform
             </div>
 
-            <Link target="_blank"  href='/requestDemo' className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-[#6859FF] to-[#AF41FF] rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px]">
-              <div>
-                Request Demo
-              </div>
-              <div className="relative">
-                <img
-                  title='arrow'
-                  className='cursor-pointer android:w-[12px] ipadmini:w-[12px] ipad:w-[15px] desktop:w-[18px] android:h-[12px] ipadmini:h-[12px] ipad:h-auto desktop:h-auto'
-                  src={'/images/elements/ep_right.svg'} alt='arrow'
-                />
-              </div>
-            </Link>
+            <PrimaryButton href="/requestDemo" text="Request Demo" />
           </div>
 
-          <div className="ipad:w-full desktop:w-6/12 font-Poppins flex-row android:gap-[16px] ipad:gap-[10px] inline-flex">
+          <div className="ipad:w-full desktop:w-6/12 font-poppins flex-row android:gap-[16px] ipad:gap-[10px] inline-flex">
             <div className='ipad:w-3/6 desktop:w-2/5 flex-col justify-center items-center flex'>
               <div className="text-[#838383] android:text-[9px] ipadmini:text-[15px] ipad:text-[14px] desktop:text-[20px] font-medium">
                 Before AdsGency AI

@@ -28,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="w-full overflow-y-hidden" >
+      <body className="w-full" >
         <WithProviders>
           {children}
         </WithProviders>

@@ -2,6 +2,7 @@ import DefaultLayout from '@/layout/default'
 import styles from './contactUs.module.css'
 import Cards from '@/app/contactUs/Cards'
 import ReactGATag from '@/components/ReactGATag'
+import Header from '@/components/home/Header'
 
 
 export const metadata = {
@@ -17,10 +18,11 @@ const ContactUsPage = () => {
         page: "/contactUs",
         title: metadata.title
       }} />
-      <section className={`w-full h-[calc(100vh-64px)] bg-[#1B1C21] flex flex-col items-center justify-center ${styles['home-bg']}`}>
-        <h1 className="text-2xl sm:text-4xl text-white font-bold">Contact Us</h1>
-        <Cards />
-      </section>
+      <div className="w-full h-auto relative">
+        <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[0px] ipad:pt-[82px] w-full relative bg-hero-pattern bg-cover">
+          <Header />
+        </div>
+      </div>
     </DefaultLayout>
   )
 }

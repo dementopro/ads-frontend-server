@@ -4,6 +4,7 @@ export const Blogs: IBlog[] = [
   {
     id: '1',
     title: 'Revolutionize Your Advertising Campaigns with AI-Driven Precision: Introducing AdsGency AI',
+    miniTitle: `Revolutionize Your Advertising`,
     content: [
       'img:/blog/1/1.png',
       'I. Introduction',
@@ -42,13 +43,16 @@ export const Blogs: IBlog[] = [
       `V. Conclusion`,
       `AdsGency AI is more than just a tool; it's a transformative solution for modern advertising. With its AI-driven capabilities, it offers a new way to approach advertising that is efficient, effective, and aligned with the needs of today's businesses. Try out AdsGency AI today and take your advertising campaigns to the next level.`
     ],
-    publishDate: '07/31/2023',
+    publishDate: 'July 2023',
     publisher: 'Melody Jiang',
     coverImage: '/blog/1/cover.png',
+    layout: 'col',
+    type: 'Modern'
   },
   {
     id: '2',
     title: 'How to Use AI in Advertising: A Comprehensive Guide',
+    miniTitle: `How to Use AI in Advertising`,
     content: [
       'img:/blog/2/1.png',
       `I. Introduction`,
@@ -87,13 +91,16 @@ Cost: Consider the investment required for AI tools and expertise.`,
       `Whether you're just starting with AI or looking to enhance your existing strategies, this guide provides a comprehensive overview to help you navigate the exciting world of AI in advertising.`,
       'img:/blog/2/3.png'
     ],
-    publishDate: '08/03/2023',
+    publishDate: 'March 2023',
     publisher: 'Bolbi Liu',
     coverImage: '/blog/2/cover.png',
+    layout: 'col',
+    type: 'Latest'
   },
   {
     id: '3',
     title: `AI in Advertising: It's Not Just for Robots Anymore!`,
+    miniTitle: `AI in Advertising`,
     content: [
       'img:/blog/3/1.png',
       `Hey there, fellow human! If you're reading this, you're probably curious about how AI(Artificial Intelligence) is taking over the advertising world.And no, we're not talking about robots selling you the latest gadgets (although that would be cool). We're diving into the real, practical ways AI is changing the game in advertising.Buckle up!`,
@@ -119,8 +126,10 @@ Wrap It Up`,
       `So there you have it, a not - so - serious look at how AI is shaking up the advertising world.It's not just for tech geeks and robots; it's for anyone looking to up their advertising game.Give it a whirl, and who knows ? You might just find your new best advertising buddy in AI.`,
       'img:/blog/3/3.png',
     ],
-    publishDate: '08/06/2023',
+    publishDate: 'June 2023',
     publisher: 'Ken Xu',
     coverImage: '/blog/3/cover.png',
+    layout: 'row',
+    type: 'AI Fusion'
   }
 ]

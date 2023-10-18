@@ -44,18 +44,18 @@ export const footerLinks = [
   {
     title: 'Company',
     links: [
-      // {
-      //   label: 'About Us',
-      //   href: '/',
-      // },
+      {
+        label: 'About Us',
+        href: '/',
+      },
       {
         label: 'Contact Us',
         href: '/contactUs',
       },
-      {
-        label: 'Privacy Policy',
-        href: '/privacy',
-      },
+      // {
+      //   label: 'Privacy Policy',
+      //   href: '/privacy',
+      // },
       {
         label: 'Careers',
         href: '/careers',

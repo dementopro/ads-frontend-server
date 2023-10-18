@@ -4,6 +4,11 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Banner from '@/components/home/Banner'
 import Breadcrumb from '@/components/Breadcrumb'
+import PrimaryButton from '@/components/PrimaryButton'
+import { useState } from 'react';
+import { headerLinks } from '@/data/headerLinks'
+import DropDown from '../admin/header/DropDown';
+import Dropdown from '@/components/Dropdown';
 
 
 const Header = () => {
@@ -13,10 +18,10 @@ const Header = () => {
   function toHome() {
     router.push('/')
   }
-
+  const [expanded, setExpanded] = useState(false);
   return (
     <>
-      <div className="w-full relative bg-zinc-900 android:rounded-[0px] ipadmini:rounded-[0px] ipad:rounded-[25px] desktop:rounded-[25px]">
+      <div className="desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] relative bg-zinc-900 android:rounded-[0px] ipadmini:rounded-[0px] ipad:rounded-[25px] desktop:rounded-[25px]">
         <Banner />
 
         <div className="w-full android:h-[95px] ipadmini:h-[95px] ipad:h-[70px] desktop:h-[70px] relative px-[32px] bg-zinc-900 rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-10">
@@ -37,24 +42,15 @@ const Header = () => {
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex flex-grow justify-start items-center gap-4">
             <div className="justify-center items-center ipad:gap-[25px] desktop:gap-[32px] flex text-white ipad:text-[13px] desktop:text-[15px] desktop:font-regular desktop:font-medium">
-              <Link href='/'>
-                Home
-              </Link>
-              <Link href='/features'>
-                Features
-              </Link>
-              {/* <Link target="_blank"  href='/public/pricing' className="text-white text-[15px] font-medium leading-tight">
-              Pricing
-              </Link> */}
-              <Link href='/blog'>
-                Blog
-              </Link>
-              <Link href='/careers'>
-                Careers
-              </Link>
-              <Link href='/contactUs'>
-                Contact Us
-              </Link>
+              {headerLinks.map((link, index) => (
+                link.links.length === 0 ? ( // Check if links array is not empty
+                  <Link key={index} href={link.url} className="hover:text-[#9D93FF]">
+                    {link.title}
+                  </Link>
+                ) : (
+                  <Dropdown key={index} heading={link.title} links={link.links} />
+                )
+              ))}
             </div>
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-auto justify-end items-end gap-4 text-white text-semibold">
@@ -63,21 +59,10 @@ const Header = () => {
               Sign In
             </div>
             </Link> */}
-            <Link target="_blank"  href='/requestDemo' className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-[#6859FF] to-[#AF41FF] rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px]">
-              <div>
-                Request Demo
-              </div>
-              <div className="relative">
-                <img
-                  title='arrow'
-                  className='cursor-pointer android:w-[12px] ipadmini:w-[12px] ipad:w-[15px] desktop:w-[18px] android:h-[12px] ipadmini:h-[12px] ipad:h-auto desktop:h-auto'
-                  src={'/images/elements/ep_right.svg'} alt='arrow'
-                />
-              </div>
-            </Link>
+            <PrimaryButton href="/requestDemo" text="Request Demo" />
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
 }

@@ -1,71 +1,91 @@
-'use client'
-import { IBlog } from '@/types/blog'
-import React from 'react'
-import { Blogs } from '@/data/blogs'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Icon } from '@iconify/react'
+'use client';
+import { IBlog } from '@/types/blog';
+import React from 'react';
+import { Blogs } from '@/data/blogs';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Icon } from '@iconify/react';
+import SecondaryButton from '@/components/SecondaryButton';
 
 type BlogCardProps = {
-  blog: IBlog
-}
+  blog: IBlog;
+};
 
 const BlogCard = ({ blog }: BlogCardProps) => {
   return (
     <>
       <div
-        className='flex flex-col shadow-lg border-2 border-black hover:border-primary-purple rounded-md overflow-hidden transition-all group relative select-none'
-        style={{
-          background: 'linear-gradient(180deg, #1B1C21 0%, #251F32 100%)'
-        }}
+        className={`w-full flex android:flex-col ipad:flex-row justify-start items-center ${
+          blog.layout === 'row'
+            ? 'ipadmini:flex-row android:gap-[16px] ipad:gap-[32px]'
+            : 'ipadmini:flex-col gap-[16px]'
+        }`}
       >
-        <Link target="_blank"  href={`/blog/${blog.id}`} className='w-full h-48 bg-gray-300 relative overflow-hidden'>
-          <Image src={blog.coverImage} alt={blog.title} layout='fill' className='object-cover hover:scale-125 transition-all duration-600 cursor-pointer' />
-        </Link>
-        <div className='flex flex-col gap-3 p-4'        >
-          <Link target="_blank"  href={`/blog/${blog.id}`} className='cursor-pointer text-lg font-bold line-clamp-2 hover:text-primary-purple' title={blog.title}>
-            {blog.title}
-          </Link>
-          <p className='text-xs text-primary-gray line-clamp-2'>
-            {blog.content.filter(p => !p.startsWith('img:'))}
-          </p>
-          <div className='text-sm text-white flex justify-between items-center group-hover:opacity-0 transition-all font-mono'>
-            <div className='flex items-center gap-1 text-white'>
-              <Icon icon='mdi:calendar' className='text-primary-gray text-xl' />
-              <span>{blog.publishDate}</span>
-            </div>
-            <div className='flex items-center gap-1 text-white'>
-              <Icon icon='mdi:account-circle' className='text-primary-gray text-xl' />
-              <span>{blog.publisher}</span>
-            </div>
+        <div
+          className={`android:h-[200px] android:w-full ipadmini:h-[200px] ipadmini:w-full ipad:h-full ${
+            blog.layout === 'row' ? '' : 'ipad:h-full ipad:w-2/3 desktop:w-1/2'
+          }`}
+        >
+          <img
+            src={blog.coverImage}
+            alt="Blog Image"
+            className="w-full h-full object-cover rounded-[25px]"
+          />
+        </div>
+        <div
+          className={`inline-flex android:w-full ipadmini:w-full ${
+            blog.layout === 'row' ? '' : 'ipad:w-1/2'
+          } flex-col justify-start items-start android:gap-[8px] ipad:gap-[16px]`}
+        >
+          <div className="android:px-[14px] ipad:px-[18px] android:py-[3px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
+            {blog.type}
           </div>
-          <Link target="_blank"  href={`/blog/${blog.id}`} className='mx-auto text-center cursor-pointer text-base underline underline-offset-8 transition-all duration-300 delay-600 hover:underline-offset-2 line-clamp-2 text-primary-purple hidden group-hover:flex absolute bottom-4 right-4' title={blog.title}>
-            Read More...
-          </Link>
+          <div
+            className={`${
+              blog.layout === 'row'
+                ? 'android:text-[28px] ipad:text-[34px] leading-[40px]'
+                : 'android:text-[18px] ipad:text-[20px] leading-[24px]'
+            } font-semibold font-poppins`}
+          >
+            {blog.layout === 'row' ? blog.title : blog.miniTitle}
+          </div>
+          {blog.layout === 'row' && (
+            <div className="android:text-[12px] ipad:text-[16px] font-normal font-open-sans leading-[19px] line-clamp-2">
+              {blog.content.filter((p) => !p.startsWith('img:'))}
+            </div>
+          )}
+          {blog.layout === 'col' && (
+            <div className="android:text-[12px] ipad:text-[16px] text-[#D0D0D0] font-normal font-open-sans leading-[19px]">
+              {blog.publishDate}
+            </div>
+          )}
+          <SecondaryButton path="/blog/" id={blog.id} text="View" />
         </div>
       </div>
     </>
-  )
-}
-
-
+  );
+};
 
 const BlogList = () => {
-
-  const blogs = Blogs.sort((a, b) => +b.id - +a.id)
-
+  const rowLayoutBlogs = Blogs.filter((blog) => blog.layout === 'row');
+  const colLayoutBlogs = Blogs.filter((blog) => blog.layout === 'col');
   return (
-    <>
-      <div className='grid grid-cols-1 sm:grid-cols-2 ipad:grid-cols-3 w-full max-w-[1200px] px-8 gap-4'>
-        {
-          blogs.map((blog) => (
-            <BlogCard blog={blog} key={blog.id} />
-          ))
-        }
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+      <div className="w-full text-[#D0D0D0] font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
+        Featured
       </div>
-      <p className='mt-16 text-xs text-primary-gray/50 text-center'>1 / 1</p>
-    </>
-  )
-}
+      <div className="w-full flex flex-col justify-center items-center gap-[32px] inline-flex">
+        {rowLayoutBlogs.map((blog) => (
+          <BlogCard blog={blog} key={blog.id} />
+        ))}
+      </div>
 
-export default BlogList
+      <div className="w-full flex android:flex-col ipadmini:flex-row justify-center items-center gap-[32px] inline-flex">
+        {colLayoutBlogs.map((blog) => (
+          <BlogCard blog={blog} key={blog.id} />
+        ))}
+      </div>
+    </div>
+  );
+};
+export default BlogList;

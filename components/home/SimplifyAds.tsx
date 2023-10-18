@@ -6,12 +6,13 @@ import producthuntIcon from '@iconify/icons-logos/producthunt';
 import brandSuperhuman from '@iconify/icons-tabler/brand-superhuman';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import PrimaryButton from '@/components/PrimaryButton'
 
 
 const SimplifyAds = () => {
     return (
         <div className='android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex'>
-            <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-Open+Sans'>
+            <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
                 Simplify your Ads Management
             </div>
             <div className="w-full pb-[16px] px-[16px] overflow-x-auto android:justify-center ipad:justify-center inline-flex">
@@ -99,18 +100,7 @@ const SimplifyAds = () => {
                     </div>
                 </div>
             </div>
-            <Link target="_blank" href='/requestDemo' className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-[#6859FF] to-[#AF41FF] rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px]">
-                <div>
-                    Request Demo
-                </div>
-                <div className="relative">
-                    <img
-                        title='arrow'
-                        className='cursor-pointer android:w-[12px] ipadmini:w-[12px] ipad:w-[15px] desktop:w-[18px] android:h-[12px] ipadmini:h-[12px] ipad:h-auto desktop:h-auto'
-                        src={'/images/elements/ep_right.svg'} alt='arrow'
-                    />
-                </div>
-            </Link>
+            <PrimaryButton href="/requestDemo" text="Request Demo" />
         </div >
     )
 }

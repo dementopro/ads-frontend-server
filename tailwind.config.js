@@ -30,9 +30,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        'open-sans': ['Open Sans', 'sans-serif'],
-        'poppins': ['Poppins', 'sans-serif'],
+        'open-sans': ['"Open Sans"', 'sans-serif'],
+        'poppins': ['"Poppins"', 'sans-serif'],
       },
+      outline: ['focus'],
     },
   },
   plugins: [

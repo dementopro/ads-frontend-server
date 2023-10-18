@@ -11,6 +11,7 @@
 html,
 body {
   @apply w-full h-full;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .admin-content {

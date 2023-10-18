@@ -1,4 +1,4 @@
-export const TERMS = [
+export const terms = [
     {
         title: 'Acceptance of Terms',
         description: 'The services that AdsGency AI provides are subject to the following Terms of Service ("TOS"). AdsGency AI reserves the right to update the TOS at any time without notice to you. The most current version of the TOS can be reviewed by clicking on the "Terms of Service" hypertext link located at the bottom of our Web pages.'
