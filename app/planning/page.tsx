@@ -7,8 +7,9 @@ import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
 import AdminLayout from '@/layout/admin'
 import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
 import { message, Spin } from 'antd'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState, useContext } from 'react'
 import axios from '@/lib/axios';
+import { AccountContext } from '@/context/account'
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -46,6 +47,8 @@ const PlanningPage = () => {
   const [planId, setPlanId] = useState<number | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
+  const { updateAccount } = useContext(AccountContext)
+
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value)
@@ -91,6 +94,7 @@ const PlanningPage = () => {
         if (data.status === SUCCESS_CODE) {
           console.log('data', data)
           messageApi.success(data.msg || 'Generate successfully')
+          updateAccount()
           setPlan(data.planning_obj[0].plan)
           if (!planList) {
             setPlanList([data.planning_obj[0]])
@@ -127,7 +131,7 @@ const PlanningPage = () => {
         show={showNotEnoughCredits}
         setShow={() => setShowNotEnoughCredits(false)} />
       <section className='flex flex-col justify-center'>
-        <h1 className='text-white font-medium text-2xl mb-6'>
+        <h1 className='mb-6 text-2xl font-medium text-white'>
           Planning
         </h1>
         <Spin spinning={isGenerating} wrapperClassName='text-base'>
