@@ -135,6 +135,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     if (isLogin) {
       setAccount(isLogin as AccountInterface);
       setIsLoading (false)
+      setIsLogin(true)
       // if (pathname === '/login' || pathname === '/register') {
       //   redirect ('/home');
       // }

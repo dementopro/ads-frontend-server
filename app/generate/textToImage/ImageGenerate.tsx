@@ -8,8 +8,9 @@ import { IGeneImageResp } from '@/types/generate';
 import { Spin, message } from 'antd'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useContext } from 'react'
 import axios from '@/lib/axios';
+import { AccountContext } from '@/context/account';
 
 const ImageGenerate = () => {
   const router = useRouter()
@@ -22,6 +23,7 @@ const ImageGenerate = () => {
   const [image, setImage] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
+  const { updateAccount } = useContext(AccountContext)
 
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setPrompt(e.target.value)
@@ -50,6 +52,7 @@ const ImageGenerate = () => {
           setDescription(image.description)
           setImage(`${process.env.NEXT_PUBLIC_IMG_URL}${data.file_path}/${image.filename}`)
           router.refresh()
+          updateAccount()
         } else if (data.status === NOT_ENOUGH_CREDIT) {
           setShowNotEnoughCredits(true)
         } else {
@@ -74,7 +77,7 @@ const ImageGenerate = () => {
         setShow={() => setShowNotEnoughCredits(false)} />
       <Spin spinning={isGenerating}>
         <div className='flex gap-4 max-md:flex-col'>
-          <div className='flex flex-col gap-4 flex-1'>
+          <div className='flex flex-col flex-1 gap-4'>
             <div className='border rounded-lg border-[#3A3A3A] bg-[#1B1C21] px-4 py-[18px] flex flex-col gap-[10px] justify-between'>
               <textarea value={prompt} onChange={handleChange} className='text-xl bg-transparent outline-none h-[90px] resize-none' placeholder='Write your prompt here...' />
               <div className='flex flex-wrap items-center justify-end gap-5'>

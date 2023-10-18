@@ -17,16 +17,18 @@ const AdminSidebar = () => {
     router.push('/pricing');
   }
 
-  const isLogin = isUserLogin() ? true : false;
+
+  const { isLogin }  = useContext(AccountContext)
+
 
   return (
     <aside className='max-ipad:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6'>
       <div className='flex flex-col w-full'>
         <Menu />
       </div>
-      <div className='flex flex-col items-center justify-center gap-3 w-full px-6'>
+      <div className='flex flex-col items-center justify-center w-full gap-3 px-6'>
         {isLogin && <SubscriptionInfo />}
-        <button onClick={toPricing} className='cursor-pointer hover:border-primary-purple hover:text-primary-purple hover:border-solid text-primary-gray w-full border-2 border-dashed border-primary-gray flex items-center justify-center gap-2 rounded-lg py-1'>
+        <button onClick={toPricing} className='flex items-center justify-center w-full gap-2 py-1 border-2 border-dashed rounded-lg cursor-pointer hover:border-primary-purple hover:text-primary-purple hover:border-solid text-primary-gray border-primary-gray'>
           <Icon icon={creditCardMarkerOutline} width={20} />
           <span>Pricing</span>
         </button>

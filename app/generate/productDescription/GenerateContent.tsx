@@ -1,6 +1,6 @@
 'use client'
 import { Spin } from 'antd'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useContext } from 'react'
 import contentSaveOutline from '@iconify/icons-mdi/content-save-outline';
 import contentCopy from '@iconify/icons-mdi/content-copy';
 import { Icon } from '@iconify/react';
@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 
 import axios from '@/lib/axios';
+import { AccountContext } from '@/context/account';
 
 type Props = {
   mode: IGeneTextForm['mode']
@@ -26,6 +27,7 @@ const GenerateContent = ({ mode }: Props) => {
   const [messageApi, contextHolder] = message.useMessage()
   const router = useRouter()
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
+  const { updateAccount } = useContext(AccountContext)
 
   async function onGenerate() {
     try {
@@ -45,6 +47,7 @@ const GenerateContent = ({ mode }: Props) => {
         if (data.status === SUCCESS_CODE) {
           setContent(data.text)
           messageApi.success('Generated successfully')
+          updateAccount()
         } else if (data.status === NOT_ENOUGH_CREDIT) {
           setShowNotEnoughCredits(true)
         } else {

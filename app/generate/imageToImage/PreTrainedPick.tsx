@@ -8,6 +8,7 @@ import { GeneImageContext } from '@/context/generate'
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
 import axios from '@/lib/axios';
 import { PretrainItem, IGeneImageOption, IGeneImageResp } from '@/types/generate'
+import { AccountContext } from '@/context/account'
 
 type PickImageProps = {
   item: PretrainItem
@@ -89,6 +90,7 @@ const PreTrainedPick = () => {
     updateReload,
     imageId
   } = useContext(GeneImageContext)
+  const { updateAccount } = useContext(AccountContext)
 
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState<boolean>(false)
   const [prompt, setPrompt] = useState<string>('');
@@ -151,6 +153,7 @@ const PreTrainedPick = () => {
           }))
           updateGeneratedImage(result)
           updateReload()
+          updateAccount()
           router.refresh()
         } else if (data.status === NOT_ENOUGH_CREDIT) {
           setShowNotEnoughCredits(true)
@@ -232,7 +235,7 @@ const PreTrainedPick = () => {
         tips='It requires 3 credits to use image to image feature.'
         setShow={() => setShowNotEnoughCredits(false)} />
       <div className='flex flex-col mt-10'>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <div className='flex flex-wrap items-center text-primary-gray'>
             <OptionBtn
               onClick={() => updatePreTrainStep('background')}
@@ -283,7 +286,7 @@ const PreTrainedPick = () => {
           </button>
         </div>
       </div>
-      <div className='flex flex-wrap gap-5 mt-8 relative'>
+      <div className='relative flex flex-wrap gap-5 mt-8'>
         {
           pretrainList[`${preTrainedStep}List`]
             ?.map((item, index) => (
