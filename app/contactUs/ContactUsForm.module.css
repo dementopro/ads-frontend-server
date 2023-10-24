@@ -1,0 +1,57 @@
+.gradient-text {
+    background: linear-gradient(270deg, #D634FF 0%, #4663FF 81.52%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.input {
+    @apply w-full h-[45px] android:px-[18px] ipad:px-[24px] android:py-[12px] ipad:py-[16px] bg-[#27252D] text-[#756E88] android:rounded-[2px] ipad:rounded-[4px] border-1 border-[#4E4A5B] justify-start items-center;
+}
+
+.textarea {
+    @apply w-full android:px-[18px] ipad:px-[24px] android:py-[12px] ipad:py-[16px] bg-[#27252D] text-[#756E88] android:rounded-[2px] ipad:rounded-[4px] border-1 border-[#4E4A5B] justify-start items-center;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  @apply text-[#5F6368];
+}
+
+.input:hover,
+.textarea:hover {
+  @apply border-primary-purple;
+}
+
+.form::before {
+    content: '';
+    @apply android:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[60%] left-[-10px];
+}
+
+.form::after {
+    content: '';
+    @apply android:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[-10px] right-[20%];
+}
+
+.pop {
+    box-shadow: 0px 0px 66px 0px rgba(132, 79, 255, 0.28);
+    @apply max-w-[254px] px-5 py-4 text-sm text-primary-gray rounded-2xl border-primary-purple absolute max-sm:hidden;
+}
+
+.pop1 {
+    @apply left-[10%] top-[28%]
+}
+
+.pop2 {
+    @apply right-[10%] top-[28%]
+}
+
+.pop3 {
+    @apply left-[10%] bottom-[28%]
+}
+
+
+.pop1::before {
+    content: '';
+    @apply android:hidden absolute rounded-full w-4 h-4 bg-primary-gradient bottom-[-10%] right-[60px];
+}

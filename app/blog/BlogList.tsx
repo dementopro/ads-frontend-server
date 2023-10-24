@@ -15,16 +15,14 @@ const BlogCard = ({ blog }: BlogCardProps) => {
   return (
     <>
       <div
-        className={`w-full flex android:flex-col ipad:flex-row justify-start items-center ${
-          blog.layout === 'row'
+        className={`w-full flex android:flex-col ipad:flex-row justify-start items-center ${blog.layout === 'row'
             ? 'ipadmini:flex-row android:gap-[16px] ipad:gap-[32px]'
             : 'ipadmini:flex-col gap-[16px]'
-        }`}
+          }`}
       >
         <div
-          className={`android:h-[200px] android:w-full ipadmini:h-[200px] ipadmini:w-full ipad:h-full ${
-            blog.layout === 'row' ? '' : 'ipad:h-full ipad:w-2/3 desktop:w-1/2'
-          }`}
+          className={`android:h-[200px] w-full ${blog.layout === 'row' ? 'ipad:h-[350px]' : 'ipad:h-[200px]'
+            }`}
         >
           <img
             src={blog.coverImage}
@@ -33,19 +31,17 @@ const BlogCard = ({ blog }: BlogCardProps) => {
           />
         </div>
         <div
-          className={`inline-flex android:w-full ipadmini:w-full ${
-            blog.layout === 'row' ? '' : 'ipad:w-1/2'
-          } flex-col justify-start items-start android:gap-[8px] ipad:gap-[16px]`}
+          className={`inline-flex android:w-full ipadmini:w-full ${blog.layout === 'row' ? '' : 'ipad:w-1/2'
+            } flex-col justify-start items-start android:gap-[8px] ipad:gap-[16px]`}
         >
           <div className="android:px-[14px] ipad:px-[18px] android:py-[3px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
             {blog.type}
           </div>
           <div
-            className={`${
-              blog.layout === 'row'
+            className={`${blog.layout === 'row'
                 ? 'android:text-[28px] ipad:text-[34px] leading-[40px]'
                 : 'android:text-[18px] ipad:text-[20px] leading-[24px]'
-            } font-semibold font-poppins`}
+              } font-semibold font-poppins`}
           >
             {blog.layout === 'row' ? blog.title : blog.miniTitle}
           </div>
@@ -70,7 +66,7 @@ const BlogList = () => {
   const rowLayoutBlogs = Blogs.filter((blog) => blog.layout === 'row');
   const colLayoutBlogs = Blogs.filter((blog) => blog.layout === 'col');
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[16px] ipad:my-[32px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full text-[#D0D0D0] font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
         Featured
       </div>

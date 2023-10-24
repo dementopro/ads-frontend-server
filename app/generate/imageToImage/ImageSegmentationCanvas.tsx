@@ -140,7 +140,7 @@ const ImageSegmentationCanvas = ({ imgSrc, imgSegmentation }: ImageSegmentationC
         onClick={onClick}
         onMouseMove={mousemove}
         onMouseOut={mouseout}
-        className='cursor-pointer transition-all' />
+        className='cursor-pointer transition ease-in-out' />
     </div>
   )
 }

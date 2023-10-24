@@ -25,7 +25,7 @@ const Features = () => {
       };
     
     return (
-        <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black flex-col android:gap-[16px] ipad:gap-[32px] inline-flex'>
+        <div className='w-full android:my-[32px] ipad:my-[60px] bg-black flex-col android:gap-[16px] ipad:gap-[32px] inline-flex'>
             <div className="w-full flex-col android:justify-start ipadmini:justify-center items-center android:gap-[16px] ipad:gap-[32px] inline-flex">
                 <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
                     Features

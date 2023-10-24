@@ -1,8 +1,7 @@
 'use client'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation';
-import styles from './Header.module.css'
-import Link from 'next/link';
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { FiX } from 'react-icons/fi'
 
 const Banner = () => {
 
@@ -20,10 +19,8 @@ const Banner = () => {
                             See Details
                         </div>
                         <div className="w-[18px] h-4 relative">
-                            <img
-                                title='arrow'
-                                className='cursor-pointer ipad:w-[15px] desktop:w-[18px] ipad:h-auto desktop:h-auto'
-                                src={'/images/elements/close.svg'} alt='arrow'
+                            <FiX
+                                className="cursor-pointer ipad:w-[15px] desktop:w-[18px] ipad:h-auto desktop:h-auto"
                             />
                         </div>
                     </Link>

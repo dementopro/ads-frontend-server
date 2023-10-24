@@ -29,7 +29,7 @@ const LabelSelect = ({ text, color, selectedSet, setSelectedSet }: LabelSelectPr
     <button
       onClick={onClick}
       className={
-        `h-min flex flex-col gap-[6px] px-4 py-3 rounded-lg bg-[#27282F] border hover:opacity-80 transition-all duration-300
+        `h-min flex flex-col gap-[6px] px-4 py-3 rounded-lg bg-[#27282F] border hover:opacity-80 transition ease-in-out duration-300
         ${selectedSet.has(text) ? 'border-primary-purple text-white' : 'border-[#27282F] text-primary-gray'}
       `}
     >

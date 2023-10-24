@@ -93,7 +93,7 @@ function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnPr
   return (
     <button
       onClick={handleClick}
-      className={`flex h-[44px] text-[15px] w-full items-center hover:text-white hover:bg-[#383454] px-8 transition-all ${isActive ? 'bg-[#35363A] border-r-primary-purple text-white border-r-[3px]' : 'bg-transparent text-primary-gray'}`}
+      className={`flex h-[44px] text-[15px] w-full items-center hover:text-white hover:bg-[#383454] px-8 transition ease-in-out ${isActive ? 'bg-[#35363A] border-r-primary-purple text-white border-r-[3px]' : 'bg-transparent text-primary-gray'}`}
     >
       {
         icon

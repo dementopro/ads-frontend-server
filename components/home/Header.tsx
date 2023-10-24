@@ -1,14 +1,13 @@
 'use client'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Banner from '@/components/home/Banner'
-import Breadcrumb from '@/components/Breadcrumb'
 import PrimaryButton from '@/components/PrimaryButton'
 import { useState } from 'react';
 import { headerLinks } from '@/data/headerLinks'
-import DropDown from '../admin/header/DropDown';
 import Dropdown from '@/components/Dropdown';
+import MobileMenu from '@/components/MobileMenu';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 
 const Header = () => {
@@ -18,19 +17,28 @@ const Header = () => {
   function toHome() {
     router.push('/')
   }
-  const [expanded, setExpanded] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleBreadcrumbClick = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const mobileMenuTop = isMobileMenuOpen ? 'translate-y-[95px]' : 'translate-y-[-200px]';
   return (
     <>
-      <div className="desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] relative bg-zinc-900 android:rounded-[0px] ipadmini:rounded-[0px] ipad:rounded-[25px] desktop:rounded-[25px]">
+      <div className="desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] ipad:rounded-[25px] relative bg-[#15161A]">
         <Banner />
-
-        <div className="w-full android:h-[95px] ipadmini:h-[95px] ipad:h-[70px] desktop:h-[70px] relative px-[32px] bg-zinc-900 rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-10">
-          <div className="android:inline-block absolute left-[32px] ipad:hidden z-11">
-            <img
-              className='cursor-pointer android:w-[18px] ipadmini:w-[22px] h-auto android:block ipad:hidden'
-              title='Home'
-              src={'/images/elements/breadcrumb.svg'} alt='logo'
-            />
+        <MobileMenu translate={mobileMenuTop} />
+        <div className="w-full android:h-[95px] ipad:h-[70px] relative px-[32px] bg-[#15161A] ipad:rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-20">
+          <div className="android:inline-block absolute left-[32px] ipad:hidden z-10 transition ease-in-out !duration-500">
+            {isMobileMenuOpen ?
+              <FiX
+                className='cursor-pointer android:w-[18px] ipadmini:w-[22px] h-auto android:block ipad:hidden'
+                onClick={handleBreadcrumbClick}
+              /> :
+              <FiMenu
+                className='cursor-pointer android:w-[18px] ipadmini:w-[22px] h-auto android:block ipad:hidden'
+                onClick={handleBreadcrumbClick}
+              />}
           </div>
           <div className="relative">
             <img
@@ -54,7 +62,7 @@ const Header = () => {
             </div>
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-auto justify-end items-end gap-4 text-white text-semibold">
-            {/* <Link target="_blank"  href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-zinc-900 justify-center items-center gap-4 flex">
+            {/* <Link target="_blank"  href={'/login'} className="w-36 h-11 px-4 py-1.5 bg-[#15161A] justify-center items-center gap-4 flex">
             <div className="w-[120px] text-center text-white text-base font-medium leading-[29.12px]">
               Sign In
             </div>

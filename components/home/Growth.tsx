@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 const Growth = () => {
   return (
-    <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black'>
+    <div className='w-full android:my-[32px] ipad:my-[60px] bg-black'>
       <div className="w-full flex-col justify-center items-center android:gap-[30px] ipadmini:gap-[40px] ipad:gap-[50px] desktop:gap-[60px] inline-flex">
         <div className="w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[20px] desktop:text-[24px] font-bold font-poppins leading-normal">
           Enabling our Customer&apos;s Growth

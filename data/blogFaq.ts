@@ -1,4 +1,4 @@
-export const blogFaqs = [
+export const blogFaq = [
   {
     question: 'How do I subscribe?',
     answer:

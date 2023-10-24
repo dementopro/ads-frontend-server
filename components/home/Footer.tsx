@@ -33,31 +33,13 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 
 const Footer = () => {
   return (
-    <footer className='px-6 sm:px-20 pt-10 bg-black'>
+    <footer className='flex flex-col px-6 sm:px-20 pt-10 bg-black android:gap-[48px] ipadmini:gap-[100px]'>
       <div className='desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] flex flex-wrap gap-8 justify-between'>
         <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />
           <span className='text-sm text-primary-gray'>
             One stop ads platform without limits
           </span>
-          {/* icons */}
-          <div className='flex items-center gap-3 text-primary-gray'>
-            <Icon
-              onClick={() => window.open('https://www.facebook.com/profile.php?id=100090180429796', '_blank')}
-              className='hover:text-[#4267B2] cursor-pointer' width={24} height={24} icon={facebookIcon} />
-            <Icon onClick={
-              () => window.open('https://twitter.com/AdsGency_AI', '_blank')
-            } className='hover:text-[#1DA1F2] cursor-pointer' width={24} height={24} icon={twitterIcon} />
-            <Icon onClick={
-              () => window.open('mailto:contactus@adsgency.ai', '_blank')
-            } className='hover:text-[#0F9D58] cursor-pointer' width={24} height={24} icon={gmailIcon} />
-            <Icon onClick={
-              () => window.open('https://www.youtube.com/@AdsGencyAI', '_blank')
-            } className='hover:text-[#FF0000] cursor-pointer' width={24} height={24} icon={youtubeIcon} />
-            <Icon onClick={
-              () => window.open('https://www.linkedin.com/company/adsgency-ai', '_blank')
-            } className='hover:text-[#0077b5] cursor-pointer' width={24} height={24} icon={linkedinIcon} />
-          </div>
         </div>
         <div className="flex flex-wrap gap-20">
           {

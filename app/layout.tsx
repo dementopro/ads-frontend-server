@@ -1,7 +1,7 @@
 import './globals.css'
 import { Poppins } from 'next/font/google'
 import WithProviders from '@/app/WithProviders'
-import Announcement from '@/components/home/Announcement';
+import Announcement from '@/components/home/Announcement'
 
 const poppins = Poppins({ subsets: ['latin'], weight: "400" })
 
@@ -28,8 +28,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="w-full" >
+      <body className="w-full overflow-y-hidden" >
         <WithProviders>
+          <Announcement />
           {children}
         </WithProviders>
       </body>

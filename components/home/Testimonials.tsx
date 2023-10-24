@@ -38,7 +38,7 @@ const Testimonials = () => {
 
     const dynamicClasses = getDynamicClasses();
     return (
-        <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black'>
+        <div className='w-full android:my-[32px] ipad:my-[60px] bg-black'>
             <div className="w-full flex-col justify-center items-center android:gap-[32px] ipadmini:gap-[32px] ipad:gap-[16px] desktop:gap-[32px] inline-flex">
                 <div className='android:flex-col ipadmini:flex-row ipad:flex-row desktop:flex-row justify-center items-center android:gap-[0px] ipadmini:gap-[6px] ipad:gap-[8px] desktop:gap-[10px] inline-flex'>
                     <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-poppins">

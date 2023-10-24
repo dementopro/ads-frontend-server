@@ -3,8 +3,7 @@ import DefaultLayout from '@/layout/default';
 import React from 'react';
 import styles from './blog.module.css';
 import BlogList from '@/app/blog/BlogList';
-import { Blogs } from '@/data/blogs';
-import Faq from '@/app/blog/Faq';
+import BlogFaq from '@/app/blog/BlogFaq';
 import Header from '@/components/home/Header';
 import AboveFooter from '@/components/home/AboveFooter';
 
@@ -25,7 +24,7 @@ const BlogPage = () => {
       <div className="relative flex flex-col w-full h-auto">
         <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[0px] ipad:pt-[82px] w-full relative bg-hero-pattern bg-cover">
           <Header />
-          <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto relative android:mx-[32px] android:mt-[32px] ipad:mx-[0px] ipad:mt-[60px] android:pb-[32px] ipad:pb-[60px] gap-[0px] border-b-1 border-[#A09BAE]">
+          <div className="relative desktop:w-[1240px] ipad:w-full android:mx-[32px] ipad:mx-[0px] desktop:mx-auto mt-[32px] pb-[16px] border-b-1 border-[#A09BAE]">
             <div className="font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
               Blog
             </div>
@@ -43,7 +42,7 @@ const BlogPage = () => {
           </div>
         </div>
         <BlogList />
-        <Faq />
+        <BlogFaq />
         <AboveFooter />
       </div>
     </DefaultLayout>

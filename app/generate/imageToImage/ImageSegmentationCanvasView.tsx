@@ -84,7 +84,7 @@ const ImageSegmentationCanvasView = ({ imgSrc, imgSegmentation }: ImageSegmentat
     <div className='w-full h-full flex items-center justify-center'>
       <canvas
         ref={canvas} width={width} height={height}
-        className='cursor-pointer transition-all' />
+        className='cursor-pointer transition ease-in-out' />
     </div>
   )
 }

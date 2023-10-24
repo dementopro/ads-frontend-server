@@ -61,7 +61,7 @@ const JobCard = ({ job }: JobCardProps) => {
       </div>
       {
         isExpanded && (
-          <div className='w-full flex flex-col gap-3 transition-all duration-300'>
+          <div className='w-full flex flex-col gap-3 transition ease-in-out duration-300'>
             <div className='flex flex-col gap-2'>
               <h3 className='text-lg font-semibold'>
                 Position Overview:

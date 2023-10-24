@@ -124,12 +124,12 @@ const SubscriptionInfo = () => {
         </div>
         {
           isSubscribed ?
-            <button onClick={onCancel} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition-all'>
+            <button onClick={onCancel} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition ease-in-out'>
               <Icon icon={bellCancel} />
               <span>Unsubscribe</span>
             </button>
             :
-            <button onClick={toPricing} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition-all'>
+            <button onClick={toPricing} className='cursor-pointer hover:border-solid text-white w-full border-2 border-dashed border-white flex items-center justify-center gap-2 rounded-lg py-1 hover:bg-white hover:text-primary-purple transition ease-in-out'>
               <Icon icon={bellIcon} />
               <span>Subscribe Here</span>
             </button>

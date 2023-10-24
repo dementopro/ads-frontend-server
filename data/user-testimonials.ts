@@ -20,7 +20,7 @@ export const userTestimonials = [
   {
     name: 'Alexey Yurkevich',
     designation: 'Software Engineer',
-    testimonial: 'Im really inspired by AdsGency AI’s product and it’s one of the most promising companies I’ve seen!',
+    testimonial: 'I’m really inspired by AdsGency AI’s product and it’s one of the most promising companies I’ve seen!',
     image: 'image-3',
   },
   {

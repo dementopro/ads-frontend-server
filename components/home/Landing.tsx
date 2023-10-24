@@ -3,9 +3,10 @@ import React from 'react'
 import Link from 'next/link'
 import Header from '@/components/home/Header'
 import PrimaryButton from '@/components/PrimaryButton'
+import { FiX } from 'react-icons/fi'
 
 
-const NewLanding = () => {
+const Landing = () => {
   return (
     <div className="w-full h-auto relative">
       {/* <div className="w-full h-screen left-0 top-0 absolute bg-gradient-to-tr from-black via-transparent to-black z-neg-1"></div>
@@ -39,7 +40,7 @@ const NewLanding = () => {
                 Without Limits
               </div>
             </div>
-            <div className="mt-[16px] w-full text-stone-300 android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
+            <div className="mt-[16px] w-full text-stone-300 android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left">
               Marketing agencies save time & money with our one-stop ads AI platform
             </div>
 
@@ -70,10 +71,8 @@ const NewLanding = () => {
                   <div className='flex-col justifu-start items-start android:gap-[8px] ipadmini:gap-[10px] ipad:gap-[13px] desktop:gap-[15px] inline-flex'>
                     <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
                       <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#4E4A5B] rounded-full">
-                        <img
-                          title='cross'
-                          className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
-                          src={'/images/elements/cross.svg'} alt='arrow'
+                        <FiX
+                          className='cursor-pointer text-[#A09BAE] android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
                         />
                       </div>
                       <div className="text-[#4E4A5B] android:text-[8px] ipadmini:text-[10px] ipad:text-[9px] desktop:text-[12px] font-medium">
@@ -82,10 +81,8 @@ const NewLanding = () => {
                     </div>
                     <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
                       <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#4E4A5B] rounded-full">
-                        <img
-                          title='cross'
-                          className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
-                          src={'/images/elements/cross.svg'} alt='arrow'
+                        <FiX
+                          className='cursor-pointer text-[#A09BAE] android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
                         />
                       </div>
                       <div className="text-[#4E4A5B] android:text-[8px] ipadmini:text-[10px] ipad:text-[9px] desktop:text-[12px] font-medium">
@@ -171,4 +168,4 @@ const NewLanding = () => {
   )
 }
 
-export default NewLanding
+export default Landing

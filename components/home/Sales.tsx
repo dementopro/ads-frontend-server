@@ -11,7 +11,7 @@ import PrimaryButton from '@/components/PrimaryButton';
 
 const Sales = () => {
     return (
-        <div className='w-full android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] desktop:my-[60px] bg-black'>
+        <div className='w-full android:my-[32px] ipad:my-[60px] bg-black'>
             <div className="inline-flex flex-col items-center justify-center w-full gap-8">
                 <div className="android:w-[328px] ipadmini:w-[677px] ipad:w-[862px] desktop:w-[1036px] android:py-[20px] ipadmini:py-[32px] ipad:py-[32px] desktop:py-[32px] android:px-[20px] ipadmini:px-[32px] ipad:px-[32px] desktop:px-[36px] relative bg-[#27252D] android:border-2 ipadmini:border-3 ipad:border-4 desktop:border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
                     <div className="w-full android:flex-col ipadmini:flex-row ipad:flex-row desktop:flex-row justify-center items-center gap-[20px] inline-flex">
@@ -25,7 +25,7 @@ const Sales = () => {
                             <div className="w-full flex-row android:justify-center ipadmini:justify-start ipadmini:items-start ipad:mt-[16px] desktop:mt-[0px] gap-[8px] inline-flex">
                                 <div className="w-full flex-col android:justify-center android:items-center ipadmini:justify-start ipadmini:items-start gap-[1px] inline-flex">
                                     <div className="bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text android:text-[16px] ipadmini:text-[23px] ipad:text-[30px] desktop:text-[30px] font-semibold font-poppins">
-                                        93 %
+                                        93%
                                     </div>
                                     <div className="android:text-[11px] ipadmini:text-[15px] ipad:text-[20px] desktop:text-[20px] font-semibold font-poppins">
                                         Time

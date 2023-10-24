@@ -24,15 +24,15 @@ const PrivacyPolicyPage = () => {
         <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[0px] ipad:pt-[82px] android:pb-[32px] ipad:pb-[60px] w-full relative z-10 bg-hero-pattern bg-cover">
           <Header />
           <div className="relative android:mx-[32px] android:my-[32px] ipad:mx-[60px] ipad:my-[60px]">
-            <img
-              className='absolute top-[-50px] left-[-50px] android:w-[80px] ipad:w-[130px] h-auto z-10'
+            {/* <img
+              className='absolute top-[-50px] left-[-50px] android:w-[60px] ipad:w-[100px] h-auto z-10'
               title='Home'
               src={'/images/bg-elements/headline-circles.png'} alt='logo'
-            />
-            <div className="z-20 text-white font-poppins font-bold android:text-center ipad:text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px]">
+            /> */}
+            <div className="z-20 relative text-white font-poppins font-bold android:text-center ipad:text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px]">
               Privacy & Terms
             </div>
-            <div className="z-20 text-[#D0D0D0] font-open-sans font-regular android:text-center ipad:text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
+            <div className="z-20 relative text-[#D0D0D0] font-open-sans font-regular android:text-center ipad:text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
               Last updated: April 2023
             </div>
           </div>

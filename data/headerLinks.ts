@@ -1,5 +1,10 @@
 export const headerLinks = [
     {
+        title: 'Home',
+        links: [],
+        url: '/',
+    },
+    {
         title: 'Features',
         links: [],
         url: '/features',
@@ -29,10 +34,10 @@ export const headerLinks = [
                 label: 'Blog',
                 href: '/blog',
             },
-            {
-              label: 'News & Press',
-              href: '/',
-            }
+            // {
+            //   label: 'News & Press',
+            //   href: '/',
+            // }
         ],
         url: '',
     }
