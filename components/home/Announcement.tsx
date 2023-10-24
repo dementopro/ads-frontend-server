@@ -6,26 +6,23 @@ import { usePathname } from 'next/navigation';
 
 const Announcement = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [hasShownAnnouncement, setHasShownAnnouncement] = useState(false);
   const pathname = usePathname();
 
   const closeAnnouncement = () => {
     setIsOpen(false);
-    // Remove the 'overflow-y-hidden' class from the body
     document.body.classList.remove('overflow-y-hidden');
   };
 
-  const [hasShownAnnouncement, setHasShownAnnouncement] = useState(false);
-
   useEffect(() => {
-    // Check if the announcement has been shown before
     const hasShown = localStorage.getItem('hasShownAnnouncement');
+    pathname === '/' && document.body.classList.add('overflow-y-hidden');
 
     if (!hasShown) {
-      // If not, show the announcement
       setHasShownAnnouncement(true);
       localStorage.setItem('hasShownAnnouncement', 'true');
     }
-  }, []);
+  }, [pathname]);
 
   if (!hasShownAnnouncement && pathname == '/') {
     return (

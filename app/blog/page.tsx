@@ -6,6 +6,7 @@ import BlogList from '@/app/blog/BlogList';
 import BlogFaq from '@/app/blog/BlogFaq';
 import Header from '@/components/home/Header';
 import AboveFooter from '@/components/home/AboveFooter';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Blog - AdsGency AI',
@@ -32,11 +33,13 @@ const BlogPage = () => {
               <div className="text-white font-poppins font-bold text-left android:text-[32px] ipad:text-[43px]">
                 Stay in the Loop with
               </div>
-              <img
+              <Image
                 className="cursor-pointer android:w-[200px] ipadmini:w-[250px] h-auto"
-                title="Home"
-                src={'/logo.svg'}
+                src="/logo.svg"
                 alt="logo"
+                title="Home"
+                width={200}
+                height={200}
               />
             </div>
           </div>

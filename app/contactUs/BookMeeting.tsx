@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import PrimaryButton from '@/components/PrimaryButton';
+import Image from 'next/image';
 
 const BookMeeting = () => {
   return (
@@ -11,15 +12,18 @@ const BookMeeting = () => {
         </div>
         <div className="w-full inline-flex flex-col gap-0 text-center android:text-[12px] ipadmini:text-[14px] ipad:text-[16px] desktop:text-[18px] font-regular">
           <div className="inline-flex gap-[8px] justify-center items-center">
-            <img
-              src="/images/home/sparkles.svg"
+            <Image
               className="android:w-[21px] ipadmini:w-[26px] ipad:w-[30px] desktop:w-[36px] android:h-[21px] ipadmini:h-[26px] ipad:h-[30px] desktop:h-[36px]"
+              src="/images/home/sparkles.svg"
               alt="sparkles"
+              title="Home"
+              width={21}
+              height={21}
             />
-            <div className="">Don't wait another minute!</div>
+            <div className="">Don&apos;t wait another minute!</div>
           </div>
           <div className="justify-center items-center">
-            Time is ticking, and your competitors aren't slowing down.
+            Time is ticking, and your competitors aren&apos;t slowing down.
           </div>
           <div className="justify-center items-center">
             <span className="pr-[8px] bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
