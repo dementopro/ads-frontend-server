@@ -16,6 +16,8 @@ import ConfirmModal from '@/app/pricing/ConfirmModal';
 import PayResult from '@/app/pricing/PayResult';
 import { useRouter } from 'next/navigation';
 
+import axios from '@/lib/axios';
+
 type SubscriptionButtonProps = {
   plan: PricingPlan,
   onSubscription: (planId: number) => void,
@@ -101,8 +103,19 @@ const PricingPage = () => {
           mode: 'subscribe'
         })
       })
+<<<<<<< Updated upstream
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
+=======
+<<<<<<< Updated upstream
+      if (response.status === 200) {
+        const data: SubscriptionResp = response.data
+=======
+      if (response.status===200) {
+        const data: SubscriptionResp = response.data
+        console.log("data:::",data)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
           setPayResultMessage(data.message || 'Subscription successfully')
           setPayResultVisible(true)
@@ -126,7 +139,16 @@ const PricingPage = () => {
   async function onDowngrade(planId: number) {
     try {
       setLoading(true)
+<<<<<<< Updated upstream
       const response = await fetch('/fapi/downgrade_subscription_api', {
+=======
+<<<<<<< Updated upstream
+      const response = await axios({
+        url: '/fapi/downgrade_subscription_api',
+=======
+      const response = await axios('/fapi/downgrade_subscription_api', {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -135,8 +157,18 @@ const PricingPage = () => {
           plan_id: planId,
         })
       })
+<<<<<<< Updated upstream
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
+=======
+<<<<<<< Updated upstream
+      if (response.status === 200) {
+        const data: SubscriptionResp = response.data;
+=======
+      if (response.status===200) {
+        const data: SubscriptionResp = await response.data
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         if (data.status === SUCCESS_CODE || data.status === 'active') {
           setPayResultMessage(data.message || 'Downgrade successfully')
           setPayResultVisible(true)
@@ -158,7 +190,16 @@ const PricingPage = () => {
   async function onUpgrade(planId: number) {
     try {
       setLoading(true)
+<<<<<<< Updated upstream
       const response = await fetch('/fapi/subscription_api', {
+=======
+<<<<<<< Updated upstream
+      const response = await axios({
+        url: '/fapi/subscription_api',
+=======
+      const response = await axios('/fapi/subscription_api', {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -168,8 +209,18 @@ const PricingPage = () => {
           mode: 'upgrade'
         })
       })
+<<<<<<< Updated upstream
       if (response.ok) {
         const data: SubscriptionResp = await response.json()
+=======
+<<<<<<< Updated upstream
+      if (response.status === 200) {
+        const data: SubscriptionResp = response.data;
+=======
+      if (response.status===200) {
+        const data: SubscriptionResp = await response.data
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         if (data.status === 'active' || data.status === SUCCESS_CODE) {
           setPayResultMessage(data.message || 'Upgrade successfully')
           setPayResultVisible(true)
