@@ -1,12 +1,5 @@
 'use client'
-import Image from 'next/image'
-import React, { useState, useEffect } from 'react';
-import Slider from "react-slick";
-import producthuntIcon from '@iconify/icons-logos/producthunt';
-import brandSuperhuman from '@iconify/icons-tabler/brand-superhuman';
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import Statistic from 'antd/es/statistic/Statistic';
+import React from 'react';
 import { CircularProgress } from "@nextui-org/react";
 
 const Statistics = () => {
@@ -44,7 +37,7 @@ const Statistics = () => {
                         <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Decrease Cost
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
                             Reduce adsmanagement cost by 80%
                         </div>
                     </div>
@@ -63,7 +56,7 @@ const Statistics = () => {
                         <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Increase Efficiency
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
                             Generate ad content 10x faster
                         </div>
                     </div>
@@ -82,7 +75,7 @@ const Statistics = () => {
                         <div className="android:text-[18px] ipad:text-[24px] font-semibold font-poppins">
                             Increase ROI
                         </div>
-                        <div className="ipad:mt-[20px] text-center android:text-[12px] ipad:text-[16px] font-regular font-open-sans">
+                        <div className="ipad:mt-[20px] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
                             32% Improvement on ad performance
                         </div>
                     </div>

@@ -17,7 +17,7 @@ const JobCard = ({ job }: JobCardProps) => {
   return (
     <div
       className={`
-        relative flex flex-col items-start justify-between gap-8 rounded-lg max-w-[1000px] p-6 border-2 border-black hover:border-primary-purple transition duration-300 ease-in-out
+        relative flex flex-col items-start justify-between gap-8 rounded-lg max-w-[1000px] p-6 border-2 border-black hover:border-primary-purple transition duration-300 ease-in-outt
       `}
       style={{
         background: 'linear-gradient(180deg, #251F32ee 0%, #1B1C21ee 100%)'
@@ -47,7 +47,7 @@ const JobCard = ({ job }: JobCardProps) => {
               className='flex items-center justify-center gap-1 cursor-pointer hover:opacity-80'>
               <span>{isExpanded ? 'Hide' : 'Show'} details</span>
               <Icon icon='mdi:chevron-down' width={20} height={20}
-                className={`transition duration-300 ease-in-out transform ${isExpanded ? 'rotate-180' : ''}`}
+                className={`transition duration-300 ease-in-outt transform ${isExpanded ? 'rotate-180' : ''}`}
               />
             </button>
           </div>

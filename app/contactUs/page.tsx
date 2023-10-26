@@ -68,7 +68,11 @@ const ContactUsPage = () => {
                   </div>
                 </div>
               </div>
-              <PrimaryButton href="/requestDemo" text="Request Demo" />
+              <PrimaryButton
+                target="_blank"
+                href="/requestDemo"
+                text="Request Demo"
+              />
             </div>
             <div className="w-full">
               <ContactUsForm />

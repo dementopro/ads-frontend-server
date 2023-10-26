@@ -1,7 +1,6 @@
 import ReactGATag from '@/components/ReactGATag';
 import DefaultLayout from '@/layout/default';
 import React from 'react';
-import styles from './blog.module.css';
 import BlogList from '@/app/blog/BlogList';
 import BlogFaq from '@/app/blog/BlogFaq';
 import Header from '@/components/home/Header';

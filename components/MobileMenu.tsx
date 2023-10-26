@@ -10,7 +10,7 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ translate }) => {
     return (
-        <div className={`w-full android:block ipad:hidden h-auto absolute ${translate} z-10 transition ease-in-out !duration-500`}>
+        <div className={`w-full android:block ipad:hidden h-auto absolute ${translate} z-30 transition ease-in-out !duration-500`}>
             <div className="px-[32px] py-[40px] w-full relative bg-[#15161A]">
                 <div className="w-full relative justify-center items-start gap-[32px] inline-flex flex-col">
                     {headerLinks.map((link, index) => (

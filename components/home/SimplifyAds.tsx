@@ -21,8 +21,8 @@ const SimplifyAds = () => {
                         </div>
                     </div>
                     <div className="w-full flex flex-row justify-center items-center android:gap-[20px] ipadmini:gap-[30px] ipad:gap-[80px]">
-                        <img className="w-full overflow-hidden android:h-[140px] ipadmini:h-[150px] ipad:h-[165px] desktop:h-[165px] object-cover relative android:rounded-[10px] ipad:rounded-[25px]" src="images/home/simplify/image-1.jpeg" />
-                        <img className="w-full overflow-hidden android:h-[140px] ipadmini:h-[150px] ipad:h-[165px] desktop:h-[165px] object-cover relative android:rounded-[10px] ipad:rounded-[25px]" src="images/home/simplify/image-2.png" />
+                        <img className="w-full overflow-hidden android:h-[140px] ipadmini:h-[150px] ipad:h-[165px] desktop:h-[165px] object-cover relative android:rounded-[10px] ipad:rounded-[25px]" src="/images/home/simplify/image-1.jpeg" />
+                        <img className="w-full overflow-hidden android:h-[140px] ipadmini:h-[150px] ipad:h-[165px] desktop:h-[165px] object-cover relative android:rounded-[10px] ipad:rounded-[25px]" src="/images/home/simplify/image-2.png" />
                     </div>
                     <div className="w-full flex flex-row justify-center items-center android:gap-[20px] ipadmini:gap-[30px] ipad:gap-[80px]">
                         <div className="w-full justify-end items-center gap-[10px] inline-flex">
@@ -94,7 +94,7 @@ const SimplifyAds = () => {
                     </div>
                 </div>
             </div>
-            <PrimaryButton href="/requestDemo" text="Request Demo" />
+            <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
         </div >
     )
 }

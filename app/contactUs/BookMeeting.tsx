@@ -23,16 +23,17 @@ const BookMeeting = () => {
             <div className="">Don&apos;t wait another minute!</div>
           </div>
           <div className="justify-center items-center">
-            Time is ticking, and your competitors aren&apos;t slowing down.
+            Time is ticking, and your competitors aren't slowing down.
           </div>
           <div className="justify-center items-center">
-            <span className="pr-[8px] bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text">
-              Book a Meeting
-            </span>
-            with us today!
+            Book a Meeting with us today!
           </div>
         </div>
-        <PrimaryButton href="/requestDemo" text="Book Meeting" />
+        <PrimaryButton
+          target="_blank"
+          href="https://calendly.com/xinrliu/adsgency-ai-demo-meeting"
+          text="Book Meeting"
+        />
       </div>
     </div>
   );

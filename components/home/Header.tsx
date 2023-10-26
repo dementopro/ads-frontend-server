@@ -28,8 +28,8 @@ const Header = () => {
       <div className="desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] ipad:rounded-[25px] relative bg-[#15161A]">
         <Banner />
         <MobileMenu translate={mobileMenuTop} />
-        <div className="w-full android:h-[95px] ipad:h-[70px] relative px-[32px] bg-[#15161A] ipad:rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-20">
-          <div className="android:inline-block absolute left-[32px] ipad:hidden z-10 transition ease-in-out !duration-500">
+        <div className="w-full android:h-[95px] ipad:h-[70px] relative px-[32px] bg-[#15161A] ipad:rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-40">
+          <div className="android:inline-block absolute left-[32px] ipad:hidden z-30 transition ease-in-out !duration-500">
             {isMobileMenuOpen ?
               <FiX
                 className='cursor-pointer android:w-[18px] ipadmini:w-[22px] h-auto android:block ipad:hidden'
@@ -67,7 +67,7 @@ const Header = () => {
               Sign In
             </div>
             </Link> */}
-            <PrimaryButton href="/requestDemo" text="Request Demo" />
+            <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
           </div>
         </div>
       </div >

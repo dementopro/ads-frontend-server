@@ -13,8 +13,7 @@ const Expand: React.FC<ExpandProps> = ({ question, answer }) => {
 
   return (
     <div
-      className={`w-full flex flex-col px-[16px] desktop:py-[16px] ipad:py-[8px] gap-[16px] bg-[#1B1C21] rounded-[25px] items-center transition ease-in-out duration-2000 cursor-pointer focus:outline-none ${expanded ? 'expand-open' : 'expand-closed'
-        }`}
+      className={`w-full flex flex-col h-auto px-[16px] ipad:py-[16px] android:py-[10px] gap-[16px] bg-[#1B1C21] rounded-[25px] items-center transition ease-in-out !duration-500 cursor-pointer focus:outline-none ${expanded ? 'expand-open' : 'expand-closed'}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex flex-row justify-between w-full">
@@ -24,15 +23,13 @@ const Expand: React.FC<ExpandProps> = ({ question, answer }) => {
         <div className="text-right">
           <FiChevronDown
             className={`cursor-pointer inline-block android:w-[16px] ipad:w-[18px] h-auto rotate-${expanded ? '180' : '0'
-          } transition ease-in-out duration-500`}
+          } transition ease-in-out !duration-500`}
           />
         </div>
       </div>
-      {expanded && (
-        <div className="w-full text-left font-regular android:text-[12px] ipad:text-[16px]">
+        <div className={`w-full ${expanded ? 'block' : 'hidden'} text-left font-regular android:text-[14px] ipad:text-[16px] transition ease-in-out !duration-500`}>
           {answer}
         </div>
-      )}
     </div>
   );
 };

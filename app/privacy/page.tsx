@@ -49,7 +49,7 @@ const PrivacyPolicyPage = () => {
               <div className="text-white font-poppins android:font-medium ipad:font-semibold android:text-[15px] ipadmini:text-[22px] ipad:text-[28px] desktop:text-[34px]">
                 {item.title}
               </div>
-              <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[12px] ipad:text-[16px]">
+              <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[14px] ipad:text-[16px]">
                 {item.description}
               </div>
             </div>
@@ -67,7 +67,7 @@ const PrivacyPolicyPage = () => {
               <div className="text-white font-poppins android:font-medium ipad:font-semibold android:text-[15px] ipadmini:text-[22px] ipad:text-[28px] desktop:text-[34px]">
                 {item.title}
               </div>
-              <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[12px] ipad:text-[16px]">
+              <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[14px] ipad:text-[16px]">
                 {item.description}
               </div>
             </div>

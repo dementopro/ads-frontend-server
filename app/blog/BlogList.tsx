@@ -46,12 +46,12 @@ const BlogCard = ({ blog }: BlogCardProps) => {
             {blog.layout === 'row' ? blog.title : blog.miniTitle}
           </div>
           {blog.layout === 'row' && (
-            <div className="android:text-[12px] ipad:text-[16px] font-normal font-open-sans leading-[19px] line-clamp-2">
-              {blog.content.filter((p) => !p.startsWith('img:'))}
+            <div className="android:text-[14px] ipad:text-[16px] font-normal font-open-sans leading-[19px] line-clamp-2">
+              {blog.introductionText}
             </div>
           )}
           {blog.layout === 'col' && (
-            <div className="android:text-[12px] ipad:text-[16px] text-[#D0D0D0] font-normal font-open-sans leading-[19px]">
+            <div className="android:text-[14px] ipad:text-[16px] text-[#D0D0D0] font-normal font-open-sans leading-[19px]">
               {blog.publishDate}
             </div>
           )}

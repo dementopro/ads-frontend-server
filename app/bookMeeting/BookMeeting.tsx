@@ -4,7 +4,7 @@ import React from 'react'
 import styles from './BookMeeting.module.css'
 import Image from 'next/image';
 
-const BookMeetingView = () => {
+const BookMeeting = () => {
 
   const router = useRouter();
 
@@ -42,4 +42,4 @@ const BookMeetingView = () => {
   )
 }
 
-export default BookMeetingView
+export default BookMeeting

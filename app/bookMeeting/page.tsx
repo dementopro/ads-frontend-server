@@ -1,7 +1,7 @@
 import ReactGATag from '@/components/ReactGATag';
 import DefaultLayout from '@/layout/default';
 import styles from './BookMeeting.module.css';
-import BookMeetingView from '@/app/bookMeeting/BookMeetingView';
+import BookMeeting from '@/app/bookMeeting/BookMeeting';
 
 export const metadata = {
   title: 'Book a meeting - AdsGency AI',
@@ -23,7 +23,7 @@ const BookMeetingPage = () => {
         <h2 className={`text-3xl text-center font-semibold px-4 mt-8 sm:mt-20 ${styles['gradient-text']}`}>
           {`We're looking forward to meeting you.`}
         </h2>
-        <BookMeetingView />
+        <BookMeeting />
         <div className={`${styles['pop']} ${styles['pop1']}`}>
           {`We've delivered over 229K+ ad content for clients`}
         </div>

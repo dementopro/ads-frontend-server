@@ -60,7 +60,7 @@ const Sales = () => {
                                 </div>
                             </div>
 
-                            <PrimaryButton href="/contactUs" text="Contact Sales" />
+                            <PrimaryButton target="_blank" href="/contactUs" text="Contact Sales" />
 
                         </div>
 

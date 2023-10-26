@@ -44,7 +44,7 @@ const Landing = () => {
               Marketing agencies save time & money with our one-stop ads AI platform
             </div>
 
-            <PrimaryButton href="/requestDemo" text="Request Demo" />
+            <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
           </div>
 
           <div className="ipad:w-full desktop:w-6/12 font-poppins flex-row android:gap-[16px] ipad:gap-[10px] inline-flex">
@@ -56,12 +56,12 @@ const Landing = () => {
               <div className="mt-[10px] px-[8px] pt-[8px] pb-[16px] bg-[#27252D] rounded-[15px] shadow flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
                 <div className="self-stretch justify-start items-start android:gap-[7px] ipadmini:gap-[7px] ipad:gap-[8px] desktop:gap-[8px] flex-row inline-flex">
                   <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-1.png" />
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-3.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-1.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-3.png" />
                   </div>
                   <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                    <img className="obejct-cover relative rounded-md" src="images/home/landing-images/image-2.png" />
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-4.png" />
+                    <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/image-2.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-4.png" />
                   </div>
                 </div>
                 <div className="flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
@@ -106,12 +106,12 @@ const Landing = () => {
               <div className="mt-[10px] android:px-[9px] android:pt-[9px] android:pb-[18px] ipadmini:px-[10px] ipadmini:pt-[10px] ipadmini:pb-[20px] ipad:px-[11px] ipad:pt-[11px] ipad:pb-[22px] desktop:px-[12px] desktop:pt-[12px] desktop:pb-[24px] bg-[#27252D] rounded-[18px] shadow flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
                 <div className="justify-start items-start gap-[8px] flex-row inline-flex">
                   <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-5.png" />
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-6.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-5.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-6.png" />
                   </div>
                   <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                    <img className="obejct-cover relative rounded-md" src="images/home/landing-images/image-7.png" />
-                    <img className="object-cover relative rounded-md" src="images/home/landing-images/image-8.png" />
+                    <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/image-7.png" />
+                    <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-8.png" />
                   </div>
                 </div>
                 <div className="flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">

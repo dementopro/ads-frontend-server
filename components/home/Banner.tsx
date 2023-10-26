@@ -14,16 +14,16 @@ const Banner = () => {
                     <div className="w-3/4 font-semibold">
                         📣 Exciting News! AdsGency AI selected to participate in the TechStars Accelerator Program 🚀
                     </div>
-                    <Link target="_blank"  href='https://www.linkedin.com/posts/bolbi-liu-6aa0b4ab_techstarsforlife-startuplife-founders-activity-7117202850144800768-lSwq?utm_source=share&utm_medium=member_desktop' className="w-1/4 justify-end items-end gap-[16px] flex">
-                        <div className="font-medium underline">
+                    <div  className="w-1/4 justify-end items-end gap-[16px] flex">
+                        <Link target="_blank"  href='https://www.linkedin.com/posts/bolbi-liu-6aa0b4ab_techstarsforlife-startuplife-founders-activity-7117202850144800768-lSwq?utm_source=share&utm_medium=member_desktop' className="font-medium underline">
                             See Details
-                        </div>
+                        </Link>
                         <div className="w-[18px] h-4 relative">
                             <FiX
                                 className="cursor-pointer ipad:w-[15px] desktop:w-[18px] ipad:h-auto desktop:h-auto"
                             />
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </>

@@ -12,39 +12,57 @@ type Props = {
 
 const BlogDetail = ({ blog }: Props) => {
   return (
-    <div className='my-8 flex flex-col w-full mx-auto container selection:bg-primary-purple'>
-      <div className='mx-auto sm:max-w-[1000px] px-8 flex flex-col items-center justify-center gap-2 w-full relative my-8'>
-        <Link target="_blank"  href='/blog' title='Go back to blogs'>
-          <Icon icon='mdi:arrow-left' width={24} height={24} className='text-white hover:opacity-80 sm:absolute left-3 top-[50%] translate-y-[-50%]' />
-        </Link>
-        <div className='text-white/80'>
-          <time>{blog.publishDate}</time> - Release
-        </div>
-        <h1 className={`${styles['landing-txt']} select-none max-w-[800px] leading-loose text-4xl font-semibold text-center`}>{blog.title}</h1>
-        <span className='text-primary-gray text-sm'>@{blog.publisher}</span>
-      </div>
-      <div className='text-base mx-auto max-w-[1000px] relative'>
-        {blog.content.map((paragraph, index) => {
-          if (paragraph.startsWith('img:')) {
-            const image = paragraph.replace('img:', '')
-            return (
-              <div key={index} className='relative w-full sm:w-[600px] mx-auto my-4 sm:my-12'>
-                <Image src={image} alt={blog.title} width={600} height={600} className='sm:rounded-md max-w-full h-auto' />
+    <>
+      <div className="ipad:w-[900px] flex flex-col gap-[32px] justify-center items-center relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:my-[60px]">
+        {blog.content.map((section, index) => (
+          <div key={index} className="w-full flex flex-col justify-center items-center android:py-[38px] ipad:py-[42px] android:gap-[20px] ipad:gap-[26px]">
+            {section.title &&
+              <div className="w-full text-white font-poppins font-medium text-center android:text-[30px] ipad:text-[34px]">
+                {section.title}
               </div>
-            )
-          } else {
-            return (
-              <p key={index} className='p-4 text-white/80'>
-                {paragraph}
-              </p>
-            )
-          }
-        })}
-        <p className='max-sm:mt-8 text-primary-gray/80 text-center'>
-          - End -
-        </p>
+            }
+            <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-left android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px] android:border-l-5 ipad:border-l-8 border-violet-500 border-opacity-60 pl-[18px]">
+              {section.para.map((line, index) => {
+                switch (true) {
+                  case line.startsWith('bn:'):
+                    return (
+                      <p key={index} className="font-bold android:mt-[15px] ipad:mt-[20px]">
+                        {line.substring(3)}
+                      </p>
+                    );
+                  
+                  case line.startsWith('b:'):
+                    return (
+                      <p key={index} className="font-bold">
+                        {line.substring(2)}
+                      </p>
+                    );
+                  
+                  case line.startsWith('n:'):
+                    return (
+                      <p key={index} className="android:mt-[15px] ipad:mt-[20px]">
+                        {line.substring(2)}
+                      </p>
+                    );
+                    
+                  case line.startsWith('img:'):
+                    return (
+                      <img key={index} src={line.substring(4)} className="w-full android:mt-[15px] ipad:mt-[20px] android:h-[180px] ipadmini:h-[380px] desktop:h-[260px] object-cover android:rounded-[8px] ipad:rounded-[12px]" />
+                    );
+
+                  default:
+                    return (
+                      <p key={index}>
+                        {line}
+                      </p>
+                    );
+                }
+              })}
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </>
   )
 }
 
