@@ -1,9 +1,5 @@
 import './globals.css'
-import { Poppins } from 'next/font/google'
 import WithProviders from '@/app/WithProviders'
-import Announcement from '@/components/home/Announcement'
-
-const poppins = Poppins({ subsets: ['latin'], weight: "400" })
 
 export const metadata = {
   title: 'AdsGency AI',
@@ -30,7 +26,6 @@ export default function RootLayout({
       </head>
       <body className="w-full" >
         <WithProviders>
-          <Announcement />
           {children}
         </WithProviders>
       </body>

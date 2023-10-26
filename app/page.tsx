@@ -10,6 +10,7 @@ import Testimonials from '@/components/home/Testimonials'
 import DefaultLayout from '@/layout/default'
 import Features from '@/components/home/Features'
 import AboveFooter from '@/components/home/AboveFooter'
+import Announcement from '@/components/home/Announcement'
 
 // Metadata for the page
 export const metadata = {
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     // Wrap the content with the DefaultLayout component
     <DefaultLayout>
+      <Announcement />
       <ReactGATag fieldObject={{
         hitType: "pageview",
         page: "/",
