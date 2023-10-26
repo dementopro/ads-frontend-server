@@ -47,12 +47,10 @@ const PaymentForm = () => {
       return;
     }
     try {
-      // const cookie = headers().get('cookie') || ''
       setIsLoading(true);
-<<<<<<< Updated upstream
-      const response = await fetch('/fapi/add_credit_api', {
+      const response = await axios('/fapi/add_credit_api', {
         method: 'POST',
-        body: JSON.stringify({
+        data: JSON.stringify({
           ...values,
           year: +values.expiration.split('-')[0],
           month: +values.expiration.split('-')[1],
@@ -61,61 +59,8 @@ const PaymentForm = () => {
           'Content-Type': 'application/json',
         },
       });
-      if (response.ok) {
-        const data = await response.json();
-=======
-<<<<<<< Updated upstream
-      if (!isLoading) {
-        const response = await axios({
-          url: '/fapi/add_credit_api',
-          method: 'POST',
-          data: JSON.stringify({
-            ...values,
-            year: +values.expiration.split('-')[0],
-            month: +values.expiration.split('-')[1],
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        if (response.status === 200) {
-          const data = response.data
-          if (data.status === SUCCESS_CODE) {
-            messageApi.success(data.message || 'Add credit successfully');
-            setTimeout(() => {
-              router.push('/profile')
-            }, 500);
-          } else {
-            messageApi.error(data.message || 'Something went wrong');
-          }
-=======
-      // const response = await fetch('/fapi/add_credit_api', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     ...values,
-      //     year: +values.expiration.split('-')[0],
-      //     month: +values.expiration.split('-')[1],
-      //   }),
-      //   headers: {
-      //     cookie,
-      //     'Content-Type': 'application/json',
-      //   },
-      // });
-      const response = await axios({
-        url: '/fapi/add_credit_api',
-        method: 'POST',
-        data: {
-            ...values,
-            year: +values.expiration.split('-')[0],
-            month: +values.expiration.split('-')[1]
-          },
-        headers:{
-          'Content-Type': 'application/json'
-        }
-      })
       if (response.status===200) {
         const data = await response.data;
->>>>>>> Stashed changes
         if (data.status === SUCCESS_CODE) {
           messageApi.success(data.message || 'Add credit successfully');
           setTimeout(() => {
@@ -127,10 +72,6 @@ const PaymentForm = () => {
               router.push('/profile');
             }
           }, 500);
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         } else {
           messageApi.error(data.message || 'Something went wrong');
         }
