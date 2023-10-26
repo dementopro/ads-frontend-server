@@ -10,6 +10,7 @@ import Testimonials from '@/components/home/Testimonials'
 import DefaultLayout from '@/layout/default'
 import Features from '@/components/home/Features'
 import AboveFooter from '@/components/home/AboveFooter'
+import Announcement from '@/components/home/Announcement'
 
 // Metadata for the page
 export const metadata = {

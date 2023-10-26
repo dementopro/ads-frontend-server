@@ -23,7 +23,7 @@ const BookMeeting = () => {
             <div className="">Don&apos;t wait another minute!</div>
           </div>
           <div className="justify-center items-center">
-            Time is ticking, and your competitors aren't slowing down.
+            Time is ticking, and your competitors aren&apos;t slowing down.
           </div>
           <div className="justify-center items-center">
             Book a Meeting with us today!
