@@ -28,6 +28,7 @@ export const AccountContext = createContext<{
   setNextPage:(nextPage:string) => void;
   setSelectedPlan:(selectedPlan:number) => void;
   selectedPlan:number;
+  setIsLogin:(isLogin:boolean) => void;
   setCreditInfo:(creditInfo:boolean) => void;
   setCredits: (credits: number) => void;
   setTrialDays: (trialDays: number) => void;
@@ -60,8 +61,9 @@ export const AccountContext = createContext<{
   setTrialDateAt: () => { },
   setSelectedPlan:() => {},
   setCreditInfo:()=>{},
+  setIsLogin:()=>{},
   setNextPage:() => {},
-  updateAccount: () => { },
+  updateAccount: () => { }
 });
 
 export const useAccountContext = () => useContext(AccountContext);
