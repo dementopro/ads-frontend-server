@@ -156,11 +156,10 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
       isSubscribed, setIsSubscribed,
       planId, updateAccount,
       trialDateAt, setTrialDateAt,
-      isLogin, creditInfo, setCreditInfo,nextPage,
+      isLogin, setIsLogin, creditInfo, setCreditInfo,nextPage,
       setNextPage, selectedPlan, setSelectedPlan
     }}>
       {children}
     </AccountContext.Provider>
   )
 }
-

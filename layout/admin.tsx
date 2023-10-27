@@ -9,7 +9,7 @@ import { usePathname, useRouter, redirect } from 'next/navigation';
 const AdminLayout = ({ children }: {
   children: React.ReactNode;
 }) => {
-  const { account, isLoading, setAccount } = useAccountContext();
+  const { account, isLoading, setAccount, setIsLogin } = useAccountContext();
   const pathname: string = usePathname();
   const router = useRouter();
 
@@ -17,14 +17,18 @@ const AdminLayout = ({ children }: {
     if (isLoading) {
 
     } else {
-      if (!account)
+      if (!account){
         redirect ('/login')
+      }
+      else{
+        setIsLogin(true)
+      }
     }
   }, [account, isLoading]);
 
   if (isLoading) {
     return <div className='flex flex-col h-screen max-h-screen min-w-full admin-content'>
-      
+
       </div>
   }
 
