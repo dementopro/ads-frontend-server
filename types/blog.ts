@@ -6,11 +6,11 @@ export interface IBlog {
     title: string;
     para: string[];
   }[];
-  introductionImage: string;
   introductionText: string;
   publishDate: string;
   publisher: string;
   coverImage: string;
+  authorImage: string;
   layout: string;
   type: string
 }

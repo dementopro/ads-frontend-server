@@ -1,10 +1,8 @@
 'use client'
 import { IBlog } from '@/types/blog'
-import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import React from 'react'
-import styles from '@/app/blog/blog.module.css'
-import Image from 'next/image'
+import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6"
 
 type Props = {
   blog: IBlog
@@ -13,7 +11,7 @@ type Props = {
 const BlogDetail = ({ blog }: Props) => {
   return (
     <>
-      <div className="ipad:w-[900px] flex flex-col gap-[32px] justify-center items-center relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:my-[60px]">
+      <div className="ipad:w-[900px] flex flex-col gap-[16px] justify-center items-center relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:my-[60px]">
         {blog.content.map((section, index) => (
           <div key={index} className="w-full flex flex-col justify-center items-center android:py-[38px] ipad:py-[42px] android:gap-[20px] ipad:gap-[26px]">
             {section.title &&
@@ -61,6 +59,20 @@ const BlogDetail = ({ blog }: Props) => {
             </div>
           </div>
         ))}
+        <div className="w-full flex items-center">
+          <div className="w-full flex justify-start items-center gap-[15px]">
+            <img src={blog.authorImage} className='rounded-full android:w-[60px] ipad:w-[80px] android:h-[60px] ipad:h-[80px] object-cover ' />
+            <div className="flex flex-col text-white font-open-sans font-regular">
+              <div className="android:text-[18px] ipad:text-[20px]"> {blog.publisher} </div>
+              <div className="android:text-[12px] ipad:text-[14px]"> 2 min read - {blog.publishDate} </div>
+            </div>
+          </div>
+          <div className="w-full flex justify-end items-center gap-[8px]">
+              <Link target="_blank" href="https://twitter.com/AdsGency_AI" className="android:h-30px ipad:h-35px w-auto"> <FaXTwitter /> </Link>
+              <Link target="_blank" href="https://www.linkedin.com/company/adsgency-ai/" className="android:h-30px ipad:h-35px w-auto"> <FaLinkedin /> </Link>
+              <Link target="_blank" href="https://www.instagram.com/adsgency_ai/" className="android:h-30px ipad:h-35px w-auto"> <FaInstagram /> </Link>
+          </div>
+        </div>
       </div>
     </>
   )
