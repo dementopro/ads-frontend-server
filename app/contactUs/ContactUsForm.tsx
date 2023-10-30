@@ -72,7 +72,7 @@ const ContactUsForm = () => {
         }}
         size="middle"
         preserve={false}
-        className="w-full inline-flex flex-col gap-[16px] justify-center items-start android:px-[32px] ipad:px-[48px] py-[26px] bg-[#141414] android:rounded-[9px] ipad:rounded-[12px] border-1 border-violet-500 border-opacity-60"
+        className="w-full inline-flex flex-col gap-[16px] justify-center items-start android:px-[32px] ipad:px-[48px] py-[26px] bg-[#141414] android:rounded-[9px] ipad:rounded-[12px] border-1 border-[#9D93FF] border-opacity-60"
       >
         <div className="w-full text-white text-left android:text-[25px] ipad:text-[33px] font-semibols">
           Contact Us

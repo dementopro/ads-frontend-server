@@ -11,7 +11,7 @@ const SimplifyAds = () => {
                 Simplify your Ads Management
             </div>
             <div className="w-full pb-[16px] px-[16px] overflow-x-auto android:justify-center ipad:justify-center inline-flex">
-                <div className="inline-flex flex-col android:w-[550px] ipadmini:w-[600px] ipad:w-[862px] desktop:w-[932px] py-[32px] android:px-[30px] ipad:px-[100px] relative bg-[#27252D] android:border-2 ipadmini:border-3 ipad:border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-center items-center android:gap-[16px] ipad:gap-[32px]">
+                <div className="inline-flex flex-col android:w-[550px] ipadmini:w-[600px] ipad:w-[862px] desktop:w-[932px] py-[32px] android:px-[30px] ipad:px-[100px] relative bg-[#27252D] android:border-2 ipadmini:border-3 ipad:border-4 border-[#9D93FF] border-opacity-60 rounded-[25px] shadow flex-col justify-center items-center android:gap-[16px] ipad:gap-[32px]">
                     <div className="w-full flex flex-row justify-center items-center android:gap-[20px] ipadmini:gap-[30px] ipad:gap-[80px]">
                         <div className="w-full text-center text-[#A09BAE] android:text-[10px] ipadmini:text-[13px] ipad:text-[16px] desktop:text-[16px] font-medium">
                             Without AdsGency AI

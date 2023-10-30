@@ -12,7 +12,7 @@ const ContactUsFaq = () => {
         {contactUsFaq.map((faq, index) => (
           <div
             key={index}
-            className="inline-flex flex-col text-left w-full py-[26px] px-[16px] android:h-[150px] ipadmini:h-[250px] desktop:h-[220px] gap-[8px] android:border-2 ipadmini:border-3 ipad:border-4 border-violet-500 border-opacity-60 rounded-[25px]"
+            className="inline-flex flex-col text-left w-full py-[26px] px-[16px] android:h-[150px] ipadmini:h-[250px] desktop:h-[220px] gap-[8px] android:border-2 ipadmini:border-3 ipad:border-4 border-[#9D93FF] border-opacity-60 rounded-[25px]"
           >
             <div className="font-open-sans font-semibold android:text-[16px] ipad:text-[20px]">
               {faq.question}

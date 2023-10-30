@@ -19,7 +19,7 @@ const BlogDetail = ({ blog }: Props) => {
                 {section.title}
               </div>
             }
-            <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-left android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px] android:border-l-5 ipad:border-l-8 border-violet-500 border-opacity-60 pl-[18px]">
+            <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-left android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px] android:border-l-5 ipad:border-l-8 border-[#9D93FF] border-opacity-60 pl-[18px]">
               {section.para.map((line, index) => {
                 switch (true) {
                   case line.startsWith('bn:'):

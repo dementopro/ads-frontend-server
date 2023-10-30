@@ -13,7 +13,7 @@ const Sales = () => {
     return (
         <div className='w-full android:my-[32px] ipad:my-[60px] bg-black'>
             <div className="inline-flex flex-col items-center justify-center w-full gap-8">
-                <div className="android:w-[328px] ipadmini:w-[677px] ipad:w-[862px] desktop:w-[1036px] android:py-[20px] ipadmini:py-[32px] ipad:py-[32px] desktop:py-[32px] android:px-[20px] ipadmini:px-[32px] ipad:px-[32px] desktop:px-[36px] relative bg-[#27252D] android:border-2 ipadmini:border-3 ipad:border-4 desktop:border-4 border-violet-500 border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
+                <div className="android:w-[328px] ipadmini:w-[677px] ipad:w-[862px] desktop:w-[1036px] android:py-[20px] ipadmini:py-[32px] ipad:py-[32px] desktop:py-[32px] android:px-[20px] ipadmini:px-[32px] ipad:px-[32px] desktop:px-[36px] relative bg-[#27252D] android:border-2 ipadmini:border-3 ipad:border-4 desktop:border-4 border-[#9D93FF] border-opacity-60 rounded-[25px] shadow flex-col justify-start items-center gap-[25px] inline-flex">
                     <div className="w-full android:flex-col ipadmini:flex-row ipad:flex-row desktop:flex-row justify-center items-center gap-[20px] inline-flex">
                         <div className="w-full flex-col android:justify-center android:items-center ipadmini:justify-start ipadmini:items-start android:gap-[15px] ipadmini:gap-[20px] ipad:gap-[16px] desktop:gap-[30px] inline-flex">
                             <div className="text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[24px] desktop:text-[42px] font-bold font-open-sans">

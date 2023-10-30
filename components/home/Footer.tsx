@@ -34,7 +34,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 const Footer = () => {
   return (
     <footer className='flex flex-col px-6 sm:px-20 pt-10 bg-black android:gap-[48px] ipadmini:gap-[100px]'>
-      <div className='desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] flex flex-wrap gap-8 justify-between'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto ipad:m-[0px] flex flex-wrap gap-8 justify-between'>
         <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />
           <span className='text-sm text-primary-gray'>
@@ -53,7 +53,7 @@ const Footer = () => {
           }
         </div>
       </div>
-      <div className='desktop:w-[1240px] ipad:w-full desktop:m-auto ipad:m-[0px] border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto ipad:m-[0px] border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
         <span>&copy; 2023 AdsGency AI. All rights reserved.</span>
       </div>
     </footer >

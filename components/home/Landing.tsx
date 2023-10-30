@@ -120,7 +120,7 @@ const Landing = () => {
                   </div>
                   <div className='flex-col justifu-start items-start android:gap-[8px] ipadmini:gap-[10px] ipad:gap-[13px] desktop:gap-[15px] inline-flex'>
                     <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px]] inline-flex">
-                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
+                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#9D93FF] rounded-full">
                         <img
                           title='cross'
                           className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
@@ -132,7 +132,7 @@ const Landing = () => {
                       </div>
                     </div>
                     <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
-                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
+                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#9D93FF] rounded-full">
                         <img
                           title='cross'
                           className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
@@ -145,7 +145,7 @@ const Landing = () => {
                     </div>
 
                     <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
-                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
+                      <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#9D93FF] rounded-full">
                         <img
                           title='cross'
                           className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'

@@ -33,7 +33,7 @@ const Announcement = () => {
         <div className="android:w-[340px] ipad:w-auto bg-[#CAC5FF] bg-cover android:gap-[8px] ipad:gap-[16px] android:m-[10px] ipad:m-[0px] p-[32px] android:rounded-[15px] ipad:rounded-[25px] shadow flex-col inline-flex">
           <div className="w-full relative text-right">
             <FiX
-              className="cursor-pointer text-[#0B0129] hover:text-violet-500 inline-block android:w-[15px] ipadmini:[20px] ipad:w-[25px] desktop:w-[30px] h-auto"
+              className="cursor-pointer text-[#0B0129] hover:text-[#9D93FF] inline-block android:w-[15px] ipadmini:[20px] ipad:w-[25px] desktop:w-[30px] h-auto"
               onClick={closeAnnouncement}
             />
           </div>
