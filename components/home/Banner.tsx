@@ -5,6 +5,8 @@ import { FiX } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 
 const Banner = () => {
+    const router = useRouter()
+    
     const [isOpen, setIsOpen] = useState(false);
 
     const closeBanner = () => {
@@ -22,7 +24,6 @@ const Banner = () => {
 
     if (!isOpen) return <></>;
 
-    const router = useRouter()
 
     return (
         <>
