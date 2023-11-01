@@ -25,7 +25,7 @@ const Header = () => {
   const mobileMenuTop = isMobileMenuOpen ? 'translate-y-[95px]' : 'translate-y-[-200px]';
   return (
     <>
-      <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto ipad:m-[0px] ipad:rounded-[25px] relative bg-[#15161A]">
+      <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:my-[0px] ipad:my-[82px] ipad:rounded-[25px] relative bg-[#15161A]">
         <Banner />
         <MobileMenu translate={mobileMenuTop} />
         <div className="w-full android:h-[95px] ipad:h-[70px] relative px-[32px] bg-[#15161A] ipad:rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-40">
@@ -67,7 +67,7 @@ const Header = () => {
               Sign In
             </div>
             </Link> */}
-            <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
+            <PrimaryButton target="_self" href="/requestDemo" text="Request Demo" />
           </div>
         </div>
       </div >

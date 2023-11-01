@@ -94,7 +94,7 @@ const SimplifyAds = () => {
                     </div>
                 </div>
             </div>
-            <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
+            <PrimaryButton target="_self" href="/requestDemo" text="Request Demo" />
         </div >
     )
 }

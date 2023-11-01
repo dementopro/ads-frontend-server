@@ -18,7 +18,7 @@ const AboveFooter = () => {
                 <img className="android:block ipadmini:hidden hidden w-full h-auto left-0 top-0 absolute object-cover rounded z-neg-1" src="/images/home/above-footer-vector-android.svg" />
                 <div className="h-full px-[50px] relative justify-start items-center flex-row flex z-10">
                     <div className="justify-start items-start flex-col flex gap-[20px]">
-                        <PrimaryButton target="_blank" href="/requestDemo" text="Request Demo" />
+                        <PrimaryButton target="_self" href="/requestDemo" text="Request Demo" />
                         <div className="text-white android:text-[12px] ipadmini:text-[12px] ipad:text-[16px] desktop:text-[16px] font-medium font-poppins">
                             <span>
                                 AdsGency AI for Enterprise?

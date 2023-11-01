@@ -1,3 +1,4 @@
+'use client'
 import CareerContainer from '@/components/careers/CareerContainer';
 
 const CareersPage = () => {

@@ -3,7 +3,11 @@ import PrimaryButton from '@/components/PrimaryButton'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 
-const JoinOurTeam = () => {
+interface JoinOurTeamProps {
+  scrollToOpenPositions: () => void; // Define the type explicitly
+}
+
+const JoinOurTeam: React.FC<JoinOurTeamProps> = ({ scrollToOpenPositions }) => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -40,11 +44,13 @@ const JoinOurTeam = () => {
             to build the future of commerce.
           </div>
 
-          <PrimaryButton
-            target="_self"
-            href="/"
-            text="See Open Roles"
-          />
+          <div onClick={scrollToOpenPositions}>
+            <PrimaryButton
+              target="_self"
+              href=""
+              text="See Open Roles"
+            />
+          </div>
         </div>
       </div>
 
