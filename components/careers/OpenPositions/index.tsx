@@ -33,7 +33,6 @@ const OpenPositions = () => {
                     <div className="flex flex-col gap-[32px]">
                         {item.positions.map((position, pIndex) => (
                             <div key={pIndex} className="android:w-full desktop:w-3/4 flex flex-row items-center bg-[#27252D] android:rounded-[8px] ipad:rounded-[12px] android:px-[16px] ipad:px-[32px] android:py-[45px] ipad:py-[48px]">
-
                                 <div className="w-full flex flex-col gap-[8px] text-white">
                                     <div className="android:text-[16px] ipad:text-[18px] font-semibold">
                                         {position.title}

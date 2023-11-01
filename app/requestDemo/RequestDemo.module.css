@@ -29,19 +29,19 @@
 
 .pop {
   box-shadow: 0px 0px 66px 0px rgba(132, 79, 255, 0.28);
-  @apply max-w-[254px] px-5 py-4 text-sm text-primary-gray rounded-2xl border-primary-purple absolute max-sm:hidden;
+  @apply android:hidden ipad:block ipad:w-[160px] desktop:w-[255px] bg-[#141414] px-[13px] py-[16px] text-[14px] text-[#C1BECA] rounded-[15px] border-primary-purple absolute;
 }
 
 .pop1 {
-  @apply left-[10%] top-[28%]
+  @apply ipad:left-[-200px] desktop:left-[-295px] top-[20px]
 }
 
 .pop2 {
-  @apply right-[10%] top-[28%]
+  @apply ipad:right-[-200px] desktop:right-[-295px] top-[20px]
 }
 
 .pop3 {
-  @apply left-[10%] bottom-[28%]
+  @apply ipad:left-[-200px] desktop:left-[-295px] bottom-[200px]
 }
 
 

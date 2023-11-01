@@ -73,8 +73,17 @@ const RequestDemoForm = () => {
         }}
         size='middle'
         preserve={false}
-        className="android:w-full ipadmini:w-[550px] inline-flex flex-col gap-[16px] justify-center items-start android:px-[32px] ipad:px-[48px] py-[26px] bg-[#141414] android:rounded-[9px] ipad:rounded-[12px] border-1 border-[#9D93FF] border-opacity-60"
+        className="android:w-full ipadmini:w-[550px] relative inline-flex flex-col gap-[16px] justify-center items-start android:px-[32px] ipad:px-[48px] py-[26px] bg-[#141414] android:rounded-[9px] ipad:rounded-[12px] border-1 border-[#9D93FF] border-opacity-60"
       >
+        <div className={`${styles['pop']} ${styles['pop1']}`}>
+          We&apos;ve delivered over 229K+ ad content for clients
+        </div>
+        <div className={`${styles['pop']} ${styles['pop2']}`}>
+          Saving time from training marketers, hiring agencies and conducting analysis.
+        </div>
+        <div className={`${styles['pop']} ${styles['pop3']}`}>
+          No code interface & low maintenance for users applications
+        </div>
         <div className="w-full text-white text-center android:text-[25px] ipad:text-[33px] font-semibold">
           Request Demo
         </div>

@@ -23,7 +23,7 @@ const OurCoreValues = () => {
                             Efficiency
                         </div>
                         <div className="ipad:mt-[20px] text-[#D0CDD6] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
-                            At AdsGency AI, we value smart work as much as hard work. We’re passionate about simplifying processes and optimizing results, always aiming for that sweet spot of precision and effectiveness. In everything we do, we prioritize clarity and purpose, ensuring our strategies are as efficient as they are impactful.
+                            At AdsGency AI, we value smart work as much as hard work. We&apos;re passionate about simplifying processes and optimizing results, always aiming for that sweet spot of precision and effectiveness. In everything we do, we prioritize clarity and purpose, ensuring our strategies are as efficient as they are impactful.
                         </div>
                     </div>
                     <div className="w-full h-full ipadmini:px-[30px] desktop:px-[50px] flex-col justify-center items-center android:gap-[8px] ipad:gap-[15px] inline-flex ipadmini:border-r-2 ipadmini:border-[#838383] ipadmini:border-opacity-45">
@@ -31,7 +31,7 @@ const OurCoreValues = () => {
                             Leadership
                         </div>
                         <div className="ipad:mt-[20px] text-[#D0CDD6] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
-                            Leadership at AdsGency AI isn't just a title; it's a mindset. We're not just observers of industry trends; we’re the pioneers shaping them. Every member of our team, irrespective of their role, is empowered with the spirit of innovation, always encouraged to think forward and craft the future of advertising.
+                            Leadership at AdsGency AI isn&apos;t just a title; it&apos;s a mindset. We&apos;re not just observers of industry trends; we&apos;re the pioneers shaping them. Every member of our team, irrespective of their role, is empowered with the spirit of innovation, always encouraged to think forward and craft the future of advertising.
                         </div>
                     </div>
                     <div className="w-full h-full ipadmini:px-[30px] desktop:px-[50px] flex-col justify-center items-center android:gap-[8px] ipad:gap-[15px] inline-flex">
@@ -39,7 +39,7 @@ const OurCoreValues = () => {
                             Collaboration
                         </div>
                         <div className="ipad:mt-[20px] text-[#D0CDD6] text-center android:text-[14px] ipad:text-[16px] font-regular font-open-sans">
-                            We firmly believe that the best solutions emerge from collaborative efforts. It’s a blend of diverse talents, perspectives, and insights that allows us to craft exceptional advertising strategies. Together, as a united team, we ensure our clients benefit from the best of our combined knowledge and creativity.
+                            We firmly believe that the best solutions emerge from collaborative efforts. It&apos;s a blend of diverse talents, perspectives, and insights that allows us to craft exceptional advertising strategies. Together, as a united team, we ensure our clients benefit from the best of our combined knowledge and creativity.
                         </div>
                     </div>
                 </div>
