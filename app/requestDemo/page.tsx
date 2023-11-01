@@ -19,22 +19,24 @@ const RequestDemoPage = () => {
           title: metadata.title
         }}
       />
-      <section className='relative flex flex-col items-center justify-center'>
-        <h2 className={`text-3xl text-center font-semibold px-4 mt-8 sm:mt-20 ${styles['gradient-text']}`}>
-          {`We're looking forward to meeting you.`}
-        </h2>
-        <RequestDemoForm />
-        <div className={`${styles['pop']} ${styles['pop1']}`}>
-          {`We've delivered over 229K+ ad content for clients`}
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10">
+        <div className="android:w-full ipadmini:w-[495px] ipad:w-full desktop:w-[1240px] mx-auto flex justify-center items-center flex-col gap-[32px] android:mt-[60px] android:mb-[32px] ipad:my-[60px] android:px-[32px] ipadmini:px-[0px]">
+          <div className='text-center w-full bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text android:text-[34px] ipad:text-[36px] font-bold font-poppins'>
+            We&apos;re looking forward to meeting you
+          </div>
+          <RequestDemoForm />
+          <div className={`${styles['pop']} ${styles['pop1']}`}>
+            {`We've delivered over 229K+ ad content for clients`}
+          </div>
+          <div className={`${styles['pop']} ${styles['pop2']}`}>
+            {`Saving time from training marketers, hiring agencies and conducting analysis.`}
+          </div>
+          <div className={`${styles['pop']} ${styles['pop3']}`}>
+            {`No code interface & low maintenance for users applications`}
+          </div>
         </div>
-        <div className={`${styles['pop']} ${styles['pop2']}`}>
-          {`Saving time from training marketers, hiring agencies and conducting analysis.`}
-        </div>
-        <div className={`${styles['pop']} ${styles['pop3']}`}>
-          {`No code interface & low maintenance for users applications`}
-        </div>
-      </section>
-    </DefaultLayout>
+      </div>
+    </DefaultLayout >
   )
 }
 

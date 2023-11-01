@@ -6,29 +6,25 @@
 }
 
 .input {
-  @apply bg-[#212228] border border-[#383838] w-full flex-1 h-[44px] text-white rounded-sm px-6 py-4;
+  @apply w-full h-[45px] android:px-[18px] ipad:px-[24px] android:py-[12px] ipad:py-[16px] bg-[#27252D] text-[#756E88] android:rounded-[2px] ipad:rounded-[4px] border-1 border-[#4E4A5B] justify-start items-center;
 }
 
 .input::placeholder {
-  @apply text-[#5F6368];
+@apply text-[#756E88];
 }
 
 .input:hover {
-  @apply border-primary-purple;
-}
-
-.form {
-  @apply max-sm:!shadow-none mb-3 sm:my-[50px] flex flex-wrap gap-x-5 flex-col rounded-lg sm:border border-primary-purple max-w-[540px] px-4 sm:px-[50px] py-9 max-sm:mx-4 w-full relative z-50 bg-[#121213];
+@apply border-primary-purple;
 }
 
 .form::before {
-  content:'';
-  @apply max-sm:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[60%] left-[-10px];
+  content: '';
+  @apply android:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[60%] left-[-10px];
 }
 
 .form::after {
   content: '';
-  @apply max-sm:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[-10px] right-[20%];
+  @apply android:hidden absolute rounded-full w-5 h-5 bg-primary-gradient top-[-10px] right-[20%];
 }
 
 .pop {
@@ -50,6 +46,6 @@
 
 
 .pop1::before {
-  content:'';
-  @apply max-sm:hidden absolute rounded-full w-4 h-4 bg-primary-gradient bottom-[-10%] right-[60px];
+  content: '';
+  @apply android:hidden absolute rounded-full w-4 h-4 bg-primary-gradient bottom-[-10%] right-[60px];
 }

@@ -15,7 +15,7 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  @apply text-[#5F6368];
+  @apply text-[#756E88];
 }
 
 .input:hover,

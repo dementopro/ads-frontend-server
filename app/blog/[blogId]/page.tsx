@@ -8,7 +8,6 @@ import Header from '@/components/home/Header'
 import AboveFooter from '@/components/home/AboveFooter'
 import { FiArrowLeft } from 'react-icons/fi'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 export const metadata = {
   title: 'Blog - AdsGency AI',

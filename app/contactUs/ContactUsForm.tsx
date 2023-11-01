@@ -74,7 +74,7 @@ const ContactUsForm = () => {
         preserve={false}
         className="w-full inline-flex flex-col gap-[16px] justify-center items-start android:px-[32px] ipad:px-[48px] py-[26px] bg-[#141414] android:rounded-[9px] ipad:rounded-[12px] border-1 border-[#9D93FF] border-opacity-60"
       >
-        <div className="w-full text-white text-left android:text-[25px] ipad:text-[33px] font-semibols">
+        <div className="w-full text-white text-left android:text-[25px] ipad:text-[33px] font-semibold">
           Contact Us
         </div>
         <div className="w-full inline-flex android:flex-col ipadmini:flex-row gap-[18px]">
@@ -223,6 +223,7 @@ const ContactUsForm = () => {
 
         <button
           onClick={toContactUs}
+          disabled={loading}
           className="android:px-[18px] ipadmini:px-[25px] ipad:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] ipad:py-[10px] desktop:py-[14px] bg-gradient-to-r from-[#6859FF] to-[#AF41FF] rounded-lg justify-center items-center android:gap-[5px] ipadmini:gap-[5px] ipad:gap-[8px] desktop:gap-[8px] flex android:text-[12px] ipadmini:text-[12px] ipad:text-[14px] desktop:text-[16px] hover:from-[#A29BF8] hover:to-[#C590F8] transition ease-in-out !duration-500"
         >
           <div className="text-white">{loading ? 'Sending...' : 'Submit'}</div>

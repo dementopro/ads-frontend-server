@@ -52,7 +52,7 @@ const Testimonials = () => {
                     Here&apos;s what they have to say about us
                 </div>
                 <div className='w-full ipad:mt-[16px] desktop:mt-[0px] flex-col justify-center items-center !gap-[10px] inline-flex'>
-                    <Marquee pauseOnHover={true} speed={20}>
+                    <Marquee pauseOnHover={true} speed={20} autoFill={true}>
                         {userTestimonials.map((item, index) => (
                             <div key={index} className="android:w-[230px] ipadmini:w-[270px] ipad:w-[300px] android:h-[270px] ipadmini:h-[300px] ipad:h-[330px] android:mx-[30px] ipadmini:mx-[40px] ipad:mx-[50px] desktop:mx-[50px] android:pt-[18px] ipadmini:pt-[20px] ipad:pt-[32px] desktop:pt-[32px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[16px] !inline-flex overflow-hidden">
                                 <div className="w-full android:px-[18px] ipadmini:px-[20px] ipad:px-[32px] desktop:px-[32px] justify-start items-center">
