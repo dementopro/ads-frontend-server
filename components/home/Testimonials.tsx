@@ -77,7 +77,6 @@ const Testimonials = () => {
                                 <div className="w-full pl-8 android:py-[8px] ipadmini:py-[10px] ipad:py-[12px] desktop:py-[12px] bg-[#171717] justify-start items-center inline-flex">
                                     <div className=" justify-start items-center android:gap-[14px] ipadmini:gap-[16px] ipad:gap-[30px] desktop:gap-[30px] inline-flex">
                                         <img alt={item.name} src={`/images/home/testimonial/${item.image}.svg`} className="android:w-[27px] ipadmni:w-[32px] ipad:w-[42px] desktop:w-[42px] android:h-[27px] ipadmni:h-[32px] ipad:h-[42px] desktop:h-[42px] rounded-full border border-white" />
-                                        <img alt={item.name} src={`/images/home/testimonial/${item.image}.svg`} className="android:w-[27px] ipadmni:w-[32px] ipad:w-[42px] desktop:w-[42px] android:h-[27px] ipadmni:h-[32px] ipad:h-[42px] desktop:h-[42px] rounded-full border border-white" />
                                         <div className="flex-col justify-center items-start android:gap-[0px] ipadmini:gap-[4px] ipad:gap-[5px] desktop:gap-[5px] inline-flex">
                                             <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[12px] desktop:text-[12px] font-semibold font-poppins">
                                                 {item.name}
