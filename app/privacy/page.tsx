@@ -3,7 +3,7 @@ import DefaultLayout from '@/layout/default'
 import React from 'react'
 import { privacy } from '@/data/privacy'
 import { terms } from '@/data/terms'
-import Header from '@/components/home/Header'
+import Header from '@/components/common/Header'
 import Image from 'next/image'
 
 
@@ -21,23 +21,20 @@ const PrivacyPolicyPage = () => {
           title: metadata.title
         }}
       />
-      <div className="w-full h-auto relative">
-        <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[0px] ipad:pt-[82px] android:pb-[32px] ipad:pb-[60px] w-full relative z-10 bg-hero-pattern bg-cover">
-          <Header />
-          <div className="desktop:w-[1240px] relative android:mx-[32px] android:my-[32px] ipad:mx-[60px] desktop:mx-auto ipad:my-[60px]">
-            <Image
-              width={100}
-              height={100}
-              className='android:hidden ipad:block absolute top-[-20px] left-[-50px] android:w-[60px] ipad:w-[100px] h-auto z-10'
-              title='Home'
-              src={'/images/bg-elements/headline-circles.svg'} alt='logo'
-            />
-            <div className="z-20 relative text-white font-poppins font-bold android:text-center ipad:text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px]">
-              Privacy & Terms
-            </div>
-            <div className="z-20 relative text-[#D0D0D0] font-open-sans font-regular android:text-center ipad:text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
-              Last updated: April 2023
-            </div>
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
+        <div className="desktop:w-[1240px] relative android:mx-[32px] android:my-[32px] ipad:mx-[60px] desktop:mx-auto ipad:my-[60px]">
+          <Image
+            width={100}
+            height={100}
+            className='android:hidden ipad:block absolute top-[-20px] left-[-50px] android:w-[60px] ipad:w-[100px] h-auto z-10'
+            title='Home'
+            src={'/images/bg-elements/headline-circles.svg'} alt='logo'
+          />
+          <div className="z-20 relative text-white font-poppins font-bold android:text-center ipad:text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px]">
+            Privacy & Terms
+          </div>
+          <div className="z-20 relative text-[#D0D0D0] font-open-sans font-regular android:text-center ipad:text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
+            Last updated: April 2023
           </div>
         </div>
       </div>
@@ -48,7 +45,6 @@ const PrivacyPolicyPage = () => {
             Privacy Policy
           </div>
         </div>
-        
         {privacy.map((item, index) => (
           <div key={index} className="flex flex-col">
             <div className="text-white font-poppins android:font-medium ipad:font-semibold android:text-[15px] ipadmini:text-[22px] ipad:text-[28px] desktop:text-[34px]">

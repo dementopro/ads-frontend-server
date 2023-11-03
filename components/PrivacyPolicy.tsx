@@ -1,73 +1,67 @@
 import React from 'react'
+import { privacy } from '@/data/privacy'
+import { terms } from '@/data/terms'
+import Image from 'next/image'
 
 const PrivacyPolicy = () => {
-  return (
-    <section className='flex flex-col max-h-[80vh] mr-[-30px] px-4'>
-      <div className='flex flex-col max-h-[75vh] overflow-auto pr-5 my-6'>
-        <h1 className='text-center text-3xl font-bold pb-3 border-b px-4'>
-          Privacy Policy
-        </h1>
-        <h2 className='text-xl font-semibold my-2'>Introduction</h2>
-        <p className='font-mono'>
-          {`AdsGency AI (the "Company") values the privacy of its users ("User" or "you") and has developed this Privacy Policy to demonstrate its commitment to protecting your privacy. This Privacy Policy describes the types of information we may collect from you or that you may provide when you use our Services, and our practices for collecting, using, maintaining, protecting, and disclosing that information.`}
+    return (
+        <>
+            <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
+                <div className="desktop:w-[1240px] relative android:mx-[32px] android:my-[32px] ipad:mx-[60px] desktop:mx-auto ipad:my-[60px]">
+                    <Image
+                        width={100}
+                        height={100}
+                        className='android:hidden ipad:block absolute top-[-20px] left-[-50px] android:w-[60px] ipad:w-[100px] h-auto z-10'
+                        title='Home'
+                        src={'/images/bg-elements/headline-circles.svg'} alt='logo'
+                    />
+                    <div className="z-20 relative text-white font-poppins font-bold android:text-center ipad:text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px]">
+                        Privacy & Terms
+                    </div>
+                    <div className="z-20 relative text-[#D0D0D0] font-open-sans font-regular android:text-center ipad:text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
+                        Last updated: April 2023
+                    </div>
+                </div>
+            </div>
 
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Personal Identification Information</h2>
-        <p className='font-mono'>
-          {`We may collect personally identifiable information ("PII") that you provide to us, such as your name, email address, postal address, phone number, and payment method details. We may collect this information in various ways, including but not limited to, when you register on our site, subscribe to a newsletter, fill out a form, or enter information on our Services.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Non-Personal Identification Information</h2>
-        <p className='font-mono'>
-          {`We may collect non-personal identification information about Users whenever they interact with our Services. This may include the browser name, the type of computer, and technical information about Users' means of connection to our Services, such as the operating system, the Internet service providers utilized, and other similar information.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Cookies and Tracking Technologies</h2>
-        <p className='font-mono'>
-          {`We may use cookies, pixel tags, and similar technologies to automatically collect this information. Cookies are small bits of information that are stored by your computer’s web browser. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Services.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Use of Collected Information and AI Training</h2>
-        <p className='font-mono'>
-          {`AdsGency AI collects and uses Users' personal information for various purposes: to provide and maintain our services; to notify you about changes to our Services; to allow you to participate in interactive features of our Services when you choose to do so; to provide customer support; to gather analysis or valuable information so that we can improve our Services; to monitor the usage of our Services; to detect, prevent and address technical issues; to fulfil any other purpose for which you provide it; to provide you with news, special offers and general information about other goods, services and events which we offer. We also use the aggregated and anonymized data to train our machine learning models for providing better services and experiences.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Protection of Your Information</h2>
-        <p className='font-mono'>
-          {`We take reasonable measures to protect your personal information in an effort to prevent loss, misuse, unauthorized access, disclosure, alteration, and destruction. These measures include firewalls, data encryption, physical access controls to our data centers, and information access authorization controls. We also have implemented measures to maintain the safety of your personal information when you enter, submit, or access your personal information.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Changes to this Privacy Policy</h2>
-        <p className='font-mono'>
-          {`AdsGency AI has the discretion to update this Privacy Policy at any time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.`}
-        </p>
-        <h1 className='text-center text-3xl font-bold mt-4 pb-3 border-b px-4'>
-          Terms of Service
-        </h1>
-        <h2 className='text-xl font-semibold my-2'>Acceptance of Terms</h2>
-        <p className='font-mono'>
-          {`The services that AdsGency AI provides are subject to the following Terms of Service ("TOS"). AdsGency AI reserves the right to update the TOS at any time without notice to you. The most current version of the TOS can be reviewed by clicking on the "Terms of Service" hypertext link located at the bottom of our Web pages.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Use of Services</h2>
-        <p className='font-mono'>
-          {`You agree to not use the Services to: upload or distribute any computer viruses, worms, or any software intended to damage or alter a computer system or data; send unsolicited or unauthorized advertising, promotional materials, junk mail, or any other form of duplicative or unsolicited messages; defame, harass, abuse, threaten or defraud Users of the Services, or collect, or attempt to collect, personal information about Users or third parties without their consent.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Privacy and Protection of Personal Information</h2>
-        <p className='font-mono'>
-          {`See the Privacy Policy relating to the collection and use of your information, which is incorporated by reference into these Terms of Service.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>
-          Termination of Use
-        </h2>
-        <p className='font-mono'>
-          {`You agree that AdsGency AI may, in its sole discretion, terminate or suspend your access to all or part of the Services with or without notice and for any reason, including, without limitation, breach of these Terms of Service. Any suspected fraudulent, abusive or illegal activity may be grounds for terminating your relationship and may be referred to appropriate law enforcement authorities.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Intellectual Property</h2>
-        <p className='font-mono'>
-          {`All content included as part of the Services, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the Services, is the property of AdsGency AI or its suppliers and protected by copyright and other laws that protect intellectual property and proprietary rights.`}
-        </p>
-        <h2 className='text-xl font-semibold my-2'>Governing Law</h2>
-        <p className='font-mono'>
-          {`These Terms of Service shall be governed by and construed in accordance with the laws of the country where the Company is registered, without regard to its conflict of law provisions.`}
-        </p>
-      </div>
-    </section>
-  )
+            <div className="desktop:w-[1240px] flex flex-col android:mx-[32px] android:mb-[32px] ipad:mx-[100px] desktop:mx-auto ipad:mb-[80px] android:gap-[16px] ipad:gap-[32px]">
+                <div className="text-center font-poppins font-semibold inline-block android:text-[26px] ipadmini:text-[32px] ipad:text-[40px] desktop:text-[48px]">
+                    <div className="inline-block bg-gradient-to-r from-[#D336FF] to-[#FD8CFF] text-transparent bg-clip-text">
+                        Privacy Policy
+                    </div>
+                </div>
+
+                {privacy.map((item, index) => (
+                    <div key={index} className="flex flex-col">
+                        <div className="text-white font-poppins android:font-medium ipad:font-semibold android:text-[15px] ipadmini:text-[22px] ipad:text-[28px] desktop:text-[34px]">
+                            {item.title}
+                        </div>
+                        <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[14px] ipad:text-[16px]">
+                            {item.description}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div className="desktop:w-[1240px] flex flex-col android:m-[32px] android:mb-[32px] ipad:mx-[100px] desktop:mx-auto ipad:mb-[80px] android:gap-[16px] ipad:gap-[32px]">
+                <div className="text-center font-poppins font-semibold inline-block android:text-[26px] ipadmini:text-[32px] ipad:text-[40px] desktop:text-[48px]">
+                    <div className="inline-block bg-gradient-to-r from-[#D336FF] to-[#FD8CFF] text-transparent bg-clip-text">
+                        Terms of Services
+                    </div>
+                </div>
+                {terms.map((item, index) => (
+                    <div key={index} className="flex flex-col">
+                        <div className="text-white font-poppins android:font-medium ipad:font-semibold android:text-[15px] ipadmini:text-[22px] ipad:text-[28px] desktop:text-[34px]">
+                            {item.title}
+                        </div>
+                        <div className="text-[#D0D0D0] font-open-sans font-regular android:text-[14px] ipad:text-[16px]">
+                            {item.description}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </>
+    )
 }
 
 export default PrivacyPolicy

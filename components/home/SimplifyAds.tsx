@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import PrimaryButton from '@/components/PrimaryButton'
+import PrimaryButton from '@/components/common/PrimaryButton'
 import { FiCheck, FiX } from 'react-icons/fi';
 
 

@@ -1,8 +1,9 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { userTestimonials } from '@/data/testimonials';
-import Marquee from "react-fast-marquee";
-
+import React, { useState, useEffect } from 'react'
+import { userTestimonials } from '@/data/testimonials'
+import Marquee from "react-fast-marquee"
+import { AiFillStar } from "react-icons/ai"
+import { BiSolidQuoteAltLeft } from "react-icons/bi"
 
 const Testimonials = () => {
     const [text, setText] = useState('');
@@ -56,26 +57,17 @@ const Testimonials = () => {
                         {userTestimonials.map((item, index) => (
                             <div key={index} className="android:w-[230px] ipadmini:w-[270px] ipad:w-[300px] android:h-[270px] ipadmini:h-[300px] ipad:h-[330px] android:mx-[30px] ipadmini:mx-[40px] ipad:mx-[50px] desktop:mx-[50px] android:pt-[18px] ipadmini:pt-[20px] ipad:pt-[32px] desktop:pt-[32px] bg-gradient-to-br from-[#3A2966] to-[#010101] rounded-[25px] flex-col justify-start items-center gap-[16px] !inline-flex overflow-hidden">
                                 <div className="w-full android:px-[18px] ipadmini:px-[20px] ipad:px-[32px] desktop:px-[32px] justify-start items-center">
-                                    <img className="android:w-[20px] ipadmini:w-[30px] ipad:w-[40px] desktop:w-[40px] h-auto"
-                                        alt='quote' src='/images/elements/quote.svg'
+                                    <BiSolidQuoteAltLeft
+                                        className="android:w-[20px] ipadmini:w-[30px] ipad:w-[40px] desktop:w-[40px] h-auto"
                                     />
                                 </div>
                                 <div className="w-full justify-center items-start gap-[8px] inline-flex">
-                                    <img className="android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto"
-                                        alt='quote' src='/images/elements/star.svg'
-                                    />
-                                    <img className="android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto"
-                                        alt='quote' src='/images/elements/star.svg'
-                                    />
-                                    <img className="android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto"
-                                        alt='quote' src='/images/elements/star.svg'
-                                    />
-                                    <img className="android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto"
-                                        alt='quote' src='/images/elements/star.svg'
-                                    />
-                                    <img className="android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto"
-                                        alt='quote' src='/images/elements/star.svg'
-                                    />
+                                    {[0, 1, 2, 3, 4].map((index) => (
+                                        <AiFillStar
+                                            key={index}
+                                            className='cursor-pointer text-white android:w-[15px] ipadmini:w-[20px] ipad:w-[25px] desktop:w-[25px] h-auto'
+                                        />
+                                    ))}
                                 </div>
                                 <div className="android:px-[18px] ipadmini:px-[20px] ipad:px-[32px] desktop:px-[32px] h-full justify-center item-center text-center text-white android:text-[10px] ipadmini:text-[12px] ipad:text-[13px] desktop:text-[13px] font-regular font-open-sans leading-[19px] inline-flex">
                                     <div className='justify-center item-center'>
@@ -84,6 +76,7 @@ const Testimonials = () => {
                                 </div>
                                 <div className="w-full pl-8 android:py-[8px] ipadmini:py-[10px] ipad:py-[12px] desktop:py-[12px] bg-[#171717] justify-start items-center inline-flex">
                                     <div className=" justify-start items-center android:gap-[14px] ipadmini:gap-[16px] ipad:gap-[30px] desktop:gap-[30px] inline-flex">
+                                        <img alt={item.name} src={`/images/home/testimonial/${item.image}.svg`} className="android:w-[27px] ipadmni:w-[32px] ipad:w-[42px] desktop:w-[42px] android:h-[27px] ipadmni:h-[32px] ipad:h-[42px] desktop:h-[42px] rounded-full border border-white" />
                                         <img alt={item.name} src={`/images/home/testimonial/${item.image}.svg`} className="android:w-[27px] ipadmni:w-[32px] ipad:w-[42px] desktop:w-[42px] android:h-[27px] ipadmni:h-[32px] ipad:h-[42px] desktop:h-[42px] rounded-full border border-white" />
                                         <div className="flex-col justify-center items-start android:gap-[0px] ipadmini:gap-[4px] ipad:gap-[5px] desktop:gap-[5px] inline-flex">
                                             <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[12px] desktop:text-[12px] font-semibold font-poppins">

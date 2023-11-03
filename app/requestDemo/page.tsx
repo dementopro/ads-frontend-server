@@ -1,7 +1,6 @@
-import RequestDemoForm from '@/app/requestDemo/RequestDemoForm';
-import ReactGATag from '@/components/ReactGATag';
-import DefaultLayout from '@/layout/default';
-import styles from './RequestDemo.module.css';
+import RequestDemoForm from '@/components/requestDemo/RequestDemoForm'
+import ReactGATag from '@/components/ReactGATag'
+import DefaultLayout from '@/layout/default'
 
 export const metadata = {
   title: 'Enterprise Inquiry - AdsGency AI',

@@ -6,7 +6,7 @@ import producthuntIcon from '@iconify/icons-logos/producthunt';
 import brandSuperhuman from '@iconify/icons-tabler/brand-superhuman';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
-import PrimaryButton from '@/components/PrimaryButton';
+import PrimaryButton from '@/components/common/PrimaryButton';
 
 
 const Sales = () => {

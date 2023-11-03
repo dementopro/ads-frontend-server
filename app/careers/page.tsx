@@ -2,7 +2,7 @@
 import CareerContainer from '@/components/careers/CareerContainer';
 
 const CareersPage = () => {
-  return <CareerContainer />;
+  return <CareerContainer />
 };
 
-export default CareersPage;
+export default CareersPage

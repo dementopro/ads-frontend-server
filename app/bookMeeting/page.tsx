@@ -1,7 +1,7 @@
 import ReactGATag from '@/components/ReactGATag';
 import DefaultLayout from '@/layout/default';
 import styles from './BookMeeting.module.css';
-import BookMeeting from '@/app/bookMeeting/BookMeeting';
+import BookMeeting from '@/components/bookMeeting/BookMeeting';
 
 export const metadata = {
   title: 'Book a meeting - AdsGency AI',

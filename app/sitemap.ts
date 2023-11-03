@@ -30,6 +30,9 @@ const links = [
     url: '/careers',
   },
   {
+    url: '/aboutUs',
+  },
+  {
     url: '/features',
   },
   {

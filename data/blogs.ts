@@ -69,8 +69,8 @@ export const Blogs: IBlog[] = [
     introductionText: `In today's fast-paced digital world, managing advertising campaigns can be a complex and time-consuming task. Traditional methods often fall short in delivering the desired results. Enter AdsGency AI, an AI-driven advertising platform designed to transform the way businesses approach advertising.`,
     publishDate: 'July 2023',
     publisher: 'Melody Jiang',
-    coverImage: '/blog/1/cover.svg',
-    authorImage: '/blog/author/Melody.svg',
+    coverImage: '/images/blog/blog1-cover.svg',
+    authorImage: '/images/blog/author/Melody.svg',
     layout: 'col',
     type: 'Modern'
   },
@@ -145,8 +145,8 @@ export const Blogs: IBlog[] = [
     introductionText: `Artificial Intelligence (AI) has become a game-changer in the advertising industry. From automating mundane tasks to providing deep insights into customer behavior, AI is revolutionizing how businesses approach advertising. This guide will explore how to leverage AI in advertising to achieve better results and efficiency.`,
     publishDate: 'March 2023',
     publisher: 'Bolbi Liu',
-    coverImage: '/blog/2/cover.svg',
-    authorImage: '/blog/author/Bolbi.svg',
+    coverImage: '/images/blog/blog2-cover.svg',
+    authorImage: '/images/blog/author/Bolbi.svg',
     layout: 'col',
     type: 'Latest'
   },
@@ -202,8 +202,8 @@ export const Blogs: IBlog[] = [
     introductionText: `Hey there, fellow human! If you're reading this, you're probably curious about how AI(Artificial Intelligence) is taking over the advertising world.And no, we're not talking about robots selling you the latest gadgets (although that would be cool). We're diving into the real, practical ways AI is changing the game in advertising.Buckle up!`,
     publishDate: 'June 2023',
     publisher: 'Ken Xu',
-    coverImage: '/blog/3/cover.svg',
-    authorImage: '/blog/author/Ken.svg',
+    coverImage: '/images/blog/blog3-cover.svg',
+    authorImage: '/images/blog/author/Ken.svg',
     layout: 'row',
     type: 'AI Fusion'
   }

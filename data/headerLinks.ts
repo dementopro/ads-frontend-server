@@ -20,10 +20,10 @@ export const headerLinks = [
                 label: 'Careers',
                 href: '/careers',
             },
-            // {
-            //     label: 'About',
-            //     href: '/',
-            // }
+            {
+                label: 'About',
+                href: '/aboutUs',
+            }
         ],
         url: '',
     },

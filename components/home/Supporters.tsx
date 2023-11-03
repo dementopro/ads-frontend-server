@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link';
-import { supportersLogos } from '@/data/supporters-logos';
+import { supportersLogos } from '@/data/supportersLogos';
 import Marquee from "react-fast-marquee";
 
 

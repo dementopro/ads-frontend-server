@@ -1,9 +1,9 @@
 
 'use client'
-import Footer from '@/components/home/Footer'
+import Footer from '@/components/common/Footer'
 import React from 'react'
 import { NextUIProvider } from "@nextui-org/react"
-import Header from '@/components/home/Header'
+import Header from '@/components/common/Header'
 
 // Define the DefaultLayout component
 const DefaultLayout = ({ children }: {

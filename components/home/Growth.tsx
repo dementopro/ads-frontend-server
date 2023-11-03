@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { growthLogos } from '@/data/growth-logos';
+import { growthLogos } from '@/data/growthLogos';
 import Marquee from "react-fast-marquee";
 
 

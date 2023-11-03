@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import PrimaryButton from '@/components/PrimaryButton'
-import { FiX } from 'react-icons/fi'
+import PrimaryButton from '@/components/common/PrimaryButton'
+import { FiX, FiCheck } from 'react-icons/fi'
 
 
 const Landing = () => {
@@ -48,12 +48,12 @@ const Landing = () => {
             <div className="mt-[10px] px-[8px] pt-[8px] pb-[16px] bg-[#27252D] rounded-[15px] shadow flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
               <div className="self-stretch justify-start items-start android:gap-[7px] ipadmini:gap-[7px] ipad:gap-[8px] desktop:gap-[8px] flex-row inline-flex">
                 <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-1.png" />
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-3.png" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/before-image-1.svg" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/before-image-3.svg" />
                 </div>
                 <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                  <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/image-2.png" />
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-4.png" />
+                  <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/before-image-2.svg" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/before-image-4.svg" />
                 </div>
               </div>
               <div className="flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
@@ -98,12 +98,12 @@ const Landing = () => {
             <div className="mt-[10px] android:px-[9px] android:pt-[9px] android:pb-[18px] ipadmini:px-[10px] ipadmini:pt-[10px] ipadmini:pb-[20px] ipad:px-[11px] ipad:pt-[11px] ipad:pb-[22px] desktop:px-[12px] desktop:pt-[12px] desktop:pb-[24px] bg-[#27252D] rounded-[18px] shadow flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
               <div className="justify-start items-start gap-[8px] flex-row inline-flex">
                 <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-5.png" />
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-6.png" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/after-image-1.svg" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/after-image-3.svg" />
                 </div>
                 <div className="w-full flex-col justify-start items-start gap-[8px] inline-flex">
-                  <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/image-7.png" />
-                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/image-8.png" />
+                  <img className="obejct-cover relative rounded-md" src="/images/home/landing-images/after-image-2.svg" />
+                  <img className="object-cover relative rounded-md" src="/images/home/landing-images/after-image-4.svg" />
                 </div>
               </div>
               <div className="flex-col justify-start items-center android:gap-[12px] ipadmini:gap-[15px] ipad:gap-[20px] desktop:gap-[25px] inline-flex">
@@ -112,11 +112,9 @@ const Landing = () => {
                 </div>
                 <div className='flex-col justifu-start items-start android:gap-[8px] ipadmini:gap-[10px] ipad:gap-[13px] desktop:gap-[15px] inline-flex'>
                   <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px]] inline-flex">
-                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
-                      <img
-                        title='cross'
-                        className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
-                        src={'/images/elements/correct.svg'} alt='arrow'
+                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#7D55FA] rounded-full">
+                      <FiCheck
+                        className='cursor-pointer text-white android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
                       />
                     </div>
                     <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[11px] desktop:text-[12px] font-medium">
@@ -124,11 +122,9 @@ const Landing = () => {
                     </div>
                   </div>
                   <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
-                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
-                      <img
-                        title='cross'
-                        className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
-                        src={'/images/elements/correct.svg'} alt='arrow'
+                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#7D55FA] rounded-full">
+                      <FiCheck
+                        className='cursor-pointer text-white android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
                       />
                     </div>
                     <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[11px] desktop:text-[12px] font-medium">
@@ -136,11 +132,9 @@ const Landing = () => {
                     </div>
                   </div>
                   <div className="justify-start items-center android:gap-[5px] ipadmini:gap-[7px] ipad:gap-[7px] desktop:gap-[8px] inline-flex">
-                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-violet-500 rounded-full">
-                      <img
-                        title='cross'
-                        className='cursor-pointer android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
-                        src={'/images/elements/correct.svg'} alt='arrow'
+                    <div className="android:p-[2px] ipadmini:p-[5px] ipad:p-[5px] desktop:p-[7px] relative bg-[#7D55FA] rounded-full">
+                      <FiCheck
+                        className='cursor-pointer text-white android:w-[14px] ipadmini:w-[18px] ipad:w-[18px] desktop:w-[20px] h-auto'
                       />
                     </div>
                     <div className="text-white android:text-[8px] ipadmini:text-[10px] ipad:text-[11px] desktop:text-[12px] font-medium">
