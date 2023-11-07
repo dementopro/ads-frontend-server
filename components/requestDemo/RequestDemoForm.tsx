@@ -155,7 +155,7 @@ const RequestDemoForm = () => {
           </Form.Item>
         </div>
 
-        <div className="w-full">
+{/*         <div className="w-full">
           <Form.Item
             className="w-full mb-0"
             name="phone_number"
@@ -173,7 +173,7 @@ const RequestDemoForm = () => {
               }}
             />
           </Form.Item>
-        </div>
+        </div> */}
 
         <div className="w-full inline-flex android:flex-col ipadmini:flex-row gap-[18px]">
           <Form.Item
