@@ -1,0 +1,6 @@
+.inputArea {
+    minHeight: '138px';
+    maxHeight: '138px';
+    overflowY: 'auto';
+    scrollbarColor: 'inherit';
+}

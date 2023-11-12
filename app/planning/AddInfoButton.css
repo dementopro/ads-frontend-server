@@ -1,0 +1,22 @@
+.main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  align-self: stretch;
+  margin-top: 24px;
+}
+
+.button-dev {
+  display: flex;
+  height: 44px;
+  padding: 6px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  background: #844FFF;
+}
+
+

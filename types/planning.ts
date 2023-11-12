@@ -17,3 +17,16 @@ export interface IPlanningHistory extends IResponse {
 }
 
 export type IPlan = Record<string, string[]>
+
+
+export interface CompnayDetailForm {
+  name: string;
+  website: string;
+  description: string;
+  product_description: string;
+  target_audice: string;
+  content_type: string;
+  customer_profile: string;
+  competitors: string;
+  business_objectives: string[];
+}

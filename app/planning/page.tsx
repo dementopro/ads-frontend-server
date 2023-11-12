@@ -1,15 +1,30 @@
-'use client'
-import ListPlanning from '@/app/planning/ListPlanning'
-import MyPlanning from '@/app/planning/MyPlanning'
-import NotEnoughtCredits from '@/components/NotEnoughtCredits'
-import ReactGATag from '@/components/ReactGATag'
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant'
-import AdminLayout from '@/layout/admin'
-import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning'
-import { message, Spin } from 'antd'
-import React, { ChangeEvent, useEffect, useState, useContext } from 'react'
+'use client';
+
+import Image from 'next/image';
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import ReactGATag from '@/components/ReactGATag';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
+import AdminLayout from '@/layout/admin';
+import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning';
+import { message, Spin } from 'antd';
+import React, { ChangeEvent, useEffect, useState, useContext } from 'react';
 import axios from '@/lib/axios';
-import { AccountContext } from '@/context/account'
+import { AccountContext } from '@/context/account';
+import HorizontalStepper from './HorizontalStepper';
+import AddCompany from './AddCompany';
+import ContentTypeSection from './ContentTypeSection';
+import { CompnayDetailForm } from '@/types/planning';
+import TargetAudience from './AdditionalDetails/TargetAudience';
+import CustomerProfile from './AdditionalDetails/CustomerProfile';
+import Competitors from './AdditionalDetails/Competitors';
+import AddInfoButton from './AddInfoButton';
+import HistoricalData from './AdditionalDetails/HistoricalData';
+import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
+import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
+import BackButton from './Recommendations/BackButton';
+import OnPage from './Recommendations/OnPage';
+import styles from './planning.module.css';
+import OffPage from './Recommendations/OffPage';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -18,103 +33,51 @@ async function getHistory(id?: number) {
     const res = await axios({
       url: `/api/planning/history?id=${id}`,
       method: 'GET',
-    })
+    });
     if (res.status !== 200) {
-      throw new Error('Failed to fetch data')
+      throw new Error('Failed to fetch data');
     }
-    const data: IPlanningHistory = res.data
+    const data: IPlanningHistory = res.data;
     if (data.status === SUCCESS_CODE) {
       if (id) {
-        return data.planning
+        return data.planning;
       }
-      return data.planning_list
+      return data.planning_list;
     } else {
-      console.log('data', data)
-      return []
+      console.log('data', data);
+      return [];
     }
   } catch (err) {
-    console.log("error: ", err);
+    console.log('error: ', err);
     return [];
   }
 }
 
 const PlanningPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [prompt, setPrompt] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [plan, setPlan] = useState<IPlan | null>(null)
-  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null)
-  const [planId, setPlanId] = useState<number | undefined>(undefined)
-  const [isLoading, setIsLoading] = useState(false)
-  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false)
-  const { updateAccount } = useContext(AccountContext)
+  const [prompt, setPrompt] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [plan, setPlan] = useState<IPlan | null>(null);
+  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null);
+  const [planId, setPlanId] = useState<number | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false);
+  const [fromData, setFromData] = useState<CompnayDetailForm>({
+    name: '',
+    website: '',
+    description: '',
+    product_description: '',
+    target_audice: '',
+    content_type: '',
+    customer_profile: '',
+    competitors: '',
+    business_objectives: [],
+  });
 
+  const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setPrompt(e.target.value)
-  }
-
-  useEffect(() => {
-    updateList()
-  }, [])
-
-  useEffect(() => {
-    if (planId) {
-      messageApi.loading('Loading plan...', 1)
-      getHistory(planId).then((res) => {
-        setPlan(res.plan)
-        messageApi.success('Load plan successfully')
-      })
-    }
-  }, [planId])
-
-
-  async function updateList() {
-    setIsLoading(true)
-    const res = await getHistory();
-    setPlanList(res || [])
-    setIsLoading(false)
-  }
-
-
-  async function onGenerate() {
-    if (!prompt) {
-      messageApi.error('Please enter your prompt')
-      return
-    }
-    try {
-      setIsGenerating(true)
-      messageApi.loading('Generating plan...', 1)
-      const res = await axios({
-        url: `/api/planning/generate?prompt=${prompt}`,
-        method: 'GET',
-      })
-      const data = res.data
-      if (res.status === 200) {
-        if (data.status === SUCCESS_CODE) {
-          console.log('data', data)
-          messageApi.success(data.msg || 'Generate successfully')
-          updateAccount()
-          setPlan(data.planning_obj[0].plan)
-          if (!planList) {
-            setPlanList([data.planning_obj[0]])
-          } else {
-            setPlanList([data.planning_obj[0], ...planList.slice(0, 4)])
-          }
-        } else if (data.status === NOT_ENOUGH_CREDIT) {
-          setShowNotEnoughCredits(true)
-        } else {
-          console.log('data', data)
-          messageApi.error(data.msg || 'Generate failed')
-        }
-      } else {
-        console.log('error: ', data)
-      }
-    } catch (error) {
-      console.log('error: ', error)
-    } finally {
-      setIsGenerating(false)
-    }
+    setPrompt(e.target.value);
   }
 
   return (
@@ -122,33 +85,138 @@ const PlanningPage = () => {
       {contextHolder}
       <ReactGATag
         fieldObject={{
-          hitType: "pageview",
-          page: "/planning",
-          title: "Planning - AdsGency AI"
+          hitType: 'pageview',
+          page: '/planning',
+          title: 'Planning - AdsGency AI',
         }}
       />
       <NotEnoughtCredits
         show={showNotEnoughCredits}
-        setShow={() => setShowNotEnoughCredits(false)} />
-      <section className='flex flex-col justify-center'>
-        <h1 className='mb-6 text-2xl font-medium text-white'>
-          Planning
-        </h1>
-        <Spin spinning={isGenerating} wrapperClassName='text-base'>
-          <div className='border rounded-lg border-[#3A3A3A] bg-[#1B1C21] px-4 py-[18px] flex flex-col gap-[10px] justify-between'>
-            <input type='text' value={prompt} onChange={handleChange} className='bg-transparent outline-none text-xl resize-none h-[30px]' placeholder='What are you selling?' />
-            <div className='flex flex-wrap items-center justify-end gap-5'>
-              <button onClick={onGenerate} className='bg-primary-purple hover:opacity-80 flex items-center justify-center w-[152px] h-[44px] rounded-lg truncate'>
-                {isGenerating ? 'Generating...' : 'Generate'}
-              </button>
-            </div>
-          </div>
-        </Spin>
-        <ListPlanning planList={planList} setPlanId={setPlanId} updateList={updateList} />
-        <MyPlanning plan={plan} />
-      </section>
-    </AdminLayout>
-  )
-}
+        setShow={() => setShowNotEnoughCredits(false)}
+      />
 
-export default PlanningPage
+      <Spin spinning={isGenerating} wrapperClassName="w-[932px] text-[15px]">
+        <section className="flex flex-col justify-center">
+          {activeButtonIndex == 0 && (
+            <div className="flex gap-x-[8px] mb-6">
+              <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
+                ✨
+              </p>
+              <h1 className="text-2xl w-[521px] h-[29px] font-medium text-white">
+                Get&nbsp;Started
+              </h1>
+            </div>
+          )}
+          {activeButtonIndex == 1 && (
+            <div className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
+              <div className="flex gap-x-[8px]">
+                <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
+                  📋
+                </p>
+                <h1 className="text-2xl w-[521px] h-[29px] font-medium text-white">
+                  Let’s gather some more information
+                </h1>
+              </div>
+              <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5 ">
+                <button
+                  className={`flex justify-center min-w-[169px] h-[44px] text-[15px] items-center gap-4 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
+                  `}
+                  disabled={true}
+                >
+                  {fromData?.content_type === 'Social Media' ? (
+                    <span className="w-[197px] h-[20px] text-[#ABABAB] text-[15px] not-italic font-medium leading-5">
+                      Content&nbsp;Type: {fromData?.content_type}
+                    </span>
+                  ) : (
+                    <span className="w-[137px] h-[20px] text-[#ABABAB] text-[15px] not-italic font-medium leading-5">
+                      Content&nbsp;Type: {fromData?.content_type.toUpperCase()}
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+          {activeButtonIndex == 2 && (
+            <div className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
+              <div className="flex">
+                <p className="w-[24px] h-[24px]">💡</p>
+                <h1 className="text-2xl font-medium text-white">
+                  Recommendations
+                </h1>
+              </div>
+              <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5 ">
+                <button
+                  className={`flex justify-center min-w-[169px] h-[44px] text-[15px] items-center gap-4 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
+                  `}
+                  disabled={true}
+                >
+                  Content type: {fromData?.content_type.toUpperCase()}
+                </button>
+              </div>
+            </div>
+          )}
+          <HorizontalStepper
+            activeButtonIndex={activeButtonIndex}
+            setActiveButtonIndex={setActiveButtonIndex}
+          />
+        </section>
+        {activeButtonIndex == 0 && (
+          <div className="flex flex-col text-[15px]">
+            <AddCompany />
+            <ContentTypeSection setFromData={setFromData} fromData={fromData} />
+            <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} />
+          </div>
+        )}
+        {activeButtonIndex == 1 && (
+          <div className="flex flex-col">
+            <TargetAudience />
+            <CustomerProfile />
+            <Competitors />
+            <HistoricalData />
+            <BusinessObjectives />
+            <SubmitAndBackButton
+              activeButtonIndex={activeButtonIndex}
+              setActiveButtonIndex={setActiveButtonIndex}
+            />
+          </div>
+        )}
+        {activeButtonIndex == 2 && (
+          <>
+            <div className={`${styles.onPageDiv}`}>
+              <button
+                className={`flex justify-center items-center gap-4 px-[26px] py-[10px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
+                  `}
+                disabled={true}
+              >
+                Recommendations - {fromData?.content_type.toUpperCase()}
+              </button>
+              <OnPage />
+              <OffPage />
+            </div>
+            <BackButton
+              activeButtonIndex={activeButtonIndex}
+              setActiveButtonIndex={setActiveButtonIndex}
+            />
+          </>
+        )}
+        <div className="flex float-right mt-[32px] gap-[10px]">
+          <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
+            Find a bug or encountering an error? Submit an issue report with
+            us&nbsp;
+            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline">
+              here
+            </button>
+          </p>
+          <Image
+            width={28}
+            height={28}
+            src={'/images/admin/plan/info.svg'}
+            alt="#"
+          />
+        </div>
+      </Spin>
+    </AdminLayout>
+  );
+};
+
+export default PlanningPage;
