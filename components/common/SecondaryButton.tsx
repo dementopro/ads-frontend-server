@@ -4,7 +4,7 @@ import { FiArrowRight } from 'react-icons/fi';
 
 interface ButtonProps {
   path: string;
-  id: string;
+  id?: string;
   text: string;
 }
 

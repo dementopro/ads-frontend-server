@@ -34,10 +34,10 @@ export const headerLinks = [
                 label: 'Blog',
                 href: '/blog',
             },
-            // {
-            //   label: 'News & Press',
-            //   href: '/',
-            // }
+            {
+              label: 'News & Press',
+              href: '/newsPress',
+            }
         ],
         url: '',
     }
