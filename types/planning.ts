@@ -34,4 +34,7 @@ export interface CompanyForm {
   companyName: string;
   websiteURL: string;
   description: string;
+  sellingDescription: string;
+  idealCustomerProfile: string;
+  targetAudience: string;
 }

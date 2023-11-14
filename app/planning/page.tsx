@@ -32,6 +32,7 @@ import styles from './planning.module.css';
 import OffPage from './Recommendations/OffPage';
 import { FormikHelpers, useFormik } from 'formik';
 import { CompanyValidate } from '@/lib/validate';
+import AddCompanyDetails from './AddCompanyDetails';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -88,6 +89,9 @@ const PlanningPage = () => {
       companyName: '',
       websiteURL: '',
       description: '',
+      sellingDescription: '',
+      idealCustomerProfile: '',
+      targetAudience: '',
     },
     onSubmit,
     validate: CompanyValidate,
@@ -185,6 +189,7 @@ const PlanningPage = () => {
         {activeButtonIndex == 0 && (
           <div className="flex flex-col text-[15px]">
             <AddCompany formik={formik} />
+            <AddCompanyDetails formik={formik} />
             <ContentTypeSection setFromData={setFromData} fromData={fromData} />
             <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} />
           </div>

@@ -11,7 +11,7 @@ interface AddCompanyProps {
 const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
   return (
     <div className={`${styles.div} `}>
-      <p className="w-[521px] text-[15px] text-[color:var(--primary-300,#FFFFFF)] not-italic font-medium leading-[normal]">
+      <p className="w-[521px] text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
         1.&nbsp;Add information about your company
       </p>
       <div className="w-[887] flex flex-row gap-x-[65px]">
@@ -22,7 +22,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
         >
           <label
             className="text-primary-gray mb-2 text-base"
-            htmlFor="CompanyName"
+            htmlFor="companyName"
           >
             *Company Name
           </label>
@@ -34,7 +34,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
                 ? '!border-rose-600'
                 : 'border-none'
             }`}
-            {...formik.getFieldProps('CompanyName')}
+            {...formik.getFieldProps('companyName')}
           />
         </div>
         <div

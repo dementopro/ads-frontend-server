@@ -25,7 +25,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
       </p>
       <div className="flex items-start gap-[32px] self-stretch h-[40px]">
         <button
-          className={`flex justify-center items-center text-[15px] w-[63px] h-[40px] rounded-lg px-[16px] py-[8px] rounded-lg border-solid ${
+          className={`flex justify-center items-center text-[15px] w-[63px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
             activeButtonIndex === 0
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
@@ -39,7 +39,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
           </span>
         </button>
         <button
-          className={`flex justify-center items-center text-[15px] w-[123px] h-[40px] rounded-lg px-[16px] py-[8px] rounded-lg border-solid ${
+          className={`flex justify-center items-center text-[15px] w-[123px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
             activeButtonIndex === 1
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'

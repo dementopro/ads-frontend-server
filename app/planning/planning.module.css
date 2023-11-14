@@ -1,46 +1,42 @@
 .div {
-    @apply flex flex-col text-[15px] min-h-[337px] font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl ;
-    background: #23252B;
+  @apply flex flex-col text-[15px]  font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
+  background: #23252b;
 }
 
 .mainDiv {
-    @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start pt-[18px] pb-[18px] pl-[24px] pr-[24px] rounded-xl ;
-    background: #23252B;
+  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start pt-[18px] pb-[18px] pl-[24px] pr-[24px] rounded-xl;
+  background: #23252b;
 }
 
 .onPageDiv {
-    @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl ;
-    background: #1B1C21;
-
+  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
+  background: #1b1c21;
 }
 
 .googleDiv {
-  @apply flex flex-col font-poppins items-start gap-8 p-[24px] mt-[16px] rounded-xl ;
-  background: #23252B;
+  @apply flex flex-col font-poppins items-start gap-8 p-[24px] mt-[16px] rounded-xl;
+  background: #23252b;
 }
 
-.target{
-  @apply flex flex-col font-poppins items-start gap-8 flex-[1_0_0] mt-[50px] self-stretch p-6 rounded-xl; 
-  background: #23252B;
+.target {
+  @apply flex flex-col font-poppins items-start gap-8 flex-[1_0_0] mt-[50px] self-stretch p-6 rounded-xl;
+  background: #23252b;
 }
 
 .input {
   @apply text-[#FFFFFF] font-poppins flex w-[411px] h-[60px] mt-[16px] flex-col justify-end items-end shrink-0 border pl-6 pr-0 pb-0 rounded-lg;
-  background: #1B1C21;
+  background: #1b1c21;
 }
 
 .input::placeholder {
- @apply w-[495px] h-[49px] font-poppins shrink-0 border text-[#ABABAB] text-base not-italic font-medium leading-6;
+  @apply w-[495px] h-[49px] font-poppins shrink-0 border text-[#ABABAB] text-base not-italic font-medium leading-6;
 }
 
-.description{
+.description {
   @apply text-[#FFFFFF] flex font-poppins mt-[24px] gap-2 flex-col justify-end items-end shrink-0 border pl-[24px] pt-[18px] pb-0 rounded-lg;
-  background: #1B1C21;
+  background: #1b1c21;
 }
 
 .description::placeholder {
   @apply w-[495px] font-poppins shrink-0 text-[#ABABAB] text-base not-italic font-medium leading-6;
 }
-
-
-

@@ -92,14 +92,13 @@ export function resetPasswordValidate(values: ResetPasswordForm) {
 
 export function CompanyValidate(values: CompanyForm) {
   const errors = {} as CompanyForm;
-  if (!values.companyName) {
-    errors.companyName = 'Company Name is required';
-  }
-  if (!values.websiteURL) {
-    errors.websiteURL = 'Website URL is required';
-  }
-  if (!values.description) {
-    errors.description = 'Company description is required';
-  }
+  
+  errors.companyName = values?.companyName ? values.companyName : 'Company Name is required';
+  errors.websiteURL = values?.websiteURL ? values.websiteURL : 'Website URL is required';
+  errors.description = values?.description ? values.description : 'Company description is required';
+  errors.sellingDescription = values?.sellingDescription ? values.sellingDescription : 'Company selling description is required';
+  errors.idealCustomerProfile = values?.idealCustomerProfile ? values.idealCustomerProfile : 'Ideal customer profile is required';
+  errors.targetAudience = values?.targetAudience ? values.targetAudience : 'Target Audience is required';
+
   return errors;
 }
