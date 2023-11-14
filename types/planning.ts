@@ -16,8 +16,7 @@ export interface IPlanningHistory extends IResponse {
   planning?: IPlanningObj;
 }
 
-export type IPlan = Record<string, string[]>
-
+export type IPlan = Record<string, string[]>;
 
 export interface CompnayDetailForm {
   name: string;
@@ -29,4 +28,10 @@ export interface CompnayDetailForm {
   customer_profile: string;
   competitors: string;
   business_objectives: string[];
+}
+
+export interface CompanyForm {
+  companyName: string;
+  websiteURL: string;
+  description: string;
 }

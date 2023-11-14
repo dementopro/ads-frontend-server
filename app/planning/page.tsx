@@ -5,7 +5,12 @@ import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
 import AdminLayout from '@/layout/admin';
-import { IPlan, IPlanningHistory, IPlanningObj } from '@/types/planning';
+import {
+  CompanyForm,
+  IPlan,
+  IPlanningHistory,
+  IPlanningObj,
+} from '@/types/planning';
 import { message, Spin } from 'antd';
 import React, { ChangeEvent, useEffect, useState, useContext } from 'react';
 import axios from '@/lib/axios';
@@ -25,6 +30,8 @@ import BackButton from './Recommendations/BackButton';
 import OnPage from './Recommendations/OnPage';
 import styles from './planning.module.css';
 import OffPage from './Recommendations/OffPage';
+import { FormikHelpers, useFormik } from 'formik';
+import { CompanyValidate } from '@/lib/validate';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -75,6 +82,21 @@ const PlanningPage = () => {
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
+
+  const formik = useFormik<CompanyForm>({
+    initialValues: {
+      companyName: '',
+      websiteURL: '',
+      description: '',
+    },
+    onSubmit,
+    validate: CompanyValidate,
+  });
+
+  async function onSubmit(
+    values: CompanyForm,
+    actions: FormikHelpers<CompanyForm>
+  ) {}
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value);
@@ -162,7 +184,7 @@ const PlanningPage = () => {
         </section>
         {activeButtonIndex == 0 && (
           <div className="flex flex-col text-[15px]">
-            <AddCompany />
+            <AddCompany formik={formik} />
             <ContentTypeSection setFromData={setFromData} fromData={fromData} />
             <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} />
           </div>
