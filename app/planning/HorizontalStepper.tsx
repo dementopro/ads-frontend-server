@@ -15,8 +15,8 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
     setActiveButtonIndex(index);
   };
   return (
-    <div className="flex w-[932px] flex-wrap font-poppins items-center gap-[32px]">
-      <div className="w-full ipad:h-[57px] px-[24px] bg-[#23252B] rounded-[12px] justify-start items-center android:gap-[32px] ipad:gap-[32px] android:flex-col ipadmini:flex-row inline-flex">
+    <div className="flex w-full flex-wrap font-poppins items-center gap-[32px]">
+      <div className="w-full ipad:h-[57px] px-[24px] bg-[#23252B] rounded-[12px] justify-between items-center android:gap-[32px] ipad:gap-[32px] android:flex-col ipadmini:flex-row inline-flex">
         <button
           className={`w-[273.33px] h-[41px] px-[10px] py-[8px] ${
             activeButtonIndex === 0 ? 'bg-[#35363A]' : ''

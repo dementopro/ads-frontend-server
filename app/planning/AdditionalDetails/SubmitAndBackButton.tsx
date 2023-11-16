@@ -1,15 +1,26 @@
 import React, { FC } from 'react';
 import styles from './SubmitAndBackButton.module.css';
+import { useFormik } from 'formik';
+import { CompanyForm } from '@/types/planning';
 
 interface SubmitAndBackButtonProps {
   activeButtonIndex: number;
   setActiveButtonIndex: (activeButtonIndex: number) => void; // Define setSearchQuery function with a searchQuery argument
+  formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
 
 const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   activeButtonIndex,
   setActiveButtonIndex,
+  formik
 }) => {
+  const handleSubmit = (index: number) => {
+    if(formik.errors.sellingDescription == "" && formik.errors.idealCustomerProfile == "" && formik.errors.targetAudience == ""&& formik.errors.competitors==""){      
+      setActiveButtonIndex(index);
+    }else{
+      console.log('Please fill rerequired field');
+    }
+  };
   return (
     <div className="flex items-center gap-10 self-stretch mt-[32px]">
       <p className="w-[619px] text-[color:var(--primary-50,#F7F7FF)] h-[18px] text-[15px] not-italic font-medium leading-[normal]">
@@ -26,7 +37,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
       </button>
       <button
         onClick={() => {
-          setActiveButtonIndex(activeButtonIndex + 1);
+          handleSubmit(activeButtonIndex + 1);
         }}
         className={`${styles.submit}`}
       >

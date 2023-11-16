@@ -9,37 +9,11 @@ interface AddCompanyDetailsProps {
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   return (
     <>
-      <div className={`${styles.div} `}>
-        <p className="w-[521px] text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-          2.&nbsp;What are you selling?
-        </p>
-        <div
-          className={`w-[887px] ${
-            true ? `max-h-[241px]` : `max-h-[141px]`
-          } flex flex-col`}
-        >
-          <textarea
-            className={`${styles.description} ${
-              formik.errors.sellingDescription &&
-              formik.touched.sellingDescription
-                ? '!border-rose-600'
-                : 'border-none'
-            } `}
-            placeholder="Enter your company selling description"
-            style={{
-              minHeight: '138px',
-              maxHeight: '138px',
-              overflowY: 'auto',
-              scrollbarColor: 'inherit',
-            }}
-            {...formik.getFieldProps('sellingDescription')}
-          />
-        </div>
-      </div>
-      <div className="flex w-[932px] justify-between">
-        <div className={`${styles.div} w-[48%]`}>
+      
+      {/* <div className="flex w-full justify-between"> */}
+        <div className={`${styles.div} w-full`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            3.&nbsp;Add your target audience
+            4.&nbsp;Add your target audience
           </p>
           <div
             className={` ${
@@ -60,9 +34,9 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             />
           </div>
         </div>
-        <div className={`${styles.div} w-[48%]`}>
+        <div className={`${styles.div} w-full`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            4.&nbsp;Add ideal customer profile
+            5.&nbsp;Add ideal customer profile
           </p>
           <div
             className={` ${
@@ -84,7 +58,31 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             />
           </div>
         </div>
-      </div>
+        <div className={`${styles.div} w-full`}>
+          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+            6.&nbsp;Add your competitors
+          </p>
+          <div
+            className={` ${
+              true ? `max-h-[241px]` : `max-h-[141px]`
+            } flex flex-col w-full`}
+          >
+            <textarea
+              className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
+                formik.errors.competitors &&
+                formik.touched.competitors
+                  ? '!border-rose-600'
+                  : 'border-none'
+              } w-full `}
+              placeholder="Who is currently ranking in your niche?"
+              style={{
+                height: '220px',
+              }}
+              {...formik.getFieldProps('competitors')}
+            />
+          </div>
+        </div>
+      {/* </div> */}
     </>
   );
 };

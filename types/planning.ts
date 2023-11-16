@@ -37,4 +37,5 @@ export interface CompanyForm {
   sellingDescription: string;
   idealCustomerProfile: string;
   targetAudience: string;
+  competitors: string;
 }

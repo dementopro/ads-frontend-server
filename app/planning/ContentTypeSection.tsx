@@ -20,8 +20,8 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
 
   return (
     <div className={`${styles.mainDiv} mt-[32px]`}>
-      <p className="w-[521px] text-[color:var(--primary-300,#FFFFFF)] h-[18px] mb-[24px] not-italic font-medium leading-[normal]">
-        2.&nbsp;Choose your content type
+      <p className="w-full text-[color:#B3ACFF] h-[18px] mb-[24px] not-italic font-medium leading-[normal]">
+        3.&nbsp;Choose your content type
       </p>
       <div className="flex items-start gap-[32px] self-stretch h-[40px]">
         <button

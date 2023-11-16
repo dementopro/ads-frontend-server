@@ -92,6 +92,7 @@ const PlanningPage = () => {
       sellingDescription: '',
       idealCustomerProfile: '',
       targetAudience: '',
+      competitors:''
     },
     onSubmit,
     validate: CompanyValidate,
@@ -121,14 +122,14 @@ const PlanningPage = () => {
         setShow={() => setShowNotEnoughCredits(false)}
       />
 
-      <Spin spinning={isGenerating} wrapperClassName="w-[932px] text-[15px]">
+      <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
         <section className="flex flex-col justify-center">
           {activeButtonIndex == 0 && (
             <div className="flex gap-x-[8px] mb-6">
               <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
                 ✨
               </p>
-              <h1 className="text-2xl w-[521px] h-[29px] font-medium text-white">
+              <h1 className="text-2xl w-full h-[29px] font-medium text-white">
                 Get&nbsp;Started
               </h1>
             </div>
@@ -139,7 +140,7 @@ const PlanningPage = () => {
                 <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
                   📋
                 </p>
-                <h1 className="text-2xl w-[521px] h-[29px] font-medium text-white">
+                <h1 className="text-2xl w-full h-[29px] font-medium text-white">
                   Let’s gather some more information
                 </h1>
               </div>
@@ -189,21 +190,23 @@ const PlanningPage = () => {
         {activeButtonIndex == 0 && (
           <div className="flex flex-col text-[15px]">
             <AddCompany formik={formik} />
-            <AddCompanyDetails formik={formik} />
+             {/* <AddCompanyDetails formik={formik} /> */}
             <ContentTypeSection setFromData={setFromData} fromData={fromData} />
-            <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} />
+            <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} formik={formik}/>
           </div>
         )}
         {activeButtonIndex == 1 && (
           <div className="flex flex-col">
-            <TargetAudience />
-            <CustomerProfile />
-            <Competitors />
+            {/* <TargetAudience />
+            <CustomerProfile /> */}
+             <AddCompanyDetails formik={formik} />
+            {/* <Competitors /> */}
             <HistoricalData />
             <BusinessObjectives />
             <SubmitAndBackButton
               activeButtonIndex={activeButtonIndex}
               setActiveButtonIndex={setActiveButtonIndex}
+              formik={formik}
             />
           </div>
         )}

@@ -2,7 +2,10 @@
   @apply flex flex-col text-[15px]  font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
   background: #23252b;
 }
-
+.container {
+  @apply w-[80%] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
+  background: #23252b;
+}
 .mainDiv {
   @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start pt-[18px] pb-[18px] pl-[24px] pr-[24px] rounded-xl;
   background: #23252b;
@@ -24,12 +27,12 @@
 }
 
 .input {
-  @apply text-[#FFFFFF] font-poppins flex w-[411px] h-[60px] mt-[16px] flex-col justify-end items-end shrink-0 border pl-6 pr-0 pb-0 rounded-lg;
+  @apply text-[#FFFFFF] font-poppins flex w-full h-[60px] mt-[16px] flex-col justify-end items-end shrink-0 border pl-6 pr-0 pb-0 rounded-lg;
   background: #1b1c21;
 }
 
 .input::placeholder {
-  @apply w-[495px] h-[49px] font-poppins shrink-0 border text-[#ABABAB] text-base not-italic font-medium leading-6;
+  @apply w-full h-[49px] font-poppins shrink-0 border text-[#ABABAB] text-base not-italic font-medium leading-6;
 }
 
 .description {
@@ -38,5 +41,5 @@
 }
 
 .description::placeholder {
-  @apply w-[495px] font-poppins shrink-0 text-[#ABABAB] text-base not-italic font-medium leading-6;
+  @apply w-full font-poppins shrink-0 text-[#ABABAB] text-base not-italic font-medium leading-6;
 }

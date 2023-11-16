@@ -10,13 +10,14 @@ interface AddCompanyProps {
 
 const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
   return (
-    <div className={`${styles.div} `}>
-      <p className="w-[521px] text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+    <>
+    <div className={`${styles.div} w-full `}>
+      <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal] mb-6">
         1.&nbsp;Add information about your company
       </p>
-      <div className="w-[887] flex flex-row gap-x-[65px]">
+      <div className="w-full flex flex-row gap-x-[65px]">
         <div
-          className={`w-[411px] flex flex-col ${
+          className={`w-[50%] flex flex-col ${
             true ? 'h-[128px]' : 'h-[94px]'
           }`}
         >
@@ -38,7 +39,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
           />
         </div>
         <div
-          className={`w-[411px] flex flex-col ${
+          className={`w-[50%] flex flex-col ${
             false ? 'h-[128px]' : 'h-[94px]'
           }`}
         >
@@ -61,13 +62,13 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
         </div>
       </div>
       <div
-        className={`w-[887px] ${
+        className={` ${
           true ? `max-h-[241px]` : `max-h-[141px]`
-        } flex flex-col`}
+        } flex flex-col w-full`}
       >
         <label
           htmlFor="description"
-          className="w-[521px] h-[18px] text-[15px] text-base not-italic font-medium leading-[normal] text-[color:var(--primary-300,#ABABAB)]"
+          className=" h-[18px] text-[15px] text-base not-italic font-medium leading-[normal] text-[color:var(--primary-300,#ABABAB)]"
         >
           *Company Description
         </label>
@@ -88,7 +89,35 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
         />
       </div>
     </div>
-    // </div>
+    <div className={`${styles.div} `}>
+        <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+          2.&nbsp;What are you selling?
+        </p>
+        <div
+          className={`w-full ${
+            true ? `max-h-[241px]` : `max-h-[141px]`
+          } flex flex-col`}
+        >
+          <textarea
+            className={`${styles.description} ${
+              formik.errors.sellingDescription &&
+              formik.touched.sellingDescription
+                ? '!border-rose-600'
+                : 'border-none'
+            } `}
+            placeholder="Enter your company selling description"
+            style={{
+              minHeight: '138px',
+              maxHeight: '138px',
+              overflowY: 'auto',
+              scrollbarColor: 'inherit',
+            }}
+            {...formik.getFieldProps('sellingDescription')}
+          />
+        </div>
+      </div>
+    </>
+   
   );
 };
 

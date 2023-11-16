@@ -6,7 +6,7 @@ const HistoricalData = () => {
   return (
     <div className={`${styles.googleDiv}`}>
       <div className="flex flex-col w-[521px] text-[15px] h-[43px] gap-[8px]">
-        <p className="w-[521px] text-[15px] h-[18px] text-[color:var(--primary-300,#FFFF)]">
+        <p className="w-[521px] text-[15px] h-[18px] text-[color:#B3ACFF]">
           6.&nbsp;Connect your historical data (optional)
         </p>
         <p className="w-[521px] text-[15px] h-[17px] text-[color:var(--primary-300,#ABABAB)]">

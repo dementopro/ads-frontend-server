@@ -5,11 +5,11 @@ import { Input } from 'antd';
 const BusinessObjectives = () => {
   return (
     <div className={`${styles.mainDiv} gap-[24px] mt-[16px]`}>
-      <p className="w-[521px] text-[15px] h-[18px] text-[color:var(--primary-300,#FFFF)]">
-        7.&nbsp;Choose your business objectives
+      <p className="w-[521px] text-[15px] h-[18px] text-[color:#B3ACFF]">
+        8.&nbsp;Choose your business objectives
       </p>
       <div className={`gap-[16px] flex flex-col items-start self-stretch`}>
-        <div className="flex gap-x-[16px]">
+        <div className="flex gap-x-[16px] gap-y-[16px] flex-wrap">
           <button
             className={`inline-flex justify-center items-center gap-4 w-[137px] h-[40px] px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]  ${
               false
@@ -68,8 +68,6 @@ const BusinessObjectives = () => {
               Expand&nbsp;SEO&nbsp;Footprint
             </label>
           </button>
-        </div>
-        <div className="flex gap-x-[16px]">
           <button
             className={`inline-flex justify-center items-center gap-4 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]  ${
               false

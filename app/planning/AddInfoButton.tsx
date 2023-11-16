@@ -1,13 +1,20 @@
 import React, { FC } from 'react';
 import './AddInfoButton.css';
+import { useFormik } from 'formik';
+import { CompanyForm } from '@/types/planning';
 
 interface AddInfoButtonProps {
   setActiveButtonIndex: (activeButtonIndex: number) => void; // Define setSearchQuery function with a searchQuery argument
+  formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
 
-const AddInfoButton: FC<AddInfoButtonProps> = ({ setActiveButtonIndex }) => {
+const AddInfoButton: FC<AddInfoButtonProps> = ({ setActiveButtonIndex ,formik}) => {
   const handleButtonClick = (index: number) => {
-    setActiveButtonIndex(index);
+    if(formik.errors.companyName == "" && formik.errors.websiteURL == ""&& formik.errors.description==""){      
+      setActiveButtonIndex(index);
+    }else{
+      console.log('Please fill rerequired field');
+    }
   };
   return (
     <div className="main-div">
