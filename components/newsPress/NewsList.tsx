@@ -38,7 +38,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
           <div className="text-[#D0D0D0] android:text-[14px] ipad:text-[16px] font-normal font-open-sans leading-[22px]">
             {news.description}
           </div>
-          <SecondaryButton path={news.link} text="Read" />
+          <SecondaryButton path={news.link} text="Read" target="_blank" id="" />
         </div>
       </div>
     </>
@@ -48,6 +48,11 @@ const NewsCard = ({ news }: NewsCardProps) => {
 const NewsList = () => {
   const largeNews = news.filter((news) => news.size === 'large');
   const smallNews = news.filter((news) => news.size === 'small');
+
+  const id2 = news.filter((news) => news.id === '2');
+  const id1 = news.filter((news) => news.id === '1');
+  const id3 = news.filter((news) => news.id === '3');
+
   return (
     <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[16px] ipad:my-[32px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
@@ -55,16 +60,38 @@ const NewsList = () => {
           Latest
         </div>
       </div>
-      <div className="w-full flex flex-col justify-start items-start gap-[32px] inline-flex">
-        {largeNews.map((news) => (
-          <NewsCard news={news} key={news.id} />
-        ))}
+      <div className='android:block ipad:hidden'>
+        <div className="w-full flex flex-col justify-start items-start gap-[32px] inline-flex">
+          {largeNews.map((news) => (
+            <NewsCard news={news} key={news.id} />
+          ))}
+        </div>
+
+        <div className="w-full flex android:flex-col ipadmini:flex-row justify-start items-start gap-[32px] inline-flex">
+          {smallNews.map((news) => (
+            <NewsCard news={news} key={news.id} />
+          ))}
+        </div>
       </div>
 
-      <div className="w-full flex android:flex-col ipadmini:flex-row justify-center items-center gap-[32px] inline-flex">
-        {smallNews.map((news) => (
-          <NewsCard news={news} key={news.id} />
-        ))}
+      <div className='android:hidden ipad:block'>
+        <div className="w-full flex flex-row justify-start items-start gap-[32px] inline-flex">
+          {id2.map((news) => (
+            <div className='w-1/4'>
+              <NewsCard news={news} key={news.id} />
+            </div>
+          ))}
+          {id1.map((news) => (
+            <div className='w-2/4'>
+              <NewsCard news={news} key={news.id} />
+            </div>
+          ))}
+          {id3.map((news) => (
+            <div className='w-1/4'>
+              <NewsCard news={news} key={news.id} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
