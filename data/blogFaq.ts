@@ -1,17 +1,17 @@
 export const blogFaq = [
   {
-    question: 'How do I subscribe?',
+    question: 'How can AdsGency AI benefit my business?',
     answer:
-      'Simply hit the ‘SIGN UP’ button and join our mailing list for the latest updates.',
+      `AdsGency AI can benefit your business by improving ad performance through AI-driven optimizations and increasing your ROI. You'll save time, reduce costs, and achieve more efficient advertising campaigns.`,
   },
   {
-    question: 'How often are blogs posted?',
+    question: 'How can I connect with Adsgency AI for my business questions?',
     answer:
-      'Our AI constantly monitors the AI landscape and shares new insights as they emerge.',
+      `You can request a personalized time slot by reaching out to our team through the "Contact Us" page. We'll be happy to schedule a meeting and provide insights into how Adsgency AI can benefit your specific business.`,
   },
   {
-    question: 'Can I contribute my ideas?',
+    question: 'What topics are covered in the Adsgency AI blog?',
     answer:
-      'Absolutely! We welcome contributions from the AI community. Reach out to us with your proposals.',
+      `In our blog, we cover a wide range of topics related to digital advertising, marketing automation, AI-driven optimizations, industry trends, and best practices. Our goal is to provide valuable insights to help you succeed in the world of online advertising.`,
   },
-];
+]

@@ -4,7 +4,7 @@ import styles from './register.module.css'
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import { PaymentForm, RegisterForm } from '@/types/auth'
-import { paymentValidate, registerValidate } from '@/lib/validate'
+import { paymentValidate, registerValidate, isValidEmail } from '@/lib/validate'
 import { useRouter } from 'next/navigation'
 import { DatePicker, Modal, message } from 'antd'
 import { SUCCESS_CODE } from '@/data/constant'
@@ -129,6 +129,10 @@ const RegisterForm = () => {
       if (!email) {
         messageApi.error('Please enter your email')
         return
+      }
+      if (!isValidEmail(email)) {
+        messageApi.error('Invalid email format');
+        return;
       }
       setIsSending(true)
       messageApi.loading('Sending verification code...')

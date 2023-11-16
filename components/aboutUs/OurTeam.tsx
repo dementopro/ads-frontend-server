@@ -16,13 +16,13 @@ const OurTeam = () => {
                 </div>
             </div>
 
-            <div className="android:w-full ipadmini:w-[532px] h-auto flex android:flex-col ipadmini:flex-row gap-[32px] justify-center items-center">
+            <div className="w-full h-auto flex android:flex-col ipad:flex-row gap-[32px] justify-center items-center">
                 {ourTeam.map((employee, index) => (
-                    <div key={index} className="w-full flex flex-col gap-[20px] items-center">
+                    <div key={index} className="w-[250px] flex flex-col gap-[20px] items-center">
                         <Image
                             width={250}
                             height={250}
-                            className='android:w-full ipadmini:w-[250px] ipadmini:h-[250px] object-cover rounded-[8px] border-4 border-[#9D93FF] border-opacity-60'
+                            className='w-full h-[250px] object-cover rounded-[8px] border-4 border-[#7D55FA] border-opacity-60'
                             src={employee.image} alt='logo'
                         />
                         <div className="w-full flex flex-col gap-[10px] items-start justify-center">

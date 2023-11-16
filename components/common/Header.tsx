@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Banner from '@/components/Announcement/Banner'
+import Banner from '@/components/announcement/Banner'
 import PrimaryButton from '@/components/common/PrimaryButton'
 import { useState } from 'react';
 import { headerLinks } from '@/data/headerLinks'
@@ -25,7 +25,7 @@ const Header = () => {
   const mobileMenuTop = isMobileMenuOpen ? 'translate-y-[95px]' : 'translate-y-[-200px]';
   return (
     <>
-      <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:my-[0px] ipad:my-[82px] ipad:rounded-[25px] relative bg-[#15161A]">
+      <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:mt-[0px] ipad:mt-[82px] ipad:rounded-[25px] relative bg-[#15161A]">
         <Banner />
         <MobileMenu translate={mobileMenuTop} />
         <div className="w-full android:h-[95px] ipad:h-[70px] relative px-[32px] bg-[#15161A] ipad:rounded-[25px] shadow justify-center items-center ipad:gap-[32px] desktop:gap-[32px] inline-flex z-40">
@@ -49,7 +49,7 @@ const Header = () => {
             />
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex flex-grow justify-start items-center gap-4">
-            <div className="justify-center items-center ipad:gap-[25px] desktop:gap-[32px] flex text-white text-[15px] font-medium">
+            <div className="justify-center items-center ipad:gap-[25px] desktop:gap-[32px] flex text-white text-[15px]">
               {headerLinks.map((link, index) => (
                 link.links.length === 0 ? ( // Check if links array is not empty
                   <Link key={index} href={link.url} className="hover:text-[#9D93FF]">

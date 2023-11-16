@@ -48,11 +48,6 @@ const ContactUsContainer = () => {
                         </div>
                     </div>
                 </div>
-                <PrimaryButton
-                    target="_self"
-                    href="/requestDemo"
-                    text="Request Demo"
-                />
             </div>
             <div className="w-full">
                 <ContactUsForm />

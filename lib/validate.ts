@@ -18,8 +18,11 @@ export function registerValidate(values: RegisterForm) {
   if (!values.username) {
     errors.username = 'Username is required'
   }
+  // Email format validation
   if (!values.email) {
-    errors.email = 'Email is required'
+    errors.email = 'Email is required';
+  } else if (!isValidEmail(values.email)) {
+    errors.email = 'Invalid email format';
   }
   if (!values.password) {
     errors.password = 'Password is required'
@@ -28,6 +31,13 @@ export function registerValidate(values: RegisterForm) {
     errors.verification_code = 'Verification code is required'
   }
   return errors
+}
+
+// Function to check email format
+export function isValidEmail(email: string): boolean {
+  // Regular expression for basic email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 export async function paymentValidate(values: PaymentForm) {
@@ -48,10 +58,10 @@ export async function paymentValidate(values: PaymentForm) {
   // Convert the response to JSON
   const responseData = response.data;
 
-// Check the isValid property
+  // Check the isValid property
   if (!responseData.isValid) {
     errors.card_number = 'Card number is invalid'
-  } 
+  }
   if (!values.cvc) {
     errors.cvc = 'CVC is required'
   }
@@ -61,12 +71,12 @@ export async function paymentValidate(values: PaymentForm) {
   const date = new Date();
   let month = ("0" + (date.getMonth() + 1)).slice(-2)
   let year = date.getFullYear();
-  const expYear = parseInt(values.expiration.slice(0,4), 10);
-  const expMonth = parseInt(values.expiration.slice(5,7), 10);
-  let monthNum =  parseInt(month, 10);
+  const expYear = parseInt(values.expiration.slice(0, 4), 10);
+  const expMonth = parseInt(values.expiration.slice(5, 7), 10);
+  let monthNum = parseInt(month, 10);
   if (expYear < year || (expYear === year && expMonth < monthNum)) {
-      errors.expiration = 'Expiration is invalid';
-      console.log('error!');
+    errors.expiration = 'Expiration is invalid';
+    console.log('error!');
   }
   if (!values.expiration) {
     errors.expiration = 'Expiration is required'

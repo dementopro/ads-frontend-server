@@ -129,3 +129,13 @@ body {
 .ant-slider-track {
   @apply !bg-primary-purple;
 }
+
+.ant-modal-wrap {
+ padding: 100px;
+}
+.ant-modal-content {
+  background: radial-gradient(at left top, #3D296D, #000000 70%);
+}
+.ant-modal-close {
+  color: white !important;
+}

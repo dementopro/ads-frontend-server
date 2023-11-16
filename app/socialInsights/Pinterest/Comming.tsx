@@ -17,7 +17,7 @@ const Comming = () => {
       <Image src='/images/socialInsights/man.svg' alt='man' width={204} height={176} />
       <div
         className='text-primary-gray flex items-center justify-center'>
-        Dashboard is comming soon!
+        Dashboard is coming soon!
       </div>
     </div>
   )
