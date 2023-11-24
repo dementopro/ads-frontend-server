@@ -7,6 +7,7 @@ import Image from 'next/image';
 interface AddCompanyDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
+
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   return (
     <>

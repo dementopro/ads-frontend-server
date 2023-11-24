@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-
 import { CompanyDetailForm } from '@/types/planning';
 import styles from './planning.module.css';
 

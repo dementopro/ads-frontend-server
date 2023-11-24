@@ -56,7 +56,10 @@ export const SeoAnalyzerContext = createContext<{
     competitors:'',
     business_objectives: [],
     content_type: '',
-    product_description: ''
+    product_description: '',
+    email: '',
+    marketing_template: '',
+    schedule: []
   },
   emailInstruction: {
     email_options: [],
@@ -89,7 +92,10 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     competitors:'',
     business_objectives: [],
     content_type: '',
-    product_description: ''
+    product_description: '',
+    email: '',
+    marketing_template: '',
+    schedule: []
   })
   const [emailInstruction, setEmailInstruction] = useState<EmailInstruction>({
     email_options: [],

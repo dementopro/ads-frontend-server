@@ -78,6 +78,55 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .finally(() => {
           setIsLoading(false);
         });
+    } else if (
+      formData.content_type.toLowerCase() == 'email marketing' &&
+      formik.errors.idealCustomerProfile == '' &&
+      formik.errors.targetAudience == '' &&
+      formik.errors.email == '' &&
+      formik.errors.marketing_template == ''
+    ) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        business_objectives: formData.business_objectives,
+        competitors: formik.values.companyName,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description,
+        product_description: formik.values.sellingDescription,
+        target_audice: formik.values.targetAudience,
+        website: formik.values.websiteURL,
+        email: formik.values.email,
+        marketing_template: formik.values.marketing_template,
+        schedule: formik.values.schedule
+      });
+      axios
+        .post('/fapi/email_marketing_instruction_api', {
+          company_name: formik.values.companyName,
+          company_description: formik.values.description,
+          target_audience: formik.values.targetAudience,
+          customer_profile: formik.values.idealCustomerProfile,
+          business_objectives: formData.business_objectives.join(','),
+          website_url: formik.values.websiteURL,
+          email_address: formik.values.email,
+          email_template: formik.values.marketing_template
+        })
+        .then((res) => {
+          console.log('Response from /email_marketing_instruction_api:', res.data);
+          if (res.data.status == true) {
+            const instruction = JSON.parse(res.data.instruction);
+            setEmailInstruction(instruction);
+            setActiveButtonIndex(index);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /email_marketing_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       console.log('Please fill rerequired field', formik.errors);
     }

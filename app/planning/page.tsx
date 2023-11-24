@@ -6,11 +6,11 @@ import {
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
+import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EventMarketingDetails';
 import { FormikHelpers, useFormik } from 'formik';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Spin, message } from 'antd';
-
 import { AccountContext } from '@/context/account';
 import AddCompany from './AddCompany';
 import AddCompanyDetails from './AddCompanyDetails';
@@ -23,6 +23,7 @@ import { CompanyValidate } from '@/lib/validate';
 import Competitors from './AdditionalDetails/Competitors';
 import ContentTypeSection from './ContentTypeSection';
 import CustomerProfile from './AdditionalDetails/CustomerProfile';
+import GmailRecommendation from './Recommendations/Gmail';
 import HistoricalData from './AdditionalDetails/HistoricalData';
 import HorizontalStepper from './HorizontalStepper';
 import Image from 'next/image';
@@ -69,18 +70,20 @@ type TabButtonProps = {
   onClick?: () => void;
 };
 
-export function Button({ children, isActivated, onClick }: TabButtonProps) {
+export const Button = ({ children, isActivated, onClick }: TabButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`px-4 h-12 flex items-center justify-center gap-2 text-normal rounded-t-lg hover:bg-[#35363A] border-b-2 ${isActivated
+      className={`px-4 h-12 flex items-center justify-center gap-2 text-normal rounded-t-lg hover:bg-[#35363A] border-b-2 ${
+        isActivated
           ? 'text-white border-primary-purple bg-[#35363A]'
-          : 'border-[#989899] text-primary-gray'}`}
+          : 'border-[#989899] text-primary-gray'
+      }`}
     >
       {children}
     </button>
   );
-}
+};
 
 const PlanningPage = () => {
   const searchParams = useSearchParams();
@@ -102,6 +105,9 @@ const PlanningPage = () => {
     customer_profile: '',
     competitors: '',
     business_objectives: [],
+    email: '',
+    marketing_template: '',
+    schedule: [],
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
@@ -116,6 +122,9 @@ const PlanningPage = () => {
       idealCustomerProfile: '',
       targetAudience: '',
       competitors: '',
+      email: '',
+      marketing_template: '',
+      schedule: [],
     },
     onSubmit,
     validate: CompanyValidate,
@@ -228,11 +237,7 @@ const PlanningPage = () => {
         {activeButtonIndex == 1 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <div className="flex flex-col">
-              {/* <TargetAudience />
-            <CustomerProfile /> */}
               <AddCompanyDetails formik={formik} />
-              {/* <Competitors /> */}
-              {/* <HistoricalData /> */}
               <BusinessObjectives
                 title="7. Choose your business objectives"
                 options={[
@@ -256,6 +261,33 @@ const PlanningPage = () => {
             </div>
           ) : (
             <>
+              <EmailMarketingDetails
+                activeTab={activeSeoType}
+                setActiveTab={setActiveSeoType}
+                formData={formData}
+                formik={formik}
+              />
+              <BusinessObjectives
+                title="8. Choose your business objectives"
+                options={[
+                  'Lead Generation',
+                  'Customer Acquisition',
+                  'Customer Retention',
+                  'Brand Awareness',
+                  'Product Launches',
+                  'Event Promotions',
+                  'Sales Promotions',
+                  'Feedback & Surveys',
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
             </>
           ))}
         {activeButtonIndex == 2 &&
@@ -299,6 +331,23 @@ const PlanningPage = () => {
             </>
           ) : (
             <>
+              <div className="flex items-center mt-8">
+                {tabsList.map((tab, i) => (
+                  <Button
+                    key={`tab_${i}`}
+                    isActivated={activeSeoType == i}
+                    onClick={() => setActiveSeoType(i)}
+                  >
+                    <Image src={tab.icon} alt={tab.title} width={24} height={24} />
+                    <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+                  </Button>
+                ))}
+              </div>
+              {activeSeoType == 0 ? <GmailRecommendation /> : <GmailRecommendation />}
+              <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
             </>
           ))}
         <div className="flex float-right mt-[32px] gap-[10px]">

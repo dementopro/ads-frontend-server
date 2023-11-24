@@ -109,8 +109,10 @@ export function CompanyValidate(values: CompanyForm) {
   errors.description = values?.description ? '' : 'Company description is required';
   errors.sellingDescription = values?.sellingDescription ? '' : 'Company selling description is required';
   errors.idealCustomerProfile = values?.idealCustomerProfile ? '' : 'Ideal customer profile is required';
+  errors.competitors = values?.competitors ? '' : 'Competitor is required';
   errors.targetAudience = values?.targetAudience ? '' : 'Target Audience is required';
-  errors.competitors = values?.competitors ? '' : 'Competitors is required';
+  errors.email = values?.email ? '' : 'Email is required';
+  errors.marketing_template = values?.marketing_template ? '' : 'Marketing Template is required';
 
   return errors;
 }

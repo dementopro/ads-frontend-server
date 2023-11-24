@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-
 import { CompanyDetailForm } from '@/types/planning';
 import { Input } from 'antd';
 import styles from '@/./app/planning/planning.module.css';

@@ -28,6 +28,9 @@ export interface CompanyDetailForm {
   customer_profile: string;
   competitors: string;
   business_objectives: string[];
+  email: string | undefined;
+  marketing_template: string | undefined;
+  schedule: Array<any> | undefined;
 }
 
 export interface CompanyForm {
@@ -38,4 +41,7 @@ export interface CompanyForm {
   idealCustomerProfile: string;
   targetAudience: string;
   competitors: string;
+  email: string;
+  marketing_template: string;
+  schedule: any[];
 }
