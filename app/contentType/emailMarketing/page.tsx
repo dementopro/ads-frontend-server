@@ -13,7 +13,7 @@ import { Spin, message } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AccountContext } from '@/context/account';
 import AdminLayout from '@/layout/admin';
-import { Button } from '@/app/planning/page';
+import Button from '@/app/planning/TabButton';
 import GmailMarketing from './Gmail';
 import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';

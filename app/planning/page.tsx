@@ -36,6 +36,7 @@ import TargetAudience from './AdditionalDetails/TargetAudience';
 import axios from '@/lib/axios';
 import styles from './planning.module.css';
 import { useSearchParams } from 'next/navigation';
+import Button from './TabButton';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -63,27 +64,6 @@ async function getHistory(id?: number) {
     return [];
   }
 }
-
-type TabButtonProps = {
-  children: React.ReactNode;
-  isActivated?: boolean;
-  onClick?: () => void;
-};
-
-export const Button = ({ children, isActivated, onClick }: TabButtonProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 h-12 flex items-center justify-center gap-2 text-normal rounded-t-lg hover:bg-[#35363A] border-b-2 ${
-        isActivated
-          ? 'text-white border-primary-purple bg-[#35363A]'
-          : 'border-[#989899] text-primary-gray'
-      }`}
-    >
-      {children}
-    </button>
-  );
-};
 
 const PlanningPage = () => {
   const searchParams = useSearchParams();

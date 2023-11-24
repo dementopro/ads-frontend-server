@@ -1,7 +1,7 @@
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import React, { FC } from 'react';
 
-import { Button } from '../page';
+import Button from '../TabButton';
 import Image from 'next/image';
 import styles from '../planning.module.css';
 import { useFormik } from 'formik';
@@ -86,7 +86,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({ formData, formi
             </div>
           </div>
         </div>
-        
+
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
             4.&nbsp;Enter your email marketing templates

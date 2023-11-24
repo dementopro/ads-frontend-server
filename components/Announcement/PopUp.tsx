@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PrimaryButton from '@/components/common/PrimaryButton';
 import { FiX } from 'react-icons/fi';
+import Image from 'next/image';
 
 const Announcement = () => {
   const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
@@ -58,9 +59,10 @@ const Announcement = () => {
                   text="See Details Here"
                 />
               </div>
-              <img
+              <Image
                 className="android:w-full ipad:w-[290px] h-auto android:rounded-[6px] ipad:rounded-[12px]"
                 src="/images/home/announcement.png"
+                alt="Announcement"
               />
             </div>
           </div>
