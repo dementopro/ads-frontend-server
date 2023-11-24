@@ -18,9 +18,7 @@ const TheResponsiveBar = ({ data, xLabel, yLabel }: TheResponsiveBarProps) => {
     <>
       <ResponsiveBar
         theme={{
-          text: {
-            color: '#eee',
-          },
+          textColor: '#eee',
           tooltip: {
             container: {
               background: '#222222',
