@@ -1,6 +1,7 @@
 import { LoginForm, PaymentForm, RegisterForm, ResetPasswordForm } from "@/types/auth"
-import axios from '@/lib/axios';
+
 import { CompanyForm } from "@/types/planning";
+import axios from '@/lib/axios';
 
 export function loginValidate(values: LoginForm) {
   const errors = {} as LoginForm
@@ -102,7 +103,7 @@ export function resetPasswordValidate(values: ResetPasswordForm) {
 
 export function CompanyValidate(values: CompanyForm) {
   const errors = {} as CompanyForm;
-  
+
   errors.companyName = values?.companyName ? '' : 'Company Name is required';
   errors.websiteURL = values?.websiteURL ? '' : 'Website URL is required';
   errors.description = values?.description ? '' : 'Company description is required';

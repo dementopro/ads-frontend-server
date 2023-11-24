@@ -1,45 +1,54 @@
-import React from 'react';
-import styles from '@/./app/planning/planning.module.css';
+import React, { useEffect } from 'react';
+
 import { Input } from 'antd';
+import styles from '@/./app/planning/planning.module.css';
+import { useRouter } from 'next/navigation';
+import { useSeoAnalyzerContext } from '@/context/seo';
 
 const OffPage = () => {
+  const { offpage } = useSeoAnalyzerContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log('onpage issues:', offpage);
+  }, [offpage])
+
   return (
-    <div className={`${styles.mainDiv} gap-y-[24px]`}>
-      <div className="flex flex-row gap-x-[8px]">
-        <p className="w-[16px] h-[16px]">⭐</p>
-        <p className="w-full self-stretch text-white text-[15px] h-[18px] not-italic font-medium leading-[normal]">
-          Recommendations - Off page Optimizations
-        </p>
-      </div>
-      <div className="flex flex-col gap-y-[24px]">
-        <div className="flex flex-col gap-y-[16px]">
+    <div className={`${styles.onPageDiv} overflow-x-auto`}>
+      { offpage.map((issue, i) => (
+        <div className={`${styles.mainDiv} gap-y-[24px] w-full`} key={`onpage_issue_${i}`}>
+          <div className="flex flex-row gap-x-[8px]">
+            <p className="w-[16px] h-[16px]">⭐</p>
+            <p className="w-full self-stretch text-white text-[15px] h-[18px] not-italic font-medium leading-[normal]">
+              Recommendations
+            </p>
+          </div>
           <p className="text-white text-[15px] h-[18px] not-italic font-medium leading-[normal]">
-            Low off page impact
+          { issue.url }
           </p>
-          <p className="text-[15px] h-[17px] text-[color:var(--primary-300,#ABABAB)]">
-            Low impact of search engine ranking that fall outside of your
-            website
+          <p className="text-[15px] text-[color:var(--primary-300,#ABABAB)]">
+            { `We found the following to increase your URL ${ issue.url }'s authority.` }
           </p>
-        </div>
-        <div className="flex items-center gap-8 self-stretch">
-          <div className="flex flex-col w-[695px] h-[51px] justify-center items-start gap-4 flex-[1_0_0]">
-            <p className="self-stretch text-white text-[15px] h-[18px] not-italic font-medium leading-[normal]">
-              Solution
-            </p>
-            <p className="text-[15px] h-[17px] text-[color:var(--primary-300,#ABABAB)]">
-              Off page tasks have been identified to help improve search engine
-              ranking
-            </p>
+          <div className='block w-full'>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex-1">
+                <div className='flex-none block'>
+                  { issue.warnings.map((val, i) => (
+                    <p key={i} className="text-[15px] text-[color:var(--primary-300,#ABABAB)] whitespace-pre-wrap" style={{ wordWrap: "break-word", overflowWrap: "anywhere"}}>
+                      - { val }
+                    </p>
+                  )) }
+                </div>
+              </div>
+              <button className="px-5 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple" onClick={() => {
+                router.push(`/contentType/seo?type=1&url=${issue.url}`);
+              }}>
+                <span className="text-[13.5px]">View</span>
+              </button>
+            </div>
           </div>
-          <div
-            className={`flex h-11 w-[109px] justify-center items-center gap-2 py-[6px] px-[16px] rounded-lg bg-[#844FFF]`}
-          >
-            <button className="inline-flex w-[109px] h-[20px] text-white text-center not-italic font-semibold leading-5">
-              <span className="w-[77px] h-[20px] text-[13.5px]">Implement</span>
-            </button>
-          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

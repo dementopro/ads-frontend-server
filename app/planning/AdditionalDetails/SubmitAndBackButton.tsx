@@ -1,28 +1,96 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './SubmitAndBackButton.module.css';
 import { useFormik } from 'formik';
-import { CompanyForm } from '@/types/planning';
+import { CompanyForm, CompanyDetailForm } from '@/types/planning';
+import axios from 'axios';
+import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import { Spin, message } from 'antd';
 
 interface SubmitAndBackButtonProps {
   activeButtonIndex: number;
   setActiveButtonIndex: (activeButtonIndex: number) => void; // Define setSearchQuery function with a searchQuery argument
   formik: ReturnType<typeof useFormik<CompanyForm>>;
+  formData: CompanyDetailForm;
 }
 
 const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   activeButtonIndex,
   setActiveButtonIndex,
-  formik
+  formik,
+  formData,
 }) => {
+  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction } =
+    useSeoAnalyzerContext();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleSubmit = (index: number) => {
-    if(formik.errors.sellingDescription == "" && formik.errors.idealCustomerProfile == "" && formik.errors.targetAudience == ""&& formik.errors.competitors==""){      
-      setActiveButtonIndex(index);
-    }else{
-      console.log('Please fill rerequired field');
+    if (
+      formData.content_type.toLowerCase() == 'seo' &&
+      formik.errors.idealCustomerProfile == '' &&
+      formik.errors.targetAudience == '' &&
+      formik.errors.competitors == ''
+    ) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        business_objectives: formData.business_objectives,
+        competitors: formik.values.companyName,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description,
+        product_description: formik.values.sellingDescription,
+        target_audice: formik.values.targetAudience,
+        website: formik.values.websiteURL,
+      });
+      axios
+        .post('/fapi/seo_onpage_analyze_api', {
+          company_name: formik.values.companyName,
+          company_description: formik.values.description,
+          target_audience: formik.values.targetAudience,
+          customer_profile: formik.values.idealCustomerProfile,
+          competitor: formik.values.competitors,
+          business_objectives: formData.business_objectives.join(','),
+          website_url: formik.values.websiteURL,
+        })
+        .then((res) => {
+          if (res.data.status == true) {
+            setOnpage(res.data.issues);
+            const offpages = JSON.parse(res.data.strategies);
+            let temp: Array<SeoAnalysis> = [];
+            offpages.map((pg: any) => {
+              Object.keys(pg).map((key) => {
+                temp.push({
+                  url: key,
+                  warnings: pg[key],
+                });
+              });
+            });
+            setOffpage(temp);
+            setActiveButtonIndex(index);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /seo_onpage_analyze_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      console.log('Please fill rerequired field', formik.errors);
     }
   };
+
   return (
     <div className="flex items-center gap-10 self-stretch mt-[32px]">
+      {contextHolder}
+      {isLoading && (
+        <div className="fixed flex items-center justify-center w-screen h-screen bg-black/40 z-[99999] top-0 left-0">
+          <Spin />
+        </div>
+      )}
       <p className="w-[619px] text-[color:var(--primary-50,#F7F7FF)] h-[18px] text-[15px] not-italic font-medium leading-[normal]">
         Submit related helpful information to help us improve your
         recommendations!

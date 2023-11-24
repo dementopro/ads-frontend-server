@@ -1,38 +1,40 @@
 'use client';
 
-import Image from 'next/image';
-import NotEnoughtCredits from '@/components/NotEnoughtCredits';
-import ReactGATag from '@/components/ReactGATag';
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import AdminLayout from '@/layout/admin';
 import {
   CompanyForm,
   IPlan,
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
-import { message, Spin } from 'antd';
-import React, { ChangeEvent, useEffect, useState, useContext } from 'react';
-import axios from '@/lib/axios';
-import { AccountContext } from '@/context/account';
-import HorizontalStepper from './HorizontalStepper';
-import AddCompany from './AddCompany';
-import ContentTypeSection from './ContentTypeSection';
-import { CompnayDetailForm } from '@/types/planning';
-import TargetAudience from './AdditionalDetails/TargetAudience';
-import CustomerProfile from './AdditionalDetails/CustomerProfile';
-import Competitors from './AdditionalDetails/Competitors';
-import AddInfoButton from './AddInfoButton';
-import HistoricalData from './AdditionalDetails/HistoricalData';
-import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
-import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
-import BackButton from './Recommendations/BackButton';
-import OnPage from './Recommendations/OnPage';
-import styles from './planning.module.css';
-import OffPage from './Recommendations/OffPage';
 import { FormikHelpers, useFormik } from 'formik';
-import { CompanyValidate } from '@/lib/validate';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { Spin, message } from 'antd';
+
+import { AccountContext } from '@/context/account';
+import AddCompany from './AddCompany';
 import AddCompanyDetails from './AddCompanyDetails';
+import AddInfoButton from './AddInfoButton';
+import AdminLayout from '@/layout/admin';
+import BackButton from './Recommendations/BackButton';
+import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
+import { CompanyDetailForm } from '@/types/planning';
+import { CompanyValidate } from '@/lib/validate';
+import Competitors from './AdditionalDetails/Competitors';
+import ContentTypeSection from './ContentTypeSection';
+import CustomerProfile from './AdditionalDetails/CustomerProfile';
+import HistoricalData from './AdditionalDetails/HistoricalData';
+import HorizontalStepper from './HorizontalStepper';
+import Image from 'next/image';
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import OffPage from './Recommendations/OffPage';
+import OnPage from './Recommendations/OnPage';
+import ReactGATag from '@/components/ReactGATag';
+import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
+import TargetAudience from './AdditionalDetails/TargetAudience';
+import axios from '@/lib/axios';
+import styles from './planning.module.css';
+import { useSearchParams } from 'next/navigation';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -61,7 +63,27 @@ async function getHistory(id?: number) {
   }
 }
 
+type TabButtonProps = {
+  children: React.ReactNode;
+  isActivated?: boolean;
+  onClick?: () => void;
+};
+
+export function Button({ children, isActivated, onClick }: TabButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 h-12 flex items-center justify-center gap-2 text-normal rounded-t-lg hover:bg-[#35363A] border-b-2 ${isActivated
+          ? 'text-white border-primary-purple bg-[#35363A]'
+          : 'border-[#989899] text-primary-gray'}`}
+    >
+      {children}
+    </button>
+  );
+}
+
 const PlanningPage = () => {
+  const searchParams = useSearchParams();
   const [messageApi, contextHolder] = message.useMessage();
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -70,19 +92,20 @@ const PlanningPage = () => {
   const [planId, setPlanId] = useState<number | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false);
-  const [fromData, setFromData] = useState<CompnayDetailForm>({
+  const [formData, setFormData] = useState<CompanyDetailForm>({
     name: '',
     website: '',
     description: '',
     product_description: '',
     target_audice: '',
-    content_type: '',
+    content_type: 'SEO',
     customer_profile: '',
     competitors: '',
     business_objectives: [],
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
+  const [activeSeoType, setActiveSeoType] = useState<number>(0);
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -92,11 +115,18 @@ const PlanningPage = () => {
       sellingDescription: '',
       idealCustomerProfile: '',
       targetAudience: '',
-      competitors:''
+      competitors: '',
     },
     onSubmit,
     validate: CompanyValidate,
   });
+
+  useEffect(() => {
+    if (searchParams) {
+      const step = parseInt(searchParams.get('step') || '0');
+      setActiveButtonIndex(step);
+    }
+  }, [searchParams]);
 
   async function onSubmit(
     values: CompanyForm,
@@ -122,7 +152,10 @@ const PlanningPage = () => {
         setShow={() => setShowNotEnoughCredits(false)}
       />
 
-      <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
+      <Spin
+        spinning={isGenerating}
+        wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]"
+      >
         <section className="flex flex-col justify-center">
           {activeButtonIndex == 0 && (
             <div className="flex gap-x-[8px] mb-6">
@@ -150,15 +183,9 @@ const PlanningPage = () => {
                   `}
                   disabled={true}
                 >
-                  {fromData?.content_type === 'Social Media' ? (
-                    <span className="w-[197px] h-[20px] text-[#ABABAB] text-[15px] not-italic font-medium leading-5">
-                      Content&nbsp;Type: {fromData?.content_type}
-                    </span>
-                  ) : (
-                    <span className="w-[137px] h-[20px] text-[#ABABAB] text-[15px] not-italic font-medium leading-5">
-                      Content&nbsp;Type: {fromData?.content_type.toUpperCase()}
-                    </span>
-                  )}
+                  <span className="h-[20px] text-[#ABABAB] text-[15px] not-italic font-medium leading-5">
+                    Content&nbsp;Type: {formData?.content_type}
+                  </span>
                 </button>
               </div>
             </div>
@@ -177,7 +204,7 @@ const PlanningPage = () => {
                   `}
                   disabled={true}
                 >
-                  Content type: {fromData?.content_type.toUpperCase()}
+                  Content type: {formData?.content_type}
                 </button>
               </div>
             </div>
@@ -190,45 +217,90 @@ const PlanningPage = () => {
         {activeButtonIndex == 0 && (
           <div className="flex flex-col text-[15px]">
             <AddCompany formik={formik} />
-             {/* <AddCompanyDetails formik={formik} /> */}
-            <ContentTypeSection setFromData={setFromData} fromData={fromData} />
-            <AddInfoButton setActiveButtonIndex={setActiveButtonIndex} formik={formik}/>
-          </div>
-        )}
-        {activeButtonIndex == 1 && (
-          <div className="flex flex-col">
-            {/* <TargetAudience />
-            <CustomerProfile /> */}
-             <AddCompanyDetails formik={formik} />
-            {/* <Competitors /> */}
-            <HistoricalData />
-            <BusinessObjectives />
-            <SubmitAndBackButton
-              activeButtonIndex={activeButtonIndex}
+            {/* <AddCompanyDetails formik={formik} /> */}
+            <ContentTypeSection setFormData={setFormData} formData={formData} />
+            <AddInfoButton
               setActiveButtonIndex={setActiveButtonIndex}
               formik={formik}
             />
           </div>
         )}
-        {activeButtonIndex == 2 && (
-          <>
-            <div className={`${styles.onPageDiv}`}>
-              <button
-                className={`flex justify-center items-center gap-4 px-[26px] py-[10px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
-                  `}
-                disabled={true}
-              >
-                Recommendations - {fromData?.content_type.toUpperCase()}
-              </button>
-              <OnPage />
-              <OffPage />
+        {activeButtonIndex == 1 &&
+          (formData.content_type.toLowerCase() == 'seo' ? (
+            <div className="flex flex-col">
+              {/* <TargetAudience />
+            <CustomerProfile /> */}
+              <AddCompanyDetails formik={formik} />
+              {/* <Competitors /> */}
+              {/* <HistoricalData /> */}
+              <BusinessObjectives
+                title="7. Choose your business objectives"
+                options={[
+                  'Organic Traffic',
+                  'Bounce Rate',
+                  'Brand Visibility',
+                  'Expand SEO Footprint',
+                  'Improve Domain authority',
+                  'Rankings',
+                  'Competitive positioning',
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
             </div>
-            <BackButton
-              activeButtonIndex={activeButtonIndex}
-              setActiveButtonIndex={setActiveButtonIndex}
-            />
-          </>
-        )}
+          ) : (
+            <>
+            </>
+          ))}
+        {activeButtonIndex == 2 &&
+          (formData.content_type.toLowerCase() == 'seo' ? (
+            <>
+              <div className="flex items-center mt-8">
+                <Button
+                  isActivated={activeSeoType == 0}
+                  onClick={() => setActiveSeoType(0)}
+                >
+                  <Image
+                    src="/images/seo/on-page.svg"
+                    alt={'SEO (on-page)'}
+                    width={24}
+                    height={24}
+                  />
+                  <span className="truncate" title="SEO (on-page)">
+                    SEO (on-page)
+                  </span>
+                </Button>
+                <Button
+                  isActivated={activeSeoType == 1}
+                  onClick={() => setActiveSeoType(1)}
+                >
+                  <Image
+                    src="/images/seo/off-page.svg"
+                    alt={'SEO (off-page)'}
+                    width={24}
+                    height={24}
+                  />
+                  <span className="truncate" title="SEO (off-page)">
+                    SEO (off-page)
+                  </span>
+                </Button>
+              </div>
+              {activeSeoType == 0 ? <OnPage /> : <OffPage />}
+              <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
+            </>
+          ) : (
+            <>
+            </>
+          ))}
         <div className="flex float-right mt-[32px] gap-[10px]">
           <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
             Find a bug or encountering an error? Submit an issue report with

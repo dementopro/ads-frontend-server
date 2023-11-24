@@ -1,5 +1,7 @@
 'use client'
+
 import { AccountProvider } from "@/context/account"
+import { SeoAnalyzerProvider } from "@/context/seo";
 import { useEffect } from "react"
 
 const WithProviders = ({ children }: { children: React.ReactNode }) => {
@@ -9,7 +11,9 @@ const WithProviders = ({ children }: { children: React.ReactNode }) => {
   }, []);
   return (
     <AccountProvider>
-      {children}
+      <SeoAnalyzerProvider>
+        {children}
+      </SeoAnalyzerProvider>
     </AccountProvider>
   )
 }

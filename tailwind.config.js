@@ -28,6 +28,11 @@ module.exports = {
           'gray': '#ababab',
           'purple': '#844fff',
         },
+        background: {
+          100: '#1b1c21',
+          200: '#23252b',
+          300: '#35363A'
+        }
       },
       fontFamily: {
         'open-sans': ['"Open Sans"', 'sans-serif'],
