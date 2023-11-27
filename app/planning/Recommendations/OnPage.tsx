@@ -8,10 +8,6 @@ const OnPage = () => {
   const { onpage } = useSeoAnalyzerContext();
   const router = useRouter();
 
-  useEffect(() => {
-    console.log('onpage issues:', onpage);
-  }, [onpage])
-
   return (
     <div className={`${styles.onPageDiv} overflow-x-auto`}>
       { onpage.map((issue, i) => (

@@ -40,7 +40,6 @@ async function getHistory(id?: number) {
       }
       return data.planning_list;
     } else {
-      console.log('data', data);
       return [];
     }
   } catch (err) {
@@ -90,7 +89,6 @@ const PlanningPage = () => {
       setActiveSeoType(parseInt(searchParams.get('type') || '0'));
       setUrl(searchParams.get('url') || '');
     }
-    console.log('params:', searchParams);
   }, [searchParams])
 
   const page = useMemo<SeoAnalysis | null>(() => {

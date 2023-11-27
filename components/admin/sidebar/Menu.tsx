@@ -27,25 +27,21 @@ const menuItems = [
     activeIcon: '/images/sidebar/active/planning.svg',
   },
   {
-    text: 'Generate',
+    text: 'Channels',
     icon: '/images/sidebar/generate.svg',
     activeIcon: '/images/sidebar/active/generate.svg',
     children: [
       {
-        text: 'Text to Image',
-        href: '/generate/textToImage',
+        text: 'SEO',
+        href: '/contentType/seo',
       },
       {
-        text: 'Image to Image',
-        href: '/generate/imageToImage',
+        text: 'Social Media',
+        href: '/contentType/seo',
       },
       {
-        text: 'Text to Copies',
-        href: '/generate/productDescription?mode=description',
-      },
-      {
-        text: 'Remix Tool',
-        href: '/generate/remixTool',
+        text: 'Email Marketing',
+        href: '/contentType/emailMarketing',
       }
     ]
   },

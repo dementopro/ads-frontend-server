@@ -59,7 +59,7 @@ export const SeoAnalyzerContext = createContext<{
     product_description: '',
     email: '',
     marketing_template: '',
-    schedule: []
+    schedule: {}
   },
   emailInstruction: {
     email_options: [],
@@ -95,7 +95,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     product_description: '',
     email: '',
     marketing_template: '',
-    schedule: []
+    schedule: {}
   })
   const [emailInstruction, setEmailInstruction] = useState<EmailInstruction>({
     email_options: [],
@@ -103,6 +103,10 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
   });
   const pathname: string = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    console.log(emailInstruction);
+  }, [emailInstruction])
 
   // Provide the account data through the context to child components
   return (

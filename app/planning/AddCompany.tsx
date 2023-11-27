@@ -26,6 +26,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
               *Company Name
             </label>
             <input
+              maxLength={50}
               placeholder="Enter your Company Name"
               id="CompanyName"
               className={`${styles['input']} ${
@@ -48,6 +49,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
               *Website URL
             </label>
             <input
+              maxLength={50}
               placeholder="Enter Website URL"
               id="websiteURL"
               className={`${styles['input']} ${
@@ -66,7 +68,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
         >
           <label
             htmlFor="description"
-            className=" h-[18px] text-[15px] text-base not-italic font-medium leading-[normal] text-[color:var(--primary-300,#ABABAB)]"
+            className="h-[18px] text-[15px] text-base not-italic font-medium leading-[normal] text-[color:var(--primary-300,#ABABAB)]"
           >
             *Company Description
           </label>
@@ -76,6 +78,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
                 ? '!border-rose-600'
                 : 'border-none'
             } `}
+            maxLength={2000}
             placeholder="Enter your company description"
             style={{
               minHeight: '138px',

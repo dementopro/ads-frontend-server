@@ -47,7 +47,6 @@ const Page = () => {
       setActiveTab(parseInt(searchParams.get('type') || '0'));
       setUrl(searchParams.get('url') || '');
     }
-    console.log('params:', searchParams);
   }, [searchParams])
 
   const page = useMemo<SeoAnalysis | null>(() => {

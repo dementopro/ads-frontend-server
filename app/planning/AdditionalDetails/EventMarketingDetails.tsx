@@ -18,29 +18,34 @@ interface EmailMarketingDetailsProps {
 
 export const tabsList = [
   {
-    'title': 'Gmail',
-    'icon': '/images/planning/gmail.svg'
+    title: 'Gmail',
+    icon: '/images/planning/gmail.svg',
   },
   {
-    'title': 'Outlook',
-    'icon': '/images/planning/outlook.svg'
+    title: 'Outlook',
+    icon: '/images/planning/outlook.svg',
   },
   {
-    'title': 'Mailchimp',
-    'icon': '/images/planning/mailchimp.svg'
+    title: 'Mailchimp',
+    icon: '/images/planning/mailchimp.svg',
   },
   {
-    'title': 'Yahoo',
-    'icon': '/images/planning/yahoo.svg'
+    title: 'Yahoo',
+    icon: '/images/planning/yahoo.svg',
   },
   {
-    'title': 'Proton Mail',
-    'icon': '/images/planning/proton.svg'
-  }
-]
+    title: 'Proton Mail',
+    icon: '/images/planning/proton.svg',
+  },
+];
 
-const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({ formData, formik, activeTab, setActiveTab }) => {
-  const {isOpen, onOpen: onOpenEmailSchedule, onOpenChange} = useDisclosure();
+const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
+  formData,
+  formik,
+  activeTab,
+  setActiveTab,
+}) => {
+  const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   return (
     <>
       <div className="grid grid-cols-12 gap-4 mt-8">
@@ -51,27 +56,45 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({ formData, formi
               isActivated={activeTab == i}
               onClick={() => setActiveTab(i)}
             >
-              <Image src={tab.icon} alt={'SEO (off-page)'} width={24} height={24} />
-              <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+              <Image
+                src={tab.icon}
+                alt={'SEO (off-page)'}
+                width={24}
+                height={24}
+              />
+              <span className="truncate" title="SEO (off-page)">
+                {tab.title}
+              </span>
             </Button>
           ))}
         </div>
         <div className={`${styles.div} col-span-12 !mt-0`}>
-          <div className='grid w-full grid-cols-12'>
-            <div className='col-span-12 lg:col-span-6'>
+          <div className="grid w-full grid-cols-12">
+            <div className="col-span-12 lg:col-span-6">
               <h6 className="text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-                3.&nbsp;Connect your { tabsList[activeTab].title } account
+                3.&nbsp;Connect your {tabsList[activeTab].title} account
               </h6>
-              <p className='mt-1 text-sm text-primary-gray'>Select for 1 click authentication</p>
-              <button className='flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110'>
-                <Image src={tabsList[activeTab].icon} alt={tabsList[activeTab].title} width={24} height={24} />
-                <p className='text-primary-gray text-[15px]'>
-                  { tabsList[activeTab].title }
+              <p className="mt-1 text-sm text-primary-gray">
+                Select for 1 click authentication
+              </p>
+              <button
+                className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
+                onClick={() => {
+                }}
+              >
+                <Image
+                  src={tabsList[activeTab].icon}
+                  alt={tabsList[activeTab].title}
+                  width={24}
+                  height={24}
+                />
+                <p className="text-primary-gray text-[15px]">
+                  {tabsList[activeTab].title}
                 </p>
               </button>
             </div>
-            <div className='col-span-12 lg:col-span-6'>
-              <p className='mt-1 text-sm text-primary-gray'>
+            <div className="col-span-12 lg:col-span-6">
+              <p className="mt-1 text-sm text-primary-gray">
                 OR Enter your email
               </p>
               <input
@@ -83,6 +106,11 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({ formData, formi
                 placeholder="Enter email address"
                 {...formik.getFieldProps('email')}
               />
+              {formik.errors.email && (
+                <label className="text-xs text-rose-600">
+                  {formik.errors.email}
+                </label>
+              )}
             </div>
           </div>
         </div>
@@ -116,11 +144,14 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({ formData, formi
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
             5.&nbsp;Provide your email scheduling
           </p>
-          <button className='flex items-center gap-2 px-4 py-2 rounded-lg bg-background-300 hover:brightness-110 text-primary-gray' onClick={() => {
-            onOpenEmailSchedule();
-          }}>
-            <BiCalendar className='w-6 h-6' />
-            <p className='text-primary-gray text-[15px]'>Email Schedule</p>
+          <button
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-300 hover:brightness-110 text-primary-gray"
+            onClick={() => {
+              onOpenEmailSchedule();
+            }}
+          >
+            <BiCalendar className="w-6 h-6" />
+            <p className="text-primary-gray text-[15px]">Email Schedule</p>
           </button>
           <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} />
         </div>

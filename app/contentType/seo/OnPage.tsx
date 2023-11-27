@@ -45,20 +45,24 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
           <h3>Technical Optimizations</h3>
           <BiChevronDown />
         </div>
-        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple">
+        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {
+          setLoadings([...new Array(page?.warnings.length || 0)].map((_) => true));
+          setAnswers([...new Array(page?.warnings.length || 0)].map((_) => ''));
+          messageApi.success('Refreshed');
+        }}>
           <BiRefresh className="w-5 h-5 text-primary-purple" />
           Refresh
         </button>
       </div>
       <div className="bg-[#23252b] w-full !p-0 overflow-hidden rounded-lg grid grid-cols-12 gap-x-2">
         <div className="bg-[#1E1F24] text-[#848484] w-full col-span-12 grid grid-cols-12">
-          <div className="py-3 pl-10 col-span-8">
+          <div className="col-span-8 py-3 pl-10">
             <div className="flex items-center gap-2 font-normal text-left">
               Recommendations
               <BiChevronDown />
             </div>
           </div>
-          <div className="py-3 col-span-2">
+          <div className="col-span-2 py-3">
             <div className="flex items-center gap-2 font-normal text-left">
               Status
               <BiChevronDown />
@@ -70,10 +74,10 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
         {
           page && page.warnings.map((warning, i) => (
             <div key={i} className="hover:bg-[#444549] hover:border-b-primary-purple hover:border-b-2 col-span-12 grid grid-cols-12 gap-2 m-0">
-              <div className="py-4 pl-10 col-span-8" style={{ overflowWrap: "anywhere" }}>
+              <div className="col-span-8 py-4 pl-10" style={{ overflowWrap: "anywhere" }}>
                 { warning }
               </div>
-              <div className="py-4 col-span-2">
+              <div className="col-span-2 py-4">
                 <Chip
                   color={ loadings[i] == true ? "warning" : "success" }
                   variant="light"
@@ -82,7 +86,7 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
                   { loadings[i] == true ? "Pending Preview" : "Completed" }
                 </Chip>
               </div>
-              <div className="py-4 pr-10 text-right col-span-2">
+              <div className="col-span-2 py-4 pr-10 text-right">
                 <button
                   className="px-4 bg-none text-primary-purple"
                   onClick={() => {
@@ -98,7 +102,6 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
                         sub_category: "",
                         warning: warning
                       }).then((res) => {
-                        console.log(warning, res.data);
                         if (res.data.status == true) {
                           setLoadings((prev) => {
                             let temp = [...prev];
@@ -158,8 +161,8 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
                         <span className="w-[77px] h-[20px] text-[13.5px]">Download</span>
                       </button>
                     </div>
-                    <div className='w-full mt-5 relative'>
-                      <ReactMarkdownPreview source={answers[i]} className='overflow-auto p-4 relative rounded-lg' style={{ overflowWrap: "anywhere" }} />
+                    <div className='relative w-full mt-5'>
+                      <ReactMarkdownPreview source={answers[i]} className='relative p-4 overflow-auto rounded-lg' style={{ overflowWrap: "anywhere" }} />
                     </div>
                   </div>
                 }

@@ -9,6 +9,7 @@ const CustomerProfile = () => {
         4.&nbsp;Add ideal customer profile
       </p>
       <Input.TextArea
+        maxLength={2000}
         className={`${styles.description} placeholder-shown:border-[#1B1C21]`} // Apply your custom class here
         placeholder="Ex: industry, geography, pain points"
         style={{

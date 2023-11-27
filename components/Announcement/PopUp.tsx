@@ -36,9 +36,9 @@ const Announcement = () => {
         className={`absolute top-0 left-0 h-screen w-full transition ease-in-out !duration-500 z-50 ${isAnnouncementOpen ? 'opacity-100' : 'opacity-0 hidden'
           }`}
       >
-        <div className="relative flex bg-black bg-opacity-50 h-full w-full justify-center items-center">
+        <div className="relative flex items-center justify-center w-full h-full bg-black bg-opacity-50">
           <div className="android:w-[340px] ipad:w-auto bg-[#CAC5FF] bg-cover android:gap-[8px] ipad:gap-[16px] android:m-[10px] ipad:m-[0px] p-[32px] android:rounded-[15px] ipad:rounded-[25px] shadow flex-col inline-flex">
-            <div className="w-full relative text-right">
+            <div className="relative w-full text-right">
               <FiX
                 className="cursor-pointer text-[#0B0129] hover:text-[#9D93FF] inline-block android:w-[15px] ipadmini:[20px] ipad:w-[25px] desktop:w-[30px] h-auto"
                 onClick={closeAnnouncement}
@@ -62,6 +62,8 @@ const Announcement = () => {
               <Image
                 className="android:w-full ipad:w-[290px] h-auto android:rounded-[6px] ipad:rounded-[12px]"
                 src="/images/home/announcement.png"
+                width={290}
+                height={150}
                 alt="Announcement"
               />
             </div>

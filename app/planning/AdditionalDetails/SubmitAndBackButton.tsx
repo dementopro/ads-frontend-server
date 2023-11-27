@@ -5,6 +5,7 @@ import { CompanyForm, CompanyDetailForm } from '@/types/planning';
 import axios from 'axios';
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { Spin, message } from 'antd';
+import { formValidUrl } from '@/utils';
 
 interface SubmitAndBackButtonProps {
   activeButtonIndex: number;
@@ -52,7 +53,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
           customer_profile: formik.values.idealCustomerProfile,
           competitor: formik.values.competitors,
           business_objectives: formData.business_objectives.join(','),
-          website_url: formik.values.websiteURL,
+          website_url: formValidUrl(formik.values.websiteURL),
         })
         .then((res) => {
           if (res.data.status == true) {
@@ -108,12 +109,11 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
           target_audience: formik.values.targetAudience,
           customer_profile: formik.values.idealCustomerProfile,
           business_objectives: formData.business_objectives.join(','),
-          website_url: formik.values.websiteURL,
+          website_url: formValidUrl(formik.values.websiteURL),
           email_address: formik.values.email,
           email_template: formik.values.marketing_template
         })
         .then((res) => {
-          console.log('Response from /email_marketing_instruction_api:', res.data);
           if (res.data.status == true) {
             const instruction = JSON.parse(res.data.instruction);
             setEmailInstruction(instruction);

@@ -9,10 +9,6 @@ const OffPage = () => {
   const { offpage } = useSeoAnalyzerContext();
   const router = useRouter();
 
-  useEffect(() => {
-    console.log('onpage issues:', offpage);
-  }, [offpage])
-
   return (
     <div className={`${styles.onPageDiv} overflow-x-auto`}>
       { offpage.map((issue, i) => (

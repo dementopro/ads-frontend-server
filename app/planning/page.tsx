@@ -37,6 +37,7 @@ import axios from '@/lib/axios';
 import styles from './planning.module.css';
 import { useSearchParams } from 'next/navigation';
 import Button from './TabButton';
+import { useSeoAnalyzerContext } from '@/context/seo';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -56,7 +57,6 @@ async function getHistory(id?: number) {
       }
       return data.planning_list;
     } else {
-      console.log('data', data);
       return [];
     }
   } catch (err) {
@@ -67,6 +67,7 @@ async function getHistory(id?: number) {
 
 const PlanningPage = () => {
   const searchParams = useSearchParams();
+  const { company } = useSeoAnalyzerContext();
   const [messageApi, contextHolder] = message.useMessage();
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -87,7 +88,7 @@ const PlanningPage = () => {
     business_objectives: [],
     email: '',
     marketing_template: '',
-    schedule: [],
+    schedule: {},
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
@@ -104,11 +105,28 @@ const PlanningPage = () => {
       competitors: '',
       email: '',
       marketing_template: '',
-      schedule: [],
+      schedule: {},
     },
     onSubmit,
     validate: CompanyValidate,
   });
+
+  useEffect(() => {
+    if (company) {
+      formik.setValues({
+        companyName: company.name,
+        competitors: company.competitors,
+        description: company.description,
+        email: company.email,
+        idealCustomerProfile: company.customer_profile,
+        marketing_template: company.marketing_template,
+        schedule: company.schedule,
+        sellingDescription: company.product_description,
+        targetAudience: company.target_audice,
+        websiteURL: company.website
+      })
+    }
+  }, [company])
 
   useEffect(() => {
     if (searchParams) {

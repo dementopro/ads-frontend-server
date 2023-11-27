@@ -14,7 +14,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
       <div className="grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            4.&nbsp;Add your target audience
+            3. Add your target audience*
           </p>
           <div
             className={` ${
@@ -22,6 +22,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
+              maxLength={2000}
               className={`border bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 rounded-lg ${
                 formik.errors.targetAudience && formik.touched.targetAudience
                   ? 'border-rose-600'
@@ -37,7 +38,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            5.&nbsp;Add ideal customer profile
+            4. Add ideal customer profile*
           </p>
           <div
             className={` ${
@@ -45,6 +46,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
+              maxLength={2000}
               className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
                 formik.errors.idealCustomerProfile &&
                 formik.touched.idealCustomerProfile
@@ -61,7 +63,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            5.&nbsp;Add your competitors
+            5. Add your competitors*
           </p>
           <div
             className={` ${
@@ -69,6 +71,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
+              maxLength={2000}
               className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
                 formik.errors.competitors &&
                 formik.touched.competitors
@@ -87,7 +90,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
         <div className={`${styles.googleDiv} col-span-12 lg:col-span-6 !mt-0`}>
           <div className="flex flex-col w-[521px] text-[15px] h-[43px] gap-[8px]">
             <p className="w-[521px] text-[15px] h-[18px] text-[color:#B3ACFF]">
-              6.&nbsp;Connect your historical data (optional)
+              6. Connect your historical data (optional)
             </p>
             <p className="w-[521px] text-[15px] h-[17px] text-[color:var(--primary-300,#ABABAB)]">
               Select for 1 click authentication

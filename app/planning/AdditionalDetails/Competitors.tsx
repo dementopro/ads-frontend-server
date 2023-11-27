@@ -9,6 +9,7 @@ const Competitors = () => {
         5.&nbsp;Add your competitors
       </p>
       <Input.TextArea
+        maxLength={2000}
         className={`${styles.description} placeholder-shown:border-[#1B1C21]`} // Apply your custom class here
         placeholder="Who is currently ranking in your niche?"
         style={{

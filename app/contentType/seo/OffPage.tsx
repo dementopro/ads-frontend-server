@@ -45,7 +45,9 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
           <h3>Technical Optimizations</h3>
           <BiChevronDown />
         </div>
-        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple">
+        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {
+          setAnswers([...new Array(page?.warnings.length || 0)].map((_) => ''));
+        }}>
           <BiRefresh className="w-5 h-5 text-primary-purple" />
           Refresh
         </button>
@@ -101,7 +103,6 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             sub_category: "",
                             warning: warning
                           }).then((res) => {
-                            console.log(warning, res.data);
                             if (res.data.status == true) {
                               setLoadings((prev) => {
                                 let temp = [...prev];
@@ -111,12 +112,10 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                               setAnswers((prev) => {
                                 let temp = [...prev];
                                 const rawFix = res.data.offfix.replaceAll('\n', '<br/>');
-                                console.log(rawFix);
                                 try {
                                   const offfix = JSON.parse(rawFix);
                                   temp[i] = offfix;
                                 } catch (e) {
-                                  console.log(e, rawFix);
                                   temp[i] = rawFix;
                                 } finally {
                                   return temp;
@@ -172,7 +171,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             <span className="w-[77px] h-[20px] text-[13.5px]">Download</span>
                           </button>
                         </div>
-                        <div className='w-full mt-5 relative'>
+                        <div className='relative w-full mt-5'>
                           {
                             typeof answers[i] == 'object' ? Object.keys(answers[i]).map((key) => answers[i][key]).map((sol, index) => (
                               <div key={`step_${index}`} className='mt-4'>
@@ -180,10 +179,10 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                                   Step { index + 1 }: { sol.step }
                                 </div>
                                 <div className='mt-2'>
-                                  <ReactMarkdownPreview source={sol.detail} className='overflow-auto p-4 relative rounded-lg' style={{ overflowWrap: "anywhere" }} />
+                                  <ReactMarkdownPreview source={sol.detail} className='relative p-4 overflow-auto rounded-lg' style={{ overflowWrap: "anywhere" }} />
                                 </div>
                               </div>
-                            )) : <ReactMarkdownPreview source={answers[i]} className='overflow-auto p-4 relative rounded-lg' style={{ overflowWrap: "anywhere" }} />
+                            )) : <ReactMarkdownPreview source={answers[i]} className='relative p-4 overflow-auto rounded-lg' style={{ overflowWrap: "anywhere" }} />
                           }
                         </div>
                       </div>
