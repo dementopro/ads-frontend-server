@@ -24,6 +24,7 @@ import axios from 'axios';
 import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
 import Checkbox from './Checkbox';
+import DownloadDropdown from './DownloadDropdown';
 import { DETAIL_LIMIT } from '@/data/constant';
 
 const GmailMarketing = () => {
@@ -82,28 +83,7 @@ const GmailMarketing = () => {
               <p className="text-sm font-normal text-white">
                 {`You uploaded this ${emailInstruction.email_template_type.toLowerCase()} marketing template:`}
               </p>
-              <button
-                className="px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple"
-                onClick={() => {
-                  let data: string = company.marketing_template as string;
-                  data += '<br>';
-                  emailInstruction.email_options.forEach((option, i) => {
-                    data += `${option.option_name} email - Option ${i + 1}`;
-                    data += '<br>';
-                    data += `**Subject Line**: ${option.template_subject_line}<br>**Email Body**:<br/>${option.email_template}`;
-                  });
-                  const downloadData = new Blob([data], { type: 'text/plain' });
-                  const url = window.URL.createObjectURL(downloadData);
-                  const tempLink = document.createElement('a');
-                  tempLink.href = url;
-                  tempLink.setAttribute('download', 'file.md');
-                  tempLink.click();
-                }}
-              >
-                <span className="w-[77px] h-[20px] text-[13.5px]">
-                  Download
-                </span>
-              </button>
+              <DownloadDropdown selects={selectedTemplates} />
             </div>
           </div>
           <div className="w-full">

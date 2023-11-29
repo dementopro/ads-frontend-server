@@ -2,7 +2,8 @@
 
 import { AccountProvider } from "@/context/account"
 import { SeoAnalyzerProvider } from "@/context/seo";
-import { useEffect } from "react"
+import { useEffect } from "react";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const WithProviders = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
@@ -12,7 +13,9 @@ const WithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <AccountProvider>
       <SeoAnalyzerProvider>
-        {children}
+        <GoogleOAuthProvider clientId="176418914084-gk8rf20881ifp8els3utulr46o80l5u5.apps.googleusercontent.com">
+          {children}
+        </GoogleOAuthProvider>
       </SeoAnalyzerProvider>
     </AccountProvider>
   )

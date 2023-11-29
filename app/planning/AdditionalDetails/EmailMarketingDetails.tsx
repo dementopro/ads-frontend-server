@@ -6,6 +6,9 @@ import Image from 'next/image';
 import styles from '../planning.module.css';
 import { useFormik } from 'formik';
 import { BiCalendar } from 'react-icons/bi';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import MicrosoftLogin from 'react-microsoft-login';
 import { useDisclosure } from '@nextui-org/react';
 import EmailScheduleModal from './EmailScheduleModal';
 import { DETAIL_LIMIT } from '@/data/constant';
@@ -49,6 +52,37 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
 }) => {
   const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   const [isOpenEmailEditModal, setIsOpenEmailEditModal] = useState<boolean>(false);
+  const [isEmailAuthenticated, setIsEmailAuthenticated] =
+    useState<boolean>(false);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${codeResponse.access_token}`,
+              Accept: 'application/json',
+            },
+          }
+        )
+        .then((res) => {
+          formik.setValues({
+            ...formik.values,
+            email: res.data.email,
+          });
+          setIsEmailAuthenticated(true);
+        })
+        .catch((err) => console.log(err));
+    },
+    onError: (err) => {
+      console.log('fail:', err);
+    },
+  });
+
+  const microsoftRedirectURL: string | undefined = process.env.NODE_ENV === 'development' ? "http://localhost:3000" : process.env.NEXT_PUBLIC_PRODUCTION_URL;
+  console.log("redirect url: ", microsoftRedirectURL, process.env.NODE_ENV, process.env.NEXT_PUBLIC_PRODUCTION_URL);
 
   return (
     <>
@@ -58,7 +92,10 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
             <Button
               key={`tab_${i}`}
               isActivated={activeTab == i}
-              onClick={() => setActiveTab(i)}
+              onClick={() => {
+                setIsEmailAuthenticated(false);
+                setActiveTab(i);
+              }}
             >
               <Image
                 src={tab.icon}
@@ -81,21 +118,75 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               <p className="mt-1 text-sm text-primary-gray">
                 Select for 1 click authentication
               </p>
-              <button
-                className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
-                onClick={() => {
-                }}
-              >
-                <Image
-                  src={tabsList[activeTab].icon}
-                  alt={tabsList[activeTab].title}
-                  width={24}
-                  height={24}
-                />
-                <p className="text-primary-gray text-[15px]">
-                  {tabsList[activeTab].title}
-                </p>
-              </button>
+              {activeTab === 0 ? (
+                <button
+                  className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
+                  onClick={() => {
+                    login();
+                  }}
+                  disabled={isEmailAuthenticated}
+                >
+                  <Image
+                    src={tabsList[activeTab].icon}
+                    alt={tabsList[activeTab].title}
+                    width={24}
+                    height={24}
+                  />
+                  <p className="text-primary-gray text-[15px]">
+                    {tabsList[activeTab].title}
+                  </p>
+                </button>
+              ) : activeTab === 1 ? (
+                <div className='max-w-fit'>
+                  <MicrosoftLogin
+                    clientId="4302711c-32c9-4fab-8cdb-5926cac2b5c9"
+                    withUserData={true}
+                    redirectUri={microsoftRedirectURL}
+                    authCallback={(err, data) => {
+                      console.log(err, data);
+                      if (!err) {
+                        formik.setValues({
+                          ...formik.values,
+                          email: data.mail,
+                        });
+                        setIsEmailAuthenticated(true);
+                      } else {
+                        console.log('fail:', err);
+                      }
+                    }}
+                  >
+                    <button
+                      className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
+                      disabled={isEmailAuthenticated}
+                    >
+                      <Image
+                        src={tabsList[activeTab].icon}
+                        alt={tabsList[activeTab].title}
+                        width={24}
+                        height={24}
+                      />
+                      <p className="text-primary-gray text-[15px]">
+                        {tabsList[activeTab].title}
+                      </p>
+                    </button>
+                  </MicrosoftLogin>
+                </div>
+              ) : (
+                <button
+                  className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
+                  onClick={() => {}}
+                >
+                  <Image
+                    src={tabsList[activeTab].icon}
+                    alt={tabsList[activeTab].title}
+                    width={24}
+                    height={24}
+                  />
+                  <p className="text-primary-gray text-[15px]">
+                    {tabsList[activeTab].title}
+                  </p>
+                </button>
+              )}
             </div>
             <div className="col-span-12 lg:col-span-6">
               <p className="mt-1 text-sm text-primary-gray">
@@ -105,10 +196,13 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
                 className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${
                   formik.errors.email && formik.touched.email
                     ? 'border-rose-600'
+                    : isEmailAuthenticated
+                    ? 'border-green-600'
                     : 'border-none'
                 } w-full `}
                 placeholder="Enter email address"
                 {...formik.getFieldProps('email')}
+                disabled={isEmailAuthenticated}
               />
               {formik.errors.email && formik.touched.email && (
                 <label className="mt-2 text-xs text-rose-600">
