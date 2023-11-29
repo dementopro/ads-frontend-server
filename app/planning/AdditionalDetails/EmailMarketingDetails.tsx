@@ -52,8 +52,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
 }) => {
   const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   const [isOpenEmailEditModal, setIsOpenEmailEditModal] = useState<boolean>(false);
-  const [isEmailAuthenticated, setIsEmailAuthenticated] =
-    useState<boolean>(false);
+  const [isEmailAuthenticated, setIsEmailAuthenticated] = useState<boolean>(false);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
