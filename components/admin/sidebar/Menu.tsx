@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 // Define an array of menu items with their properties
 const menuItems = [
   {
-    text: 'Home',
+    text: 'Get Started',
     href: '/home',
     icon: '/images/sidebar/home.svg',
     activeIcon: '/images/sidebar/active/home.svg'
@@ -37,7 +37,7 @@ const menuItems = [
       },
       {
         text: 'Social Media',
-        href: '/contentType/seo',
+        href: '/contentType/socialMedia',
       },
       {
         text: 'Email Marketing',

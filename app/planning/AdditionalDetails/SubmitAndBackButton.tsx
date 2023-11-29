@@ -6,6 +6,8 @@ import axios from 'axios';
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { Spin, message } from 'antd';
 import { formValidUrl } from '@/utils';
+import { useRouter } from 'next/navigation';
+import LoadingSpin from '../LoadingSpin';
 
 interface SubmitAndBackButtonProps {
   activeButtonIndex: number;
@@ -22,6 +24,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
 }) => {
   const { setOnpage, setOffpage, setCompany, company, setEmailInstruction } =
     useSeoAnalyzerContext();
+  const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -135,11 +138,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   return (
     <div className="flex items-center gap-10 self-stretch mt-[32px]">
       {contextHolder}
-      {isLoading && (
-        <div className="fixed flex items-center justify-center w-screen h-screen bg-black/40 z-[99999] top-0 left-0">
-          <Spin />
-        </div>
-      )}
+      {isLoading && <LoadingSpin />}
       <p className="w-[619px] text-[color:var(--primary-50,#F7F7FF)] h-[18px] text-[15px] not-italic font-medium leading-[normal]">
         Submit related helpful information to help us improve your
         recommendations!
@@ -147,7 +146,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
       <button
         className="flex h-11 justify-center items-center gap-4 flex-[1_0_0] border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
         onClick={() => {
-          setActiveButtonIndex(activeButtonIndex - 1);
+          router.push('/home');
         }}
       >
         Back

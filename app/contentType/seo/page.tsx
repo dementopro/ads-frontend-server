@@ -124,7 +124,7 @@ const PlanningPage = () => {
             <Button
               isActivated={activeSeoType == 0}
               onClick={() => {
-                router.push('/planning?step=2')
+                router.push('/planning?step=2&type=0')
                 setActiveSeoType(0)
               }}
             >
@@ -134,7 +134,7 @@ const PlanningPage = () => {
             <Button
               isActivated={activeSeoType == 1}
               onClick={() => {
-                router.push('/planning?step=2')
+                router.push('/planning?step=2&type=1')
                 setActiveSeoType(1)
               }}
             >
@@ -144,6 +144,18 @@ const PlanningPage = () => {
           </div>
           <div className={`${styles.onPageDiv}`}>
           { activeSeoType == 0 ? <OnPage page={page} /> : <OffPage page={page} /> }
+          </div>
+          <div className='w-full mt-6'>
+            <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">
+              <button
+                className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
+                onClick={() => {
+                  router.push(`/planning?step=2&type=${activeSeoType}`)
+                }}
+              >
+                Back
+              </button>
+            </div>
           </div>
         </>
       </Spin>

@@ -6,25 +6,18 @@ import {
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
-import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EventMarketingDetails';
+import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
 import { FormikHelpers, useFormik } from 'formik';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Spin, message } from 'antd';
-import { AccountContext } from '@/context/account';
-import AddCompany from './AddCompany';
 import AddCompanyDetails from './AddCompanyDetails';
-import AddInfoButton from './AddInfoButton';
 import AdminLayout from '@/layout/admin';
 import BackButton from './Recommendations/BackButton';
 import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
 import { CompanyDetailForm } from '@/types/planning';
 import { CompanyValidate } from '@/lib/validate';
-import Competitors from './AdditionalDetails/Competitors';
-import ContentTypeSection from './ContentTypeSection';
-import CustomerProfile from './AdditionalDetails/CustomerProfile';
 import GmailRecommendation from './Recommendations/Gmail';
-import HistoricalData from './AdditionalDetails/HistoricalData';
 import HorizontalStepper from './HorizontalStepper';
 import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
@@ -32,12 +25,12 @@ import OffPage from './Recommendations/OffPage';
 import OnPage from './Recommendations/OnPage';
 import ReactGATag from '@/components/ReactGATag';
 import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
-import TargetAudience from './AdditionalDetails/TargetAudience';
 import axios from '@/lib/axios';
-import styles from './planning.module.css';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Button from './TabButton';
 import { useSeoAnalyzerContext } from '@/context/seo';
+import BugReportModal from '@/components/contactUs/BugReportModal';
+import { useDisclosure } from '@nextui-org/react';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -66,6 +59,7 @@ async function getHistory(id?: number) {
 }
 
 const PlanningPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { company } = useSeoAnalyzerContext();
   const [messageApi, contextHolder] = message.useMessage();
@@ -91,8 +85,9 @@ const PlanningPage = () => {
     schedule: {},
   });
 
-  const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
+  const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
+  const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange } = useDisclosure();
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -113,6 +108,10 @@ const PlanningPage = () => {
 
   useEffect(() => {
     if (company) {
+      if (company.name === '' || company.website === '' || company.description === '') {
+        router.push('/home');
+      }
+
       formik.setValues({
         companyName: company.name,
         competitors: company.competitors,
@@ -125,13 +124,18 @@ const PlanningPage = () => {
         targetAudience: company.target_audice,
         websiteURL: company.website
       })
+      setFormData({
+        ...company
+      })
     }
   }, [company])
 
   useEffect(() => {
     if (searchParams) {
-      const step = parseInt(searchParams.get('step') || '0');
+      const step = parseInt(searchParams.get('step') || '1');
+      const type = parseInt(searchParams.get('type') || '0');
       setActiveButtonIndex(step);
+      setActiveSeoType(type);
     }
   }, [searchParams]);
 
@@ -164,16 +168,6 @@ const PlanningPage = () => {
         wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]"
       >
         <section className="flex flex-col justify-center">
-          {activeButtonIndex == 0 && (
-            <div className="flex gap-x-[8px] mb-6">
-              <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
-                ✨
-              </p>
-              <h1 className="text-2xl w-full h-[29px] font-medium text-white">
-                Get&nbsp;Started
-              </h1>
-            </div>
-          )}
           {activeButtonIndex == 1 && (
             <div className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
               <div className="flex gap-x-[8px]">
@@ -219,19 +213,10 @@ const PlanningPage = () => {
           <HorizontalStepper
             activeButtonIndex={activeButtonIndex}
             setActiveButtonIndex={setActiveButtonIndex}
+            formik={formik}
+            formData={formData}
           />
         </section>
-        {activeButtonIndex == 0 && (
-          <div className="flex flex-col text-[15px]">
-            <AddCompany formik={formik} />
-            {/* <AddCompanyDetails formik={formik} /> */}
-            <ContentTypeSection setFormData={setFormData} formData={formData} />
-            <AddInfoButton
-              setActiveButtonIndex={setActiveButtonIndex}
-              formik={formik}
-            />
-          </div>
-        )}
         {activeButtonIndex == 1 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <div className="flex flex-col">
@@ -352,9 +337,12 @@ const PlanningPage = () => {
           <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
             Find a bug or encountering an error? Submit an issue report with
             us&nbsp;
-            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline">
+            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline" onClick={() => {
+              onOpenBugReportModal();
+            }}>
               here
             </button>
+            <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} />
           </p>
           <Image
             width={28}

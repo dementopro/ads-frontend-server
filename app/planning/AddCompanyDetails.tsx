@@ -34,6 +34,9 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('targetAudience')}
             />
+            <label className={`text-xs text-right mt-2 ${(formik.errors.targetAudience && formik.touched.targetAudience) ? 'text-rose-600' : 'text-primary-gray'}`}>
+              {formik.values.targetAudience.length} / 2000
+            </label>
           </div>
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
@@ -59,6 +62,9 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('idealCustomerProfile')}
             />
+            <label className={`text-xs text-right mt-2 ${(formik.errors.idealCustomerProfile && formik.touched.idealCustomerProfile) ? 'text-rose-600' : 'text-primary-gray'}`}>
+              {formik.values.idealCustomerProfile.length} / 2000
+            </label>
           </div>
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
@@ -84,6 +90,9 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('competitors')}
             />
+            <label className={`text-xs text-right mt-2 ${(formik.errors.competitors && formik.touched.competitors) ? 'text-rose-600' : 'text-primary-gray'}`}>
+              {formik.values.competitors.length} / 2000
+            </label>
           </div>
         </div>
 

@@ -20,7 +20,7 @@ import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
-import { tabsList } from '@/app/planning/AdditionalDetails/EventMarketingDetails';
+import { tabsList } from '@/app/planning/AdditionalDetails/EmailMarketingDetails';
 
 const Page = () => {
   const router = useRouter();
