@@ -110,7 +110,7 @@ const HomePage = () => {
     marketing_template: '',
     schedule: {},
   });
-  const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange } = useDisclosure();
+  const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -206,7 +206,7 @@ const HomePage = () => {
             }}>
               here
             </button>
-            <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} />
+            <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} onClose={onCloseBugReportModal} />
           </p>
           <Image
             width={28}

@@ -1,3 +1,6 @@
+import React, { FC } from 'react';
+import { BiInfoCircle } from 'react-icons/bi';
+import { useFormik } from 'formik';
 import {
   Button,
   Modal,
@@ -6,18 +9,15 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import React, { FC, Fragment, useState } from 'react';
-import { BiCalendarEvent, BiCheck, BiInfoCircle } from 'react-icons/bi';
-import { Listbox, Transition } from '@headlessui/react';
-import { BiChevronDown } from 'react-icons/bi';
-import { useSeoAnalyzerContext } from '@/context/seo';
-import { FormikHelpers, useFormik } from 'formik';
-import { CompanyValidate } from '@/lib/validate';
-import { DETAIL_LIMIT } from '@/data/constant';
+import { message } from 'antd'
+import axios from 'axios';
+
+import { DETAIL_LIMIT, SUCCESS_CODE } from '@/data/constant';
 
 interface BugReportModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
+  onClose: () => void;
 }
 
 type FormData = {
@@ -39,7 +39,9 @@ const FormValidate = (values: FormData) => {
 const BugReportModal: FC<BugReportModalProps> = ({
   isOpen,
   onOpenChange,
+  onClose
 }) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const formik = useFormik<FormData>({
     initialValues: {
       email: '',
@@ -50,12 +52,38 @@ const BugReportModal: FC<BugReportModalProps> = ({
     validate: FormValidate
   })
 
-  async function onSubmit(
-    values: FormData,
-    actions: FormikHelpers<FormData>
-  ) {}
+  async function onSubmit() {
+    if (
+      formik.errors.email == '' &&
+      formik.errors.title == '' &&
+      formik.errors.description == '') {
+
+      const response = await axios({
+        url: '/fapi/issue',
+        method: 'POST',
+        data: formik.values,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (response.status === 200) {
+        const data = response.data
+        if (data.status === SUCCESS_CODE) {
+          messageApi.success(data.message || 'Submit success');
+          formik.resetForm();
+          onClose();
+        } else {
+          messageApi.error(data.message || 'Something went wrong');
+        }
+      } else {
+        messageApi.error(response.statusText || 'Something went wrong');
+      }
+    }
+  }
 
   return (
+    <>
+    {contextHolder}
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
@@ -150,7 +178,7 @@ const BugReportModal: FC<BugReportModalProps> = ({
               </button>
               <button
                 className="flex items-center justify-center flex-1 h-[44px] rounded-lg text-white bg-primary-purple hover:brightness-110 border-background-500"
-                onClick={onClose}
+                onClick={onSubmit}
               >
                 Submit
               </button>
@@ -159,6 +187,7 @@ const BugReportModal: FC<BugReportModalProps> = ({
         )}
       </ModalContent>
     </Modal>
+    </>
   );
 };
 
