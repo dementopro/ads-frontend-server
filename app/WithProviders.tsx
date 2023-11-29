@@ -13,7 +13,7 @@ const WithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <AccountProvider>
       <SeoAnalyzerProvider>
-        <GoogleOAuthProvider clientId="176418914084-gk8rf20881ifp8els3utulr46o80l5u5.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="176418914084-3fcpqahi01ru9tv4doiah06utfrb085l.apps.googleusercontent.com">
           {children}
         </GoogleOAuthProvider>
       </SeoAnalyzerProvider>
