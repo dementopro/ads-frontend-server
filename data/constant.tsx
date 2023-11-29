@@ -26,3 +26,5 @@ export const breadCrumbMap: Record<string, string[]> = {
   '/socialInsights': ['Social Insights'],
   '/profile': ['User Profile'],
 }
+
+export const DETAIL_LIMIT = 2000;

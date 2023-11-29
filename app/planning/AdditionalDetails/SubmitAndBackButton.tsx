@@ -63,12 +63,10 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
             setOnpage(res.data.issues);
             const offpages = JSON.parse(res.data.strategies);
             let temp: Array<SeoAnalysis> = [];
-            offpages.map((pg: any) => {
-              Object.keys(pg).map((key) => {
-                temp.push({
-                  url: key,
-                  warnings: pg[key],
-                });
+            Object.keys(offpages).map((key) => {
+              temp.push({
+                url: key,
+                warnings: offpages[key],
               });
             });
             setOffpage(temp);

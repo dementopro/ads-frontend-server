@@ -1,6 +1,7 @@
+import { DETAIL_LIMIT } from '@/data/constant';
+import { Input } from 'antd';
 import React from 'react';
 import styles from '@/./app/planning/planning.module.css';
-import { Input } from 'antd';
 
 const CustomerProfile = () => {
   return (
@@ -9,7 +10,7 @@ const CustomerProfile = () => {
         4.&nbsp;Add ideal customer profile
       </p>
       <Input.TextArea
-        maxLength={2000}
+        maxLength={DETAIL_LIMIT}
         className={`${styles.description} placeholder-shown:border-[#1B1C21]`} // Apply your custom class here
         placeholder="Ex: industry, geography, pain points"
         style={{

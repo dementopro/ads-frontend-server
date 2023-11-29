@@ -154,10 +154,6 @@ const HomePage = () => {
     actions: FormikHelpers<CompanyForm>
   ) {}
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setPrompt(e.target.value);
-  }
-
   return (
     <AdminLayout>
       {contextHolder}
@@ -195,7 +191,6 @@ const HomePage = () => {
         </section>
         <div className="flex flex-col text-[15px]">
           <AddCompany formik={formik} />
-          {/* <AddCompanyDetails formik={formik} /> */}
           <ContentTypeSection setFormData={setFormData} formData={formData} />
           <AddInfoButton
             formik={formik}

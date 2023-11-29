@@ -3,6 +3,7 @@ import styles from '@/app/planning/planning.module.css';
 import { Input } from 'antd';
 import { useFormik } from 'formik';
 import { CompanyForm } from '@/types/planning';
+import { DETAIL_LIMIT } from '@/data/constant';
 
 interface AddCompanyProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
@@ -87,7 +88,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
                 ? '!border-rose-600'
                 : 'border-none'
             } `}
-            maxLength={2000}
+            maxLength={DETAIL_LIMIT}
             placeholder="Enter your company description"
             style={{
               minHeight: '138px',

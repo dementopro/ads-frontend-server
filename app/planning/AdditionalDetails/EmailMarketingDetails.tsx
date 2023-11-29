@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import { BiCalendar } from 'react-icons/bi';
 import { useDisclosure } from '@nextui-org/react';
 import EmailScheduleModal from './EmailScheduleModal';
+import { DETAIL_LIMIT } from '@/data/constant';
 import EmailEditModal from './EmailEditModal';
 
 interface EmailMarketingDetailsProps {
@@ -141,7 +142,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               {...formik.getFieldProps('marketing_template')}
             />
             <label className={`text-xs text-right mt-2 ${(formik.errors.marketing_template && formik.touched.marketing_template) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.marketing_template.length} / 2000
+              {formik.values.marketing_template.length} / {DETAIL_LIMIT}
             </label>
           </div>
 
@@ -188,7 +189,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               {...formik.getFieldProps('targetAudience')}
             />
             <label className={`text-xs text-right mt-2 ${(formik.errors.targetAudience && formik.touched.targetAudience) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.targetAudience.length} / 2000
+              {formik.values.targetAudience.length} / {DETAIL_LIMIT}
             </label>
           </div>
         </div>
@@ -216,7 +217,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               {...formik.getFieldProps('idealCustomerProfile')}
             />
             <label className={`text-xs text-right mt-2 ${(formik.errors.idealCustomerProfile && formik.touched.idealCustomerProfile) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.idealCustomerProfile.length} / 2000
+              {formik.values.idealCustomerProfile.length} / {DETAIL_LIMIT}
             </label>
           </div>
         </div>

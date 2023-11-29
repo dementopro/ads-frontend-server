@@ -33,13 +33,13 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
     setSelectedComponentIndex(index);
     setActiveButtonIndex(index);
   };
-  
+
   const handleSubmit = (index: number) => {
     if (
-      formData.content_type.toLowerCase() == 'seo' &&
-      formik.errors.idealCustomerProfile == '' &&
-      formik.errors.targetAudience == '' &&
-      formik.errors.competitors == ''
+      formData.content_type.toLowerCase() === 'seo' &&
+      formik.errors.idealCustomerProfile === '' &&
+      formik.errors.targetAudience === '' &&
+      formik.errors.competitors === ''
     ) {
       setIsLoading(true);
       setCompany({
@@ -65,16 +65,14 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
           website_url: formValidUrl(formik.values.websiteURL),
         })
         .then((res) => {
-          if (res.data.status == true) {
+          if (res.data.status) {
             setOnpage(res.data.issues);
             const offpages = JSON.parse(res.data.strategies);
             let temp: Array<SeoAnalysis> = [];
-            offpages.map((pg: any) => {
-              Object.keys(pg).map((key) => {
-                temp.push({
-                  url: key,
-                  warnings: pg[key],
-                });
+            Object.keys(offpages).map((key) => {
+              temp.push({
+                url: key,
+                warnings: offpages[key],
               });
             });
             setOffpage(temp);
@@ -89,11 +87,11 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
           setIsLoading(false);
         });
     } else if (
-      formData.content_type.toLowerCase() == 'email marketing' &&
-      formik.errors.idealCustomerProfile == '' &&
-      formik.errors.targetAudience == '' &&
-      formik.errors.email == '' &&
-      formik.errors.marketing_template == ''
+      formData.content_type.toLowerCase() === 'email marketing' &&
+      formik.errors.idealCustomerProfile === '' &&
+      formik.errors.targetAudience === '' &&
+      formik.errors.email === '' &&
+      formik.errors.marketing_template === ''
     ) {
       setIsLoading(true);
       setCompany({
@@ -123,7 +121,7 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
           email_template: formik.values.marketing_template
         })
         .then((res) => {
-          if (res.data.status == true) {
+          if (res.data.status) {
             const instruction = JSON.parse(res.data.instruction);
             setEmailInstruction(instruction);
             setActiveButtonIndex(index);

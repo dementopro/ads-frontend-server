@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import React, { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useState, useEffect } from 'react';
 import { BiCalendarEvent, BiCheck } from 'react-icons/bi';
 import { Listbox, Transition } from '@headlessui/react';
 import { BiChevronDown } from 'react-icons/bi';
@@ -16,33 +16,26 @@ const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 interface DayScheduleProps {
   day: number;
-  onSelect: (value: any) => void;
+  onSelect: (index: number, value: any) => void;
   onClick: () => void;
   onAddTime: () => void;
+  schedules: number[] | null;
 }
 
 const DaySchedule: FC<DayScheduleProps> = ({
   day,
-  // schedules,
+  schedules,
   onSelect,
   onClick,
   onAddTime,
 }) => {
-  const [schedules, setSchedules] = useState<Array<number> | null>(null);
-
   return (
     <div className="flex flex-wrap w-full gap-4 mt-4">
       <div
         className={`bg-background-300 rounded-lg w-[128px] h-[48px] ${
           !!schedules ? 'border border-primary-gray' : 'border-none'
         } flex items-center justify-center text-primary-gray`}
-        onClick={() => {
-          if (!schedules) {
-            setSchedules([]);
-          } else {
-            setSchedules(null);
-          }
-        }}
+        onClick={onClick}
       >
         {days[day]}
       </div>
@@ -51,8 +44,8 @@ const DaySchedule: FC<DayScheduleProps> = ({
           key={i}
           value={schedules[i]}
           onChange={(value) => {
-            // onSelect(value);
-            setSchedules((prev) => prev ? prev.map((val, index) => index == i ? value : val) : prev)
+            onSelect(i, value);
+            // setSchedules((prev) => prev ? prev.map((val, index) => index == i ? value : val) : prev)
           }}
         >
           <div className="relative">
@@ -122,9 +115,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
       {schedules && (
         <button
           className="text-base bg-transparent text-primary-purple rounded-lg w-[128px] h-[48px] flex items-center justify-center hover:brightness-110"
-          onClick={() => {
-            setSchedules([...schedules, -1]);
-          }}
+          onClick={onAddTime}
         >
           Add Time
         </button>
@@ -143,6 +134,13 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
   onOpenChange,
 }) => {
   const { company, setCompany } = useSeoAnalyzerContext();
+  const [schedules, setSchedules] = useState<any>({});
+
+  useEffect(() => {
+    if (company) {
+      setSchedules(company.schedule);
+    }
+  }, [company])
 
   return (
     <Modal
@@ -173,18 +171,33 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
                   <DaySchedule
                     key={i}
                     day={i}
-                    onSelect={(value) => {}}
-                    // schedules={company.schedule[i]}
-                    onClick={() => {}}
+                    onSelect={(idx, value) => {
+                      let newSchedules = {
+                        ...schedules,
+                        [day.toLowerCase()]: schedules[day.toLowerCase()].map((val: any, _idx: number) => _idx === idx ? value : val)
+                      }
+                      setSchedules(newSchedules);
+                    }}
+                    schedules={schedules[day.toLowerCase()]}
+                    onClick={() => {
+                      if (!schedules[day.toLowerCase()]) {
+                        setSchedules({
+                          ...schedules,
+                          [day.toLowerCase()]: []
+                        })
+                      } else {
+                        setSchedules({
+                          ...schedules,
+                          [day.toLowerCase()]: null
+                        })
+                      }
+                    }}
                     onAddTime={() => {
                       const newSchedule = {
-                        ...company.schedule,
-                        [i]: [...company.schedule[i], -1],
+                        ...schedules,
+                        [day.toLowerCase()]: [...schedules[day.toLowerCase()], -1],
                       };
-                      setCompany({
-                        ...company,
-                        schedule: newSchedule,
-                      });
+                      setSchedules(newSchedule);
                     }}
                   />
                 ))}
@@ -199,7 +212,13 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
               </button>
               <button
                 className="flex items-center justify-center flex-1 h-[44px] rounded-lg text-white bg-primary-purple hover:brightness-110 border-background-500"
-                onClick={onClose}
+                onClick={() => {
+                  setCompany({
+                    ...company,
+                    schedule: schedules
+                  })
+                  onClose();
+                }}
               >
                 Ok
               </button>

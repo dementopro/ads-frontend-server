@@ -1,6 +1,7 @@
 import { LoginForm, PaymentForm, RegisterForm, ResetPasswordForm } from "@/types/auth"
 
 import { CompanyForm } from "@/types/planning";
+import { DETAIL_LIMIT } from "@/data/constant";
 import axios from '@/lib/axios';
 
 export function loginValidate(values: LoginForm) {
@@ -106,11 +107,11 @@ export function CompanyValidate(values: CompanyForm) {
 
   errors.companyName = values?.companyName ? values.companyName.length > 50 ? 'Company Name should be shorter than 50 characters' : '' : 'Company Name is required';
   errors.websiteURL = values?.websiteURL ? /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/.test(values.websiteURL) ? '' : 'Enter a valid website url' : 'Website URL is required';
-  errors.description = values?.description ? (values.description.length >= 50 && values.description.length <= 2000) ? '' : 'Company description should be 50 - 2000 characters' : 'Company description is required';
+  errors.description = values?.description ? (values.description.length >= 50 && values.description.length <= DETAIL_LIMIT) ? '' : `Company description should be 50 - ${DETAIL_LIMIT} characters` : 'Company description is required';
   errors.sellingDescription = values?.sellingDescription ? '' : 'Company selling description is required';
-  errors.idealCustomerProfile = values?.idealCustomerProfile ? (values.description.length <= 2000) ? '' : 'Company description should be 50 - 2000 characters' : 'Ideal customer profile is required';
-  errors.competitors = values?.competitors ? (values.description.length <= 2000) ? '' : 'Company description should be 50 - 2000 characters' : 'Competitor is required';
-  errors.targetAudience = values?.targetAudience ? (values.description.length <= 2000) ? '' : 'Company description should be 50 - 2000 characters' : 'Target Audience is required';
+  errors.idealCustomerProfile = values?.idealCustomerProfile ? (values.description.length <= DETAIL_LIMIT) ? '' : `Company description should be 50 - ${DETAIL_LIMIT} characters` : 'Ideal customer profile is required';
+  errors.competitors = values?.competitors ? (values.description.length <= DETAIL_LIMIT) ? '' : `Company description should be 50 - ${DETAIL_LIMIT} characters` : 'Competitor is required';
+  errors.targetAudience = values?.targetAudience ? (values.description.length <= DETAIL_LIMIT) ? '' : `Company description should be 50 - ${DETAIL_LIMIT} characters` : 'Target Audience is required';
   errors.email = values?.email ? /^\w+([\.-]?\w+)*@gmail\.com$/.test(values?.email) ? '' : 'Email is not valid gmail!' : 'Email is required';
   errors.marketing_template = values?.marketing_template ? '' : 'Marketing Template is required';
 

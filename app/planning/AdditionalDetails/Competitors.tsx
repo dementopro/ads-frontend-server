@@ -1,6 +1,7 @@
+import { DETAIL_LIMIT } from '@/data/constant';
+import { Input } from 'antd';
 import React from 'react';
 import styles from '@/./app/planning/planning.module.css';
-import { Input } from 'antd';
 
 const Competitors = () => {
   return (
@@ -9,7 +10,7 @@ const Competitors = () => {
         5.&nbsp;Add your competitors
       </p>
       <Input.TextArea
-        maxLength={2000}
+        maxLength={DETAIL_LIMIT}
         className={`${styles.description} placeholder-shown:border-[#1B1C21]`} // Apply your custom class here
         placeholder="Who is currently ranking in your niche?"
         style={{

@@ -13,6 +13,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import { FormikHelpers, useFormik } from 'formik';
 import { CompanyValidate } from '@/lib/validate';
+import { DETAIL_LIMIT } from '@/data/constant';
 
 interface BugReportModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ const FormValidate = (values: FormData) => {
   const errors = {} as FormData;
 
   errors.title = values?.title ? (values.title.length < 50) ? '' : 'Title should be less than 50 characters' : 'Title is required';
-  errors.description = values?.description ? (values.description.length >= 50 && values.description.length <= 2000) ? '' : 'Description should be 50 - 2000 characters' : 'Description is required';
+  errors.description = values?.description ? (values.description.length >= 50 && values.description.length <= DETAIL_LIMIT) ? '' : `Description should be 50 - ${DETAIL_LIMIT} characters` : 'Description is required';
   errors.email = values?.email ? /^\w+([\.-]?\w+)*@gmail\.com$/.test(values?.email) ? '' : 'Email is not valid gmail!' : 'Email is required';
 
   return errors;

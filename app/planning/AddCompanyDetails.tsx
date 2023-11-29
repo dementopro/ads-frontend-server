@@ -3,6 +3,7 @@ import styles from './planning.module.css';
 import { useFormik } from 'formik';
 import React, { FC } from 'react';
 import Image from 'next/image';
+import { DETAIL_LIMIT } from '@/data/constant';
 
 interface AddCompanyDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
@@ -22,7 +23,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
-              maxLength={2000}
+              maxLength={DETAIL_LIMIT}
               className={`border bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 rounded-lg ${
                 formik.errors.targetAudience && formik.touched.targetAudience
                   ? 'border-rose-600'
@@ -34,8 +35,14 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('targetAudience')}
             />
-            <label className={`text-xs text-right mt-2 ${(formik.errors.targetAudience && formik.touched.targetAudience) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.targetAudience.length} / 2000
+            <label
+              className={`text-xs text-right mt-2 ${
+                formik.errors.targetAudience && formik.touched.targetAudience
+                  ? 'text-rose-600'
+                  : 'text-primary-gray'
+              }`}
+            >
+              {formik.values.targetAudience.length} / {DETAIL_LIMIT}
             </label>
           </div>
         </div>
@@ -49,7 +56,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
-              maxLength={2000}
+              maxLength={DETAIL_LIMIT}
               className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
                 formik.errors.idealCustomerProfile &&
                 formik.touched.idealCustomerProfile
@@ -62,8 +69,15 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('idealCustomerProfile')}
             />
-            <label className={`text-xs text-right mt-2 ${(formik.errors.idealCustomerProfile && formik.touched.idealCustomerProfile) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.idealCustomerProfile.length} / 2000
+            <label
+              className={`text-xs text-right mt-2 ${
+                formik.errors.idealCustomerProfile &&
+                formik.touched.idealCustomerProfile
+                  ? 'text-rose-600'
+                  : 'text-primary-gray'
+              }`}
+            >
+              {formik.values.idealCustomerProfile.length} / {DETAIL_LIMIT}
             </label>
           </div>
         </div>
@@ -77,10 +91,9 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             } flex flex-col w-full`}
           >
             <textarea
-              maxLength={2000}
+              maxLength={DETAIL_LIMIT}
               className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
-                formik.errors.competitors &&
-                formik.touched.competitors
+                formik.errors.competitors && formik.touched.competitors
                   ? '!border-rose-600'
                   : 'border-none'
               } w-full `}
@@ -90,8 +103,14 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
               }}
               {...formik.getFieldProps('competitors')}
             />
-            <label className={`text-xs text-right mt-2 ${(formik.errors.competitors && formik.touched.competitors) ? 'text-rose-600' : 'text-primary-gray'}`}>
-              {formik.values.competitors.length} / 2000
+            <label
+              className={`text-xs text-right mt-2 ${
+                formik.errors.competitors && formik.touched.competitors
+                  ? 'text-rose-600'
+                  : 'text-primary-gray'
+              }`}
+            >
+              {formik.values.competitors.length} / {DETAIL_LIMIT}
             </label>
           </div>
         </div>

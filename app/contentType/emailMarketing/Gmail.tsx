@@ -24,6 +24,7 @@ import axios from 'axios';
 import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
 import Checkbox from './Checkbox';
+import { DETAIL_LIMIT } from '@/data/constant';
 
 const GmailMarketing = () => {
   const router = useRouter();
@@ -194,7 +195,7 @@ const GmailMarketing = () => {
                     <div className="mt-2">
                       {edits.includes(i) == true ? (
                         <Input.TextArea
-                          maxLength={2000}
+                          maxLength={DETAIL_LIMIT}
                           className={`${styles.description} placeholder-shown:border-[#1B1C21] !mt-0 !p-2 border-white/20`} // Apply your custom class here
                           placeholder="Ex: industry, geography, pain points"
                           style={{
