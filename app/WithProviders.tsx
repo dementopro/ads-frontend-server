@@ -12,7 +12,7 @@ const WithProviders = ({ children , session}: { children: React.ReactNode, sessi
     <AccountProvider>
       <SessionProvider session={session} refetchInterval={60} refetchOnWindowFocus>
         <SeoAnalyzerProvider>
-          <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID as string}>
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
             {children}
           </GoogleOAuthProvider>
         </SeoAnalyzerProvider>
