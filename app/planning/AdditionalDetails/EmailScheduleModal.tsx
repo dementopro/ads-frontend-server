@@ -49,10 +49,10 @@ const DaySchedule: FC<DayScheduleProps> = ({
           }}
         >
           <div className="relative">
-            <Listbox.Button className="relative bg-background-200 w-[128px] h-[48px] py-2 pl-3 pr-10 text-left hover:brightness-110 rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+            <Listbox.Button className="relative bg-background-200 z-10 w-[128px] h-[48px] py-2 pl-3 pr-10 text-left hover:brightness-110 rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate">
-                {`${schedules[i] < 0 ? 'Times' : schedules[i] == 12 ? 12 : schedules[i] % 12}${
-                  schedules[i] > 0 ? (schedules[i] >= 13 ? 'pm' : 'am') : ''
+                {`${schedules[i] < 0 ? 'Times' : (schedules[i] === 0 || schedules[i] === 12) ? 12 : schedules[i] % 12}${
+                  schedules[i] >= 0 ? (schedules[i] >= 12 ? 'pm' : 'am') : ''
                 }`}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -68,7 +68,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base rounded-md shadow-lg bg-background-200 max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute w-full py-1 mt-1 z-[9999] overflow-auto text-base rounded-md shadow-lg bg-background-200 max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
                 <Listbox.Option
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
@@ -101,7 +101,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {`${idx == 12 ? 12 : idx % 12}${idx >= 13 ? 'pm' : 'am'}`}
+                          {`${(idx === 0 || idx === 12) ? 12 : idx % 12}${idx >= 12 ? 'pm' : 'am'}`}
                         </span>
                       </>
                     )}

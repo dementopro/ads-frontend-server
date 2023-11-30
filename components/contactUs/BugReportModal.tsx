@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { BiInfoCircle } from 'react-icons/bi';
+import React, { FC, useState } from 'react';
+import { BiFileBlank, BiInfoCircle } from 'react-icons/bi';
 import { useFormik } from 'formik';
 import {
   Button,
@@ -30,7 +30,7 @@ const FormValidate = (values: FormData) => {
 
   errors.title = values?.title ? (values.title.length < 50) ? '' : 'Title should be less than 50 characters' : 'Title is required';
   errors.description = values?.description ? (values.description.length >= 50 && values.description.length <= DETAIL_LIMIT) ? '' : `Description should be 50 - ${DETAIL_LIMIT} characters` : 'Description is required';
-  errors.email = values?.email ? /^\w+([\.-]?\w+)*@gmail\.com$/.test(values?.email) ? '' : 'Email is not valid gmail!' : 'Email is required';
+  errors.email = values?.email ? /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(values?.email) ? '' : 'Email is not valid email!' : 'Email is required';
 
   return errors;
 }
@@ -41,6 +41,7 @@ const BugReportModal: FC<BugReportModalProps> = ({
   onClose
 }) => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [uploadImage, setUploadImage] = useState<File | null>(null);
   const formik = useFormik<FormData>({
     initialValues: {
       email: '',
@@ -166,6 +167,21 @@ const BugReportModal: FC<BugReportModalProps> = ({
                       </label>
                     )}
                   </div>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <label className='text-primary-purple cursor-pointer flex items-center gap-2' htmlFor='upload_image'>
+                    <BiFileBlank />
+                    Upload Image
+                    <input type='file' id='upload_image' onChange={(e) => {
+                      console.log(e.currentTarget.files);
+                      if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+                        setUploadImage(e.currentTarget.files[0]);
+                      }
+                    }} hidden />
+                  </label>
+                  <p className='text-white/70'>
+                    { uploadImage && uploadImage.name }
+                  </p>
                 </div>
               </ModalBody>
               <ModalFooter className="flex w-full gap-6">

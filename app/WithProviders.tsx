@@ -7,11 +7,7 @@ import { SeoAnalyzerProvider } from "@/context/seo";
 import { useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const WithProviders = ({ children, session }: { children: React.ReactNode, session: Session | null }) => {
-  useEffect(() => {
-    // Clear localStorage when this component is mounted in the browser
-    localStorage.clear();
-  }, []);
+const WithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <AccountProvider>
       <SessionProvider session={session} refetchInterval={60} refetchOnWindowFocus>

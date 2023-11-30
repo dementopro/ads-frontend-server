@@ -40,14 +40,14 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute z-[9999] right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none">
-              <div className="px-1 py-1 ">
+            <Menu.Items className="absolute z-[9999] right-0 w-56 mt-2 origin-top-right bg-background-100 text-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none">
+              <div className="px-1 py-1">
                 <Menu.Item>
                   {({ active }) => (
                     <button
                       className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        active && 'bg-violet-500'
+                      } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm text-white`}
                       onClick={() => {
                         let data: string = company.marketing_template as string;
                         data += '<br>';
@@ -69,8 +69,8 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                         tempLink.click();
                       }}
                     >
-                      <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />
                       Download Selected
+                      <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />
                     </button>
                   )}
                 </Menu.Item>
@@ -78,8 +78,8 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                   {({ active }) => (
                     <button
                       className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        active && 'bg-violet-500'
+                      } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm text-white`}
                       onClick={() => {
                         let data: string = company.marketing_template as string;
                         data += '<br>';
@@ -100,8 +100,8 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                         tempLink.click();
                       }}
                     >
-                      <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />
                       Download All
+                      <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />
                     </button>
                   )}
                 </Menu.Item>
@@ -109,10 +109,11 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                   {({ active }) => (
                     <button
                       className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        active && 'bg-violet-500'
+                      } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm text-white`}
                       onClick={() => {}}
                     >
+                      Launch to Gmail
                       <Image
                         src="/images/planning/gmail.svg"
                         alt={'Optimization'}
@@ -120,7 +121,6 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                         width={20}
                         height={20}
                       />
-                      Download All
                     </button>
                   )}
                 </Menu.Item>

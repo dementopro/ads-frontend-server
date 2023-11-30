@@ -42,7 +42,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
             width={24}
             height={24}
           />
-          <h3>Technical Optimizations</h3>
+          <h3>{ page?.url }</h3>
           <BiChevronDown />
         </div>
         <button className="flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {

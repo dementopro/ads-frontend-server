@@ -1,6 +1,7 @@
 import {
   BiChevronDown,
   BiChevronUp,
+  BiCopy,
   BiEdit,
   BiInfoCircle,
   BiRecycle,
@@ -205,32 +206,46 @@ const GmailMarketing = () => {
                     </div>
                   </div>
                 </div>
-                <button
-                  className="absolute flex items-center gap-1 text-primary-purple top-4 right-6"
-                  onClick={() => {
-                    if (edits.includes(i)) {
-                      setEdits((prev) => prev.filter((val) => val != i));
-                      let newEmailInstruction: EmailInstruction = {
-                        ...emailInstruction,
-                        email_options: optionEdits
-                      };
+                <div className='absolute flex items-center gap-4 top-4 right-6'>
+                  <button
+                    className="flex items-center gap-1 text-primary-purple"
+                    onClick={() => {
+                      try {
+                        navigator.clipboard.writeText(option.email_template);
+                        messageApi.success('Copied successfully!')
+                      } catch (err) {
+                        messageApi.error('Something went wrong!')
+                        console.warn(err);
+                      }
+                    }}
+                  >
+                    <BiCopy className="w-5 h-5" />
+                    Copy
+                  </button>
+                  <button
+                    className="flex items-center gap-1 text-primary-purple"
+                    onClick={() => {
+                      if (edits.includes(i)) {
+                        setEdits((prev) => prev.filter((val) => val != i));
+                        let newEmailInstruction: EmailInstruction = {
+                          ...emailInstruction,
+                          email_options: optionEdits
+                        };
 
-                      setEmailInstruction(newEmailInstruction);
-                    } else {
-                      setEdits((prev) => [...prev, i]);
-                    }
-                  }}
-                  onChange={(value) => {
-                    console.log('changed value:', value);
-                  }}
-                >
-                  {edits.includes(i) ? (
-                    <BiSave className="w-5 h-5" />
-                  ) : (
-                    <BiEdit className="w-5 h-5" />
-                  )}
-                  {edits.includes(i) ? 'Save' : 'Edit'}
-                </button>
+                        setEmailInstruction(newEmailInstruction);
+                      } else {
+                        setEdits((prev) => [...prev, i]);
+                      }
+                    }}
+                  >
+                    {edits.includes(i) ? (
+                      <BiSave className="w-5 h-5" />
+                    ) : (
+                      <BiEdit className="w-5 h-5" />
+                    )}
+                    {edits.includes(i) ? 'Save' : 'Edit'}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
