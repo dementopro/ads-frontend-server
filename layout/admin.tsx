@@ -4,14 +4,12 @@ import ContentHeader from '@/components/admin/ContentHeader'; // Importing the C
 import { isUserLogin } from '@/lib/auth';
 import { useAccountContext, type AccountInterface } from '@/context/account';
 import React, { useEffect } from 'react';
-import { usePathname, useRouter, redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 // Define the AdminLayout component
 const AdminLayout = ({ children }: {
   children: React.ReactNode;
 }) => {
   const { account, isLoading, setAccount, setIsLogin } = useAccountContext();
-  const pathname: string = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     if (isLoading) {

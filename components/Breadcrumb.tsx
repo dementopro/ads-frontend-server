@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const Breadcrumb = () => {
   // Get the current pathname using the `usePathname` hook from Next.js
-  const pathname = usePathname();
+  const pathname: string | null = usePathname();
 
   return (
     <div className='flex items-center text-primary-gray gap-0 android:gap-4 ipadmini:gap-6'>
@@ -18,7 +18,7 @@ const Breadcrumb = () => {
       </Link>
       {/* Generate breadcrumb items based on the current pathname */}
       {
-        breadCrumbMap[pathname]?.map((item) => (
+        breadCrumbMap[pathname as string]?.map((item) => (
           <div key={item} className='flex items-center gap-0 android:gap-4 ipadmini:gap-6'>
             {/* Chevron icon */}
             <Icon icon={chevronRight} />

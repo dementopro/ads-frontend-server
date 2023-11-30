@@ -7,7 +7,7 @@ import { SeoAnalyzerProvider } from "@/context/seo";
 import { useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const WithProviders = ({ children }: { children: React.ReactNode }) => {
+const WithProviders = ({ children , session}: { children: React.ReactNode, session: Session | null }) => {
   return (
     <AccountProvider>
       <SessionProvider session={session} refetchInterval={60} refetchOnWindowFocus>

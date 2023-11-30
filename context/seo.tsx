@@ -101,8 +101,6 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     email_options: [],
     email_template_type: ''
   });
-  const pathname: string = usePathname();
-  const router = useRouter();
 
   // Provide the account data through the context to child components
   return (

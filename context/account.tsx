@@ -84,10 +84,6 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [creditInfo, setCreditInfo] = useState(false)
   const [nextPage, setNextPage] = useState("")
   const [selectedPlan, setSelectedPlan] = useState(-1);
-  const pathname: string = usePathname();
-  const router = useRouter();
-
-  // }, [])
 
   // Function to fetch and update user account data
   async function updateAccount() {

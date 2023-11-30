@@ -29,7 +29,7 @@ const DescriptionContent = () => {
   }
 
   function getIndex() {
-    const mode = params.get('mode')
+    const mode = params?.get('mode')
     const index = modes.findIndex((el) => el === mode)
     return index === -1 ? 0 : index
   }

@@ -165,7 +165,7 @@ export default function Menu() {
         menuItems.map((item, index) => {
           return (
             item.children?.length ?
-              <Disclosure defaultOpen={item.children.map(child => child.href).includes(pathname)} key={index}>
+              <Disclosure defaultOpen={item.children.map(child => child.href).includes(pathname as string)} key={index}>
                 {({ open }) => (
                   <>
                     <Disclosure.Button className={`flex text-[15px] h-[44px] w-full items-center justify-between bg-transparent text-primary-gray px-8 hover:bg-[#383454] hover:text-white`}>
