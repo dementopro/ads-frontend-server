@@ -104,10 +104,6 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
   const pathname: string = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(emailInstruction);
-  }, [emailInstruction])
-
   // Provide the account data through the context to child components
   return (
     <SeoAnalyzerContext.Provider value={{

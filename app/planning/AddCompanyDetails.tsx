@@ -1,8 +1,15 @@
+"use client";
+import React, { FC, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import axios from 'axios';
+import { message } from 'antd';
+import { useFormik } from 'formik';
+import { useDisclosure } from '@nextui-org/react';
+
+import GoogleAnalyticsModal from "@/app/planning/Analytics/GoogleAnalyticsModal";
 import { CompanyForm } from '@/types/planning';
 import styles from './planning.module.css';
-import { useFormik } from 'formik';
-import React, { FC } from 'react';
-import Image from 'next/image';
 import { DETAIL_LIMIT } from '@/data/constant';
 
 interface AddCompanyDetailsProps {
@@ -10,8 +17,65 @@ interface AddCompanyDetailsProps {
 }
 
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [isGoogleAnalyticsDone, setIsGoogleAnalyticsDone] = useState<boolean>(false);
+  const { data: session, status } = useSession();
+  const [analyticsData, setAnalyticsData] = useState([]);
+  const { isOpen: isGoogleAnalyticsModalOpen, onOpen: onOpenGoogleAnalyticsModal, onOpenChange: onOpenGoogleAnalyticsModalChange } = useDisclosure();
+
+  const popupCenter = (url: string, title: string) => {
+    const dualScreenLeft = window.screenLeft ?? window.screenX;
+    const dualScreenTop = window.screenTop ?? window.screenY;
+
+    const width =
+      window.innerWidth ?? document.documentElement.clientWidth ?? screen.width;
+
+    const height =
+      window.innerHeight ??
+      document.documentElement.clientHeight ??
+      screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+
+    const left = (width - 500) / 2 / systemZoom + dualScreenLeft;
+    const top = (height - 550) / 2 / systemZoom + dualScreenTop;
+
+    const newWindow = window.open(
+      url,
+      title,
+      `width=${500 / systemZoom},height=${550 / systemZoom
+      },top=${top},left=${left}`
+    );
+
+    newWindow?.focus();
+  };
+
+  const handleGoogleAnalyticsOAuth = async () => {
+    popupCenter("/auth/google", "Google Analytics Sign In");
+  }
+
+  useEffect(() => {
+    (async () => {
+      if (status === "authenticated" && formik.values.websiteURL && !isGoogleAnalyticsDone) {
+        setIsGoogleAnalyticsDone(true);
+        try {
+          const analyticsResponse = await axios.post(`/api/planning/analytics?site=${formik.values.websiteURL}`, {
+            accessToken: session.accessToken,
+            refreshToken: session.refreshToken
+          });
+          messageApi.success("Fetched analysis data");
+          setAnalyticsData(analyticsResponse as any);
+          onOpenGoogleAnalyticsModal();
+        } catch (error) {
+          messageApi.error("Something went wrong");
+        }
+      }
+    })();
+  }, [session, status, formik, messageApi, isGoogleAnalyticsDone, onOpenGoogleAnalyticsModal]);
+
   return (
     <>
+      {contextHolder}
       <div className="grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
@@ -125,14 +189,14 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             </p>
           </div>
           <div className="flex flex-row gap-[24px]">
-            <button className="inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]">
+            <button className="inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB] cursor-pointer" onClick={handleGoogleAnalyticsOAuth}>
               <Image
                 width={18}
                 height={18}
                 src={'/images/admin/plan/google-analytics-svgrepo-com.svg'}
                 alt="#"
               />
-              <label className="inline-flex text-[15px] min-h-[20px] min-w-[112px] justify-center items-center ">
+              <label className="inline-flex text-[15px] min-h-[20px] min-w-[112px] justify-center items-center cursor-pointer">
                 Google Analytics
               </label>
             </button>
@@ -143,13 +207,14 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
                 src={'/images/admin/plan/Vector.svg'}
                 alt="#"
               />
-              <label className="inline-flex text-[15px] min-h-[20px] min-w-[64px] justify-center items-center ">
+              <label className="inline-flex text-[15px] min-h-[20px] min-w-[64px] justify-center items-center cursor-pointer">
                 Semrush
               </label>
             </button>
           </div>
         </div>
       </div>
+      <GoogleAnalyticsModal isOpen={isGoogleAnalyticsModalOpen} onOpenChange={onOpenGoogleAnalyticsModalChange} formik={formik} analyticsData={analyticsData as []} />
     </>
   );
 };

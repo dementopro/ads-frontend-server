@@ -1,18 +1,26 @@
 'use client'
+import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
 
 import { AccountProvider } from "@/context/account"
 import { SeoAnalyzerProvider } from "@/context/seo";
 import { useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const WithProviders = ({ children }: { children: React.ReactNode }) => {
+const WithProviders = ({ children, session }: { children: React.ReactNode, session: Session | null }) => {
+  useEffect(() => {
+    // Clear localStorage when this component is mounted in the browser
+    localStorage.clear();
+  }, []);
   return (
     <AccountProvider>
-      <SeoAnalyzerProvider>
-        <GoogleOAuthProvider clientId="176418914084-3fcpqahi01ru9tv4doiah06utfrb085l.apps.googleusercontent.com">
-          {children}
-        </GoogleOAuthProvider>
-      </SeoAnalyzerProvider>
+      <SessionProvider session={session} refetchInterval={60} refetchOnWindowFocus>
+        <SeoAnalyzerProvider>
+          <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID as string}>
+            {children}
+          </GoogleOAuthProvider>
+        </SeoAnalyzerProvider>
+      </SessionProvider>
     </AccountProvider>
   )
 }

@@ -27,6 +27,17 @@ const nextConfig = {
             },
         ]
     },
+    webpack: (config) => {
+      config.ignoreWarnings = [
+        // https://webpack.js.org/configuration/other-options/#ignorewarnings
+        {
+          module: /node-fetch/,
+          message: /.*Can't resolve 'encoding'.*/,
+        },
+      ];
+
+      return config;
+    },
     experimental: {
         proxyTimeout: 10 * 60 * 1000,
         serverActions: true,

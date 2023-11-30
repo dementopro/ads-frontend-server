@@ -1,4 +1,5 @@
 import './globals.css'
+import { getServerSession } from 'next-auth';
 import WithProviders from '@/app/WithProviders'
 
 export const metadata = {
@@ -9,14 +10,16 @@ export const metadata = {
     'Generative AI Advertising, AI Ad Agency, AI Advertising, AdsGency AI, AdsGency AI Generative Advertising Solutions',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
-      <head> 
+      <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -27,7 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body className="w-full">
-        <WithProviders>{children}</WithProviders>
+        <WithProviders session={session}>{children}</WithProviders>
       </body>
     </html>
   );
