@@ -32,6 +32,12 @@ const OurTeam = () => {
                     </div>
                 ))}
             </div>
+                    
+            <PrimaryButton
+                target="_self"
+                href="/careers"
+                text="See Open Roles"
+            />
         </div>
     );
 };

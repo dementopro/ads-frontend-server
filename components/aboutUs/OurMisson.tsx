@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const OurMission = () => {
     return (
-        <div className="android:w-full desktop:w-[1240px] desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black android:flex-col ipadmini:flex-row justify-center items-center android:gap-[32px] desktop:gap-[60px] inline-flex">
+        <div className="android:w-full desktop:w-[1240px] desktop:mx-auto android:pl-[32px] android:pr-[32px] ipad:pl-[60px] desktop:pl-[0px] ipadmini:pr-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black android:flex-col ipadmini:flex-row justify-center items-center android:gap-[32px] desktop:gap-[60px] inline-flex">
             <div className="w-full flex flex-col justify-center items-start">
                 <div className="flex flex-col gap-[16px] android:items-center ipadmini:items-start android:text-center ipadmini:text-left">
                     <div className="w-full text-white font-poppins font-semibold android:text-[32px] ipad:text-[43px] android:leading-[34px] ipad:leading-[40px] desktop:leading-[56px]">
@@ -24,7 +24,7 @@ const OurMission = () => {
                 <Image
                     width={696}
                     height={529}
-                    className="w-full h-auto object-coverm rounded-[25px]"
+                    className="android:h-[386px] desktop:h-[475px] w-full object-cover rounded-[12px]"
                     src={'/images/careers/our-mission.jpeg'}
                     alt="our-mission"
                 />
