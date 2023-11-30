@@ -6,10 +6,6 @@ import { useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const WithProviders = ({ children }: { children: React.ReactNode }) => {
-  useEffect(() => {
-    // Clear localStorage when this component is mounted in the browser
-    localStorage.clear();
-  }, []);
   return (
     <AccountProvider>
       <SeoAnalyzerProvider>

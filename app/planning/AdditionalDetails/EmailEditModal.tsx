@@ -1,18 +1,22 @@
 import "./EmailEditModal.css";
 import {
   Button,
+  CircularProgress,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import { EditorRef, EmailEditorProps } from 'react-email-editor';
+import { Editor, EditorRef, EmailEditorProps } from 'react-email-editor';
 import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
 import dynamic from 'next/dynamic';
 import sample from "./sample.json";
 import styled from 'styled-components';
+import axios from "axios";
+import { message } from "antd";
+import Image from "next/image";
 
 interface EmailEditModalProps {
   isOpen: boolean;
@@ -34,11 +38,77 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
   const emailEditorRef = useRef<EditorRef | null>(null);
   const [preview, setPreview] = useState(false);
   const [template, setTemplate] = useState<number>(-1);
+  const [templates, setTemplates] = useState([sample]);
+  const [messageApi, contextHolder] = message.useMessage();
+  const [isSavingDesign, setIsSavingDesign] = useState<boolean>(false);
+
+  useEffect(() => {
+    // axios.get('/load_email_template_api')
+    //   .then((res) => {
+    //     if (res.data.status) {
+    //       setTemplates([
+    //         ...templates,
+    //         ...res.data.templates.map((temp: string) => JSON.parse(temp))
+    //       ])
+    //     } else {
+    //       messageApi.error('Something went wrong!');
+    //       console.warn('load email template error:', res.data);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     messageApi.error('Something went wrong!');
+    //     console.warn('load email template error:', err);
+    //   })
+    const templatesString = localStorage.getItem('templates');
+    if (!templatesString) localStorage.setItem('templates', '[]');
+    else {
+      const localTemplates: any[] = JSON.parse(localStorage.getItem('templates') as string);
+      setTemplates([
+        sample,
+        ...localTemplates
+      ]);
+    }
+  }, [])
 
   const saveDesign = () => {
     const unlayer = emailEditorRef.current?.editor;
-
-    unlayer?.saveDesign((design: any) => {
+    unlayer?.exportHtml(({ design, html }: { design: any, html: string }) => {
+      setIsSavingDesign(true);
+      const htmlBlob = new Blob([html], { type: "text/html" }),
+        designBlob = new Blob([JSON.stringify(design)], { type: "application/json" })
+      const formData = new FormData();
+      formData.append('html', htmlBlob);
+      formData.append('design', designBlob);
+      axios.post('/fapi/save_email_template_api', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then((res) => {
+        if (res.data.status) {
+          const localTemplates: any[] = JSON.parse(localStorage.getItem('templates') as string);
+          localTemplates.push({
+            thumbnail: process.env.NEXT_PUBLIC_API_URL + '/' +  res.data.img_url,
+            design: design
+          });
+          localStorage.setItem('templates', JSON.stringify(localTemplates));
+          setTemplates([
+            ...templates,
+            {
+              thumbnail: process.env.NEXT_PUBLIC_API_URL + '/' +  res.data.img_url,
+              design: design
+            }
+          ])
+          messageApi.success('Saved successfully!');
+        } else {
+          messageApi.error('Something went wrong!');
+          console.warn('email template save error:', res.data.message);
+        }
+      }).catch((err) => {
+        messageApi.error('Something went wrong!');
+        console.warn('email template save error:', err);
+      }).finally(() => {
+        setIsSavingDesign(false);
+      })
     });
   };
 
@@ -68,7 +138,14 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
 
   const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
     unlayer.addEventListener('design:loaded', onDesignLoad);
-    unlayer.loadDesign(sample[template] as any);
+    unlayer.loadDesign(templates[template].design as any);
+    if (emailEditorRef.current) {
+      emailEditorRef.current.editor = unlayer;
+    } else {
+      emailEditorRef.current = {
+        editor: unlayer
+      }
+    }
   };
 
   const onReady: EmailEditorProps['onReady'] = (unlayer) => {
@@ -100,6 +177,7 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
       hideCloseButton
       className='overflow-visible max-w-screen-2xl h-5/6'
     >
+      {contextHolder}
       <ModalContent className="p-6 text-white bg-background-100">
         {(onClose) => (
           <>
@@ -113,20 +191,22 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
               {
                 template === -1
                   ? <div className="flex flex-wrap gap-4">
-                    <div
-                      className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75"
-                      style={{ backgroundImage: "url(/images/email-templates/1.png)" }}
-                      onClick={() => {
-                        setTemplate(0);
-                      }}
-                    ></div>
-                    <div
-                      className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75"
-                      style={{ backgroundImage: "url(/images/email-templates/2.png)" }}
-                      onClick={() => {
-                        setTemplate(1);
-                      }}
-                    ></div>
+                    { templates.map((temp, i) => (
+                      <div
+                        key={i}
+                        className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75"
+                        onClick={() => {
+                          setTemplate(i);
+                        }}
+                      >
+                        <Image
+                          src={temp.thumbnail}
+                          width={160}
+                          height={240}
+                          alt={`template_${i}`}
+                        />
+                      </div>
+                    ))}
                   </div>
                   : <>
                     <div className="flex items-center justify-end gap-3">
@@ -136,11 +216,13 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
                       <Button onClick={togglePreview}>
                         {preview ? 'Hide' : 'Show'} Preview
                       </Button>
-                      <Button onClick={saveDesign}>Save Design</Button>
+                      <Button onClick={saveDesign}>
+                        { isSavingDesign ? <CircularProgress color="default" aria-label="Loading..."/> : 'Save Design' }
+                      </Button>
                       <Button onClick={exportHtml}>Export HTML</Button>
                     </div>
                     <React.StrictMode>
-                      <StyledEmailEditor ref={emailEditorRef} onLoad={onLoad} onReady={onReady} />
+                      <StyledEmailEditor onLoad={onLoad} onReady={onReady} />
                     </React.StrictMode>
                   </>
               }
