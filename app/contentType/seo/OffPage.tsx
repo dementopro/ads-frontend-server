@@ -99,8 +99,8 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             customer_profile: company.customer_profile,
                             competitor: company.competitors,
                             business_objectives: company.business_objectives.join(','),
-                            main_category: "",
-                            sub_category: "",
+                            main_category: page.url,
+                            sub_category: warning,
                             warning: warning
                           }).then((res) => {
                             if (res.data.status == true) {
@@ -176,7 +176,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             typeof answers[i] == 'object' ? Object.keys(answers[i]).map((key) => answers[i][key]).map((sol, index) => (
                               <div key={`step_${index}`} className='mt-4'>
                                 <div>
-                                  Step { index + 1 }: { sol.step }
+                                  { sol.step_name }
                                 </div>
                                 <div className='mt-2'>
                                   <ReactMarkdownPreview source={sol.detail} className='relative p-4 overflow-auto rounded-lg' style={{ overflowWrap: "anywhere" }} />

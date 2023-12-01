@@ -1,5 +1,5 @@
 {
-    "thumbnail": "http://192.168.141.36:5000/static/assets/images/email_templates/out_1701359098.968728.png",
+    "thumbnail": "static/assets/images/sample_email_template.png",
     "design": {
         "counters": {
             "u_row": 8,

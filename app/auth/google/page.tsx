@@ -1,14 +1,22 @@
 "use client"
 
 import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+
+import { AccountContext } from '@/context/account';
 
 const SignInPage = () => {
     const { data: session, status } = useSession();
+    const { isGoogleAnalyticsDone, setIsGoogleAnalyticsDone } = useContext(AccountContext);
+
     useEffect(() => {
       if (!(status === "loading") && !session) void signIn("google");
-      if (session) window.close();
-    }, [session, status]);
+      if (session) {
+        window.close();
+        if (isGoogleAnalyticsDone < 0)
+          setIsGoogleAnalyticsDone(0);
+      }
+    }, [isGoogleAnalyticsDone, session, setIsGoogleAnalyticsDone, status]);
 
     return (
       <div

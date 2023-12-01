@@ -18,6 +18,7 @@ export interface AccountInterface {
 export const AccountContext = createContext<{
   account: AccountInterface | null,
   isLoading: boolean,
+  isGoogleAnalyticsDone: number,
   totalCredits: number;
   isSubscribed: boolean;
   trialDateAt: string;
@@ -25,6 +26,7 @@ export const AccountContext = createContext<{
   creditInfo:boolean;
   setAccount: (account: AccountInterface | null) => void,
   setIsLoading: (isLoading: boolean) => void,
+  setIsGoogleAnalyticsDone: (isDone: number) => void,
   setNextPage:(nextPage:string) => void;
   setSelectedPlan:(selectedPlan:number) => void;
   selectedPlan:number;
@@ -42,6 +44,7 @@ export const AccountContext = createContext<{
     username: ''
   },
   isLoading: false,
+  isGoogleAnalyticsDone: -1,
   isLogin: false,
   planId: 0,
   credits: 0,
@@ -54,6 +57,7 @@ export const AccountContext = createContext<{
   selectedPlan: -1,
   setAccount: () => { },
   setIsLoading: () => { },
+  setIsGoogleAnalyticsDone: () => { },
   setCredits: () => { },
   setTrialDays: () => { },
   setTotalCredits: () => { },
@@ -84,6 +88,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   const [creditInfo, setCreditInfo] = useState(false)
   const [nextPage, setNextPage] = useState("")
   const [selectedPlan, setSelectedPlan] = useState(-1);
+  const [isGoogleAnalyticsDone, setIsGoogleAnalyticsDone] = useState<number>(-1);
 
   // Function to fetch and update user account data
   async function updateAccount() {
@@ -145,6 +150,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     <AccountContext.Provider value={{
       account, setAccount,
       isLoading, setIsLoading,
+      isGoogleAnalyticsDone, setIsGoogleAnalyticsDone,
       credits, setCredits,
       trialDays, setTrialDays,
       totalCredits, setTotalCredits,

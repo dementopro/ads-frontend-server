@@ -87,14 +87,14 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
         if (res.data.status) {
           const localTemplates: any[] = JSON.parse(localStorage.getItem('templates') as string);
           localTemplates.push({
-            thumbnail: process.env.NEXT_PUBLIC_API_URL + '/' +  res.data.img_url,
+            thumbnail: res.data.img_url,
             design: design
           });
           localStorage.setItem('templates', JSON.stringify(localTemplates));
           setTemplates([
             ...templates,
             {
-              thumbnail: process.env.NEXT_PUBLIC_API_URL + '/' +  res.data.img_url,
+              thumbnail: res.data.img_url,
               design: design
             }
           ])
@@ -200,7 +200,7 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
                         }}
                       >
                         <Image
-                          src={temp.thumbnail}
+                          src={process.env.NEXT_PUBLIC_API_URL + '/' +  temp.thumbnail}
                           width={160}
                           height={240}
                           alt={`template_${i}`}

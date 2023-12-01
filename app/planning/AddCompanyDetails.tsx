@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import { useDisclosure } from '@nextui-org/react';
 
 import GoogleAnalyticsModal from "@/app/planning/Analytics/GoogleAnalyticsModal";
+import { AccountContext } from '@/context/account';
 import { CompanyForm } from '@/types/planning';
 import styles from './planning.module.css';
 import { DETAIL_LIMIT } from '@/data/constant';
@@ -18,10 +19,10 @@ interface AddCompanyDetailsProps {
 
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [isGoogleAnalyticsDone, setIsGoogleAnalyticsDone] = useState<boolean>(false);
   const { data: session, status } = useSession();
   const [analyticsData, setAnalyticsData] = useState([]);
   const { isOpen: isGoogleAnalyticsModalOpen, onOpen: onOpenGoogleAnalyticsModal, onOpenChange: onOpenGoogleAnalyticsModalChange } = useDisclosure();
+  const { isGoogleAnalyticsDone, setIsGoogleAnalyticsDone } = useContext(AccountContext);
 
   const popupCenter = (url: string, title: string) => {
     const dualScreenLeft = window.screenLeft ?? window.screenX;
@@ -51,13 +52,17 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   };
 
   const handleGoogleAnalyticsOAuth = async () => {
+    setIsGoogleAnalyticsDone(-1);
     popupCenter("/auth/google", "Google Analytics Sign In");
+    setTimeout(() => {
+      setIsGoogleAnalyticsDone(0);
+    }, 2000);
   }
 
   useEffect(() => {
     (async () => {
       if (status === "authenticated" && formik.values.websiteURL && !isGoogleAnalyticsDone) {
-        setIsGoogleAnalyticsDone(true);
+        setIsGoogleAnalyticsDone(1);
         try {
           const analyticsResponse = await axios.post(`/api/planning/analytics?site=${formik.values.websiteURL}`, {
             accessToken: session.accessToken,
@@ -71,7 +76,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
         }
       }
     })();
-  }, [session, status, formik, messageApi, isGoogleAnalyticsDone, onOpenGoogleAnalyticsModal]);
+  }, [session, status, formik, messageApi, isGoogleAnalyticsDone, onOpenGoogleAnalyticsModal, setIsGoogleAnalyticsDone]);
 
   return (
     <>
