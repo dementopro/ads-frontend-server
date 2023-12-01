@@ -1,13 +1,6 @@
 'use client'
-import Image from 'next/image'
+
 import React, { useState, useEffect } from 'react';
-import Slider from "react-slick";
-import producthuntIcon from '@iconify/icons-logos/producthunt';
-import brandSuperhuman from '@iconify/icons-tabler/brand-superhuman';
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import Statistic from 'antd/es/statistic/Statistic';
-import { CircularProgress } from "@nextui-org/react";
 
 const Features = () => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);

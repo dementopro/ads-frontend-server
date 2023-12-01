@@ -76,18 +76,18 @@ const NewsList = () => {
 
       <div className='android:hidden ipad:block'>
         <div className="w-full flex flex-row justify-start items-start gap-[32px] inline-flex">
-          {id2.map((news) => (
-            <div className='w-1/4'>
+          {id2.map((news, index) => (
+            <div key={index} className='w-1/4'>
               <NewsCard news={news} key={news.id} />
             </div>
           ))}
-          {id1.map((news) => (
-            <div className='w-2/4'>
+          {id1.map((news, index) => (
+            <div key={index} className='w-2/4'>
               <NewsCard news={news} key={news.id} />
             </div>
           ))}
-          {id3.map((news) => (
-            <div className='w-1/4'>
+          {id3.map((news, index) => (
+            <div key={index} className='w-1/4'>
               <NewsCard news={news} key={news.id} />
             </div>
           ))}

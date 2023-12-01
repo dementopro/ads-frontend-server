@@ -1,18 +1,19 @@
 import ReactGATag from '@/components/ReactGATag'
 import DefaultLayout from '@/layout/default'
 import React from 'react'
-import styles from './features.module.css'
-import FeatureOne from '@/app/features/FeatureOne'
-import { features } from '@/data/features'
-import Link from 'next/link'
-import TopContent from '@/app/features/TopContent'
+import FeaturesPageHome from '@/components/features/FeaturesPageHome'
+import Step1 from '@/components/features/Step1'
+import Step2 from '@/components/features/Step2'
+import Step3 from '@/components/features/Step3'
+import Step4 from '@/components/features/Step4'
+import Step5 from '@/components/features/Step5'
+import AboveFooter from '@/components/common/AboveFooter'
 
 export const metadata = {
   title: 'Features - AdsGency AI',
 }
 
 const FeaturesPage = () => {
-
   return (
     <DefaultLayout>
       <ReactGATag
@@ -23,27 +24,14 @@ const FeaturesPage = () => {
         }}
       />
       <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
-        <section className={`w-full min-h-[calc(100vh-64px)] flex flex-col items-center pb-12`}>
-          <TopContent />
-          <div className='w-full flex flex-col gap-16 py-8' id='features'>
-            {
-              features.map((feature, index) => (
-                <FeatureOne key={index} isReverse={index % 2 === 0} feature={feature} />
-              ))
-            }
-          </div>
-          <p className='mt-12 font-thin text-center px-4 text-white italic'>
-            Unlock the full potential of your advertising efforts with AdsGency AI! 🎊
-          </p>
-          <div className='flex items-center mt-8'>
-            <Link target="_blank" 
-              href='/requestDemo'
-              className={`${styles['border-image-pesudo']} flex items-center justify-center h-[44px] bg-transparent text-white cursor-pointer hover:opacity-80 px-8 truncate`}>
-              Request Demo
-            </Link>
-          </div>
-        </section>
+        <FeaturesPageHome />
       </div>
+      <Step1 />
+      <Step2 />
+      <Step3 />
+      <Step4 />
+      <Step5 />
+      <AboveFooter />
     </DefaultLayout>
   )
 }

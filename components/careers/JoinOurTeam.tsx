@@ -58,7 +58,7 @@ const JoinOurTeam: React.FC<JoinOurTeamProps> = ({ scrollToOpenPositions }) => {
         <Image
           width={696}
           height={529}
-          className="w-full h-auto object-coverm rounded-[25px]"
+          className="w-full h-auto object-cover rounded-[25px]"
           src={isDesktop ? '/images/careers/join-us-large.svg' : '/images/careers/join-us-small.svg'}
           alt="join-us"
         />
