@@ -144,26 +144,6 @@ const ContactUsForm = () => {
           </Form.Item>
         </div>
 
-        <div className="w-full">
-          <Form.Item
-            className="w-full mb-0"
-            name="phone_number"
-            rules={[{ required: true, message: 'Phone number is required' }]}
-            label={
-              <span className="text-white android:text-[10px] ipad:text-[14px]">
-                Phone Number
-              </span>
-            }
-          >
-            <Input
-              placeholder="+1 1234567890"
-              classNames={{
-                input: styles['input'],
-              }}
-            />
-          </Form.Item>
-        </div>
-
         <div className="w-full inline-flex android:flex-col ipadmini:flex-row gap-[18px]">
           <Form.Item
             className="w-full mb-0"

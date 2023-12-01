@@ -7,15 +7,11 @@ export const Blogs: IBlog[] = [
     miniTitle: `Revolutionize Your Advertising`,
     content: [
       {
-        title: `Overview of the Current Challenges in Advertising Campaign Management`,
+        title: `Current Challenges in Advertising Campaign Management`,
         para: [
           `Managing advertising campaigns involves numerous challenges, from targeting the right audience to optimizing ad spend.`,
-          `n:The lack of real-time insights and automation often leads to inefficiencies and missed opportunities.`,
-        ]
-      },
-      {
-        title: `Introduction to AdsGency AI`,
-        para: [
+          `The lack of real-time insights and automation often leads to inefficiencies and missed opportunities.`,
+          `bn:Introduction to AdsGency AI`,
           `AdsGency AI is here to change the game. With its innovative AI-driven platform, it offers solutions that save time, resources, and streamline advertising processes.`,
         ]
       },
@@ -25,28 +21,34 @@ export const Blogs: IBlog[] = [
           `AdsGency AI is not just another advertising tool; it's a comprehensive solution offering unparalleled benefits.`,
           `bn:Saving Time and Resources`,
           `Eliminate the Need for Training Marketers and Hiring Agencies: With automated workflows and real-time performance monitoring, AdsGency AI takes care of the heavy lifting.`,
-          `One-Click Deployment and Real-Time Fine-Tuning: Deploy to public or on-premise clouds with ease and fine-tune your models in real-time.`,
+          `bn:One-Click Deployment and Real-Time Fine-Tuning`,
+          `Deploy to public or on-premise clouds with ease and fine-tune your models in real-time.`,
           `bn:Seamless Integration and Low Maintenance`,
           `Compatibility with Various Tech Stacks and Cloud Platforms: Whether you're using AWS, GCP, Azure, or any other platform, AdsGency AI integrates seamlessly.`,
-          `No Code Interface & Low Maintenance: Designed for user-friendliness, it requires minimal coding and offers easy maintenance.`,
+          `bn:No Code Interface & Low Maintenance`,
+          `Designed for user-friendliness, it requires minimal coding and offers easy maintenance.`,
           `bn:ML Model Retraining and Updating`,
-          `Continuous Improvement of ML Models: AdsGency AI continuously re-trains and updates your models, ensuring relevance and accuracy.`,
-          `Adherence to Compliance: The platform ensures that your data processing and model deployment adhere to local and international laws and regulations.`,
+          `bn:Continuous Improvement of ML Models`,
+          `AdsGency AI continuously re-trains and updates your models, ensuring relevance and accuracy.`,
+          `bn:Adherence to Compliance`,
+          `The platform ensures that your data processing and model deployment adhere to local and international laws and regulations.`,
         ]
       },
       {
         title: `Features of AdsGency AI`,
         para: [
-          `AdsGency AI is packed with features that set it apart.`,
-          `bn:Advertisement Optimization`,
-          `Utilize Data to Maximize Ad Effectiveness: Reach the right people at the right time with AI-driven insights.`,
-          `One-Stop AI Solution: From ad optimization to real-time feedback, it's all covered.`,
-          `bn:Creative Content Generation`,
-          `AI-Powered Framework: Generate brand-level creative content in seconds.`,
-          `Remix Capability: Customize content with ease.`,
-          `bn:Audience Segmentation and Insights`,
-          `Analyze Competitors' Data: Gain enhanced understanding of your target audience.`,
-          `Omnichannel Integration: See things from a universal perspective with integration across various ad channels.`,
+          `b:Utilize Data to Maximize Ad Effectiveness`,
+          `Reach the right people at the right time with AI-driven insights.`,
+          `bn:One-Stop AI Solution`,
+          `From ad optimization to real-time feedback, it's all covered.`,
+          `bn:AI-Powered Framework`,
+          `Generate brand-level creative content in seconds.`,
+          `bn:Remix Capability`,
+          `Customize content with ease.`,
+          `bn:Analyze Competitors' Data`,
+          `Gain enhanced understanding of your target audience.`,
+          `bn:Omnichannel Integration`,
+          `See things from a universal perspective with integration across various ad channels.`,
         ]
       },
       {
@@ -123,7 +125,7 @@ export const Blogs: IBlog[] = [
         ]
       },
       {
-        title: `Challenges and Considerations`,
+        title: `Challenges, Considerations and Conclusion`,
         para: [
           `While AI offers tremendous advantages, it also comes with challenges:`,
           `bn:1. Data Privacy:`,
@@ -134,13 +136,6 @@ export const Blogs: IBlog[] = [
           `Consider the investment required for AI tools and expertise.`,
         ]
       },
-      {
-        title: `Conclusion`,
-        para: [
-          `AI in advertising is no longer a futuristic concept; it's a practical tool that businesses of all sizes can leverage. By understanding the principles of AI and how to apply them in advertising, you can transform your advertising strategies, achieving better results with greater efficiency.`,
-          `n:Whether you're just starting with AI or looking to enhance your existing strategies, this guide provides a comprehensive overview to help you navigate the exciting world of AI in advertising.`
-        ]
-      }
     ],
     introductionText: `Artificial Intelligence (AI) has become a game-changer in the advertising industry. From automating mundane tasks to providing deep insights into customer behavior, AI is revolutionizing how businesses approach advertising. This guide will explore how to leverage AI in advertising to achieve better results and efficiency.`,
     publishDate: 'March 2023',
