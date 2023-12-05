@@ -40,7 +40,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
     errors.targetAudience == '' &&
     errors.email == '' &&
     errors.marketing_template == ''
-  
+
   const isValidSocialMedia = (content_type: string, errors: any) => 
     content_type.toLowerCase() == 'social media' &&
     errors.idealCustomerProfile == '' &&
