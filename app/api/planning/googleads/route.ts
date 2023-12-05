@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleAdsApi, enums } from 'google-ads-api';
-import { google } from 'googleapis';
+const { google } = require('googleapis');
 
 export async function POST(req: NextRequest) {
   try {
