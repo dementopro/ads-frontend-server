@@ -29,8 +29,10 @@ export interface CompanyDetailForm {
   competitors: string;
   business_objectives: string[];
   email: string;
+  url: string;
   marketing_template: string;
   schedule: any;
+  assets: File[];
 }
 
 export interface CompanyForm {
@@ -44,4 +46,5 @@ export interface CompanyForm {
   email: string;
   marketing_template: string;
   schedule: any;
+  url: string;
 }

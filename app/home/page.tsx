@@ -107,8 +107,10 @@ const HomePage = () => {
     competitors: '',
     business_objectives: [],
     email: '',
+    url: '',
     marketing_template: '',
     schedule: {},
+    assets: []
   });
   const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
 
@@ -122,6 +124,7 @@ const HomePage = () => {
       targetAudience: '',
       competitors: '',
       email: '',
+      url: '',
       marketing_template: '',
       schedule: {},
     },
@@ -141,7 +144,8 @@ const HomePage = () => {
         schedule: company.schedule,
         sellingDescription: company.product_description,
         targetAudience: company.target_audice,
-        websiteURL: company.website
+        websiteURL: company.website,
+        url: company.url
       })
       setFormData({
         ...company

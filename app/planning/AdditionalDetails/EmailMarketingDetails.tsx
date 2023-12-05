@@ -9,10 +9,12 @@ import { BiCalendar } from 'react-icons/bi';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import MicrosoftLogin from 'react-microsoft-login';
-import { useDisclosure } from '@nextui-org/react';
+import { Chip, useDisclosure } from '@nextui-org/react';
 import EmailScheduleModal from './EmailScheduleModal';
 import { DETAIL_LIMIT } from '@/data/constant';
 import EmailEditModal from './EmailEditModal';
+import { useSeoAnalyzerContext } from '@/context/seo';
+import { formatTimeOfDay } from '@/utils';
 
 interface EmailMarketingDetailsProps {
   formData: CompanyDetailForm;
@@ -50,6 +52,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
   activeTab,
   setActiveTab,
 }) => {
+  const { company } = useSeoAnalyzerContext();
   const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   const [isOpenEmailEditModal, setIsOpenEmailEditModal] = useState<boolean>(false);
   const [isEmailAuthenticated, setIsEmailAuthenticated] = useState<boolean>(false);
@@ -95,6 +98,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
                 setIsEmailAuthenticated(false);
                 setActiveTab(i);
               }}
+              className='w-full md:w-auto'
             >
               <Image
                 src={tab.icon}
@@ -102,7 +106,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
                 width={24}
                 height={24}
               />
-              <span className="truncate" title="SEO (off-page)">
+              <span className="hidden truncate md:block" title="SEO (off-page)">
                 {tab.title}
               </span>
             </Button>
@@ -257,7 +261,18 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
             <BiCalendar className="w-6 h-6" />
             <p className="text-primary-gray text-[15px]">Email Schedule</p>
           </button>
-          <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} />
+          <div className='flex flex-wrap w-full gap-3'>
+            {
+              Object.keys(company.schedule).map((key, _) => {
+                return company.schedule[key].map((time: number, _i: number) => (
+                  <Chip key={_i} className='rounded-lg'>
+                    {key + ' ' + formatTimeOfDay(time)}
+                  </Chip>
+                ))
+              })
+            }
+          </div>
+          <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} title='Email Schedule' description='Select the days & times you would like to schedule your emails' />
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>

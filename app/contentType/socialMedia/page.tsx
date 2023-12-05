@@ -13,13 +13,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AccountContext } from '@/context/account';
 import AdminLayout from '@/layout/admin';
 import Button from '@/app/planning/TabButton';
-import GmailMarketing from './Gmail';
+import Instagram from './Instagram';
 import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
-import { tabsList } from '@/app/planning/AdditionalDetails/EmailMarketingDetails';
+import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
 
 const Page = () => {
   const router = useRouter();
@@ -90,7 +90,7 @@ const Page = () => {
             ))}
           </div>
           <div className={`${styles.onPageDiv}`}>
-          { activeTab == 0 ? <GmailMarketing /> : <GmailMarketing /> }
+          { activeTab == 0 ? <Instagram /> : <Instagram /> }
           </div>
         </>
       </Spin>

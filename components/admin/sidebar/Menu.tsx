@@ -98,6 +98,7 @@ function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnPr
         schedule: company.schedule,
         sellingDescription: company.product_description,
         targetAudience: company.target_audice,
+        url: company.url
       });
 
       if (href === '/planning' && (errors.companyName !== '' || errors.websiteURL !== '' || errors.description !== '')) {

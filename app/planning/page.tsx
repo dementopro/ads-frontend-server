@@ -31,6 +31,9 @@ import Button from './TabButton';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import BugReportModal from '@/components/contactUs/BugReportModal';
 import { useDisclosure } from '@nextui-org/react';
+import SocialMediaDetails from './AdditionalDetails/SocialMediaDetails';
+import InstagramRecommendation from './Recommendations/Instagram';
+import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -81,8 +84,10 @@ const PlanningPage = () => {
     competitors: '',
     business_objectives: [],
     email: '',
+    url: '',
     marketing_template: '',
     schedule: {},
+    assets: []
   });
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
@@ -99,6 +104,7 @@ const PlanningPage = () => {
       targetAudience: '',
       competitors: '',
       email: '',
+      url: '',
       marketing_template: '',
       schedule: {},
     },
@@ -122,7 +128,8 @@ const PlanningPage = () => {
         schedule: company.schedule,
         sellingDescription: company.product_description,
         targetAudience: company.target_audice,
-        websiteURL: company.website
+        websiteURL: company.website,
+        url: company.url
       })
       setFormData({
         ...company
@@ -242,7 +249,7 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </div>
-          ) : (
+          ) : (formData.content_type.toLowerCase() === 'email marketing' ?
             <>
               <EmailMarketingDetails
                 activeTab={activeSeoType}
@@ -261,6 +268,32 @@ const PlanningPage = () => {
                   'Event Promotions',
                   'Sales Promotions',
                   'Feedback & Surveys',
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
+            </>
+            :
+            <>
+              <SocialMediaDetails
+                activeTab={activeSeoType}
+                setActiveTab={setActiveSeoType}
+                formData={formData}
+                formik={formik}
+              />
+              <BusinessObjectives
+                title="8. Choose your business objectives"
+                options={[
+                  'Increase Sales',
+                  'Brand Awareness',
+                  'Website Traffic',
+                  'Engagement'
                 ]}
                 formData={formData}
                 setFormData={setFormData}
@@ -312,7 +345,7 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-          ) : (
+          ) : (formData.content_type.toLowerCase() === 'email marketing' ?
             <>
               <div className="flex items-center mt-8">
                 {tabsList.map((tab, i) => (
@@ -327,6 +360,26 @@ const PlanningPage = () => {
                 ))}
               </div>
               {activeSeoType == 0 ? <GmailRecommendation /> : <GmailRecommendation />}
+              <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
+            </>
+            :
+            <>
+              <div className="flex items-center mt-8">
+                {SocialMediaTabs.map((tab, i) => (
+                  <Button
+                    key={`tab_${i}`}
+                    isActivated={activeSeoType == i}
+                    onClick={() => setActiveSeoType(i)}
+                  >
+                    <Image src={tab.icon} alt={tab.title} width={24} height={24} />
+                    <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+                  </Button>
+                ))}
+              </div>
+              {activeSeoType == 0 ? <InstagramRecommendation /> : <InstagramRecommendation />}
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}

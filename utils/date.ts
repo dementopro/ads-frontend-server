@@ -28,3 +28,7 @@ export function getDateListBetween(start: string, end: string) {
   }
   return formatDateRange(dateList)
 }
+
+export function formatTimeOfDay(h: number) {
+  return `${(h === 0 || h === 12) ? 12 : h % 12}${h >= 12 ? 'pm' : 'am'}`
+}

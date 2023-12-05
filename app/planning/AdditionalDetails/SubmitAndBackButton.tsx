@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import styles from './SubmitAndBackButton.module.css';
 import { useFormik } from 'formik';
 import { CompanyForm, CompanyDetailForm } from '@/types/planning';
@@ -22,19 +22,37 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   formik,
   formData,
 }) => {
-  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction } =
+  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction, setSocialMedia, socialMedia } =
     useSeoAnalyzerContext();
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const isValidSeo = (content_type: string, errors: any) => 
+    content_type.toLowerCase() == 'seo' &&
+    errors.idealCustomerProfile == '' &&
+    errors.targetAudience == '' &&
+    errors.competitors == ''
+
+  const isValidEmailMarketing = (content_type: string, errors: any) => 
+    content_type.toLowerCase() == 'email marketing' &&
+    errors.idealCustomerProfile == '' &&
+    errors.targetAudience == '' &&
+    errors.email == '' &&
+    errors.marketing_template == ''
+  
+  const isValidSocialMedia = (content_type: string, errors: any) => 
+    content_type.toLowerCase() == 'social media' &&
+    errors.idealCustomerProfile == '' &&
+    errors.targetAudience == '' &&
+    errors.url == ''
+  
+  const isValid = useMemo(() => {
+    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.errors);
+  }, [formData, formik.errors])
+
   const handleSubmit = (index: number) => {
-    if (
-      formData.content_type.toLowerCase() == 'seo' &&
-      formik.errors.idealCustomerProfile == '' &&
-      formik.errors.targetAudience == '' &&
-      formik.errors.competitors == ''
-    ) {
+    if (isValidSeo(formData.content_type, formik.errors)) {
       setIsLoading(true);
       setCompany({
         ...company,
@@ -80,13 +98,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .finally(() => {
           setIsLoading(false);
         });
-    } else if (
-      formData.content_type.toLowerCase() == 'email marketing' &&
-      formik.errors.idealCustomerProfile == '' &&
-      formik.errors.targetAudience == '' &&
-      formik.errors.email == '' &&
-      formik.errors.marketing_template == ''
-    ) {
+    } else if (isValidEmailMarketing(formData.content_type, formik.errors)) {
       setIsLoading(true);
       setCompany({
         ...company,
@@ -128,6 +140,64 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .finally(() => {
           setIsLoading(false);
         });
+    } else if (isValidSocialMedia(formData.content_type, formik.errors)) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        business_objectives: formData.business_objectives,
+        competitors: formik.values.companyName,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description,
+        product_description: formik.values.sellingDescription,
+        target_audice: formik.values.targetAudience,
+        website: formik.values.websiteURL,
+        email: formik.values.email,
+        marketing_template: formik.values.marketing_template,
+        schedule: formik.values.schedule,
+        url: formik.values.url
+      });
+
+      const bodyData = new FormData()
+      bodyData.append('company_name', formik.values.companyName);
+      bodyData.append('company_description', formik.values.description);
+      bodyData.append('target_audience', formik.values.targetAudience);
+      bodyData.append('customer_profile', formik.values.idealCustomerProfile);
+      bodyData.append('business_objectives', formData.business_objectives.join(','));
+      bodyData.append('website_url', formValidUrl(formik.values.websiteURL));
+      bodyData.append('email_address', formik.values.email);
+      bodyData.append('email_template', formik.values.marketing_template);
+      company.assets.forEach((asset) => {
+        bodyData.append('media', asset);
+      });
+
+      axios
+        .post('/fapi/pinterest_get_instructions_api', bodyData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then((res) => {
+          console.log("res: ", res);
+          if (res.data.status == true) {
+            setSocialMedia([
+              ...socialMedia,
+              ...res.data.recommendations.map((rec: any) => ({
+                content: JSON.parse(rec.content),
+                img_url: rec.img_url
+              }))
+            ]);
+            setActiveButtonIndex(index);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /social_media_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       console.log('Please fill rerequired field', formik.errors);
     }
@@ -153,7 +223,8 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         onClick={() => {
           handleSubmit(activeButtonIndex + 1);
         }}
-        className={`${styles.submit}`}
+        className={`${styles.submit} ${!isValid && '!bg-background-300'}`}
+        disabled={!isValid}
       >
         Submit
       </button>

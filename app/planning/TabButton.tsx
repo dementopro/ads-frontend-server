@@ -1,12 +1,13 @@
 import { FC } from "react";
 
-type TabButtonProps = {
+interface TabButtonProps {
   children: React.ReactNode;
   isActivated?: boolean;
   onClick?: () => void;
+  className?: string;
 };
 
-const Button: FC<TabButtonProps> = ({ children, isActivated, onClick }) => {
+const Button: FC<TabButtonProps> = ({ children, isActivated, onClick, className }) => {
   return (
     <button
       onClick={onClick}
@@ -14,7 +15,7 @@ const Button: FC<TabButtonProps> = ({ children, isActivated, onClick }) => {
         isActivated
           ? 'text-white border-primary-purple bg-[#35363A]'
           : 'border-[#989899] text-primary-gray'
-      }`}
+      } ${className !== undefined && className}`}
     >
       {children}
     </button>

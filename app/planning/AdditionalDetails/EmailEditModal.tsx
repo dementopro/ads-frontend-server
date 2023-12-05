@@ -18,6 +18,8 @@ import axios from "axios";
 import { message } from "antd";
 import Image from "next/image";
 
+const EmailEditor = dynamic (()=>import ('react-email-editor'))
+
 interface EmailEditModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
@@ -27,14 +29,6 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
   isOpen,
   onOpenChange,
 }) => {
-  const EmailEditor = dynamic (()=>import ('react-email-editor'))
-
-  const StyledEmailEditor = styled(EmailEditor)`
-    .blockbuilder-branding {
-      display: none !important;
-    }
-  `;
-
   const emailEditorRef = useRef<EditorRef | null>(null);
   const [preview, setPreview] = useState(false);
   const [template, setTemplate] = useState<number>(-1);
@@ -88,6 +82,7 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
           const localTemplates: any[] = JSON.parse(localStorage.getItem('templates') as string);
           localTemplates.push({
             thumbnail: res.data.img_url,
+            html: html,
             design: design
           });
           localStorage.setItem('templates', JSON.stringify(localTemplates));
@@ -125,9 +120,17 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
 
     if (preview) {
       unlayer?.hidePreview();
+      setTimeout(() => {
+        const logo = document.getElementById("adsgency-logo");
+        if (logo) logo.style.display = 'flex';
+      }, 100);
       setPreview(false);
     } else {
       unlayer?.showPreview('desktop');
+      setTimeout(() => {
+        const logo = document.getElementById("adsgency-logo");
+        if (logo) logo.style.display = 'none';
+      }, 100);
       setPreview(true);
     }
   };
@@ -149,25 +152,30 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
   };
 
   const onReady: EmailEditorProps['onReady'] = (unlayer) => {
+    const editorIframe = document.getElementById("email-editor");
     const emailEditor = document.getElementById('editor-2');
     if (emailEditor) {
       emailEditor.style.position = 'relative';
     }
     setTimeout(() => {
       const newLogo = document.createElement('div');
+      newLogo.id = "adsgency-logo";
       newLogo.style.width = '425px';
       newLogo.style.height = '50px';
       newLogo.style.background = 'rgb(238, 238, 238)';
       newLogo.style.position = 'absolute';
       newLogo.style.right = '0';
       newLogo.style.bottom = '0';
-      newLogo.style.display = 'flex';
+      newLogo.style.display = 'inline-flex';
       newLogo.style.justifyContent = 'center';
       newLogo.style.alignItems = 'center';
       newLogo.innerHTML = '<img alt="logo" loading="lazy" width="132" height="28" decoding="async" data-nimg="1" src="/logo_black.svg" style="color: transparent;">';
 
-      emailEditor?.appendChild(newLogo);
-    }, 10);
+      if (editorIframe) {
+        editorIframe.style.position = "relative";
+        editorIframe.appendChild(newLogo);
+      }
+    }, 100);
   };
 
   return (
@@ -213,16 +221,18 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
                       <Button onClick={() => setTemplate(-1)}>
                         Back
                       </Button>
-                      <Button onClick={togglePreview}>
-                        {preview ? 'Hide' : 'Show'} Preview
-                      </Button>
                       <Button onClick={saveDesign}>
                         { isSavingDesign ? <CircularProgress color="default" aria-label="Loading..."/> : 'Save Design' }
                       </Button>
-                      <Button onClick={exportHtml}>Export HTML</Button>
                     </div>
                     <React.StrictMode>
-                      <StyledEmailEditor onLoad={onLoad} onReady={onReady} />
+                      <div id="email-editor">
+                        <EmailEditor onLoad={onLoad} onReady={onReady} options={{
+                          features: {
+                            preview: false
+                          }
+                        }} />
+                      </div>
                     </React.StrictMode>
                   </>
               }

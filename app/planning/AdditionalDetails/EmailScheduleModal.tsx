@@ -11,6 +11,7 @@ import { BiCalendarEvent, BiCheck } from 'react-icons/bi';
 import { Listbox, Transition } from '@headlessui/react';
 import { BiChevronDown } from 'react-icons/bi';
 import { useSeoAnalyzerContext } from '@/context/seo';
+import { formatTimeOfDay } from '@/utils';
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -51,9 +52,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
           <div className="relative">
             <Listbox.Button className="relative bg-background-200 z-10 w-[128px] h-[48px] py-2 pl-3 pr-10 text-left hover:brightness-110 rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate">
-                {`${schedules[i] < 0 ? 'Times' : (schedules[i] === 0 || schedules[i] === 12) ? 12 : schedules[i] % 12}${
-                  schedules[i] >= 0 ? (schedules[i] >= 12 ? 'pm' : 'am') : ''
-                }`}
+                {`${schedules[i] < 0 ? 'Times' : formatTimeOfDay(schedules[i])}`}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <BiChevronDown
@@ -101,7 +100,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {`${(idx === 0 || idx === 12) ? 12 : idx % 12}${idx >= 12 ? 'pm' : 'am'}`}
+                          {formatTimeOfDay(idx)}
                         </span>
                       </>
                     )}
@@ -127,11 +126,15 @@ const DaySchedule: FC<DayScheduleProps> = ({
 interface EmailScheduleModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
+  title: string;
+  description: string;
 }
 
 const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
   isOpen,
   onOpenChange,
+  title,
+  description
 }) => {
   const { company, setCompany } = useSeoAnalyzerContext();
   const [schedules, setSchedules] = useState<any>({});
@@ -156,10 +159,10 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
             <ModalHeader className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-2xl">
                 <BiCalendarEvent className="w-7 h-7" />
-                Email Schedule
+                {title}
               </div>
               <p className="mt-2 text-sm text-primary-gray">
-                Select the days & times you would like to schedule your emails
+                {description}
               </p>
             </ModalHeader>
             <ModalBody>
@@ -174,28 +177,28 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
                     onSelect={(idx, value) => {
                       let newSchedules = {
                         ...schedules,
-                        [day.toLowerCase()]: schedules[day.toLowerCase()].map((val: any, _idx: number) => _idx === idx ? value : val)
+                        [day]: schedules[day].map((val: any, _idx: number) => _idx === idx ? value : val)
                       }
                       setSchedules(newSchedules);
                     }}
-                    schedules={schedules[day.toLowerCase()]}
+                    schedules={schedules[day]}
                     onClick={() => {
-                      if (!schedules[day.toLowerCase()]) {
+                      if (!schedules[day]) {
                         setSchedules({
                           ...schedules,
-                          [day.toLowerCase()]: []
+                          [day]: []
                         })
                       } else {
                         setSchedules({
                           ...schedules,
-                          [day.toLowerCase()]: null
+                          [day]: null
                         })
                       }
                     }}
                     onAddTime={() => {
                       const newSchedule = {
                         ...schedules,
-                        [day.toLowerCase()]: [...schedules[day.toLowerCase()], -1],
+                        [day]: [...schedules[day], -1],
                       };
                       setSchedules(newSchedule);
                     }}

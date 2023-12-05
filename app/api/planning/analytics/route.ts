@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { google } from 'googleapis';
+const { google } = require('googleapis');
 
 export async function POST(req: NextRequest) {
   try {

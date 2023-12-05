@@ -1,5 +1,5 @@
 import { Account, QueryAccountResp } from "@/types/account";
-import { CompanyDetailForm, CompanyForm } from "@/types/planning";
+import { CompanyDetailForm } from "@/types/planning";
 import { createContext, useContext, useEffect, useState } from "react";
 import { isUserLogin, onLogin, onLogout } from "@/lib/auth";
 import { redirect, usePathname, useRouter } from 'next/navigation';
@@ -28,6 +28,11 @@ export type EmailInstruction = {
   email_options: Array<EmailOption>;
 }
 
+export type SocialMedia = Array<{
+  content: any;
+  img_url: string;
+}>
+
 // Create a context for managing user account-related data
 export const SeoAnalyzerContext = createContext<{
   onpage: Array<SeoAnalysis>,
@@ -36,12 +41,14 @@ export const SeoAnalyzerContext = createContext<{
   isLoadingOffpage: boolean,
   company: CompanyDetailForm,
   emailInstruction: EmailInstruction,
+  socialMedia: SocialMedia,
   setOnpage: (data: Array<SeoAnalysis>) => void,
   setOffpage: (data: Array<SeoAnalysis>) => void,
   setIsLoadingOnpage: (data: boolean) => void,
   setIsLoadingOffpage: (data: boolean) => void,
   setCompany: (data: CompanyDetailForm) => void,
   setEmailInstruction: (data: EmailInstruction) => void
+  setSocialMedia: (data: SocialMedia) => void
 }>({
   onpage: [],
   offpage: [],
@@ -58,19 +65,23 @@ export const SeoAnalyzerContext = createContext<{
     content_type: 'SEO',
     product_description: '',
     email: '',
+    url: '',
     marketing_template: '',
-    schedule: {}
+    schedule: {},
+    assets: []
   },
   emailInstruction: {
     email_options: [],
     email_template_type: ''
   },
+  socialMedia: [],
   setOnpage: (data) => {},
   setOffpage: (data) => {},
   setIsLoadingOnpage: (data) => {},
   setIsLoadingOffpage: (data) => {},
   setCompany: (data) => {},
-  setEmailInstruction: (data) => {}
+  setEmailInstruction: (data) => {},
+  setSocialMedia: (data) => {}
 });
 
 export const useSeoAnalyzerContext = () => useContext(SeoAnalyzerContext);
@@ -94,13 +105,16 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     content_type: 'SEO',
     product_description: '',
     email: '',
+    url: '',
     marketing_template: '',
-    schedule: {}
+    schedule: {},
+    assets: []
   })
   const [emailInstruction, setEmailInstruction] = useState<EmailInstruction>({
     email_options: [],
     email_template_type: ''
   });
+  const [socialMedia, setSocialMedia] = useState<SocialMedia>([]);
 
   // Provide the account data through the context to child components
   return (
@@ -110,7 +124,8 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
       isLoadingOnpage, setIsLoadingOnpage,
       isLoadingOffpage, setIsLoadingOffpage,
       company, setCompany,
-      emailInstruction, setEmailInstruction
+      emailInstruction, setEmailInstruction,
+      socialMedia, setSocialMedia
     }}>
       {children}
     </SeoAnalyzerContext.Provider>

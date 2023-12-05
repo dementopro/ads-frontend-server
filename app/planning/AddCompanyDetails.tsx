@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import axios from 'axios';
@@ -8,10 +8,10 @@ import { useFormik } from 'formik';
 import { useDisclosure } from '@nextui-org/react';
 
 import GoogleAnalyticsModal from "@/app/planning/Analytics/GoogleAnalyticsModal";
-import { AccountContext } from '@/context/account';
 import { CompanyForm } from '@/types/planning';
 import styles from './planning.module.css';
 import { DETAIL_LIMIT } from '@/data/constant';
+import { popupCenter } from '@/utils/popup';
 
 interface AddCompanyDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
@@ -19,56 +19,27 @@ interface AddCompanyDetailsProps {
 
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const { data: session, status } = useSession();
+  const [isAnalyticsOAuthDone, setIsAnalyticsOAuthDone] = useState<boolean>(false);
   const [analyticsData, setAnalyticsData] = useState([]);
   const { isOpen: isGoogleAnalyticsModalOpen, onOpen: onOpenGoogleAnalyticsModal, onOpenChange: onOpenGoogleAnalyticsModalChange } = useDisclosure();
-  const { isGoogleAnalyticsDone, setIsGoogleAnalyticsDone } = useContext(AccountContext);
-
-  const popupCenter = (url: string, title: string) => {
-    const dualScreenLeft = window.screenLeft ?? window.screenX;
-    const dualScreenTop = window.screenTop ?? window.screenY;
-
-    const width =
-      window.innerWidth ?? document.documentElement.clientWidth ?? screen.width;
-
-    const height =
-      window.innerHeight ??
-      document.documentElement.clientHeight ??
-      screen.height;
-
-    const systemZoom = width / window.screen.availWidth;
-
-    const left = (width - 500) / 2 / systemZoom + dualScreenLeft;
-    const top = (height - 550) / 2 / systemZoom + dualScreenTop;
-
-    const newWindow = window.open(
-      url,
-      title,
-      `width=${500 / systemZoom},height=${550 / systemZoom
-      },top=${top},left=${left}`
-    );
-
-    newWindow?.focus();
-  };
+  const { data: session, status } = useSession();
 
   const handleGoogleAnalyticsOAuth = async () => {
-    setIsGoogleAnalyticsDone(-1);
-    popupCenter("/auth/google", "Google Analytics Sign In");
-    setTimeout(() => {
-      setIsGoogleAnalyticsDone(0);
-    }, 2000);
+    popupCenter("/auth/google", "Google Analytics Sign In", () => {
+      setIsAnalyticsOAuthDone(true);
+    });
   }
 
   useEffect(() => {
     (async () => {
-      if (status === "authenticated" && formik.values.websiteURL && !isGoogleAnalyticsDone) {
-        setIsGoogleAnalyticsDone(1);
+      if (status === "authenticated" && formik.values.websiteURL && isAnalyticsOAuthDone) {
         try {
           const analyticsResponse = await axios.post(`/api/planning/analytics?site=${formik.values.websiteURL}`, {
             accessToken: session.accessToken,
             refreshToken: session.refreshToken
           });
           messageApi.success("Fetched analysis data");
+          setIsAnalyticsOAuthDone(false);
           setAnalyticsData(analyticsResponse as any);
           onOpenGoogleAnalyticsModal();
         } catch (error) {
@@ -76,7 +47,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
         }
       }
     })();
-  }, [session, status, formik, messageApi, isGoogleAnalyticsDone, onOpenGoogleAnalyticsModal, setIsGoogleAnalyticsDone]);
+  }, [session, status, formik, messageApi, onOpenGoogleAnalyticsModal, isAnalyticsOAuthDone]);
 
   return (
     <>
