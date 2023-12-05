@@ -22,9 +22,7 @@ const Choropleth = ({ data }: ChoroplethProps) => {
         data={data}
         colors='nivo'
         theme={{
-          text: {
-            color: '#eee'
-          },
+          textColor: '#eee',
           tooltip: {
             container: {
               background: '#222',

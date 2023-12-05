@@ -65,7 +65,7 @@ const InstagramRecommendation = () => {
             <div className="flex flex-wrap gap-4">
               {
                 socialMedia.map((media, i) => (
-                  <div>
+                  <div key={i}>
                     <Image
                       className='overflow-hidden rounded-lg !w-[192px] !h-[160px] object-cover object-center'
                       src={process.env.NEXT_PUBLIC_API_URL + media.img_url}

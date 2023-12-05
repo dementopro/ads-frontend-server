@@ -15,9 +15,7 @@ const TheResponsiveBar = ({ data }: TheResponsiveBarProps) => {
       {/* The ResponsiveBar component from the Nivo library */}
       <ResponsiveBar
         theme={{
-          text: {
-            color: '#eee'
-          },
+          textColor: '#eee',
           tooltip: {
             container: {
               background: '#222222',

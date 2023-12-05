@@ -12,8 +12,10 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  types
 }: {
   children: React.ReactNode;
+  types: React.ReactNode;
 }) {
   const session = await getServerSession();
 
