@@ -106,11 +106,10 @@ const BugReportModal: FC<BugReportModalProps> = ({
                     *Email Address
                   </p>
                   <input
-                    className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${
-                      formik.errors.email && formik.touched.email
-                        ? 'border-rose-600'
-                        : 'border-white/20'
-                    } w-full `}
+                    className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${formik.errors.email && formik.touched.email
+                      ? 'border-rose-600'
+                      : 'border-white/20'
+                      } w-full `}
                     placeholder="Enter email address"
                     {...formik.getFieldProps('email')}
                   />
@@ -125,11 +124,10 @@ const BugReportModal: FC<BugReportModalProps> = ({
                     *Title of issue
                   </p>
                   <input
-                    className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${
-                      formik.errors.title && formik.touched.title
-                        ? 'border-rose-600'
-                        : 'border-white/20'
-                    } w-full `}
+                    className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${formik.errors.title && formik.touched.title
+                      ? 'border-rose-600'
+                      : 'border-white/20'
+                      } w-full `}
                     placeholder="Enter concise title that summarizes the issue"
                     {...formik.getFieldProps('title')}
                   />
@@ -144,18 +142,16 @@ const BugReportModal: FC<BugReportModalProps> = ({
                     *Description
                   </p>
                   <div
-                    className={` ${
-                      true ? `max-h-[241px]` : `max-h-[141px]`
-                    } flex flex-col w-full mt-2`}
+                    className={` ${true ? `max-h-[241px]` : `max-h-[141px]`
+                      } flex flex-col w-full mt-2`}
                   >
                     <textarea
-                      className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${
-                        formik.errors.description &&
+                      className={`bg-[#1b1c21] text-white pl-[24px] pt-[18px] pb-0 border rounded-lg ${formik.errors.description &&
                         formik.touched.description
-                          ? '!border-rose-600'
-                          : 'border-white/20'
-                      } w-full `}
-                      placeholder="Copy and paste your email marketing templates"
+                        ? '!border-rose-600'
+                        : 'border-white/20'
+                        } w-full `}
+                      placeholder="Enter a detailed description of the issue"
                       style={{
                         height: '220px',
                       }}
@@ -172,15 +168,22 @@ const BugReportModal: FC<BugReportModalProps> = ({
                   <label className='text-primary-purple cursor-pointer flex items-center gap-2' htmlFor='upload_image'>
                     <BiFileBlank />
                     Upload Image
-                    <input type='file' id='upload_image' onChange={(e) => {
+                    <input type='file' id='upload_image' accept='image/*' onChange={(e) => {
                       console.log(e.currentTarget.files);
                       if (e.currentTarget.files && e.currentTarget.files.length > 0) {
-                        setUploadImage(e.currentTarget.files[0]);
+                        const selectedFile = e.currentTarget.files[0];
+                        // Check if the selected file is an image
+                        if (selectedFile.type.startsWith('image/')) {
+                          setUploadImage(selectedFile);
+                        } else {
+                          // Alert or handle non-image files
+                          console.error('Please select a valid image file.');
+                        }
                       }
                     }} hidden />
                   </label>
                   <p className='text-white/70'>
-                    { uploadImage && uploadImage.name }
+                    {uploadImage && uploadImage.name}
                   </p>
                 </div>
               </ModalBody>

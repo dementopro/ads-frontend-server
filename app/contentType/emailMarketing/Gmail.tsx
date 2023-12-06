@@ -80,8 +80,8 @@ const GmailMarketing = () => {
             </p>
           </div>
           <div className="w-full py-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-sm font-normal text-white">
+            <div className="w-full flex flex-row flex-wrap items-center justify-between gap-2">
+              <p className="flex-1 text-sm font-normal text-white">
                 {`You uploaded this ${emailInstruction.email_template_type.toLowerCase()} marketing template:`}
               </p>
               <DownloadDropdown selects={selectedTemplates} />
