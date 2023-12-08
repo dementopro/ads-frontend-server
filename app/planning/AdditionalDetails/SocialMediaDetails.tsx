@@ -1,12 +1,15 @@
+'use client';
+
 import React, { FC, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
 import { BiCalendar, BiFileBlank } from 'react-icons/bi';
 import { Chip, tabs, useDisclosure } from '@nextui-org/react';
 import { message } from 'antd';
 import { useFormik } from 'formik';
 import axios from 'axios';
 
-import PinterestAnalyticsModal from "@/app/planning/Analytics/PinterestAnalyticsModal";
+// import PinterestAnalyticsModal from "@/app/planning/Analytics/PinterestAnalyticsModal";
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import { DETAIL_LIMIT } from '@/data/constant';
@@ -16,6 +19,8 @@ import styles from '../planning.module.css';
 import EmailScheduleModal from './EmailScheduleModal';
 import { popupCenter } from '@/utils/popup';
 import { formatTimeOfDay } from '@/utils';
+
+const PinterestAnalyticsModal = dynamic(() => import("@/app/planning/Analytics/PinterestAnalyticsModal"), { ssr: false });
 
 interface SocialMediaDetailsProps {
   formData: CompanyDetailForm;
@@ -92,12 +97,15 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   const { data: session, status } = useSession();
 
   const oauthLogin = () => {
-    popupCenter(tabsList[activeTab].page, `${ tabsList[activeTab].title } Sign In`, () => {
-      setIsSocialAuthenticated(prevState => ({
-        ...prevState,
-        [tabsList[activeTab].title.toLowerCase()]: true
-      }))
-    });
+    const selectedProvider: string = tabsList[activeTab].provider;
+    if ( selectedProvider === 'google' || selectedProvider === 'pinterest') {
+      popupCenter(tabsList[activeTab].page, `${ tabsList[activeTab].title } Sign In`, () => {
+        setIsSocialAuthenticated(prevState => ({
+          ...prevState,
+          [tabsList[activeTab].title.toLowerCase()]: true
+        }))
+      });
+    }
   };
 
   useEffect(() => {
@@ -116,6 +124,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           });
           setAnalyticsData(pinterestAnalytics.data as []);
           onOpenPinterestAnalyticsModal();
+
           messageApi.success("Fetched analysis data");
         } catch (error) {
           messageApi.error("Something went wrong");
@@ -136,6 +145,10 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               onClick={() => {
                 setIsEmailAuthenticated(false);
                 setActiveTab(i);
+                formik.setValues({
+                  ...formik.values,
+                  socialMediaType: tab.title.toLowerCase()
+                });
               }}
               className='w-full md:w-auto'
             >
@@ -221,13 +234,26 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
             <label className='flex items-center gap-2 mt-4 cursor-pointer text-primary-purple' htmlFor='upload_image'>
               <BiFileBlank />
               Upload Asset
-              <input type='file' multiple id='upload_image' onChange={(e) => {
+              <input type='file' multiple id='upload_image' accept="image/*" onChange={(e) => {
                 if (e.currentTarget.files && e.currentTarget.files.length > 0) {
                   const assets = [...new Array(e.currentTarget.files.length)].map((_, i) => e.currentTarget.files?.item(i) as File);
                   setCompany({
                     ...company,
+                    name: formik.values.companyName,
+                    business_objectives: formData.business_objectives,
+                    competitors: formik.values.competitors,
+                    content_type: formData.content_type,
+                    customer_profile: formik.values.idealCustomerProfile,
+                    description: formik.values.description,
+                    product_description: formik.values.sellingDescription,
+                    target_audice: formik.values.targetAudience,
+                    website: formik.values.websiteURL,
+                    email: formik.values.email,
+                    marketing_template: formik.values.marketing_template,
+                    schedule: formik.values.schedule,
+                    url: formik.values.url,
                     assets
-                  })
+                  });
                 }
               }} hidden />
             </label>
@@ -297,6 +323,22 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-300 hover:brightness-110 text-primary-gray"
             onClick={() => {
               onOpenAdSchedule();
+              setCompany({
+                ...company,
+                name: formik.values.companyName,
+                business_objectives: formData.business_objectives,
+                competitors: formik.values.competitors,
+                content_type: formData.content_type,
+                customer_profile: formik.values.idealCustomerProfile,
+                description: formik.values.description,
+                product_description: formik.values.sellingDescription,
+                target_audice: formik.values.targetAudience,
+                website: formik.values.websiteURL,
+                email: formik.values.email,
+                marketing_template: formik.values.marketing_template,
+                schedule: formik.values.schedule,
+                url: formik.values.url
+              });
             }}
           >
             <BiCalendar className="w-6 h-6" />

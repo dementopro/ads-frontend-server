@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Button,
     Modal,
@@ -6,10 +8,11 @@ import {
     ModalFooter,
     ModalHeader,
   } from '@nextui-org/react';
-  import React, { FC, useMemo } from 'react';
+  import React, { FC } from 'react';
   import { BiInfoCircle } from 'react-icons/bi';
   import { useFormik } from 'formik';
-  import Chart, { Props } from 'react-apexcharts';
+  import dynamic from 'next/dynamic';
+  import Chart from 'react-apexcharts';
   
   import { CompanyForm } from '@/types/planning';
   
@@ -26,17 +29,17 @@ import {
     formik,
     analyticsData
   }) => {
-    const spentFundSeries: Props["series"] = [{
+    const spentFundSeries = [{
         name: 'Price',
         data: analyticsData.map(item => (item as any).SPEND_IN_DOLLAR)
     }];
-    const impressionSeries: Props["series"] = [{
+    const impressionSeries = [{
         name: 'Total Impressions',
         data: analyticsData.map(item => (item as any).TOTAL_IMPRESSION)
     }];
     const toFixedWithoutZeros = (num: number, precision: number) => Number.parseFloat(num.toFixed(precision));
 
-    const spentFundOptions: Props["options"] = {
+    const spentFundOptions = {
         chart: {
             id: 'pinterest-analytics-chart',
             type: 'bar',
@@ -108,7 +111,7 @@ import {
         }
     };
 
-    const impressionOptions: Props["options"] = {
+    const impressionOptions = {
         fill: {
             colors: analyticsData.map(() => "red")
         },
@@ -206,8 +209,8 @@ import {
               </ModalHeader>
               <ModalBody>
                 <div>
-                  <Chart options={spentFundOptions} series={spentFundSeries} type="bar" height="350" />
-                  <Chart options={impressionOptions} series={impressionSeries} type="bar" height="350" />
+                  <Chart options={spentFundOptions as any} series={spentFundSeries} type="bar" height="350" />
+                  <Chart options={impressionOptions as any} series={impressionSeries} type="bar" height="350" />
                 </div>
               </ModalBody>
               <ModalFooter className="flex w-full gap-6">

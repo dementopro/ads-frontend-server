@@ -92,7 +92,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                       className="px-4 bg-none text-primary-purple"
                       onClick={() => {
                         if (loadings[i] == true && selectedRow != i) {
-                          axios.post('/fapi/get_seo_instruction_api', {
+                          axios.post('/fapi/get_seo_instruction_api', Object.assign({
                             company_name: company.name,
                             company_description: company.description,
                             target_audience: company.target_audice,
@@ -101,8 +101,8 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             business_objectives: company.business_objectives.join(','),
                             main_category: page.url,
                             sub_category: warning,
-                            warning: warning
-                          }).then((res) => {
+                            warning: ""
+                          }, )).then((res) => {
                             if (res.data.status == true) {
                               setLoadings((prev) => {
                                 let temp = [...prev];

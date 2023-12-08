@@ -13,7 +13,6 @@ import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
 import dynamic from 'next/dynamic';
 import sample from "./sample.json";
-import styled from 'styled-components';
 import axios from "axios";
 import { message } from "antd";
 import Image from "next/image";

@@ -58,7 +58,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         ...company,
         name: formik.values.companyName,
         business_objectives: formData.business_objectives,
-        competitors: formik.values.companyName,
+        competitors: formik.values.competitors,
         content_type: formData.content_type,
         customer_profile: formik.values.idealCustomerProfile,
         description: formik.values.description,
@@ -104,7 +104,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         ...company,
         name: formik.values.companyName,
         business_objectives: formData.business_objectives,
-        competitors: formik.values.companyName,
+        competitors: formik.values.competitors,
         content_type: formData.content_type,
         customer_profile: formik.values.idealCustomerProfile,
         description: formik.values.description,
@@ -113,7 +113,8 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         website: formik.values.websiteURL,
         email: formik.values.email,
         marketing_template: formik.values.marketing_template,
-        schedule: formik.values.schedule
+        schedule: formik.values.schedule,
+        url: formik.values.url
       });
       axios
         .post('/fapi/email_marketing_instruction_api', {
@@ -146,7 +147,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         ...company,
         name: formik.values.companyName,
         business_objectives: formData.business_objectives,
-        competitors: formik.values.companyName,
+        competitors: formik.values.competitors,
         content_type: formData.content_type,
         customer_profile: formik.values.idealCustomerProfile,
         description: formik.values.description,
