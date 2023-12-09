@@ -115,8 +115,8 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
         <div className={`${styles.div} col-span-12 !mt-0`}>
           <div className="grid w-full grid-cols-12">
             <div className="col-span-12 lg:col-span-6">
-              <h6 className="text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-                3.&nbsp;Connect your {tabsList[activeTab].title} account
+              <h6 className="text-[15px] text-white not-italic font-medium leading-[normal]">
+                3.&nbsp;Connect your {tabsList[activeTab].title} account*
               </h6>
               <p className="mt-1 text-sm text-primary-gray">
                 Select for 1 click authentication
@@ -217,8 +217,8 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            4.&nbsp;Enter your email marketing templates
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            4.&nbsp;Enter your email marketing templates*
           </p>
           <div
             className={` ${
@@ -249,7 +249,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             5.&nbsp;Provide your email scheduling
           </p>
           <button
@@ -276,8 +276,8 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            6.&nbsp;Add your target audience
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            6.&nbsp;Add your target audience*
           </p>
           <div
             className={` ${
@@ -303,8 +303,8 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            7.&nbsp;Add ideal customer profile
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            7.&nbsp;Add ideal customer profile*
           </p>
           <div
             className={` ${

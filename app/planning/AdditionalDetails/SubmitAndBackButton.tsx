@@ -89,6 +89,8 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
             });
             setOffpage(temp);
             setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
           }
         })
         .catch((err) => {
@@ -132,6 +134,8 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
             const instruction = JSON.parse(res.data.instruction);
             setEmailInstruction(instruction);
             setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
           }
         })
         .catch((err) => {
@@ -182,14 +186,13 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .then((res) => {
           console.log("res: ", res);
           if (res.data.status == true) {
-            setSocialMedia([
-              ...socialMedia,
-              ...res.data.recommendations.map((rec: any) => ({
-                content: JSON.parse(rec.content),
-                img_url: rec.img_url
-              }))
-            ]);
+            setSocialMedia(res.data.recommendations.map((rec: any) => ({
+              content: JSON.parse(rec.content),
+              img_url: process.env.NEXT_PUBLIC_API_URL + rec.img_url
+            })));
             setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
           }
         })
         .catch((err) => {

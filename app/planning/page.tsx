@@ -32,7 +32,7 @@ import { useSeoAnalyzerContext } from '@/context/seo';
 import BugReportModal from '@/components/contactUs/BugReportModal';
 import { useDisclosure } from '@nextui-org/react';
 import SocialMediaDetails from './AdditionalDetails/SocialMediaDetails';
-import InstagramRecommendation from './Recommendations/Instagram';
+import SocialMediaRecommendation from './Recommendations/SocialMedia';
 import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
 
 async function getHistory(): Promise<IPlanningObj[]>;
@@ -379,7 +379,7 @@ const PlanningPage = () => {
                   </Button>
                 ))}
               </div>
-              {activeSeoType == 0 ? <InstagramRecommendation /> : <InstagramRecommendation />}
+              <SocialMediaRecommendation type={activeSeoType} />
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}

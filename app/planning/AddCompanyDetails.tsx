@@ -54,7 +54,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
       {contextHolder}
       <div className="grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             3. Add your target audience*
           </p>
           <div
@@ -87,7 +87,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
           </div>
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             4. Add ideal customer profile*
           </p>
           <div
@@ -122,7 +122,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
           </div>
         </div>
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             5. Add your competitors*
           </p>
           <div
@@ -157,7 +157,7 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
 
         <div className={`${styles.googleDiv} col-span-12 lg:col-span-6 !mt-0`}>
           <div className="flex flex-col w-[521px] text-[15px] h-[43px] gap-[8px]">
-            <p className="w-[521px] text-[15px] h-[18px] text-[color:#B3ACFF]">
+            <p className="w-[521px] text-[15px] h-[18px] text-white">
               6. Connect your historical data (optional)
             </p>
             <p className="w-[521px] text-[15px] h-[17px] text-[color:var(--primary-300,#ABABAB)]">

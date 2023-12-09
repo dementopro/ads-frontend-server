@@ -13,7 +13,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AccountContext } from '@/context/account';
 import AdminLayout from '@/layout/admin';
 import Button from '@/app/planning/TabButton';
-import Instagram from './Instagram';
+import SocialMedia from './SocialMedia';
 import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
@@ -76,7 +76,7 @@ const Page = () => {
 
       <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
         <>
-          <h2 className="text-3xl">📧&nbsp;Email Marketing</h2>
+          <h2 className="text-3xl">👥&nbsp;Social Media</h2>
           <div className='flex items-center mt-4'>
             {tabsList.map((tab, i) => (
               <Button
@@ -90,7 +90,19 @@ const Page = () => {
             ))}
           </div>
           <div className={`${styles.onPageDiv}`}>
-          { activeTab == 0 ? <Instagram /> : <Instagram /> }
+            <SocialMedia type={activeTab} />
+          </div>
+          <div className='w-full mt-6'>
+            <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">
+              <button
+                className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
+                onClick={() => {
+                  router.push(`/planning?step=2&type=${activeTab}`)
+                }}
+              >
+                Back
+              </button>
+            </div>
           </div>
         </>
       </Spin>

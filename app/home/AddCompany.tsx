@@ -13,7 +13,7 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
   return (
     <>
       <div className={`${styles.div} w-full `}>
-        <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal] mb-6">
+        <p className=" text-[15px] text-white not-italic font-medium leading-[normal] mb-6">
           1.&nbsp;Add information about your company
         </p>
         <div className="w-full flex flex-row gap-x-[65px]">

@@ -20,7 +20,7 @@ import {
 } from 'react-icons/bi';
 import { Chip, Tooltip } from '@nextui-org/react';
 import { DatePicker, Input, Spin, message } from 'antd';
-import React, { Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import {
   EmailInstruction,
   EmailOption,
@@ -37,16 +37,26 @@ import { DETAIL_LIMIT } from '@/data/constant';
 import MediaStepper from './MediaStepper';
 import { Menu, Transition } from '@headlessui/react';
 import Select from '@/components/common/Select';
+import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
 
-const Instagram = () => {
+interface SocialMediaProps {
+  type: number;
+}
+
+const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
-  const { company, emailInstruction, setEmailInstruction, socialMedia, setSocialMedia } =
-    useSeoAnalyzerContext();
+  const {
+    company,
+    emailInstruction,
+    setEmailInstruction,
+    socialMedia,
+    setSocialMedia,
+  } = useSeoAnalyzerContext();
   const [optionEdits, setOptionEdits] = useState<EmailOption[]>([]);
   const [activeMedia, setActiveMedia] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [ratio, setRatio] = useState<string>("Square");
+  const [ratio, setRatio] = useState<string>('Square');
   const [isBasicOpen, setIsBasicOpen] = useState<boolean>(false);
   const [isDetailedOpen, setIsDetailedOpen] = useState<boolean>(false);
   const [isTextOpen, setIsTextOpen] = useState<boolean>(false);
@@ -58,7 +68,7 @@ const Instagram = () => {
     if (emailInstruction && emailInstruction.email_options) {
       setOptionEdits([...emailInstruction.email_options]);
     }
-  }, [emailInstruction])
+  }, [emailInstruction]);
 
   if (socialMedia.length === 0) return <></>;
 
@@ -73,7 +83,7 @@ const Instagram = () => {
             width={24}
             height={24}
           />
-          <h3>Instagram Optimizations</h3>
+          <h3>{tabsList[type].title} Optimizations</h3>
         </div>
         <button className="flex items-center gap-2 px-4 bg-none text-primary-purple">
           <BiRefresh className="w-5 h-5 text-primary-purple" />
@@ -93,9 +103,9 @@ const Instagram = () => {
           <MediaStepper
             value={activeMedia}
             options={socialMedia.map((val, i) => ({
-                name: `Media ${i + 1}`,
-                value: i,
-              }))}
+              name: `Media ${i + 1}`,
+              value: i,
+            }))}
             onChange={(option) => {
               setActiveMedia(option.value);
             }}
@@ -106,8 +116,8 @@ const Instagram = () => {
           <div className="flex items-center gap-2 p-2 mt-2 rounded-lg bg-background-300">
             <BiInfoCircle className="w-4 h-4" />
             <p className="text-[15px]">
-              Media {activeMedia + 1} - Choose and edit optimized media content to publish to
-              Instagram
+              Media {activeMedia + 1} - Choose and edit optimized media content
+              to publish to {tabsList[type].title}
             </p>
           </div>
           <div className="w-full py-4">
@@ -218,27 +228,29 @@ const Instagram = () => {
                   )}
                 </Menu>
                 <div className="flex flex-wrap gap-8 mt-6">
-                  <div className='w-[336px]'>
+                  <div className="w-[336px]">
                     <div className="bg-[#27282F] w-full rounded-lg overflow-hidden">
                       <Image
-                        src={process.env.NEXT_PUBLIC_API_URL + socialMedia[activeMedia]?.img_url}
+                        src={socialMedia[activeMedia]?.img_url}
                         width={261}
                         height={261}
                         alt={socialMedia[activeMedia]?.img_url}
-                        className='w-full h-[261px] object-center object-cover'
+                        className="w-full h-[261px] object-center object-cover"
                       />
 
                       <div className="p-5 text-primary-gray">
                         {socialMedia[activeMedia]?.content.caption}
-                        {socialMedia[activeMedia]?.content.keywords.map((keyword: any) => " #" + keyword)}
+                        {socialMedia[activeMedia]?.content.keywords?.map(
+                          (keyword: any) => ' #' + keyword
+                        )}
                       </div>
                     </div>
-                    <div className='flex flex-row-reverse w-full gap-4 mt-4'>
-                      <BiCopy className='w-5 h-5' />
-                      <BiDownload className='w-5 h-5' />
+                    <div className="flex flex-row-reverse w-full gap-4 mt-4">
+                      <BiCopy className="w-5 h-5" />
+                      <BiDownload className="w-5 h-5" />
                     </div>
                   </div>
-                  
+
                   <div className="flex-1 p-0">
                     <div className="border rounded-lg border-background-300">
                       <div
@@ -261,33 +273,35 @@ const Instagram = () => {
                           Social Media Objectives:
                         </h3>
                         <div className="flex items-center gap-2 mt-2">
-                          {
-                            company.business_objectives.map((val, i) => (
-                              <Chip key={i} className="rounded-lg bg-background-300 text-primary-gray">
-                                {val}
-                              </Chip>
-                            ))
-                          }
+                          {company.business_objectives.map((val, i) => (
+                            <Chip
+                              key={i}
+                              className="rounded-lg bg-background-300 text-primary-gray"
+                            >
+                              {val}
+                            </Chip>
+                          ))}
                         </div>
 
                         <h3 className="mt-4 font-medium text-white text-normal">
                           Target Audience
                         </h3>
-                        <div className="w-full">
-                          {company.target_audice}
-                        </div>
+                        <div className="w-full">{company.target_audice}</div>
 
                         <h3 className="mt-6 font-medium text-white text-normal">
                           Trending Kewords
                         </h3>
                         <div className="flex flex-wrap items-center gap-2 mt-2">
-                          {
-                            socialMedia[activeMedia]?.content.keywords.map((val: any, idx: number) => (
-                              <Chip key={idx} className="rounded-lg bg-background-300 text-primary-gray">
+                          {socialMedia[activeMedia]?.content.keywords?.map(
+                            (val: any, idx: number) => (
+                              <Chip
+                                key={idx}
+                                className="rounded-lg bg-background-300 text-primary-gray"
+                              >
                                 {val}
                               </Chip>
-                            ))
-                          }
+                            )
+                          )}
                         </div>
                       </div>
                     </div>
@@ -331,7 +345,10 @@ const Instagram = () => {
                               Potential Outcome
                             </h6>
                             <p className="mt-2 text-primary-gray">
-                              {socialMedia[activeMedia]?.content.potential_outcome}
+                              {
+                                socialMedia[activeMedia]?.content
+                                  .potential_outcome
+                              }
                             </p>
                           </div>
                           <BiCopy className="w-5 h-5" />
@@ -400,11 +417,11 @@ const Instagram = () => {
                           <BiCopy className="w-5 h-5" />
                         </div>
                         <Image
-                          src={process.env.NEXT_PUBLIC_API_URL + socialMedia[activeMedia]?.img_url}
+                          src={socialMedia[activeMedia]?.img_url}
                           width={261}
                           height={261}
                           alt={socialMedia[activeMedia]?.img_url}
-                          className='rounded-lg mt-4 w-[192px] h-[160px] object-center object-cover'
+                          className="rounded-lg mt-4 w-[192px] h-[160px] object-center object-cover"
                         />
 
                         <div className="mt-4">
@@ -483,12 +500,12 @@ const Instagram = () => {
                               </div>
                             </div>
 
-                            <div className='flex items-center justify-between col-span-12'>
-                              <div className='flex items-center gap-2'>
+                            <div className="flex items-center justify-between col-span-12">
+                              <div className="flex items-center gap-2">
                                 <u>Use optimal times</u>
-                                <BiChevronDown className='w-5 h-5' />
+                                <BiChevronDown className="w-5 h-5" />
                               </div>
-                              <BiTrash className='w-5 h-5' />
+                              <BiTrash className="w-5 h-5" />
                             </div>
                           </div>
                         </div>
@@ -504,9 +521,9 @@ const Instagram = () => {
                       </div>
                     </div>
 
-                    <div className='w-full text-right'>
+                    <div className="w-full text-right">
                       <button className="px-6 py-2 mt-4 text-white rounded-lg bg-primary-purple">
-                        Launch to Instagram
+                        Launch to {tabsList[type].title}
                       </button>
                     </div>
                   </div>
@@ -520,4 +537,4 @@ const Instagram = () => {
   );
 };
 
-export default Instagram;
+export default SocialMedia;

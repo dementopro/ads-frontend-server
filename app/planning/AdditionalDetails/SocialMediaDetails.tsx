@@ -167,8 +167,8 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         <div className={`${styles.div} col-span-12 !mt-0`}>
           <div className="grid w-full grid-cols-12">
             <div className="col-span-12 lg:col-span-6">
-              <h6 className="text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-                3.&nbsp;Connect your {tabsList[activeTab].title} account
+              <h6 className="text-[15px] text-white not-italic font-medium leading-[normal]">
+                3.&nbsp;Connect your {tabsList[activeTab].title} account*
               </h6>
               <p className="mt-1 text-sm text-primary-gray">
                 Select for 1 click authentication
@@ -214,8 +214,8 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            4.&nbsp;Upload media assets for Instagram
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            4.&nbsp;Upload media assets for {tabsList[activeTab].title}*
           </p>
           <div
             className={` ${
@@ -261,8 +261,8 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            5.&nbsp;Add your target audience
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            5.&nbsp;Add your target audience*
           </p>
           <div
             className={` ${
@@ -288,8 +288,8 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            6.&nbsp;Add ideal customer profile
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            6.&nbsp;Add ideal customer profile*
           </p>
           <div
             className={` ${
@@ -316,8 +316,8 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         </div>
 
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
-          <p className=" text-[15px] text-[color:#B3ACFF] not-italic font-medium leading-[normal]">
-            7.&nbsp;Provide your Ad scheduling
+          <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
+            7.&nbsp;Provide your Ad scheduling*
           </p>
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-300 hover:brightness-110 text-primary-gray"
