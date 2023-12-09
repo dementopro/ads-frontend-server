@@ -21,6 +21,7 @@ import {
 import { Chip, Tooltip } from '@nextui-org/react';
 import { DatePicker, Input, Spin, message } from 'antd';
 import { FC, Fragment, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import {
   EmailInstruction,
   EmailOption,
@@ -63,12 +64,26 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const [isImageOpen, setIsImageOpen] = useState<boolean>(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
   const [schedules, setSchedules] = useState<any>([]);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (emailInstruction && emailInstruction.email_options) {
       setOptionEdits([...emailInstruction.email_options]);
     }
   }, [emailInstruction]);
+
+  const handleOnLaunchAd = async () => {
+    try {
+      const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[type].title.toLowerCase().replaceAll(" ", "")}/launchAd`, {
+        accessToken: (session as any)[tabsList[type].provider].accessToken,
+        refreshToken: (session as any)[tabsList[type].provider].refreshToken
+      });
+      
+      messageApi.success('Launch Ad success');
+    } catch (error) {
+      messageApi.error('Something went wrong');
+    }
+  };
 
   if (socialMedia.length === 0) return <></>;
 
@@ -379,7 +394,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                           {socialMedia[activeMedia]?.content.caption}
                         </div>
 
-                        <div className="mt-4">
+                        {/* <div className="mt-4">
                           <h6 className="text-white text-normal">
                             Generate texts with AI
                           </h6>
@@ -391,7 +406,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
 
                         <button className="px-3 py-1 mt-4 text-white rounded-lg bg-primary-purple">
                           Regenerate Text
-                        </button>
+                        </button> */}
                       </div>
                     </div>
 
@@ -424,7 +439,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                           className="rounded-lg mt-4 w-[192px] h-[160px] object-center object-cover"
                         />
 
-                        <div className="mt-4">
+                        {/* <div className="mt-4">
                           <h6 className="text-white text-normal">
                             Product Image
                           </h6>
@@ -436,7 +451,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
 
                         <button className="px-3 py-1 mt-4 text-white rounded-lg bg-primary-purple">
                           Regenerate Image
-                        </button>
+                        </button> */}
                       </div>
                     </div>
 
@@ -522,7 +537,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                     </div>
 
                     <div className="w-full text-right">
-                      <button className="px-6 py-2 mt-4 text-white rounded-lg bg-primary-purple">
+                      <button className="px-6 py-2 mt-4 text-white rounded-lg bg-primary-purple" onClick={handleOnLaunchAd}>
                         Launch to {tabsList[type].title}
                       </button>
                     </div>

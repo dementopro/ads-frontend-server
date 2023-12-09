@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { BiCalendar, BiFileBlank } from 'react-icons/bi';
@@ -103,35 +103,42 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         setIsSocialAuthenticated(prevState => ({
           ...prevState,
           [tabsList[activeTab].title.toLowerCase()]: true
-        }))
+        }));
+
+        formik.setValues({
+          ...formik.values,
+          url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
+        })
       });
     }
   };
+  
+  const isCurrentSocialAuthenticated: boolean = useMemo(() => {
+    return isSocialAuthenticated[tabsList[activeTab].title.toLowerCase()]
+  }, [activeTab]);
+  
+  const handleAnalyticsDashboard = async () => {
+    if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
+      && isCurrentSocialAuthenticated) {
+      try {
+        setIsSocialAuthenticated(prevState => ({
+          ...prevState,
+          [tabsList[activeTab].title.toLowerCase()]: false
+        }));
 
-  useEffect(() => {
-    (async () => {
-      if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
-        && isSocialAuthenticated[tabsList[activeTab].title.toLowerCase()]) {
-        try {
-          setIsSocialAuthenticated(prevState => ({
-            ...prevState,
-            [tabsList[activeTab].title.toLowerCase()]: false
-          }));
+        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}?site=${formik.values.websiteURL}`, {
+          accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
+          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
+        });
+        setAnalyticsData(pinterestAnalytics.data as []);
+        onOpenPinterestAnalyticsModal();
 
-          const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}?site=${formik.values.websiteURL}`, {
-            accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
-            refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
-          });
-          setAnalyticsData(pinterestAnalytics.data as []);
-          onOpenPinterestAnalyticsModal();
-
-          messageApi.success("Fetched analysis data");
-        } catch (error) {
-          messageApi.error("Something went wrong");
-        }
+        messageApi.success("Fetched analysis data");
+      } catch (error) {
+        messageApi.error("Something went wrong");
       }
-    })();
-  }, [session, status, formik, messageApi, isSocialAuthenticated, activeTab]);
+    }
+  };
 
   return (
     <>
@@ -173,20 +180,32 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               <p className="mt-1 text-sm text-primary-gray">
                 Select for 1 click authentication
               </p>
-              <button
-                className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
-                onClick={oauthLogin}
-              >
-                <Image
-                  src={tabsList[activeTab].icon}
-                  alt={tabsList[activeTab].title}
-                  width={24}
-                  height={24}
-                />
-                <p className="text-primary-gray text-[15px]">
-                  {tabsList[activeTab].title}
-                </p>
-              </button>
+              <div className="mt-6 flex flex-row">
+                <button
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isCurrentSocialAuthenticated ? "bg-background-300" : "bg-primary-purple"} hover:brightness-110`}
+                  onClick={oauthLogin}
+                  disabled={isCurrentSocialAuthenticated}
+                >
+                  <Image
+                    src={tabsList[activeTab].icon}
+                    alt={tabsList[activeTab].title}
+                    width={24}
+                    height={24}
+                  />
+                  <p className={`${isCurrentSocialAuthenticated ? "text-primary-gray" : "text-white"} text-[15px]`}>
+                    {tabsList[activeTab].title}
+                  </p>
+                </button>
+                <button
+                  className={`flex items-center gap-2 ml-3 px-4 py-2 rounded-lg ${isCurrentSocialAuthenticated ? "bg-primary-purple" : "bg-background-300" } hover:brightness-110`}
+                  onClick={handleAnalyticsDashboard}
+                  disabled={!isCurrentSocialAuthenticated}
+                >
+                  <p className={`${isCurrentSocialAuthenticated ? "text-white" : "text-primary-gray"} text-[15px]`}>
+                    Analytics Dashboard
+                  </p>
+                </button>
+              </div>
             </div>
             <div className="col-span-12 lg:col-span-6">
               <p className="mt-1 text-sm text-primary-gray">
@@ -196,13 +215,13 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
                 className={`border bg-[#1b1c21] text-white pl-[24px] py-[18px] rounded-lg mt-2 ${
                   formik.errors.url && formik.touched.url
                     ? 'border-rose-600'
-                    : isEmailAuthenticated
+                    : isCurrentSocialAuthenticated
                     ? 'border-green-600'
                     : 'border-none'
                 } w-full `}
                 placeholder={`Enter ${tabsList[activeTab].title} address`}
                 {...formik.getFieldProps('url')}
-                disabled={isEmailAuthenticated}
+                disabled={isCurrentSocialAuthenticated}
               />
               {formik.errors.url && formik.touched.url && (
                 <label className="mt-2 text-xs text-rose-600">
