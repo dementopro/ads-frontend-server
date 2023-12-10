@@ -16,10 +16,6 @@ export const growthLogos = [
     image: 'home-for-good.svg',
   },
   {
-    id: 5,
-    image: 'marketkarma.svg',
-  },
-  {
     id: 6,
     image: 'media-mint.svg',
   },

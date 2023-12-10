@@ -1,0 +1,49 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  1% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 500ms forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  99% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.fade-out {
+  animation: fade-out 250ms forwards;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 20s linear infinite;
+}

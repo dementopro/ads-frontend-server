@@ -10,6 +10,11 @@ import Testimonials from '@/components/home/Testimonials'
 import DefaultLayout from '@/layout/default'
 import Features from '@/components/home/Features'
 import AboveFooter from '@/components/common/AboveFooter'
+import Brand from '@/components/home/Brand'
+import GetRecommendations from '@/components/home/GetRecommendations'
+import Samples from '@/components/home/Samples'
+import Demo from '@/components/home/Demo'
+import Services from '@/components/home/Services'
 
 // Metadata for the page
 export const metadata = {
@@ -28,12 +33,11 @@ export default function Home() {
       }} />
       <Landing />
       <Growth />
-      <Testimonials />
-      <Supporters />
-      <SimplifyAds />
-      <Sales />
-      <Statistics />
-      <Features />
+      <Brand />
+      <GetRecommendations />
+      <Samples />
+      <Demo />
+      <Services />
       <AboveFooter />
     </DefaultLayout>
   )

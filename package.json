@@ -31,7 +31,7 @@
     "eslint-config-next": "13.4.10",
     "file-saver": "^2.0.5",
     "formik": "^2.4.2",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^10.16.15",
     "fs": "^0.0.1-security",
     "google-ads-api": "^14.2.0",
     "googleapis": "^128.0.0",
