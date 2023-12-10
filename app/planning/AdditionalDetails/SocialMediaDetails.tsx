@@ -100,32 +100,29 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
     const selectedProvider: string = tabsList[activeTab].provider;
     if ( selectedProvider === 'google' || selectedProvider === 'pinterest') {
       popupCenter(tabsList[activeTab].page, `${ tabsList[activeTab].title } Sign In`, () => {
-        setIsSocialAuthenticated(prevState => ({
-          ...prevState,
-          [tabsList[activeTab].title.toLowerCase()]: true
-        }));
+        if (session && (session as any)["user"]) {
+          setIsSocialAuthenticated(prevState => ({
+            ...prevState,
+            [tabsList[activeTab].title.toLowerCase()]: true
+          }));
 
-        formik.setValues({
-          ...formik.values,
-          url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
-        })
+          formik.setValues({
+            ...formik.values,
+            url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
+          })
+        }
       });
     }
   };
   
   const isCurrentSocialAuthenticated: boolean = useMemo(() => {
     return isSocialAuthenticated[tabsList[activeTab].title.toLowerCase()]
-  }, [activeTab]);
-  
+  }, [isSocialAuthenticated, activeTab]);
+
   const handleAnalyticsDashboard = async () => {
     if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
       && isCurrentSocialAuthenticated) {
       try {
-        setIsSocialAuthenticated(prevState => ({
-          ...prevState,
-          [tabsList[activeTab].title.toLowerCase()]: false
-        }));
-
         const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}?site=${formik.values.websiteURL}`, {
           accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
           refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
