@@ -15,7 +15,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
         </span>
       </h2>
       <p className="mt-6 text-xl font-semibold text-center text-white font-open-sans">
-        Here's what they have to say about us
+        Here&apos;s what they have to say about us
       </p>
       <div className="flex flex-wrap items-start justify-center gap-6 mt-6">
         <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
@@ -53,7 +53,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
           </div>
           <div className="flex-1 max-h-[140px] overflow-hidden" style={{ overflowWrap: 'anywhere' }}>
-            Finally, a tool that doesn't just throw spaghetti at the wall, but
+            Finally, a tool that doesn&apos;t just throw spaghetti at the wall, but
             carefully selects the strands for a perfect al dente performance.
             AdsGency AI is like the dream sidekick for marketers!
           </div>
@@ -81,7 +81,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           <div className="flex-1 max-h-[140px] overflow-hidden" style={{ overflowWrap: 'anywhere' }}>
             As a fellow marketer, I understand the struggle of creating ads that
             effectively resonate with our target audience. AdsGency sounds like
-            the perfect solution to this pain point. I can't wait to give it a
+            the perfect solution to this pain point. I can&apos;t wait to give it a
             try and see how the AI-generated ads perform.
           </div>
           <div className="flex items-center w-full gap-4">

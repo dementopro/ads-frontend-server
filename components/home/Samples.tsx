@@ -74,6 +74,8 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
             name="Ruul.io"
             comment="ruul.io  Unlock the power of collaboration with Ruul.io – your gateway to seamless teamwork and productivity. 💻 #RuulYourWorld #CollaborationRevolution #ProductivityMatters"
           />
+        </div>
+        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
           <SampleCard
             avatar="/images/home/samples/4.png"
             image="/images/home/samples/4.jfif"
@@ -101,7 +103,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
               <br />
               <br />
               Welcome to UniHusk – your destination for exceptional outdoor
-              living! We're thrilled to have you on board and can't wait to help
+              living! We&apos;re thrilled to have you on board and can&apos;t wait to help
               you create unforgettable outdoor spaces.
               <br />
               <br />
@@ -109,7 +111,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
               15% discount on your next purchase.
               <br />
               <br />
-              Thank you for choosing UniHusk – let's make your outdoor living
+              Thank you for choosing UniHusk – let&apos;s make your outdoor living
               exceptional!
               <br />
               <br />
@@ -154,7 +156,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
               <br />
               <br />
               Welcome to Delos – where extraordinary experiences come to life!
-              We are thrilled to have you as part of our community, and we can't
+              We are thrilled to have you as part of our community, and we can&apos;t
               wait to embark on this journey of discovery and innovation
               together.
               <br />
