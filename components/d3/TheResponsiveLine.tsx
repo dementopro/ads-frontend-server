@@ -10,7 +10,9 @@ const TheResponsiveLine = ({ data }: TheResponsiveLineProps) => {
       {/* The ResponsiveLine component from the Nivo library */}
       <ResponsiveLine
         theme={{
-          textColor: '#eee',
+          text: {
+            color: '#eee',
+          },
           tooltip: {
             container: {
               background: '#222222',
