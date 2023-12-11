@@ -184,7 +184,7 @@ const Demo: FC<IDemoProps> = (props) => {
                           Company Name
                         </label>
                         <div className="py-[10px] px-4 bg-background-100 border border-[#3A3A3A] rounded-md text-primary-gray mt-2">
-                          Bamboo HR
+                          Global HR
                         </div>
                       </div>
                       <div className="col-span-12 ipad:col-span-6">
@@ -192,18 +192,15 @@ const Demo: FC<IDemoProps> = (props) => {
                           Company Website
                         </label>
                         <div className="py-[10px] px-4 bg-background-100 border border-[#3A3A3A] rounded-md text-primary-gray mt-2">
-                          bamboohr.com
+                          globalhr.com
                         </div>
                       </div>
                       <div className="col-span-12">
                         <label className="text-sm font-medium text-white">
                           Company Description
                         </label>
-                        <div className="py-[10px] px-4 bg-background-100 border border-[#3A3A3A] rounded-md text-primary-gray mt-2 min-h-[200px] text-sm">
-                          BambooHR is your one-stop shop for data management,
-                          with instant, pre-built reports, automated workflows,
-                          and in-depth analytics to back you up and keep you
-                          moving.
+                        <div className="py-[10px] px-4 bg-background-100 border border-[#3A3A3A] rounded-md text-primary-gray mt-2 min-h-[200px] font-medium text-sm">
+                          Global HR is your strategic workforce partner, offering international expertise with a local touch.<br/>From compliance assurance to cutting-edge technologies, we tailor solutions to elevate your business through effective workforce management.
                         </div>
                       </div>
                     </div>

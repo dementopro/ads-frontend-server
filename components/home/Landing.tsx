@@ -18,7 +18,7 @@ const Landing = () => {
               alt="sparkles"
             />
             <div className="bg-gradient-to-r from-[#6859FF] to-[#AF41FF] bg-clip-text text-transparent">
-              <p className="text-base uppercase">One Stop Ad AI Platform</p>
+              <p className="text-base uppercase tracking-[.2em]">One Stop Ad AI Platform</p>
             </div>
           </div>
           <div className="w-full text-poppins flex-col justify-start items-start flex android:text-[34px] ipad:text-[43px] desktop:text-[48px] font-bold">
@@ -40,8 +40,8 @@ const Landing = () => {
               <p>Creative ad content using generative AI</p>
             </div>
           </div>
-          <div className="mt-[16px] w-full text-white text-base android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left bg-background-300 rounded-md py-1 px-2">
-            Decrease Your Advertising Costs & Maximize ROI With AdsGencyAI
+          <div className="mt-[16px] w-fit text-white text-base android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left bg-background-300 rounded-lg py-3 px-4">
+            Decrease Your Advertising Costs & Maximize ROI With AdsGency AI
           </div>
 
           <PrimaryButton

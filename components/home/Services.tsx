@@ -61,10 +61,10 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             <Avatar src="/images/home/avatar/2.jpg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
-                David Saadioui
+                Niroshan Ranapathi
               </h6>
               <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
-                Founder @ PRKD
+                Software Engineer
               </p>
             </div>
           </div>
@@ -88,10 +88,10 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             <Avatar src="/images/home/avatar/3.jpg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
-                David Saadioui
+                Ardash Benny
               </h6>
               <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
-                Founder @ PRKD
+                SaaS Marketer
               </p>
             </div>
           </div>
@@ -115,10 +115,10 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             <Avatar src="/images/home/avatar/4.jpg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
-                David Saadioui
+                Jade
               </h6>
               <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
-                Founder @ PRKD
+                Product Manager
               </p>
             </div>
           </div>
@@ -140,10 +140,10 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             <Avatar src="/images/home/avatar/5.jpg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
-                David Saadioui
+                Alexey Yurkevich
               </h6>
               <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
-                Founder @ PRKD
+                Software Engineer
               </p>
             </div>
           </div>

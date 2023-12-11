@@ -17,7 +17,7 @@ const SampleCard = ({ avatar, name, comment, image }: SampleCardProps) => {
     <div className="bg-white py-2 w-full android:w-[242px] rounded-lg">
       <div className="flex gap-[10px] items-center px-4">
         <Avatar src={avatar} alt={name} className="w-9 h-9" />
-        <h3 className="text-black font-semibold text-[11px] capitalize">
+        <h3 className="text-black font-semibold text-sm capitalize">
           {name}
         </h3>
       </div>
@@ -33,7 +33,7 @@ const SampleCard = ({ avatar, name, comment, image }: SampleCardProps) => {
         className="break-words whitespace-break-spaces mt-3 px-[14px] text-black text-xs"
         style={{ overflowWrap: 'anywhere' }}
       >
-        <span>{name.replaceAll(' ', '').toLowerCase()}</span>&nbsp;
+        <span className="font-bold">{name.replaceAll(' ', '').toLowerCase()}</span>&nbsp;
         <span>{comment}</span>
       </div>
     </div>
@@ -55,7 +55,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
         <div className="flex justify-center mt-6">
           <PrimaryButton target="_self" href="/features" text="Learn More" />
         </div>
-        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
+        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-14">
           <SampleCard
             avatar="/images/home/samples/1.png"
             image="/images/home/samples/1.jfif"
@@ -65,34 +65,40 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
           <SampleCard
             avatar="/images/home/samples/2.png"
             image="/images/home/samples/2.jfif"
-            name="Titan Ignite"
-            comment="titanignite  Elevate your brand, amplify your reach, and scale your impact. 🔥 #ScaleWithIgnite #BusinessGrowth #StrategicSuccesss"
+            name="Ruul.io"
+            comment="Unlock the power of collaboration with Ruul.io – your gateway to seamless teamwork and productivity. 💻 #RuulYourWorld #CollaborationRevolution #ProductivityMatters"
           />
           <SampleCard
             avatar="/images/home/samples/3.png"
             image="/images/home/samples/3.jfif"
-            name="Ruul.io"
-            comment="ruul.io  Unlock the power of collaboration with Ruul.io – your gateway to seamless teamwork and productivity. 💻 #RuulYourWorld #CollaborationRevolution #ProductivityMatters"
-          />
-        </div>
-        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
-          <SampleCard
-            avatar="/images/home/samples/4.png"
-            image="/images/home/samples/4.jfif"
             name="Earlz"
             comment="Elevate your tech game with Earlz.de – Discover cutting-edge solutions and redefine your digital experience. 🚀 #EarlzTechHub #InnovationUnleashed #TechSolutions"
           />
           <SampleCard
+            avatar="/images/home/samples/4.png"
+            image="/images/home/samples/4.jfif"
+            name="Sembrar.Io"
+            comment="Cultivate success with Sembrar.io – your growth partner in the digital landscape. 🌱 #SembrarGrowth #DigitalInnovation #HarvestingSuccess"
+          />
+        </div>
+        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
+          <SampleCard
             avatar="/images/home/samples/5.png"
             image="/images/home/samples/5.jfif"
-            name="The Hayden Digital"
-            comment="Discover the digital edge with TheHaydenDigital.com, and embark on a journey of digital transformation. 🌐✨ #HaydenDigitalImpact #DigitalTransformation #CreativeStrategies"
+            name="Titan Ignite"
+            comment="Elevate your brand, amplify your reach, and scale your impact. 🔥 #ScaleWithIgnite #BusinessGrowth #StrategicSuccesss"
           />
           <SampleCard
             avatar="/images/home/samples/6.png"
             image="/images/home/samples/6.jfif"
-            name="Sembrar.Io"
-            comment="Cultivate success with Sembrar.io – your growth partner in the digital landscape. 🌱 #SembrarGrowth #DigitalInnovation #HarvestingSuccess"
+            name="The Hayden Digital"
+            comment="Discover the digital edge with TheHaydenDigital.com, and embark on a journey of digital transformation. 🌐✨ #HaydenDigitalImpact #DigitalTransformation #CreativeStrategies"
+          />
+          <SampleCard
+            avatar="/images/home/samples/7.png"
+            image="/images/home/samples/7.jpg"
+            name="Market Karma"
+            comment="Boost your online presence with MarketKarma.com – navigate the digital landscape, build your brand, and conquer markets. 🚀 #MarketKarmaMagic #DigitalDominance #StrategicSuccess"
           />
         </div>
         <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
