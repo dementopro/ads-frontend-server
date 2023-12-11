@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { pinterestAxios, setPinterestAccessToken } from "./index";
+import { pinterestAxios, setPinterestAccessToken } from "../index";
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,10 +8,10 @@ export async function POST(req: NextRequest) {
     const accessToken = body.accessToken;
     
     setPinterestAccessToken(accessToken);
-    let adAccounts = await pinterestAxios.get("/ad_accounts");
-    adAccounts = adAccounts.data;
 
-    return NextResponse.json((adAccounts as any).items || [], {
+    const response = await pinterestAxios.get("/ad_accounts");
+
+    return NextResponse.json(response.data.items || [], {
       status: 200
     });
   } catch (error) {

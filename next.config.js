@@ -9,7 +9,8 @@ const nextConfig = {
             '54.203.149.67',
             '35.91.9.232',
             'adsgency.ai',
-            '54.185.20.181'
+            '54.185.20.181',
+            '9d37-135-181-7-162.ngrok-free.app'
         ],
     },
     async rewrites() {

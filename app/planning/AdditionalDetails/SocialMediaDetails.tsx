@@ -82,60 +82,78 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
 }) => {
   const { company, setCompany } = useSeoAnalyzerContext();
   const { isOpen, onOpen: onOpenAdSchedule, onOpenChange } = useDisclosure();
-  const [isSocialAuthenticated, setIsSocialAuthenticated] = useState<{[key: string]: boolean}>({
-    "instagram": false,
-    "meta": false,
-    "linkedin": false,
-    "youtube": false,
-    "pinterest": false,
-    "google ads": false
-  });
-  const [isEmailAuthenticated, setIsEmailAuthenticated] = useState<boolean>(false);
   const { isOpen: isPinterestAnalyticsModalOpen, onOpen: onOpenPinterestAnalyticsModal, onOpenChange: onOpenPinterestAnalyticsModalChange } = useDisclosure();
+  const [selectedAdAccount, setSelectedAdAccount] = useState(null);
+  const [adAccounts, setAdAccounts] = useState([]);
+  const [analytics, setAnalytics] = useState([]);
+  const [isOAuthFinished, setIsOAuthFinished] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [analyticsData, setAnalyticsData] = useState([]);
   const { data: session, status } = useSession();
 
   const oauthLogin = () => {
     const selectedProvider: string = tabsList[activeTab].provider;
     if ( selectedProvider === 'google' || selectedProvider === 'pinterest') {
       popupCenter(tabsList[activeTab].page, `${ tabsList[activeTab].title } Sign In`, () => {
-        if (session && (session as any)["user"]) {
-          setIsSocialAuthenticated(prevState => ({
-            ...prevState,
-            [tabsList[activeTab].title.toLowerCase()]: true
-          }));
-
-          formik.setValues({
-            ...formik.values,
-            url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
-          })
-        }
+        setIsOAuthFinished(true);
       });
     }
   };
   
   const isCurrentSocialAuthenticated: boolean = useMemo(() => {
-    return isSocialAuthenticated[tabsList[activeTab].title.toLowerCase()]
-  }, [isSocialAuthenticated, activeTab]);
+    return !!(session && (session as any)[tabsList[activeTab].provider])
+  }, [session, activeTab]);
 
   const handleAnalyticsDashboard = async () => {
     if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
       && isCurrentSocialAuthenticated) {
       try {
-        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}?site=${formik.values.websiteURL}`, {
+        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}`, {
           accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
           refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
         });
-        setAnalyticsData(pinterestAnalytics.data as []);
-        onOpenPinterestAnalyticsModal();
 
+        const data = pinterestAnalytics.data;
+        data.length > 0 ? setSelectedAdAccount(data[0]) : setSelectedAdAccount(null);
+        setAdAccounts(data);
+        onOpenPinterestAnalyticsModal();
         messageApi.success("Fetched analysis data");
       } catch (error) {
         messageApi.error("Something went wrong");
       }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setIsOAuthFinished(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    setIsOAuthFinished(!!(session && (session as any)[tabsList[activeTab].provider]));
+  }, [activeTab]);
+  
+  useEffect(() => {
+    if (isOAuthFinished && session && (session as any)["user"]) {
+      formik.setValues({
+        ...formik.values,
+        url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
+      });
+    }
+  }, [isOAuthFinished, session]);
+
+  useEffect(() => {
+    (async () => {
+      if (selectedAdAccount) {
+        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}/getAnalytics?ad_account_id=${(selectedAdAccount as any).id}`, {
+          accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
+          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
+        });
+
+        setAnalytics(pinterestAnalytics.data as []);
+      }
+    })();
+  }, [selectedAdAccount]);
 
   return (
     <>
@@ -147,7 +165,6 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               key={`tab_${i}`}
               isActivated={activeTab == i}
               onClick={() => {
-                setIsEmailAuthenticated(false);
                 setActiveTab(i);
                 formik.setValues({
                   ...formik.values,
@@ -375,7 +392,15 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
         </div>
       </div>
 
-      <PinterestAnalyticsModal isOpen={isPinterestAnalyticsModalOpen} onOpenChange={onOpenPinterestAnalyticsModalChange} formik={formik} analyticsData={analyticsData as []} />
+      <PinterestAnalyticsModal
+        formik={formik}
+        isOpen={isPinterestAnalyticsModalOpen}
+        onOpenChange={onOpenPinterestAnalyticsModalChange}
+        selectedAdAccount={selectedAdAccount}
+        setSelectedAdAccount={setSelectedAdAccount}
+        accounts={adAccounts as []}
+        analyticsData={analytics as []}
+      />
     </>
   );
 };

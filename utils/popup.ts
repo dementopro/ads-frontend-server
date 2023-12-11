@@ -29,7 +29,6 @@ export const popupCenter = (url: string, title: string, callback: () => void = (
     if (event.origin === process.env.NEXT_PUBLIC_FRONTEND_URL as string) {
       const { event: eventName } = event.data;
       if (eventName === "close") {
-        console.log("close event is occurred!");
         callback();
       }
     }

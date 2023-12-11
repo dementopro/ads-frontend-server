@@ -22,6 +22,7 @@ import { Chip, Tooltip } from '@nextui-org/react';
 import { DatePicker, Input, Spin, message } from 'antd';
 import { FC, Fragment, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useDisclosure } from '@nextui-org/react';
 import {
   EmailInstruction,
   EmailOption,
@@ -35,8 +36,10 @@ import axios from 'axios';
 import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
 import { DETAIL_LIMIT } from '@/data/constant';
-import MediaStepper from './MediaStepper';
 import { Menu, Transition } from '@headlessui/react';
+
+import LaunchAdModal from "./LaunchAdModal";
+import MediaStepper from './MediaStepper';
 import Select from '@/components/common/Select';
 import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
 
@@ -63,8 +66,12 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const [isTextOpen, setIsTextOpen] = useState<boolean>(false);
   const [isImageOpen, setIsImageOpen] = useState<boolean>(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
+  const { isOpen: isLaunchAdModalOpen, onOpen: onLaunchAdModalOpen, onOpenChange: onLaunchAdModalOpenChange } = useDisclosure();
   const [schedules, setSchedules] = useState<any>([]);
   const { data: session, status } = useSession();
+
+  console.log("social media: ", socialMedia[activeMedia]);
+  console.log("company: ", company);
 
   useEffect(() => {
     if (emailInstruction && emailInstruction.email_options) {
@@ -73,16 +80,17 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   }, [emailInstruction]);
 
   const handleOnLaunchAd = async () => {
-    try {
-      const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[type].title.toLowerCase().replaceAll(" ", "")}/launchAd`, {
-        accessToken: (session as any)[tabsList[type].provider].accessToken,
-        refreshToken: (session as any)[tabsList[type].provider].refreshToken
-      });
+    onLaunchAdModalOpen();
+    // try {
+    //   const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[type].title.toLowerCase().replaceAll(" ", "")}/launchAd`, {
+    //     accessToken: (session as any)[tabsList[type].provider].accessToken,
+    //     refreshToken: (session as any)[tabsList[type].provider].refreshToken
+    //   });
       
-      messageApi.success('Launch Ad success');
-    } catch (error) {
-      messageApi.error('Something went wrong');
-    }
+    //   messageApi.success('Launch Ad success');
+    // } catch (error) {
+    //   messageApi.error('Something went wrong');
+    // }
   };
 
   if (socialMedia.length === 0) return <></>;
@@ -304,7 +312,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         <div className="w-full">{company.target_audice}</div>
 
                         <h3 className="mt-6 font-medium text-white text-normal">
-                          Trending Kewords
+                          Trending Keywords
                         </h3>
                         <div className="flex flex-wrap items-center gap-2 mt-2">
                           {socialMedia[activeMedia]?.content.keywords?.map(
@@ -361,8 +369,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                             </h6>
                             <p className="mt-2 text-primary-gray">
                               {
-                                socialMedia[activeMedia]?.content
-                                  .potential_outcome
+                                socialMedia[activeMedia]?.content['potential_outcome'] || socialMedia[activeMedia]?.content['potential outcome']
                               }
                             </p>
                           </div>
@@ -548,6 +555,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
           </div>
         </div>
       </div>
+      <LaunchAdModal isOpen={isLaunchAdModalOpen} onOpenChange={onLaunchAdModalOpenChange} socialMedia={socialMedia[activeMedia]} company={company} />
     </>
   );
 };

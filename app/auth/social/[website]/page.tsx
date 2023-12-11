@@ -3,6 +3,8 @@
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 
+import LoadingSpin from "@/app/planning/LoadingSpin";
+
 const SignInPage = ({ params }: { params: { website: string } }) => {
   const { data: session, status } = useSession();
   const website: string = params.website;
@@ -19,16 +21,12 @@ const SignInPage = ({ params }: { params: { website: string } }) => {
   }, [session, status, website]);
 
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        position: "absolute",
-        left: 0,
-        top: 0,
-        background: "white",
-      }}
-    ></div>
+    <div className="w-screen h-screen absolute left-0 top-0 bg-white flex items-center justify-center">
+      <LoadingSpin />
+      <p className="text-xl text-primary-purple font-bold pt-[70px]">
+        Granting Access
+      </p>
+    </div>
   );
 };
 

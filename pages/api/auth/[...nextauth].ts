@@ -25,7 +25,7 @@ export const authOptions: AuthOptions = {
       },
       authorization: {
         params: {
-          scope: "user_accounts:read ads:read"
+          scope: "user_accounts:read ads:read ads:write boards:read boards:write pins:read pins:write"
         }
       }
     })

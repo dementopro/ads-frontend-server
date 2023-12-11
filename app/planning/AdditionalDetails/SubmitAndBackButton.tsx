@@ -184,7 +184,6 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
           }
         })
         .then((res) => {
-          console.log("res: ", res);
           if (res.data.status == true) {
             setSocialMedia(res.data.recommendations.map((rec: any) => ({
               content: JSON.parse(rec.content),
