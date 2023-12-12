@@ -14,7 +14,7 @@ type SampleCardProps = {
 
 const SampleCard = ({ avatar, name, comment, image }: SampleCardProps) => {
   return (
-    <div className="bg-white py-2 w-full android:w-[242px] rounded-lg">
+    <div className="bg-white shrink-0 py-2 w-full android:w-[242px] rounded-lg">
       <div className="flex gap-[10px] items-center px-4">
         <Avatar src={avatar} alt={name} className="w-9 h-9" />
         <h3 className="text-black font-semibold text-sm capitalize">
@@ -40,11 +40,11 @@ const SampleCard = ({ avatar, name, comment, image }: SampleCardProps) => {
   );
 };
 
-interface ISamplesProps {}
+interface ISamplesProps { }
 
 const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
   return (
-    <div className="bg-[#15161A] mt-20 py-16">
+    <div className="ipad:px-[60px] desktop:px-[100px] android:px-[16px] ipad:px-[0px] bg-[#15161A] mt-20 py-16">
       <div className="max-w-[1240px] w-full mx-auto">
         <h2 className="text-center text-white font-poppins text-[43px] font-extrabold">
           Created with AdsGency AI
@@ -55,33 +55,35 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
         <div className="flex justify-center mt-6">
           <PrimaryButton target="_self" href="/features" text="Learn More" />
         </div>
-        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-14">
-          <SampleCard
-            avatar="/images/home/samples/1.png"
-            image="/images/home/samples/1.jfif"
-            name="Mazelab"
-            comment="Transforming visions into reality with Mazelab – where innovation meets craftsmanship. Elevate your space, #MazelabStyle. ✨ #InteriorDesign #CraftedElegance #HomeInspiration"
-          />
-          <SampleCard
-            avatar="/images/home/samples/2.png"
-            image="/images/home/samples/2.jfif"
-            name="Ruul.io"
-            comment="Unlock the power of collaboration with Ruul.io – your gateway to seamless teamwork and productivity. 💻 #RuulYourWorld #CollaborationRevolution #ProductivityMatters"
-          />
-          <SampleCard
-            avatar="/images/home/samples/3.png"
-            image="/images/home/samples/3.jfif"
-            name="Earlz"
-            comment="Elevate your tech game with Earlz.de – Discover cutting-edge solutions and redefine your digital experience. 🚀 #EarlzTechHub #InnovationUnleashed #TechSolutions"
-          />
-          <SampleCard
-            avatar="/images/home/samples/4.png"
-            image="/images/home/samples/4.jfif"
-            name="Sembrar.Io"
-            comment="Cultivate success with Sembrar.io – your growth partner in the digital landscape. 🌱 #SembrarGrowth #DigitalInnovation #HarvestingSuccess"
-          />
+        <div className='w-full'>
+          <div className="flex android:pb-[30px] ipad:pb-0 android:overflow-x-auto ipad:overflow-x-hidden ipad:flex-wrap items-stretch android:justify-start ipad:justify-center w-full gap-4 mt-14">
+            <SampleCard
+              avatar="/images/home/samples/1.png"
+              image="/images/home/samples/1.jfif"
+              name="Mazelab"
+              comment="Transforming visions into reality with Mazelab – where innovation meets craftsmanship. Elevate your space, #MazelabStyle. ✨ #InteriorDesign #CraftedElegance #HomeInspiration"
+            />
+            <SampleCard
+              avatar="/images/home/samples/2.png"
+              image="/images/home/samples/2.jfif"
+              name="Ruul.io"
+              comment="Unlock the power of collaboration with Ruul.io – your gateway to seamless teamwork and productivity. 💻 #RuulYourWorld #CollaborationRevolution #ProductivityMatters"
+            />
+            <SampleCard
+              avatar="/images/home/samples/3.png"
+              image="/images/home/samples/3.jfif"
+              name="Earlz"
+              comment="Elevate your tech game with Earlz.de – Discover cutting-edge solutions and redefine your digital experience. 🚀 #EarlzTechHub #InnovationUnleashed #TechSolutions"
+            />
+            <SampleCard
+              avatar="/images/home/samples/4.png"
+              image="/images/home/samples/4.jfif"
+              name="Sembrar.Io"
+              comment="Cultivate success with Sembrar.io – your growth partner in the digital landscape. 🌱 #SembrarGrowth #DigitalInnovation #HarvestingSuccess"
+            />
+          </div>
         </div>
-        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
+        <div className="android:hidden ipad:flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
           <SampleCard
             avatar="/images/home/samples/5.png"
             image="/images/home/samples/5.jfif"
@@ -101,7 +103,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
             comment="Boost your online presence with MarketKarma.com – navigate the digital landscape, build your brand, and conquer markets. 🚀 #MarketKarmaMagic #DigitalDominance #StrategicSuccess"
           />
         </div>
-        <div className="flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
+        <div className="android:hidden ipad:flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
           <div className="p-6 bg-white rounded-lg w-[290px]">
             <img src="/images/home/samples/logo1.png" className='h-[40px]' />
             <div className="mt-3 text-xs text-black break-words whitespace-break-spaces">

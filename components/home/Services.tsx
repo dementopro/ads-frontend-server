@@ -1,24 +1,59 @@
 'use client';
 import { Avatar } from '@nextui-org/react';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BiSolidStar, BiStar } from 'react-icons/bi';
 
-interface IServicesProps {}
+interface IServicesProps { }
 
 const Services: React.FunctionComponent<IServicesProps> = (props) => {
+  const [text, setText] = useState('');
+  const textOptions = ['Transformation', 'Strategic Planning', 'Content Generation', 'Ads Optimization', 'Insights'];
+  const animationDuration = 2000;
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Rotate through text options
+      setText(textOptions[(textOptions.indexOf(text) + 1) % textOptions.length]);
+    }, animationDuration);
+
+    return () => clearInterval(intervalId);
+  }, [text]);
+
+  const getDynamicClasses = () => {
+    // Define CSS classes based on the current text
+    switch (text) {
+      case 'Transformation':
+        return 'bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text';
+      case 'Strategic Planning':
+        return 'text-violet-400';
+      case 'Content Generation':
+        return 'bg-gradient-to-r from-[#D336FF] to-[#FD8CFF] text-transparent bg-clip-text';
+      case 'Ads Optimization':
+        return 'bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text';
+      case 'Insights':
+        return 'text-violet-400';
+      default:
+        return 'bg-gradient-to-r from-[#D634FF] to-[#4663FF] text-transparent bg-clip-text';
+    }
+  };
+  const dynamicClasses = getDynamicClasses();
   return (
     <div className="mt-20 max-w-[1240px] w-full mx-auto">
-      <h2 className="text-[42px] font-poppins text-white font-bold text-center break-words whitespace-pre-wrap break-all">
-        We Help Our Clients Achieve&nbsp;
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D634FF] to-[#4663FF]">
-          Transformation
-        </span>
-      </h2>
+      <div className='w-full android:flex-col ipadmini:flex-row ipad:flex-row desktop:flex-row justify-center items-center android:gap-[0px] ipadmini:gap-[6px] ipad:gap-[8px] desktop:gap-[10px] inline-flex'>
+        <div className="text-white android:text-[34px] desktop:text-[42px] font-bold font-poppins">
+          We Help our</div>
+        <div className='text-white android:text-[34px] desktop:text-[42px] font-bold font-poppins'>
+          Clients Achieve
+        </div>
+        <div className={`${dynamicClasses} android:text-[34px] desktop:text-[42px] font-bold font-poppins`}>
+          {text}
+        </div>
+      </div>
       <p className="mt-6 text-xl font-semibold text-center text-white font-open-sans">
         Here&apos;s what they have to say about us
       </p>
-      <div className="flex flex-wrap items-start justify-center gap-6 mt-6">
-        <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
+      <div className="flex android:mx-[30px] ipad:mx-0 android:pb-[30px] ipad:pb-0 android:overflow-x-auto ipad:overflow-x-hidden ipad:flex-wrap items-start android:justify-start ipad:justify-center gap-6 mt-6">
+        <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
@@ -44,7 +79,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           </div>
         </div>
 
-        <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
+        <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
@@ -70,7 +105,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           </div>
         </div>
 
-        <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
+        <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
@@ -97,7 +132,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           </div>
         </div>
 
-        <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
+        <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
@@ -124,7 +159,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           </div>
         </div>
 
-        <div className="w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
+        <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
