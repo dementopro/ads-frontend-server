@@ -43,6 +43,8 @@ const GmailMarketing = () => {
     }
   }, [emailInstruction])
 
+  // console.log("emailInstruction: ", emailInstruction, company);
+
   return (
     <>
       {contextHolder}
@@ -84,7 +86,7 @@ const GmailMarketing = () => {
               <p className="flex-1 text-sm font-normal text-white">
                 {`You uploaded this ${emailInstruction.email_template_type.toLowerCase()} marketing template:`}
               </p>
-              <DownloadDropdown selects={selectedTemplates} />
+              <DownloadDropdown selects={selectedTemplates} messageApi={messageApi} />
             </div>
           </div>
           <div className="w-full">

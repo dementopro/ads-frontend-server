@@ -25,7 +25,7 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { onpage, offpage } = useSeoAnalyzerContext();
-  const [messageApi, contextHolder] = message.useMessage();
+  const [_, contextHolder] = message.useMessage();
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [plan, setPlan] = useState<IPlan | null>(null);
