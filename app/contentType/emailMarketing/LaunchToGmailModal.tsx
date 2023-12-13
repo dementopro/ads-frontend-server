@@ -7,7 +7,6 @@ import {
 } from '@nextui-org/react';
 import React, { FC, useRef, useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
-import { message } from 'antd';
 import Papa from 'papaparse';
 import axios from 'axios';
 
@@ -18,6 +17,7 @@ interface LaunchToGmailProps {
   onOpenChange: () => void;
   onClose: () => void;
   selects: number[];
+  messageApi: any;
 };
 
 const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
@@ -25,8 +25,8 @@ const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
   onOpenChange,
   onClose,
   selects,
+  messageApi
 }) => {
-  const [messageApi, contextHolder] = message.useMessage();
   const [csvData, setCSVData] = useState([]);
   const { emailInstruction } = useSeoAnalyzerContext();
   const csvFileRef = useRef(null);
@@ -49,7 +49,6 @@ const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
 
   const handleLaunchEmail = async () => {
     const selectedEmailTemplate = emailInstruction.email_options[selects[0]];
-    console.log("selected email template: ", selectedEmailTemplate);
 
     try {
       const { data } = await axios({
@@ -81,18 +80,17 @@ const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
       hideCloseButton
       className='overflow-visible max-w-lg h-1/3'
     >
-      {contextHolder}
       <ModalContent className="p-6 text-white bg-background-100">
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-2xl">
                 <BiInfoCircle className="w-7 h-7" />
-                Launch Email Template to Gmail
+                Upload audiences email in CSV file
               </div>
             </ModalHeader>
             <ModalBody>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload CSV file</label>
+              <label className="block mb-2 text-sm font-medium text-white" htmlFor="file_input">Upload CSV file</label>
               <input ref={csvFileRef} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" accept='*.csv' onChange={handleCSVFileChange} />
             </ModalBody>
             <ModalFooter className="flex w-full gap-6">

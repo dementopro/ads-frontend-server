@@ -2,6 +2,7 @@ import { FC, Fragment } from 'react';
 import Image from 'next/image';
 import { Menu, Transition } from '@headlessui/react';
 import { useDisclosure } from '@nextui-org/react';
+import { message } from 'antd';
 import { BiChevronDown, BiDownload, BiChevronUp } from 'react-icons/bi';
 
 import { useSeoAnalyzerContext } from "@/context/seo";
@@ -12,9 +13,19 @@ interface DownloadDropdownProps {
   messageApi: any;
 }
 
-const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects, messageApi }) => {
+const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
   const { isOpen: isLaunchToGmailModalOpen, onOpen: onLaunchToGmailModalOpen, onOpenChange: onLaunchToGmailModalOpenChange, onClose: onLaunchToGmailModalClose } = useDisclosure();
   const { company, emailInstruction } = useSeoAnalyzerContext();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const handleLaunchToGmail = async () => {
+    if (selects.length !== 1) {
+      messageApi.error('You have to select only 1 email template.');
+      return;
+    }
+
+    onLaunchToGmailModalOpen();
+  };
 
   const handleLaunchToGmail = async () => {
     console.log("selects: ", selects);
@@ -28,6 +39,7 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects, messageApi }) =>
 
   return (
     <>
+      {contextHolder}
       <Menu as="div" className="relative inline-block text-left">
         {({ open }) => (
           <>
@@ -146,7 +158,7 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects, messageApi }) =>
           </>
         )}
       </Menu>
-      <LaunchToGmailModal isOpen={isLaunchToGmailModalOpen} onOpenChange={onLaunchToGmailModalOpenChange} onClose={onLaunchToGmailModalClose} selects={selects} />
+      <LaunchToGmailModal isOpen={isLaunchToGmailModalOpen} onOpenChange={onLaunchToGmailModalOpenChange} onClose={onLaunchToGmailModalClose} selects={selects} messageApi={messageApi} />
     </>
   );
 };
