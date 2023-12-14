@@ -27,6 +27,16 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
     onLaunchToGmailModalOpen();
   };
 
+  const handleLaunchToGmail = async () => {
+    console.log("selects: ", selects);
+    if (selects.length !== 1) {
+      messageApi.error('You have to select only 1 email template.');
+      return;
+    }
+
+    onLaunchToGmailModalOpen();
+  };
+
   return (
     <>
       {contextHolder}

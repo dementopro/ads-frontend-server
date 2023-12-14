@@ -9,9 +9,9 @@ const TheResponsivePie = ({ data }: TheResponsivePieProps) => {
     <>
       <ResponsivePie
         theme={{
-        //   text: {
-        //     color: '#eee',
-        //   },
+          text: {
+            color: '#eee',
+          },
           tooltip: {
             container: {
               background: '#222222',
