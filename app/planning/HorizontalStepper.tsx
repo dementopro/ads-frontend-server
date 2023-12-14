@@ -1,13 +1,13 @@
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
-import { CompanyValidate } from '@/lib/validate';
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { formValidUrl } from '@/utils';
 import { message } from 'antd';
 import axios from 'axios';
-import { FormikErrors, FormikHelpers, useFormik } from 'formik';
+import { FormikErrors, useFormik } from 'formik';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import LoadingSpin from './LoadingSpin';
+import styles from '@/./app/planning/planning.module.css';
 
 interface HorizontalStepperProps {
   activeButtonIndex: number;
@@ -140,142 +140,99 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
   };
 
   return (
-    <div className="flex w-full flex-wrap font-poppins items-center gap-[32px]">
+    <div className={`${styles.stepperDiv} text-[13px] font-poppins`}>
       {contextHolder}
       {isLoading && <LoadingSpin />}
-      <div className="w-full ipad:h-[57px] p-[6px] bg-[#23252B] rounded-[12px] justify-between items-center android:gap-[8px] ipad:gap-[8px] android:flex-col ipadmini:flex-row inline-flex">
-        <button
-          className={`flex-1 h-full px-[10px] py-[8px] border ${
-            activeButtonIndex === 0 ? 'border-primary-purple' : 'border-none'
-          } rounded-lg justify-start items-center android:gap-[7px] ipad:gap-[16px] flex`}
-          onClick={() => {
-            router.push('/home');
-          }}
+      <button
+        className={`w-full px-[10px] py-[8px] rounded-[4px] justify-start items-center android:gap-[7px] ipad:gap-[16px] flex border-1
+          ${activeButtonIndex === 0 ? 'border-[#844FFF] bg-[#35363A]' : 'border-[#1B1C21]'} `}
+      >
+        <div
+          className={`${activeButtonIndex === 0 ? 'border-[#844FFF] bg-[#844FFF] text-white' : 'bg-[#1B1C21] border-[#ABABAB] text-[#ABABAB]'
+            } border-1 w-[24px] h-[24px] rounded-full justify-center items-center flex`}
         >
-          <div
-            className={`w-[26px] h-[25px] border ${
-              activeButtonIndex === 0 ? 'border-primary-purple' : 'border-primary-gray'
-            } rounded-[360px] justify-center items-center flex`}
-          >
-            <div
-              className={`text-center ${
-                activeButtonIndex === 0 ? 'text-primary-purple' : 'text-primary-gray'
-              } android:text-[12px] ipad:text-[12px]`}
-            >
-              1
-            </div>
-          </div>
-          <div
-            className={`android:text-[9px] ipad:text-[13px] font-poppins  ${
-              activeButtonIndex === 0
-                ? 'text-white font-medium'
-                : 'text-[#838383]'
-            }`}
-          >
-            Information
-          </div>
-        </button>
-
-        <button
-          className={`flex-1 h-full px-[10px] py-[8px] border ${
-            activeButtonIndex === 1 ? 'border-primary-purple' : 'border-none'
-          } rounded-lg justify-start items-center android:gap-[7px] ipad:gap-[16px] flex`}
-          onClick={() => {
-            formik.validateForm().then((errors: FormikErrors<CompanyForm>) => {
-              console.log('Errors:', errors)
-              if (errors && (errors.companyName !== '' || errors.websiteURL !== '' || errors.description !== '')) {
-                messageApi.error('Please fill up all required information in get started page before proceed to additional details');
-              } else {
-                setCompany({
-                  ...company,
-                  name: formik.values.companyName,
-                  website: formik.values.websiteURL,
-                  description: formik.values.description,
-                  content_type: formData.content_type,
-                });
-                router.push('/planning');
-              }
-            }).catch((err) => {
+          <div> 1 </div>
+        </div>
+        <div
+          className={`${activeButtonIndex === 0 ? 'text-white font-medium' : 'text-[#ABABAB]'}`}
+        >
+          Information
+        </div>
+      </button>
+      <button
+        className={`w-full px-[10px] py-[8px] rounded-[4px] justify-start items-center android:gap-[7px] ipad:gap-[16px] flex border-1
+          ${activeButtonIndex === 1 ? 'border-[#844FFF] bg-[#35363A]' : 'border-[#1B1C21]'} `}
+        onClick={() => {
+          formik.validateForm().then((errors: FormikErrors<CompanyForm>) => {
+            console.log('Errors:', errors)
+            if (errors && (errors.companyName !== '' || errors.websiteURL !== '' || errors.description !== '')) {
               messageApi.error('Please fill up all required information in get started page before proceed to additional details');
-            })
-          }}
+            } else {
+              setCompany({
+                ...company,
+                name: formik.values.companyName,
+                website: formik.values.websiteURL,
+                description: formik.values.description,
+                content_type: formData.content_type,
+              });
+              router.push('/planning');
+            }
+          }).catch((err) => {
+            messageApi.error('Please fill up all required information in get started page before proceed to additional details');
+          })
+        }}
+      >
+        <div
+          className={`${activeButtonIndex === 1 ? 'border-[#844FFF] bg-[#844FFF] text-white' : 'bg-[#1B1C21] border-[#ABABAB] text-[#ABABAB]'
+            } border-1 w-[24px] h-[24px] rounded-full justify-center items-center flex`}
         >
-          <div
-            className={`w-[26px] h-[25px] border ${
-              activeButtonIndex === 1 ? 'border-primary-purple' : 'border-primary-gray'
-            } rounded-[360px] justify-center items-center flex`}
-          >
-            <div
-              className={`text-center ${
-                activeButtonIndex === 1 ? 'text-primary-purple' : 'text-primary-gray'
-              } android:text-[12px] ipad:text-[12px]`}
-            >
-              2
-            </div>
-          </div>
-          <div
-            className={`android:text-[9px] ipad:text-[13px] font-poppins ${
-              activeButtonIndex === 1
-                ? 'text-white font-medium'
-                : 'text-[#838383]'
-            }`}
-          >
-            Additional Details
-          </div>
-        </button>
-
-        <button
-          className={`flex-1 h-full px-[10px] py-[8px] border ${
-            activeButtonIndex === 2 ? 'border-primary-purple' : 'border-none'
-          } rounded-lg justify-start items-center android:gap-[7px] ipad:gap-[16px] flex`}
-          onClick={() => {
-            formik.validateForm().then((errors) => {
-              if (company.content_type.toLowerCase() === 'seo' && errors && (errors.targetAudience !== '' || errors.idealCustomerProfile !== '' || errors.competitors !== '')) {
-                messageApi.error('Please fill up all required information in get started page before proceed to additional recommendations');
-              } else if (company.content_type.toLowerCase() === 'email marketing' && errors && (errors.targetAudience !== '' || errors.idealCustomerProfile !== '' || errors.marketing_template !== '')) {
-                messageApi.error('Please fill up all required information in planning page before proceed to additional recommendations');
-              } else {
-                setCompany({
-                  ...company,
-                  business_objectives: formData.business_objectives,
+          <div> 2 </div>
+        </div>
+        <div
+          className={`${activeButtonIndex === 1 ? 'text-white font-medium' : 'text-[#ABABAB]'}`}
+        >
+          Additional Details
+        </div>
+      </button>
+      <button
+        className={`w-full px-[10px] py-[8px] rounded-[4px] justify-start items-center android:gap-[7px] ipad:gap-[16px] flex border-1
+          ${activeButtonIndex === 2 ? 'border-[#844FFF] bg-[#35363A]' : 'border-[#1B1C21]'} `}
+        onClick={() => {
+          formik.validateForm().then((errors) => {
+            if (company.content_type.toLowerCase() === 'seo' && errors && (errors.targetAudience !== '' || errors.idealCustomerProfile !== '' || errors.competitors !== '')) {
+              messageApi.error('Please fill up all required information in get started page before proceed to additional recommendations');
+            } else if (company.content_type.toLowerCase() === 'email marketing' && errors && (errors.targetAudience !== '' || errors.idealCustomerProfile !== '' || errors.marketing_template !== '')) {
+              messageApi.error('Please fill up all required information in planning page before proceed to additional recommendations');
+            } else {
+              setCompany({
+                ...company,
+                business_objectives: formData.business_objectives,
                   competitors: formik.values.competitors,
                   customer_profile: formik.values.idealCustomerProfile,
-                  product_description: formik.values.sellingDescription,
                   target_audice: formik.values.targetAudience,
-                });
-                handleSubmit(2);
-                // router.push('/planning?step=2');
-              }
-            }).catch((err) => {
-              messageApi.error('Please fill up all required information in planning page before proceed to additional recommendations');
-            })
-          }}
+              });
+              handleSubmit(2);
+              // router.push('/planning?step=2');
+            }
+          }).catch((err) => {
+            messageApi.error('Please fill up all required information in planning page before proceed to additional recommendations');
+          })
+        }}
+      >
+        <div
+          className={`${activeButtonIndex === 2 ? 'border-[#844FFF] bg-[#844FFF] text-white' : 'bg-[#1B1C21] border-[#ABABAB] text-[#ABABAB]'
+            } border-1 w-[24px] h-[24px] rounded-full justify-center items-center flex`}
         >
-          <div
-            className={`w-[26px] h-[25px] border ${
-              activeButtonIndex === 2 ? 'border-primary-purple' : 'border-primary-gray'
-            } rounded-[360px] justify-center items-center flex`}
-          >
-            <div
-              className={`text-center ${
-                activeButtonIndex === 2 ? 'text-primary-purple' : 'text-primary-gray'
-              } android:text-[12px] ipad:text-[12px]`}
-            >
-              3
-            </div>
-          </div>
-          <div
-            className={`android:text-[9px] ipad:text-[13px] font-poppins ${
-              activeButtonIndex === 2
-                ? 'text-white font-medium'
-                : 'text-[#838383]'
-            }`}
-          >
-            Recommendations
-          </div>
-        </button>
-      </div>
+          <div> 3 </div>
+        </div>
+        <div
+          className={`${activeButtonIndex === 2 ? 'text-white font-medium' : 'text-[#ABABAB]'}`}
+        >
+          Recommendations
+        </div>
+      </button>
     </div>
+
   );
 };
 

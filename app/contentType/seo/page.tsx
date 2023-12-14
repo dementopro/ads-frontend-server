@@ -116,10 +116,15 @@ const PlanningPage = () => {
         setShow={() => setShowNotEnoughCredits(false)}
       />
 
-      <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
-        <>
-          <h2 className="text-3xl">🎯&nbsp;SEO</h2>
-          <div className='flex items-center mt-4'>
+      <Spin spinning={isGenerating} wrapperClassName="relative">
+        <div className="w-full flex flex-col gap-[24px]">
+          <div className="flex flex-col justify-center">
+            <div className="flex gap-[8px] justify-start text-[24px] font-medium text-white">
+              <div> 🎯 </div>
+              <div> SEO </div>
+            </div>
+          </div>
+          <div className="flex flex-row flex-wrap items-start gap-[20px] self-stretch border-b-1 border-[#27282F]">
             <Button
               isActivated={activeSeoType == 0}
               onClick={() => {
@@ -127,8 +132,13 @@ const PlanningPage = () => {
                 setActiveSeoType(0)
               }}
             >
-              <Image src='/images/seo/on-page.svg' alt={'SEO (on-page)'} width={24} height={24} />
-              <span className='truncate' title='SEO (on-page)'>SEO (on-page)</span>
+              <Image
+                src='/images/seo/on-page.svg'
+                alt={'SEO (on-page)'}
+                width={24}
+                height={24}
+              />
+              SEO (on-page)
             </Button>
             <Button
               isActivated={activeSeoType == 1}
@@ -137,26 +147,29 @@ const PlanningPage = () => {
                 setActiveSeoType(1)
               }}
             >
-              <Image src='/images/seo/off-page.svg' alt={'SEO (off-page)'} width={24} height={24} />
-              <span className='truncate' title='SEO (off-page)'>SEO (off-page)</span>
+              <Image
+                src='/images/seo/off-page.svg'
+                alt={'SEO (off-page)'}
+                width={24}
+                height={24}
+              />
+              SEO (off-page)
             </Button>
           </div>
-          <div className={`${styles.onPageDiv}`}>
-          { activeSeoType == 0 ? <OnPage page={page} /> : <OffPage page={page} /> }
+          <div className={`${styles.subDiv}`}>
+            {activeSeoType == 0 ? <OnPage page={page} /> : <OffPage page={page} />}
           </div>
-          <div className='w-full mt-6'>
-            <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">
-              <button
-                className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
-                onClick={() => {
-                  router.push(`/planning?step=2&type=${activeSeoType}`)
-                }}
-              >
-                Back
-              </button>
-            </div>
+          <div className='flex justify-end'>
+            <button
+              className={`${styles.subButton} android:w-full desktop:w-[150px] bg-[#844FFF]}`}
+              onClick={() => {
+                router.push(`/planning?step=2&type=${activeSeoType}`)
+              }}
+            >
+              Back
+            </button>
           </div>
-        </>
+        </div>
       </Spin>
     </AdminLayout>
   );

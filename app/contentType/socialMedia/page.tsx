@@ -12,14 +12,14 @@ import { Spin, message } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AccountContext } from '@/context/account';
 import AdminLayout from '@/layout/admin';
-import Button from '@/app/planning/TabButton';
+import Button from '@/app/planning/AdditionalDetails/Common/TabButton';
 import SocialMedia from './SocialMedia';
 import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
-import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
+import { socialMediaTabsList } from '@/app/planning/AdditionalDetails/SocialMedia/SocialMediaDetailPage';
 
 const Page = () => {
   const router = useRouter();
@@ -74,37 +74,40 @@ const Page = () => {
         setShow={() => setShowNotEnoughCredits(false)}
       />
 
-      <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
-        <>
-          <h2 className="text-3xl">👥&nbsp;Social Media</h2>
-          <div className='flex items-center mt-4'>
-            {tabsList.map((tab, i) => (
+      <Spin spinning={isGenerating} wrapperClassName="relative">
+        <div className="w-full flex flex-col gap-[24px]">
+          <div className="flex flex-col justify-center">
+            <div className="flex gap-[8px] justify-start text-[24px] font-medium text-white">
+              <div> 👥 </div>
+              <div> Social Media </div>
+            </div>
+          </div>
+          <div className="flex flex-row flex-wrap items-start gap-[20px] self-stretch border-b-1 border-[#27282F]">
+            {socialMediaTabsList.map((tab, i) => (
               <Button
                 key={`tab_${i}`}
                 isActivated={activeTab == i}
                 onClick={() => setActiveTab(i)}
               >
-                <Image src={tab.icon} alt={'SEO (off-page)'} width={24} height={24} />
-                <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+                <Image src={tab.icon} alt={tab.title} width={24} height={24} />
+                {tab.title}
               </Button>
             ))}
           </div>
-          <div className={`${styles.onPageDiv}`}>
+          <div className={`${styles.subDiv}`}>
             <SocialMedia type={activeTab} />
           </div>
-          <div className='w-full mt-6'>
-            <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">
-              <button
-                className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
-                onClick={() => {
-                  router.push(`/planning?step=2&type=${activeTab}`)
-                }}
-              >
-                Back
-              </button>
-            </div>
+          <div className='flex justify-end'>
+            <button
+              className={`${styles.subButton} android:w-full desktop:w-[150px] bg-[#844FFF]}`}
+              onClick={() => {
+                router.push(`/planning?step=2&type=${activeTab}`)
+              }}
+            >
+              Back
+            </button>
           </div>
-        </>
+        </div>
       </Spin>
     </AdminLayout>
   );

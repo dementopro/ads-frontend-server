@@ -1,45 +1,85 @@
-.div {
-  @apply flex flex-col text-[15px]  font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
-  background: #23252b;
-}
-.container {
-  @apply w-[80%] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
-  background: #23252b;
-}
-.mainDiv {
-  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start pt-[18px] pb-[18px] pl-[24px] pr-[24px] rounded-xl;
-  background: #23252b;
-}
-
-.onPageDiv {
-  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
-  background: #1b1c21;
-}
-
 .googleDiv {
   @apply flex flex-col font-poppins items-start gap-8 p-[24px] mt-[16px] rounded-xl;
   background: #23252b;
 }
 
-.target {
-  @apply flex flex-col font-poppins items-start gap-8 flex-[1_0_0] mt-[50px] self-stretch p-6 rounded-xl;
-  background: #23252b;
+/* .subDiv {
+  @apply flex flex-col text-[15px] font-poppins items-start gap-[16px] py-[18px] px-[24px] rounded-[8px];
+  background: #23252B;
+} */
+
+.subDiv {
+  @apply w-full flex flex-col gap-[15px] font-poppins items-start px-[18px] py-[24px] rounded-[8px] border-1 border-[#27282F];
+  background: #1B1C21;
+}
+
+.recDiv {
+  @apply w-full flex android:flex-col desktop:flex-row bg-[#27282F] px-[24px] py-[18px] font-poppins rounded-[8px] gap-[14px];
+}
+
+.stepperDiv {
+  @apply w-full flex android:flex-col desktop:flex-row gap-[8px] font-poppins items-start p-[6px] rounded-[8px] border-1 border-[#27282F];
+  background: #1B1C21;
+}
+
+.divHead {
+  @apply text-[15px] text-white;
+}
+
+.subHead {
+  @apply text-[14px] text-[#ABABAB];
+}
+
+.label,
+.upload,
+.button {
+  @apply inline-flex text-[15px] justify-center items-center gap-[10px] !px-[16px] !py-[8px] rounded-[8px] bg-[#35363A] text-[#ABABAB] border-none;
+}
+
+.upload:focus,
+.button:focus,
+.upload:hover,
+.button:hover {
+  @apply outline-none text-[#844FFF];
+}
+
+.mainButton {
+  @apply android:flex desktop:inline-flex text-[15px] justify-center items-center gap-[10px] !px-[16px] !py-[12px] rounded-[8px] text-white border-none;
+}
+
+.subButton {
+  @apply text-[15px] justify-center items-center gap-[10px] !px-[16px] !py-[12px] rounded-[8px] text-white border-1 border-[#ABABAB];
 }
 
 .input {
-  @apply text-[#FFFFFF] font-poppins flex w-full h-[60px] mt-[16px] flex-col justify-end items-end shrink-0 border pl-6 pr-0 pb-0 rounded-lg;
-  background: #1b1c21;
+  @apply w-full inline-flex justify-center items-center text-[#FFFFFF] font-poppins px-[16px] py-[0px] h-[60px] border-1 rounded-[4px];
+  background: #212228;
 }
 
-.input::placeholder {
-  @apply w-full h-[49px] font-poppins shrink-0 border text-[#ABABAB] text-base not-italic font-medium leading-6;
+.textarea {
+  @apply w-full inline-flex justify-center items-center text-[#FFFFFF] font-poppins px-[16px] pt-[12px] !h-[100px] border-1 rounded-[4px];
+  background: #212228;
 }
 
-.description {
-  @apply text-[#FFFFFF] flex font-poppins mt-[24px] gap-2 flex-col justify-end items-end shrink-0 border pl-[24px] pt-[18px] pb-0 rounded-lg;
-  background: #1b1c21;
+.input::placeholder,
+.textarea::placeholder {
+  @apply text-[#ABABAB] text-[12px] not-italic font-medium;
 }
 
-.description::placeholder {
-  @apply w-full font-poppins shrink-0 text-[#ABABAB] text-base not-italic font-medium leading-6;
+.subDiv2 {
+  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start pt-[18px] pb-[18px] pl-[24px] pr-[24px] rounded-xl;
+  background: #23252B;
+  display: block;
+  overflow: auto;
 }
+
+.onPageDiv {
+  @apply flex flex-col text-[15px] min-h-[118px] font-poppins items-start gap-[24px] pt-[18px] pb-[18px] pl-[24px] pr-[24px] mt-[32px] rounded-xl;
+  background: #1B1C21;
+}
+
+.target {
+  @apply flex flex-col font-poppins items-start gap-8 flex-[1_0_0] mt-[50px] self-stretch p-6 rounded-xl;
+  background: #23252B;
+}
+

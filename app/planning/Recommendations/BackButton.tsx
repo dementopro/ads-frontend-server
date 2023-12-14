@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import styles from '@/./app/planning/planning.module.css';
 
 interface BackButtonProps {
   activeButtonIndex: number;
@@ -10,9 +11,9 @@ const BackButton: FC<BackButtonProps> = ({
   setActiveButtonIndex,
 }) => {
   return (
-    <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">
+    <div className="flex justify-end items-center">
       <button
-        className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
+        className={`${styles.subButton}`}
         onClick={() => {
           setActiveButtonIndex(activeButtonIndex - 1);
         }}

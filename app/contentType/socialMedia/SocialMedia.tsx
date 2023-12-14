@@ -41,7 +41,7 @@ import { Menu, Transition } from '@headlessui/react';
 import LaunchAdModal from "./LaunchAdModal";
 import MediaStepper from './MediaStepper';
 import Select from '@/components/common/Select';
-import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
+import { socialMediaTabsList } from '@/app/planning/AdditionalDetails/SocialMedia/SocialMediaDetailPage';
 
 interface SocialMediaProps {
   type: number;
@@ -106,7 +106,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
             width={24}
             height={24}
           />
-          <h3>{tabsList[type].title} Optimizations</h3>
+          <h3>{socialMediaTabsList[type].title} Optimizations</h3>
         </div>
         <button className="flex items-center gap-2 px-4 bg-none text-primary-purple">
           <BiRefresh className="w-5 h-5 text-primary-purple" />
@@ -140,7 +140,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
             <BiInfoCircle className="w-4 h-4" />
             <p className="text-[15px]">
               Media {activeMedia + 1} - Choose and edit optimized media content
-              to publish to {tabsList[type].title}
+              to publish to {socialMediaTabsList[type].title}
             </p>
           </div>
           <div className="w-full py-4">
@@ -545,7 +545,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
 
                     <div className="w-full text-right">
                       <button className="px-6 py-2 mt-4 text-white rounded-lg bg-primary-purple" onClick={handleOnLaunchAd}>
-                        Launch to {tabsList[type].title}
+                        Launch to {socialMediaTabsList[type].title}
                       </button>
                     </div>
                   </div>

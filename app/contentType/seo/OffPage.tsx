@@ -43,51 +43,48 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
             height={24}
           />
           <h3>{ page?.url }</h3>
-          <BiChevronDown />
         </div>
-        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {
+        <button className="android:hidden desktop:flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {
           setAnswers([...new Array(page?.warnings.length || 0)].map((_) => ''));
         }}>
           <BiRefresh className="w-5 h-5 text-primary-purple" />
           Refresh
         </button>
       </div>
-      <table className="bg-[#23252b] w-full !p-0 overflow-hidden rounded-lg">
-        <thead className="bg-[#1E1F24] text-[#848484] w-full">
-          <tr>
-            <th className="py-3 pl-10">
+      <div className="w-full flex flex-col bg-[#23252b] w-full !p-0 overflow-hidden rounded-lg">
+        <div className="w-full android:hidden desktop:flex bg-[#1E1F24] text-[#848484]">
+            <div className="w-2/4 py-3 pl-10">
               <div className="flex items-center gap-2 font-normal text-left">
                 Recommendations
                 <BiChevronDown />
               </div>
-            </th>
-            <th className="py-3">
+            </div>
+            <div className="w-1/4 py-3">
               <div className="flex items-center gap-2 font-normal text-left">
                 Status
                 <BiChevronDown />
               </div>
-            </th>
-            <th className="w-1/2"></th>
-          </tr>
-        </thead>
-        <tbody>
+            </div>
+        </div>
           {
             page && page.warnings.map((warning, i) => (
               <>
-                <tr className="hover:bg-[#444549] hover:border-b-primary-purple hover:border-b-2">
-                  <td className="py-4 pl-10" style={{ overflowWrap: "anywhere" }}>
-                    { warning }
-                  </td>
-                  <td className="py-4">
-                    <Chip
-                      color={ loadings[i] == true ? "warning" : "success" }
-                      variant="light"
-                      className="rounded-md bg-[#1E1F24]"
-                    >
-                      { loadings[i] == true ? "Pending Preview" : "Completed" }
-                    </Chip>
-                  </td>
-                  <td className="py-4 pr-10 text-right">
+                <div className="flex hover:bg-[#444549] justify-start items-center hover:border-b-primary-purple hover:border-b-2">
+                  <div className='flex android:flex-col desktop:flex-row w-3/4'>
+                    <div className="android:w-full desktop:w-2/3 android:pt-4 android:pb-0 desktop:pt-4 desktop:pb-4 pl-10" style={{ overflowWrap: "anywhere" }}>
+                      { warning }
+                    </div>
+                    <div className="android:w-full desktop:w-1/3 py-4 android:pl-10 desktop:pl-0">
+                      <Chip
+                        color={ loadings[i] == true ? "warning" : "success" }
+                        variant="light"
+                        className="rounded-md bg-[#1E1F24]"
+                      >
+                        { loadings[i] == true ? "Pending Preview" : "Completed" }
+                      </Chip>
+                    </div>
+                  </div>
+                  <div className="flex justify-end w-1/4 py-4 pr-10 text-right">
                     <button
                       className="px-4 bg-none text-primary-purple"
                       onClick={() => {
@@ -134,7 +131,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                       }}
                     >
                       <div className="flex items-center gap-2">
-                        {selectedRow == i ? 'Close' : 'View'}
+                        <div className='android:hidden desktop:block'> {selectedRow == i ? 'Close' : 'View'} </div>
                         {selectedRow == i ? (
                           <BiChevronUp className="w-5 h-5 text-primary-purple" />
                         ) : (
@@ -142,25 +139,25 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                         )}
                       </div>
                     </button>
-                  </td>
-                </tr>
-                <tr
+                  </div>
+                </div>
+                <div
                   className={`${
                     selectedRow == i ? '' : 'hidden'
                   } border-b-white/50 border-b-1 w-full`}
                 >
-                  <td colSpan={3} className="px-10">
+                  <div className="px-10">
                     {
                       loadings[i] == true
                       ? <div className='w-full py-3 text-center'>
                         <Spin />
                         </div>
                       : <div className="py-5 border-t-1 border-t-white/20">
-                        <div className='flex items-center justify-between'>
+                        <div className='flex android:flex-col desktop:flex-row gap-2 items-center justify-between'>
                           <p className='font-normal text-white/60'>
                             Based on your URL { page.url }, remove meta keywords tag from HTML
                           </p>
-                          <button className="inline-flex px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple" onClick={() => {
+                          <button className="android:w-full desktop:w-auto desktop:inline-flex px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple" onClick={() => {
                             const data = new Blob([answers[i]], { type: 'text/plain' });
                             const url = window.URL.createObjectURL(data);
                             const tempLink = document.createElement('a');
@@ -187,13 +184,12 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                         </div>
                       </div>
                     }
-                  </td>
-                </tr>
+                  </div>
+                </div>
               </>
             ))
           }
-        </tbody>
-      </table>
+      </div>
     </>
   );
 };

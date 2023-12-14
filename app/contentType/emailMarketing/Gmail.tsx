@@ -58,13 +58,13 @@ const GmailMarketing = () => {
           />
           <h3>Email Marketing Optimizations</h3>
         </div>
-        <button className="flex items-center gap-2 px-4 bg-none text-primary-purple">
+        <button className="android:hidden desktop:flex items-center gap-2 px-4 bg-none text-primary-purple">
           <BiRefresh className="w-5 h-5 text-primary-purple" />
           Refresh
         </button>
       </div>
       <div className="bg-[#23252b] w-full !p-0 overflow-hidden rounded-lg">
-        <div className="bg-[#1E1F24] text-[#848484] w-full">
+        <div className="android:hidden desktop:block bg-[#1E1F24] text-[#848484] w-full">
           <div className="col-span-8 px-10 py-3">
             <div className="flex items-center gap-2 font-normal text-left">
               Recommendations
@@ -86,7 +86,9 @@ const GmailMarketing = () => {
               <p className="flex-1 text-sm font-normal text-white">
                 {`You uploaded this ${emailInstruction.email_template_type.toLowerCase()} marketing template:`}
               </p>
-              <DownloadDropdown selects={selectedTemplates} messageApi={messageApi} />
+              <div className='android:hidden desktop:inline-block'>
+                <DownloadDropdown selects={selectedTemplates} messageApi={messageApi} />
+              </div>
             </div>
           </div>
           <div className="w-full">
@@ -95,6 +97,9 @@ const GmailMarketing = () => {
               className="relative p-4 overflow-auto rounded-lg"
               style={{ overflowWrap: 'anywhere' }}
             />
+          </div>
+          <div className='android:inline-block desktop:hidden mt-5 mb-5 w-full'>
+            <DownloadDropdown selects={selectedTemplates} messageApi={messageApi} />
           </div>
           {emailInstruction.email_options.map((option, i) => (
             <div key={`option_${i}`} className="mt-5">
@@ -210,7 +215,7 @@ const GmailMarketing = () => {
                 </div>
                 <div className='absolute flex items-center gap-4 top-4 right-6'>
                   <button
-                    className="flex items-center gap-1 text-primary-purple"
+                    className="android:hidden desktop:flex items-center gap-1 text-primary-purple"
                     onClick={() => {
                       try {
                         navigator.clipboard.writeText(option.email_template);
@@ -225,7 +230,7 @@ const GmailMarketing = () => {
                     Copy
                   </button>
                   <button
-                    className="flex items-center gap-1 text-primary-purple"
+                    className="android:hidden desktop:flex items-center gap-1 text-primary-purple"
                     onClick={() => {
                       if (edits.includes(i)) {
                         setEdits((prev) => prev.filter((val) => val != i));

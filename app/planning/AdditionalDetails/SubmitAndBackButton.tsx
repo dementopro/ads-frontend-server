@@ -1,5 +1,5 @@
 import React, { FC, useMemo, useState } from 'react';
-import styles from './SubmitAndBackButton.module.css';
+import styles from '../planning.module.css';
 import { useFormik } from 'formik';
 import { CompanyForm, CompanyDetailForm } from '@/types/planning';
 import axios from 'axios';
@@ -205,32 +205,36 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
       console.log('Please fill rerequired field', formik.errors);
     }
   };
-
+  
   return (
-    <div className="flex items-center gap-10 self-stretch mt-[32px]">
+    <div className="flex flex-row gap-[14px] items-center">
       {contextHolder}
       {isLoading && <LoadingSpin />}
-      <p className="w-[619px] text-[color:var(--primary-50,#F7F7FF)] h-[18px] text-[15px] not-italic font-medium leading-[normal]">
-        Submit related helpful information to help us improve your
-        recommendations!
-      </p>
-      <button
-        className="flex h-11 justify-center items-center gap-4 flex-[1_0_0] border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
-        onClick={() => {
-          router.push('/home');
-        }}
-      >
-        Back
-      </button>
-      <button
-        onClick={() => {
-          handleSubmit(activeButtonIndex + 1);
-        }}
-        className={`${styles.submit} ${!isValid && '!bg-background-300'}`}
-        disabled={!isValid}
-      >
-        Submit
-      </button>
+      <div className="desktop:w-2/3 android:hidden desktop:inline text-white text-[15px] font-medium text-left">
+        Submit related helpful information to help us improve your recommendations!
+      </div>
+      <div className="android:w-full desktop:w-1/3 flex gap-[14px] justify-center items-end">
+        <button
+          className={`${styles.subButton} android:w-full desktop:w-[150px]`}
+          onClick={() => {
+            router.push('/home');
+          }}
+        >
+          Back
+        </button>
+        <button
+          onClick={() => {
+            handleSubmit(activeButtonIndex + 1);
+          }}
+          className={`${styles.mainButton} android:w-full desktop:w-[150px] ${!isValid
+            ? '!bg-background-300'
+            : ' bg-[#844FFF]'
+            }`}
+          disabled={!isValid}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
