@@ -21,41 +21,15 @@ const tabs = [
   },
 ];
 
-interface IGetRecommendationsProps { }
+interface IGetRecommendationsProps {}
 
 const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
   const [tab, setTab] = useState<number>(0);
 
   return (
-    <div className="ipad:px-[60px] desktop:px-[100px] android:px-[16px] ipad:px-[0px] w-full max-w-[1240px] mx-auto mt-20">
+    <div className="w-full max-w-[1240px] mx-auto mt-20">
       <div className="relative grid grid-cols-12 gap-10 px-4 mt-4 overflow-visible">
-        <div className="android:block ipad:hidden relative android:col-span-12 ipad:col-span-5">
-          <div
-            className="absolute top-0 left-0 z-0 h-full ipadmini:w-full ipad:w-full desktop:col-span-6 translate-y-[10%] opacity-70"
-            style={{
-              background:
-                'radial-gradient(60% 50% at 50.00% 50.00%, #000 0%, rgba(104, 89, 255, 0.27) 33.65%, rgba(50, 46, 84, 0.00) 100%)',
-            }}
-          ></div>
-          <div className="flex items-center android:justify-center ipadmini:justify-end gap-2">
-            <img
-              src="/images/home/sparkles.svg"
-              className="android:w-[21px] ipadmini:w-[26px] ipad:w-[30px] desktop:w-[36px] android:h-[21px] ipadmini:h-[26px] ipad:h-[26px] desktop:h-[26px]"
-              alt="sparkles"
-            />
-            <h5 className="uppercase bg-gradient-to-r from-[#6859FF] bg-clip-text text-transparent to-[#AF41FF] text-base tracking-[.2em]">
-              How It Works
-            </h5>
-          </div>
-          <p className="mt-6 text-[42px] android:text-center ipadmini:text-right font-extrabold text-white">
-            Get Recommendations in seconds
-          </p>
-          <p className="mt-6 android:text-center ipadmini:text-right text-white text-[20px] font-semibold">
-            Our optimizations are backed by your historical data. Just choose
-            your content type and watch as our AI scans your data 90% faster.
-          </p>
-        </div>
-        <div className="flex ipadmini:justify-end bg-[#010314] rounded-2xl p-6 android:col-span-12 ipad:col-span-7 flex gap-6">
+        <div className="bg-[#010314] rounded-2xl p-6 desktop:col-span-7 col-span-12 flex gap-6">
           <div className="flex-1">
             <div className="overflow-hidden rounded-lg">
               <div className="bg-[#0E1125] px-6 py-3 flex items-center gap-2">
@@ -119,10 +93,11 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
           </div>
           <div className="basis-[250px] w-[250px]">
             <div
-              className={`transition-all w-full px-6 py-3 text-center cursor-pointer rounded-lg select-none ${tab === 0
+              className={`transition-all w-full px-6 py-3 text-center cursor-pointer rounded-lg select-none ${
+                tab === 0
                   ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
                   : 'border border-[#7D55FA]'
-                }`}
+              }`}
               onClick={() => {
                 setTab(0);
               }}
@@ -135,10 +110,11 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
               </p>
             </div>
             <div
-              className={`transition-all w-full px-6 py-3 mt-3 text-center cursor-pointer rounded-lg select-none ${tab === 1
+              className={`transition-all w-full px-6 py-3 mt-3 text-center cursor-pointer rounded-lg select-none ${
+                tab === 1
                   ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
                   : 'border border-[#7D55FA]'
-                }`}
+              }`}
               onClick={() => {
                 setTab(1);
               }}
@@ -151,10 +127,11 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
               </p>
             </div>
             <div
-              className={`transition-all w-full px-6 py-3 mt-3 text-center rounded-lg cursor-pointer select-none ${tab === 2
+              className={`transition-all w-full px-6 py-3 mt-3 text-center rounded-lg cursor-pointer select-none ${
+                tab === 2
                   ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
                   : 'border border-[#7D55FA]'
-                }`}
+              }`}
               onClick={() => {
                 setTab(2);
               }}
@@ -168,7 +145,7 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
             </div>
           </div>
         </div>
-        <div className="android:hidden ipad:block relative android:col-span-12 ipad:col-span-5">
+        <div className="relative android:col-span-12 ipadmini:col-span-5 ipad:col-span-5 desktop:col-span-5">
           <div
             className="absolute top-0 left-0 z-0 h-full ipadmini:w-full ipad:w-full desktop:col-span-6 translate-y-[10%] opacity-70"
             style={{

@@ -18,7 +18,7 @@ const Demo: FC<IDemoProps> = (props) => {
           'radial-gradient(55.59% 55.02% at 47.67% 45.03%, #000 0%, rgba(104, 89, 255, 0.27) 50%, rgba(50, 46, 84, 0.00) 100%)',
       }}
     >
-      <div className="max-w-[1240px] w-full mx-auto px-4 relative ipad:px-[60px] desktop:px-[100px] android:px-[16px] ipad:px-[0px]">
+      <div className="max-w-[1240px] w-full mx-auto px-4 relative ipad:px-[100px]">
         <h2 className="text-white font-open-sans text-[42px] font-extrabold text-center">
           ✨ Interactive Demo ✨
         </h2>
@@ -442,12 +442,12 @@ const Demo: FC<IDemoProps> = (props) => {
         <div
           className={`transition-all ease-linear duration-[2000] absolute flex items-end gap-2 ${
             tab === 0
-              ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
+              ? '-translate-x-1/2 translate-y-full bottom-1/2'
               : tab === 1
-              ? '-translate-x-2/3 android:left-[150px] ipad"left-0 top-[40px]'
+              ? '-translate-x-2/3 top-[40px]'
               : tab === 2
-              ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
-              : '-translate-x-[200px] android:left-[200px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2 -translate-y-[50px]'
+              ? '-translate-x-1/2 translate-y-full bottom-1/2'
+              : '-translate-x-[200px] bottom-1/2 -translate-y-[50px]'
           }`}
         >
           <Avatar src="/images/home/avatar/1.jpg" size="lg" />
@@ -487,10 +487,10 @@ const Demo: FC<IDemoProps> = (props) => {
             tab === 0
               ? 'top-[50px] right-0'
               : tab === 1
-              ? 'android:bottom-[100px] ipadmini:bottom-[50px] android:right-[0px] ipadmini:-right-[100px]'
+              ? 'bottom-[50px] -right-[100px]'
               : tab === 2
               ? 'top-[50px] right-0'
-              : 'bottom-[200px] android:right-[0px] ipadmini:-right-[100px]'
+              : 'bottom-[200px] -right-[100px]'
           }`}
         >
           <div className="p-4 bg-[#7D55FA] rounded-xl relative mt-6">
