@@ -15,7 +15,7 @@ const nextConfig = {
     },
     async rewrites() {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-        console.log(apiUrl, 'apiUrl');
+
         // Check if apiUrl is defined
         if (!apiUrl) {
             console.error('NEXT_PUBLIC_API_URL is not defined in your environment variables.');

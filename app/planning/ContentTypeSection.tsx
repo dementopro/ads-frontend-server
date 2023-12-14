@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { CompanyDetailForm } from '@/types/planning';
-import styles from '@/app/planning/planning.module.css';
+import styles from './planning.module.css';
 
 interface ContentTypeSectionProps {
   formData: CompanyDetailForm;

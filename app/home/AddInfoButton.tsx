@@ -1,10 +1,10 @@
 import React, { FC, useMemo } from 'react';
+import './AddInfoButton.css';
 import { useFormik } from 'formik';
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { message } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useSeoAnalyzerContext } from '@/context/seo';
-import styles from '@/./app/planning/planning.module.css';
 
 interface AddInfoButtonProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
@@ -50,13 +50,12 @@ const AddInfoButton: FC<AddInfoButtonProps> = ({
   }, [formik]);
 
   return (
-    <div className="flex justify-end">
+    <div className="main-div">
       {contextHolder}
       <button
-        className={`${styles.mainButton} ${!isValid
-          ? '!bg-background-300'
-          : ' bg-[#844FFF]'
-          }`}
+        className={`text-white text-center text-[15px] !px-6 not-italic font-semibold leading-5 button-dev whitespace-nowrap ${
+          !isValid && '!bg-background-300'
+        }`}
         onClick={() => handleButtonClick(1)}
         disabled={!isValid}
       >

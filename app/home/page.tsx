@@ -1,3 +1,37 @@
+// import CardItems from '@/app/home/CardItems'
+// import CommunityFrom from '@/app/home/CommunityFrom'
+// import RecentProjects from '@/app/home/RecentProjects'
+// import ReactGATag from '@/components/ReactGATag'
+// import AdminLayout from '@/layout/admin'
+// import React from 'react'
+
+// export const metadata = {
+//   title: 'User Home - AdsGency AI',
+// }
+
+// const HomePage = () => {
+//   return (
+//     <AdminLayout>
+//       <ReactGATag
+//         fieldObject={{
+//           hitType: "pageview",
+//           page: "/home",
+//           title: metadata.title
+//         }}
+//       />
+//       <section className='flex flex-col justify-center'>
+//         <h1 className='mb-6 text-2xl font-medium text-white'>
+//           What advertising tasks do you have today?
+//         </h1>
+//         <CardItems />
+//         {/* <RecentProjects /> */}
+//         <CommunityFrom />
+//       </section>
+//     </AdminLayout>
+//   )
+// }
+
+// export default HomePage
 'use client';
 
 import {
@@ -76,7 +110,7 @@ const HomePage = () => {
     url: '',
     marketing_template: '',
     schedule: {},
-    assets: [],
+    assets: []
   });
   const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
 
@@ -85,8 +119,8 @@ const HomePage = () => {
       companyName: '',
       websiteURL: '',
       description: '',
-      idealCustomerProfile: '',
       sellingDescription: '',
+      idealCustomerProfile: '',
       targetAudience: '',
       competitors: '',
       email: '',
@@ -104,11 +138,11 @@ const HomePage = () => {
         companyName: company.name,
         competitors: company.competitors,
         description: company.description,
-        sellingDescription: company.product_description,
         email: company.email,
         idealCustomerProfile: company.customer_profile,
         marketing_template: company.marketing_template,
         schedule: company.schedule,
+        sellingDescription: company.product_description,
         targetAudience: company.target_audice,
         websiteURL: company.website,
         url: company.url
@@ -122,7 +156,7 @@ const HomePage = () => {
   async function onSubmit(
     values: CompanyForm,
     actions: FormikHelpers<CompanyForm>
-  ) { }
+  ) {}
 
   return (
     <AdminLayout>
@@ -139,41 +173,45 @@ const HomePage = () => {
         setShow={() => setShowNotEnoughCredits(false)}
       />
 
-      <Spin spinning={isGenerating} wrapperClassName="relative">
-        <div className="w-full flex flex-col gap-[24px]">
-          <div className="flex flex-col justify-center">
-            <div className="flex gap-[8px] justify-start text-[24px] font-medium text-white">
-              <div> ✨ </div>
-              <div> Get Started </div>
-            </div>
+      <Spin
+        spinning={isGenerating}
+        wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]"
+      >
+        <section className="flex flex-col justify-center">
+          <div className="flex gap-x-[8px] mb-6">
+            <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
+              ✨
+            </p>
+            <h1 className="text-2xl w-full h-[29px] font-medium text-white">
+              Get&nbsp;Started
+            </h1>
           </div>
           <HorizontalStepper
             activeButtonIndex={0}
-            setActiveButtonIndex={() => { }}
+            setActiveButtonIndex={() => {}}
             formik={formik}
             formData={formData}
           />
-
-          <div className="flex flex-col gap-[14px]">
-            <AddCompany formik={formik} index={1} />
-            <ContentTypeSection setFormData={setFormData} formData={formData} index={2} />
-          </div>
+        </section>
+        <div className="flex flex-col text-[15px]">
+          <AddCompany formik={formik} />
+          <ContentTypeSection setFormData={setFormData} formData={formData} />
           <AddInfoButton
             formik={formik}
             formData={formData}
           />
         </div>
-        <div className="flex justify-end items-center mt-[10px] gap-[5px] text-[14px] text-[#ABABAB] font-normal">
-          <div className='text-right'>
-            Find a bug or encountering an error? Submit an issue report with us &nbsp;
-            <button className="font-medium underline"
-              onClick={() => {
-                onOpenBugReportModal();
-              }}>
+        <div className="flex float-right mt-[32px] gap-[10px]">
+          <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
+            Find a bug or encountering an error? Submit an issue report with
+            us&nbsp;
+            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline" onClick={() => {
+              onOpenBugReportModal();
+            }}>
               here
             </button>
             <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} onClose={onCloseBugReportModal} />
-          </div>
+          </p>
           <Image
             width={28}
             height={28}

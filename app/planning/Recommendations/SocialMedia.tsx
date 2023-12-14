@@ -5,7 +5,7 @@ import { SocialMedia, useSeoAnalyzerContext } from '@/context/seo';
 import { BiEdit, BiInfoCircle } from 'react-icons/bi';
 import Image from 'next/image';
 import { Dropdown } from 'antd';
-import { socialMediaTabsList } from '../AdditionalDetails/SocialMedia/SocialMediaDetailPage';
+import { tabsList } from '../AdditionalDetails/SocialMediaDetails';
 
 const uploadMenuItems = [
   {
@@ -65,7 +65,7 @@ const SocialMediaRecommendation: FC<SocialMediaRecommendationTypes> = ({
             <BiInfoCircle className="w-4 h-4" />
             <p className="text-[15px]">
               Based on your uploaded media assets, we have generated optimized
-              media content and captions for {socialMediaTabsList[type].title}
+              media content and captions for {tabsList[type].title}
             </p>
           </div>
           <h3 className="mt-4 font-medium text-white text-normal">
