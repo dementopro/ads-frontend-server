@@ -28,28 +28,29 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   const [messageApi, contextHolder] = message.useMessage();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const isValidSeo = (content_type: string, errors: any) => 
+  const isValidSeo = (content_type: string, errors: any) =>
     content_type.toLowerCase() == 'seo' &&
     errors.idealCustomerProfile == '' &&
     errors.targetAudience == '' &&
     errors.competitors == ''
 
-  const isValidEmailMarketing = (content_type: string, errors: any) => 
+  const isValidEmailMarketing = (content_type: string, errors: any) =>
     content_type.toLowerCase() == 'email marketing' &&
     errors.idealCustomerProfile == '' &&
     errors.targetAudience == '' &&
     errors.email == '' &&
     errors.marketing_template == ''
 
-  const isValidSocialMedia = (content_type: string, errors: any) => 
+  const isValidSocialMedia = (content_type: string, values: any, errors: any) =>
     content_type.toLowerCase() == 'social media' &&
+    Object.keys(values.schedule).length > 0 &&
     errors.idealCustomerProfile == '' &&
     errors.targetAudience == '' &&
     errors.url == ''
-  
+
   const isValid = useMemo(() => {
-    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.errors);
-  }, [formData, formik.errors])
+    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.values, formik.errors);
+  }, [formData, formik.values, formik.errors])
 
   const handleSubmit = (index: number) => {
     if (isValidSeo(formData.content_type, formik.errors)) {
@@ -145,7 +146,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .finally(() => {
           setIsLoading(false);
         });
-    } else if (isValidSocialMedia(formData.content_type, formik.errors)) {
+    } else if (isValidSocialMedia(formData.content_type, formik.values, formik.errors)) {
       setIsLoading(true);
       setCompany({
         ...company,

@@ -70,9 +70,6 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const [schedules, setSchedules] = useState<any>([]);
   const { data: session, status } = useSession();
 
-  console.log("social media: ", socialMedia[activeMedia]);
-  console.log("company: ", company);
-
   useEffect(() => {
     if (emailInstruction && emailInstruction.email_options) {
       setOptionEdits([...emailInstruction.email_options]);
@@ -86,7 +83,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
     //     accessToken: (session as any)[tabsList[type].provider].accessToken,
     //     refreshToken: (session as any)[tabsList[type].provider].refreshToken
     //   });
-      
+
     //   messageApi.success('Launch Ad success');
     // } catch (error) {
     //   messageApi.error('Something went wrong');
@@ -274,7 +271,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                     </div>
                   </div>
 
-                  <div className="flex-1 p-0">
+                  <div className="flex-1 p-0 flex-wrap">
                     <div className="border rounded-lg border-background-300">
                       <div
                         className="flex items-center px-8 py-4 cursor-pointer"
@@ -295,7 +292,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         <h3 className="font-medium text-white text-normal">
                           Social Media Objectives:
                         </h3>
-                        <div className="flex items-center gap-2 mt-2">
+                        <div className="flex flex-wrap items-center gap-2 mt-2">
                           {company.business_objectives.map((val, i) => (
                             <Chip
                               key={i}

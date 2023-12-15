@@ -154,6 +154,7 @@ const SocialMediaRecommendation: FC<SocialMediaRecommendationTypes> = ({
               </Dropdown>
               <input
                 type="file"
+                accept="image/*"
                 id="upload_image"
                 hidden
                 onChange={(e) => {
@@ -173,6 +174,7 @@ const SocialMediaRecommendation: FC<SocialMediaRecommendationTypes> = ({
               <input
                 type="file"
                 id="replace_image"
+                accept="image/*"
                 hidden
                 onChange={(e) => {
                   if (e.target.files && e.target.files.length > 0) {
