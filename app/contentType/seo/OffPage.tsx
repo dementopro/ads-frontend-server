@@ -46,7 +46,9 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
           <BiChevronDown />
         </div>
         <button className="flex items-center gap-2 px-4 bg-none text-primary-purple" onClick={() => {
+          setLoadings([...new Array(page?.warnings.length || 0)].map((_) => true));
           setAnswers([...new Array(page?.warnings.length || 0)].map((_) => ''));
+          setSelectedRow(-1);
         }}>
           <BiRefresh className="w-5 h-5 text-primary-purple" />
           Refresh
@@ -176,7 +178,7 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             typeof answers[i] == 'object' ? Object.keys(answers[i]).map((key) => answers[i][key]).map((sol, index) => (
                               <div key={`step_${index}`} className='mt-4'>
                                 <div>
-                                  { sol.step_name }
+                                  Step {index + 1}: { sol[`step${index + 1}`] || sol.step_name }
                                 </div>
                                 <div className='mt-2'>
                                   <ReactMarkdownPreview source={sol.detail} className='relative p-4 overflow-auto rounded-lg' style={{ overflowWrap: "anywhere" }} />

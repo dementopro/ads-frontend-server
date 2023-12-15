@@ -1,7 +1,7 @@
 'use client'
 // Imports
 import { paymentValidate } from '@/lib/validate';
-import { PaymentForm } from '@/types/auth';
+import { type PaymentForm } from '@/types/auth';
 import { Icon } from '@iconify/react';
 import { FormikHelpers, useFormik } from 'formik';
 import React, { ChangeEvent, useState, useContext } from 'react'
@@ -173,7 +173,6 @@ const PaymentForm = () => {
             placeholder="Select Country"
             searchable={false}
             selectButtonClassName={styles["menu-flags-button"]}
-            countries={["US"]}
           />
         </div>
         {/* Submit Button */}
