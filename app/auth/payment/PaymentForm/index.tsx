@@ -178,6 +178,7 @@ const PaymentForm = () => {
         {/* Submit Button */}
         <div className='flex items-center justify-between gap-2'>
           <button
+            type='button'
             onClick={() => onSubmitPayment(formikForPayment.values)}
             className={`${styles['payment-btn']} flex-1`}>
             {isLoading && <Icon icon={loadingIcon} className='mr-2' />}

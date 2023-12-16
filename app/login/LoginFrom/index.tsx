@@ -9,7 +9,7 @@ import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
 import styles from './login.module.css'
-import { LoginForm } from '@/types/auth';
+import { type LoginForm } from '@/types/auth';
 import { onLogin } from '@/lib/auth';
 import { loginValidate } from '@/lib/validate';
 import axios from '@/lib/axios';
@@ -109,7 +109,7 @@ const LoginForm = () => {
         </button>
       </form>
       <div className='flex flex-col items-center justify-center gap-4 mt-12 text-sm text-primary-gray'>
-        <p>Dont&apos;t have account? <Link target="_blank"  className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>
+        <p>Dont&apos;t have account? <Link target="_self"  className='text-[#7366ff] font-semibold' href={'/register'} >Sign up 💜</Link></p>
       </div>
     </>
   )

@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import styles from './register.module.css'
 import Link from 'next/link'
 import { useFormik } from 'formik'
-import { PaymentForm, RegisterForm } from '@/types/auth'
+import type { PaymentForm, RegisterForm } from '@/types/auth'
 import { paymentValidate, registerValidate, isValidEmail } from '@/lib/validate'
 import { useRouter } from 'next/navigation'
 import { DatePicker, Modal, message } from 'antd'
@@ -58,8 +58,7 @@ const RegisterForm = () => {
       messageApi.error('You need to agree with privacy policy first')
       return
     }
-    // setStep(2)
-    onRegister()
+    setStep(2)
   }
 
   async function onSubmitPayment(values: PaymentForm) {
@@ -76,9 +75,9 @@ const RegisterForm = () => {
       setIsSignUpLoading(true)
       const form = {
         ...formikForRegister.values,
-        // ...formikForPayment.values,
-        // year: +formikForPayment.values.expiration.slice(0, 4),
-        // month: +formikForPayment.values.expiration.slice(5, 7),
+        ...formikForPayment.values,
+        year: +formikForPayment.values.expiration.slice(0, 4),
+        month: +formikForPayment.values.expiration.slice(5, 7),
       }
       const response = await axios({
         url: '/fapi/signup_api',
@@ -304,7 +303,6 @@ const RegisterForm = () => {
                 placeholder="Select Country"
                 searchable={false}
                 selectButtonClassName={styles["menu-flags-button"]}
-                countries={["US"]}
               />
             </div>
             <div className='flex items-center justify-between gap-2'>
@@ -328,7 +326,7 @@ const RegisterForm = () => {
       }
       <div className='mt-8 flex flex-col items-center justify-center gap-4 text-primary-gray text-sm'>
         <p>
-          Already have an account? <Link target="_blank"  className='text-[#7366ff] font-semibold' href={'/login'} >Sign in 💜</Link>
+          Already have an account? <Link target="_self"  className='text-[#7366ff] font-semibold' href={'/login'} >Sign in 💜</Link>
         </p>
       </div>
     </>

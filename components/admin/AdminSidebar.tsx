@@ -8,7 +8,6 @@ import { Icon } from '@iconify/react';
 import creditCardMarkerOutline from '@iconify/icons-mdi/credit-card-marker-outline';
 import React, { useContext } from 'react';
 import { AccountContext } from '@/context/account';
-import { isUserLogin } from '@/lib/auth';
 
 const AdminSidebar = () => {
   const router = useRouter();

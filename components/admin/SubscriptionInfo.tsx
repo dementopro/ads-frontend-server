@@ -119,8 +119,8 @@ const SubscriptionInfo = () => {
             </div>
         }
         <div className='flex items-center justify-between text-white text-sm'>
-          <span className='font-semibold'>Credits</span>
-          <div><span className='font-semibold'>{credits}</span></div>
+          {/* <span className='font-semibold'>Credits</span>
+          <div><span className='font-semibold'>{credits}</span></div> */}
         </div>
         {
           isSubscribed ?
