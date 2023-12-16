@@ -29,7 +29,7 @@ const PayResult = ({ visible, onClose, message }: PayResultProps) => {
           onClick={onClose}
           className={`mt-9 w-[280px] flex items-center justify-center py-2 text-white cursor-pointer hover:opacity-80 rounded-lg bg-primary-purple`}
         >
-          Okey
+          Okay
         </button>
       </div>
     </div>

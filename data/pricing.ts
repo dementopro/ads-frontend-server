@@ -1,16 +1,16 @@
 export const Pricing = [
   {
-    plan: 'Startups Plan',
+    plan: 'Plans',
     icon: 'plan1.svg',
     activeIcon: 'plan1-active.svg',
     plans: [
       {
-        title: 'Starter',
+        title: 'Startup',
         price: '$39',
         planId: 1,
       },
       {
-        title: 'Advanced',
+        title: 'Business',
         price: '$69',
         planId: 2,
       },
@@ -21,20 +21,31 @@ export const Pricing = [
       },
     ],
     features: [
-      ['Credits', 10, 20, 30],
-      // ['Brand', 1, 2, 2],
-      // ['User', 1, 2, 2],
-      // ['Platforms integration', 1, 2, 2],
-      // ['Model finetuning', 1, 2, 2],
-      // ['Custom Pricing Model', '-', '-', '-'],
-      ['Planning', true, true, true],
-      ['Text to copies', true, true, true],
-      ['Text to image', true, true, true],
-      ['Social insights', true, true, true],
-      ['Image to image', true, true, true],
-      // ['Image to 3D model', false, false, false],
-      // ['Image to video', false, false, false],
-      // ['Analytics', false, false, false],
+      // ['Credits', 10, 20, 30],
+      ['SEO audit', true, true, true],
+      ['Website analysis', true, true, true],
+      ['On page technical optimization', true, true, true],
+      ['Off page optimization', true, true, true],
+      ['Backlinks building', true, true, true],
+      ['Content creation', true, true, true],
+      ['Keywords searching', true, true, true],
+      ['Google Analytics integration', true, true, true],
+      ['Gmail integration', false, true, true],
+      ['Outlook integration', false, true, true],
+      ['Email template', false, true, true],
+      ['Customizable design', false, true, true],
+      ['Bulk email launching', false, true, true],
+      ['Email content generation', false, true, true],
+      ['Competitor analysis', false, true, true],
+      ['Instagram integration', false, false, true],
+      ['Facebook integration', false, false, true],
+      ['Pinterest integration', false, false, true],
+      ['Image generation', false, false, true],
+      ['Social media launching', false, false, true],
+      ['Caption generation', false, false, true],
+      ['Tags generation', false, false, true],
+      ['Trending keywords optimization', false, false, true],
+      ['Historical posts optimization', false, false, true],
     ]
   },
   {
@@ -230,4 +241,4 @@ export const PublicPricing = [
       ['Analytics', false, false, false],
     ]
   }
-] 
+]

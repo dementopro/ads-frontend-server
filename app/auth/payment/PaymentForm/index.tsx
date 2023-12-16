@@ -48,7 +48,7 @@ const PaymentForm = () => {
     }
     try {
       setIsLoading(true);
-      const response = await axios('/fapi/add_credit_api', {
+      const response = await axios('/fapi/update_payment_method_api', {
         method: 'POST',
         data: JSON.stringify({
           ...values,

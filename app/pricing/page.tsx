@@ -226,7 +226,7 @@ const PricingPage = () => {
           }}
           message={payResultMessage}
         />
-        <div className='flex items-center gap-4'>
+        <div className='items-center gap-4 hidden'>
           {
             Pricing.map(price => (
               <div
@@ -252,7 +252,7 @@ const PricingPage = () => {
                     <div key={item.title}
                       className='w-[240px] flex flex-col justify-center items-center bg-[#27282F] rounded-lg p-4 border border-[#3A3A3A] gap-2'
                     >
-                      <div className='text-primary-purple uppercase'>{item.title}</div>
+                      <div className='text-primary-purple text-[2.2rem] font-bold'>{item.title}</div>
                       <div className='flex items-center text-primary-gray text-sm'>
                         <span className='text-white text-3xl mr-3'>{item.price}</span>
                         <span>/month</span>
@@ -286,18 +286,18 @@ const PricingPage = () => {
                   <div key={item?.[0] as string}
                     className='w-full h-10 flex justify-evenly items-center text-sm rounded-lg even:bg-[#27282F]'
                   >
-                    <div className='w-[160px] text-primary-gray text-sm text-left'>{item[0]}</div>
-                    <div className={`w-[240px] text-center flex items-center justify-center ${item[1] === 'Unlimited' || item[1] === 'Available' ? 'text-primary-purple' : ''}`}>
+                    <div className='w-[300px] text-primary-gray text-sm text-left'>{item[0]}</div>
+                    <div className={`w-[400px] text-center flex items-center justify-center ${item[1] === 'Unlimited' || item[1] === 'Available' ? 'text-primary-purple' : ''}`}>
                       {typeof item[1] === 'boolean' ? (
                         item[1] ? <Icon className='text-primary-purple' icon={checkIcon} /> : <Icon className='text-[#34A853]' icon={closeIcon} />
                       ) : item[1]}
                     </div>
-                    <div className={`w-[240px] text-center flex items-center justify-center ${item[2] === 'Unlimited' || item[2] === 'Available' ? 'text-primary-purple' : ''}`}>
+                    <div className={`w-[300px] text-center flex items-center justify-center ${item[2] === 'Unlimited' || item[2] === 'Available' ? 'text-primary-purple' : ''}`}>
                       {typeof item[2] === 'boolean' ? (
                         item[2] ? <Icon className='text-primary-purple' icon={checkIcon} /> : <Icon className='text-[#34A853]' icon={closeIcon} />
                       ) : item[2]}
                     </div>
-                    <div className={`w-[240px] text-center flex items-center justify-center ${item[3] === 'Unlimited' || item[3] === 'Available' ? 'text-primary-purple' : ''}`}>
+                    <div className={`w-[400px] text-center flex items-center justify-center ${item[3] === 'Unlimited' || item[3] === 'Available' ? 'text-primary-purple' : ''}`}>
                       {typeof item[3] === 'boolean' ? (
                         item[3] ? <Icon className='text-primary-purple' icon={checkIcon} /> : <Icon className='text-[#34A853]' icon={closeIcon} />
                       ) : item[3]}

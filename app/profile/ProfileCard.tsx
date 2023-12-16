@@ -85,10 +85,10 @@ const ProfileCard = () => {
                   <Icon className='text-primary-gray' icon='mdi:email-outline' width={20} height={20} />
                   <span>{userProfile?.email}</span>
                 </div>
-                <div className='flex items-center gap-2'>
+                {/* <div className='flex items-center gap-2'>
                   <Icon className='text-primary-gray' icon='mdi:credit-card' width={20} height={20} />
                   <span>{userProfile?.credit || 0} Credits</span>
-                </div>
+                </div> */}
               </div>
               {
                 userProfile?.subscription_start &&
@@ -104,7 +104,7 @@ const ProfileCard = () => {
               <Icon icon='akar-icons:edit' width={16} height={16} />
               <span className='text-base'>Edit profile</span>
             </button>
-            <Link target="_blank" 
+            <Link target="_self"
               href='/auth/payment'
               className='hover:opacity-90 h-[40px] px-4 text-primary-purple flex items-center justify-center gap-2'>
               <Icon icon='akar-icons:edit' width={16} height={16} />
