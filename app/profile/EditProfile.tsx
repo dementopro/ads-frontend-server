@@ -25,7 +25,7 @@ const EditProfile = ({ show, setShow, username, onUpdated }: Props) => {
                   User profile
                 </div>
                 {/* avatar */}
-                <div className='hidden mt-8 mb-6 flex-shrink-0 rounded-full w-[100px] h-[100px] relative overflow-hidden border border-primary-purple'>
+                <div className='mt-8 mb-6 flex-shrink-0 rounded-full w-[100px] h-[100px] relative overflow-hidden border border-primary-purple'>
                   <Image
                     src='/images/avatar.svg'
                     fill

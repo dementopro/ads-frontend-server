@@ -54,11 +54,7 @@ const SubscriptionButton = ({ plan, onSubscription }: SubscriptionButtonProps) =
     <button
       onClick={() => onSubscription(plan.planId)}
       disabled={planId === plan.planId && isSubscribed}
-      className={
-        `rounded-lg w-[132px] flex items-center justify-center py-2
-        ${planId === plan.planId && isSubscribed ? 'bg-[#201641] text-primary-purple' : 'bg-primary-gradient text-white cursor-pointer hover:opacity-80'}
-        `
-      }>
+      className={`rounded-lg w-[132px] flex items-center justify-center py-2 ${planId === plan.planId && isSubscribed ? 'bg-[#201641] text-primary-purple' : 'bg-primary-gradient text-white cursor-pointer hover:opacity-80'}`}>
       {formatBtnText()}
     </button>
   )

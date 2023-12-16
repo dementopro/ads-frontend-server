@@ -20,6 +20,7 @@ interface DayScheduleProps {
   onSelect: (index: number, value: any) => void;
   onClick: () => void;
   onAddTime: () => void;
+  onDeleteTime: (dayIndex: number, index: number) => void;
   schedules: number[] | null;
 }
 
@@ -29,13 +30,14 @@ const DaySchedule: FC<DayScheduleProps> = ({
   onSelect,
   onClick,
   onAddTime,
+  onDeleteTime,
 }) => {
   return (
     <div className="flex flex-wrap w-full gap-4 mt-4">
       <div
         className={`bg-background-300 rounded-lg w-[128px] h-[48px] ${
           !!schedules ? 'border border-primary-gray' : 'border-none'
-        } flex items-center justify-center text-primary-gray`}
+        } flex items-center justify-center text-primary-gray hover:bg-background-500 cursor-pointer`}
         onClick={onClick}
       >
         {days[day]}
@@ -49,8 +51,13 @@ const DaySchedule: FC<DayScheduleProps> = ({
             // setSchedules((prev) => prev ? prev.map((val, index) => index == i ? value : val) : prev)
           }}
         >
-          <div className="relative">
-            <Listbox.Button className="relative bg-background-200 z-10 w-[128px] h-[48px] py-2 pl-3 pr-10 text-left hover:brightness-110 rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <div className="relative mr-2">
+            <div className="absolute top-0 right-0 translate-x-full translate-y-[-50%] cursor-pointer" onClick={() => onDeleteTime(day, i)}>
+              <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <Listbox.Button className="relative bg-background-200 z-10 w-[128px] h-[48px] py-2 pl-3 pr-10 text-left hover:brightness-110 rounded-lg shadow-md cursor-pointer focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate">
                 {`${schedules[i] < 0 ? 'Times' : formatTimeOfDay(schedules[i])}`}
               </span>
@@ -67,7 +74,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute w-full py-1 mt-1 z-[9999] overflow-auto text-base rounded-md shadow-lg bg-background-200 max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute w-full py-1 mt-1 z-[9999] overflow-auto text-base rounded-md shadow-lg bg-background-200 max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm cursor-pointer">
                 <Listbox.Option
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
@@ -87,7 +94,7 @@ const DaySchedule: FC<DayScheduleProps> = ({
                   <Listbox.Option
                     key={idx}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative select-none py-2 pl-10 pr-4 cursor-pointer ${
                         active ? 'bg-primary-purple' : ''
                       }`
                     }
@@ -202,6 +209,14 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
                       };
                       setSchedules(newSchedule);
                     }}
+                    onDeleteTime={(dayIndex, i) => {
+                      const updatedSchedule = {
+                        ...schedules,
+                      };
+                      const updatedDaySchedule = updatedSchedule[days[dayIndex]];
+                      updatedDaySchedule.splice(i, 1);
+                      setSchedules(updatedSchedule);
+                    }}
                   />
                 ))}
               </div>
@@ -216,9 +231,15 @@ const EmailScheduleModal: FC<EmailScheduleModalProps> = ({
               <button
                 className="flex items-center justify-center flex-1 h-[44px] rounded-lg text-white bg-primary-purple hover:brightness-110 border-background-500"
                 onClick={() => {
+                  let newSchedules: any = {};
+                  const keys = Object.keys(schedules);
+                  for (let i = 0; i < keys.length; i++) {
+                    const key: string = keys[i];
+                    newSchedules[key] = (schedules[key] ? (schedules[key] as any).filter((time: number) => time >= 0) : schedules[key]) as any;
+                  }
                   setCompany({
                     ...company,
-                    schedule: schedules
+                    schedule: newSchedules
                   })
                   onClose();
                 }}

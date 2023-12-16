@@ -41,12 +41,12 @@ const SubscriptionInfo = () => {
   // Function to handle cancellation
   function onCancel() {
     modal.confirm({
-      title: 'Are you sure you want to unsubscribe?',
-      content: 'You will lose all your credits and your account will be downgraded to the free plan after your trial ends.',
+      title: <p className="text-white">Are you sure you want to unsubscribe?</p>,
+      content: <p className="text-white">You will lose all your credits and your account will be downgraded to the free plan after your trial ends.</p>,
       okText: 'Yes, unsubscribe',
       cancelText: 'No, keep my subscription',
       cancelButtonProps: {
-        className: 'bg-primary-gradient text-white rounded-lg font-semibold hover:!text-white hover:opacity-80 mt-2'
+        className: 'bg-primary-gradient text-white rounded-lg font-semibold hover:!text-white hover:opacity-80 mt-2 border-0'
       },
       okButtonProps: {
         className: 'bg-white text-primary-purple rounded-lg font-semibold hover:!text-white hover:!bg-primary-purple mt-2',

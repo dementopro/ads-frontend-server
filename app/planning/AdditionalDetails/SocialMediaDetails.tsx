@@ -98,7 +98,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
       });
     }
   };
-  
+
   const isCurrentSocialAuthenticated: boolean = useMemo(() => {
     return !!(session && (session as any)[tabsList[activeTab].provider])
   }, [session, activeTab]);
@@ -132,7 +132,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   useEffect(() => {
     setIsOAuthFinished(!!(session && (session as any)[tabsList[activeTab].provider]));
   }, [activeTab]);
-  
+
   useEffect(() => {
     if (isOAuthFinished && session && (session as any)["user"]) {
       formik.setValues({
@@ -380,7 +380,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           <div className='flex flex-wrap w-full gap-3'>
             {
               Object.keys(company.schedule).map((key, _) => {
-                return company.schedule[key].map((time: number, _i: number) => (
+                return company.schedule[key]?.map((time: number, _i: number) => (
                   <Chip key={_i} className='rounded-lg'>
                     {key + ' ' + formatTimeOfDay(time)}
                   </Chip>

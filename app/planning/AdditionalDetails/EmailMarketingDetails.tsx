@@ -52,7 +52,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
   activeTab,
   setActiveTab,
 }) => {
-  const { company } = useSeoAnalyzerContext();
+  const { company, setCompany } = useSeoAnalyzerContext();
   const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   const [isOpenEmailEditModal, setIsOpenEmailEditModal] = useState<boolean>(false);
   const [isEmailAuthenticated, setIsEmailAuthenticated] = useState<boolean>(false);
@@ -255,6 +255,22 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-300 hover:brightness-110 text-primary-gray"
             onClick={() => {
+              setCompany({
+                ...company,
+                name: formik.values.companyName,
+                business_objectives: formData.business_objectives,
+                competitors: formik.values.competitors,
+                content_type: formData.content_type,
+                customer_profile: formik.values.idealCustomerProfile,
+                description: formik.values.description,
+                product_description: formik.values.sellingDescription,
+                target_audice: formik.values.targetAudience,
+                website: formik.values.websiteURL,
+                email: formik.values.email,
+                marketing_template: formik.values.marketing_template,
+                schedule: formik.values.schedule,
+                url: formik.values.url,
+              });
               onOpenEmailSchedule();
             }}
           >

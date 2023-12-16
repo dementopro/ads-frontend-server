@@ -65,7 +65,7 @@ const ConnectPlatform = () => {
       ) : (
         <div className="bg-primary-gray text-white rounded-lg flex items-center justify-center py-2 px-4 select-none">
           <Icon icon="mdi-lock" width={18} className="mr-2" />
-          Comming soon
+          Coming soon
         </div>
       )}
     </div>

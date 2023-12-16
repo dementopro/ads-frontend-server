@@ -114,7 +114,7 @@ export function CompanyValidate(values: CompanyForm) {
   errors.targetAudience = values?.targetAudience ? (values.description.length <= DETAIL_LIMIT) ? '' : `Company description should be 50 - ${DETAIL_LIMIT} characters` : 'Target Audience is required';
   errors.email = values?.email ? /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(values?.email) ? '' : 'Email is not valid email!' : 'Email is required';
   errors.marketing_template = values?.marketing_template ? '' : 'Marketing Template is required';
-  errors.url = values?.url ? ((values?.socialMediaType === 'pinterest' && !/^(http(s)?:\/\/)?(www.)?pinterest.com\/(.*)?$/i.test(values.url)) ? 'Invalid Pinterest URL' : '') : 'URL is required';
+  errors.url = values?.url ? ((values?.socialMediaType === 'pinterest' && !/^(http(s)?:\/\/)?((.*).)?pinterest.com\/(.*)?$/i.test(values.url)) ? 'Invalid Pinterest URL' : '') : 'URL is required';
 
   return errors;
 }
