@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { ComponentType, FC, useEffect, useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { BiCalendar, BiFileBlank } from 'react-icons/bi';
@@ -21,6 +21,7 @@ import { popupCenter } from '@/utils/popup';
 import { formatTimeOfDay } from '@/utils';
 
 const PinterestAnalyticsModal = dynamic(() => import("@/app/planning/Analytics/PinterestAnalyticsModal"), { ssr: false });
+const MetaAnalyticsModal = dynamic(() => import("@/app/planning/Analytics/MetaAnalyticsModal"), { ssr: false });
 
 interface SocialMediaDetailsProps {
   formData: CompanyDetailForm;
@@ -29,48 +30,62 @@ interface SocialMediaDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
 
-export const tabsList = [
+export const tabsList: {
+  title: string;
+  icon: string;
+  page: string;
+  provider: string;
+  url: (userid: string) => string;
+  analyticsModalComponent?: ComponentType;
+}[] = [
   {
     title: 'Instagram',
     icon: '/images/planning/instagram.svg',
     page: '/auth/social/instagram',
-    provider: 'instagram'
+    provider: 'instagram',
+    url: (userid: string) => `https://www.instagram.com/${userid}`
   },
   {
     title: 'Meta',
     icon: '/images/planning/meta.svg',
     page: '/auth/social/facebook',
-    provider: 'facebook'
+    provider: 'facebook',
+    url: (userid: string) => `https://www.facebook.com/${userid}`
   },
   {
     title: 'Linkedin',
     icon: '/images/planning/linkedin.svg',
     page: '/auth/social/linkedin',
-    provider: 'linkedin'
+    provider: 'linkedin',
+    url: (userid: string) => `https://www.facebook.com/${userid}`
   },
   {
     title: 'Youtube',
     icon: '/images/planning/youtube.svg',
     page: '/auth/social/youtube',
-    provider: 'youtube'
+    provider: 'youtube',
+    url: (userid: string) => `https://www.facebook.com/${userid}`
   },
   {
     title: 'Pinterest',
     icon: '/images/planning/pinterest.svg',
     page: '/auth/social/pinterest',
-    provider: 'pinterest'
+    provider: 'pinterest',
+    url: (userid: string) => `https://www.pinterest.com/${userid}`
   },
   {
     title: 'Reddit',
     icon: '/images/planning/reddit.svg',
     page: '/auth/social/reddit',
-    provider: 'reddit'
+    provider: 'reddit',
+    url: (userid: string) => `https://www.facebook.com/${userid}`
   },
   {
     title: 'Google Ads',
     icon: '/images/planning/googleads.svg',
     page: '/auth/social/google',
-    provider: 'google'
+    provider: 'google',
+    url: (userid: string) => `https://www.facebook.com/${userid}`
   }
 ];
 
@@ -82,9 +97,9 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
 }) => {
   const { company, setCompany } = useSeoAnalyzerContext();
   const { isOpen, onOpen: onOpenAdSchedule, onOpenChange } = useDisclosure();
-  const { isOpen: isPinterestAnalyticsModalOpen, onOpen: onOpenPinterestAnalyticsModal, onOpenChange: onOpenPinterestAnalyticsModalChange } = useDisclosure();
+  const { isOpen: isAnalyticsModalOpen, onOpen: onOpenAnalyticsModal, onOpenChange: onOpenChangeAnalyticsModal } = useDisclosure();
   const [selectedAdAccount, setSelectedAdAccount] = useState(null);
-  const [adAccounts, setAdAccounts] = useState([]);
+  const [adAccounts, setAdAccounts] = useState<any[]>([]);
   const [analytics, setAnalytics] = useState([]);
   const [isOAuthFinished, setIsOAuthFinished] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -92,8 +107,14 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
 
   const oauthLogin = () => {
     const selectedProvider: string = tabsList[activeTab].provider;
-    if ( selectedProvider === 'google' || selectedProvider === 'pinterest') {
-      popupCenter(tabsList[activeTab].page, `${ tabsList[activeTab].title } Sign In`, () => {
+    const providers = [
+      'google',
+      'pinterest',
+      'instagram',
+      'facebook'
+    ];
+    if (providers.indexOf(selectedProvider) > -1) {
+      popupCenter(tabsList[activeTab].page, `${tabsList[activeTab].title} Sign In`, () => {
         setIsOAuthFinished(true);
       });
     }
@@ -103,19 +124,22 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
     return !!(session && (session as any)[tabsList[activeTab].provider])
   }, [session, activeTab]);
 
+  const currentSocialTitle: string = useMemo(() => tabsList[activeTab].title.toLowerCase().replaceAll(" ", ""), [activeTab]);
+
   const handleAnalyticsDashboard = async () => {
     if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
       && isCurrentSocialAuthenticated) {
       try {
-        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}`, {
+        const accountsResponse = await axios.post(`/api/planning/${currentSocialTitle}`, {
+          accountId: (session as any)[tabsList[activeTab].provider].accountId,
           accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
           refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
         });
 
-        const data = pinterestAnalytics.data;
-        data.length > 0 ? setSelectedAdAccount(data[0]) : setSelectedAdAccount(null);
-        setAdAccounts(data);
-        onOpenPinterestAnalyticsModal();
+        const accounts: any[] = accountsResponse.data;
+        accounts.length > 0 ? setSelectedAdAccount(accounts[0]) : setSelectedAdAccount(null);
+        setAdAccounts(accounts);
+        onOpenAnalyticsModal();
         messageApi.success("Fetched analysis data");
       } catch (error) {
         messageApi.error("Something went wrong");
@@ -135,9 +159,10 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
 
   useEffect(() => {
     if (isOAuthFinished && session && (session as any)["user"]) {
+      console.log("session: ", session);
       formik.setValues({
         ...formik.values,
-        url: `https://www.pinterest.com/${(session as any)["user"]["name"]}`
+        url: tabsList[activeTab].url((session as any)["user"]["name"])
       });
     }
   }, [isOAuthFinished, session]);
@@ -145,12 +170,12 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   useEffect(() => {
     (async () => {
       if (selectedAdAccount) {
-        const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[activeTab].title.toLowerCase().replaceAll(" ", "")}/getAnalytics?ad_account_id=${(selectedAdAccount as any).id}`, {
+        const analytics = await axios.post(`/api/planning/${currentSocialTitle}/getAnalytics?ad_account_id=${(selectedAdAccount as any).id}`, {
           accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
-          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
+          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken,
+          accountAccessToken: (selectedAdAccount as any)?.access_token || ''
         });
-
-        setAnalytics(pinterestAnalytics.data as []);
+        setAnalytics(analytics.data as []);
       }
     })();
   }, [selectedAdAccount]);
@@ -175,11 +200,11 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
             >
               <Image
                 src={tab.icon}
-                alt={'SEO (off-page)'}
+                alt={tab.title}
                 width={24}
                 height={24}
               />
-              <span className="hidden truncate md:block" title="SEO (off-page)">
+              <span className="hidden truncate md:block">
                 {tab.title}
               </span>
             </Button>
@@ -391,16 +416,25 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} title="Ad Schedule" description="Select the days & times you would like to schedule your ads" />
         </div>
       </div>
+      
+      {(() => {
+        const props = {
+          formik: formik,
+          isOpen: isAnalyticsModalOpen,
+          onOpenChange: onOpenChangeAnalyticsModal,
+          selectedAdAccount: selectedAdAccount,
+          setSelectedAdAccount: setSelectedAdAccount,
+          accounts: adAccounts as [],
+          analyticsData: analytics as []
+        };
 
-      <PinterestAnalyticsModal
-        formik={formik}
-        isOpen={isPinterestAnalyticsModalOpen}
-        onOpenChange={onOpenPinterestAnalyticsModalChange}
-        selectedAdAccount={selectedAdAccount}
-        setSelectedAdAccount={setSelectedAdAccount}
-        accounts={adAccounts as []}
-        analyticsData={analytics as []}
-      />
+        switch (currentSocialTitle) {
+          case "meta":
+            return <MetaAnalyticsModal { ...props } />
+          case "pinterest":
+            return <PinterestAnalyticsModal { ...props } />
+        }
+      })()}
     </>
   );
 };

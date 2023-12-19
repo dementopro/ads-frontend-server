@@ -20,7 +20,7 @@ import {
 } from 'react-icons/bi';
 import { Chip, Tooltip } from '@nextui-org/react';
 import { DatePicker, Input, Spin, message } from 'antd';
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useDisclosure } from '@nextui-org/react';
 import {
@@ -38,10 +38,11 @@ import { useRouter } from 'next/navigation';
 import { DETAIL_LIMIT } from '@/data/constant';
 import { Menu, Transition } from '@headlessui/react';
 
-import LaunchAdModal from "./LaunchAdModal";
-import MediaStepper from './MediaStepper';
-import Select from '@/components/common/Select';
 import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
+import Select from '@/components/common/Select';
+import MediaStepper from './MediaStepper';
+import MetaLaunchAdModal from "./social/meta/LaunchAdModal";
+import PinterestLaunchAdModal from "./social/pinterest/LaunchAdModal";
 
 interface SocialMediaProps {
   type: number;
@@ -69,6 +70,8 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const { isOpen: isLaunchAdModalOpen, onOpen: onLaunchAdModalOpen, onOpenChange: onLaunchAdModalOpenChange } = useDisclosure();
   const [schedules, setSchedules] = useState<any>([]);
   const { data: session, status } = useSession();
+
+  const currentSocialTitle: string = useMemo(() => tabsList[type].title.toLowerCase().replaceAll(" ", ""), [type]);
 
   useEffect(() => {
     if (emailInstruction && emailInstruction.email_options) {
@@ -552,7 +555,21 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
           </div>
         </div>
       </div>
-      <LaunchAdModal isOpen={isLaunchAdModalOpen} onOpenChange={onLaunchAdModalOpenChange} socialMedia={socialMedia[activeMedia]} company={company} />
+      {(() => {
+        const props = {
+          isOpen: isLaunchAdModalOpen,
+          onOpenChange: onLaunchAdModalOpenChange,
+          socialMedia: socialMedia[activeMedia],
+          company: company
+        };
+
+        switch (currentSocialTitle) {
+          case "meta":
+            return <MetaLaunchAdModal { ...props } />
+          case "pinterest":
+            return <PinterestLaunchAdModal { ...props } />
+        }
+      })()}
     </>
   );
 };

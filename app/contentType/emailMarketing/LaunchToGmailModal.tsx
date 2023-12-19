@@ -28,7 +28,7 @@ const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
   messageApi
 }) => {
   const [csvData, setCSVData] = useState([]);
-  const { emailInstruction } = useSeoAnalyzerContext();
+  const { company, emailInstruction } = useSeoAnalyzerContext();
   const csvFileRef = useRef(null);
 
   const handleCSVFileChange = () => {
@@ -55,7 +55,7 @@ const LaunchToGmailModal: FC<LaunchToGmailProps> = ({
         url: "/fapi/sender_email",
         method: 'POST',
         data: {
-          from_email: "delta.beret@gmail.com",
+          from_email: company.email,
           to_emails: csvData,
           subject: selectedEmailTemplate.template_subject_line,
           html_content: selectedEmailTemplate.email_template
