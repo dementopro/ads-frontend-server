@@ -54,7 +54,7 @@ const NewsList = () => {
   const id3 = news.filter((news) => news.id === '3');
 
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[16px] ipad:my-[32px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
         <div className="inline-block rounded-[12px] bg-[#7D55FA] android:px-[28px] android:py-[6px] ipad:px-[32px] ipad:py-[8px]">
           Latest
@@ -95,26 +95,6 @@ const NewsList = () => {
         <div className="w-full flex android:flex-col ipadmini:flex-row justify-start items-start gap-[32px] inline-flex">
           {smallNews.map((news) => (
             <NewsCard news={news} key={news.id} />
-          ))}
-        </div>
-      </div>
-
-      <div className='android:hidden ipad:block'>
-        <div className="w-full flex flex-row justify-start items-start gap-[32px] inline-flex">
-          {id2.map((news, index) => (
-            <div key={index} className='w-1/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
-          ))}
-          {id1.map((news, index) => (
-            <div key={index} className='w-2/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
-          ))}
-          {id3.map((news, index) => (
-            <div key={index} className='w-1/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
           ))}
         </div>
       </div>
