@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-const imghash = require('imghash');
+// const imghash = require('imghash');
 
 import { metaAxios, setMetaAccessToken } from "../index";
 
