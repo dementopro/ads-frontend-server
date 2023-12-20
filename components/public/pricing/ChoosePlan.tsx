@@ -42,7 +42,7 @@ const ChoosePlan = () => {
             <div className='text-[#D0CDD6] text-[12px] font-regular font-open-sans'>
               {plan.priceText}
             </div>
-            <PrimaryButton target="_self" href="/" text="Subscribe Now" />
+            <PrimaryButton target="_self" href="/register" text="Subscribe Now" />
             <div className='flex flex-col pl-[30px] gap-[16px] justify-start items-start'>
               <div className='text-[14.5px] font-medium font-poppins'> Plan Includes: </div>
               {plan.list.slice(0, 5).map((item, index) => (
