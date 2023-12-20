@@ -14,6 +14,8 @@ import { BiInfoCircle } from 'react-icons/bi';
 import StyledComponents from 'styled-components';
 import axios from 'axios';
 
+import LoadingSpin from "@/app/planning/LoadingSpin";
+
 const StyledSelect = StyledComponents(Select)`
   & > label {
     color: white !important;
@@ -57,24 +59,38 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
   company,
   socialMedia
 }) => {
+  const [pages, setPages] = useState<any[]>([]);
   const [adAccounts, setAdAccounts] = useState<any[]>([]);
+  const [adSets, setAdSets] = useState<any[]>([]);
+  const [selectedPage, setSelectedPage] = useState(null);
   const [selectedAdAccount, setSelectedAdAccount] = useState(null);
+  const [selectedAdSet, setSelectedAdSet] = useState(null);
+  const [isLaunchingAd, setIsLaunchingAd] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const { data: session } = useSession();
+
+  const handlePageSelectionChange = (e: any) => {
+    setSelectedPage(e.target.value);
+  };
 
   const handleAdAccountsSelectionChange = (e: any) => {
     setSelectedAdAccount(e.target.value);
   };
 
+  const handleAdSetsSelectionChange = (e: any) => {
+    setSelectedAdSet(e.target.value);
+  };
+
   const handleLaunchAd = async () => {
     try {
-      console.log("selectedAdAccount: ", selectedAdAccount);
+      setIsLaunchingAd(true);
       await axios.post("/api/planning/meta/launchAd", {
-        pageId: (session as any)["facebook"].accountId,
+        pageId: selectedPage,
         accessToken: (session as any)["facebook"].accessToken,
         adAccountId: selectedAdAccount,
+        adSetId: selectedAdSet,
         link: company.website,
-        title: socialMedia.content.title,
+        title: socialMedia.content.image,
         description: socialMedia.content.caption,
         media_image_url: socialMedia.img_url
       });
@@ -82,21 +98,29 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
     } catch (error) {
       console.log("error: ", error);
       messageApi.error("Something went wrong");
-    }
+    } finally {
+      setIsLaunchingAd(false);
+    };
   }
 
   const isValid: boolean = useMemo(() => {
-    return !!selectedAdAccount
-  }, [selectedAdAccount]);
+    return !!selectedPage && !!selectedAdAccount && !!selectedAdSet;
+  }, [selectedPage, selectedAdAccount, selectedAdSet]);
 
   useEffect(() => {
     (async () => {
       if (isOpen) {
-        const accountsResponse = await axios.post(`/api/planning/meta/getAdAccounts`, {
+        const body = {
           accountId: (session as any)["facebook"].accountId,
-          accessToken: (session as any)["facebook"].accessToken
-        });
+          accessToken: (session as any)["facebook"].accessToken,
+        };
 
+        const pagesResponse = await axios.post("/api/planning/meta/getPages", body);
+        const pages: any[] = pagesResponse.data;
+        pages.length > 0 ? setSelectedPage(pages[0].id) : setSelectedPage(null);
+        setPages(pages);
+
+        const accountsResponse = await axios.post("/api/planning/meta/getAdAccounts", body);
         const accounts: any[] = accountsResponse.data;
         accounts.length > 0 ? setSelectedAdAccount(accounts[0].id) : setSelectedAdAccount(null);
         setAdAccounts(accounts);
@@ -104,9 +128,25 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
     })();
   }, [isOpen]);
 
+  useEffect(() => {
+    (async () => {
+      if (selectedAdAccount) {
+        const adSetsResponse = await axios.post("/api/planning/meta/getAdSets", {
+          adAccountId: selectedAdAccount,
+          accessToken: (session as any)["facebook"].accessToken
+        });
+
+        const adSets: any[] = adSetsResponse.data;
+        adSets.length > 0 ? setSelectedAdSet(adSets[0].id) : setSelectedAdSet(null);
+        setAdSets(adSets);
+      } else setSelectedAdSet(null);
+    })();
+  }, [selectedAdAccount]);
+
   return (
     <>
       {contextHolder}
+      {isLaunchingAd && <LoadingSpin />}
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -125,11 +165,30 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
               <ModalBody>
                 <div>
                   <StyledSelect
+                    label="Pages"
+                    color='default'
+                    placeholder="Select a page"
+                    labelPlacement="outside"
+                    className="max-w-lg text-white"
+                    disableSelectorIconRotation
+                    selectedKeys={selectedPage ? [selectedPage] : []}
+                    onChange={handlePageSelectionChange}
+                    selectorIcon={<SelectorIcon />}
+                  >
+                    {pages.map((page) => (
+                      <SelectItem key={(page as any)['id']} value={page}>
+                        {(page as any)['name']}
+                      </SelectItem>
+                    ))}
+                  </StyledSelect>
+                </div>
+                <div className="mt-4">
+                  <StyledSelect
                     label="Ad Accounts"
                     color='default'
                     placeholder="Select an ad account"
                     labelPlacement="outside"
-                    className="max-w-xs text-white"
+                    className="max-w-lg text-white"
                     disableSelectorIconRotation
                     selectedKeys={selectedAdAccount ? [selectedAdAccount] : []}
                     onChange={handleAdAccountsSelectionChange}
@@ -138,6 +197,26 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
                     {adAccounts.map((adAccount) => (
                       <SelectItem key={(adAccount as any)['id']} value={adAccount}>
                         {(adAccount as any)['name']}
+                      </SelectItem>
+                    ))}
+                  </StyledSelect>
+                </div>
+                
+                <div className="mt-4">
+                  <StyledSelect
+                    label="Ad Sets"
+                    color='default'
+                    placeholder="Select an ad set"
+                    labelPlacement="outside"
+                    className="max-w-lg text-white mt-3"
+                    disableSelectorIconRotation
+                    selectedKeys={selectedAdSet ? [selectedAdSet] : []}
+                    onChange={handleAdSetsSelectionChange}
+                    selectorIcon={<SelectorIcon />}
+                  >
+                    {adSets.map((adSet) => (
+                      <SelectItem key={(adSet as any)['id']} value={adSet}>
+                        {(adSet as any)['name']}
                       </SelectItem>
                     ))}
                   </StyledSelect>
@@ -151,8 +230,8 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
                   Close
                 </button>
                 <button
-                  className={`flex items-center justify-center flex-1 h-[44px] rounded-lg text-white ${isValid ? 'bg-primary-purple' : '!bg-background-300'} hover:brightness-110 border-background-500`}
-                  disabled={!isValid}
+                  className={`flex items-center justify-center flex-1 h-[44px] rounded-lg text-white ${isValid || !isLaunchingAd ? 'bg-primary-purple' : '!bg-background-300'} hover:brightness-110 border-background-500`}
+                  disabled={!isValid || isLaunchingAd}
                   onClick={handleLaunchAd}
                 >
                   Launch

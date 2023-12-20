@@ -2,6 +2,7 @@ import { Dropdown, MenuProps, message } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import chevronDown from '@iconify/icons-mdi/chevron-down'
+import { signOut } from 'next-auth/react'
 import { Icon } from '@iconify/react'
 
 // Import necessary dependencies and components
@@ -60,6 +61,7 @@ const DropDown = () => {
       messageApi.loading('Logout...');
       onLogout();
       setAccount(null);
+      signOut();
       router.push('/login');
     } catch (error) {
       console.log('error', error)

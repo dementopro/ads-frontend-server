@@ -33,7 +33,7 @@ export const authOptions: AuthOptions = {
     }),
     InstagramProvider({
       clientId: process.env.INSTAGRAM_CLIENT_ID as string,
-      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string
+      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
