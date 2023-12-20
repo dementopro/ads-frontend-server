@@ -7,13 +7,13 @@ export const footerLinks = [
         href: '/requestDemo',
       },
       {
+        label: 'Pricing',
+        href: '/public/pricing',
+      },
+      {
         label: 'Features',
         href: '/features',
       },
-      // {
-      //   label: 'Pricing',
-      //   href: '/public/pricing',
-      // },
       // {
       //   label: 'Watch Demo',
       //   href: '/',

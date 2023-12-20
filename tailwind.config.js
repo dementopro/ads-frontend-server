@@ -19,6 +19,8 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern': 'radial-gradient(at left top, #3D296D, #000000 70%)',
+        'light-purple-gradient': 'linear-gradient(to top, #4B2880, #4C3496)',
+        'brand-color': 'linear-gradient(to right, #6859FF, #AF41FF)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
