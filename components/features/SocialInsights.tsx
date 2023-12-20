@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import PrimaryButton from '../common/PrimaryButton';
 
-const Step4 = () => {
+const SocialInsights = () => {
   return (
     <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black android:flex-col ipad:flex-row justify-center items-center gap-[32px] inline-flex">
       <Image
@@ -17,11 +17,10 @@ const Step4 = () => {
             Social Insights
           </div>
           <div className="w-fulll text-left text-white font-poppins font-semibold android:text-[32px] ipad:text-[42px] android:leading-[34px] ipad:leading-[56px]">
-            Step 4: <br />
-            Gain Insights & Optimize
+            Gain Insights & Max ROI
           </div>
           <div className="w-full text-left font-open-sans text-[#D0CDD6] font-regular android:text-[14px] ipad:text-[16px]">
-            Implement AI-driven analytics to monitor and analyze your ad campaigns in real-time so you can make data-driven decisions and continuously optimize your strategies.
+            Use our AI-driven analytics to monitor and analyze your ad campaigns in real-time so you can make data-driven decisions and continuously optimize your strategies.
           </div>
         </div>
       </div>
@@ -36,4 +35,4 @@ const Step4 = () => {
   );
 };
 
-export default Step4;
+export default SocialInsights;

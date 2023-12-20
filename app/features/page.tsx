@@ -4,7 +4,7 @@ import React from 'react'
 import FeaturesPageHome from '@/components/features/FeaturesPageHome'
 import Planning from '@/components/features/Planning'
 import Types from '@/components/features/Types'
-import Step4 from '@/components/features/Step4'
+import SocialInsights from '@/components/features/SocialInsights'
 import AboveFooter from '@/components/common/AboveFooter'
 import Optimization from '@/components/features/Optimization'
 
@@ -28,7 +28,7 @@ const FeaturesPage = () => {
       <Planning />
       <Types />
       <Optimization />
-      <Step4 />
+      <SocialInsights />
       <AboveFooter />
     </DefaultLayout>
   )
