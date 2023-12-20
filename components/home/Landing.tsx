@@ -9,9 +9,9 @@ import Image from 'next/image';
 const Landing = () => {
   return (
     <div className="ipad:px-[60px] desktop:px-[100px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
-      <div className="max-w-[1240px] ipad:w-full m-auto h-full android:mt-[16px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px] grid grid-cols-12">
-        <div className="android:col-span-12 ipadmini:col-span-12 ipad:col-span-12 desktop:col-span-7 flex-col android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start android:items-center ipadmini:items-center ipad:items-start desktop:items-start android:gap-[12px] ipadmini:gap-[14px] ipad:gap-[16px] desktop:gap-[16px] inline-flex">
-          <div className="flex items-center w-full gap-2">
+      <div className="max-w-[1240px] ipad:w-full m-auto h-full android:mt-[128px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px] grid grid-cols-12">
+        <div className="android:col-span-12 ipad:col-span-7 flex-col android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start android:items-center ipad:items-start android:gap-[12px] ipadmini:gap-[14px] ipad:gap-[16px] desktop:gap-[16px] inline-flex">
+          <div className="flex android:justify-center ipad:justify-start items-center w-full gap-2">
             <img
               src="/images/home/sparkles.svg"
               className="android:w-[21px] ipadmini:w-[26px] ipad:w-[30px] desktop:w-[36px] android:h-[21px] ipadmini:h-[26px] ipad:h-[26px] desktop:h-[26px]"
@@ -40,7 +40,7 @@ const Landing = () => {
               <p>Creative ad content using generative AI</p>
             </div>
           </div>
-          <div className="mt-[16px] w-fit text-white text-base android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left bg-background-300 rounded-lg py-3 px-4">
+          <div className="mt-[16px] w-fit text-white text-base android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left bg-background-300 rounded-lg android:py-1 android:px-2 ipad:py-3 ipad:px-4">
             Decrease Your Advertising Costs & Maximize ROI With AdsGency AI
           </div>
 
@@ -51,9 +51,9 @@ const Landing = () => {
           />
         </div>
 
-        <div className="android:col-span-12 ipadmini:col-span-12 ipad:col-span-12 desktop:col-span-5 font-poppins android:gap-[16px] ipad:gap-[10px] h-[700px] overflow-hidden">
+        <div className="android:w-[300px] ipadmini:w-[380px] android:m-auto android:col-span-12 ipad:col-span-5 font-poppins android:gap-[16px] ipad:gap-[10px] android:h-[475px] ipad:h-screen overflow-hidden">
           <div className="grid h-full grid-cols-12 gap-0">
-            <div className="!col-span-6 marquee h-full" style={{ animationDuration: '70s' }}>
+            <div className="!col-span-6 justify-end marquee h-full" style={{ animationDuration: '70s' }}>
               <img src="/images/home/landing-images/1.png" alt="" />
               <img src="/images/home/landing-images/2.png" alt="" />
               <img src="/images/home/landing-images/3.png" alt="" />
