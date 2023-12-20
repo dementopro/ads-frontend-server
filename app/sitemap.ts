@@ -39,6 +39,9 @@ const links = [
     url: '/privacy',
   },
   {
+    url: '/terms',
+  },
+  {
     url: '/newsPress',
   }
 ]

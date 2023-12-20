@@ -56,10 +56,10 @@ export const footerLinks = [
         label: 'Careers',
         href: '/careers',
       },
-      // {
-      //   label: 'Partners',
-      //   href: '/',
-      // }
+      {
+        label: 'Terms of Service',
+        href: '/terms',
+      }
     ],
   },
 ];
