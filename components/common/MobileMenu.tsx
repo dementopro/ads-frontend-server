@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { headerLinks } from '@/data/headerLinks'
+import { headerLinks } from '@/data/links/headerLinks'
 import Dropdown from '@/components/common/Dropdown'
 
 interface MobileMenuProps {

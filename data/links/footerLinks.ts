@@ -53,13 +53,17 @@ export const footerLinks = [
         href: '/privacy',
       },
       {
+        label: 'Terms of Service',
+        href: '/terms',
+      },
+      {
+        label: 'Report Misuse',
+        href: '/reportMisuse',
+      },
+      {
         label: 'Careers',
         href: '/careers',
       },
-      {
-        label: 'Terms of Service',
-        href: '/terms',
-      }
     ],
   },
 ];

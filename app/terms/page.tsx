@@ -9,7 +9,7 @@ export const metadata = {
   title: 'Terms of Service - AdsGency AI',
 }
 
-const PrivacyPolicyPage = () => {
+const TermsPage = () => {
   return (
     <DefaultLayout>
       <ReactGATag
@@ -75,4 +75,4 @@ const PrivacyPolicyPage = () => {
   )
 }
 
-export default PrivacyPolicyPage
+export default TermsPage;

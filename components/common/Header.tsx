@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Banner from '@/components/announcement/Banner'
 import PrimaryButton from '@/components/common/PrimaryButton'
 import { useState } from 'react';
-import { headerLinks } from '@/data/headerLinks'
+import { headerLinks } from '@/data/links/headerLinks'
 import Dropdown from '@/components/common/Dropdown';
 import MobileMenu from '@/components/common/MobileMenu';
 import { FiMenu, FiX } from 'react-icons/fi';

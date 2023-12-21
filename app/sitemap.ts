@@ -43,7 +43,10 @@ const links = [
   },
   {
     url: '/newsPress',
-  }
+  },
+  {
+    url: '/reportMisuse',
+  },
 ]
 
 const blogs = Blogs.map(blog => {
