@@ -1,5 +1,76 @@
 export const comparison = [
   {
+    title: 'Core Functionality',
+    list: [
+      {
+        title: 'Content creation',
+        premium: true,
+        business: true,
+        startup: true,
+      },
+      {
+        title: 'Image generation',
+        premium: true,
+        business: false,
+        startup: false,
+      },
+      {
+        title: 'Social media launching',
+        premium: true,
+        business: false,
+        startup: false,
+      },
+      {
+        title: 'Email template',
+        premium: true,
+        business: true,
+        startup: false,
+      },
+      {
+        title: 'Customize design',
+        premium: true,
+        business: true,
+        startup: false,
+      },
+      {
+        title: 'Bulk email launching',
+        premium: true,
+        business: true,
+        startup: false,
+      },
+      {
+        title: 'Competitor analysis',
+        premium: true,
+        business: true,
+        startup: false,
+      },
+      {
+        title: 'SEO audit',
+        premium: true,
+        business: true,
+        startup: true,
+      },
+      {
+        title: 'Website analysis',
+        premium: true,
+        business: true,
+        startup: true,
+      },
+      {
+        title: 'Backlinks building',
+        premium: true,
+        business: true,
+        startup: true,
+      },
+      {
+        title: 'Keywords searching',
+        premium: true,
+        business: true,
+        startup: true,
+      },
+    ]
+  },
+  {
     title: 'Advanced Integrations',
     list: [
       {
@@ -89,77 +160,6 @@ export const comparison = [
         premium: true,
         business: true,
         startup: false,
-      },
-    ]
-  },
-  {
-    title: 'Core Functionality',
-    list: [
-      {
-        title: 'Content creation',
-        premium: true,
-        business: true,
-        startup: true,
-      },
-      {
-        title: 'Image generation',
-        premium: true,
-        business: false,
-        startup: false,
-      },
-      {
-        title: 'Social media launching',
-        premium: true,
-        business: false,
-        startup: false,
-      },
-      {
-        title: 'Email template',
-        premium: true,
-        business: true,
-        startup: false,
-      },
-      {
-        title: 'Customize design',
-        premium: true,
-        business: true,
-        startup: false,
-      },
-      {
-        title: 'Bulk email launching',
-        premium: true,
-        business: true,
-        startup: false,
-      },
-      {
-        title: 'Competitor analysis',
-        premium: true,
-        business: true,
-        startup: false,
-      },
-      {
-        title: 'SEO audit',
-        premium: true,
-        business: true,
-        startup: true,
-      },
-      {
-        title: 'Website analysis',
-        premium: true,
-        business: true,
-        startup: true,
-      },
-      {
-        title: 'Backlinks building',
-        premium: true,
-        business: true,
-        startup: true,
-      },
-      {
-        title: 'Keywords searching',
-        premium: true,
-        business: true,
-        startup: true,
       },
     ]
   },
