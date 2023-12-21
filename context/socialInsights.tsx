@@ -1,7 +1,7 @@
 // Import necessary modules and types
 import { DataMetric, DateRange, Platform, PlatformType } from "@/types/socialInsights";
 import { createContext, useEffect, useState } from "react";
-import twitterIcon from '@iconify/icons-logos/twitter';
+import twitterX from '@iconify/icons-line-md/twitter-x';
 import facebookIcon from '@iconify/icons-logos/facebook';
 import linkedinIcon from '@iconify/icons-logos/linkedin-icon';
 import tiktokIcon from '@iconify/icons-logos/tiktok-icon';
@@ -75,7 +75,7 @@ export const SocialInsightsProvider = ({ children }: { children: React.ReactNode
     },
     {
       name: 'twitter',
-      icon: twitterIcon,
+      icon: twitterX,
     },
     {
       name: 'instagram',

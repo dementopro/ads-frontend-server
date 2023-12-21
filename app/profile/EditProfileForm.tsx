@@ -7,8 +7,9 @@ import { Icon } from '@iconify/react';
 import { SUCCESS_CODE } from '@/data/constant';
 import axios from '@/lib/axios';
 
-const EditProfileForm = ({ username, onUpdated }: {
+const EditProfileForm = ({ username, avatar, onUpdated }: {
   username?: string,
+  avatar?: string,
   onUpdated: () => void
 }) => {
 
@@ -23,7 +24,7 @@ const EditProfileForm = ({ username, onUpdated }: {
       const response = await axios({
         url: '/fapi/update_user_profile_api',
         method: 'POST',
-        data: JSON.stringify({ username }),
+        data: JSON.stringify({ username, avatar }),
         headers: {
           'Content-Type': 'application/json'
         }

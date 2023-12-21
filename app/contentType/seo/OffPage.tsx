@@ -163,7 +163,14 @@ const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
                             Based on your URL { page.url }, remove meta keywords tag from HTML
                           </p>
                           <button className="inline-flex px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple" onClick={() => {
-                            const data = new Blob([answers[i]], { type: 'text/plain' });
+                            let text: string = '';
+                            if (answers[i].length > 0) {
+                              answers[i].map((answer: any, index: number) => {
+                                text += `Step ${index + 1}: ${answer[`step${index + 1}`] || answer.step_name}\n`;
+                                text += `Detail: ${answer.detail}\n\n`;
+                              });
+                            }
+                            const data = new Blob([text], { type: 'text/plain' });
                             const url = window.URL.createObjectURL(data);
                             const tempLink = document.createElement('a');
                             tempLink.href = url;

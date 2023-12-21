@@ -48,6 +48,7 @@ const ProfileCard = () => {
     <>
       <EditProfile
         username={userProfile?.username}
+        avatar={userProfile?.avatar}
         show={showEditProfile}
         setShow={setShowEditProfile}
         onUpdated={getUserProfile}
@@ -58,7 +59,7 @@ const ProfileCard = () => {
             {/* avatar */}
             <div className='flex-shrink-0 rounded-full w-[100px] h-[100px] relative overflow-hidden border border-primary-purple'>
               <Image
-                src='/images/avatar.svg'
+                src={userProfile?.avatar ? process.env.NEXT_PUBLIC_API_URL + userProfile?.avatar : '/images/avatar.svg'}
                 fill
                 alt='avatar'
               />

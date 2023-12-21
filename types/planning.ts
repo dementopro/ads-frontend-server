@@ -29,7 +29,7 @@ export interface CompanyDetailForm {
   competitors: string;
   business_objectives: string[];
   email: string;
-  social_media_type?: string;
+  socialMediaType?: string;
   url: string;
   marketing_template: string;
   schedule: any;

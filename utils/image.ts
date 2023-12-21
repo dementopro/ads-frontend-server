@@ -7,7 +7,6 @@ export async function getImageAsBase64(url: string) {
     });
 
     const buffer = Buffer.from(response.data, 'binary').toString('base64');
-    // const base64Image = `data:${response.headers['content-type']};base64,${buffer}`;
         
     return buffer;
   } catch (error) {

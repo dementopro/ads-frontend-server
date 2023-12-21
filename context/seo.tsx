@@ -107,6 +107,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     email: '',
     url: '',
     marketing_template: '',
+    socialMediaType: '',
     schedule: {},
     assets: []
   })

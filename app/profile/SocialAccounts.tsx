@@ -1,41 +1,27 @@
-import { SocialInsightsContext } from '@/context/socialInsights'
-import { SUCCESS_CODE } from '@/data/constant'
-import { capitalize } from '@/lib/format'
+import React, { useCallback, useContext } from 'react'
+import { useSession } from 'next-auth/react';
 import { Icon } from '@iconify/react'
 import { Modal, message } from 'antd'
-import React, { useContext } from 'react'
-import axios from '@/lib/axios'
+
+import { SocialInsightsContext } from '@/context/socialInsights'
+import { useAccountContext } from '@/context/account'
+import { SUCCESS_CODE } from '@/data/constant'
+import { capitalize } from '@/lib/format'
 
 const SocialAccounts = () => {
 
-  const { platforms, checkConnectStatus, updateAllConnectStatus } = useContext(SocialInsightsContext)
+  const { platforms, checkConnectStatus, setIsTikTokConnected, updateAllConnectStatus } = useContext(SocialInsightsContext)
+  const { socialAccounts, disconnectSocialAccount } = useAccountContext()
   const [modal, modalContextHolder] = Modal.useModal()
   const [messageApi, contextHolder] = message.useMessage()
 
-  const enablePlatforms = ['tiktok']
+  const enablePlatforms: string[] = ['facebook', 'pinterest']
 
-  async function disconnectTikTok() {
-    try {
-      const response = await axios({
-        url: '/fapi/tiktok_logout',
-        method: 'GET'
-      })
-      if (response.status === 200) {
-        const data: IResponse = response.data
-        if (data.status === SUCCESS_CODE) {
-          messageApi.success('Successfully disconnected')
-        } else {
-          messageApi.error(data.message || 'Something went wrong')
-        }
-      }
-    } catch (error) {
-      console.log('error', error)
-    } finally {
-      updateAllConnectStatus()
-    }
-  }
+  const isSocialConnected = useCallback((provider: string) => {
+    return socialAccounts && socialAccounts[provider];
+  }, [SocialAccounts]);
 
-  function ask() {
+  function ask(platformName: string) {
     modal.confirm({
       title: <p className="text-white">Are you sure you want to disconnect?</p>,
       content: '',
@@ -51,7 +37,7 @@ const SocialAccounts = () => {
       maskClosable: true,
       centered: true,
       async onOk() {
-        await disconnectTikTok()
+        disconnectSocialAccount(platformName);
       }
     })
   }
@@ -66,7 +52,7 @@ const SocialAccounts = () => {
           {
             platforms.map(platform => (
               <div key={platform.name} className={`p-4 flex items-center justify-between w-full rounded-lg hover:bg-[#35363A]`}>
-                <div className={`flex items-center gap-7 ${!enablePlatforms.includes(platform.name) || !checkConnectStatus(platform.name) ? 'filter grayscale' : ''}`}>
+                <div className={`flex items-center gap-7 ${!enablePlatforms.includes(platform.name) || !isSocialConnected(platform.name) ? 'filter grayscale' : ''}`}>
                   <Icon width={22} height={22} icon={platform.icon} />
                   <span className='text-base'>{capitalize(platform.name)}</span>
                 </div>
@@ -75,12 +61,12 @@ const SocialAccounts = () => {
                   <div className='flex items-center gap-3'>
                     <div
                       className='px-4 py-1 rounded-lg text-primary-purple'>
-                      {checkConnectStatus(platform.name) ? 'Connected' : 'Not connected'}
+                      {isSocialConnected(platform.name) ? 'Connected' : 'Not connected'}
                     </div>
                     {
-                      checkConnectStatus(platform.name) &&
+                      isSocialConnected(platform.name) &&
                       <button
-                        onClick={ask}
+                        onClick={() => ask(platform.name)}
                         className='hover:opacity-80 px-4 py-1 rounded-lg bg-primary-purple text-white'>
                         Disconnect
                       </button>

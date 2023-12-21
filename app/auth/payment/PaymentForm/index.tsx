@@ -153,7 +153,7 @@ const PaymentForm = () => {
               CVC
             </label>
             <input
-              type="text"
+              type="password"
               placeholder='CVC'
               id="cvc"
               value={formikForPayment.values.cvc}

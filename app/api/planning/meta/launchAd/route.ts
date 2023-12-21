@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import _ from 'lodash';
 
 import { getImageAsBase64 } from "@/utils/image";
 import { metaAxios, setMetaAccessToken } from "../index";
@@ -41,8 +42,9 @@ export async function POST(req: NextRequest) {
       status: 200
     });
   } catch (error) {
-    console.log("error: ", (error as any).response);
-    return NextResponse.json(error, {
+    console.log((error as any).response.data.error);
+    //console.log("error: ", Error(_.get(error, 'response.data.error', (error as any).message)));
+    return NextResponse.json(Error(_.get(error, 'response.data.error.error_user_msg', (error as any).message)), {
       status: 400
     });
   }

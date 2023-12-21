@@ -22,6 +22,9 @@ const StyledSelect = StyledComponents(Select)`
   },
   & svg {
     stroke: black !important;
+  },
+  & [data-slot='value'] {
+    color: black !important;
   }
 `;
 
@@ -95,9 +98,9 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
         media_image_url: socialMedia.img_url
       });
       messageApi.success("Launched Ad on Pinterest Success")
-    } catch (error) {
+    } catch (error: any) {
       console.log("error: ", error);
-      messageApi.error("Something went wrong");
+      messageApi.error(error.message);
     } finally {
       setIsLaunchingAd(false);
     };

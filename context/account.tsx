@@ -12,11 +12,27 @@ import axios from '@/lib/axios';
 export interface AccountInterface {
   email: string;
   username?: string;
+  avatar?: string;
+}
+
+export interface SocialAccountInterface {
+  name: string;
+  email?: string;
+  image?: string;
+  accessToken: string;
+  accountId: string;
+  expiresAt: Date;
+  refreshToken?: string;
+}
+
+export interface SocialAccountsInterface {
+  [key: string]: SocialAccountInterface
 }
 
 // Create a context for managing user account-related data
 export const AccountContext = createContext<{
   account: AccountInterface | null,
+  socialAccounts: SocialAccountsInterface,
   isLoading: boolean,
   totalCredits: number;
   isSubscribed: boolean;
@@ -24,6 +40,8 @@ export const AccountContext = createContext<{
   nextPage: string;
   creditInfo:boolean;
   setAccount: (account: AccountInterface | null) => void,
+  setSocialAccounts: (provider: string, account: SocialAccountInterface) => void,
+  disconnectSocialAccount: (provider: string) => void,
   setIsLoading: (isLoading: boolean) => void,
   setNextPage:(nextPage:string) => void;
   setSelectedPlan:(selectedPlan:number) => void;
@@ -41,6 +59,7 @@ export const AccountContext = createContext<{
     email: '',
     username: ''
   },
+  socialAccounts: {},
   isLoading: false,
   isLogin: false,
   planId: 0,
@@ -53,6 +72,8 @@ export const AccountContext = createContext<{
   nextPage: "",
   selectedPlan: -1,
   setAccount: () => { },
+  setSocialAccounts: () => { },
+  disconnectSocialAccount: () => { },
   setIsLoading: () => { },
   setCredits: () => { },
   setTrialDays: () => { },
@@ -73,6 +94,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
 
   // Define state variables to manage user account data
   const [account, setAccount] = useState<AccountInterface | null>(null);
+  const [socialAccounts, setSocialAccountsState] = useState<SocialAccountsInterface>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [planId, setPlanId] = useState(0)
   const [credits, setCredits] = useState(0)
@@ -128,6 +150,22 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
     }
   }
 
+  const setSocialAccounts = (provider: string, account: SocialAccountInterface) => {
+    const newSocialAccounts: SocialAccountsInterface = {
+      ...socialAccounts,
+      [provider]: account
+    };
+
+    setSocialAccountsState(newSocialAccounts);
+  }
+
+  const disconnectSocialAccount = (provider: string) => {
+    const newSocialAccounts: SocialAccountsInterface = { ...socialAccounts };
+    delete newSocialAccounts[provider];
+
+    setSocialAccountsState(newSocialAccounts);
+  }
+
   useEffect(() => {
     setIsLoading (true)
     const isLogin = isUserLogin();
@@ -145,6 +183,7 @@ export const AccountProvider = ({ children }: { children: React.ReactNode }) => 
   return (
     <AccountContext.Provider value={{
       account, setAccount,
+      socialAccounts, setSocialAccounts, disconnectSocialAccount,
       isLoading, setIsLoading,
       credits, setCredits,
       trialDays, setTrialDays,

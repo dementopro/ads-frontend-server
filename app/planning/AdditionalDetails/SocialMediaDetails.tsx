@@ -1,8 +1,9 @@
 'use client';
 
 import React, { ComponentType, FC, useEffect, useMemo, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { BiCalendar, BiFileBlank } from 'react-icons/bi';
 import { Chip, tabs, useDisclosure } from '@nextui-org/react';
 import { message } from 'antd';
@@ -11,6 +12,7 @@ import axios from 'axios';
 
 // import PinterestAnalyticsModal from "@/app/planning/Analytics/PinterestAnalyticsModal";
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
+import { type SocialAccountInterface, type SocialAccountsInterface, useAccountContext } from '@/context/account';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import { DETAIL_LIMIT } from '@/data/constant';
 import Button from '../TabButton';
@@ -30,16 +32,20 @@ interface SocialMediaDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
 
-export const tabsList: {
+interface SocialTab {
   title: string;
+  uri: string;
   icon: string;
   page: string;
   provider: string;
   url: (userid: string) => string;
   analyticsModalComponent?: ComponentType;
-}[] = [
+}
+
+export const tabsList: SocialTab[] = [
   {
     title: 'Instagram',
+    uri: 'instagram',
     icon: '/images/planning/instagram.svg',
     page: '/auth/social/instagram',
     provider: 'instagram',
@@ -47,27 +53,31 @@ export const tabsList: {
   },
   {
     title: 'Meta',
+    uri: 'meta',
     icon: '/images/planning/meta.svg',
     page: '/auth/social/facebook',
     provider: 'facebook',
-    url: (userid: string) => `https://www.facebook.com/${userid}`
+    url: (userid: string) => `https://www.facebook.com/profile.php?id=${userid}`
   },
   {
     title: 'Linkedin',
+    uri: 'linkedin',
     icon: '/images/planning/linkedin.svg',
     page: '/auth/social/linkedin',
     provider: 'linkedin',
-    url: (userid: string) => `https://www.facebook.com/${userid}`
+    url: (userid: string) => `https://www.linkedin.com/${userid}`
   },
   {
     title: 'Youtube',
+    uri: 'youtube',
     icon: '/images/planning/youtube.svg',
     page: '/auth/social/youtube',
     provider: 'youtube',
-    url: (userid: string) => `https://www.facebook.com/${userid}`
+    url: (userid: string) => `https://www.youtube.com/${userid}`
   },
   {
     title: 'Pinterest',
+    uri: 'pinterest',
     icon: '/images/planning/pinterest.svg',
     page: '/auth/social/pinterest',
     provider: 'pinterest',
@@ -75,17 +85,19 @@ export const tabsList: {
   },
   {
     title: 'Reddit',
+    uri: 'reddit',
     icon: '/images/planning/reddit.svg',
     page: '/auth/social/reddit',
     provider: 'reddit',
-    url: (userid: string) => `https://www.facebook.com/${userid}`
+    url: (userid: string) => `https://www.reddit.com/${userid}`
   },
   {
     title: 'Google Ads',
+    uri: 'googleads',
     icon: '/images/planning/googleads.svg',
     page: '/auth/social/google',
     provider: 'google',
-    url: (userid: string) => `https://www.facebook.com/${userid}`
+    url: (userid: string) => `https://ads.google.com/${userid}`
   }
 ];
 
@@ -96,6 +108,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   setActiveTab,
 }) => {
   const { company, setCompany } = useSeoAnalyzerContext();
+  const { socialAccounts, setSocialAccounts } = useAccountContext();
   const { isOpen, onOpen: onOpenAdSchedule, onOpenChange } = useDisclosure();
   const { isOpen: isAnalyticsModalOpen, onOpen: onOpenAnalyticsModal, onOpenChange: onOpenChangeAnalyticsModal } = useDisclosure();
   const [selectedAdAccount, setSelectedAdAccount] = useState(null);
@@ -103,37 +116,50 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   const [analytics, setAnalytics] = useState([]);
   const [isOAuthFinished, setIsOAuthFinished] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
+  
+  const currentProvider: string = useMemo(() => {
+    setAdAccounts([]);
+    setAnalytics([]);
+    return tabsList[activeTab].provider as string
+  }, [tabsList, activeTab]);
 
-  const oauthLogin = () => {
-    const selectedProvider: string = tabsList[activeTab].provider;
-    const providers = [
-      'google',
-      'pinterest',
-      'instagram',
-      'facebook'
-    ];
-    if (providers.indexOf(selectedProvider) > -1) {
-      popupCenter(tabsList[activeTab].page, `${tabsList[activeTab].title} Sign In`, () => {
-        setIsOAuthFinished(true);
-      });
+  const isCurrentSocialAuthenticated: boolean = useMemo(() => {
+    const account: SocialAccountInterface = socialAccounts[currentProvider];
+    return !!account;
+  }, [socialAccounts, currentProvider]);
+
+  const oauthLogin = async () => {
+    try {
+      await signOut({redirect: false});
+      const selectedProvider: string = currentProvider;
+      const providers = [
+        'google',
+        'pinterest',
+        'instagram',
+        'facebook'
+      ];
+      if (providers.indexOf(selectedProvider) > -1) {
+        // void signIn(selectedProvider, {});
+        popupCenter(tabsList[activeTab].page, `${tabsList[activeTab].title} Sign In`, () => {
+          setIsOAuthFinished(true);
+        });
+      }
+    } catch (error: any) {
+      messageApi.error(error.message || "Something went wrong");
     }
   };
 
-  const isCurrentSocialAuthenticated: boolean = useMemo(() => {
-    return !!(session && (session as any)[tabsList[activeTab].provider])
-  }, [session, activeTab]);
-
-  const currentSocialTitle: string = useMemo(() => tabsList[activeTab].title.toLowerCase().replaceAll(" ", ""), [activeTab]);
 
   const handleAnalyticsDashboard = async () => {
-    if (status === "authenticated" && (session as any)[tabsList[activeTab].provider] && formik.values.websiteURL
-      && isCurrentSocialAuthenticated) {
+    if (status === "authenticated" && socialAccounts[currentProvider] && formik.values.websiteURL && isCurrentSocialAuthenticated) {
       try {
-        const accountsResponse = await axios.post(`/api/planning/${currentSocialTitle}`, {
-          accountId: (session as any)[tabsList[activeTab].provider].accountId,
-          accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
-          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken
+        console.log("uri: ", tabsList[activeTab].uri);
+        const accountsResponse = await axios.post(`/api/planning/${tabsList[activeTab].uri}`, {
+          accountId: socialAccounts[currentProvider].accountId,
+          accessToken: socialAccounts[currentProvider].accessToken,
+          refreshToken: socialAccounts[currentProvider].refreshToken
         });
 
         const accounts: any[] = accountsResponse.data;
@@ -153,16 +179,50 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
     }
   }, []);
 
-  useEffect(() => {
-    setIsOAuthFinished(!!(session && (session as any)[tabsList[activeTab].provider]));
-  }, [activeTab]);
+  // useEffect(() => {
+  //   if (searchParams) {
+  //     const socialPlatform = searchParams.get('social');
+  //     if (socialPlatform) {
+  //       const index = tabsList.findIndex((tab: SocialTab) => tab.uri === socialPlatform);
+  //       if (index > -1) {
+  //         setActiveTab(index);
+  //       } else setActiveTab(0);
+  //     } else setActiveTab(0);
+  //   }
+  // }, [searchParams]);
 
   useEffect(() => {
-    if (isOAuthFinished && session && (session as any)["user"]) {
-      console.log("session: ", session);
+    setIsOAuthFinished(!!socialAccounts[currentProvider]);
+    let formikValues = {
+      ...formik.values,
+      socialMediaType: tabsList[activeTab].title.toLowerCase()
+    }
+
+    if (socialAccounts[currentProvider]) {
+      formikValues.url = tabsList[activeTab].url(socialAccounts[currentProvider].accountId);
+    } else {
+      formikValues.url = ''
+    }
+
+    formik.setValues(formikValues);
+  }, [currentProvider]);
+
+  useEffect(() => {
+    if (isOAuthFinished && session && (session as any)["user"] && (session as any)[currentProvider]) {
+      const sessionData: any = session;
       formik.setValues({
         ...formik.values,
-        url: tabsList[activeTab].url((session as any)["user"]["name"])
+        url: sessionData[currentProvider] ? tabsList[activeTab].url(sessionData[currentProvider].accountId) : ''
+      });
+
+      setSocialAccounts(currentProvider, {
+        name: sessionData.user.name,
+        email: sessionData.user.email || '',
+        image: sessionData.user.image || '',
+        accessToken: sessionData[currentProvider].accessToken,
+        accountId: sessionData[currentProvider].accountId,
+        expiresAt: new Date(sessionData[currentProvider].expiresAt),
+        refreshToken: sessionData[currentProvider].refreshToken
       });
     }
   }, [isOAuthFinished, session]);
@@ -170,9 +230,9 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   useEffect(() => {
     (async () => {
       if (selectedAdAccount) {
-        const analytics = await axios.post(`/api/planning/${currentSocialTitle}/getAnalytics?ad_account_id=${(selectedAdAccount as any).id}`, {
-          accessToken: (session as any)[tabsList[activeTab].provider].accessToken,
-          refreshToken: (session as any)[tabsList[activeTab].provider].refreshToken,
+        const analytics = await axios.post(`/api/planning/${tabsList[activeTab].uri}/getAnalytics?ad_account_id=${(selectedAdAccount as any).id}`, {
+          accessToken: socialAccounts[currentProvider].accessToken,
+          refreshToken: socialAccounts[currentProvider].refreshToken,
           accountAccessToken: (selectedAdAccount as any)?.access_token || ''
         });
         setAnalytics(analytics.data as []);
@@ -191,10 +251,6 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               isActivated={activeTab == i}
               onClick={() => {
                 setActiveTab(i);
-                formik.setValues({
-                  ...formik.values,
-                  socialMediaType: tab.title.toLowerCase()
-                });
               }}
               className='w-full md:w-auto'
             >
@@ -309,6 +365,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
                     email: formik.values.email,
                     marketing_template: formik.values.marketing_template,
                     schedule: formik.values.schedule,
+                    socialMediaType: formik.values.socialMediaType,
                     url: formik.values.url,
                     assets
                   });
@@ -394,6 +451,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
                 website: formik.values.websiteURL,
                 email: formik.values.email,
                 marketing_template: formik.values.marketing_template,
+                socialMediaType: formik.values.socialMediaType,
                 schedule: formik.values.schedule,
                 url: formik.values.url
               });
@@ -428,7 +486,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           analyticsData: analytics as []
         };
 
-        switch (currentSocialTitle) {
+        switch (tabsList[activeTab].uri) {
           case "meta":
             return <MetaAnalyticsModal { ...props } />
           case "pinterest":

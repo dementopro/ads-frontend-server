@@ -103,6 +103,15 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
               {formik.errors.description}
             </label>
           )}
+          <label
+            className={`text-xs text-right mt-2 ${
+              formik.errors.description && formik.touched.description
+                ? 'text-rose-600'
+                : 'text-primary-gray'
+            }`}
+          >
+            {formik.values.description.length} / {DETAIL_LIMIT}
+          </label>
         </div>
       </div>
     </>

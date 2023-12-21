@@ -118,16 +118,16 @@ export function CompanyValidate(values: CompanyForm) {
     if (!values?.url)
       return 'URL is required';
 
-      switch (values?.socialMediaType) {
-        case 'pinterest':
-          return !/^(http(s)?:\/\/)?((.*).)?pinterest.com\/(.*)?$/i.test(values.url) ? 'Invalid Pinterest URL' : '';
+    switch (values?.socialMediaType) {
+      case 'pinterest':
+        return !/^(http(s)?:\/\/)?((.*).)?pinterest.com\/(.*)?$/i.test(values.url) ? 'Invalid Pinterest URL' : '';
 
-        case 'meta':
-          return !/^(http(s)?:\/\/)?((.*).)?facebook.com\/(.*)?$/i.test(values.url) ? 'Invalid Facebook URL' : '';
+      case 'meta':
+        return !/^(http(s)?:\/\/)?((.*).)?facebook.com\/(.*)?$/i.test(values.url) ? 'Invalid Facebook URL' : '';
 
-        default:
-          return 'Unsupported social media';
-      }
+      default:
+        return 'Unsupported social media';
+    }
   })();
 
   return errors;

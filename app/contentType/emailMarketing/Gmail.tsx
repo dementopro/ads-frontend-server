@@ -140,7 +140,8 @@ const GmailMarketing = () => {
               </div>
               <div className="relative w-full mt-5">
                 <div className="w-full p-4 text-white rounded-lg bg-background-50">
-                  <div className="flex items-center justify-between">
+                  <div className='flex items-start justify-between gap-2'>
+                  <div className="flex-1 flex items-center justify-between">
                     <h6 className="flex items-center gap-2">
                       <b className='whitespace-nowrap'>Subject line:</b>&nbsp;
                       {edits.includes(i) == true ? (
@@ -153,7 +154,7 @@ const GmailMarketing = () => {
                             overflowY: 'auto', // Add vertical scroll when content exceeds the height
                             scrollbarColor: 'inherit',
                           }}
-                          value={optionEdits[i].template_subject_line}
+                          value={`${ optionEdits[i].template_subject_line }`}
                           onChange={(e) => {
                             const value = e.currentTarget.value;
                             setOptionEdits((prev) => prev.map((val, index) => {
@@ -172,6 +173,47 @@ const GmailMarketing = () => {
                         <p>{option.template_subject_line}</p>
                       )}
                     </h6>
+                  </div>
+                  <div className='flex items-center gap-4 top-4 right-6'>
+                    <button
+                      className="flex items-center gap-1 text-primary-purple"
+                      onClick={() => {
+                        try {
+                          navigator.clipboard.writeText(option.email_template);
+                          messageApi.success('Copied successfully!')
+                        } catch (err) {
+                          messageApi.error('Something went wrong!')
+                          console.warn(err);
+                        }
+                      }}
+                    >
+                      <BiCopy className="w-5 h-5" />
+                      Copy
+                    </button>
+                    <button
+                      className="flex items-center gap-1 text-primary-purple"
+                      onClick={() => {
+                        if (edits.includes(i)) {
+                          setEdits((prev) => prev.filter((val) => val != i));
+                          let newEmailInstruction: EmailInstruction = {
+                            ...emailInstruction,
+                            email_options: optionEdits
+                          };
+
+                          setEmailInstruction(newEmailInstruction);
+                        } else {
+                          setEdits((prev) => [...prev, i]);
+                        }
+                      }}
+                    >
+                      {edits.includes(i) ? (
+                        <BiSave className="w-5 h-5" />
+                      ) : (
+                        <BiEdit className="w-5 h-5" />
+                      )}
+                      {edits.includes(i) ? 'Save' : 'Edit'}
+                    </button>
+                  </div>
                   </div>
                   <div className="mt-4">
                     <h6 className="font-bold">Email Body</h6>
@@ -207,46 +249,6 @@ const GmailMarketing = () => {
                       )}
                     </div>
                   </div>
-                </div>
-                <div className='absolute flex items-center gap-4 top-4 right-6'>
-                  <button
-                    className="flex items-center gap-1 text-primary-purple"
-                    onClick={() => {
-                      try {
-                        navigator.clipboard.writeText(option.email_template);
-                        messageApi.success('Copied successfully!')
-                      } catch (err) {
-                        messageApi.error('Something went wrong!')
-                        console.warn(err);
-                      }
-                    }}
-                  >
-                    <BiCopy className="w-5 h-5" />
-                    Copy
-                  </button>
-                  <button
-                    className="flex items-center gap-1 text-primary-purple"
-                    onClick={() => {
-                      if (edits.includes(i)) {
-                        setEdits((prev) => prev.filter((val) => val != i));
-                        let newEmailInstruction: EmailInstruction = {
-                          ...emailInstruction,
-                          email_options: optionEdits
-                        };
-
-                        setEmailInstruction(newEmailInstruction);
-                      } else {
-                        setEdits((prev) => [...prev, i]);
-                      }
-                    }}
-                  >
-                    {edits.includes(i) ? (
-                      <BiSave className="w-5 h-5" />
-                    ) : (
-                      <BiEdit className="w-5 h-5" />
-                    )}
-                    {edits.includes(i) ? 'Save' : 'Edit'}
-                  </button>
                 </div>
               </div>
             </div>

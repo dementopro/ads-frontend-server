@@ -40,6 +40,7 @@ export interface IUserProfileResp extends IResponse {
 export interface UserProfile {
   email: string
   username: string
+  avatar?: string
   timestamp: string
   credit: number
   subscription_plan_id?: number

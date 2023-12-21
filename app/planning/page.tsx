@@ -127,6 +127,7 @@ const PlanningPage = () => {
         marketing_template: company.marketing_template,
         schedule: company.schedule,
         sellingDescription: company.product_description,
+        socialMediaType: company.socialMediaType,
         targetAudience: company.target_audice,
         websiteURL: company.website,
         url: company.url
