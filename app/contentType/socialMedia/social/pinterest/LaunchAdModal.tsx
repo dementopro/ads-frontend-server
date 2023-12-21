@@ -11,8 +11,23 @@ import { useSession } from 'next-auth/react';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { message } from 'antd';
 import { BiInfoCircle } from 'react-icons/bi';
+import StyledComponents from 'styled-components';
 import axios from 'axios';
 
+const StyledSelect = StyledComponents(Select)`
+  & > label {
+    color: white !important;
+  },
+  & svg {
+    stroke: black !important;
+  },
+  & [data-slot='value'] {
+    color: black !important;
+  }
+  & button {
+    color: black !important;
+  }
+`;
 interface LaunchAdModalProps {
   isOpen: boolean;
   onOpenChange: () => void;
@@ -128,7 +143,7 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
               </ModalHeader>
               <ModalBody>
                 <div>
-                  <Select
+                  <StyledSelect
                     label="Ad Accounts"
                     color='default'
                     placeholder="Select an ad account"
@@ -144,8 +159,8 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
                         {(adAccount as any)['name']}
                       </SelectItem>
                     ))}
-                  </Select>
-                  <Select
+                  </StyledSelect>
+                  <StyledSelect
                     label="Ad Groups"
                     color='default'
                     placeholder="Select an ad group"
@@ -161,7 +176,7 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
                         {(adGroup as any)['name']}
                       </SelectItem>
                     ))}
-                  </Select>
+                  </StyledSelect>
                 </div>
               </ModalBody>
               <ModalFooter className="flex w-full gap-6">

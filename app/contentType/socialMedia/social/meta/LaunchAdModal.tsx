@@ -26,6 +26,9 @@ const StyledSelect = StyledComponents(Select)`
   & [data-slot='value'] {
     color: black !important;
   }
+  & button {
+    color: black !important;
+  }
 `;
 
 interface LaunchAdModalProps {
