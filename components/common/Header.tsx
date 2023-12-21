@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Banner from '@/components/announcement/Banner'
+import Banner from '@/components/Announcement/Banner'
 import PrimaryButton from '@/components/common/PrimaryButton'
 import { useState } from 'react';
 import { headerLinks } from '@/data/links/headerLinks'

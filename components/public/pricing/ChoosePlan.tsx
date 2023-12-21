@@ -18,13 +18,13 @@ const ChoosePlan = () => {
   };
   return (
     <div className="desktop:w-[1240px] ipad:w-full m-auto h-full android:my-[32px] ipad:my-[48px] android:px-[32px] ipad:px-[0px] justify-center items-center flex flex-col gap-[32px]">
-      <div className="android:px-[14px] ipad:px-[18px] android:py-[3px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
+      <div className="android:px-[14px] ipad:px-[18px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
         Choose a Plan
       </div>
       <div className='w-full flex flex-row gap-[60px] items-start justify-center'>
         {plan.map((plan, index) => (
-          <div className={`w-full py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
-            <div key={index} className={`w-full flex flex-col gap-[16px] py-[16px] px-[20px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
+          <div key={index} className={`w-full py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
+            <div className={`w-full flex flex-col gap-[16px] py-[16px] px-[20px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
               <div className='flex flex-col gap-[5px]'>
                 <div className='text-white text-[42px] font-bold font-poppins'>
                   {plan.plan}
