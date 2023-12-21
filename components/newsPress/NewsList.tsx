@@ -46,12 +46,9 @@ const NewsCard = ({ news }: NewsCardProps) => {
 };
 
 const NewsList = () => {
-  const largeNews = news.filter((news) => news.size === 'large');
-  const smallNews = news.filter((news) => news.size === 'small');
-
-  const id2 = news.filter((news) => news.id === '2');
-  const id1 = news.filter((news) => news.id === '1');
-  const id3 = news.filter((news) => news.id === '3');
+  const id1 = news.find((blog) => blog.id === '1');
+  const id2 = news.find((blog) => blog.id === '2');
+  const id3 = news.find((blog) => blog.id === '3');
 
   return (
     <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
@@ -60,42 +57,27 @@ const NewsList = () => {
           Latest
         </div>
       </div>
-      <div className='android:block ipad:hidden'>
+      <div className='android:flex ipad:hidden flex-col gap-[32px]'>
         <div className="w-full flex flex-col justify-start items-start gap-[32px] inline-flex">
-          {largeNews.map((news) => (
-            <NewsCard news={news} key={news.id} />
-          ))}
+          {id1 && <NewsCard news={id1} key={id1.id} />}
         </div>
-
         <div className="w-full flex android:flex-col ipadmini:flex-row justify-start items-start gap-[32px] inline-flex">
-          {smallNews.map((news) => (
-            <NewsCard news={news} key={news.id} />
-          ))}
+          {id2 && <NewsCard news={id2} key={id2.id} />}
+          {id3 && <NewsCard news={id3} key={id3.id} />}
         </div>
       </div>
 
       <div className='android:hidden ipad:block'>
         <div className="w-full flex flex-row justify-start items-start gap-[32px] inline-flex">
-          {id2.map((news, index) => (
-            <div key={index} className='w-1/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
-          ))}
-          {id1.map((news, index) => (
-            <div key={index} className='w-2/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
-          ))}
-          {id3.map((news, index) => (
-            <div key={index} className='w-1/4'>
-              <NewsCard news={news} key={news.id} />
-            </div>
-          ))}
-        </div>
-        <div className="w-full flex android:flex-col ipadmini:flex-row justify-start items-start gap-[32px] inline-flex">
-          {smallNews.map((news) => (
-            <NewsCard news={news} key={news.id} />
-          ))}
+          {id2 && <div key={id2.id} className='w-1/4'>
+            <NewsCard news={id2} key={id2.id} />
+          </div>}
+          {id1 && <div key={id1.id} className='w-2/4'>
+            <NewsCard news={id1} key={id1.id} />
+          </div>}
+          {id3 && <div key={id3.id} className='w-1/4'>
+            <NewsCard news={id3} key={id3.id} />
+          </div>}
         </div>
       </div>
     </div>
