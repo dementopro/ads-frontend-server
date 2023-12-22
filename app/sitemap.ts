@@ -47,6 +47,9 @@ const links = [
   {
     url: '/reportMisuse',
   },
+  {
+    url: '/styleGuide',
+  },
 ]
 
 const blogs = Blogs.map(blog => {

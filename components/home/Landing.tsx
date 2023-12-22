@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const Landing = () => {
   return (
-    <div className="ipad:px-[60px] desktop:px-[100px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
+    <div className="ipad:px-[60px] desktop:px-[100px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
       <div className="max-w-[1240px] ipad:w-full m-auto h-full android:mt-[128px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px] grid grid-cols-12">
         <div className="android:col-span-12 ipad:col-span-7 flex-col android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start android:items-center ipad:items-start android:gap-[12px] ipadmini:gap-[14px] ipad:gap-[16px] desktop:gap-[16px] inline-flex">
           <div className="flex android:justify-center ipad:justify-start items-center w-full gap-2">

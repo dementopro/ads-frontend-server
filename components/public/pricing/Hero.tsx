@@ -9,7 +9,7 @@ import PrimaryButton from '@/components/common/PrimaryButton'
 const Hero = () => {
   return (
     <div className="desktop:w-[1240px] ipad:w-full m-auto h-full android:my-[32px] ipad:my-[48px] android:px-[32px] ipad:px-[0px] justify-center items-center flex flex-col gap-[16px]">
-      <div className="android:w-full desktop:w-[1000px] text-white text-center android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-poppins">
+      <div className="android:w-full desktop:w-[1000px] text-white text-center android:text-[20px] ipad:text-[42px] font-semibold font-poppins ipad:tracking-[-3px]">
         Supercharge Your Marketing Strategies Today!<span className='text-primary-purple'> Sign Up Now </span>
       </div>
       <div className="flex items-center gap-2">

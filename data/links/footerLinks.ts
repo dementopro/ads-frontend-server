@@ -14,31 +14,19 @@ export const footerLinks = [
         label: 'Features',
         href: '/features',
       },
-      // {
-      //   label: 'Watch Demo',
-      //   href: '/',
-      // }
     ],
   },
   {
     title: 'Resources',
     links: [
-      // {
-      //   label: 'All Resources',
-      //   href: '/',
-      // },
       {
         label: 'Blog',
         href: '/blog',
       },
-      // {
-      //   label: 'FAQs',
-      //   href: '/',
-      // },
-      // {
-      //   label: 'Help Center',
-      //   href: '/',
-      // }
+      {
+        label: 'Style Guide',
+        href: '/styleGuide',
+      },
     ],
   },
   {

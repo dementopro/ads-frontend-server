@@ -1,7 +1,6 @@
 import ReactGATag from '@/components/ReactGATag'
 import DefaultLayout from '@/layout/default'
 import React from 'react'
-import { service } from '@/data/service'
 import Image from 'next/image'
 import AboveFooter from '@/components/common/AboveFooter'
 
@@ -20,7 +19,7 @@ const TermsPage = () => {
           title: metadata.title
         }}
       />
-      <div className="relative ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
+      <div className="relative ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
         <Image
           width={100}
           height={100}
@@ -31,12 +30,12 @@ const TermsPage = () => {
         <Image
           width={100}
           height={100}
-          className='android:hidden desktop:block absolute right-[50px] top-[350px] rotate-[180deg] h-auto z-10'
+          className='android:hidden desktop:block absolute right-0 top-[350px] rotate-[180deg] h-auto z-10'
           title='Home'
           src={'/images/bg-elements/headline-circles.svg'} alt='logo'
         />
-        <div className="ipad:w-[900px] flex flex-col gap-[32px] justify-center items-center relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:my-[48px] z-20">
-          <div className="w-full text-white font-poppins font-medium text-center android:text-[34px] ipad:text-[43px] android:leading-[34px] desktop:leading-[43px]">
+        <div className="ipad:w-[800px] flex flex-col gap-[32px] justify-center items-center relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:my-[48px] z-20">
+          <div className="w-full text-white font-poppins font-semibold text-center android:text-[34px] ipad:text-[43px] android:leading-[34px] ipad:leading-[43px] ipad:tracking-[-3px]">
             Report a vulnerability or misuse of <span className="bg-brand-color text-transparent bg-clip-text">AdsGency AI</span>
           </div>
           <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-center android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">

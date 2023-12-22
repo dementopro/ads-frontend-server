@@ -19,7 +19,7 @@ const TermsPage = () => {
           title: metadata.title
         }}
       />
-      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-pattern bg-cover">
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
         <div className="desktop:w-[1240px] relative android:m-[32px] ipad:m-[60px] desktop:mx-auto">
           <Image
             width={100}
@@ -28,7 +28,7 @@ const TermsPage = () => {
             title='Home'
             src={'/images/bg-elements/headline-circles.svg'} alt='logo'
           />
-          <div className="z-20 relative text-white font-poppins font-bold text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px] tracking-[-3px] android:leading-[43px] ipadmini:leading-[64px]">
+          <div className="z-20 relative text-white font-poppins font-semibold text-left android:text-[34px] ipadmini:text-[44px] ipad:text-[54px] desktop:text-[64px] android:tracking-[-3px] ipad:tracking-[-3px] android:leading-[43px] ipadmini:leading-[64px]">
             AdsGency AI Terms of Service
           </div>
           <div className="z-20 ipad:mt-[20px] relative text-[#D0D0D0] font-open-sans font-regular text-left android:text-[12px] ipadmini:text-[16px] ipad:text-[20px] desktop:text-[24px]">
