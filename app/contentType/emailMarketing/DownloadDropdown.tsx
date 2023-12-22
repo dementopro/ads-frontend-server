@@ -18,6 +18,47 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
   const { company, emailInstruction } = useSeoAnalyzerContext();
   const [messageApi, contextHolder] = message.useMessage();
 
+  const handleDownloadSelectedOption = () => {
+    if (selects.length < 1) {
+      messageApi.error('You have to select at least 1 email template.');
+      return;
+    }
+
+    let data: string = '';
+    selects.map((idx, i) => {
+      const option = emailInstruction.email_options[idx];
+      data += `Option ${i + 1} - ${option.option_name} email`;
+      data += '\n';
+      data += `Subject Line: ${option.template_subject_line}\nEmail Body:\n${option.email_template}\n${idx === selects[selects.length - 1] ? '' : '\n\n'}`;
+    });
+    const downloadData = new Blob([data], {
+      type: 'text/plain',
+    });
+    const url = window.URL.createObjectURL(downloadData);
+    const tempLink = document.createElement('a');
+    tempLink.href = url;
+    tempLink.setAttribute('download', `${company.name} marketing email.txt`);
+    tempLink.click();
+  };
+
+  const handleDownloadAllEmail = () => {
+    let data: string = company.marketing_template as string;
+    data += '\n\n';
+    emailInstruction.email_options.map((option, i) => {
+      data += `Option ${i + 1} - ${option.option_name} email`;
+      data += '\n';
+      data += `Subject Line: ${option.template_subject_line}\nEmail Body:\n${option.email_template}\n${i === emailInstruction.email_options.length - 1 ? '' : '\n\n'}`;
+    });
+    const downloadData = new Blob([data], {
+      type: 'text/plain',
+    });
+    const url = window.URL.createObjectURL(downloadData);
+    const tempLink = document.createElement('a');
+    tempLink.href = url;
+    tempLink.setAttribute('download', `${company.name} marketing email.txt`);
+    tempLink.click();
+  }
+
   const handleLaunchToGmail = async () => {
     if (selects.length !== 1) {
       messageApi.error('You have to select only 1 email template.');
@@ -66,26 +107,7 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                         className={`${
                           active && 'bg-violet-500'
                         } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm text-white`}
-                        onClick={() => {
-                          let data: string = company.marketing_template as string;
-                          data += '<br>';
-                          selects.map((idx, i) => {
-                            const option = emailInstruction.email_options[idx];
-                            data += `${option.option_name} email - Option ${
-                              i + 1
-                            }`;
-                            data += '<br>';
-                            data += `**Subject Line**: ${option.template_subject_line}<br>**Email Body**:<br/>${option.email_template}`;
-                          });
-                          const downloadData = new Blob([data], {
-                            type: 'text/plain',
-                          });
-                          const url = window.URL.createObjectURL(downloadData);
-                          const tempLink = document.createElement('a');
-                          tempLink.href = url;
-                          tempLink.setAttribute('download', 'file.md');
-                          tempLink.click();
-                        }}
+                        onClick={handleDownloadSelectedOption}
                       >
                         Download Selected
                         <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />
@@ -98,25 +120,7 @@ const DownloadDropdown: FC<DownloadDropdownProps> = ({ selects }) => {
                         className={`${
                           active && 'bg-violet-500'
                         } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm text-white`}
-                        onClick={() => {
-                          let data: string = company.marketing_template as string;
-                          data += '<br>';
-                          emailInstruction.email_options.map((option, i) => {
-                            data += `${option.option_name} email - Option ${
-                              i + 1
-                            }`;
-                            data += '<br>';
-                            data += `**Subject Line**: ${option.template_subject_line}<br>**Email Body**:<br/>${option.email_template}`;
-                          });
-                          const downloadData = new Blob([data], {
-                            type: 'text/plain',
-                          });
-                          const url = window.URL.createObjectURL(downloadData);
-                          const tempLink = document.createElement('a');
-                          tempLink.href = url;
-                          tempLink.setAttribute('download', 'file.md');
-                          tempLink.click();
-                        }}
+                        onClick={handleDownloadAllEmail}
                       >
                         Download All
                         <BiDownload className="w-5 h-5 mr-2" aria-hidden="true" />

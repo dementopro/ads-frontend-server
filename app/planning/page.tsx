@@ -1,4 +1,8 @@
 'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { Spin, message } from 'antd';
+import Image from 'next/image';
 
 import {
   CompanyForm,
@@ -9,8 +13,6 @@ import {
 import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
 import { FormikHelpers, useFormik } from 'formik';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { Spin, message } from 'antd';
 import AddCompanyDetails from './AddCompanyDetails';
 import AdminLayout from '@/layout/admin';
 import BackButton from './Recommendations/BackButton';
@@ -19,14 +21,12 @@ import { CompanyDetailForm } from '@/types/planning';
 import { CompanyValidate } from '@/lib/validate';
 import GmailRecommendation from './Recommendations/Gmail';
 import HorizontalStepper from './HorizontalStepper';
-import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import OffPage from './Recommendations/OffPage';
 import OnPage from './Recommendations/OnPage';
 import ReactGATag from '@/components/ReactGATag';
 import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
 import axios from '@/lib/axios';
-import { useRouter, useSearchParams } from 'next/navigation';
 import Button from './TabButton';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import BugReportModal from '@/components/contactUs/BugReportModal';
@@ -34,6 +34,7 @@ import { useDisclosure } from '@nextui-org/react';
 import SocialMediaDetails from './AdditionalDetails/SocialMediaDetails';
 import SocialMediaRecommendation from './Recommendations/SocialMedia';
 import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
+import InfoGraphicsDetails from './AdditionalDetails/InfographicsDetails';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -251,7 +252,7 @@ const PlanningPage = () => {
               />
             </div>
           ) : (formData.content_type.toLowerCase() === 'email marketing' ?
-            <>
+            (<>
               <EmailMarketingDetails
                 activeTab={activeSeoType}
                 setActiveTab={setActiveSeoType}
@@ -279,9 +280,9 @@ const PlanningPage = () => {
                 formik={formik}
                 formData={formData}
               />
-            </>
-            :
-            <>
+            </>)
+            : (formData.content_type.toLowerCase() === 'social media' ?
+            (<>
               <SocialMediaDetails
                 activeTab={activeSeoType}
                 setActiveTab={setActiveSeoType}
@@ -305,8 +306,35 @@ const PlanningPage = () => {
                 formik={formik}
                 formData={formData}
               />
-            </>
-          ))}
+            </>)
+            : (
+            <>
+              <InfoGraphicsDetails
+                formData={formData}
+                formik={formik}
+                setFormData={setFormData}
+              />
+              <BusinessObjectives
+                title="7. Choose your business objectives"
+                options={[
+                  'Product Features',
+                  'Brand Awareness',
+                  'Educate Customers',
+                  'Engagement',
+                  'Event Promotion',
+                  'Visualize Data'
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
+            </>)
+          )))}
         {activeButtonIndex == 2 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <>

@@ -4,7 +4,6 @@ import { SessionProvider } from 'next-auth/react';
 
 import { AccountProvider } from "@/context/account"
 import { SeoAnalyzerProvider } from "@/context/seo";
-import { useEffect } from "react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const WithProviders = ({ children , session}: { children: React.ReactNode, session: Session | null }) => {

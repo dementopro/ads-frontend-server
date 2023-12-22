@@ -42,7 +42,7 @@ import {
 } from '@/types/planning';
 import { FormikHelpers, useFormik } from 'formik';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spin, message } from 'antd';
 import AddCompany from './AddCompany';
 import AddInfoButton from './AddInfoButton';
@@ -55,7 +55,6 @@ import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
 import axios from '@/lib/axios';
-import { useSearchParams } from 'next/navigation';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import BugReportModal from '@/components/contactUs/BugReportModal';
 import { useDisclosure } from '@nextui-org/react';
@@ -88,13 +87,8 @@ async function getHistory(id?: number) {
 
 const HomePage = () => {
   const { company } = useSeoAnalyzerContext();
-  const [messageApi, contextHolder] = message.useMessage();
-  const [prompt, setPrompt] = useState('');
+  const [_messageApi, contextHolder] = message.useMessage();
   const [isGenerating, setIsGenerating] = useState(false);
-  const [plan, setPlan] = useState<IPlan | null>(null);
-  const [planList, setPlanList] = useState<IPlanningObj[] | null>(null);
-  const [planId, setPlanId] = useState<number | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
   const [showNotEnoughCredits, setShowNotEnoughCredits] = useState(false);
   const [formData, setFormData] = useState<CompanyDetailForm>({
     name: '',
