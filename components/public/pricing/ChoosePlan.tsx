@@ -65,17 +65,7 @@ const ChoosePlan = () => {
               </div>
               <button
                 onClick={() => toggleExpansion(index)}
-                className='flex flex-row gap-[10px] text-[13px] font-open-sans font-regular text-white items-center items-start'
-              >
-                {expandedPlans[index] ? <HiOutlineMinusCircle /> : <HiOutlinePlusCircle />}
-                <div> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
-              </button>
-            </div>
-                ))}
-              </div>
-              <button
-                onClick={() => toggleExpansion(index)}
-                className='flex flex-row gap-[10px] text-[13px] font-open-sans font-regular text-white items-center items-start'
+                className='flex flex-row gap-[10px] text-[13px] font-open-sans font-regular text-white items-start'
               >
                 {expandedPlans[index] ? <HiOutlineMinusCircle /> : <HiOutlinePlusCircle />}
                 <div> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
