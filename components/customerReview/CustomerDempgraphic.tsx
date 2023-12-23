@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const CustomerDemographic = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-col gap-[32px] items-center justify-center'>
         <div className="w-full text-white font-poppins font-semibold text-center android:text-[34px] ipad:text-[43px] android:leading-[34px] ipad:leading-[43px]">
           Customer Demographic - <span className="bg-brand-color text-transparent bg-clip-text">World</span>

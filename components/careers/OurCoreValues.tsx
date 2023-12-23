@@ -5,7 +5,7 @@ import Image from 'next/image'
 const OurCoreValues = () => {
 
     return (
-        <div className="android:w-full desktop:w-[1240px] desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+        <div className="android:w-full desktop:w-[1240px] desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
             <div className="w-full flex-col relative justify-center items-start gap-[50px] inline-flex">
                 <Image
                     width={100}

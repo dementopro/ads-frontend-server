@@ -6,7 +6,7 @@ import { FiCheck, FiX } from 'react-icons/fi';
 
 const SimplifyAds = () => {
     return (
-        <div className='android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex'>
+        <div className='android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex'>
             <div className='w-full text-center text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans'>
                 Simplify your Ads Management
             </div>

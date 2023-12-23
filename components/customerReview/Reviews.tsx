@@ -9,7 +9,7 @@ interface IReviewsProps { }
 
 const Reviews: React.FunctionComponent<IReviewsProps> = (props) => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-col gap-[32px] items-center justify-center'>
         <div className="w-full text-center text-white android:text-[34px] desktop:text-[43px] font-semibold font-poppins">
           What people say about Us

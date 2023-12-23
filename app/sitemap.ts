@@ -53,6 +53,9 @@ const links = [
   {
     url: '/customerReview',
   },
+  {
+    url: '/ethics',
+  },
 ]
 
 const blogs = Blogs.map(blog => {

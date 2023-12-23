@@ -12,7 +12,7 @@ import PrimaryButton from '@/components/common/PrimaryButton'
 const AboveFooter = () => {
 
     return (
-        <div className="w-full android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex overflow-hidden">
+        <div className="w-full android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-10 inline-flex overflow-hidden">
             <div className="android:w-[328px] ipadmini:w-[710px] ipad:w-[862px] desktop:w-[1036px] h-[214px] relative bg-[#3A3A3A] bg-opacity-20 rounded-3xl shadow">
                 <img className="android:hidden ipadmini:block w-full h-auto left-0 top-0 absolute object-cover rounded z-neg-1" src="/images/home/above-footer-vector.svg" />
                 <img className="android:block ipadmini:hidden hidden w-full h-auto left-0 top-0 absolute object-cover rounded z-neg-1" src="/images/home/above-footer-vector-android.svg" />

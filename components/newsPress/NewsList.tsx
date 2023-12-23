@@ -51,7 +51,7 @@ const NewsList = () => {
   const id3 = news.find((blog) => blog.id === '3');
 
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
         <div className="inline-block rounded-[12px] bg-[#7D55FA] android:px-[28px] android:py-[6px] ipad:px-[32px] ipad:py-[8px]">
           Latest

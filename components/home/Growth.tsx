@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 const Growth = () => {
   return (
-    <div className='w-full android:my-[32px] ipad:my-[60px] bg-black'>
+    <div className='w-full android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black'>
       <div className="w-full flex-col justify-center items-center android:gap-[30px] ipadmini:gap-[40px] ipad:gap-[50px] desktop:gap-[60px] inline-flex">
         <div className="w-fit text-center android:text-[20px] ipadmini:text-[20px] ipad:text-[20px] desktop:text-[24px] font-normal font-poppins leading-normal bg-clip-text text-transparent" style={{ backgroundImage: "radial-gradient(70.71% 70.71% at 50% 50%, #FFF 30%, rgba(255, 255, 255, 0.50) 84.77%)" }}>
           <p className='text-transparent'>

@@ -4,7 +4,7 @@ import { pricingFaq } from '@/data/pricing/pricingFaq';
 
 const PricingFaq = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full text-left text-[#EF5DA8] text-[42px] font-bold font-open-sans">
         FAQs
       </div>

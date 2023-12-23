@@ -16,7 +16,7 @@ const Comparison = () => {
   };
 
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-row items-center text-center bg-[#1B1C21] text-[20px] font-poppins font-medium border-1 border-[#27282F] gap-[24px] px-[60px] py-[12px] rounded-t-[8px]'>
         <div className='w-3/6'></div>
         <div className='w-1/6'> Premium </div>

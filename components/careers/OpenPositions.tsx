@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const OpenPositions = () => {
     return (
-        <div className="relative android:w-full desktop:w-[1240px] desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black flex-col justify-center items-center android:gap-[50px] ipadmini:gap-[100px] inline-flex">
+        <div className="relative android:w-full desktop:w-[1240px] desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] bg-black flex-col justify-center items-center android:gap-[50px] ipadmini:gap-[100px] inline-flex">
             <Image
                 width={100}
                 height={100}

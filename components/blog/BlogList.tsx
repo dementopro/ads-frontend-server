@@ -63,7 +63,7 @@ const BlogList = () => {
   const rowLayoutBlogs = Blogs.filter((blog) => blog.layout === 'row');
   const colLayoutBlogs = Blogs.filter((blog) => blog.layout === 'col');
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full text-[#D0D0D0] font-open-sans font-regular text-left android:text-[18px] ipad:text-[20px]">
         Featured
       </div>

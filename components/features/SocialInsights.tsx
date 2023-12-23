@@ -3,7 +3,7 @@ import PrimaryButton from '../common/PrimaryButton';
 
 const SocialInsights = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black android:flex-col ipad:flex-row justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black android:flex-col ipad:flex-row justify-center items-center gap-[32px] inline-flex">
       <Image
         width={696}
         height={529}

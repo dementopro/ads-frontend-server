@@ -7,7 +7,7 @@ import Marquee from "react-fast-marquee";
 
 const Supporters = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-col gap-[32px] items-center justify-center'>
         <div className="w-fit text-center text-[24px] font-regular font-poppins bg-clip-text text-transparent" style={{ backgroundImage: "radial-gradient(70.71% 70.71% at 50% 50%, #FFF 30%, rgba(255, 255, 255, 0.50) 84.77%)" }}>
           <p className='text-transparent'>

@@ -7,7 +7,7 @@ import Button from './Button';
 
 const StyleGuide = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[60px] bg-black">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-col gap-[32px] items-start justify-start'>
         <div className='w-full flex android:flex-col ipadmini:flex-row gap-[16px] items-center justify-start'>
           <div className='andoir:w-full ipadmini:w-1/3 font-poppins font-semibold android:text-[34px] ipad:text-[43px] text-white'>

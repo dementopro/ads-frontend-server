@@ -36,7 +36,7 @@ const Expand: React.FC<ExpandProps> = ({ question, answer }) => {
 
 const BlogFaq = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] ipad:my-[60px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
+    <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:px-[32px] ipad:px-[60px] desktop:px-[0px] android:my-[40px] ipadmini:my-[50px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="w-full text-left text-white android:text-[20px] ipadmini:text-[20px] ipad:text-[34px] desktop:text-[42px] font-bold font-open-sans">
         FAQ&apos;s?
       </div>

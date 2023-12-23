@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactGATag from '@/components/ReactGATag';
 import DefaultLayout from '@/layout/default';
-import CustomerReviewIntro from '@/components/customerReview/CustomerReviewIntro';
-import CustomerDemographic from '@/components/customerReview/CustomerDempgraphic';
-import Reviews from '@/components/customerReview/Reviews';
-import Supporters from '@/components/customerReview/Supporters';
-import Commitment from '@/components/customerReview/Commitment';
+import EthicsIntro from '@/components/ethics/EthicsIntro';
+import OurPrinciple from '@/components/ethics/OurPrinciple';
+import Ethics from '@/components/ethics/Ethics';
+import EthicalConcern from '@/components/ethics/EthicalConcern';
 import AboveFooter from '@/components/common/AboveFooter';
 
 export const metadata = {
-  title: 'Customer Review - AdsGency AI',
+  title: 'Ethics - AdsGency AI',
 };
 
-const CustomerReviewPage = () => {
+const EthicsPage = () => {
   return (
     <DefaultLayout>
       <ReactGATag
@@ -23,15 +22,14 @@ const CustomerReviewPage = () => {
         }}
       />
       <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
-        <CustomerReviewIntro />
+        <EthicsIntro />
       </div>
-      <CustomerDemographic />
-      <Reviews />
-      <Supporters />
-      <Commitment />
+      <OurPrinciple />
+      <Ethics />
+      <EthicalConcern />
       <AboveFooter />
     </DefaultLayout>
   );
 };
 
-export default CustomerReviewPage;
+export default EthicsPage;
