@@ -1,4 +1,4 @@
-export const userTestimonials = [
+export const customerReviews = [
   {
     name: 'David Saadioui',
     designation: 'Founder @ PRKD',
@@ -20,7 +20,7 @@ export const userTestimonials = [
   {
     name: 'Alexey Yurkevich',
     designation: 'Software Engineer',
-    testimonial: 'I’m really inspired by AdsGency AI’s product and it’s one of the most promising companies I’ve seen!',
+    testimonial: `I'm really inspired by AdsGency AI's product and it's one of the most promising companies I've seen!`,
     image: 'Alexey',
   },
   {

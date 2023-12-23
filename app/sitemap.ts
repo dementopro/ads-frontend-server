@@ -50,6 +50,9 @@ const links = [
   {
     url: '/styleGuide',
   },
+  {
+    url: '/customerReview',
+  },
 ]
 
 const blogs = Blogs.map(blog => {

@@ -102,7 +102,9 @@ const LaunchAdModal: FC<LaunchAdModalProps> = ({
       });
       messageApi.success("Launched Ad on Pinterest Success")
     } catch (error: any) {
+    } catch (error: any) {
       console.log("error: ", error);
+      messageApi.error(error.message);
       messageApi.error(error.message);
     } finally {
       setIsLaunchingAd(false);

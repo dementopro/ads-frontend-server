@@ -49,6 +49,10 @@ export const footerLinks = [
         href: '/reportMisuse',
       },
       {
+        label: 'Customer Review',
+        href: '/customerReview',
+      },
+      {
         label: 'Careers',
         href: '/careers',
       },
