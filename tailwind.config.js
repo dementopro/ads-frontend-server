@@ -19,6 +19,8 @@ module.exports = {
         'android': '360px',
       },
       backgroundImage: {
+        'hero-pattern': 'radial-gradient(at left top, #3D296D, #000000 70%)',
+        'light-purple-gradient': 'linear-gradient(to top, #4B2880, #4C3496)',
         'hero-gradient': 'radial-gradient(at left top, #3D296D, #000000 70%)',
         'brand-color': 'linear-gradient(to right, #6859FF, #AF41FF)',
         'gradient-01': 'linear-gradient(to right, #6859FF, #AF41FF)',
@@ -26,6 +28,7 @@ module.exports = {
         'gradient-02': 'linear-gradient(to right, #D336FF, #FD8CFF)',
         'light-purple-gradient': 'linear-gradient(to top, #4B2880, #4C3496)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
         primary: {
@@ -34,6 +37,13 @@ module.exports = {
           '03': '#412eff',
           'gray': '#ababab',
           'purple': '#844fff',
+        },
+        background: {
+          50: '#0d1117',
+          100: '#1b1c21',
+          200: '#23252b',
+          300: '#35363A',
+          500: '#5F6368'
         },
         secondary: {
           '01': '#ebe5fe',

@@ -227,7 +227,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         onClick={() => {
           handleSubmit(activeButtonIndex + 1);
         }}
-        className={`${styles.submit} ${!isValid && '!bg-background-300'}`}
+        className={`${styles.submit} ${!isValid ? '!bg-background-300' : '!bg-primary-purple'}`}
         disabled={!isValid}
       >
         Submit
