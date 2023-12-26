@@ -17,19 +17,6 @@ export const footerLinks = [
     ],
   },
   {
-    title: 'Resources',
-    links: [
-      {
-        label: 'Blog',
-        href: '/blog',
-      },
-      {
-        label: 'Style Guide',
-        href: '/styleGuide',
-      },
-    ],
-  },
-  {
     title: 'Company',
     links: [
       {
@@ -59,6 +46,19 @@ export const footerLinks = [
       {
         label: 'Careers',
         href: '/careers',
+      },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      {
+        label: 'Blog',
+        href: '/blog',
+      },
+      {
+        label: 'Style Guide',
+        href: '/styleGuide',
       },
     ],
   },

@@ -26,7 +26,7 @@ const JoinOurTeam: React.FC<JoinOurTeamProps> = ({ scrollToOpenPositions }) => {
 
   return (
     <div className="desktop:w-[1240px] ipad:w-full m-auto h-full android:my-[32px] ipad:my-[48px] android:px-[32px] ipad:px-[0px] justify-start items-center flex android:flex-col ipadmini:flex-row android:gap-[32px] ipad:gap-[32px]">
-      <div className="relative flex flex-col items-start">
+      <div className="desktop:w-5/12 android:w-full relative flex flex-col items-start">
         <Image
           width={100}
           height={100}

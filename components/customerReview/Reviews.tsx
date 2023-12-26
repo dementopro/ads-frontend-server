@@ -18,7 +18,7 @@ const Reviews: React.FunctionComponent<IReviewsProps> = (props) => {
         <div className="flex android:flex-col ipadmini:flex-row flex-wrap gap-[32px] items-center justify-center items-stretch">
           {customerReviews.map((item, index) =>
             <div key={index} className={`android:w-full ipadmini:w-[450px] py-[2px] rounded-[20px] bg-light-purple-gradient cursor-pointer`}>
-              <div className={`w-full h-full flex flex-col gap-[32px] py-[32px] px-[64px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
+              <div className={`w-full h-full flex flex-col gap-[32px] android:py-[16px] android:px-[32px] ipad:py-[32px] ipad:px-[64px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
                 <div className='w-full flex flex-col gap-[12px] items-start'>
                   <Image
                     width={32}

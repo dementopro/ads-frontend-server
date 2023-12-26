@@ -31,7 +31,7 @@ const GetStarted = () => {
           </div>
           <PrimaryButton
             target="_blank"
-            href="/"
+            href="/register"
             text="Sign Up Now"
           />
         </div>

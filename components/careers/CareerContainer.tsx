@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
-import ReactGATag from '@/components/ReactGATag'
-import DefaultLayout from '@/layout/default'
-import AboveFooter from '@/components/common/AboveFooter'
-import JoinOurTeam from './JoinOurTeam'
-import OurCoreValues from './OurCoreValues'
-import OurMission from './OurMission'
-import OpenPositions from './OpenPositions'
+import React, { useRef } from 'react';
+import ReactGATag from '@/components/ReactGATag';
+import DefaultLayout from '@/layout/default';
+import AboveFooter from '@/components/common/AboveFooter';
+import JoinOurTeam from './JoinOurTeam';
+import OurCoreValues from './OurCoreValues';
+import OurMission from './OurMission';
+import OpenPositions from './OpenPositions';
 
 export const metadata = {
   title: 'Careers - AdsGency AI',

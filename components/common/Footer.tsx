@@ -19,9 +19,9 @@ type ColumnProps = {
 };
 
 const FooterColumn = ({ title, links }: ColumnProps) => (
-  <div className="flex flex-col gap-4">
+  <div className="flex flex-col gap-[8px]">
     <h4 className="font-semibold uppercase text-white">{title}</h4>
-    <ul className="flex flex-col gap-3 text-sm font-regular text-primary-gray">
+    <ul className="flex flex-col gap-[4px] text-[16px] font-regular text-[#C1BECA]">
       {links.map((link) => (
         <Link  href={link.href} key={link.label} className="hover:text-[#9D93FF]">
           {link.label}
@@ -33,15 +33,15 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col px-6 sm:px-20 pt-10 bg-black android:gap-[48px] ipadmini:gap-[100px]'>
-      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto ipad:m-[0px] flex flex-wrap gap-8 justify-between'>
-        <div className='flex flex-col gap-2 max-sm:items-center max-sm:w-full'>
+    <footer className='w-full flex flex-col gap-[32px] android:p-[32px] ipad:p-[60px] bg-black font-open-sans'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto flex flex-wrap gap-[32px] justify-between'>
+        <div className='flex flex-col gap-[5px] items-start'>
           <Image src='/logo.svg' width={131} height={50} alt='AdsGency AI' />
-          <span className='text-sm text-primary-gray'>
+          <span className='text-[16px] text-[#C1BECA]'>
             One stop ads platform without limits
           </span>
         </div>
-        <div className="flex flex-wrap gap-20">
+        <div className="flex flex-wrap gap-[32px]">
           {
             footerLinks.map(item => (
               <FooterColumn
@@ -53,7 +53,7 @@ const Footer = () => {
           }
         </div>
       </div>
-      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto ipad:m-[0px] border-t mt-10 text-primary-gray max-sm:text-center text-sm border-primary-gray/30 py-4'>
+      <div className='desktop:w-[1240px] ipad:w-full desktop:mx-auto text-[#C1BECA] text-[16px] text-left border-t border-[#A09BAE] py-[12px]'>
         <span>&copy; 2023 AdsGency AI. All rights reserved.</span>
       </div>
     </footer >
