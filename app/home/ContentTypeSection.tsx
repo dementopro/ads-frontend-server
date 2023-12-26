@@ -1,6 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import { CompanyDetailForm } from '@/types/planning';
+import React, { FC, Fragment } from 'react';
+
+import { TopToLeftCurveLineArrow } from '@/components/tutorial/Arrows';
+import CloseButton from '@/components/tutorial/CloseButton';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import { useTutorialsContext } from '@/context/tutorials';
 import styles from '@/app/planning/planning.module.css';
+import type { CompanyDetailForm } from '@/types/planning';
 
 interface ContentTypeSectionProps {
   formData: CompanyDetailForm;
@@ -10,6 +15,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
   setFormData,
   formData,
 }) => {
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode, setIsInTutorialMode } = useTutorialsContext();
   const setContentType = (type: number) => {
     let temp = { ...formData };
     temp['content_type'] = (() => {
@@ -30,7 +36,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
   };
 
   return (
-    <div className={`${styles.mainDiv} mt-[32px]`}>
+    <div id='content-type' className={`${styles.mainDiv} mt-[32px] relative`}>
       <p className="w-full text-white h-[18px] mb-[24px] not-italic font-medium leading-[normal]">
         2.&nbsp;Choose your content type
       </p>
@@ -92,6 +98,28 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
           </span>
         </button>
       </div>
+
+      {
+        isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'CONTENTTYPE' && (
+          <Fragment>
+            <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px]">
+              <CloseButton />
+            </div>
+            <div className="absolute left-[200px] bottom-full flex items-center z-[999]">
+              <TopToLeftCurveLineArrow width={100} height={84} className="tutorial-element" />
+              <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}>
+                Choose which type of content you want to optimize.
+              </div>
+              <p className="text-white ml-20 mt-10">
+                *Note: you can only select one content type at a time
+              </p>
+            </div>
+            <div className="absolute left-[100px] top-full translate-y-[30px]">
+              <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
+            </div>
+          </Fragment>
+        )
+      }
     </div>
   );
 };

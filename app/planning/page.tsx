@@ -1,40 +1,43 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useDisclosure } from '@nextui-org/react';
 import { Spin, message } from 'antd';
 import Image from 'next/image';
+import { FormikHelpers, useFormik } from 'formik';
+import axios from '@/lib/axios';
 
-import {
+import { useSeoAnalyzerContext } from '@/context/seo';
+import { useTutorialsContext } from '@/context/tutorials';
+import BugReportModal from '@/components/contactUs/BugReportModal';
+import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import ReactGATag from '@/components/ReactGATag';
+import CloseButton from '@/components/tutorial/CloseButton';
+import AdminLayout from '@/layout/admin';
+import { CompanyValidate } from '@/lib/validate';
+import SocialMediaDetails from './AdditionalDetails/SocialMediaDetails';
+import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
+import SocialMediaRecommendation from './Recommendations/SocialMedia';
+import OnPage from './Recommendations/OnPage';
+import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
+import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
+import InfoGraphicsDetails from './AdditionalDetails/InfographicsDetails';
+import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
+import BackButton from './Recommendations/BackButton';
+import GmailRecommendation from './Recommendations/Gmail';
+import InfographicsRecommendation from './Recommendations/Infographics';
+import OffPage from './Recommendations/OffPage';
+import AddCompanyDetails from './AddCompanyDetails';
+import HorizontalStepper from './HorizontalStepper';
+import Button from './TabButton';
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
+import type {
   CompanyForm,
+  CompanyDetailForm,
   IPlan,
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
-import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
-import { FormikHelpers, useFormik } from 'formik';
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import AddCompanyDetails from './AddCompanyDetails';
-import AdminLayout from '@/layout/admin';
-import BackButton from './Recommendations/BackButton';
-import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
-import { CompanyDetailForm } from '@/types/planning';
-import { CompanyValidate } from '@/lib/validate';
-import GmailRecommendation from './Recommendations/Gmail';
-import HorizontalStepper from './HorizontalStepper';
-import NotEnoughtCredits from '@/components/NotEnoughtCredits';
-import OffPage from './Recommendations/OffPage';
-import OnPage from './Recommendations/OnPage';
-import ReactGATag from '@/components/ReactGATag';
-import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
-import axios from '@/lib/axios';
-import Button from './TabButton';
-import { useSeoAnalyzerContext } from '@/context/seo';
-import BugReportModal from '@/components/contactUs/BugReportModal';
-import { useDisclosure } from '@nextui-org/react';
-import SocialMediaDetails from './AdditionalDetails/SocialMediaDetails';
-import SocialMediaRecommendation from './Recommendations/SocialMedia';
-import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
-import InfoGraphicsDetails from './AdditionalDetails/InfographicsDetails';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -84,12 +87,14 @@ const PlanningPage = () => {
     customer_profile: '',
     competitors: '',
     business_objectives: [],
+    infographics_styles: [],
     email: '',
     url: '',
     marketing_template: '',
     schedule: {},
     assets: []
   });
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
@@ -178,7 +183,7 @@ const PlanningPage = () => {
       >
         <section className="flex flex-col justify-center">
           {activeButtonIndex == 1 && (
-            <div className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
+            <div id='company-additional-details' className={`flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white`}>
               <div className="flex gap-x-[8px]">
                 <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
                   📋
@@ -187,7 +192,7 @@ const PlanningPage = () => {
                   Let’s gather some more information
                 </h1>
               </div>
-              <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5 ">
+              <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5" id="content-type">
                 <button
                   className={`flex justify-center min-w-[169px] h-[44px] text-[15px] items-center gap-4 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
                   `}
@@ -198,14 +203,22 @@ const PlanningPage = () => {
                   </span>
                 </button>
               </div>
+
+              {
+                isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1' && (
+                  <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
+                    <CloseButton />
+                  </div>
+                )
+              }
             </div>
           )}
           {activeButtonIndex == 2 && (
-            <div className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
+            <div id="recommendations-menu" className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
               <div className="flex">
                 <p className="w-[24px] h-[24px]">💡</p>
                 <h1 className="text-2xl font-medium text-white">
-                  Recommendations
+                  &nbsp;Recommendations
                 </h1>
               </div>
               <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5 ">
@@ -338,7 +351,7 @@ const PlanningPage = () => {
         {activeButtonIndex == 2 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <>
-              <div className="flex items-center mt-8">
+              <div id='seo-page-tab' className="flex items-center mt-8 relative">
                 <Button
                   isActivated={activeSeoType == 0}
                   onClick={() => setActiveSeoType(0)}
@@ -394,7 +407,7 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-            :
+            : (formData.content_type.toLowerCase() === 'social media') ?
             <>
               <div className="flex items-center mt-8">
                 {SocialMediaTabs.map((tab, i) => (
@@ -410,6 +423,14 @@ const PlanningPage = () => {
               </div>
               <SocialMediaRecommendation type={activeSeoType} />
               <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
+            </>
+            :
+            <>
+              <InfographicsRecommendation />
+               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}
               />

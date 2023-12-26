@@ -111,6 +111,7 @@ const InfographicsDetails: FC<InfographicsDetailsProps> = ({
                     ...company,
                     name: formik.values.companyName,
                     business_objectives: formData.business_objectives,
+                    infographics_styles: formData.infographics_styles,
                     competitors: formik.values.competitors,
                     content_type: formData.content_type,
                     customer_profile: formik.values.idealCustomerProfile,
@@ -142,21 +143,21 @@ const InfographicsDetails: FC<InfographicsDetailsProps> = ({
                   <button
                     key={i}
                     className={`px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB] whitespace-nowrap ${
-                      formData.business_objectives.includes(val)
+                      formData.infographics_styles.includes(val)
                         ? 'outline-1 outline outline-[#ABABAB] text-white font-medium'
                         : 'bg-[#35363A] text-[#ABABAB]'
                     }`}
                     onClick={() => {
-                      if (formData.business_objectives.includes(val)) {
+                      if (formData.infographics_styles.includes(val)) {
                         setFormData({
                           ...formData,
-                          business_objectives: formData.business_objectives.filter((item) => item != val)
+                          infographics_styles: formData.infographics_styles.filter((item) => item != val)
                         })
                       } else {
                         setFormData({
                           ...formData,
-                          business_objectives: [
-                            ...formData.business_objectives,
+                          infographics_styles: [
+                            ...formData.infographics_styles,
                             val
                           ]
                         })

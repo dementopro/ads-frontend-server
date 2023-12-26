@@ -30,6 +30,7 @@ export interface CompanyDetailForm {
   business_objectives: string[];
   email: string;
   socialMediaType?: string;
+  infographics_styles: string[];
   url: string;
   marketing_template: string;
   schedule: any;

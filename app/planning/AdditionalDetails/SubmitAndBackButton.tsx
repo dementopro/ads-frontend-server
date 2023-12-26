@@ -48,9 +48,16 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
     errors.targetAudience == '' &&
     errors.url == ''
 
+  const isValidInfographics = (formData: any, company: CompanyDetailForm, values: any, errors: any) =>
+    formData.content_type.toLowerCase() === 'infographics' &&
+    formData.infographics_styles.length > 0 &&
+    company.assets.length > 0 &&
+    errors.targetAudience === '' &&
+    errors.idealCustomerProfile === ''
+
   const isValid = useMemo(() => {
-    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.values, formik.errors);
-  }, [formData, formik.values, formik.errors])
+    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.values, formik.errors) || isValidInfographics(formData, company, formik.values, formik.errors);
+  }, [formData, formik.values, formik.errors, company])
 
   const handleSubmit = (index: number) => {
     if (isValidSeo(formData.content_type, formik.errors)) {
@@ -202,8 +209,58 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         .finally(() => {
           setIsLoading(false);
         });
+    } else if (isValidInfographics(formData, company, formik.values, formik.errors)) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        website: formik.values.websiteURL,
+        business_objectives: formData.business_objectives,
+        infographics_styles: formData.infographics_styles,
+        target_audice: formik.values.targetAudience,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description
+      });
+
+      const bodyData = new FormData()
+      bodyData.append('company_name', formik.values.companyName);
+      bodyData.append('website_url', formValidUrl(formik.values.websiteURL));
+      bodyData.append('company_description', formik.values.description);
+      bodyData.append('target_audience', formik.values.targetAudience);
+      bodyData.append('customer_profile', formik.values.idealCustomerProfile);
+      bodyData.append('business_objectives', formData.business_objectives.join(','));
+      bodyData.append('infographics_styles', formData.infographics_styles.join(','));
+      company.assets.forEach((asset) => {
+        bodyData.append('media', asset);
+      });
+
+      axios
+        .post('/fapi/infograhics_get_instructions_api', bodyData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then((res) => {
+          if (res.data.status == true) {
+            setSocialMedia(res.data.recommendations.map((rec: any) => ({
+              content: JSON.parse(rec.content),
+              img_url: process.env.NEXT_PUBLIC_API_URL + rec.img_url
+            })));
+            setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /social_media_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
-      console.log('Please fill rerequired field', formik.errors);
+      console.log('Please fill required fields', formik.errors);
     }
   };
 
@@ -230,7 +287,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         className={`${styles.submit} ${!isValid ? '!bg-background-300' : '!bg-primary-purple'}`}
         disabled={!isValid}
       >
-        Submit
+        {formData.content_type.toLowerCase() === 'infographics' ? 'Generate Infographics' : 'Submit'}
       </button>
     </div>
   );

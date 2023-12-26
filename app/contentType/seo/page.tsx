@@ -1,25 +1,27 @@
 'use client';
-
-import {
-  IPlan,
-  IPlanningHistory,
-  IPlanningObj,
-} from '@/types/planning';
-import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
 import React, { ChangeEvent, useContext, useEffect, useMemo, useState } from 'react';
-import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
-import { Spin, message } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-import { AccountContext } from '@/context/account';
-import AdminLayout from '@/layout/admin';
 import Image from 'next/image';
+import { Spin, message } from 'antd';
+
+import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
+import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import { AccountContext } from '@/context/account';
+import { useTutorialsContext } from '@/context/tutorials';
+import AdminLayout from '@/layout/admin';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import CloseButton from '@/components/tutorial/CloseButton';
 import OffPage from '@/app/contentType/seo/OffPage';
 import OnPage from '@/app/contentType/seo/OnPage';
 import ReactGATag from '@/components/ReactGATag';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
+import type {
+  IPlan,
+  IPlanningHistory,
+  IPlanningObj,
+} from '@/types/planning';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -78,6 +80,7 @@ const PlanningPage = () => {
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
   const [url, setUrl] = useState<string>('');
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode, setIsInTutorialMode } = useTutorialsContext();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value);
@@ -118,31 +121,49 @@ const PlanningPage = () => {
 
       <Spin spinning={isGenerating} wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]">
         <>
-          <h2 className="text-3xl">🎯&nbsp;SEO</h2>
-          <div className='flex items-center mt-4'>
-            <Button
-              isActivated={activeSeoType == 0}
-              onClick={() => {
-                router.push('/planning?step=2&type=0')
-                setActiveSeoType(0)
-              }}
-            >
-              <Image src='/images/seo/on-page.svg' alt={'SEO (on-page)'} width={24} height={24} />
-              <span className='truncate' title='SEO (on-page)'>SEO (on-page)</span>
-            </Button>
-            <Button
-              isActivated={activeSeoType == 1}
-              onClick={() => {
-                router.push('/planning?step=2&type=1')
-                setActiveSeoType(1)
-              }}
-            >
-              <Image src='/images/seo/off-page.svg' alt={'SEO (off-page)'} width={24} height={24} />
-              <span className='truncate' title='SEO (off-page)'>SEO (off-page)</span>
-            </Button>
+          <div id="seo-recommendation-menu" className="relative">
+            <h2 className="text-3xl">🎯&nbsp;SEO</h2>
+            <div className='flex items-center mt-4'>
+              <Button
+                isActivated={activeSeoType == 0}
+                onClick={() => {
+                  router.push('/planning?step=2&type=0')
+                  setActiveSeoType(0)
+                }}
+              >
+                <Image src='/images/seo/on-page.svg' alt={'SEO (on-page)'} width={24} height={24} />
+                <span className='truncate' title='SEO (on-page)'>SEO (on-page)</span>
+              </Button>
+              <Button
+                isActivated={activeSeoType == 1}
+                onClick={() => {
+                  router.push('/planning?step=2&type=1')
+                  setActiveSeoType(1)
+                }}
+              >
+                <Image src='/images/seo/off-page.svg' alt={'SEO (off-page)'} width={24} height={24} />
+                <span className='truncate' title='SEO (off-page)'>SEO (off-page)</span>
+              </Button>
+            </div>
+
+            {
+              isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL' && (
+                <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
+                  <CloseButton />
+                </div>
+              )
+            }
           </div>
-          <div className={`${styles.onPageDiv}`}>
-          { activeSeoType == 0 ? <OnPage page={page} /> : <OffPage page={page} /> }
+          <div id="seo-technical-recommendations-section" className={`${styles.onPageDiv} relative`}>
+            { activeSeoType == 0 ? <OnPage page={page} /> : <OffPage page={page} /> }
+
+            {
+              isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL' && (
+                <div className="absolute left-0 top-full w-full translate-x-[100px] translate-y-[50px] flex tutorial-element">
+                  <NavigationButtons onBack={() => setIsInTutorialMode(false)} />
+                </div>
+              )
+            }
           </div>
           <div className='w-full mt-6'>
             <div className="flex justify-end items-center gap-10 self-stretch mt-[32px]">

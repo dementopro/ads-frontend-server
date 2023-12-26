@@ -1,13 +1,19 @@
 'use client'
-import { useSeoAnalyzerContext } from '@/context/seo';
-import { CompanyValidate } from '@/lib/validate';
-// Import necessary modules and components
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { Fragment } from 'react';
 import { Disclosure } from '@headlessui/react'
 import chevronDown from '@iconify/icons-mdi/chevron-down';
 import { Icon } from '@iconify/react';
 import { message } from 'antd';
-import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation'
+
+import { useSeoAnalyzerContext } from '@/context/seo';
+import { CompanyValidate } from '@/lib/validate';
+// Import necessary modules and components
+import { useTutorialsContext } from '@/context/tutorials';
+import { LeftStraightLineArrow } from '@/components/tutorial/Arrows';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import CloseButton from '@/components/tutorial/CloseButton';
 
 // Define an array of menu items with their properties
 const menuItems = [
@@ -15,7 +21,11 @@ const menuItems = [
     text: 'Get Started',
     href: '/home',
     icon: '/images/sidebar/home.svg',
-    activeIcon: '/images/sidebar/active/home.svg'
+    activeIcon: '/images/sidebar/active/home.svg',
+    tutorial: {
+      width: 310,
+      description: 'Get Started is your starting point. Here you will create a new project & input your brand.'
+    }
   },
   // {
   //   text: 'Your Projects',
@@ -28,6 +38,10 @@ const menuItems = [
     href: '/planning',
     icon: '/images/sidebar/planning.svg',
     activeIcon: '/images/sidebar/active/planning.svg',
+    tutorial: {
+      width: 350,
+      description: 'Once you’ve added your brand details and chosen which type of content you’d like to optimize then you will plan your content specific strategy for the optimizations.'
+    }
   },
   {
     text: 'Channels',
@@ -46,13 +60,21 @@ const menuItems = [
         text: 'Email Marketing',
         href: '/contentType/emailMarketing',
       }
-    ]
+    ],
+    tutorial: {
+      width: 310,
+      description: 'In the content tab, you will find your optimized recommendations and you’ll also be able to edit, download or implement your recommendations'
+    }
   },
   {
     text: 'Social Insights',
     icon: '/images/sidebar/social-joomla.svg',
     activeIcon: '/images/sidebar/active/social-joomla.svg',
-    href: '/socialInsights'
+    href: '/socialInsights',
+    tutorial: {
+      width: 310,
+      description: 'View your ad performance, historical data, and receive optimized recommendations for each of you social accounts.'
+    }
   },
   // {
   //   text: 'Ads Management',
@@ -158,44 +180,78 @@ function MenuSigleBtn({ text, isActive, icon, activeIcon, href }: MenuSigleBtnPr
 
 // Define the Menu component
 export default function Menu() {
+  const { isInTutorialMode, tutorialCampaign, guideModeIndex } = useTutorialsContext();
   const pathname = usePathname();
 
   return (
-    <div className="mx-auto w-full rounded-2x flex flex-col gap-[18px]">
+    <div className="mx-auto w-full rounded-2x flex flex-col gap-[18px] relative">
       {
         menuItems.map((item, index) => {
           return (
-            item.children?.length ?
-              <Disclosure defaultOpen={item.children.map(child => child.href).includes(pathname as string)} key={index}>
-                {({ open }) => (
-                  <>
-                    <Disclosure.Button className={`flex text-[15px] h-[44px] w-full items-center justify-between bg-transparent text-primary-gray px-8 hover:bg-[#383454] hover:text-white`}>
-                      <div className='flex items-center'>
-                        {item.icon && <Image src={item.icon} alt={item.text} width={20} height={20} className="mr-5" />}
-                        <span>{item.text}</span>
-                      </div>
-                      <Icon icon={chevronDown} width={20} height={20}
-                        className={`${open ? 'rotate-180 transform' : ''}`}
-                      />
-                    </Disclosure.Button>
-                    <Disclosure.Panel className="">
-                      {
-                        item.children?.map((child, index) => {
-                          return (
-                            <MenuSigleBtn href={child.href} isActive={pathname === child.href} text={child.text} key={index} />
+            <div className="relative" key={item.text}>
+              {
+                item.children?.length ?
+                  <Disclosure defaultOpen={item.children.map(child => child.href).includes(pathname as string)}>
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className={`relative flex text-[15px] h-[44px] w-full items-center justify-between bg-transparent text-primary-gray px-8 hover:bg-[#383454] hover:text-white`}>
+                          <div className='flex items-center'>
+                            {item.icon && <Image src={item.icon} alt={item.text} width={20} height={20} className="mr-5" />}
+                            <span>{item.text}</span>
+                          </div>
+                          <Icon icon={chevronDown} width={20} height={20}
+                            className={`${!isInTutorialMode && open ? 'rotate-180 transform' : ''}`}
+                          />
+                        </Disclosure.Button>
+                        {
+                          !isInTutorialMode && (
+                            <Disclosure.Panel className="">
+                              {
+                                item.children?.map((child, index) => {
+                                  return (
+                                    <MenuSigleBtn href={child.href} isActive={pathname === child.href} text={child.text} key={index} />
+                                  )
+                                })
+                              }
+                            </Disclosure.Panel>
                           )
-                        })
-                      }
-                    </Disclosure.Panel>
-                  </>
-                )}
-              </Disclosure>
-              :
-              <Disclosure as="div" key={index}>
-                <MenuSigleBtn text={item.text} icon={item.icon} activeIcon={item.activeIcon} isActive={pathname === item.href} href={item.href} />
-              </Disclosure>
+                        }
+                      </>
+                    )}
+                  </Disclosure>
+                  :
+                  <Disclosure as="div">
+                    <MenuSigleBtn text={item.text} icon={item.icon} activeIcon={item.activeIcon} isActive={isInTutorialMode ? (tutorialCampaign === 'NAVIGATION' && index === guideModeIndex) : pathname === item.href} href={item.href} />
+                  </Disclosure>
+              }
+              {
+               isInTutorialMode === true && tutorialCampaign === 'NAVIGATION' && guideModeIndex === index &&
+                  (
+                    <Fragment>
+                      <LeftStraightLineArrow width={77} height={12} className="absolute left-[100%] top-[50%] translate-x-[5px] translate-y-[-50%] tutorial-element" />
+                      <div className={`absolute !w-[310px] left-[100%] top-[50%] bg-primary-purple rounded-md text-white p-2 text-md translate-x-[90px] translate-y-[-50%] tutorial-element`}>
+                        {item.tutorial.description}
+                      </div>
+                    </Fragment>
+                  )
+              }
+            </div>
           )
         })
+      }
+      {
+        isInTutorialMode && tutorialCampaign === 'NAVIGATION' && (
+          <Fragment>
+            <div className="w-screen h-screen left-0 top-0 fixed">
+              <div className="absolute left-1/2 bottom-40">
+                <NavigationButtons />
+              </div>
+            </div>
+            <div className="absolute top-0 right-0 translate-x-[150%] translate-y-[-15px]">
+              <CloseButton />
+            </div>
+          </Fragment>
+        )
       }
     </div>
   );

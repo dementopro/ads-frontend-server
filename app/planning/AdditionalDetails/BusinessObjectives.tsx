@@ -1,6 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { CompanyDetailForm } from '@/types/planning';
-import { Input } from 'antd';
+
+import { TopToLeftCurveLineArrow } from '@/components/tutorial/Arrows';
+import CloseButton from '@/components/tutorial/CloseButton';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import { useTutorialsContext } from '@/context/tutorials';
 import styles from '@/./app/planning/planning.module.css';
 
 interface ContentTypeSectionProps {
@@ -16,8 +20,10 @@ const BusinessObjectives: FC<ContentTypeSectionProps> = ({
   setFormData,
   formData,
 }) => {
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode, setIsInTutorialMode } = useTutorialsContext();
+
   return (
-    <div className={`${styles.mainDiv} gap-[24px] mt-[16px]`}>
+    <div id="business-objectives-section" className={`${styles.mainDiv} gap-[24px] mt-[16px] relative`}>
       <p className="w-[521px] text-[15px] h-[18px] text-[color:#B3ACFF]">
         { title }
       </p>
@@ -55,6 +61,25 @@ const BusinessObjectives: FC<ContentTypeSectionProps> = ({
           }
         </div>
       </div>
+
+      {
+        isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'OBJECTIVES' && (
+          <Fragment>
+            <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px] tutorial-element">
+              <CloseButton />
+            </div>
+            <div className="absolute left-[200px] bottom-full flex items-center tutorial-element">
+              <TopToLeftCurveLineArrow width={100} height={84} />
+              <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}>
+                Choose which business objectives you want your recommendations to focus on  & watch as our AI creates optimizations to achieve your goals
+              </div>
+            </div>
+            <div className="absolute left-[100px] top-full translate-y-[30px] tutorial-element">
+              <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
+            </div>
+          </Fragment>
+        )
+      }
     </div>
   );
 };

@@ -22,7 +22,7 @@ const AdminSidebar = () => {
 
   return (
     <aside className="max-ipad:hidden bg-[#1B1C21] border-r border-r-[#3A3A3A] w-[260px] h-full flex flex-col items-center justify-between pt-4 pb-6">
-      <div className="flex flex-col w-full">
+      <div id='aside-menus' className="flex flex-col w-full relative">
         <Menu />
       </div>
       <div className="flex flex-col items-center justify-center w-full gap-3 px-6">

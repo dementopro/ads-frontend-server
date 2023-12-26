@@ -1,18 +1,22 @@
-import React, { FC } from 'react';
-import styles from '@/app/planning/planning.module.css';
-import { Input } from 'antd';
+import React, { FC, Fragment } from 'react';
 import { useFormik } from 'formik';
+
+import styles from '@/app/planning/planning.module.css';
 import { CompanyForm } from '@/types/planning';
 import { DETAIL_LIMIT } from '@/data/constant';
+import { useTutorialsContext } from '@/context/tutorials';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
 
 interface AddCompanyProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
 }
 
 const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+
   return (
     <>
-      <div className={`${styles.div} w-full `}>
+      <div id='company-information' className={`${styles.div} w-full relative`}>
         <p className=" text-[15px] text-white not-italic font-medium leading-[normal] mb-6">
           1.&nbsp;Add information about your company
         </p>
@@ -113,6 +117,17 @@ const AddCompany: FC<AddCompanyProps> = ({ formik }) => {
             {formik.values.description.length} / {DETAIL_LIMIT}
           </label>
         </div>
+
+        {
+            isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL' && (
+              <Fragment>
+                {/* <div className="absolute w-full h-full left-0 top-0 z-[999]"></div> */}
+                <div className="absolute w-full top-full translate-y-[50px] flex justify-center tutorial-element">
+                  <NavigationButtons />
+                </div>
+              </Fragment>
+            )
+        }
       </div>
     </>
 

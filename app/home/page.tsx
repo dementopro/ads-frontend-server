@@ -33,6 +33,11 @@
 
 // export default HomePage
 'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Spin, message } from 'antd';
+import { FormikHelpers, useFormik } from 'formik';
+import { useDisclosure } from '@nextui-org/react';
 
 import {
   CompanyForm,
@@ -40,24 +45,21 @@ import {
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
-import { FormikHelpers, useFormik } from 'formik';
 import { NOT_ENOUGH_CREDIT, SUCCESS_CODE } from '@/data/constant';
-import React, { useEffect, useState } from 'react';
-import { Spin, message } from 'antd';
-import AddCompany from './AddCompany';
-import AddInfoButton from './AddInfoButton';
 import AdminLayout from '@/layout/admin';
 import { CompanyDetailForm } from '@/types/planning';
 import { CompanyValidate } from '@/lib/validate';
-import ContentTypeSection from './ContentTypeSection';
 import HorizontalStepper from '@/app/planning/HorizontalStepper';
-import Image from 'next/image';
 import NotEnoughtCredits from '@/components/NotEnoughtCredits';
 import ReactGATag from '@/components/ReactGATag';
-import axios from '@/lib/axios';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import BugReportModal from '@/components/contactUs/BugReportModal';
-import { useDisclosure } from '@nextui-org/react';
+import CloseButton from '@/components/tutorial/CloseButton';
+import axios from '@/lib/axios';
+import { useTutorialsContext } from '@/context/tutorials';
+import AddCompany from './AddCompany';
+import ContentTypeSection from './ContentTypeSection';
+import AddInfoButton from './AddInfoButton';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -100,6 +102,7 @@ const HomePage = () => {
     customer_profile: '',
     competitors: '',
     business_objectives: [],
+    infographics_styles: [],
     email: '',
     url: '',
     marketing_template: '',
@@ -107,6 +110,7 @@ const HomePage = () => {
     assets: []
   });
   const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -171,7 +175,7 @@ const HomePage = () => {
         spinning={isGenerating}
         wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]"
       >
-        <section className="flex flex-col justify-center">
+        <section id='starting-menu' className="flex flex-col justify-center relative">
           <div className="flex gap-x-[8px] mb-6">
             <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
               ✨
@@ -186,6 +190,14 @@ const HomePage = () => {
             formik={formik}
             formData={formData}
           />
+
+          {
+            isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL' && (
+              <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
+                <CloseButton />
+              </div>
+            )
+          }
         </section>
         <div className="flex flex-col text-[15px]">
           <AddCompany formik={formik} />

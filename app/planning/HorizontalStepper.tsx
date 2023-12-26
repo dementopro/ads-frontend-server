@@ -1,12 +1,15 @@
+import React, { FC, useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { FormikErrors, FormikHelpers, useFormik } from 'formik';
+import { message } from 'antd';
+import axios from 'axios';
+
+import { TopToLeftCurveLineArrow } from '@/components/tutorial/Arrows';
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import { useTutorialsContext } from '@/context/tutorials';
 import { CompanyValidate } from '@/lib/validate';
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { formValidUrl } from '@/utils';
-import { message } from 'antd';
-import axios from 'axios';
-import { FormikErrors, FormikHelpers, useFormik } from 'formik';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { FC, useEffect, useState } from 'react';
 import LoadingSpin from './LoadingSpin';
 
 interface HorizontalStepperProps {
@@ -28,6 +31,7 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
   const [messageApi, contextHolder] = message.useMessage();
   const [selectedComponentIndex, setSelectedComponentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
 
   const handleButtonClick = (index: number) => {
     setSelectedComponentIndex(index);
@@ -140,7 +144,7 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
   };
 
   return (
-    <div className="flex w-full flex-wrap font-poppins items-center gap-[32px]">
+    <div id='stepper-menu' className="flex w-full flex-wrap font-poppins items-center gap-[32px] relative">
       {contextHolder}
       {isLoading && <LoadingSpin />}
       <div className="w-full ipad:h-[57px] p-[6px] bg-[#23252B] rounded-[12px] justify-between items-center android:gap-[8px] ipad:gap-[8px] android:flex-col ipadmini:flex-row inline-flex">
@@ -275,6 +279,16 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({
           </div>
         </button>
       </div>
+      {
+        isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL' && (
+          <div className="absolute left-[200px] bottom-1/2 flex items-center z-[999]">
+            <TopToLeftCurveLineArrow width={100} height={84} className="tutorial-element" />
+            <div className={`w-[310px] bg-primary-purple rounded-md text-white p-2 text-md tutorial-element ml-5 mb-20`}>
+              Add your brand details and our AI will create personalized recommendations for you.
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 };

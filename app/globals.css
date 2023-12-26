@@ -14,6 +14,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  background-color: #15161A !important;
+}
+
 .admin-content {
   background-color: #15161A;
   @apply text-white p-8;
@@ -94,7 +98,7 @@ body {
 
 .table .ant-table-thead .ant-table-cell::before {
   @apply !w-0;
-} 
+}
 
 .table-row {
   @apply !bg-[#27282F] text-white text-sm;
@@ -138,4 +142,8 @@ body {
 }
 .ant-modal-close {
   color: white !important;
+}
+
+.tutorial-element {
+  z-index: 999;
 }

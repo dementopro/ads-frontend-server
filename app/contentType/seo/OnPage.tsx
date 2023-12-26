@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
   BiChevronDown,
   BiChevronUp,
@@ -5,24 +8,25 @@ import {
   BiRefresh,
   BiRepeat,
 } from 'react-icons/bi';
-import { Input, Spin, message } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { Chip } from '@nextui-org/react';
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import { Input, Spin, message } from 'antd';
 import ReactMarkdownPreview from '@uiw/react-markdown-preview';
 import axios from 'axios';
+
+import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import { useTutorialsContext } from '@/context/tutorials';
+import { TopToRightBezierCurveLineArrow, BottomToRightBezierCurveLineArrow } from '@/components/tutorial/Arrows';
 import styles from '@/./app/planning/planning.module.css';
-import { useRouter } from 'next/navigation';
 
 const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
-  const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
   const { company } = useSeoAnalyzerContext();
   const [selectedRow, setSelectedRow] = useState<number>(-1);
   const [loadings, setLoadings] = useState<Array<boolean>>([]);
   const [answers, setAnswers] = useState<Array<string>>([]);
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+  const router = useRouter();
 
   useEffect(() => {
     if (page) {
@@ -54,7 +58,7 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
           Refresh
         </button>
       </div>
-      <div className="bg-[#23252b] w-full !p-0 overflow-hidden rounded-lg grid grid-cols-12 gap-x-2">
+      <div className={`bg-[#23252b] w-full !p-0 ${isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL' ? 'overflow-visible' : 'overflow-hidden'} rounded-lg grid grid-cols-12 gap-x-2`}>
         <div className="bg-[#1E1F24] text-[#848484] w-full col-span-12 grid grid-cols-12">
           <div className="col-span-8 py-3 pl-10">
             <div className="flex items-center gap-2 font-normal text-left">
@@ -62,11 +66,22 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
               <BiChevronDown />
             </div>
           </div>
-          <div className="col-span-2 py-3">
+          <div className="col-span-2 py-3 relative">
             <div className="flex items-center gap-2 font-normal text-left">
               Status
               <BiChevronDown />
             </div>
+
+            {
+                isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL' && (
+                  <div className="absolute left-0 bottom-full translate-x-[-80px] translate-y-[10px] flex flex-col-reverse tutorial-element">
+                    <BottomToRightBezierCurveLineArrow />
+                    <div className={'!w-[400px] bg-primary-purple rounded-xl text-white p-3 text-md'}>
+                      Once you’ve opened the instructions/solution you’ll see the status of the recommendation change to ‘completed’
+                    </div>
+                  </div>
+                )
+              }
           </div>
           <div className="col-span-2"></div>
         </div>
@@ -150,7 +165,7 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
                       <p className='font-normal text-white/60'>
                         Based on your URL { page.url }, remove meta keywords tag from HTML
                       </p>
-                      <button className="inline-flex px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple" onClick={() => {
+                      <button className="inline-flex px-6 py-3 not-italic font-semibold leading-5 text-center text-white rounded-lg bg-primary-purple relative" onClick={() => {
                         const data = new Blob([answers[i]], { type: 'text/plain' });
                         const url = window.URL.createObjectURL(data);
                         const tempLink = document.createElement('a');
@@ -159,6 +174,19 @@ const OnPage = ({ page }: { page: SeoAnalysis | null }) => {
                         tempLink.click();
                       }}>
                         <span className="w-[77px] h-[20px] text-[13.5px]">Download</span>
+
+                        {
+                          isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL' && i === 0 && (
+                            <div className="absolute right-0 top-full translate-x-[-20px] translate-y-[10px] flex justify-end tutorial-element">
+                              <TopToRightBezierCurveLineArrow />
+                              <div className="absolute right-0 top-full translate-y-[10px]">
+                                <div className={'!w-[310px] bg-primary-purple rounded-xl text-white p-5 text-md'}>
+                                  Click ‘Download’ to download the code & instructions. Implement independently as needed!
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        }
                       </button>
                     </div>
                     <div className='relative w-full mt-5'>
