@@ -1,8 +1,9 @@
 'use client';
 
-import React, { ComponentType, FC, useEffect, useMemo, useState } from 'react';
+import React, { ComponentType, FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { BiCalendar, BiFileBlank } from 'react-icons/bi';
 import { Chip, tabs, useDisclosure } from '@nextui-org/react';
@@ -11,16 +12,19 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 
 // import PinterestAnalyticsModal from "@/app/planning/Analytics/PinterestAnalyticsModal";
-import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { type SocialAccountInterface, type SocialAccountsInterface, useAccountContext } from '@/context/account';
 import { useSeoAnalyzerContext } from '@/context/seo';
+import { useTutorialsContext } from '@/context/tutorials';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import CloseButton from '@/components/tutorial/CloseButton';
+import { TopToLeftCurveLineArrow, BottomToRightCurveLineArrow, MiddleToRightCurveLineArrow, BottomToLeftCurveLine, TopToRightCurveLineArrow } from '@/components/tutorial/Arrows';
 import { DETAIL_LIMIT } from '@/data/constant';
 import Button from '../TabButton';
-import Image from 'next/image';
-import styles from '../planning.module.css';
 import EmailScheduleModal from './EmailScheduleModal';
+import type { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { popupCenter } from '@/utils/popup';
 import { formatTimeOfDay } from '@/utils';
+import styles from '../planning.module.css';
 
 const PinterestAnalyticsModal = dynamic(() => import("@/app/planning/Analytics/PinterestAnalyticsModal"), { ssr: false });
 const MetaAnalyticsModal = dynamic(() => import("@/app/planning/Analytics/MetaAnalyticsModal"), { ssr: false });
@@ -118,6 +122,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   const [messageApi, contextHolder] = message.useMessage();
   const searchParams = useSearchParams();
   const { data: session, status } = useSession();
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
   
   const currentProvider: string = useMemo(() => {
     setAdAccounts([]);
@@ -244,7 +249,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
     <>
       {contextHolder}
       <div className="grid grid-cols-12 gap-4 mt-8">
-        <div className={`col-span-12 !mt-0 flex items-end`}>
+        <div id="social-media-platforms-menu" className={`col-span-12 !mt-0 flex items-end relative`}>
           {tabsList.map((tab, i) => (
             <Button
               key={`tab_${i}`}
@@ -265,8 +270,19 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               </span>
             </Button>
           ))}
+
+          {
+            isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH' && (
+              <div className="absolute right-full flex flex-col items-end translate-x-[-10px] translate-y-[-10px]">
+                <div className={`w-[200px] bg-primary-purple rounded-lg text-white p-3 text-md tutorial-element mr-10 mb-2`}>
+                  Choose which accounts you’d like to connect to for social media
+                </div>
+                <TopToRightCurveLineArrow />
+              </div>
+            )
+          }
         </div>
-        <div className={`${styles.div} col-span-12 !mt-0`}>
+        <div id="social-oauth-section" className={`relative ${styles.div} col-span-12 !mt-0`}>
           <div className="grid w-full grid-cols-12">
             <div className="col-span-12 lg:col-span-6">
               <h6 className="text-[15px] text-white not-italic font-medium leading-[normal]">
@@ -277,7 +293,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               </p>
               <div className="mt-6 flex flex-row">
                 <button
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isCurrentSocialAuthenticated ? "bg-background-300" : "bg-primary-purple"} hover:brightness-110`}
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-lg ${isCurrentSocialAuthenticated ? "bg-background-300" : "bg-primary-purple"} hover:brightness-110`}
                   onClick={oauthLogin}
                   disabled={isCurrentSocialAuthenticated}
                 >
@@ -290,6 +306,17 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
                   <p className={`${isCurrentSocialAuthenticated ? "text-primary-gray" : "text-white"} text-[15px]`}>
                     {tabsList[activeTab].title}
                   </p>
+
+                  {
+                    isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH' && (
+                      <div className="absolute top-full right-full flex items-center translate-x-[-10px] translate-y-[-10px] w-fit">
+                        <div className={`w-[300px] bg-primary-purple rounded-lg text-white p-3 text-md tutorial-element mr-2`}>
+                          Click on the “{tabsList[activeTab].title}” button to connect your account through 1 click authentication.
+                        </div>
+                        <BottomToLeftCurveLine />
+                      </div>
+                    )
+                  }
                 </button>
                 <button
                   className={`flex items-center gap-2 ml-3 px-4 py-2 rounded-lg ${isCurrentSocialAuthenticated ? "bg-primary-purple" : "bg-background-300" } hover:brightness-110`}
@@ -325,8 +352,18 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               )}
             </div>
           </div>
-        </div>
 
+          {
+            isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH' && (
+              <div className="absolute left-0 top-full w-full translate-y-[250px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <div id="social-media-audience-section" className="grid grid-cols-12 gap-4 mt-8 relative">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             4.&nbsp;Upload media assets for {tabsList[activeTab].title}*
@@ -402,6 +439,33 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           </div>
         </div>
 
+        {
+          isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'ADDITIONAL1' && (
+            <Fragment>
+              <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-200px] tutorial-element">
+                <CloseButton />
+              </div>
+              <div className="absolute left-[-300px] bottom-full flex items-center tutorial-element w-fit">
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element mr-5 mb-10`}>
+                  Upload any media assets that you’d like to optimize and watch as our AI generates targeted media based on what you upload
+                </div>
+                <MiddleToRightCurveLineArrow width={75} height={53} />
+              </div>
+              <div className="absolute right-[50px] bottom-full flex items-center tutorial-element">
+                <TopToLeftCurveLineArrow width={100} height={84} />
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}>
+                  Input additional information about your customers in order to refine recommendations 
+                </div>
+              </div>
+              <div className="absolute left-[50px] top-full w-full translate-y-[100px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            </Fragment>
+          )
+        }
+      </div>
+      
+      <div id="social-customer-schedule-section" className="relative grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             6.&nbsp;Add ideal customer profile*
@@ -473,6 +537,31 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           </div>
           <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} title="Ad Schedule" description="Select the days & times you would like to schedule your ads" />
         </div>
+
+        {
+          isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'ADDITIONAL2' && (
+            <Fragment>
+              <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-200px] tutorial-element">
+                <CloseButton />
+              </div>
+              <div className="absolute left-[-300px] bottom-full flex items-center tutorial-element w-fit">
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element mr-5 mb-10`}>
+                  Enter any email marketing templates you would like to optimize
+                </div>
+                <MiddleToRightCurveLineArrow width={75} height={53} />
+              </div>
+              <div className="absolute right-[50px] bottom-full flex items-center tutorial-element">
+                <TopToLeftCurveLineArrow width={100} height={84} />
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}>
+                Click on “ad schedule” to enter preferred time and dates for sending out ads.<br/><br/>You can always edit this later.
+                </div>
+              </div>
+              <div className="absolute left-[50px] top-full w-full translate-y-[100px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            </Fragment>
+          )
+        }
       </div>
       
       {(() => {

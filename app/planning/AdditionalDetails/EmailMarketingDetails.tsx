@@ -1,20 +1,24 @@
-import { CompanyDetailForm, CompanyForm } from '@/types/planning';
-import React, { FC, useState } from 'react';
+import Image from 'next/image';
+import MicrosoftLogin from 'react-microsoft-login';
+import React, { FC, Fragment, useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
+import { BiCalendar } from 'react-icons/bi';
+import { Chip, useDisclosure } from '@nextui-org/react';
+import { useFormik } from 'formik';
+import axios from 'axios';
 
 import Button from '../TabButton';
-import Image from 'next/image';
 import styles from '../planning.module.css';
-import { useFormik } from 'formik';
-import { BiCalendar } from 'react-icons/bi';
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
-import MicrosoftLogin from 'react-microsoft-login';
-import { Chip, useDisclosure } from '@nextui-org/react';
 import EmailScheduleModal from './EmailScheduleModal';
 import { DETAIL_LIMIT } from '@/data/constant';
 import EmailEditModal from './EmailEditModal';
+import NavigationButtons from '@/components/tutorial/NavigationButtons';
+import CloseButton from '@/components/tutorial/CloseButton';
+import { TopToLeftCurveLineArrow, BottomToRightCuveLine, MiddleToRightCurveLineArrow, BottomToLeftCurveLine, TopToRightCurveLineArrow, LongTopToRightCurveLineArrow } from '@/components/tutorial/Arrows';
 import { useSeoAnalyzerContext } from '@/context/seo';
+import { useTutorialsContext } from '@/context/tutorials';
 import { formatTimeOfDay } from '@/utils';
+import type { CompanyDetailForm, CompanyForm } from '@/types/planning';
 
 interface EmailMarketingDetailsProps {
   formData: CompanyDetailForm;
@@ -52,10 +56,11 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
   activeTab,
   setActiveTab,
 }) => {
-  const { company, setCompany } = useSeoAnalyzerContext();
   const { isOpen, onOpen: onOpenEmailSchedule, onOpenChange } = useDisclosure();
   const [isOpenEmailEditModal, setIsOpenEmailEditModal] = useState<boolean>(false);
   const [isEmailAuthenticated, setIsEmailAuthenticated] = useState<boolean>(false);
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+  const { company, setCompany } = useSeoAnalyzerContext();
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
@@ -89,7 +94,7 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
   return (
     <>
       <div className="grid grid-cols-12 gap-4 mt-8">
-        <div className={`col-span-12 !mt-0 flex items-end`}>
+        <div id="mail-platforms-menu" className={`col-span-12 !mt-0 flex items-end`}>
           {tabsList.map((tab, i) => (
             <Button
               key={`tab_${i}`}
@@ -111,8 +116,19 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               </span>
             </Button>
           ))}
+
+          {
+            isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH' && (
+              <div className="absolute right-full flex flex-col items-end translate-x-[-10px] translate-y-[-10px]">
+                <div className={`w-[200px] bg-primary-purple rounded-lg text-white p-3 text-md tutorial-element mr-10 mb-2`}>
+                  Choose which accounts you’d like to connect to for email
+                </div>
+                <TopToRightCurveLineArrow />
+              </div>
+            )
+          }
         </div>
-        <div className={`${styles.div} col-span-12 !mt-0`}>
+        <div id="mail-oauth-section" className={`relative ${styles.div} col-span-12 !mt-0`}>
           <div className="grid w-full grid-cols-12">
             <div className="col-span-12 lg:col-span-6">
               <h6 className="text-[15px] text-white not-italic font-medium leading-[normal]">
@@ -121,75 +137,88 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               <p className="mt-1 text-sm text-primary-gray">
                 Select for 1 click authentication
               </p>
-              {activeTab === 0 ? (
-                <button
-                  className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
-                  onClick={() => {
-                    login();
-                  }}
-                  disabled={isEmailAuthenticated}
-                >
-                  <Image
-                    src={tabsList[activeTab].icon}
-                    alt={tabsList[activeTab].title}
-                    width={24}
-                    height={24}
-                  />
-                  <p className="text-primary-gray text-[15px]">
-                    {tabsList[activeTab].title}
-                  </p>
-                </button>
-              ) : activeTab === 1 ? (
-                <div className='max-w-fit'>
-                  <MicrosoftLogin
-                    clientId="4302711c-32c9-4fab-8cdb-5926cac2b5c9"
-                    withUserData={true}
-                    redirectUri={microsoftRedirectURL}
-                    authCallback={(err, data) => {
-                      console.log(err, data);
-                      if (!err) {
-                        formik.setValues({
-                          ...formik.values,
-                          email: data.mail,
-                        });
-                        setIsEmailAuthenticated(true);
-                      } else {
-                        console.log('fail:', err);
-                      }
+              <div className="relative">
+                {activeTab === 0 ? (
+                  <button
+                    className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
+                    onClick={() => {
+                      login();
                     }}
+                    disabled={isEmailAuthenticated}
                   >
-                    <button
-                      className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
-                      disabled={isEmailAuthenticated}
+                    <Image
+                      src={tabsList[activeTab].icon}
+                      alt={tabsList[activeTab].title}
+                      width={24}
+                      height={24}
+                    />
+                    <p className="text-primary-gray text-[15px]">
+                      {tabsList[activeTab].title}
+                    </p>
+                  </button>
+                ) : activeTab === 1 ? (
+                  <div className='max-w-fit'>
+                    <MicrosoftLogin
+                      clientId="4302711c-32c9-4fab-8cdb-5926cac2b5c9"
+                      withUserData={true}
+                      redirectUri={microsoftRedirectURL}
+                      authCallback={(err, data) => {
+                        console.log(err, data);
+                        if (!err) {
+                          formik.setValues({
+                            ...formik.values,
+                            email: data.mail,
+                          });
+                          setIsEmailAuthenticated(true);
+                        } else {
+                          console.log('fail:', err);
+                        }
+                      }}
                     >
-                      <Image
-                        src={tabsList[activeTab].icon}
-                        alt={tabsList[activeTab].title}
-                        width={24}
-                        height={24}
-                      />
-                      <p className="text-primary-gray text-[15px]">
-                        {tabsList[activeTab].title}
-                      </p>
-                    </button>
-                  </MicrosoftLogin>
-                </div>
-              ) : (
-                <button
-                  className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
-                  onClick={() => {}}
-                >
-                  <Image
-                    src={tabsList[activeTab].icon}
-                    alt={tabsList[activeTab].title}
-                    width={24}
-                    height={24}
-                  />
-                  <p className="text-primary-gray text-[15px]">
-                    {tabsList[activeTab].title}
-                  </p>
-                </button>
-              )}
+                      <button
+                        className={`flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 ${isEmailAuthenticated === false ? 'hover:brightness-110' : 'grayscale'}`}
+                        disabled={isEmailAuthenticated}
+                      >
+                        <Image
+                          src={tabsList[activeTab].icon}
+                          alt={tabsList[activeTab].title}
+                          width={24}
+                          height={24}
+                        />
+                        <p className="text-primary-gray text-[15px]">
+                          {tabsList[activeTab].title}
+                        </p>
+                      </button>
+                    </MicrosoftLogin>
+                  </div>
+                ) : (
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 mt-6 rounded-lg bg-background-300 hover:brightness-110"
+                    onClick={() => {}}
+                  >
+                    <Image
+                      src={tabsList[activeTab].icon}
+                      alt={tabsList[activeTab].title}
+                      width={24}
+                      height={24}
+                    />
+                    <p className="text-primary-gray text-[15px]">
+                      {tabsList[activeTab].title}
+                    </p>
+                  </button>
+                )}
+
+                {
+                    isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH' && (
+                      <div className="absolute top-full right-full flex items-center translate-x-[-10px] translate-y-[-10px] w-fit">
+                        <div className={`w-[300px] bg-primary-purple rounded-lg text-white p-3 text-md tutorial-element mr-2`}>
+                          Click on the “{tabsList[activeTab].title}” button to connect your account through 1 click authentication.
+                        </div>
+                        <BottomToLeftCurveLine />
+                      </div>
+                    )
+                  }
+              </div>
             </div>
             <div className="col-span-12 lg:col-span-6">
               <p className="mt-1 text-sm text-primary-gray">
@@ -214,8 +243,18 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
               )}
             </div>
           </div>
-        </div>
 
+          {
+            isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH' && (
+              <div className="absolute left-0 top-full w-full translate-y-[250px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            )
+          }
+        </div>
+      </div>
+      
+      <div id="email-templates-schedule-section" className="relative grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             4.&nbsp;Enter your email marketing templates*
@@ -291,6 +330,33 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
           <EmailScheduleModal isOpen={isOpen} onOpenChange={onOpenChange} title='Email Schedule' description='Select the days & times you would like to schedule your emails' />
         </div>
 
+        {
+          isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'ADDITIONAL1' && (
+            <Fragment>
+              <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-200px] tutorial-element">
+                <CloseButton />
+              </div>
+              <div className="absolute left-[-300px] bottom-full flex items-center tutorial-element w-fit">
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element mr-5 mb-10`}>
+                  Enter any email marketing templates you would like to optimize
+                </div>
+                <MiddleToRightCurveLineArrow width={75} height={53} />
+              </div>
+              <div className="absolute right-[50px] bottom-full flex items-center tutorial-element">
+                <TopToLeftCurveLineArrow width={100} height={84} />
+                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}>
+                  Click on “email schedule” to enter preferred time and dates for sending out emails.<br/><br/>You can always edit this later.
+                </div>
+              </div>
+              <div className="absolute left-[50px] top-full w-full translate-y-[100px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            </Fragment>
+          )
+        }
+      </div>
+      
+      <div id="email-audience-customer-section" className="relative grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             6.&nbsp;Add your target audience*
@@ -345,6 +411,32 @@ const EmailMarketingDetails: FC<EmailMarketingDetailsProps> = ({
             </label>
           </div>
         </div>
+
+        {
+          isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'ADDITIONAL2' && (
+            <Fragment>
+              <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-200px] tutorial-element">
+                <CloseButton />
+              </div>
+              <div className="absolute left-[-150px] bottom-full translate-y-[50px] flex items-center tutorial-element w-fit">
+                <div className="flex flex-col">
+                  <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element mb-5`}>
+                    Input additional information about your customers in order to refine recommendations
+                  </div>
+                  <div className="ml-16">
+                    <BottomToRightCuveLine />
+                  </div>
+                </div>
+                <div className="mb-[200px] ml-10 w-[600px] h-[60px]">
+                  <LongTopToRightCurveLineArrow />
+                </div>
+              </div>
+              <div className="absolute left-[50px] top-full w-full translate-y-[100px] flex tutorial-element">
+                <NavigationButtons />
+              </div>
+            </Fragment>
+          )
+        }
       </div>
 
       <EmailEditModal isOpen={isOpenEmailEditModal} onOpenChange={() => setIsOpenEmailEditModal(false)} />

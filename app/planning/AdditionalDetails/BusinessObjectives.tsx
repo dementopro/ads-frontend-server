@@ -80,6 +80,44 @@ const BusinessObjectives: FC<ContentTypeSectionProps> = ({
           </Fragment>
         )
       }
+
+      {
+        isInTutorialMode && tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OBJECTIVES' && (
+          <Fragment>
+            <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px] tutorial-element">
+              <CloseButton />
+            </div>
+            <div className="absolute left-[200px] bottom-full flex items-center tutorial-element">
+              <TopToLeftCurveLineArrow width={100} height={84} />
+              <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}>
+                Choose which business objectives you want your recommendations to focus on  & watch as our AI creates optimizations to achieve your goals
+              </div>
+            </div>
+            <div className="absolute left-[100px] top-full translate-y-[30px] tutorial-element">
+              <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
+            </div>
+          </Fragment>
+        )
+      }
+
+      {
+        isInTutorialMode && tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OBJECTIVES' && (
+          <Fragment>
+            <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px] tutorial-element">
+              <CloseButton />
+            </div>
+            <div className="absolute left-[200px] bottom-full flex items-center tutorial-element">
+              <TopToLeftCurveLineArrow width={100} height={84} />
+              <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}>
+                Choose which business objectives you want your recommendations to focus on  & watch as our AI creates optimizations to achieve your goals
+              </div>
+            </div>
+            <div className="absolute left-[100px] top-full translate-y-[30px] tutorial-element">
+              <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
+            </div>
+          </Fragment>
+        )
+      }
     </div>
   );
 };

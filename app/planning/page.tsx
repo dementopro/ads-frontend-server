@@ -205,7 +205,7 @@ const PlanningPage = () => {
               </div>
 
               {
-                isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1' && (
+                isInTutorialMode && ((tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH') ||  (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH')) && (
                   <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
                     <CloseButton />
                   </div>

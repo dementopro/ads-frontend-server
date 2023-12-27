@@ -85,7 +85,7 @@ const OnPage = () => {
                   </div>
                 </div>
                 <div className="absolute left-0 top-full w-full translate-y-[250px] flex tutorial-element">
-                  <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
+                  <NavigationButtons onBack={() => setIsInTutorialMode(false)} onNext={() => setIsInTutorialMode(false)} />
                 </div>
               </Fragment>
             )

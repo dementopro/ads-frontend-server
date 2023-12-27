@@ -73,19 +73,19 @@ export type TutorialEmailGuideModesChildType = { mode: TutorialEmailGuideMode, h
 export const TutorialEmailGuideModes: TutorialEmailGuideModesChildType[] = [
   {
     mode: 'OAUTH',
-    highlightElement: ''
+    highlightElement: 'company-additional-details stepper-menu mail-platforms-menu mail-oauth-section'
   },
   {
     mode: 'ADDITIONAL1',
-    highlightElement: ''
+    highlightElement: 'email-templates-schedule-section'
   },
   {
     mode: 'ADDITIONAL2',
-    highlightElement: ''
+    highlightElement: 'email-audience-customer-section'
   },
   {
     mode: 'OBJECTIVES',
-    highlightElement: ''
+    highlightElement: 'business-objectives-section'
   },
   {
     mode: 'RECOMMENDATION',
@@ -123,19 +123,19 @@ export const TutorialSocialGuideModes: TutorialSocialGuideModesChildType[] =
 [
   {
     mode: 'OAUTH',
-    highlightElement: ''
+    highlightElement: 'company-additional-details stepper-menu social-media-platforms-menu social-oauth-section'
   },
   {
     mode: 'ADDITIONAL1',
-    highlightElement: ''
+    highlightElement: 'social-media-audience-section'
   },
   {
     mode: 'ADDITIONAL2',
-    highlightElement: ''
+    highlightElement: 'social-customer-schedule-section'
   },
   {
     mode: 'OBJECTIVES',
-    highlightElement: ''
+    highlightElement: 'business-objectives-section'
   },
   {
     mode: 'RECOMMENDATION1',

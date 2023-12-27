@@ -34,7 +34,7 @@ const AdminLayout = ({ children }: {
       </div>
   };
 
-  const overFlowVisibleCases = isInTutorialMode && ((tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL') || (tutorialCampaign === 'SEO' && currentGuideMode.mode === 'RECOMMENDATION') || (tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL'));
+  const overFlowVisibleCases = isInTutorialMode && ((tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL') || (tutorialCampaign === 'SEO' && currentGuideMode.mode === 'RECOMMENDATION') || (tutorialCampaign === 'SEO' && currentGuideMode.mode === 'DETAIL') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'ADDITIONAL1') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'ADDITIONAL2') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OBJECTIVES') || (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH') || (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'ADDITIONAL1') || (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'ADDITIONAL2') || (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OBJECTIVES'));
 
   return (
     <div className='flex flex-col h-screen max-h-screen min-w-full'>

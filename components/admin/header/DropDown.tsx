@@ -67,7 +67,7 @@ const DropDown = () => {
       onStartTutorialModalOpen();
     } else if (pathname?.includes('/home') && tutorialCampaign !== 'HOME') {
       startTutorial('HOME');
-    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'seo') {
+    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'seo') { // Additional SEO details
       if (tutorialCampaign !== 'SEO')
        startTutorial('SEO');
       else {
@@ -75,11 +75,10 @@ const DropDown = () => {
         const index: number = currentGuideModes.findIndex((guideMode) => guideMode.mode === 'RECOMMENDATION');
         if (index > -1) {
           setGuideModeIndex(index);
-          // setTutorialCampaign('SEO');
           setIsInTutorialMode(true);
         }
       }
-    } else if (pathname?.includes('/contentType') && pathname?.includes('/seo')) {
+    } else if (pathname?.includes('/contentType') && pathname?.includes('/seo')) { // SEO recommendations
       const seoGuideModes = getGuideModes('SEO');
       const index: number = seoGuideModes.findIndex((guideMode) => guideMode.mode === 'DETAIL');
       if (index > -1) {
@@ -87,10 +86,30 @@ const DropDown = () => {
         setGuideModeIndex(index);
         setIsInTutorialMode(true);
       }
-    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'social media' && tutorialCampaign !== 'SOCIAL') {
-      startTutorial('SOCIAL');
-    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'email marketing' && tutorialCampaign !== 'EMAIL') {
-      startTutorial('EMAIL');
+    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'social media') { // Additional Social details
+      if (tutorialCampaign !== 'SOCIAL')
+        startTutorial('SOCIAL');
+      else {
+        const currentGuideModes = getGuideModes(tutorialCampaign as TutorialCampaign);
+        const index: number = currentGuideModes.findIndex((guideMode) => guideMode.mode === 'OAUTH');
+        if (index > -1) {
+          setGuideModeIndex(index);
+          // setTutorialCampaign('SEO');
+          setIsInTutorialMode(true);
+        }
+      }
+    } else if (pathname?.includes('/planning') && company.content_type.toLowerCase() === 'email marketing') { // Additional mail details
+      if (tutorialCampaign !== 'EMAIL')
+        startTutorial('EMAIL');
+      else {
+        const currentGuideModes = getGuideModes(tutorialCampaign as TutorialCampaign);
+        const index: number = currentGuideModes.findIndex((guideMode) => guideMode.mode === 'OAUTH');
+        if (index > -1) {
+          setGuideModeIndex(index);
+          // setTutorialCampaign('EMAIL');
+          setIsInTutorialMode(true);
+        }
+      }
     } else setIsInTutorialMode(true);
   };
 
