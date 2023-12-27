@@ -52,8 +52,8 @@ const AdminLayout = ({ children }: {
           {children}
         </div>
       </div>
-      <div className="fixed bottom-0 right-0">
-        <iframe src="/documents/chat_bot.html" frameBorder="0" width="100%" height="500px"></iframe>
+      <div className="fixed" style={{ bottom: '8px', right: '8px' }}>
+        <iframe src="/documents/chat_bot.html" frameBorder="0" width="80px" height="80px"></iframe>
       </div>
     </div>
   );

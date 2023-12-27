@@ -8,7 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import { Editor, EditorRef, EmailEditorProps } from 'react-email-editor';
+import { EditorRef, EmailEditorProps } from 'react-email-editor';
 import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
 import dynamic from 'next/dynamic';

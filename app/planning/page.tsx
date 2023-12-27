@@ -430,7 +430,7 @@ const PlanningPage = () => {
             :
             <>
               <InfographicsRecommendation />
-               <BackButton
+              <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}
               />
