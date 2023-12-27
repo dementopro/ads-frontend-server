@@ -52,7 +52,9 @@ const AdminLayout = ({ children }: {
           {children}
         </div>
       </div>
-      {/* <Script src="/script/chatbot_script.js"></Script> */}
+      <div className="fixed bottom-0 right-0">
+        <iframe src="/documents/chat_bot.html" frameBorder="0" width="100%" height="500px"></iframe>
+      </div>
     </div>
   );
 };
