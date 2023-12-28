@@ -37,6 +37,7 @@ import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
 import { DETAIL_LIMIT } from '@/data/constant';
 import { Menu, Transition } from '@headlessui/react';
+import path from 'path';
 
 import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
 import Select from '@/components/common/Select';
@@ -46,6 +47,12 @@ import PinterestLaunchAdModal from "./social/pinterest/LaunchAdModal";
 
 interface SocialMediaProps {
   type: number;
+}
+
+interface TextCopiedState {
+  imageCaption: boolean;
+  potentialOutcome: boolean;
+  imageDescription: boolean;
 }
 
 const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
@@ -62,36 +69,72 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
   const [activeMedia, setActiveMedia] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [ratio, setRatio] = useState<string>('Square');
-  const [isBasicOpen, setIsBasicOpen] = useState<boolean>(false);
+  const [isBasicOpen, setIsBasicOpen] = useState<boolean>(true);
   const [isDetailedOpen, setIsDetailedOpen] = useState<boolean>(false);
   const [isTextOpen, setIsTextOpen] = useState<boolean>(false);
   const [isImageOpen, setIsImageOpen] = useState<boolean>(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
+  const [isTextCopied, setIsTextCopied] = useState<TextCopiedState>({
+    imageCaption: false,
+    potentialOutcome: false,
+    imageDescription: false
+  });
   const { isOpen: isLaunchAdModalOpen, onOpen: onLaunchAdModalOpen, onOpenChange: onLaunchAdModalOpenChange } = useDisclosure();
   const [schedules, setSchedules] = useState<any>([]);
   const { data: session, status } = useSession();
 
   const currentSocialTitle: string = useMemo(() => tabsList[type].title.toLowerCase().replaceAll(" ", ""), [type]);
 
+  const handleOnCopy = (attribute: 'imageCaption' | 'potentialOutcome' | 'imageDescription', value: string) => () => {
+    try {
+      navigator.clipboard.writeText(value);
+      setIsTextCopied(isTextCopied => ({
+        ...isTextCopied,
+        [attribute]: true
+      }));
+      setTimeout(() => {
+        setIsTextCopied(isTextCopied => ({
+          ...isTextCopied,
+          [attribute]: false
+        }));
+      }, 2000);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const download = (filename: string, content: string) => {
+    const element = document.createElement("a");
+    element.setAttribute("href", content);
+    element.setAttribute("download", filename);
+    element.setAttribute("target", "_blank");
+    element.click();
+  };
+
+  const handleOnDownloadImage = (imageLink: string) => async () => {
+    const result = await fetch(imageLink, {
+      method: "GET",
+      headers: {}
+    });
+    const blob = await result.blob();
+    const url = URL.createObjectURL(blob);
+    download(`image${path.extname(imageLink)}`, url);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleOnLaunchAd = async () => {
+    if (status === 'authenticated' && (session as any)[tabsList[type].provider] && (session as any)[tabsList[type].provider].accessToken)
+      onLaunchAdModalOpen();
+    else {
+      messageApi.error(`Your ${tabsList[type].title} account is not connected`);
+    }
+  };
+
   useEffect(() => {
     if (emailInstruction && emailInstruction.email_options) {
       setOptionEdits([...emailInstruction.email_options]);
     }
   }, [emailInstruction]);
-
-  const handleOnLaunchAd = async () => {
-    onLaunchAdModalOpen();
-    // try {
-    //   const pinterestAnalytics = await axios.post(`/api/planning/${tabsList[type].title.toLowerCase().replaceAll(" ", "")}/launchAd`, {
-    //     accessToken: (session as any)[tabsList[type].provider].accessToken,
-    //     refreshToken: (session as any)[tabsList[type].provider].refreshToken
-    //   });
-
-    //   messageApi.success('Launch Ad success');
-    // } catch (error) {
-    //   messageApi.error('Something went wrong');
-    // }
-  };
 
   if (socialMedia.length === 0) return <></>;
 
@@ -268,10 +311,6 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         )}
                       </div>
                     </div>
-                    <div className="flex flex-row-reverse w-full gap-4 mt-4">
-                      <BiCopy className="w-5 h-5" />
-                      <BiDownload className="w-5 h-5" />
-                    </div>
                   </div>
 
                   <div className="flex-1 p-0 flex-wrap">
@@ -286,7 +325,9 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         <span className="flex-1 px-2">
                           Based on your profile
                         </span>
-                        <BiChevronDown className="w-5 h-5" />
+                        {
+                          isBasicOpen ? <BiChevronUp className="w-5 h-5" /> : <BiChevronDown className="w-5 h-5" />
+                        }
                       </div>
                       <div
                         className="px-8 py-4 border-t border-t-background-300"
@@ -299,7 +340,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                           {company.business_objectives.map((val, i) => (
                             <Chip
                               key={i}
-                              className="rounded-lg bg-background-300 text-primary-gray"
+                              className="rounded-sm bg-background-300 text-primary-gray"
                             >
                               {val}
                             </Chip>
@@ -319,7 +360,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                             (val: any, idx: number) => (
                               <Chip
                                 key={idx}
-                                className="rounded-lg bg-background-300 text-primary-gray"
+                                className="rounded-sm bg-background-300 text-primary-gray"
                               >
                                 {val}
                               </Chip>
@@ -340,7 +381,9 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         <span className="flex-1 px-2">
                           Detailed recommendation
                         </span>
-                        <BiChevronDown className="w-5 h-5" />
+                        {
+                          isDetailedOpen ? <BiChevronUp className="w-5 h-5" /> : <BiChevronDown className="w-5 h-5" />
+                        }
                       </div>
                       <div
                         className="w-full px-8 py-4 border-t border-t-background-300"
@@ -356,7 +399,9 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                               {socialMedia[activeMedia]?.content.image}
                             </p>
                           </div>
-                          <BiCopy className="w-5 h-5" />
+                          {
+                            isTextCopied.imageDescription ? <BiCheck className="text-primary-purple w-5 h-5" /> : <BiCopy className="w-5 h-5 cursor-pointer" onClick={handleOnCopy('imageDescription', socialMedia[activeMedia]?.content.image)} />
+                          }
                         </div>
 
                         <div className="flex mt-4">
@@ -373,7 +418,9 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                               }
                             </p>
                           </div>
-                          <BiCopy className="w-5 h-5" />
+                          {
+                            isTextCopied.potentialOutcome ? <BiCheck className="text-primary-purple w-5 h-5" /> : <BiCopy className="w-5 h-5 cursor-pointer" onClick={handleOnCopy('potentialOutcome', socialMedia[activeMedia]?.content['potential_outcome'] || socialMedia[activeMedia]?.content['potential outcome'])} />
+                          }
                         </div>
                       </div>
                     </div>
@@ -386,8 +433,13 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         }}
                       >
                         <BiAward className="w-5 h-5" />
-                        <span className="flex-1 px-2">Text</span>
-                        <BiChevronDown className="w-5 h-5" />
+                        <span className="mr-8 px-2">Text</span>
+                        <span className="flex-1">
+                          <Chip className="rounded-lg bg-background-300 text-primary-gray">Step&nbsp;&nbsp;1/3</Chip>
+                        </span>
+                        {
+                          isTextOpen ? <BiChevronUp className="w-5 h-5" /> : <BiChevronDown className="w-5 h-5" />
+                        }
                       </div>
                       <div
                         className="w-full px-8 py-4 border-t border-t-background-300"
@@ -395,7 +447,9 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                       >
                         <div className="flex items-center justify-between">
                           <h6 className="text-white text-normal">Caption</h6>
-                          <BiCopy className="w-5 h-5" />
+                          {
+                            isTextCopied.imageCaption ? <BiCheck className="text-primary-purple w-5 h-5" /> : <BiCopy className="w-5 h-5 cursor-pointer" onClick={handleOnCopy('imageCaption', socialMedia[activeMedia]?.content.caption)} />
+                          }
                         </div>
                         <div className="bg-[#212228] border border-background-300 rounded-lg text-primary-gray px-6 py-4 mt-4">
                           {socialMedia[activeMedia]?.content.caption}
@@ -425,8 +479,13 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         }}
                       >
                         <BiImage className="w-5 h-5" />
-                        <span className="flex-1 px-2">Image</span>
-                        <BiChevronDown className="w-5 h-5" />
+                        <span className="mr-8 px-2">Image</span>
+                        <span className="flex-1">
+                          <Chip className="rounded-lg bg-background-300 text-primary-gray">Step&nbsp;&nbsp;2/3</Chip>
+                        </span>
+                        {
+                          isImageOpen ? <BiChevronUp className="w-5 h-5" /> : <BiChevronDown className="w-5 h-5" />
+                        }
                       </div>
                       <div
                         className="w-full px-8 py-4 border-t border-t-background-300"
@@ -436,7 +495,7 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                           <h6 className="text-white text-normal">
                             Attached images
                           </h6>
-                          <BiCopy className="w-5 h-5" />
+                          <BiDownload className="w-5 h-5 cursor-pointer" onClick={handleOnDownloadImage(socialMedia[activeMedia]?.img_url)} />
                         </div>
                         <Image
                           src={socialMedia[activeMedia]?.img_url}
@@ -470,8 +529,13 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                         }}
                       >
                         <BiCalendar className="w-5 h-5" />
-                        <span className="flex-1 px-2">Calendar</span>
-                        <BiChevronDown className="w-5 h-5" />
+                        <span className="mr-8 px-2">Calendar</span>
+                        <span className="flex-1">
+                          <Chip className="rounded-lg bg-background-300 text-primary-gray">Step&nbsp;&nbsp;3/3</Chip>
+                        </span>
+                        {
+                          isCalendarOpen ? <BiChevronUp className="w-5 h-5" /> : <BiChevronDown className="w-5 h-5" />
+                        }
                       </div>
 
                       <div
@@ -522,12 +586,8 @@ const SocialMedia: FC<SocialMediaProps> = ({ type }) => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between col-span-12">
-                              <div className="flex items-center gap-2">
-                                <u>Use optimal times</u>
-                                <BiChevronDown className="w-5 h-5" />
-                              </div>
-                              <BiTrash className="w-5 h-5" />
+                            <div className="flex items-center justify-end col-span-12">
+                              <BiTrash className="w-5 h-5 cursor-pointer" />
                             </div>
                           </div>
                         </div>

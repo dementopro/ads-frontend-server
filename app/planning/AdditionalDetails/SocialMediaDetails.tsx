@@ -123,7 +123,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
   const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
-  
+
   const currentProvider: string = useMemo(() => {
     setAdAccounts([]);
     setAnalytics([]);
@@ -343,7 +343,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
                 } w-full `}
                 placeholder={`Enter ${tabsList[activeTab].title} address`}
                 {...formik.getFieldProps('url')}
-                disabled={isCurrentSocialAuthenticated}
+                disabled={false}
               />
               {formik.errors.url && formik.touched.url && (
                 <label className="mt-2 text-xs text-rose-600">
@@ -454,7 +454,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
               <div className="absolute right-[50px] bottom-full flex items-center tutorial-element">
                 <TopToLeftCurveLineArrow width={100} height={84} />
                 <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}>
-                  Input additional information about your customers in order to refine recommendations 
+                  Input additional information about your customers in order to refine recommendations
                 </div>
               </div>
               <div className="absolute left-[50px] top-full w-full translate-y-[100px] flex tutorial-element">
@@ -464,7 +464,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           )
         }
       </div>
-      
+
       <div id="social-customer-schedule-section" className="relative grid grid-cols-12 gap-4 mt-8">
         <div className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
@@ -563,7 +563,7 @@ const SocialMediaDetails: FC<SocialMediaDetailsProps> = ({
           )
         }
       </div>
-      
+
       {(() => {
         const props = {
           formik: formik,

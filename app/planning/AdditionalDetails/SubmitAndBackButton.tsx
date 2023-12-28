@@ -1,13 +1,14 @@
 import React, { FC, useMemo, useState } from 'react';
-import styles from './SubmitAndBackButton.module.css';
-import { useFormik } from 'formik';
-import { CompanyForm, CompanyDetailForm } from '@/types/planning';
-import axios from 'axios';
-import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
-import { Spin, message } from 'antd';
-import { formValidUrl } from '@/utils';
 import { useRouter } from 'next/navigation';
+import { useFormik } from 'formik';
+import { Spin, message } from 'antd';
+
+import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import axios from '@/lib/axios';
+import { formValidUrl } from '@/utils';
 import LoadingSpin from '../LoadingSpin';
+import styles from './SubmitAndBackButton.module.css';
+import type { CompanyForm, CompanyDetailForm } from '@/types/planning';
 
 interface SubmitAndBackButtonProps {
   activeButtonIndex: number;
@@ -1065,21 +1066,6 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
       });
 
       const getCustomizedInfographicsTemplate = (infographicsTagsObj: Object) => {
-        // let infographicsTagsObj = {
-        //   "header title": "AdsGency AI",
-        //   "header description": "AdsGency AI, specializing in AI-driven advertising strategies, is revolutionizing the way marketers design and implement their ad campaigns. ",
-        //   "item1": "Enhance Your Strategy",
-        //   "description1": "By leveraging AI tools and techniques, marketers can amplify their promotional efforts, optimizing each aspect of their advertising strategy.",
-        //   "item2": "Target Accurately",
-        //   "description2": "AdsGency AI's solutions allow marketers to hone in on their target audience, ensuring their campaigns reach the right prospects at the right time.",
-        //   "item3": "Ideal for Independent Marketers",
-        //   "description3": "AdsGency AI is the perfect partner for independent marketers with less than $500,000 in annual marketing spend, providing affordable, effective and cutting-edge tools for ad creation and promotion.",
-        //   "item4": "Educate and Promote",
-        //   "description4": "Whether it's educating customers about a product or promoting an event, AdsGency AI's suite of services will meet your marketing objectives.",
-        //   "footer title": "Revitalize Your Advertising with AdsGency AI",
-        //   "footer description": "Learn more at our website: https://adsgency.ai"
-        // };
-
         let customizedInfographicsTemplate = { ...infographics_template };
         const customizeInfographicsTemplate = (templateObj: any) => {
           for (var key in templateObj) {
