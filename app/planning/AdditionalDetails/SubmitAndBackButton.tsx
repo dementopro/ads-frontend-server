@@ -22,7 +22,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   formik,
   formData,
 }) => {
-  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction, setSocialMedia, socialMedia } =
+  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction, setSocialMedia, setInfographics } =
     useSeoAnalyzerContext();
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
@@ -235,33 +235,33 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
         bodyData.append('media', asset);
       });
 
-      setActiveButtonIndex(index);
-      setIsLoading(false);
+      axios
+        .post('/fapi/infograhics_get_instructions_api', bodyData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then((res) => {
+          if (res.data.status == true) {
+            try {
+              const infographics_string = res.data.infographic;
+              const infographics_obj = JSON.parse(infographics_string);
+              setInfographics(infographics_obj);
+            } catch {
 
-      // axios
-      //   .post('/fapi/infograhics_get_instructions_api', bodyData, {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data"
-      //     }
-      //   })
-      //   .then((res) => {
-      //     if (res.data.status == true) {
-      //       setSocialMedia(res.data.recommendations.map((rec: any) => ({
-      //         content: JSON.parse(rec.content),
-      //         img_url: process.env.NEXT_PUBLIC_API_URL + rec.img_url
-      //       })));
-      //       setActiveButtonIndex(index);
-      //     } else {
-      //       messageApi.error(res.data.message);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     messageApi.error('Something went wrong');
-      //     console.warn('Error from /social_media_instruction_api', err);
-      //   })
-      //   .finally(() => {
-      //     setIsLoading(false);
-      //   });
+            }
+            setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /social_media_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       console.log('Please fill required fields', formik.errors);
     }

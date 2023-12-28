@@ -120,9 +120,9 @@ const PlanningPage = () => {
 
   useEffect(() => {
     if (company) {
-      if (company.name === '' || company.website === '' || company.description === '') {
-        router.push('/home');
-      }
+      // if (company.name === '' || company.website === '' || company.description === '') {
+      //   router.push('/home');
+      // }
 
       formik.setValues({
         companyName: company.name,

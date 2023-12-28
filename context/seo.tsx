@@ -37,6 +37,7 @@ export type SocialMedia = Array<{
 export const SeoAnalyzerContext = createContext<{
   onpage: Array<SeoAnalysis>,
   offpage: Array<SeoAnalysis>,
+  infographics: Object,
   isLoadingOnpage: boolean,
   isLoadingOffpage: boolean,
   company: CompanyDetailForm,
@@ -44,6 +45,7 @@ export const SeoAnalyzerContext = createContext<{
   socialMedia: SocialMedia,
   setOnpage: (data: Array<SeoAnalysis>) => void,
   setOffpage: (data: Array<SeoAnalysis>) => void,
+  setInfographics: (data: Object) => void,
   setIsLoadingOnpage: (data: boolean) => void,
   setIsLoadingOffpage: (data: boolean) => void,
   setCompany: (data: CompanyDetailForm) => void,
@@ -52,6 +54,7 @@ export const SeoAnalyzerContext = createContext<{
 }>({
   onpage: [],
   offpage: [],
+  infographics: {},
   isLoadingOnpage: false,
   isLoadingOffpage: false,
   company: {
@@ -78,6 +81,7 @@ export const SeoAnalyzerContext = createContext<{
   socialMedia: [],
   setOnpage: (data) => {},
   setOffpage: (data) => {},
+  setInfographics: (data) => {},
   setIsLoadingOnpage: (data) => {},
   setIsLoadingOffpage: (data) => {},
   setCompany: (data) => {},
@@ -93,6 +97,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
   // Define state variables to manage user account data
   const [onpage, setOnpage] = useState<Array<SeoAnalysis>>([]);
   const [offpage, setOffpage] = useState<Array<SeoAnalysis>>([]);
+  const [infographics, setInfographics] = useState<Object>({});
   const [isLoadingOnpage, setIsLoadingOnpage] = useState<boolean>(false);
   const [isLoadingOffpage, setIsLoadingOffpage] = useState<boolean>(false);
   const [company, setCompany] = useState<CompanyDetailForm>({
@@ -124,6 +129,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
     <SeoAnalyzerContext.Provider value={{
       onpage, setOnpage,
       offpage, setOffpage,
+      infographics, setInfographics,
       isLoadingOnpage, setIsLoadingOnpage,
       isLoadingOffpage, setIsLoadingOffpage,
       company, setCompany,
