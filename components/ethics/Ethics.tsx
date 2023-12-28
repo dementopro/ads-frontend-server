@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import PrimaryButton from '@/components/common/PrimaryButton';
-import { ethics } from '@/data/ethics/ethics';
+import { ethics } from '@/data/Ethics/ethics';
 
 const Ethics = () => {
   return (

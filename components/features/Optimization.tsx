@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { step3 } from '@/data/features/step3';
 
 const Optimization = () => {
   return (

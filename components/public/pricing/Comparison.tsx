@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { comparison } from '@/data/pricing/comparison';
+import { comparison } from '@/data/Pricing/comparison';
 import { FiCheck, FiChevronDown, FiX } from 'react-icons/fi';
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi';
 

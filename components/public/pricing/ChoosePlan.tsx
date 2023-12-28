@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react';
 import PrimaryButton from '@/components/common/PrimaryButton'
-import { plan } from '@/data/pricing/plan'
+import { plan } from '@/data/Pricing/plan'
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi'
 import { FiCheck } from 'react-icons/fi'
 import { IoMdInformationCircleOutline } from "react-icons/io";

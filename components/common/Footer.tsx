@@ -8,7 +8,7 @@ import gmailIcon from '@iconify/icons-mdi/gmail';
 import youtubeIcon from '@iconify/icons-mdi/youtube';
 import linkedinIcon from '@iconify/icons-mdi/linkedin';
 import Link from 'next/link';
-import { footerLinks } from '@/data/links/footerLinks';
+import { footerLinks } from '@/data/Links/footerLinks';
 
 type ColumnProps = {
   title: string;

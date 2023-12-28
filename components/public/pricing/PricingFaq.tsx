@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { pricingFaq } from '@/data/pricing/pricingFaq';
+import { pricingFaq } from '@/data/Pricing/pricingFaq';
 
 const PricingFaq = () => {
   return (

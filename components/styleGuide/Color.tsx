@@ -1,5 +1,5 @@
 'use client';
-import { color } from '@/data/styleGuide/color';
+import { color } from '@/data/StyleGuide/color';
 import React from 'react';
 
 const Color = () => {

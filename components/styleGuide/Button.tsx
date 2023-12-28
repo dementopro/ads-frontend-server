@@ -1,5 +1,5 @@
 'use client';
-import { font } from '@/data/styleGuide/font';
+import { font } from '@/data/StyleGuide/font';
 import React from 'react';
 
 const Button = () => {

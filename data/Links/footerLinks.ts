@@ -1,26 +1,20 @@
-export const headerLinks = [
+export const footerLinks = [
   {
-    title: 'Features',
-    links: [],
-    url: '/features',
-  },
-  {
-    title: 'Resources',
+    title: 'Product',
     links: [
       {
-        label: 'Blog',
-        href: '/blog',
+        label: 'Request Demo',
+        href: '/requestDemo',
       },
       {
-        label: 'News & Press',
-        href: '/newsPress',
+        label: 'Pricing',
+        href: '/public/pricing',
       },
       {
-        label: 'Style Guide',
-        href: '/styleGuide',
+        label: 'Features',
+        href: '/features',
       },
     ],
-    url: '',
   },
   {
     title: 'Company',
@@ -53,16 +47,27 @@ export const headerLinks = [
         label: 'Careers',
         href: '/careers',
       },
-      {
-        label: 'About',
-        href: '/aboutUs',
-      }
     ],
-    url: '',
   },
   {
-    title: 'Pricing',
-    links: [],
-    url: '/public/pricing',
+    title: 'Resources',
+    links: [
+      {
+        label: 'Blog',
+        href: '/blog',
+      },
+      {
+        label: 'Style Guide',
+        href: '/styleGuide',
+      },
+      {
+        label: 'AdsGency vs ChatGPT',
+        href: '/adsGencyVsChatGPT',
+      },
+      {
+        label: 'AdsGency vs Jasper AI',
+        href: '/adsGencyVsJasperAI',
+      },
+    ],
   },
-];  
+];

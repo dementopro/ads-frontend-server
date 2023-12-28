@@ -1,20 +1,34 @@
-export const footerLinks = [
+export const headerLinks = [
   {
-    title: 'Product',
+    title: 'Features',
+    links: [],
+    url: '/features',
+  },
+  {
+    title: 'Resources',
     links: [
       {
-        label: 'Request Demo',
-        href: '/requestDemo',
+        label: 'Blog',
+        href: '/blog',
       },
       {
-        label: 'Pricing',
-        href: '/public/pricing',
+        label: 'News & Press',
+        href: '/newsPress',
       },
       {
-        label: 'Features',
-        href: '/features',
+        label: 'Style Guide',
+        href: '/styleGuide',
+      },
+      {
+        label: 'AdsGency vs ChatGPT',
+        href: '/adsGencyVsChatGPT',
+      },
+      {
+        label: 'AdsGency vs Jasper AI',
+        href: '/adsGencyVsJasperAI',
       },
     ],
+    url: '',
   },
   {
     title: 'Company',
@@ -47,19 +61,16 @@ export const footerLinks = [
         label: 'Careers',
         href: '/careers',
       },
+      {
+        label: 'About',
+        href: '/aboutUs',
+      }
     ],
+    url: '',
   },
   {
-    title: 'Resources',
-    links: [
-      {
-        label: 'Blog',
-        href: '/blog',
-      },
-      {
-        label: 'Style Guide',
-        href: '/styleGuide',
-      },
-    ],
+    title: 'Pricing',
+    links: [],
+    url: '/public/pricing',
   },
-];
+];  

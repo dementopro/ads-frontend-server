@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { BiSolidStar, BiStar } from 'react-icons/bi';
 import { customerReviews } from '@/data/customerReviews';
-import { principle } from '@/data/ethics/principle';
+import { principle } from '@/data/Ethics/principle';
 
 const OurPrinciple = () => {
   return (

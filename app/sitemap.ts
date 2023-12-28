@@ -47,7 +47,6 @@ const links = [
   {
     url: '/reportMisuse',
   },
-
   {
     url: '/styleGuide',
   },
@@ -56,6 +55,12 @@ const links = [
   },
   {
     url: '/ethics',
+  },
+  {
+    url: '/adsGencyVsChatGPT',
+  },
+  {
+    url: '/adsGencyVsJasperAI',
   },
 ]
 

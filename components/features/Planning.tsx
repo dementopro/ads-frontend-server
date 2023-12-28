@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image'
-import { planning } from '@/data/features/planning';
+import { planning } from '@/data/Features/planning';
 import '../home/styles.css';
 
 const Planning = () => {
