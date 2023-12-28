@@ -30,6 +30,6 @@ export interface ResetPasswordForm {
 export interface ProfileForm {
   username: string;
   email: string;
-  title: string;
-  company: string;
+  job_title: string;
+  company_name: string;
 }
