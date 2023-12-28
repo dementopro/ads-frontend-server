@@ -29,7 +29,7 @@ const CustomerReviewPage = () => {
       <Reviews />
       <Supporters />
       <Commitment />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   );
 };

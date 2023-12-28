@@ -24,7 +24,7 @@ const NewsPressPage = () => {
         <NewsLanding />
       </div>
       <NewsList />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   );
 };

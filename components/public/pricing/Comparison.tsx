@@ -48,7 +48,7 @@ const Comparison = () => {
               )}
             </div>
             {item.list.length > 5 && (
-              <div className={`w-full flex flex-col gap-[16px] bg-[#1B1C21] px-[60px] py-[12px] ${!expandedPlans[index] ? 'h-[0px] opacity-0' : 'h-auto opacity-100'} transition !duration-500 ease-in-out`}>
+              <div className={`w-full flex flex-col gap-[16px] bg-[#1B1C21] px-[60px] ${!expandedPlans[index] ? 'py-[0px] opacity-0' : 'py-[12px] opacity-100'} ${expandedPlans[index] && item.title == 'Core Functionality' ? 'h-[266px]' : 'h-[0px]'} ${expandedPlans[index] && item.title == 'Advanced Integrations' ? 'h-[51px]' : 'h-[0px]'} transition-height-opacity !duration-500 ease-in-out`}>
                 {item.list.slice(5).map((list, i) =>
                   <div key={i} className='w-full flex flex-row gap-[24px] items-center justify-start'>
                     <div className='w-3/6 font-open-sans text-[18px] text-white font-regular'>
@@ -70,10 +70,10 @@ const Comparison = () => {
             {item.list.length > 5 && (
               <button
                 onClick={() => toggleExpansion(index)}
-                className='w-full flex flex-row gap-[10px] text-[13px] px-[12px] py-[6px] bg-black font-open-sans font-regular text-white items-center items-start'
+                className='w-full flex flex-row gap-[10px] text-[13px] px-[12px] py-[6px] bg-black font-open-sans font-regular text-white items-center transition !duration-500 ease-in-out'
               >
                 {expandedPlans[index] ? <HiOutlineMinusCircle /> : <HiOutlinePlusCircle />}
-                <div> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
+                <div className='transition !duration-500 ease-in-out'> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
               </button>
             )}
           </div>

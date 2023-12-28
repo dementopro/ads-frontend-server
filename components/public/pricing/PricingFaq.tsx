@@ -8,10 +8,10 @@ const PricingFaq = () => {
       <div className="w-full text-left text-[#EF5DA8] text-[42px] font-bold font-open-sans">
         FAQs
       </div>
-      <div className="w-full flex flex-row gap-[32px] justify-center items-center">
+      <div className="w-full flex flex-wrap gap-[32px] justify-center items-center items-stretch">
         {pricingFaq.map((faq, index) => (
-          <div key={index} className='w-full p-[4px] bg-light-purple-gradient rounded-[25px]'>
-            <div className="w-full flex flex-col text-left bg-black py-[26px] px-[16px] h-[220px] gap-[8px] rounded-[21px]">
+          <div key={index} className='w-[390px] p-[4px] bg-light-purple-gradient rounded-[25px]'>
+            <div className="w-full h-full flex flex-col text-left bg-black py-[26px] px-[16px] gap-[8px] rounded-[21px]">
               <div className="font-open-sans font-semibold text-[20px]">
                 {faq.question}
               </div>

@@ -27,7 +27,7 @@ const EthicsPage = () => {
       <OurPrinciple />
       <Ethics />
       <EthicalConcern />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   );
 };

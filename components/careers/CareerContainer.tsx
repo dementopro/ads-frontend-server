@@ -38,7 +38,7 @@ const CareerContainer = () => {
       <OurMission />
       <div ref={openPositionsRef}></div>
       <OpenPositions />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   );
 };

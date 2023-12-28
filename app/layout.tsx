@@ -31,7 +31,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="w-full">
+      <body className="w-full relative overflow-x-hidden">
         <WithProviders session={session}>{children}</WithProviders>
       </body>
     </html>

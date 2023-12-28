@@ -29,7 +29,7 @@ const FeaturesPage = () => {
       <Types />
       <Optimization />
       <SocialInsights />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   )
 }

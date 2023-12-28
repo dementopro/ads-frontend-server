@@ -13,8 +13,18 @@ const Ethics = () => {
       }}></div>
       <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black relative overflow-hidden">
         <div className='w-full ipad:mx-auto android:mx-0 flex android:flex-col desktop:flex-row gap-[32px] justify-center items-center z-20'>
-          <div className="android:w-full desktop:w-1/3 text-white font-poppins font-semibold android:text-center desktop:text-left android:text-[34px] ipad:text-[43px] android:leading-[34px] ipad:leading-[43px] ipad:tracking-[-3px]">
-            Ethics at<br /> <span className="bg-brand-color text-transparent bg-clip-text">AdsGency AI</span>
+          <div className="relative android:w-full desktop:w-1/3 text-white font-poppins font-semibold android:text-center desktop:text-left android:text-[34px] ipad:text-[43px] android:leading-[34px] ipad:leading-[43px] ipad:tracking-[-3px]">
+            Ethics at <br />
+            <span className="relative bg-brand-color text-transparent bg-clip-text">
+              <Image
+                className='absolute w-[50px] h-auto right-[-52px] top-[-20px]'
+                width={30}
+                height={30}
+                src='/images/ethics/star-decor.svg'
+                alt='decor'
+              />
+              AdsGency AI
+            </span>
           </div>
           <div className='android:w-full desktop:w-2/3 relative'>
             <div className='w-full relative z-20 flex flex-col gap-[32px] items-start justify-start'>

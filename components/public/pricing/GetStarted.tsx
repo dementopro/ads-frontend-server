@@ -7,8 +7,8 @@ const GetStarted = () => {
   return (
     <div className="android:my-[32px] ipad:my-[60px] android:px-[32px] bg-black flex-col justify-center items-center gap-[32px] inline-flex">
       <div className="relative shadow">
-        <div className='absolute top-[-50px] right-[-86px] w-[200px] h-[200px] bg-[#7D55FA] rounded-full opacity-25 z-10'></div>
-        <div className='absolute top-[-4px] right-[-194px] w-[266px] h-[266px] bg-brand-color rounded-full opacity-50 z-10'></div>
+        <div className='android:hidden ipad:block absolute top-[-50px] right-[-86px] w-[200px] h-[200px] bg-[#7D55FA] rounded-full opacity-25 z-10'></div>
+        <div className='android:hidden ipad:block absolute top-[-4px] right-[-194px] w-[266px] h-[266px] bg-brand-color rounded-full opacity-50 z-10'></div>
         <div className='relative inline-flex flex-col justify-start items-center android:w-full ipadmini:w-[700px] android:gap-[16px] ipad:gap-[32px] py-[36px] android:px-[16px] ipadmini:px-[32px] bg-[#27252D] rounded-[25px] z-20'>
           <div className="text-white font-poppins font-semibold text-left android:text-[32px] ipad:text-[43px] android:leading-[34px] ipadmini:leading-[50px] ipad:leading-[40px] desktop:leading-[56px]">
             Get Started Now
@@ -30,7 +30,7 @@ const GetStarted = () => {
             </div>
           </div>
           <PrimaryButton
-            target="_blank"
+            target="_self"
             href="/register"
             text="Sign Up Now"
           />

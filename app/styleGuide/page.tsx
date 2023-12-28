@@ -23,7 +23,7 @@ const StyleGuidePage = () => {
         <StyleGuideIntro />
       </div>
       <StyleGuide />
-      <AboveFooter />
+      <AboveFooter target='Sign Up' link='/register' />
     </DefaultLayout>
   );
 };

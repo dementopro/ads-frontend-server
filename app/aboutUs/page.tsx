@@ -29,7 +29,7 @@ const AboutUsPage = () => {
         <Statistics />
       </div>
       <OurTeam />
-      <AboveFooter />
+      <AboveFooter target='Request Demo' link='/requestDemo' />
     </DefaultLayout>
   );
 };

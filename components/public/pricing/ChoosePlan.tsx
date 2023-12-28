@@ -21,9 +21,9 @@ const ChoosePlan = () => {
       <div className="android:px-[14px] ipad:px-[18px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
         Choose a Plan
       </div>
-      <div className='w-full flex flex-row gap-[60px] items-start justify-center'>
+      <div className='w-full flex android:flex-wrap gap-[32px] items-start justify-center'>
         {plan.map((plan, index) => (
-          <div key={index} className={`w-full py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
+          <div key={index} className={`w-[390px] py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
             <div className={`w-full flex flex-col gap-[16px] py-[16px] px-[20px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
               <div className='flex flex-col gap-[5px]'>
                 <div className='text-white text-[42px] font-bold font-poppins'>
@@ -55,7 +55,7 @@ const ChoosePlan = () => {
                   </div>
                 ))}
               </div>
-              <div className={`flex flex-col pl-[30px] gap-[16px] justify-start items-start ${!expandedPlans[index] ? 'h-[0px] opacity-0' : 'h-auto opacity-100'} transition !duration-500 ease-in-out`}>
+              <div className={`flex flex-col pl-[30px] gap-[16px] justify-start items-start ${!expandedPlans[index] ? 'h-[0px] opacity-0' : 'h-[90px] opacity-100'} transition-height-opacity !duration-500 ease-in-out`}>
                 {plan.list.slice(5).map((item, index) => (
                   <div key={index} className='flex flex-row gap-[15px] text-[12px] font-poppins text-regular justify-start items-center'>
                     <FiCheck className='text-primary-purple w-[16px] h-[16px]' />
@@ -65,10 +65,10 @@ const ChoosePlan = () => {
               </div>
               <button
                 onClick={() => toggleExpansion(index)}
-                className='flex flex-row gap-[10px] text-[13px] font-open-sans font-regular text-white items-start'
+                className='flex flex-row gap-[10px] text-[13px] font-open-sans font-regular text-white items-center transition !duration-500 ease-in-out'
               >
                 {expandedPlans[index] ? <HiOutlineMinusCircle /> : <HiOutlinePlusCircle />}
-                <div> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
+                <div className='transition !duration-500 ease-in-out'> See {expandedPlans[index] ? 'Less' : 'More'} Details </div>
               </button>
             </div>
           </div>
