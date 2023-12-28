@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, ReactElement, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { EditorRef, EmailEditorProps } from 'react-email-editor';
 import StyledComponents from 'styled-components';
@@ -935,20 +935,12 @@ const StyledEditorWrapper = StyledComponents.div`
   }
 `;
 
-const InfographicsRecommendation: FC = () => {
-<<<<<<< HEAD
-  const { infographics } =
-    useSeoAnalyzerContext();
+const InfographicsRecommendation = () => {
+  const { infographics } = useSeoAnalyzerContext();
   const emailEditorRef = useRef<EditorRef | null>(null);
 
   const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
     unlayer.loadDesign(infographics as any);
-=======
-  const emailEditorRef = useRef<EditorRef | null>(null);
-
-  const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
-    unlayer.loadDesign(design as any);
->>>>>>> 645de561b8e4dca347a7f00992ae7554b85154a5
     if (emailEditorRef.current) {
       emailEditorRef.current.editor = unlayer;
     } else {
