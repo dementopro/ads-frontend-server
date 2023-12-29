@@ -65,10 +65,10 @@ const DropDown = () => {
       type: 'divider',
     },
     {
-      key: 'profile',
+      key: 'access-management',
       label: (
         <button
-          onClick={toProfilePage}
+          onClick={toAccessManagementPage}
           className="text-center flex items-center justify-between gap-2 w-full"
         >
           <Icon
@@ -108,6 +108,11 @@ const DropDown = () => {
   // Function to navigate to the user profile page
   function toProfilePage() {
     router.push('/profile');
+  }
+
+  // Function to navigate to the access management page
+  function toAccessManagementPage() {
+    router.push('/accessManagement');
   }
 
   const handleOpenTutorial = () => {
