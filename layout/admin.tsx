@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { redirect } from 'next/navigation';
-import Script from 'next/script';
+import { useDisclosure } from '@nextui-org/react';
 
 import AdminSidebar from '@/components/admin/AdminSidebar'; // Importing the AdminSidebar component
 import ContentHeader from '@/components/admin/ContentHeader'; // Importing the ContentHeader component
+import RefreshConfirmationModal from '@/components/RefreshConfirmation';
 import { isUserLogin } from '@/lib/auth';
 import { useAccountContext, type AccountInterface } from '@/context/account';
 import { useTutorialsContext } from '@/context/tutorials';
@@ -14,6 +15,22 @@ const AdminLayout = ({ children }: {
 }) => {
   const { account, isLoading, setAccount, setIsLogin } = useAccountContext();
   const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+  const { isOpen: isRefreshConfirmationModalOpen, onOpen: onRefreshConfirmationModalOpen, onOpenChange: onRefreshConfirmationModalOpenChange, onClose: onRefreshConfirmationModalClose } = useDisclosure();
+
+  const handleBeforeUnload = async (event: any) => {
+    // Cancel the event
+    event.preventDefault();
+    event.returnValue = '';
+    onRefreshConfirmationModalOpen();
+  };
+
+  const handleOnConfirm = () => {
+    // Perform any necessary actions before leaving the page
+    onRefreshConfirmationModalClose();
+    // Allow the page to be refreshed
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+    window.location.reload();
+  };
 
   useEffect(() => {
     if (isLoading) {
@@ -27,6 +44,14 @@ const AdminLayout = ({ children }: {
       }
     }
   }, [account, isLoading]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   if (isLoading) {
     return <div className='flex flex-col h-screen max-h-screen min-w-full admin-content'>
@@ -55,6 +80,7 @@ const AdminLayout = ({ children }: {
       <div className="fixed" style={{ bottom: '8px', right: '8px' }}>
         <iframe src="/documents/chat_bot.html" frameBorder="0" width="80px" height="80px"></iframe>
       </div>
+      <RefreshConfirmationModal isOpen={isRefreshConfirmationModalOpen} onOpenChange={onRefreshConfirmationModalOpenChange} onConfirm={handleOnConfirm} onClose={onRefreshConfirmationModalClose} />
     </div>
   );
 };

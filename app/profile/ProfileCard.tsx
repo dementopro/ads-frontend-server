@@ -137,7 +137,7 @@ const ProfileCard = () => {
               {/* {userProfile?.subscription_start && (
                 <p className="mt-3 text-primary-gray text-xs">
                   {' '}
-                  Subscription starts on {userProfile?.subscription_start}
+                  Subscription started on {userProfile?.subscription_start}
                 </p>
               )} */}
               {/* <p className='mt-3 text-primary-gray text-xs'>Opted in on {userProfile?.timestamp}</p> */}

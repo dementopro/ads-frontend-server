@@ -6,44 +6,28 @@ import {
   BiChevronUp,
   BiCopy,
   BiDownload,
-  BiEdit,
-  BiHeart,
   BiImage,
   BiInfoCircle,
-  BiRecycle,
   BiRefresh,
-  BiRepeat,
-  BiSave,
   BiStar,
-  BiText,
   BiTrash,
 } from 'react-icons/bi';
-import { Chip, Tooltip } from '@nextui-org/react';
-import { DatePicker, Input, Spin, message } from 'antd';
+import { Chip, useDisclosure } from '@nextui-org/react';
+import { DatePicker, message } from 'antd';
 import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { useDisclosure } from '@nextui-org/react';
-import {
-  EmailInstruction,
-  EmailOption,
-  SeoAnalysis,
-  useSeoAnalyzerContext,
-} from '@/context/seo';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import ReactMarkdownPreview from '@uiw/react-markdown-preview';
-import axios from 'axios';
-import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
-import { DETAIL_LIMIT } from '@/data/constant';
 import { Menu, Transition } from '@headlessui/react';
 import path from 'path';
 
 import { tabsList } from '@/app/planning/AdditionalDetails/SocialMediaDetails';
 import Select from '@/components/common/Select';
+import { EmailInstruction, EmailOption, SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import MediaStepper from './MediaStepper';
 import MetaLaunchAdModal from "./social/meta/LaunchAdModal";
 import PinterestLaunchAdModal from "./social/pinterest/LaunchAdModal";
+import styles from '@/./app/planning/planning.module.css';
 
 interface SocialMediaProps {
   type: number;

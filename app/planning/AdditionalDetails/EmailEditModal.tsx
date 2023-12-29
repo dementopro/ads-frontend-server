@@ -201,7 +201,7 @@ const EmailEditModal: FC<EmailEditModalProps> = ({
                     { templates.map((temp, i) => (
                       <div
                         key={i}
-                        className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75"
+                        className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75 cursor-pointer"
                         onClick={() => {
                           setTemplate(i);
                         }}
