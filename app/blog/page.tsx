@@ -25,7 +25,7 @@ const BlogPage = () => {
       </div>
       <BlogList />
       <BlogFaq />
-      <AboveFooter target='Request Demo' link='/requestDemo' />
+      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} />
     </DefaultLayout>
   );
 };

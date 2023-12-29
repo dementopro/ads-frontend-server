@@ -37,7 +37,7 @@ export default function Home() {
       <Samples />
       <Demo />
       <Services />
-      <AboveFooter target='Request Demo' link='/requestDemo' />
+      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} />
     </DefaultLayout>
   )
 }

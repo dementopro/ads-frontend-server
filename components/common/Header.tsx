@@ -65,7 +65,7 @@ const Header = () => {
                 Sign In
               </div>
             </Link>
-            <PrimaryButton target="_self" href="/requestDemo" text="Request Demo" />
+            <PrimaryButton icon={true} target="_self" href="/requestDemo" text="Request Demo" />
           </div>
         </div>
       </div >

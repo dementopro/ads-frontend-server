@@ -48,7 +48,7 @@ const Comparison = () => {
               )}
             </div>
             {item.list.length > 5 && (
-              <div className={`w-full flex flex-col gap-[16px] bg-[#1B1C21] px-[60px] ${!expandedPlans[index] ? 'py-[0px] opacity-0' : 'py-[12px] opacity-100'} ${expandedPlans[index] && item.title == 'Core Functionality' ? 'h-[266px]' : 'h-[0px]'} ${expandedPlans[index] && item.title == 'Advanced Integrations' ? 'h-[51px]' : 'h-[0px]'} transition-height-opacity !duration-500 ease-in-out`}>
+              <div className={`w-full flex flex-col gap-[16px] bg-[#1B1C21] px-[60px] ${!expandedPlans[index] ? 'pt-[0px] opacity-0' : 'pt-[12px] opacity-100'} ${expandedPlans[index] && item.title == 'Core Functionality' ? 'h-[266px]' : 'h-[0px]'} ${expandedPlans[index] && item.title == 'Advanced Integrations' ? 'h-[51px]' : 'h-[0px]'} transition-height-opacity !duration-500 ease-in-out`}>
                 {item.list.slice(5).map((list, i) =>
                   <div key={i} className='w-full flex flex-row gap-[24px] items-center justify-start'>
                     <div className='w-3/6 font-open-sans text-[18px] text-white font-regular'>

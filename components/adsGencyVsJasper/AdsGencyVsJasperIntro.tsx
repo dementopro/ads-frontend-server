@@ -27,7 +27,7 @@ const AdsGencyVsChatGPTIntro = () => {
         <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-center android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">
           Navigating AI writing tools can feel like exploring a jungle—plenty of options, enticing features. Let&apos;s delve into two titans: AdsGency AI vs. Jasper AI. An epic battle awaits as strengths clash and a champion emerges!
         </div>
-        <PrimaryButton
+        <PrimaryButton icon={true}
           target="_self"
           href="/register"
           text="Sign Up Today"

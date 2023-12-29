@@ -27,7 +27,7 @@ const CustomerReviewIntro = () => {
         <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-center android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">
           At AdsGency AI, customer satisfaction is our priority. Explore the experiences of businesses like yours who have partnered with us to transform their marketing strategies.
         </div>
-        <PrimaryButton
+        <PrimaryButton icon={true}
           target="_self"
           href="/register"
           text="Sign Up Today"

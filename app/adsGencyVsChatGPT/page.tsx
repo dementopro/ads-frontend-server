@@ -27,7 +27,7 @@ const AdsGencyVsChatGPTPage = () => {
       <AdsGencyVsChatGPTIntroImage />
       <Comparison />
       <Verdict />
-      <AboveFooter target='Sign Up' link='/register' />
+      <AboveFooter target='Sign Up' link='/register' icon={false} />
     </DefaultLayout>
   );
 };

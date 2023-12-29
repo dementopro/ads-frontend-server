@@ -44,7 +44,7 @@ const Landing = () => {
             Decrease Your Advertising Costs & Maximize ROI With AdsGency AI
           </div>
 
-          <PrimaryButton
+          <PrimaryButton icon={true}
             target="_blank"
             href="/requestDemo"
             text="Request Demo"

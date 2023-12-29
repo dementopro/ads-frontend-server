@@ -5,6 +5,7 @@ import ChoosePlan from "@/components/public/pricing/ChoosePlan"
 import PricingFaq from"@/components/public/pricing/PricingFaq"
 import GetStarted from "@/components/public/pricing/GetStarted"
 import Comparison from "@/components/public/pricing/Comparison"
+import AboveFooter from "@/components/common/AboveFooter"
 
 
 export const metadata = {
@@ -30,6 +31,7 @@ const PricingPage = () => {
       <Comparison />
       <PricingFaq />
       <GetStarted />
+      <AboveFooter target='Sign Up' link='/register' icon={false} />
     </DefaultLayout>
   )
 }

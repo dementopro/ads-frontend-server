@@ -72,7 +72,7 @@ const TermsPage = () => {
           </p>
         </div>
       </div>
-      <AboveFooter target='Sign Up' link='/register' />
+      <AboveFooter target='Sign Up' link='/register' icon={false} />
     </DefaultLayout>
   )
 }

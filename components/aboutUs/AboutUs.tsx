@@ -67,7 +67,7 @@ const AboutUs = () => {
             <div className="w-1/2 text-center font-open-sans text-[#D0CDD6] font-regular android:text-[14px] ipad:text-[16px]">
                 AdsGency AI is a one stop shop ads platform meant to optimize and simplify Ads Management.
             </div>
-            <PrimaryButton
+            <PrimaryButton icon={true}
                 target="_self"
                 href="/requestDemo"
                 text="Request Demo"

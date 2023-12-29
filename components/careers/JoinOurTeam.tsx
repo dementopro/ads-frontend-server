@@ -45,7 +45,7 @@ const JoinOurTeam: React.FC<JoinOurTeamProps> = ({ scrollToOpenPositions }) => {
           </div>
 
           <div onClick={scrollToOpenPositions}>
-            <PrimaryButton
+            <PrimaryButton icon={true}
               target="_self"
               href=""
               text="See Open Roles"

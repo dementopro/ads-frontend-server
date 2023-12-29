@@ -14,7 +14,7 @@ const EthicsIntro = () => {
           <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-left android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">
             At AdsGency AI, ethical principles drive our innovation. Discover our commitment to transparency, fairness, and accountability in every aspect of AI development. Join us in shaping a future where AI empowers with responsibility.
           </div>
-          <PrimaryButton
+          <PrimaryButton icon={true}
             target="_self"
             href="/reportMisuse"
             text="Report Misuse or Vulnerability"

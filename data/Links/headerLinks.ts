@@ -1,8 +1,21 @@
 export const headerLinks = [
   {
     title: 'Features',
-    links: [],
-    url: '/features',
+    links: [
+      {
+        label: 'Features',
+        href: '/features',
+      },
+      {
+        label: 'SEO Feature',
+        href: '/features/seo',
+      },
+      {
+        label: 'Email Marketing Feature',
+        href: '/features/emailMarketing',
+      },
+    ],
+    url: ''
   },
   {
     title: 'Resources',
@@ -73,4 +86,4 @@ export const headerLinks = [
     links: [],
     url: '/public/pricing',
   },
-];  
+];

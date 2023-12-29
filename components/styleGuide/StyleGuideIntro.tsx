@@ -27,7 +27,7 @@ const StyleGuideIntro = () => {
         <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-center android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">
           Access the official branding and style guide of AdsGency AI, such as mission fonts, colors, and more. Visit our homepage at AdsGency AI.
         </div>
-        <PrimaryButton
+        <PrimaryButton icon={true}
           target="_self"
           href="/public/pricing"
           text="Subscribe Today"

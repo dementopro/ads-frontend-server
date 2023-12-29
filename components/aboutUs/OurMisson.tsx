@@ -12,7 +12,7 @@ const OurMission = () => {
                     <div className="w-full font-open-sans text-[#D0CDD6] font-regular android:text-[14px] ipad:text-[16px] desktop:my-8 ">
                         At AdsGency AI, our mission is to revolutionize advertising with AI-driven solutions, creating personalized, impactful connections between businesses and their audiences.
                     </div>
-                    <PrimaryButton
+                    <PrimaryButton icon={true}
                         target="_self"
                         href="/careers"
                         text="Learn More"

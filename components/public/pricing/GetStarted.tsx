@@ -29,7 +29,7 @@ const GetStarted = () => {
               Don&apos;t wait another minute! Ready to unlock the magic of AI and marketing? <span className='text-primary-purple'>Sign up today!</span>
             </div>
           </div>
-          <PrimaryButton
+          <PrimaryButton icon={true}
             target="_self"
             href="/register"
             text="Sign Up Now"

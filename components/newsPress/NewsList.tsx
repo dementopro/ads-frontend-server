@@ -38,7 +38,7 @@ const NewsCard = ({ news }: NewsCardProps) => {
           <div className="text-[#D0D0D0] android:text-[14px] ipad:text-[16px] font-normal font-open-sans leading-[22px]">
             {news.description}
           </div>
-          <SecondaryButton path={news.link} text="Read" target="_blank" id="" />
+          <SecondaryButton path={news.link} text="Read" target="_blank" id="" icon={true} />
         </div>
       </div>
     </>

@@ -62,6 +62,12 @@ const links = [
   {
     url: '/adsGencyVsJasperAI',
   },
+  {
+    url: '/features/seo',
+  },
+  {
+    url: '/features/emailMarketing',
+  },
 ]
 
 const blogs = Blogs.map(blog => {

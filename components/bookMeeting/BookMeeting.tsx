@@ -46,7 +46,7 @@ const BookMeeting = () => {
           alt='book a meeting'
         />
         <div className="w-full">
-          <PrimaryButton
+          <PrimaryButton icon={true}
             target="_blank"
             href="https://calendly.com/xinrliu/adsgency-ai-demo-meeting"
             text="Book Meeting"

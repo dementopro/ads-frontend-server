@@ -29,7 +29,7 @@ const BookMeeting = () => {
             Book a Meeting with us today!
           </div>
         </div>
-        <PrimaryButton
+        <PrimaryButton icon={true}
           target="_blank"
           href="https://calendly.com/xinrliu/adsgency-ai-demo-meeting"
           text="Book Meeting"

@@ -27,7 +27,7 @@ const AdsGencyVsChatGPTIntro = () => {
         <div className="w-full text-[#D0CDD6] font-open-sans font-regular text-center android:text-[14px] ipad:text-[16px] andrpoid:leading-[26px] ipad:leading-[29px]">
           &quot;Explore the features, benefits, and pricing of AdsGency AI and ChatGPT—two robust AI writing tools—to find the perfect fit for your content creation needs.&quot;
         </div>
-        <PrimaryButton
+        <PrimaryButton icon={true}
           target="_self"
           href="/register"
           text="Sign Up Today"

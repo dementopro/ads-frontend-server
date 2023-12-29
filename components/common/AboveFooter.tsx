@@ -12,9 +12,10 @@ import PrimaryButton from '@/components/common/PrimaryButton'
 interface AboveFooterProps {
   target: string;
   link: string;
+  icon: boolean
 }
 
-const AboveFooter: React.FC<AboveFooterProps> = ({ target, link }) => {
+const AboveFooter: React.FC<AboveFooterProps> = ({ target, link, icon }) => {
   return (
     <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className="android:w-[328px] ipadmini:w-[710px] ipad:w-[862px] desktop:w-[1036px] mx-auto h-[214px] relative bg-[#3A3A3A] bg-opacity-20 rounded-3xl shadow overflow-hidden">
@@ -22,7 +23,7 @@ const AboveFooter: React.FC<AboveFooterProps> = ({ target, link }) => {
         <img className="android:block ipadmini:hidden hidden w-full h-auto left-0 top-0 absolute object-cover rounded z-neg-1" src="/images/home/above-footer-vector-android.svg" />
         <div className="h-full px-[50px] relative justify-start items-center flex-row flex z-10">
           <div className="justify-start items-start flex-col flex gap-[20px]">
-            <PrimaryButton target="_self" href={link} text={target} />
+            <PrimaryButton icon={icon} target="_self" href={link} text={target} />
             <div className="text-white android:text-[12px] ipadmini:text-[12px] ipad:text-[16px] desktop:text-[16px] font-medium font-poppins">
               <span>
                 AdsGency AI for Enterprise?
@@ -39,4 +40,4 @@ const AboveFooter: React.FC<AboveFooterProps> = ({ target, link }) => {
   )
 }
 
-export default AboveFooter
+export default AboveFooter;

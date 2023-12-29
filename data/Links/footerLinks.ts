@@ -14,6 +14,14 @@ export const footerLinks = [
         label: 'Features',
         href: '/features',
       },
+      {
+        label: 'SEO Feature',
+        href: '/features/seo',
+      },
+      {
+        label: 'Email Marketing Feature',
+        href: '/features/emailMarketing',
+      },
     ],
   },
   {

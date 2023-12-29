@@ -52,7 +52,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
               {blog.publishDate}
             </div>
           )}
-          <SecondaryButton path="/blog/" id={blog.id} text="View" />
+          <SecondaryButton path="/blog/" id={blog.id} text="View" icon={true} />
         </div>
       </div>
     </>

@@ -7,18 +7,19 @@ interface ButtonProps {
   id?: string;
   text: string;
   target?: string;
+  icon: boolean;
 }
 
-const SecondaryButton: React.FC<ButtonProps> = ({ path, id, text, target }) => {
+const SecondaryButton: React.FC<ButtonProps> = ({ path, id, text, target, icon}) => {
   const href = id === '' ? path : path + id;
   return (
     <Link
       href={href}
       target={target}
-      className="text-white android:px-[18px] ipadmini:px-[25px] desktop:px-[32px] android:py-[8px] ipadmini:py-[10px] desktop:py-[14px] border rounded-lg justify-center items-center android:gap-[5px] ipad:gap-[8px] flex android:text-[12px] ipad:text-[14px] hover:border-[#9D93FF] hover:text-[#9D93FF] transition ease-in-out !duration-500"
+      className="android:px-[25px] ipad:px-[32px] android:py-[10px] ipad:py-[14px] bg-black rounded-[8px] justify-center items-center android:gap-[5px] ipad:gap-[8px] flex android:text-[14px] ipad:text-[16px] border-1 border-white justify-center hover:border-[#9D93FF] hover:text-[#9D93FF] transition ease-in-out !duration-500"
     >
       <div>{text}</div>
-      <div className="relative">
+      <div className={`relative ${icon ? 'inline-block' : 'hidden'}`}>
         <FiArrowRight
           className={`cursor-pointer android:w-[12px] ipadmini:w-[12px] ipad:w-[15px] desktop:w-[18px] android:h-[12px] ipadmini:h-[12px] ipad:h-auto desktop:h-auto`}
         />

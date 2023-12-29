@@ -53,7 +53,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
           AdsGency AI works with Businesses to maximize omnichannel ROI
         </p>
         <div className="flex justify-center mt-6">
-          <PrimaryButton target="_self" href="/features" text="Learn More" />
+          <PrimaryButton icon={true} target="_self" href="/features" text="Learn More" />
         </div>
         <div className='w-full'>
           <div className="flex android:pb-[30px] ipad:pb-0 android:overflow-x-auto ipad:overflow-x-hidden ipad:flex-wrap items-stretch android:justify-start ipad:justify-center w-full gap-4 mt-14">

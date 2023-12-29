@@ -1,31 +1,33 @@
 import React from 'react';
 import ReactGATag from '@/components/ReactGATag';
 import DefaultLayout from '@/layout/default';
-import StyleGuideIntro from '@/components/styleGuide/StyleGuideIntro';
-import StyleGuide from '@/components/styleGuide/StyleGuide';
 import AboveFooter from '@/components/common/AboveFooter';
+import EmailMarketingFeatureIntro from '@/components/features/emailMarketing/EmailMarketingFeatureIntro';
+import EmailMarketingFeatures from '@/components/features/emailMarketing/EmailMarketingFeatures';
+import EmailMarketingEfforts from '@/components/features/emailMarketing/EmailMarketingEfforts';
 
 export const metadata = {
-  title: 'Style Guide - AdsGency AI',
+  title: 'Email Marketing Feature - AdsGency AI',
 };
 
-const StyleGuidePage = () => {
+const SeoFeaturePage = () => {
   return (
     <DefaultLayout>
       <ReactGATag
         fieldObject={{
           hitType: 'pageview',
-          page: '/styleGuide',
+          page: '/emailMarketing',
           title: metadata.title,
         }}
       />
       <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
-        <StyleGuideIntro />
+        <EmailMarketingFeatureIntro />
       </div>
-      <StyleGuide />
+      <EmailMarketingFeatures />
+      <EmailMarketingEfforts />
       <AboveFooter target='Sign Up' link='/register' icon={false} />
     </DefaultLayout>
   );
 };
 
-export default StyleGuidePage;
+export default SeoFeaturePage;

@@ -33,7 +33,7 @@ const OurTeam = () => {
                 ))}
             </div>
                     
-            <PrimaryButton
+            <PrimaryButton icon={true}
                 target="_self"
                 href="/careers"
                 text="See Open Roles"

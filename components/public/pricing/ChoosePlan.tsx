@@ -21,9 +21,9 @@ const ChoosePlan = () => {
       <div className="android:px-[14px] ipad:px-[18px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
         Choose a Plan
       </div>
-      <div className='w-full flex android:flex-wrap gap-[32px] items-start justify-center'>
+      <div className='w-[1000px] flex flex-rowgap-[32px] items-start justify-center'>
         {plan.map((plan, index) => (
-          <div key={index} className={`w-[390px] py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
+          <div key={index} className={`w-full py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
             <div className={`w-full flex flex-col gap-[16px] py-[16px] px-[20px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
               <div className='flex flex-col gap-[5px]'>
                 <div className='text-white text-[42px] font-bold font-poppins'>
@@ -44,7 +44,7 @@ const ChoosePlan = () => {
                 {plan.priceText}
               </div>
               <div className='w-full'>
-                <PrimaryButton target="_self" href="/register" text="Subscribe Now" />
+                <PrimaryButton icon={true} target="_self" href="/register" text="Subscribe Now" />
               </div>
               <div className='flex flex-col pl-[30px] gap-[16px] justify-start items-start'>
                 <div className='text-[14.5px] font-medium font-poppins'> Plan Includes: </div>

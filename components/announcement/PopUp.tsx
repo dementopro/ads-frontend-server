@@ -53,7 +53,7 @@ const Announcement = () => {
                   AdsGency AI selected to participate in the TechStars Accelerator
                   Program
                 </div>
-                <PrimaryButton
+                <PrimaryButton icon={true}
                   target="_blank"
                   href="https://www.linkedin.com/posts/bolbi-liu-6aa0b4ab_techstarsforlife-startuplife-founders-activity-7117202850144800768-lSwq?utm_source=share&utm_medium=member_desktop"
                   text="See Details Here"
