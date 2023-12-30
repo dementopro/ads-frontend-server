@@ -8,9 +8,9 @@ import {
 import React, { FC, useRef, useState } from 'react';
 import { BiInfoCircle } from 'react-icons/bi';
 import Papa from 'papaparse';
-import axios from 'axios';
 
 import { useSeoAnalyzerContext } from "@/context/seo";
+import axios from '@/lib/axios';
 
 interface LaunchToGmailProps {
   isOpen: boolean;

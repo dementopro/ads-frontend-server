@@ -9,14 +9,13 @@ import {
   BiRepeat,
 } from 'react-icons/bi';
 import { Chip } from '@nextui-org/react';
-import ReactMarkdown from 'react-markdown';
 import { Input, Spin, message } from 'antd';
 import ReactMarkdownPreview from '@uiw/react-markdown-preview';
-import axios from 'axios';
 
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { useTutorialsContext } from '@/context/tutorials';
 import { TopToRightBezierCurveLineArrow, BottomToRightBezierCurveLineArrow } from '@/components/tutorial/Arrows';
+import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
 
 const OnPage = ({ page }: { page: SeoAnalysis | null }) => {

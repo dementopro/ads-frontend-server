@@ -12,7 +12,7 @@ import { useSeoAnalyzerContext } from '@/context/seo';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
 
-interface InfographicDesign {
+interface LandingPageDesign {
   id: string;
   thumbnail_path: string;
 };
@@ -24,21 +24,21 @@ const StyledEditorWrapper = StyledComponents.div`
   }
 `;
 
-const InfographicsRecommendation = () => {
-  const { company, infographics } = useSeoAnalyzerContext();
+const LandingPageRecommendation = () => {
+  const { company, landingPage } = useSeoAnalyzerContext();
   const emailEditorRef = useRef<EditorRef | null>(null);
-  const [infographicsMode, setInfographicsMode] = useState<'TEMPLATES' | 'EDIT' | 'DESIGNS'>('EDIT');
-  const [designs, setDesigns] = useState<InfographicDesign[]>([]);
-  const [selectedDesign, setSelectedDesign] = useState<InfographicDesign | null>(null);
+  const [landingPageMode, setLandingPageMode] = useState<'TEMPLATES' | 'EDIT' | 'DESIGNS'>('EDIT');
+  const [designs, setDesigns] = useState<LandingPageDesign[]>([]);
+  const [selectedDesign, setSelectedDesign] = useState<LandingPageDesign | null>(null);
   const [isSavingDesign, setIsSavingDesign] = useState<boolean>(false);
   const [isEditorFullScreenMode, setIsEditorFullScreenMode] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
     if (selectedDesign) {
-      axios.get(`/fapi/get_infographic_design_by_id_api?infographic_id=${selectedDesign.id}`).then((res) => {
+      axios.get(`/fapi/get_landingpage_design_by_id_api?landingpage_id=${selectedDesign.id}`).then((res) => {
         if (res.data.status) {
-          unlayer.loadDesign(JSON.parse(res.data.infographic));
+          unlayer.loadDesign(JSON.parse(res.data.landing_page));
         } else {
           console.warn('email template save error:', res.data.message);
         }
@@ -46,8 +46,7 @@ const InfographicsRecommendation = () => {
         console.warn('email template save error:', err);
       });
     }
-    else
-      unlayer.loadDesign(infographics as any);
+    else unlayer.loadDesign(landingPage as any);
     if (emailEditorRef.current) {
       emailEditorRef.current.editor = unlayer;
     } else {
@@ -58,9 +57,9 @@ const InfographicsRecommendation = () => {
   };
 
   const onReady: EmailEditorProps['onReady'] = (unlayer) => {
-    const infographicsEditor = document.getElementById('infographics-editor');
-    if (infographicsEditor) {
-      infographicsEditor.style.position = 'relative';
+    const landingPageEditor = document.getElementById('landingpage-editor');
+    if (landingPageEditor) {
+      landingPageEditor.style.position = 'relative';
     }
     setTimeout(() => {
       const newLogo = document.createElement('div');
@@ -76,14 +75,14 @@ const InfographicsRecommendation = () => {
       newLogo.style.alignItems = 'center';
       newLogo.innerHTML = '<img alt="logo" loading="lazy" width="132" height="28" decoding="async" data-nimg="1" src="/logo_black.svg" style="color: transparent;">';
 
-      if (infographicsEditor) {
-        infographicsEditor.appendChild(newLogo);
+      if (landingPageEditor) {
+        landingPageEditor.appendChild(newLogo);
       }
     }, 100);
   };
 
   const handleEditorFullScreen = () => {
-    const element: any = document.getElementById('infographics-editor-wrapper');
+    const element: any = document.getElementById('landingpage-editor-wrapper');
     let isFullScreenModeChanged = false;
 
     if (isEditorFullScreenMode) {
@@ -122,7 +121,7 @@ const InfographicsRecommendation = () => {
       const formData = new FormData();
       formData.append('html', htmlBlob);
       formData.append('design', designBlob);
-      axios.post('/fapi/save_infographic_design_api', formData, {
+      axios.post('/fapi/save_landingpage_design_api', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -130,7 +129,7 @@ const InfographicsRecommendation = () => {
         if (res.data.status) {
           const newDesigns = [...designs];
           newDesigns.unshift({
-            id: res.data.infographic_id,
+            id: res.data.landingpage_id,
             thumbnail_path: res.data.thumbnail_path
           });
           setDesigns(newDesigns);
@@ -154,7 +153,7 @@ const InfographicsRecommendation = () => {
       const htmlBlob = new Blob([html], { type: "text/html" });
       const formData = new FormData();
       formData.append('html', htmlBlob);
-      axios.post('/fapi/export_infographic_design_to_pdf_api', formData, {
+      axios.post('/fapi/export_landingpage_design_to_pdf_api', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -162,7 +161,7 @@ const InfographicsRecommendation = () => {
         if (res.data.status) {
           const element = document.createElement("a");
           element.setAttribute("href", res.data.link);
-          element.setAttribute("download", `${company.name} Infographics.pdf`);
+          element.setAttribute("download", `${company.name} landing page.pdf`);
           element.setAttribute("target", "_blank");
           element.click();
           messageApi.success('Download successfully!');
@@ -180,9 +179,9 @@ const InfographicsRecommendation = () => {
   };
 
   useEffect(() => {
-    axios.get('/fapi/get_infographic_designs_api').then((res) => {
+    axios.get('/fapi/get_landingpage_designs_api').then((res) => {
         if (res.data.status) {
-          setDesigns(res.data.infographics);
+          setDesigns(res.data.landing_pages);
         } else {
           console.warn('email template save error:', res.data.message);
         }
@@ -192,13 +191,13 @@ const InfographicsRecommendation = () => {
   }, []);
 
   return (
-    <div id="infographics-editor-wrapper" className={`${styles.onPageDiv} overflow-x-auto`}>
+    <div id="landingpage-editor-wrapper" className={`${styles.onPageDiv} overflow-x-auto`}>
       {contextHolder}
       <div className="flex w-full items-center justify-between gap-3">
         <div className="flex gap-4">
           <button
             className="flex w-fit h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
-            onClick={() => setInfographicsMode('DESIGNS')}
+            onClick={() => setLandingPageMode('DESIGNS')}
           >
             <BiChevronLeft className="w-5 h-5" />Back to Designs
           </button>
@@ -222,6 +221,7 @@ const InfographicsRecommendation = () => {
         <div className="flex gap-4">
           <button
             className="flex w-[160px] h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368] bg-primary-purple"
+            disabled={isSavingDesign}
             onClick={handleSaveDesign}
           >
             { isSavingDesign ? <CircularProgress color="default" className="w-5 h-5" aria-label="Loading..."/> : <><BiSave className="w-5 h-5" />Save Design</> }
@@ -236,16 +236,16 @@ const InfographicsRecommendation = () => {
       </div>
       <StyledEditorWrapper className={`${styles.mainDiv} w-full h-full !p-0`}>
         {
-          infographicsMode === 'DESIGNS' && (
+          landingPageMode === 'DESIGNS' && (
             <div className="p-3 flex flex-wrap gap-5">
               {
-                designs.map((design: InfographicDesign) => (
+                designs.map((design: LandingPageDesign) => (
                   <div
                     key={design.id}
                     className="w-[160px] h-[240px] overflow-hidden shadow-md bg-cover bg-center hover:brightness-75 cursor-pointer"
                     onClick={() => {
                       setSelectedDesign(design);
-                      setInfographicsMode('EDIT');
+                      setLandingPageMode('EDIT');
                     }}
                   >
                     <Image
@@ -261,11 +261,11 @@ const InfographicsRecommendation = () => {
           )
         }
         {
-          infographicsMode === 'EDIT' && <EmailEditor editorId='infographics-editor' options={{ className: "w-full" }} onLoad={onLoad} onReady={onReady} />
+          landingPageMode === 'EDIT' && <EmailEditor editorId='landingpage-editor' options={{ className: "w-full" }} onLoad={onLoad} onReady={onReady} />
         }
       </StyledEditorWrapper>
     </div>
   );
 };
 
-export default InfographicsRecommendation;
+export default LandingPageRecommendation;

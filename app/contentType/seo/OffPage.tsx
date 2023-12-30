@@ -7,14 +7,14 @@ import {
 } from 'react-icons/bi';
 import { Input, Spin, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { Chip } from '@nextui-org/react';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import ReactMarkdownPreview from '@uiw/react-markdown-preview';
-import axios from 'axios';
-import styles from '@/./app/planning/planning.module.css';
 import { useRouter } from 'next/navigation';
+import ReactMarkdownPreview from '@uiw/react-markdown-preview';
+
+import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
+import axios from '@/lib/axios';
+import styles from '@/./app/planning/planning.module.css';
 
 const OffPage = ({ page }: { page: SeoAnalysis | null }) => {
   const router = useRouter();

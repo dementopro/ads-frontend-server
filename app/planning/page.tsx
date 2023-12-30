@@ -22,10 +22,12 @@ import OnPage from './Recommendations/OnPage';
 import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
 import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
 import InfoGraphicsDetails from './AdditionalDetails/InfographicsDetails';
+import LandingPageDetails from './AdditionalDetails/LandingPageDetails';
 import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
 import BackButton from './Recommendations/BackButton';
 import GmailRecommendation from './Recommendations/Gmail';
 import InfographicsRecommendation from './Recommendations/Infographics';
+import LandingPageRecommendation from './Recommendations/LandingPage';
 import OffPage from './Recommendations/OffPage';
 import AddCompanyDetails from './AddCompanyDetails';
 import HorizontalStepper from './HorizontalStepper';
@@ -320,8 +322,8 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </>)
-            : (
-            <>
+            : (formData.content_type.toLowerCase() === 'infographics' ?
+            (<>
               <InfoGraphicsDetails
                 formData={formData}
                 formik={formik}
@@ -347,6 +349,33 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </>)
+            :
+            <>
+              <LandingPageDetails
+                formData={formData}
+                formik={formik}
+                setFormData={setFormData}
+              />
+              <BusinessObjectives
+                title="7. Choose your business objectives"
+                options={[
+                  'Lead Generation',
+                  'Brand Awareness',
+                  'Sales Converstion',
+                  'Engagement',
+                  'Educate Customers'
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
+            </>
+            )
           )))}
         {activeButtonIndex == 2 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
@@ -427,9 +456,17 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-            :
+            : (formData.content_type.toLowerCase() === 'infographics') ?
             <>
               <InfographicsRecommendation />
+              <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
+            </>
+            :
+            <>
+              <LandingPageRecommendation />
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}

@@ -28,6 +28,8 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
           return 'Email Marketing';
         case 3:
           return 'Infographics';
+        case 4:
+          return 'Landing Page';
         default:
           return '';
       }
@@ -95,6 +97,20 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
         >
           <span className="w-[120px] h-[24px] text-[#ABABAB] text-[15px]">
             Infographics
+          </span>
+        </button>
+        <button
+          className={`flex justify-center items-center text-[15px] w-[148px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
+            formData.content_type.toLowerCase() === "landing page"
+              ? 'border border-[#ABABAB] text-white font-medium'
+              : 'bg-[#35363A] text-[#ABABAB]'
+          }`}
+          onClick={() => {
+            setContentType(4);
+          }}
+        >
+          <span className="w-[120px] h-[24px] text-[#ABABAB] text-[15px]">
+            Landing Page
           </span>
         </button>
       </div>

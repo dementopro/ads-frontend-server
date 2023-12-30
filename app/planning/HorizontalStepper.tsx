@@ -2,11 +2,11 @@ import React, { FC, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { FormikErrors, FormikHelpers, useFormik } from 'formik';
 import { message } from 'antd';
-import axios from 'axios';
 
 import { TopToLeftCurveLineArrow } from '@/components/tutorial/Arrows';
 import { SeoAnalysis, useSeoAnalyzerContext } from '@/context/seo';
 import { useTutorialsContext } from '@/context/tutorials';
+import axios from '@/lib/axios';
 import { CompanyValidate } from '@/lib/validate';
 import { CompanyDetailForm, CompanyForm } from '@/types/planning';
 import { formValidUrl } from '@/utils';

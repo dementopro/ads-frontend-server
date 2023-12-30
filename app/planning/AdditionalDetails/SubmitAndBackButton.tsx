@@ -852,7 +852,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   formik,
   formData,
 }) => {
-  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction, setSocialMedia, setInfographics } =
+  const { setOnpage, setOffpage, setCompany, company, setEmailInstruction, setSocialMedia, setInfographics, setLandingPage } =
     useSeoAnalyzerContext();
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
@@ -878,15 +878,22 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
     errors.targetAudience == '' &&
     errors.url == ''
 
-  const isValidInfographics = (formData: any, company: CompanyDetailForm, values: any, errors: any) =>
+  const isValidInfographics = (formData: any, company: CompanyDetailForm, _values: any, errors: any) =>
     formData.content_type.toLowerCase() === 'infographics' &&
     formData.infographics_styles.length > 0 &&
     company.assets.length > 0 &&
     errors.targetAudience === '' &&
     errors.idealCustomerProfile === ''
 
+  const isValidLandingPage = (content_type: string, company: CompanyDetailForm, errors: any) =>
+    content_type.toLowerCase() === 'landing page' &&
+    company.assets.length > 0 &&
+    errors.targetAudience === '' &&
+    errors.idealCustomerProfile === '' &&
+    errors.competitors === ''
+
   const isValid = useMemo(() => {
-    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.values, formik.errors) || isValidInfographics(formData, company, formik.values, formik.errors);
+    return isValidSeo(formData.content_type, formik.errors) || isValidEmailMarketing(formData.content_type, formik.errors) || isValidSocialMedia(formData.content_type, formik.values, formik.errors) || isValidInfographics(formData, company, formik.values, formik.errors) || isValidLandingPage(formData.content_type, company, formik.errors);
   }, [formData, formik.values, formik.errors, company])
 
   const handleSubmit = (index: number) => {
@@ -1102,6 +1109,85 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
               const infographics_string = res.data.infographic;
               const infographics_obj = JSON.parse(infographics_string);
               setInfographics(getCustomizedInfographicsTemplate(infographics_obj));
+            } catch {
+
+            }
+            setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /social_media_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else if (isValidLandingPage(formData.content_type, company, formik.errors)) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        website: formik.values.websiteURL,
+        business_objectives: formData.business_objectives,
+        competitors: formik.values.competitors,
+        infographics_styles: formData.infographics_styles,
+        target_audice: formik.values.targetAudience,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description
+      });
+
+      const bodyData = new FormData()
+      bodyData.append('company_name', formik.values.companyName);
+      bodyData.append('website_url', formValidUrl(formik.values.websiteURL));
+      bodyData.append('company_description', formik.values.description);
+      bodyData.append('target_audience', formik.values.targetAudience);
+      bodyData.append('customer_profile', formik.values.idealCustomerProfile);
+      bodyData.append('competitor', formik.values.competitors);
+      bodyData.append('business_objectives', formData.business_objectives.join(','));
+      company.assets.forEach((asset) => {
+        bodyData.append('media', asset);
+      });
+
+      const getCustomizedInfographicsTemplate = (infographicsTagsObj: Object) => {
+        let customizedInfographicsTemplate = { ...infographics_template };
+        const customizeInfographicsTemplate = (templateObj: any) => {
+          for (var key in templateObj) {
+            if (typeof templateObj[key] === 'object') {
+              customizeInfographicsTemplate(templateObj[key]);
+            } else {
+              if (key === 'elementType') {
+                const elementType: string = templateObj['elementType'];
+                const infographicsTagsKeys: string[] = Object.keys(infographicsTagsObj);
+                const index = infographicsTagsKeys.findIndex((key: string) => key == elementType || key.startsWith(elementType));
+                if (index > -1) {
+                  templateObj['text'] = (infographicsTagsObj as any)[infographicsTagsKeys[index]];
+                  delete (infographicsTagsObj as any)[infographicsTagsKeys[index]];
+                }
+              }
+            }
+          }
+        }
+
+        customizeInfographicsTemplate(customizedInfographicsTemplate);
+
+        return customizedInfographicsTemplate;
+      }
+
+      axios
+        .post('/fapi/landingpage_get_instructions_api', bodyData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then((res) => {
+          if (res.data.status == true) {
+            try {
+              const landingpage_string = res.data.landingpage;
+              const landingpage_obj = JSON.parse(landingpage_string);
+              setLandingPage(getCustomizedInfographicsTemplate(landingpage_obj));
             } catch {
 
             }

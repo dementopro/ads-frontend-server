@@ -38,6 +38,7 @@ export const SeoAnalyzerContext = createContext<{
   onpage: Array<SeoAnalysis>,
   offpage: Array<SeoAnalysis>,
   infographics: Object,
+  landingPage: Object,
   isLoadingOnpage: boolean,
   isLoadingOffpage: boolean,
   company: CompanyDetailForm,
@@ -46,6 +47,7 @@ export const SeoAnalyzerContext = createContext<{
   setOnpage: (data: Array<SeoAnalysis>) => void,
   setOffpage: (data: Array<SeoAnalysis>) => void,
   setInfographics: (data: Object) => void,
+  setLandingPage: (data: Object) => void,
   setIsLoadingOnpage: (data: boolean) => void,
   setIsLoadingOffpage: (data: boolean) => void,
   setCompany: (data: CompanyDetailForm) => void,
@@ -55,6 +57,7 @@ export const SeoAnalyzerContext = createContext<{
   onpage: [],
   offpage: [],
   infographics: {},
+  landingPage: {},
   isLoadingOnpage: false,
   isLoadingOffpage: false,
   company: {
@@ -82,6 +85,7 @@ export const SeoAnalyzerContext = createContext<{
   setOnpage: (data) => {},
   setOffpage: (data) => {},
   setInfographics: (data) => {},
+  setLandingPage: (data) => {},
   setIsLoadingOnpage: (data) => {},
   setIsLoadingOffpage: (data) => {},
   setCompany: (data) => {},
@@ -98,6 +102,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
   const [onpage, setOnpage] = useState<Array<SeoAnalysis>>([]);
   const [offpage, setOffpage] = useState<Array<SeoAnalysis>>([]);
   const [infographics, setInfographics] = useState<Object>({});
+  const [landingPage, setLandingPage] = useState<Object>({});
   const [isLoadingOnpage, setIsLoadingOnpage] = useState<boolean>(false);
   const [isLoadingOffpage, setIsLoadingOffpage] = useState<boolean>(false);
   const [company, setCompany] = useState<CompanyDetailForm>({
@@ -130,6 +135,7 @@ export const SeoAnalyzerProvider = ({ children }: { children: React.ReactNode })
       onpage, setOnpage,
       offpage, setOffpage,
       infographics, setInfographics,
+      landingPage, setLandingPage,
       isLoadingOnpage, setIsLoadingOnpage,
       isLoadingOffpage, setIsLoadingOffpage,
       company, setCompany,

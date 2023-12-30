@@ -59,6 +59,14 @@ const menuItems = [
       {
         text: 'Email Marketing',
         href: '/contentType/emailMarketing',
+      },
+      {
+        text: 'Infographics',
+        href: '/contentType/infographics',
+      },
+      {
+        text: 'Landing Page',
+        href: '/contentType/landingpage',
       }
     ],
     tutorial: {
