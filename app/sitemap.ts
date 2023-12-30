@@ -69,6 +69,9 @@ const links = [
     url: '/features/seo',
   },
   {
+    url: '/features/socialMedia',
+  },
+  {
     url: '/features/emailMarketing',
   },
 ]

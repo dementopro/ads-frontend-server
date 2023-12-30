@@ -23,7 +23,7 @@ const EmailMarketingFeatures = () => {
                 <div className="w-full font-poppins text-center font-mold text-[20px] uppercase z-20">
                   {item.title}
                 </div>
-                <div className="w-full font-open-sans text-center text-[#D0CDD6] font-regular text-[16px] z-20">
+                <div className="w-full font-open-sans text-center text-[#D0CDD6] font-medium italic text-[18px] z-20">
                   {item.description}
                 </div>
               </div>
