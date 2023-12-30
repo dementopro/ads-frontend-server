@@ -6,7 +6,7 @@ import SecondaryButton from '../../common/SecondaryButton';
 
 const SeoFeatureIntro = () => {
   return (
-    <div className="desktop:w-[1240px] ipad:w-full relative android:mx-[32px] ipad:mx-auto android:my-[32px] android:pt-[32px] ipad:pt-[0px] ipad:my-[48px] z-20">
+    <div className="desktop:w-[1240px] ipad:w-full relative android:mx-[32px] ipad:mx-auto android:my-[32px] ipad:pt-[0px] ipad:my-[48px] z-20">
       <Image
         width={100}
         height={100}
