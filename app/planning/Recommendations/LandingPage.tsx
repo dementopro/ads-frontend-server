@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from "next/image";
-import { BiChevronLeft, BiExpand, BiSave, BiDownload, BiExitFullscreen } from 'react-icons/bi';
-import { CircularProgress } from '@nextui-org/react';
+import { BiChevronLeft, BiExpand, BiSave, BiLink, BiExitFullscreen } from 'react-icons/bi';
+import { CircularProgress, useDisclosure } from '@nextui-org/react';
 import { EditorRef, EmailEditorProps } from 'react-email-editor';
 import StyledComponents from 'styled-components';
 import { message } from "antd";
@@ -11,10 +11,12 @@ const EmailEditor = dynamic (() => import ('react-email-editor'))
 import { useSeoAnalyzerContext } from '@/context/seo';
 import axios from '@/lib/axios';
 import styles from '@/./app/planning/planning.module.css';
+import LandingPageShareModal from './LandingPageShareModal';
 
 interface LandingPageDesign {
   id: string;
-  thumbnail_path: string;
+  thumbnail_path?: string;
+  publish_url?: string;
 };
 
 const StyledEditorWrapper = StyledComponents.div`
@@ -32,6 +34,7 @@ const LandingPageRecommendation = () => {
   const [selectedDesign, setSelectedDesign] = useState<LandingPageDesign | null>(null);
   const [isSavingDesign, setIsSavingDesign] = useState<boolean>(false);
   const [isEditorFullScreenMode, setIsEditorFullScreenMode] = useState<boolean>(false);
+  const { isOpen: isLandingPageShareModalOpen, onOpen: onLandingPageShareModalOpen, onOpenChange: onLandingPageShareModalOpenChange } = useDisclosure();
   const [messageApi, contextHolder] = message.useMessage();
 
   const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
@@ -121,17 +124,20 @@ const LandingPageRecommendation = () => {
       const formData = new FormData();
       formData.append('html', htmlBlob);
       formData.append('design', designBlob);
-      axios.post('/fapi/save_landingpage_design_api', formData, {
+
+      axios.post(`/fapi/save_landingpage_design_api${selectedDesign ? "?landingpage_id=" + selectedDesign.id : ""}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       }).then((res) => {
         if (res.data.status) {
-          const newDesigns = [...designs];
-          newDesigns.unshift({
+          const newDesign: LandingPageDesign = {
             id: res.data.landingpage_id,
             thumbnail_path: res.data.thumbnail_path
-          });
+          };
+          const newDesigns = [...designs];
+          newDesigns.unshift(newDesign);
+          setSelectedDesign(newDesign);
           setDesigns(newDesigns);
           messageApi.success('Saved successfully!');
         } else {
@@ -178,16 +184,61 @@ const LandingPageRecommendation = () => {
     });
   };
 
-  useEffect(() => {
-    axios.get('/fapi/get_landingpage_designs_api').then((res) => {
+  const handleSharePage = () => {
+    const unlayer = emailEditorRef.current?.editor;
+
+    if (!selectedDesign) {
+      messageApi.warning('Save your design first');
+
+      return;
+    };
+
+    unlayer?.exportHtml(({ design, html }: { design: any, html: string }) => {
+      const htmlBlob = new Blob([html], { type: "text/html" }),
+        designBlob = new Blob([JSON.stringify(design)], { type: "application/json" })
+      const formData = new FormData();
+      formData.append('html', htmlBlob);
+      formData.append('design', designBlob);
+
+      axios.patch(`/fapi/share_landingpage_design_api${selectedDesign ? "?landingpage_id=" + selectedDesign.id : ""}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then((res) => {
         if (res.data.status) {
-          setDesigns(res.data.landing_pages);
+          const design = selectedDesign ? {
+            ...selectedDesign,
+            publish_url: res.data.publish_url
+          } : {
+            id: res.data.landingpage_id,
+            publish_url: res.data.publish_url
+          };
+          setSelectedDesign(design);
+          onLandingPageShareModalOpen();
         } else {
           console.warn('email template save error:', res.data.message);
         }
       }).catch((err) => {
+        messageApi.error('Something went wrong!');
         console.warn('email template save error:', err);
       });
+    });
+  };
+
+  useEffect(() => {
+    axios.get('/fapi/get_landingpage_designs_api').then((res) => {
+      if (res.data.status) {
+        setDesigns(res.data.landing_pages);
+      } else {
+        console.warn('email template save error:', res.data.message);
+      }
+    }).catch((err) => {
+      console.warn('email template save error:', err);
+    });
+  }, []);
+
+  const getLandingPageFullURL = useCallback((publishURL: string) => {
+    return `${process.env.NEXT_PUBLIC_FRONTEND_URL}/landing/${publishURL}`
   }, []);
 
   return (
@@ -199,7 +250,7 @@ const LandingPageRecommendation = () => {
             className="flex w-fit h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368]"
             onClick={() => setLandingPageMode('DESIGNS')}
           >
-            <BiChevronLeft className="w-5 h-5" />Back to Designs
+            <BiChevronLeft className="w-5 h-5" />Back
           </button>
           <button
             className="flex w-fit h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368] bg-background-300"
@@ -230,7 +281,13 @@ const LandingPageRecommendation = () => {
             className="flex w-fit h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368] bg-background-300"
             onClick={handleDownloadDesign}
           >
-            <BiDownload className="w-5 h-5" />Download
+            Publish
+          </button>
+          <button
+            className="flex w-fit h-11 justify-center items-center gap-2 border px-4 py-1.5 rounded-lg border-solid border-[#5F6368] bg-background-300"
+            onClick={handleSharePage}
+          >
+            <BiLink />Share
           </button>
         </div>
       </div>
@@ -249,7 +306,7 @@ const LandingPageRecommendation = () => {
                     }}
                   >
                     <Image
-                      src={design.thumbnail_path}
+                      src={design.thumbnail_path || ''}
                       width={160}
                       height={240}
                       alt={`design_${design.id}`}
@@ -264,6 +321,8 @@ const LandingPageRecommendation = () => {
           landingPageMode === 'EDIT' && <EmailEditor editorId='landingpage-editor' options={{ className: "w-full" }} onLoad={onLoad} onReady={onReady} />
         }
       </StyledEditorWrapper>
+
+      <LandingPageShareModal isOpen={isLandingPageShareModalOpen} onOpenChange={onLandingPageShareModalOpenChange} link={selectedDesign?.publish_url ? getLandingPageFullURL(selectedDesign?.publish_url) : ''} />
     </div>
   );
 };

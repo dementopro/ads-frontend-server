@@ -10,7 +10,6 @@ const SignInPage = ({ params }: { params: { website: string } }) => {
   const website: string = params.website;
 
   useEffect(() => {
-    console.log("session: ", status, session, website);
     if (!(status === "loading") && !session) void signIn(website);
     if (session && (session as any)[website] && status === "authenticated") {
       window.opener.postMessage({ event: "close", data: `Closing ${website} auth window` }, process.env.NEXT_PUBLIC_FRONTEND_URL as string);

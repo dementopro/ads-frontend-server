@@ -45,6 +45,9 @@ const links = [
     url: '/newsPress',
   },
   {
+    url: '/landing',
+  },
+  {
     url: '/reportMisuse',
   },
   {
