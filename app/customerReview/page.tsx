@@ -22,7 +22,7 @@ const CustomerReviewPage = () => {
           title: metadata.title,
         }}
       />
-      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] w-full relative z-10 bg-hero-gradient bg-cover">
         <CustomerReviewIntro />
       </div>
       <CustomerDemographic />

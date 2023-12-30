@@ -29,6 +29,8 @@ module.exports = {
         'light-purple-gradient': 'linear-gradient(to top, #4B2880, #4C3496)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'glass-bg-gradient': 'linear-gradient(to bottom right, rgba(254, 248, 255, 0.21), rgba(254, 248, 255, 0))',
+        'glass-border-gradient': 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.22), rgba(15, 17, 19, 0.10))',
       },
       colors: {
         primary: {

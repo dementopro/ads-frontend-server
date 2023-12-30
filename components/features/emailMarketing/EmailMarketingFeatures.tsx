@@ -20,7 +20,7 @@ const EmailMarketingFeatures = () => {
             <div key={index} className='w-[550px] android:h-auto ipadmini:h-[340px] relative p-[12px] bg-glass-border-gradient rounded-[30px]'>
               <div className='w-full h-full relative flex flex-col gap-[16px] px-[60px] py-[32px] bg-glass-bg-gradient rounded-[18px] justify-center items-center'>
                 <div className='w-full h-full absolute top-0 left-0 backdrop-blur-[96px] rounded-[18px] z-10'></div>
-                <div className="w-full font-open-sans text-center font-semibold text-[34px] z-20">
+                <div className="w-full font-poppins text-center font-mold text-[20px] uppercase z-20">
                   {item.title}
                 </div>
                 <div className="w-full font-open-sans text-center text-[#D0CDD6] font-regular text-[16px] z-20">

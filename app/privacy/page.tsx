@@ -21,7 +21,7 @@ const PrivacyPolicyPage = () => {
           title: metadata.title
         }}
       />
-      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] w-full relative z-10 bg-hero-gradient bg-cover">
         <div className="desktop:w-[1240px] relative android:mx-[32px] android:my-[32px] ipad:mx-[60px] desktop:mx-auto ipad:my-[60px]">
           <Image
             width={100}

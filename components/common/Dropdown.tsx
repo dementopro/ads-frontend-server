@@ -49,7 +49,7 @@ const Dropdown: React.FC<DropdownProps> = ({ heading, links }) => {
                     </div>
                 </div>
                 {expanded && (
-                    <div className="android:w-full ipad:w-[150px] ipad:origin-bottom-left ipad:absolute ipad:left-0 android:mt-[16px] ipad:mt-[50px] ipad:box-shadow bg-[#15161A] flex flex-col android:px-[12px] android:py-[0px] ipad:px-[20px] ipad:py-[20px] ipad:rounded-[12px] android:gap-[16px] ipad:gap-[26px] text-left font-regular transition ease-in-out !duration-500">
+                    <div className="android:w-full ipad:w-[250px] ipad:origin-bottom-left ipad:absolute ipad:left-0 android:mt-[16px] ipad:mt-[50px] ipad:box-shadow bg-[#15161A] flex flex-col android:px-[12px] android:py-[0px] ipad:px-[20px] ipad:py-[20px] ipad:rounded-[12px] android:gap-[16px] ipad:gap-[26px] text-left font-regular transition ease-in-out !duration-500">
                         {links.map((link, index) => (
                             <Link
                                 key={index}

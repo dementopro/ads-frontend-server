@@ -3,15 +3,15 @@ export const headerLinks = [
     title: 'Features',
     links: [
       {
-        label: 'Features',
+        label: 'All Features',
         href: '/features',
       },
       {
-        label: 'SEO Feature',
+        label: 'SEO',
         href: '/features/seo',
       },
       {
-        label: 'Email Marketing Feature',
+        label: 'Email Marketing',
         href: '/features/emailMarketing',
       },
     ],

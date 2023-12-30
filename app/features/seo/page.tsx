@@ -1,37 +1,33 @@
-import ReactGATag from '@/components/ReactGATag'
-import DefaultLayout from '@/layout/default'
-import React from 'react'
-import FeaturesPageHome from '@/components/features/FeaturesPageHome'
-import Planning from '@/components/features/Planning'
-import Types from '@/components/features/Types'
-import SocialInsights from '@/components/features/SocialInsights'
-import AboveFooter from '@/components/common/AboveFooter'
-import Optimization from '@/components/features/Optimization'
+import React from 'react';
+import ReactGATag from '@/components/ReactGATag';
+import DefaultLayout from '@/layout/default';
+import AboveFooter from '@/components/common/AboveFooter';
+import SeoFeatureIntro from '@/components/features/seo/SeoFeatureIntro';
+import SeoEfforts from '@/components/features/seo/SeoEfforts';
+import SeoFeatures from '@/components/features/seo/SeoFeatures';
 
 export const metadata = {
-  title: 'Features - AdsGency AI',
-}
+  title: 'SEO Feature - AdsGency AI',
+};
 
-const FeaturesPage = () => {
+const SeoFeaturePage = () => {
   return (
     <DefaultLayout>
       <ReactGATag
         fieldObject={{
-          hitType: "pageview",
-          page: "/features",
+          hitType: 'pageview',
+          page: '/seo',
           title: metadata.title,
         }}
       />
-      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
-        <FeaturesPageHome />
+      <div className="ipad:px-[60px] desktop:px-[100px] android:pt-[100px] ipad:pt-[150px] w-full relative z-10 bg-hero-gradient bg-cover">
+        <SeoFeatureIntro />
       </div>
-      <Planning />
-      <Types />
-      <Optimization />
-      <SocialInsights />
-      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} />
+      <SeoFeatures />
+      <SeoEfforts />
+      <AboveFooter target='Sign Up' link='/register' icon={false} />
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default FeaturesPage;
+export default SeoFeaturePage;
