@@ -2,7 +2,6 @@
 import React from 'react';
 import Image from 'next/image';
 import PrimaryButton from '@/components/common/PrimaryButton';
-import SecondaryButton from '../../common/SecondaryButton';
 
 const SocialMediaFeatureIntro = () => {
   return (

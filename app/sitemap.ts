@@ -74,6 +74,9 @@ const links = [
   {
     url: '/features/emailMarketing',
   },
+  {
+    url: '/features/infographics',
+  },
 ]
 
 const blogs = Blogs.map(blog => {

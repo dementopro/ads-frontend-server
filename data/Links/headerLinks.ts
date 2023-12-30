@@ -18,6 +18,10 @@ export const headerLinks = [
         label: 'Email Marketing',
         href: '/features/emailMarketing',
       },
+      {
+        label: 'Infographics',
+        href: '/features/infographics',
+      },
     ],
     url: ''
   },

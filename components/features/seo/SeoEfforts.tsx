@@ -1,7 +1,5 @@
 'use client';
 import React from 'react';
-import PrimaryButton from '@/components/common/PrimaryButton';
-import Image from 'next/image';
 
 const SeoEfforts = () => {
   return (

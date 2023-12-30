@@ -7,7 +7,7 @@ const SocialMediaFeatures = () => {
     <div className="desktop:w-[1240px] ipad:w-full desktop:mx-auto android:p-[32px] ipad:p-[60px] desktop:p-[0px] android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black">
       <div className='w-full flex flex-col gap-[40px] items-center justify-center'>
         <div className="w-full text-white font-poppins font-semibold text-center android:text-[34px] ipad:text-[43px] android:leading-[34px] ipad:leading-[43px]">
-          AI Features made for <br /><span className="bg-brand-color text-transparent bg-clip-text">Social Media</span>
+          AI Features made for <br /><span className="bg-brand-color text-transparent bg-clip-text">Social Media Marketing</span>
         </div>
         <div
           className='w-full flex flex-wrap gap-[32px] justify-center items-stretch'

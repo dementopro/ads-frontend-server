@@ -26,6 +26,10 @@ export const footerLinks = [
         label: 'Email Marketing',
         href: '/features/emailMarketing',
       },
+      {
+        label: 'Infographics',
+        href: '/features/infographics',
+      },
     ],
   },
   {
