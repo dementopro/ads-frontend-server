@@ -12,23 +12,49 @@ import { footerLinks } from '@/data/Links/footerLinks';
 
 type ColumnProps = {
   title: string;
-  links: Array<{
-    label: string;
-    href: string;
-  }>;
+  section: {
+    title: string;
+    links: {
+      label: string;
+      href: string
+    }[];
+  }[];
 };
 
-const FooterColumn = ({ title, links }: ColumnProps) => (
-  <div className="flex flex-col gap-[8px]">
-    <h4 className="font-semibold uppercase text-white">{title}</h4>
-    <ul className="flex flex-col gap-[4px] text-[16px] font-regular text-[#C1BECA]">
-      {links.map((link) => (
-        <Link  href={link.href} key={link.label} className="hover:text-[#9D93FF]">
-          {link.label}
-        </Link>
+const FooterColumn = ({ title, section }: ColumnProps) => (
+  <div className='w-full flex android:flex-col ipadmini:flex-row android:gap-[16px] ipadmini:gap-[50px]'>
+    <div className='w-[200px] font-open-sans font-medium text-[20px] text-[#7879F1] uppercase'>
+      {title}
+    </div>
+    <div className='w-full flex flex-row gap-[32px]'>
+      {section.map((item, index) => (
+        <div key={index} className='w-full flex flex-col gap-[10px]'>
+          <div className='font-poppins font-medium text-[#ABABAB] uppercase text-[16px]'>
+            {item.title}
+          </div>
+          {item.links.map((link, i) =>
+            <Link
+              key={i}
+              href={link.href}
+              className="text-white hover:text-[#9D93FF] transition ease-in-out !duration-500"
+            >
+              {link.label}
+            </Link>
+          )}
+        </div>
       ))}
-    </ul>
+    </div>
   </div>
+  // <div className="flex flex-col gap-[8px]">
+  //   <h4 className="font-semibold uppercase text-white">{title}</h4>
+  //   <ul className="flex flex-col gap-[4px] text-[16px] font-regular text-[#C1BECA]">
+  //     {links.map((link) => (
+  //       <Link  href={link.href} key={link.label} className="hover:text-[#9D93FF]">
+  //         {link.label}
+  //       </Link>
+  //     ))}
+  //   </ul>
+  // </div>
 );
 
 const Footer = () => {
@@ -41,13 +67,13 @@ const Footer = () => {
             One stop ads platform without limits
           </span>
         </div>
-        <div className="flex flex-wrap gap-[32px]">
+        <div className="flex flex-col gap-[32px]">
           {
             footerLinks.map(item => (
               <FooterColumn
                 key={item.title}
                 title={item.title}
-                links={item.links}
+                section={item.section}
               />
             ))
           }

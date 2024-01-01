@@ -1,78 +1,156 @@
 'use client';
 import React from 'react';
 import PrimaryButton from '@/components/common/PrimaryButton';
-import { FiX, FiCheck } from 'react-icons/fi';
 import { BiCheck, BiCheckCircle } from 'react-icons/bi';
-import Marquee from 'react-fast-marquee';
 import Image from 'next/image';
+
+const homeFeatures = [
+  'Integrated easy-to-use platform',
+  'Optimizations based on historical data',
+  'Creative ad content using generative AI',
+]
+
+const col1Data = [
+  {
+    image: 'images/home/home-slider/email-marketing-1.svg',
+    alt: 'email-marketing-1',
+    heading: 'Email Marketing',
+    pt: 'pt-[28px]',
+  },
+  {
+    image: 'images/home/home-slider/pinterest.svg',
+    alt: 'pinterest',
+    heading: 'Pinterest Ads',
+    px: 'px-[14px]',
+  },
+  {
+    image: 'images/home/home-slider/email-marketing-2.svg',
+    alt: 'email-marketing-2',
+    heading: 'Email Marketing',
+    pt: 'pt-[28px]',
+  },
+  {
+    image: 'images/home/home-slider/instagram.svg',
+    alt: 'instagram',
+    heading: 'Instagram Ads',
+  }
+];
+const col2Data = [
+  {
+    image: 'images/home/home-slider/generative-ai.svg',
+    alt: 'generative-ai',
+    heading: 'Generative AI',
+    pt: 'pt-[13px]',
+  },
+  {
+    image: 'images/home/home-slider/instagram-2.svg',
+    alt: 'instagram-2',
+    heading: 'Instagram Ads',
+    px: 'px-[14px]',
+  },
+  {
+    image: 'images/home/home-slider/facebook.svg',
+    alt: 'facebook',
+    heading: 'Facebook Ads',
+    pt: 'pt-[28px]',
+  },
+  {
+    image: 'images/home/home-slider/seo.svg',
+    alt: 'seo',
+    heading: 'SEO Optimization',
+  }
+];
 
 const Landing = () => {
   return (
-    <div className="ipad:px-[60px] desktop:px-[100px] pb-[32px] w-full relative z-10 bg-hero-gradient bg-cover">
-      <div className="max-w-[1240px] ipad:w-full m-auto h-full android:mt-[128px] ipad:mt-[48px] android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px] grid grid-cols-12">
-        <div className="android:col-span-12 ipad:col-span-7 flex-col android:justify-center ipadmini:justify-center ipad:justify-start desktop:justify-start android:items-center ipad:items-start android:gap-[12px] ipadmini:gap-[14px] ipad:gap-[16px] desktop:gap-[16px] inline-flex">
-          <div className="flex android:justify-center ipad:justify-start items-center w-full gap-2">
+    <div className="w-full ipad:h-screen relative ipad:px-[60px] desktop:px-[100px] pb-[32px] bg-hero-gradient bg-cover z-10">
+      <div className="desktop:w-[1240px] ipad:w-full h-full flex android:flex-col ipad:flex-row m-auto android:mt-[128px] ipad:mt-[48px] h-full android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px]">
+        <div className="w-full flex-1 flex flex-col android:items-center ipad:items-start gap-[24px]">
+          <div className="flex android:justify-center ipad:justify-start items-center gap-[10px]">
             <img
               src="/images/home/sparkles.svg"
-              className="android:w-[21px] ipadmini:w-[26px] ipad:w-[30px] desktop:w-[36px] android:h-[21px] ipadmini:h-[26px] ipad:h-[26px] desktop:h-[26px]"
+              className="android:w-[26px] ipad:w-[30px] h-auto"
               alt="sparkles"
             />
-            <div className="bg-gradient-to-r from-[#6859FF] to-[#AF41FF] bg-clip-text text-transparent">
-              <p className="text-base uppercase tracking-[.2em]">One Stop Ad AI Platform</p>
+            <div className="w-full bg-brand-color bg-clip-text text-transparent font-poppins font-regular text-[16px] uppercase tracking-[6.5px]">
+              One Stop Ad AI Platform
             </div>
           </div>
-          <div className="w-full text-poppins flex-col justify-start items-start flex android:text-[34px] ipad:text-[43px] desktop:text-[48px] font-bold">
-            <div className="w-full text-white tracking-tight android:leading-[34px] ipadmini:leading-[50px] ipad:leading-[40px] desktop:leading-[56px] android:text-center ipadmini:text-center ipad:text-left desktop:text-left">
-              The Future of Advertising
+          <div className="w-full text-white font-poppins font-semibold android:text-center ipad:text-left android:text-[34px] ipad:text-[48px] android:leading-[40px] ipad:leading-[56px] android:tracking-[-1px] ipad:tracking-[-3px]">
+            All your <span className="bg-brand-color text-transparent bg-clip-text">Digital Marketing</span> deliverables in one platform.
+          </div>
+          <div className='w-full android:text-center ipad:text-left text-white text-[16px] font-open-sans font-regular'>
+            Generated <span className="bg-brand-color text-transparent bg-clip-text">300K+</span> content since 2023
+          </div>
+          <div className="flex flex-col gap-[16px] items-start justify-start">
+            {homeFeatures.map((item, index) =>
+              <div key={index} className="flex items-center gap-[10px]">
+                <div className='bg-[#7D55FA] w-[24px] h-[24px] p-[4px] rounded-full'>
+                  <BiCheck className="text-white w-[16px] h-[16px]" />
+                </div>
+                <div className='text-[16px] font-open-sans font-regular text-white'>
+                  {item}
+                </div>
+              </div>
+            )}
+          </div>
+          <div className='flex flex-row gap-[10px] justify-start items-center bg-background-300 rounded-[8px] py-[12px] px-[16px]'>
+            <div className="text-white text-base android:text-[15px] ipad:text-[18px] font-open-sans font-regular android:text-center ipad:text-left">
+              We are rated <span className='font-semibold'>5.0</span> out of <span className='font-semibold'>5.0</span> over
+            </div>
+            <Image
+              width={30}
+              height={30}
+              className='h-[32px] w-auto'
+              src='images/home/product-hunt.svg'
+              alt='producthunt logo'
+            />
+          </div>
+          <div className='flex flex-row gap-[16px] items-center justify-start'>
+            <PrimaryButton icon={true}
+              target="_self"
+              href="/register"
+              text="Create an Account"
+            />
+            <div className='flex flex-col gap-[10px] items-start justify-start font-open-sans font-regular text-[14px] text-[#D0CDD6]'>
+              <div className='underline'><a href='/public/pricing'>Start your 7-Days Free Trial Now!</a></div>
+              <div>523+ marketers signed up in the last 30 days</div>
             </div>
           </div>
-          <div className="mt-6">
-            <div className="flex items-center gap-2">
-              <BiCheck className="bg-[#7D55FA] w-6 h-6 rounded-full" />
-              <p>Integrated easy-to-use platform</p>
-            </div>
-            <div className="flex items-center gap-2 mt-4">
-              <BiCheck className="bg-[#7D55FA] w-6 h-6 rounded-full" />
-              <p>Optimizations based on historical data</p>
-            </div>
-            <div className="flex items-center gap-2 mt-4">
-              <BiCheck className="bg-[#7D55FA] w-6 h-6 rounded-full" />
-              <p>Creative ad content using generative AI</p>
-            </div>
-          </div>
-          <div className="mt-[16px] w-fit text-white text-base android:text-[12px] ipad:text-[15px] desktop:text-[18px] font-open-sans font-regular android:text-center ipad:text-left bg-background-300 rounded-lg android:py-1 android:px-2 ipad:py-3 ipad:px-4">
-            Decrease Your Advertising Costs & Maximize ROI With AdsGency AI
-          </div>
-
-          <PrimaryButton icon={true}
-            target="_blank"
-            href="/requestDemo"
-            text="Request Demo"
-          />
         </div>
 
-        <div className="android:w-[300px] ipadmini:w-[380px] android:m-auto android:col-span-12 ipad:col-span-5 font-poppins android:gap-[16px] ipad:gap-[10px] android:h-[475px] ipad:h-screen overflow-hidden">
-          <div className="grid h-full grid-cols-12 gap-0">
-            <div className="!col-span-6 justify-end marquee h-full" style={{ animationDuration: '70s' }}>
-              <img src="/images/home/landing-images/1.png" alt="" />
-              <img src="/images/home/landing-images/2.png" alt="" />
-              <img src="/images/home/landing-images/3.png" alt="" />
-              <img src="/images/home/landing-images/4.png" alt="" />
-              <img src="/images/home/landing-images/1.png" alt="" />
-              <img src="/images/home/landing-images/2.png" alt="" />
-              <img src="/images/home/landing-images/3.png" alt="" />
-              <img src="/images/home/landing-images/4.png" alt="" />
-            </div>
-            <div className="!col-span-6 marquee h-full" style={{ animationDuration: '70s' }}>
-              <img src="/images/home/landing-images/5.png" alt="" />
-              <img src="/images/home/landing-images/6.png" alt="" />
-              <img src="/images/home/landing-images/7.png" alt="" />
-              <img src="/images/home/landing-images/8.png" alt="" />
-              <img src="/images/home/landing-images/5.png" alt="" />
-              <img src="/images/home/landing-images/6.png" alt="" />
-              <img src="/images/home/landing-images/7.png" alt="" />
-              <img src="/images/home/landing-images/8.png" alt="" />
-            </div>
+        <div className={`android:w-[350px] ipad:w-[480px] android:h-[600px] ipad:h-full flex flex-row item-start justify-start gap-[16px] overflow-y-hidden`}>
+          <div className={`w-full flex flex-col gap-[16px] items-center justify-center marquee`} style={{ animationDuration: '70s' }}>
+            {col1Data.map((item, index) => (
+              <div key={index} className={`w-full p-[2px] rounded-[25px] bg-light-purple-gradient`}>
+                <div className={`w-full h-full flex flex-col bg-black gap-[16px] rounded-[23px] px-[18px] py-[32px]`}>
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    className={`w-full h-auto ${item.pt ? item.pt : ''} ${item.px ? item.px : ''}`}
+                    width={204}
+                    height={215}
+                  />
+                  <div className={`font-open-sans font-bold text-[20px] tracking-[-2px] pl-[14px]`}>{item.heading}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className={`w-full flex flex-col gap-[16px] items-center justify-center marquee`} style={{ animationDuration: '70s' }}>
+            {col2Data.map((item, index) => (
+              <div key={index} className={`w-full p-[2px] rounded-[25px] bg-light-purple-gradient`}>
+                <div className={`w-full h-full flex flex-col bg-black gap-[16px] rounded-[23px] px-[18px] py-[32px]`}>
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    className={`w-full h-auto ${item.pt ? item.pt : ''} ${item.px ? item.px : ''}`}
+                    width={204}
+                    height={215}
+                  />
+                  <div className={`font-open-sans font-bold text-[20px] tracking-[-2px] pl-[14px]`}>{item.heading}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

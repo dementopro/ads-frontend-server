@@ -11,7 +11,7 @@ const tabs = [
     title: '10x your Advertising Performance',
     comment:
       'Input your company website and brand description and choose the content type you want to optimize.',
-    image_url: '/images/home/brand/addbrand.png',
+    image_url: '/images/home/brand/addbrand.svg',
   },
   {
     value: 1,
@@ -19,7 +19,7 @@ const tabs = [
     title: 'Use the Power of AI to Create Targeted Ads',
     comment:
       'Our AI uses your input to instantly generate recommendations based on your content type.',
-    image_url: '/images/home/brand/generate.png',
+    image_url: '/images/home/brand/generate.svg',
   },
   {
     value: 2,
@@ -27,7 +27,7 @@ const tabs = [
     title: 'You have the Final Say',
     comment:
       'Choose which optimizations you want to implement and customize them easily to fit your business objectives.',
-    image_url: '/images/home/brand/optimize.png',
+    image_url: '/images/home/brand/optimize.svg',
   },
   {
     value: 3,
@@ -35,7 +35,7 @@ const tabs = [
     title: 'Launch your Content from 1 platform',
     comment:
       'Launch and review your content with ease using our integrated advertising platform',
-    image_url: '/images/home/brand/launch.png',
+    image_url: '/images/home/brand/launch.svg',
   },
 ];
 

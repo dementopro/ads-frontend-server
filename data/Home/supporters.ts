@@ -1,34 +1,34 @@
-export const supportersLogos = [
+export const supporters = [
     {
-        image: 'aws.svg',
+        image: 'images/home/pr-logos/aws.svg',
         link: 'https://aws.amazon.com/startups/accelerators'
     },
     {
-        image: 'futurepedia.svg',
+        image: 'images/home/pr-logos/futurepedia.svg',
         link: 'https://www.futurepedia.io/tool/adsgency-ai'
     },
     {
-        image: 'google.svg',
+        image: 'images/home/pr-logos/google.svg',
         link: 'https://startup.google.com/'
     },
     {
-        image: 'nvidia.svg',
+        image: 'images/home/pr-logos/nvidia.svg',
         link: 'https://www.nvidia.com/en-us/startups/'
     },
     {
-        image: 'product-hunt.svg',
+        image: 'images/home/pr-logos/product-hunt.svg',
         link: 'https://www.producthunt.com/products/adsgency-ai-beta'
     },
     {
-        image: 'superhuman.svg',
+        image: 'images/home/pr-logos/superhuman.svg',
         link: 'https://www.joinsuperhuman.ai/p/metas-new-ai-model-brings-sketches-life'
     },
     {
-        image: 'information.svg',
+        image: 'images/home/pr-logos/information.svg',
         link: 'https://www.theinformation.com/articles/inside-apples-decision-to-blow-up-the-digital-ads-business'
     },
     {
-        image: 'techstars.svg',
+        image: 'images/home/pr-logos/techstars.svg',
         link: 'https://www.techstars.com/newsroom/meet-the-24-companies-joining-techstars-seattle-class-of-2023'
     }
 ]

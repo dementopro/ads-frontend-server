@@ -28,7 +28,7 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
 
   return (
     <div className="ipad:px-[60px] desktop:px-[100px] android:px-[16px] ipad:px-[0px] w-full max-w-[1240px] mx-auto mt-20">
-      <div className="relative grid grid-cols-12 gap-10 px-4 mt-4 overflow-visible">
+      <div className="w-full relative grid grid-cols-12 px-4 mt-4">
         <div className="android:block ipad:hidden relative android:col-span-12 ipad:col-span-5">
           <div
             className="absolute top-0 left-0 z-0 h-full ipadmini:w-full ipad:w-full desktop:col-span-6 translate-y-[10%] opacity-70"
@@ -47,7 +47,7 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
               How It Works
             </h5>
           </div>
-          <p className="mt-6 text-[42px] android:text-center ipadmini:text-right font-extrabold text-white">
+          <p className="mt-6 android:text-[34px] ipadmini:text-[42px] android:text-center ipadmini:text-right font-extrabold text-white">
             Get Recommendations in seconds
           </p>
           <p className="mt-6 android:text-center ipadmini:text-right text-white text-[20px] font-semibold">
@@ -55,7 +55,7 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
             your content type and watch as our AI scans your data 90% faster.
           </p>
         </div>
-        <div className="flex ipadmini:justify-end bg-[#010314] rounded-2xl p-6 android:col-span-12 ipad:col-span-7 flex gap-6">
+        <div className="flex android:flex-col ipadmini:flex-row ipadmini:justify-end bg-[#010314] rounded-2xl p-6 android:col-span-12 ipadmini:col-span-7 gap-6">
           <div className="flex-1">
             <div className="overflow-hidden rounded-lg">
               <div className="bg-[#0E1125] px-6 py-3 flex items-center gap-2">
@@ -114,14 +114,32 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
                     <p className='mt-3 text-xs font-normal text-white'>Welcome email option 3 - lead generation</p>
                   </div>
                 </div>
+                <div className={tab === 3 ? "fade-in" : "hidden"}>
+                  <div className="px-6 py-3">
+                    <h6 className="text-[15px] font-bold text-white">
+                      Visual Data
+                    </h6>
+                    <p className="text-xs font-normal text-white">
+                      Transform intricate numbers into eye-catching visuals
+                    </p>
+                  </div>
+                  <div className="px-6 py-3">
+                    <h6 className="text-[15px] font-bold text-white">
+                      Tell a Story to your Audience
+                    </h6>
+                    <p className="text-xs font-normal text-white">
+                      Choose from customizable templates and modify each content
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="basis-[250px] w-[250px]">
+          <div className="basis-[250px] android:w-full ipadmini:w-[250px]">
             <div
               className={`transition-all w-full px-6 py-3 text-center cursor-pointer rounded-lg select-none ${tab === 0
-                  ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
-                  : 'border border-[#7D55FA]'
+                ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
+                : 'border border-[#7D55FA]'
                 }`}
               onClick={() => {
                 setTab(0);
@@ -136,8 +154,8 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
             </div>
             <div
               className={`transition-all w-full px-6 py-3 mt-3 text-center cursor-pointer rounded-lg select-none ${tab === 1
-                  ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
-                  : 'border border-[#7D55FA]'
+                ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
+                : 'border border-[#7D55FA]'
                 }`}
               onClick={() => {
                 setTab(1);
@@ -152,8 +170,8 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
             </div>
             <div
               className={`transition-all w-full px-6 py-3 mt-3 text-center rounded-lg cursor-pointer select-none ${tab === 2
-                  ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
-                  : 'border border-[#7D55FA]'
+                ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
+                : 'border border-[#7D55FA]'
                 }`}
               onClick={() => {
                 setTab(2);
@@ -164,6 +182,22 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
               </h6>
               <p className="font-semibold font-open-sans text-[15px]">
                 Quickly draft targeted emails to achieve your KPI’s
+              </p>
+            </div>
+            <div
+              className={`transition-all w-full px-6 py-3 mt-3 text-center rounded-lg cursor-pointer select-none ${tab === 3
+                ? 'border-none bg-gradient-to-r from-[#6859FF] to-[#AF41FF]'
+                : 'border border-[#7D55FA]'
+                }`}
+              onClick={() => {
+                setTab(3);
+              }}
+            >
+              <h6 className="text-2xl font-bold tracking-tight font-poppins">
+                Infographics
+              </h6>
+              <p className="font-semibold font-open-sans text-[15px]">
+                Transform Dry Data into Dazzling Content
               </p>
             </div>
           </div>

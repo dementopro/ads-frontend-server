@@ -1,97 +1,123 @@
 export const headerLinks = [
   {
     title: 'Features',
-    links: [
-      {
-        label: 'All Features',
-        href: '/features',
-      },
-      {
-        label: 'SEO',
-        href: '/features/seo',
-      },
-      {
-        label: 'Social Media',
-        href: '/features/socialMedia',
-      },
-      {
-        label: 'Email Marketing',
-        href: '/features/emailMarketing',
-      },
-      {
-        label: 'Infographics',
-        href: '/features/infographics',
-      },
-    ],
-    url: ''
-  },
-  {
-    title: 'Resources',
-    links: [
-      {
-        label: 'Blog',
-        href: '/blog',
-      },
-      {
-        label: 'News & Press',
-        href: '/newsPress',
-      },
-      {
-        label: 'Style Guide',
-        href: '/styleGuide',
-      },
-      {
-        label: 'AdsGency vs ChatGPT',
-        href: '/adsGencyVsChatGPT',
-      },
-      {
-        label: 'AdsGency vs Jasper AI',
-        href: '/adsGencyVsJasperAI',
-      },
-    ],
-    url: '',
+    href: '/features',
   },
   {
     title: 'Company',
-    links: [
+    section: [
       {
-        label: 'Contact Us',
-        href: '/contactUs'
+        title: 'Information',
+        links: [
+          {
+            label: 'Pricing',
+            href: '/public/pricing',
+          },
+          {
+            label: 'Features',
+            href: '/features',
+          },
+          {
+            label: 'Ethics',
+            href: '/ethics',
+          },
+          {
+            label: 'Careers',
+            href: '/careers',
+          },
+          {
+            label: 'Customer Review',
+            href: '/customerReview',
+          },
+        ],
       },
       {
-        label: 'Privacy Policy',
-        href: '/privacy',
+        title: 'Support',
+        links: [
+          {
+            label: 'Contact Us',
+            href: '/contactUs'
+          },
+          // {
+          //   label: 'Help Center',
+          //   href: '/helpCenter'
+          // },
+          {
+            label: 'Report Misuse',
+            href: '/reportMisuse',
+          },
+          {
+            label: 'Request Demo',
+            href: '/requestDemo',
+          },
+        ],
       },
-      {
-        label: 'Terms of Service',
-        href: '/terms',
-      },
-      {
-        label: 'Report Misuse',
-        href: '/reportMisuse',
-      },
-      {
-        label: 'Customer Review',
-        href: '/customerReview',
-      },
-      {
-        label: 'Ethics',
-        href: '/ethics',
-      },
-      {
-        label: 'Careers',
-        href: '/careers',
-      },
-      {
-        label: 'About',
-        href: '/aboutUs',
-      }
     ],
-    url: '',
   },
   {
-    title: 'Pricing',
-    links: [],
-    url: '/public/pricing',
+    title: 'Resouces',
+    section: [
+      {
+        title: 'General',
+        links: [
+          {
+            label: 'Blog',
+            href: '/blog',
+          },
+          {
+            label: 'Style Guide',
+            href: '/styleGuide',
+          },
+          {
+            label: 'Privacy Policy',
+            href: '/privacy',
+          },
+          {
+            label: 'Terms of Service',
+            href: '/terms',
+          },
+
+        ],
+      },
+      {
+        title: 'Compaisons',
+        links: [
+          {
+            label: 'AdsGency vs ChatGPT',
+            href: '/adsGencyVsChatGPT',
+          },
+          {
+            label: 'AdsGency vs Jasper AI',
+            href: '/adsGencyVsJasperAI',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Solutions',
+    section: [
+      {
+        title: 'By Use Cases',
+        links: [
+          {
+            label: 'SEO',
+            href: '/features/seo',
+          },
+          {
+            label: 'Social Media',
+            href: '/features/socialMedia',
+          },
+          {
+            label: 'Email Marketing',
+            href: '/features/emailMarketing',
+          },
+          {
+            label: 'Infographics',
+            href: '/features/infographics',
+          },
+        ],
+      },
+    ],
   },
 ];

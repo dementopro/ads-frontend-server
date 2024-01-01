@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link';
-import { supportersLogos } from '@/data/supportersLogos';
+import { supporters } from '@/data/Home/supporters';
 import Marquee from "react-fast-marquee";
 
 
@@ -15,9 +15,9 @@ const Supporters = () => {
           </p>
         </div>
         <Marquee pauseOnHover={true} speed={10} direction="right" autoFill={true}>
-          {supportersLogos.map((logo, index) => (
+          {supporters.map((logo, index) => (
             <Link key={index} target="_blank"  href={logo.link}>
-              <img className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src={`images/home/pr-logos/${logo.image}`} />
+              <img className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src={`${logo.image}`} />
             </Link>
           ))}
         </Marquee>

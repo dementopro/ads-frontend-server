@@ -48,13 +48,13 @@ const Header = () => {
           </div>
           <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex flex-grow justify-start items-center gap-4">
             <div className="justify-center items-center ipad:gap-[25px] desktop:gap-[32px] flex text-white text-[15px]">
-              {headerLinks.map((link, index) => (
-                link.links.length === 0 ? ( // Check if links array is not empty
-                  <Link key={index} href={link.url} className="hover:text-[#9D93FF]">
-                    {link.title}
+              {headerLinks.map((item, index) => (
+                !item.section ? (
+                  <Link key={index} href={item.href} className="hover:text-[#9D93FF]">
+                    {item.title}
                   </Link>
                 ) : (
-                  <Dropdown key={index} heading={link.title} links={link.links} />
+                  <Dropdown key={index} heading={item.title} section={item.section} />
                 )
               ))}
             </div>
