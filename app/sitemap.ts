@@ -1,3 +1,4 @@
+import { useCases } from '@/data/UseCases/useCases';
 import { Blogs } from '@/data/blogs';
 import { MetadataRoute } from 'next'
 
@@ -77,6 +78,9 @@ const links = [
   {
     url: '/features/infographics',
   },
+  {
+    url: '/useCases',
+  },
 ]
 
 const blogs = Blogs.map(blog => {
@@ -85,10 +89,16 @@ const blogs = Blogs.map(blog => {
   }
 })
 
+const uses = useCases.map(useCase => {
+  return {
+    url: `/useCases/${useCase.name}`,
+  }
+})
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   const baseUrl = 'https://adsgency.ai'
-  const urls = [...links, ...blogs]
+  const urls = [...links, ...blogs, ...uses]
   return urls.map(url => {
     return {
       ...url,

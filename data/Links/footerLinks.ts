@@ -1,3 +1,5 @@
+import { useCases } from "@/data/UseCases/useCases";
+
 export const footerLinks = [
   {
     title: 'Resouces',
@@ -112,6 +114,10 @@ export const footerLinks = [
             label: 'Infographics',
             href: '/features/infographics',
           },
+          ...useCases.map((item, index) => ({
+            label: `Use Case - ${item.name}`,
+            href: `/useCases/${item.name}`,
+          })),
         ],
       },
     ],

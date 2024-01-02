@@ -120,7 +120,12 @@ const Landing = () => {
         </div>
 
         <div className={`android:w-[350px] ipad:w-[480px] android:h-[600px] ipad:h-full flex flex-row item-start justify-start gap-[16px] overflow-y-hidden`}>
-          <div className={`w-full flex flex-col gap-[16px] items-center justify-center marquee`} style={{ animationDuration: '70s' }}>
+          <div className={`w-full h-full flex flex-col gap-[16px] items-center justify-center`}
+            style={{
+              whiteSpace: 'wrap',
+              animation: 'marquee 50s linear infinite',
+            }}
+          >
             {col1Data.map((item, index) => (
               <div key={index} className={`w-full p-[2px] rounded-[25px] bg-light-purple-gradient`}>
                 <div className={`w-full h-full flex flex-col bg-black gap-[16px] rounded-[23px] px-[18px] py-[32px]`}>
@@ -136,7 +141,12 @@ const Landing = () => {
               </div>
             ))}
           </div>
-          <div className={`w-full flex flex-col gap-[16px] items-center justify-center marquee`} style={{ animationDuration: '70s' }}>
+          <div className={`w-full h-full flex flex-col gap-[16px] items-center justify-center`}
+            style={{
+              whiteSpace: 'wrap',
+              animation: 'marquee 50s linear infinite',
+            }}
+          >
             {col2Data.map((item, index) => (
               <div key={index} className={`w-full p-[2px] rounded-[25px] bg-light-purple-gradient`}>
                 <div className={`w-full h-full flex flex-col bg-black gap-[16px] rounded-[23px] px-[18px] py-[32px]`}>
