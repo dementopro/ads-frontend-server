@@ -20,7 +20,9 @@ import SubmitAndBackButton from './AdditionalDetails/SubmitAndBackButton';
 import SocialMediaRecommendation from './Recommendations/SocialMedia';
 import OnPage from './Recommendations/OnPage';
 import BusinessObjectives from './AdditionalDetails/BusinessObjectives';
-import EmailMarketingDetails, { tabsList } from './AdditionalDetails/EmailMarketingDetails';
+import EmailMarketingDetails, {
+  tabsList,
+} from './AdditionalDetails/EmailMarketingDetails';
 import InfoGraphicsDetails from './AdditionalDetails/InfographicsDetails';
 import LandingPageDetails from './AdditionalDetails/LandingPageDetails';
 import { tabsList as SocialMediaTabs } from './AdditionalDetails/SocialMediaDetails';
@@ -40,6 +42,7 @@ import type {
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
+import ComingSoonPopup from '@/components/comingSoonPopup/ComingSoonPopup';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -94,13 +97,19 @@ const PlanningPage = () => {
     url: '',
     marketing_template: '',
     schedule: {},
-    assets: []
+    assets: [],
   });
-  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } =
+    useTutorialsContext();
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
-  const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
+  const {
+    isOpen: isBugReportModalOpen,
+    onOpen: onOpenBugReportModal,
+    onOpenChange: onOpenBugReportModalChange,
+    onClose: onCloseBugReportModal,
+  } = useDisclosure();
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -122,7 +131,11 @@ const PlanningPage = () => {
 
   useEffect(() => {
     if (company) {
-      if (company.name === '' || company.website === '' || company.description === '') {
+      if (
+        company.name === '' ||
+        company.website === '' ||
+        company.description === ''
+      ) {
         router.push('/home');
       }
 
@@ -138,13 +151,13 @@ const PlanningPage = () => {
         socialMediaType: company.socialMediaType,
         targetAudience: company.target_audice,
         websiteURL: company.website,
-        url: company.url
-      })
+        url: company.url,
+      });
       setFormData({
-        ...company
-      })
+        ...company,
+      });
     }
-  }, [company])
+  }, [company]);
 
   useEffect(() => {
     if (searchParams) {
@@ -185,7 +198,10 @@ const PlanningPage = () => {
       >
         <section className="flex flex-col justify-center">
           {activeButtonIndex == 1 && (
-            <div id='company-additional-details' className={`flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white`}>
+            <div
+              id="company-additional-details"
+              className={`flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white`}
+            >
               <div className="flex gap-x-[8px]">
                 <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
                   📋
@@ -194,7 +210,10 @@ const PlanningPage = () => {
                   Let’s gather some more information
                 </h1>
               </div>
-              <div className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5" id="content-type">
+              <div
+                className="h-[44px] text-white text-center text-[15px] not-italic font-semibold leading-5"
+                id="content-type"
+              >
                 <button
                   className={`flex justify-center min-w-[169px] h-[44px] text-[15px] items-center gap-4 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]
                   `}
@@ -206,17 +225,24 @@ const PlanningPage = () => {
                 </button>
               </div>
 
-              {
-                isInTutorialMode && ((tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1') || (tutorialCampaign === 'EMAIL' && currentGuideMode.mode === 'OAUTH') ||  (tutorialCampaign === 'SOCIAL' && currentGuideMode.mode === 'OAUTH')) && (
+              {isInTutorialMode &&
+                ((tutorialCampaign === 'SEO' &&
+                  currentGuideMode.mode === 'ADDITIONAL1') ||
+                  (tutorialCampaign === 'EMAIL' &&
+                    currentGuideMode.mode === 'OAUTH') ||
+                  (tutorialCampaign === 'SOCIAL' &&
+                    currentGuideMode.mode === 'OAUTH')) && (
                   <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
                     <CloseButton />
                   </div>
-                )
-              }
+                )}
             </div>
           )}
           {activeButtonIndex == 2 && (
-            <div id="recommendations-menu" className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white">
+            <div
+              id="recommendations-menu"
+              className="flex flex-col mb-[16px] gap-[16px] text-2xl font-medium text-white"
+            >
               <div className="flex">
                 <p className="w-[24px] h-[24px]">💡</p>
                 <h1 className="text-2xl font-medium text-white">
@@ -266,8 +292,8 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </div>
-          ) : (formData.content_type.toLowerCase() === 'email marketing' ?
-            (<>
+          ) : formData.content_type.toLowerCase() === 'email marketing' ? (
+            <>
               <EmailMarketingDetails
                 activeTab={activeSeoType}
                 setActiveTab={setActiveSeoType}
@@ -295,9 +321,9 @@ const PlanningPage = () => {
                 formik={formik}
                 formData={formData}
               />
-            </>)
-            : (formData.content_type.toLowerCase() === 'social media' ?
-            (<>
+            </>
+          ) : formData.content_type.toLowerCase() === 'social media' ? (
+            <>
               <SocialMediaDetails
                 activeTab={activeSeoType}
                 setActiveTab={setActiveSeoType}
@@ -310,7 +336,7 @@ const PlanningPage = () => {
                   'Increase Sales',
                   'Brand Awareness',
                   'Website Traffic',
-                  'Engagement'
+                  'Engagement',
                 ]}
                 formData={formData}
                 setFormData={setFormData}
@@ -321,9 +347,9 @@ const PlanningPage = () => {
                 formik={formik}
                 formData={formData}
               />
-            </>)
-            : (formData.content_type.toLowerCase() === 'infographics' ?
-            (<>
+            </>
+          ) : formData.content_type.toLowerCase() === 'infographics' ? (
+            <>
               <InfoGraphicsDetails
                 formData={formData}
                 formik={formik}
@@ -337,7 +363,7 @@ const PlanningPage = () => {
                   'Educate Customers',
                   'Engagement',
                   'Event Promotion',
-                  'Visualize Data'
+                  'Visualize Data',
                 ]}
                 formData={formData}
                 setFormData={setFormData}
@@ -348,8 +374,8 @@ const PlanningPage = () => {
                 formik={formik}
                 formData={formData}
               />
-            </>)
-            :
+            </>
+          ) : (
             <>
               <LandingPageDetails
                 formData={formData}
@@ -363,7 +389,7 @@ const PlanningPage = () => {
                   'Brand Awareness',
                   'Sales Converstion',
                   'Engagement',
-                  'Educate Customers'
+                  'Educate Customers',
                 ]}
                 formData={formData}
                 setFormData={setFormData}
@@ -375,12 +401,14 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </>
-            )
-          )))}
+          ))}
         {activeButtonIndex == 2 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <>
-              <div id='seo-page-tab' className="flex items-center mt-8 relative">
+              <div
+                id="seo-page-tab"
+                className="flex items-center mt-8 relative"
+              >
                 <Button
                   isActivated={activeSeoType == 0}
                   onClick={() => setActiveSeoType(0)}
@@ -416,7 +444,7 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-          ) : (formData.content_type.toLowerCase() === 'email marketing' ?
+          ) : formData.content_type.toLowerCase() === 'email marketing' ? (
             <>
               <div className="flex items-center mt-8">
                 {tabsList.map((tab, i) => (
@@ -425,18 +453,29 @@ const PlanningPage = () => {
                     isActivated={activeSeoType == i}
                     onClick={() => setActiveSeoType(i)}
                   >
-                    <Image src={tab.icon} alt={tab.title} width={24} height={24} />
-                    <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+                    <Image
+                      src={tab.icon}
+                      alt={tab.title}
+                      width={24}
+                      height={24}
+                    />
+                    <span className="truncate" title="SEO (off-page)">
+                      {tab.title}
+                    </span>
                   </Button>
                 ))}
               </div>
-              {activeSeoType == 0 ? <GmailRecommendation /> : <GmailRecommendation />}
+              {activeSeoType == 0 ? (
+                <GmailRecommendation />
+              ) : (
+                <GmailRecommendation />
+              )}
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-            : (formData.content_type.toLowerCase() === 'social media') ?
+          ) : formData.content_type.toLowerCase() === 'social media' ? (
             <>
               <div className="flex items-center mt-8">
                 {SocialMediaTabs.map((tab, i) => (
@@ -445,8 +484,15 @@ const PlanningPage = () => {
                     isActivated={activeSeoType == i}
                     onClick={() => setActiveSeoType(i)}
                   >
-                    <Image src={tab.icon} alt={tab.title} width={24} height={24} />
-                    <span className='truncate' title='SEO (off-page)'>{ tab.title }</span>
+                    <Image
+                      src={tab.icon}
+                      alt={tab.title}
+                      width={24}
+                      height={24}
+                    />
+                    <span className="truncate" title="SEO (off-page)">
+                      {tab.title}
+                    </span>
                   </Button>
                 ))}
               </div>
@@ -456,7 +502,7 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-            : (formData.content_type.toLowerCase() === 'infographics') ?
+          ) : formData.content_type.toLowerCase() === 'infographics' ? (
             <>
               <InfographicsRecommendation />
               <BackButton
@@ -464,7 +510,7 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-            :
+          ) : (
             <>
               <LandingPageRecommendation />
               <BackButton
@@ -477,12 +523,19 @@ const PlanningPage = () => {
           <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
             Find a bug or encountering an error? Submit an issue report with
             us&nbsp;
-            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline" onClick={() => {
-              onOpenBugReportModal();
-            }}>
+            <button
+              className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline"
+              onClick={() => {
+                onOpenBugReportModal();
+              }}
+            >
               here
             </button>
-            <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} onClose={onCloseBugReportModal} />
+            <BugReportModal
+              isOpen={isBugReportModalOpen}
+              onOpenChange={onOpenBugReportModalChange}
+              onClose={onCloseBugReportModal}
+            />
           </p>
           <Image
             width={28}

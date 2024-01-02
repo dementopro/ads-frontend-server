@@ -1,5 +1,11 @@
-"use client";
-import React, { FC, Fragment, useEffect, useState } from 'react';
+'use client';
+import React, {
+  FC,
+  Fragment,
+  ReactEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import axios from 'axios';
@@ -7,8 +13,12 @@ import { message } from 'antd';
 import { useFormik } from 'formik';
 import { useDisclosure } from '@nextui-org/react';
 
-import GoogleAnalyticsModal from "@/app/planning/Analytics/GoogleAnalyticsModal";
-import { TopToLeftCurveLineArrow, BottomToRightCurveLineArrow, LongBottomToRightCurveLineArrow } from '@/components/tutorial/Arrows';
+import GoogleAnalyticsModal from '@/app/planning/Analytics/GoogleAnalyticsModal';
+import {
+  TopToLeftCurveLineArrow,
+  BottomToRightCurveLineArrow,
+  LongBottomToRightCurveLineArrow,
+} from '@/components/tutorial/Arrows';
 import NavigationButtons from '@/components/tutorial/NavigationButtons';
 import CloseButton from '@/components/tutorial/CloseButton';
 import { useTutorialsContext } from '@/context/tutorials';
@@ -16,6 +26,7 @@ import { DETAIL_LIMIT } from '@/data/constant';
 import { popupCenter } from '@/utils/popup';
 import type { CompanyForm } from '@/types/planning';
 import styles from './planning.module.css';
+import ComingSoonPopup from '@/components/comingSoonPopup/ComingSoonPopup';
 
 interface AddCompanyDetailsProps {
   formik: ReturnType<typeof useFormik<CompanyForm>>;
@@ -23,42 +34,76 @@ interface AddCompanyDetailsProps {
 
 const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [isAnalyticsOAuthDone, setIsAnalyticsOAuthDone] = useState<boolean>(false);
+  const [isAnalyticsOAuthDone, setIsAnalyticsOAuthDone] =
+    useState<boolean>(false);
   const [analyticsData, setAnalyticsData] = useState([]);
-  const { isOpen: isGoogleAnalyticsModalOpen, onOpen: onOpenGoogleAnalyticsModal, onOpenChange: onOpenGoogleAnalyticsModalChange } = useDisclosure();
-  const { isInTutorialMode, tutorialCampaign, currentGuideMode, setIsInTutorialMode } = useTutorialsContext();
+  const [isSemrushPopupOpen, setIsSemrushPopupOpen] = useState<boolean>(false);
+  const {
+    isOpen: isGoogleAnalyticsModalOpen,
+    onOpen: onOpenGoogleAnalyticsModal,
+    onOpenChange: onOpenGoogleAnalyticsModalChange,
+  } = useDisclosure();
+  const {
+    isInTutorialMode,
+    tutorialCampaign,
+    currentGuideMode,
+    setIsInTutorialMode,
+  } = useTutorialsContext();
   const { data: session, status } = useSession();
 
   const handleGoogleAnalyticsOAuth = async () => {
-    popupCenter("/auth/google", "Google Analytics Sign In", () => {
+    popupCenter('/auth/google', 'Google Analytics Sign In', () => {
       setIsAnalyticsOAuthDone(true);
     });
-  }
+  };
 
   useEffect(() => {
     (async () => {
-      if (status === "authenticated" && formik.values.websiteURL && isAnalyticsOAuthDone) {
+      if (
+        status === 'authenticated' &&
+        formik.values.websiteURL &&
+        isAnalyticsOAuthDone
+      ) {
         try {
-          const analyticsResponse = await axios.post(`/api/planning/analytics?site=${formik.values.websiteURL}`, {
-            accessToken: session.accessToken,
-            refreshToken: session.refreshToken
-          });
-          messageApi.success("Fetched analysis data");
+          const analyticsResponse = await axios.post(
+            `/api/planning/analytics?site=${formik.values.websiteURL}`,
+            {
+              accessToken: session.accessToken,
+              refreshToken: session.refreshToken,
+            }
+          );
+          messageApi.success('Fetched analysis data');
           setIsAnalyticsOAuthDone(false);
           setAnalyticsData(analyticsResponse as any);
           onOpenGoogleAnalyticsModal();
         } catch (error) {
-          messageApi.error("Something went wrong");
+          messageApi.error(
+            'Something went wrong while fetching analysis data. Error' + error
+          );
         }
       }
     })();
-  }, [session, status, formik, messageApi, onOpenGoogleAnalyticsModal, isAnalyticsOAuthDone]);
+  }, [
+    session,
+    status,
+    formik,
+    messageApi,
+    onOpenGoogleAnalyticsModal,
+    isAnalyticsOAuthDone,
+  ]);
+
+  const toggleSemrushPopup = () => {
+    setIsSemrushPopupOpen(!isSemrushPopupOpen);
+  };
 
   return (
     <>
       {contextHolder}
       <div className="grid grid-cols-12 gap-4 mt-8 relative">
-        <div id='target-audience-section' className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
+        <div
+          id="target-audience-section"
+          className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}
+        >
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             3. Add your target audience*
           </p>
@@ -91,7 +136,10 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             </label>
           </div>
         </div>
-        <div id='ideal-customer-section' className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
+        <div
+          id="ideal-customer-section"
+          className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}
+        >
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             4. Add ideal customer profile*
           </p>
@@ -127,11 +175,17 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
           </div>
         </div>
 
-        {
-          isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1' && (
+        {isInTutorialMode &&
+          tutorialCampaign === 'SEO' &&
+          currentGuideMode.mode === 'ADDITIONAL1' && (
             <div className="absolute left-0 top-full w-full translate-y-[5px] flex tutorial-element">
-              <div className={'!w-[310px] bg-primary-purple rounded-xl text-white p-5 text-md translate-x-[-100px] translate-y-[100px] mr-5'}>
-                Input additional information about your customers in order to refine recommendations
+              <div
+                className={
+                  '!w-[310px] bg-primary-purple rounded-xl text-white p-5 text-md translate-x-[-100px] translate-y-[100px] mr-5'
+                }
+              >
+                Input additional information about your customers in order to
+                refine recommendations
               </div>
               <div className="relative flex-1">
                 <div className="absolute left-0 bottom-0 translate-x-[-100px] translate-y-[50%]">
@@ -142,19 +196,21 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
                 </div>
               </div>
             </div>
-          )
-        }
-        {
-          isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL1' && (
+          )}
+        {isInTutorialMode &&
+          tutorialCampaign === 'SEO' &&
+          currentGuideMode.mode === 'ADDITIONAL1' && (
             <div className="absolute left-0 top-full w-full translate-y-[250px] flex tutorial-element">
               <NavigationButtons />
             </div>
-          )
-        }
+          )}
       </div>
 
       <div className="grid grid-cols-12 gap-4 mt-8 relative">
-        <div id="competitors-section" className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}>
+        <div
+          id="competitors-section"
+          className={`${styles.div} col-span-12 lg:col-span-6 !mt-0`}
+        >
           <p className=" text-[15px] text-white not-italic font-medium leading-[normal]">
             5. Add your competitors*
           </p>
@@ -188,7 +244,10 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
           </div>
         </div>
 
-        <div id="analytics-connect-section" className={`${styles.googleDiv} col-span-12 lg:col-span-6 !mt-0`}>
+        <div
+          id="analytics-connect-section"
+          className={`${styles.googleDiv} col-span-12 lg:col-span-6 !mt-0`}
+        >
           <div className="flex flex-col w-[521px] text-[15px] h-[43px] gap-[8px]">
             <p className="w-[521px] text-[15px] h-[18px] text-white">
               6. Connect your historical data (optional)
@@ -198,7 +257,10 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
             </p>
           </div>
           <div className="flex flex-row gap-[24px]">
-            <button className="inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB] cursor-pointer" onClick={handleGoogleAnalyticsOAuth}>
+            <button
+              className="inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB] cursor-pointer"
+              onClick={handleGoogleAnalyticsOAuth}
+            >
               <Image
                 width={18}
                 height={18}
@@ -209,35 +271,47 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
                 Google Analytics
               </label>
             </button>
-            <button className="w-[122px] h-[44px] inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB]">
+            <button
+              className="w-[122px] h-[44px] inline-flex justify-center items-center gap-2 px-[16px] py-[8px] rounded-lg border-solid bg-[#35363A] text-[#ABABAB] cursor-not-allowed"
+              onClick={() => toggleSemrushPopup()}
+            >
               <Image
                 width={18}
                 height={18}
                 src={'/images/admin/plan/Vector.svg'}
                 alt="#"
               />
-              <label className="inline-flex text-[15px] min-h-[20px] min-w-[64px] justify-center items-center cursor-pointer">
+              <label className="inline-flex text-[15px] min-h-[20px] min-w-[64px] justify-center items-center cursor-not-allowed">
                 Semrush
               </label>
             </button>
           </div>
         </div>
 
-        {
-          isInTutorialMode && tutorialCampaign === 'SEO' && currentGuideMode.mode === 'ADDITIONAL2' && (
+        {isInTutorialMode &&
+          tutorialCampaign === 'SEO' &&
+          currentGuideMode.mode === 'ADDITIONAL2' && (
             <Fragment>
               <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px] tutorial-element">
                 <CloseButton />
               </div>
               <div className="absolute right-[50px] bottom-full flex items-center tutorial-element">
                 <TopToLeftCurveLineArrow width={100} height={84} />
-                <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}>
-                  Connect your Google or SEMrush accounts and our AI will leverage your historical data to refine recommendations
+                <div
+                  className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-10 mb-20`}
+                >
+                  Connect your Google or SEMrush accounts and our AI will
+                  leverage your historical data to refine recommendations
                 </div>
               </div>
               <div className="absolute left-0 top-full w-full translate-y-[5px] flex tutorial-element">
-                <div className={'!w-[310px] bg-primary-purple rounded-xl text-white p-5 text-md translate-x-[-100px] translate-y-[30px] mr-5'}>
-                  Add competitors in your industry and our AI will analyze search engine friendliness & ranking
+                <div
+                  className={
+                    '!w-[310px] bg-primary-purple rounded-xl text-white p-5 text-md translate-x-[-100px] translate-y-[30px] mr-5'
+                  }
+                >
+                  Add competitors in your industry and our AI will analyze
+                  search engine friendliness & ranking
                 </div>
                 <div className="relative flex-1">
                   <div className="absolute left-0 bottom-0 translate-x-[-100px]">
@@ -249,10 +323,20 @@ const AddCompanyDetails: FC<AddCompanyDetailsProps> = ({ formik }) => {
                 <NavigationButtons />
               </div>
             </Fragment>
-          )
-        }
+          )}
       </div>
-      <GoogleAnalyticsModal isOpen={isGoogleAnalyticsModalOpen} onOpenChange={onOpenGoogleAnalyticsModalChange} formik={formik} analyticsData={analyticsData as []} />
+      <GoogleAnalyticsModal
+        isOpen={isGoogleAnalyticsModalOpen}
+        onOpenChange={onOpenGoogleAnalyticsModalChange}
+        formik={formik}
+        analyticsData={analyticsData as []}
+      />
+      {isSemrushPopupOpen && (
+        <ComingSoonPopup
+          isOpen={isSemrushPopupOpen}
+          togglePopup={toggleSemrushPopup}
+        />
+      )}
     </>
   );
 };
