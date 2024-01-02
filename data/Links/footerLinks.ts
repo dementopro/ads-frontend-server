@@ -114,8 +114,13 @@ export const footerLinks = [
             label: 'Infographics',
             href: '/features/infographics',
           },
+        ],
+      },
+      {
+        title: 'By Industries',
+        links: [
           ...useCases.map((item, index) => ({
-            label: `Use Case - ${item.name}`,
+            label: `${item.name}`,
             href: `/useCases/${item.name}`,
           })),
         ],

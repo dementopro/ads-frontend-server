@@ -29,14 +29,14 @@ const FooterColumn = ({ title, section }: ColumnProps) => (
     <div className='w-full flex flex-row gap-[32px]'>
       {section.map((item, index) => (
         <div key={index} className='w-full flex flex-col gap-[10px]'>
-          <div className='font-poppins font-medium text-[#ABABAB] uppercase text-[16px]'>
+          <div className='font-poppins font-medium text-white uppercase text-[16px]'>
             {item.title}
           </div>
           {item.links.map((link, i) =>
             <Link
               key={i}
               href={link.href}
-              className="text-white hover:text-[#9D93FF] transition ease-in-out !duration-500"
+              className="text-[#ABABAB] hover:text-[#9D93FF] transition ease-in-out !duration-500"
             >
               {link.label}
             </Link>

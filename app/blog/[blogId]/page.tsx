@@ -30,7 +30,7 @@ const BlogOfIdPage = async ({ params }: { params: { blogId: string } }) => {
         <BlogDetailLanding blog={blog} />
       </div>
       <BlogDetail blog={blog} />
-      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} />
+      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} image='request-demo' />
       <ToTop />
     </DefaultLayout>
   )

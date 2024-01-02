@@ -3,8 +3,8 @@ import React from 'react'
 import { growthLogos } from '@/data/growthLogos';
 import Marquee from "react-fast-marquee";
 
-
 const Growth = () => {
+  const array = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
   return (
     <div className='w-full android:my-[32px] ipad:my-[0px] desktop:my-[60px] bg-black'>
       <div className="w-full flex-col justify-center items-center android:gap-[30px] ipadmini:gap-[40px] ipad:gap-[50px] desktop:gap-[60px] inline-flex">
@@ -14,17 +14,10 @@ const Growth = () => {
           </p>
         </div>
         <Marquee pauseOnHover={true} speed={10} autoFill={true} className="my-[50px]">
-          {growthLogos.map((logo, index) => (
-            <img key={index} className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src={`images/home/customer-logos/${logo.image}`} />
+        {array.map((item, index) => (
+            <img key={index} className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src={`images/home/customer-logos/logo${item}.svg`} />
           ))}
         </Marquee>
-        {/* <div className='grid grid-cols-12 max-w-[1240px]'>
-          {growthLogos.map((logo, index) => (
-            <div key={index} className='relative flex items-center justify-center p-8 border ipad:col-span-3 android:col-span-6 border-white/20'>
-              <img className="android:h-[30px] ipadmini:h-[40px] ipad:h-[50px] desktop:h-[60px] w-auto android:px-[20px] ipadmini:px-[30px] ipad:px-[40px] desktop:px-[50px] object-cover rounded" src={`images/home/customer-logos/${logo.image}`} />
-            </div>
-          ))}
-        </div> */}
       </div>
     </div>
   )

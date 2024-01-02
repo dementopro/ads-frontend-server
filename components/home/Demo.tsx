@@ -450,7 +450,7 @@ const Demo: FC<IDemoProps> = (props) => {
               : '-translate-x-[200px] android:left-[200px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2 -translate-y-[50px]'
           }`}
         >
-          <Avatar src="/images/home/avatar/1.jpg" size="lg" />
+          <Avatar src="/images/home/demo/avatar1.svg" size="lg" />
           <div className="pb-[35px]">
             <div className="p-4 bg-[#7D55FA] rounded-xl relative">
               <svg
@@ -520,7 +520,7 @@ const Demo: FC<IDemoProps> = (props) => {
                 : 'Glad you agree! Use instructions to rank higher on search engines & increase traffic to your site.'}
             </p>
           </div>
-          <Avatar src="/images/home/avatar/2.jpg" size="lg" />
+          <Avatar src="/images/home/demo/avatar2.svg" size="lg" />
         </div>
       </div>
     </div>

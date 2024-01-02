@@ -63,7 +63,7 @@ const col2Data = [
 
 const Landing = () => {
   return (
-    <div className="w-full ipad:h-screen relative ipad:px-[60px] desktop:px-[100px] pb-[32px] bg-hero-gradient bg-cover z-10">
+    <div className="w-full ipad:h-screen ipad:max-h-[1000px] relative ipad:px-[60px] desktop:px-[100px] pb-[32px] bg-hero-gradient bg-cover z-10">
       <div className="desktop:w-[1240px] ipad:w-full h-full flex android:flex-col ipad:flex-row m-auto android:mt-[128px] ipad:mt-[48px] h-full android:px-[16px] ipad:px-[0px] justify-start items-center android:gap-[32px] ipad:gap-[32px]">
         <div className="w-full flex-1 flex flex-col android:items-center ipad:items-start gap-[24px]">
           <div className="flex android:justify-center ipad:justify-start items-center gap-[10px]">

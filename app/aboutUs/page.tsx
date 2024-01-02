@@ -29,7 +29,7 @@ const AboutUsPage = () => {
         <Statistics />
       </div>
       <OurTeam />
-      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} />
+      <AboveFooter target='Request Demo' link='/requestDemo' icon={true} image='request-demo' />
     </DefaultLayout>
   );
 };

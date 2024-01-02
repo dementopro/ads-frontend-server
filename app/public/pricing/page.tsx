@@ -31,7 +31,7 @@ const PricingPage = () => {
       <Comparison />
       <PricingFaq />
       <GetStarted />
-      <AboveFooter target='Sign Up' link='/register' icon={false} />
+      <AboveFooter target='Sign Up' link='/register' icon={false} image='request-demo' />
     </DefaultLayout>
   )
 }

@@ -29,7 +29,7 @@ const IUseCasesPage = async ({ params }: { params: { useCaseName: string } }) =>
       <WithAdsGency useCase={useCase} />
       <BoostUseCase useCase={useCase} />
       <Conclusion useCase={useCase} />
-      <AboveFooter target='Sign Up' link='/register' icon={false} />
+      <AboveFooter target='Sign Up' link='/register' icon={false} image='request-demo' />
     </DefaultLayout>
   );
 };

@@ -67,7 +67,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             insights for multichannel marketing.
           </div>
           <div className="flex items-center w-full gap-4">
-            <Avatar src="/images/home/avatar/1.jpg" size="md" />
+            <Avatar src="/images/home/testimonial/David.svg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
                 David Saadioui
@@ -93,7 +93,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             AdsGency AI is like the dream sidekick for marketers!
           </div>
           <div className="flex items-center w-full gap-4">
-            <Avatar src="/images/home/avatar/2.jpg" size="md" />
+            <Avatar src="/images/home/testimonial/Niroshan.svg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
                 Niroshan Ranapathi
@@ -120,7 +120,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             try and see how the AI-generated ads perform.
           </div>
           <div className="flex items-center w-full gap-4">
-            <Avatar src="/images/home/avatar/3.jpg" size="md" />
+            <Avatar src="/images/home/testimonial/Ardash.svg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
                 Ardash Benny
@@ -147,7 +147,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             never have been able to see on my own.
           </div>
           <div className="flex items-center w-full gap-4">
-            <Avatar src="/images/home/avatar/4.jpg" size="md" />
+            <Avatar src="/images/home/testimonial/Jade.svg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
                 Jade
@@ -172,7 +172,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
             most promising companies I’ve seen!
           </div>
           <div className="flex items-center w-full gap-4">
-            <Avatar src="/images/home/avatar/5.jpg" size="md" />
+            <Avatar src="/images/home/testimonial/Alexey.svg" size="md" />
             <div>
               <h6 className="text-xs font-semibold text-white font-poppins">
                 Alexey Yurkevich

@@ -96,7 +96,7 @@ export const useCases: IUseCase[] = [
   },
   {
     id: '3',
-    name: 'Ecom',
+    name: 'E-commerce',
     intro: {
       whiteHead: 'Sell More with AI-Powered Content:',
       colorHead: 'AdsGency AI for E-commerce',
@@ -188,7 +188,7 @@ export const useCases: IUseCase[] = [
   },
   {
     id: '5',
-    name: 'Marketing',
+    name: 'Marketing Agencies',
     intro: {
       whiteHead: 'Content Magic, Client Smiles:',
       colorHead: 'AdsGency AI for Marketing Agencies',

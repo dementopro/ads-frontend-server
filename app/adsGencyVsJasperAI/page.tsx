@@ -27,7 +27,7 @@ const AdsGencyVsJasperPage = () => {
       <AdsGencyVsJasperIntroImage />
       <Comparison />
       <Verdict />
-      <AboveFooter target='Sign Up' link='/register' icon={false} />
+      <AboveFooter target='Sign Up' link='/register' icon={false} image='request-demo' />
     </DefaultLayout>
   );
 };
