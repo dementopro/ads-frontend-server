@@ -122,7 +122,7 @@ const InviteCollaboratorForm = ({
             onClick={() => setShow(false)}
             className="mt-4 w-full max-w-[240px] justify-center h-[44px] flex items-center cursor-pointer hover:opacity-80 rounded border border-1 border-[#5F6368] text-white text-base font-medium truncate"
           >
-            Cancle
+            Cancel
           </button>
           <button
             onClick={() => {

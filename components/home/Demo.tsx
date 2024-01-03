@@ -4,8 +4,9 @@ import Image from 'next/image';
 import { FC, useState } from 'react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import "./styles.css";
+import { FiArrowDown } from 'react-icons/fi';
 
-interface IDemoProps {}
+interface IDemoProps { }
 
 const Demo: FC<IDemoProps> = (props) => {
   const [tab, setTab] = useState<number>(0);
@@ -19,16 +20,24 @@ const Demo: FC<IDemoProps> = (props) => {
       }}
     >
       <div className="max-w-[1240px] w-full mx-auto px-4 relative ipad:px-[60px] desktop:px-[100px] android:px-[16px] ipad:px-[0px]">
-        <h2 className="text-white font-open-sans text-[42px] font-extrabold text-center">
-          ✨ Interactive Demo ✨
+        <h2 className="flex flex-row gap-[16px] justify-center items-center text-white font-open-sans text-[42px] font-extrabold text-center">
+          <span> ✨ Interactive Demo </span>
+          <div className="android:px-[25px] ipad:px-[32px] android:py-[10px] ipad:py-[14px] bg-brand-color rounded-[8px] justify-center items-center android:gap-[5px] ipad:gap-[8px] flex android:text-[14px] ipad:text-[16px] hover:from-[#A29BF8] hover:to-[#C590F8] transition ease-in-out !duration-500">
+            <div className="text-white"> Click Below </div>
+            <div className={`relative`}>
+              <FiArrowDown
+                className={`cursor-pointer text-white android:w-[12px] ipadmini:w-[12px] ipad:w-[15px] desktop:w-[18px] android:h-[12px] ipadmini:h-[12px] ipad:h-auto desktop:h-auto`}
+              />
+            </div>
+          </div>
+          <span> ✨ </span>
         </h2>
         <div className="w-full border-y-1 border-y-[#844FFF] p-6 bg-[#010314] rounded-[20px] min-h-[500px] mt-8">
           <div className="flex rounded-[14px] bg-[#15161A] w-full items-stretch justify-self-stretch overflow-hidden p-0">
             <div className="ipad:w-[200px] bg-[#1B1C21] border-r border-r-[#3A3A3A] py-4">
               <div
-                className={`flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${
-                  tab === 0 && 'bg-[#7D55FA]'
-                }`}
+                className={`flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${tab === 0 && 'bg-[#7D55FA]'
+                  }`}
                 onClick={() => setTab(0)}
               >
                 <img src="/images/sidebar/home.svg" className="w-4 h-4" />
@@ -37,9 +46,8 @@ const Demo: FC<IDemoProps> = (props) => {
                 </span>
               </div>
               <div
-                className={`mt-[10px] flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${
-                  (tab === 1 || tab === 2) && 'bg-[#7D55FA]'
-                }`}
+                className={`mt-[10px] flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${(tab === 1 || tab === 2) && 'bg-[#7D55FA]'
+                  }`}
                 onClick={() => setTab(1)}
               >
                 <img
@@ -58,9 +66,8 @@ const Demo: FC<IDemoProps> = (props) => {
               {tab === 3 && (
                 <>
                   <div
-                    className={`mt-[10px] flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${
-                      tab === 3 && 'bg-[#7D55FA]'
-                    }`}
+                    className={`mt-[10px] flex items-center gap-2 px-5 py-1 hover:bg-[#0d0d0f80] select-none cursor-pointer ${tab === 3 && 'bg-[#7D55FA]'
+                      }`}
                   >
                     <span className="text-white ipad:indent-3">SEO</span>
                   </div>
@@ -92,77 +99,67 @@ const Demo: FC<IDemoProps> = (props) => {
               </section>
               <section
                 id="stepper"
-                className={`flex items-stretch gap-4 p-2 rounded-xl bg-background-200 ${
-                  tab === 3 && 'hidden'
-                }`}
+                className={`flex items-stretch gap-4 p-2 rounded-xl bg-background-200 ${tab === 3 && 'hidden'
+                  }`}
               >
                 <button
-                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${
-                    tab === 0 && 'bg-[#7D55FA]'
-                  }`}
+                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${tab === 0 && 'bg-[#7D55FA]'
+                    }`}
                   onClick={() => setTab(0)}
                 >
                   <div
-                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${
-                      tab === 0
+                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${tab === 0
                         ? 'bg-white text-[#7D55FA]'
                         : 'bg-[#4E4A5B] text-[#838383]'
-                    }`}
+                      }`}
                   >
                     1
                   </div>
                   <span
-                    className={`${
-                      tab === 0 ? 'text-white' : 'text-[#838383]'
-                    } font-poppins text-sm`}
+                    className={`${tab === 0 ? 'text-white' : 'text-[#838383]'
+                      } font-poppins text-sm`}
                   >
                     Plan
                   </span>
                 </button>
                 <button
-                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${
-                    tab === 1 && 'bg-[#7D55FA]'
-                  }`}
+                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${tab === 1 && 'bg-[#7D55FA]'
+                    }`}
                   onClick={() => setTab(1)}
                 >
                   <div
-                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${
-                      tab === 1
+                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${tab === 1
                         ? 'bg-white text-[#7D55FA]'
                         : 'bg-[#4E4A5B] text-[#838383]'
-                    }`}
+                      }`}
                   >
                     2
                   </div>
                   <span
-                    className={`${
-                      tab === 1 ? 'text-white' : 'text-[#838383]'
-                    } font-poppins text-sm`}
+                    className={`${tab === 1 ? 'text-white' : 'text-[#838383]'
+                      } font-poppins text-sm`}
                   >
                     Additional Details
                   </span>
                 </button>
                 <button
-                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${
-                    tab === 2 && 'bg-[#7D55FA]'
-                  }`}
+                  className={`flex-1 flex items-center gap-3 rounded-lg px-2 py-1 ${tab === 2 && 'bg-[#7D55FA]'
+                    }`}
                   onClick={() => {
                     if (tab !== 0) setTab(2);
                   }}
                 >
                   <div
-                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${
-                      tab === 2
+                    className={`rounded-full w-6 h-6 font-poppins text-normal font-semibold text-center align-middle ${tab === 2
                         ? 'bg-white text-[#7D55FA]'
                         : 'bg-[#4E4A5B] text-[#838383]'
-                    }`}
+                      }`}
                   >
                     3
                   </div>
                   <span
-                    className={`${
-                      tab === 2 ? 'text-white' : 'text-[#838383]'
-                    } font-poppins text-sm`}
+                    className={`${tab === 2 ? 'text-white' : 'text-[#838383]'
+                      } font-poppins text-sm`}
                   >
                     Recommendation
                   </span>
@@ -170,9 +167,8 @@ const Demo: FC<IDemoProps> = (props) => {
               </section>
               <section className="w-full mt-6">
                 <div
-                  className={`grid grid-cols-12 gap-4 ${
-                    tab === 0 ? 'fade-in' : 'hidden'
-                  }`}
+                  className={`grid grid-cols-12 gap-4 ${tab === 0 ? 'fade-in' : 'hidden'
+                    }`}
                 >
                   <div className="w-full col-span-12 px-6 py-4 bg-background-200 rounded-xl">
                     <h5 className="text-[#B3ACFF] text-sm font-medium">
@@ -200,7 +196,7 @@ const Demo: FC<IDemoProps> = (props) => {
                           Company Description
                         </label>
                         <div className="py-[10px] px-4 bg-background-100 border border-[#3A3A3A] rounded-md text-primary-gray mt-2 min-h-[200px] font-medium text-sm">
-                          Global HR is your strategic workforce partner, offering international expertise with a local touch.<br/>From compliance assurance to cutting-edge technologies, we tailor solutions to elevate your business through effective workforce management.
+                          Global HR is your strategic workforce partner, offering international expertise with a local touch.<br />From compliance assurance to cutting-edge technologies, we tailor solutions to elevate your business through effective workforce management.
                         </div>
                       </div>
                     </div>
@@ -229,9 +225,8 @@ const Demo: FC<IDemoProps> = (props) => {
                   </div>
                 </div>
                 <div
-                  className={`grid grid-cols-12 gap-4 ${
-                    tab === 1 ? 'fade-in' : 'hidden'
-                  }`}
+                  className={`grid grid-cols-12 gap-4 ${tab === 1 ? 'fade-in' : 'hidden'
+                    }`}
                 >
                   <div className="w-full col-span-12 px-6 py-4 ipad:col-span-6 bg-background-200 rounded-xl">
                     <h5 className="text-[#B3ACFF] text-sm font-medium">
@@ -323,9 +318,8 @@ const Demo: FC<IDemoProps> = (props) => {
                   </div>
                 </div>
                 <div
-                  className={`grid grid-cols-12 gap-4 ${
-                    tab === 2 ? 'fade-in' : 'hidden'
-                  }`}
+                  className={`grid grid-cols-12 gap-4 ${tab === 2 ? 'fade-in' : 'hidden'
+                    }`}
                 >
                   <div className="col-span-12 border border-[#27282F] bg-[#1B1C21] px-[14px] py-[10px] rounded-xl">
                     <div className="bg-[#27282F] px-[14px] py-[10px] rounded-lg">
@@ -365,9 +359,8 @@ const Demo: FC<IDemoProps> = (props) => {
                   </div>
                 </div>
                 <div
-                  className={`grid grid-cols-12 gap-4 ${
-                    tab === 3 ? 'fade-in' : 'hidden'
-                  }`}
+                  className={`grid grid-cols-12 gap-4 ${tab === 3 ? 'fade-in' : 'hidden'
+                    }`}
                 >
                   <div className="col-span-12 border border-[#27282F] bg-[#1B1C21] px-[14px] py-[10px] rounded-xl">
                     <div className="bg-[#27282F] p-4">
@@ -440,15 +433,14 @@ const Demo: FC<IDemoProps> = (props) => {
         </div>
 
         <div
-          className={`transition-all ease-linear duration-[2000] absolute flex items-end gap-2 ${
-            tab === 0
+          className={`transition-all ease-linear duration-[2000] absolute flex items-end gap-2 ${tab === 0
               ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
               : tab === 1
-              ? '-translate-x-2/3 android:left-[150px] ipad"left-0 top-[40px]'
-              : tab === 2
-              ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
-              : '-translate-x-[200px] android:left-[200px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2 -translate-y-[50px]'
-          }`}
+                ? '-translate-x-2/3 android:left-[150px] ipad"left-0 top-[40px]'
+                : tab === 2
+                  ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
+                  : '-translate-x-[200px] android:left-[200px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2 -translate-y-[50px]'
+            }`}
         >
           <Avatar src="/images/home/demo/avatar1.svg" size="lg" />
           <div className="pb-[35px]">
@@ -473,25 +465,24 @@ const Demo: FC<IDemoProps> = (props) => {
                 {tab === 0
                   ? 'I need to optimize my website’s SEO'
                   : tab === 1
-                  ? 'Will additional info help my recommendations?'
-                  : tab === 2
-                  ? 'Wow! That was fast. I see my suggestions based on my website.'
-                  : "Great! These are useful suggestions I can use to start cleaning up my website's HTML"}
+                    ? 'Will additional info help my recommendations?'
+                    : tab === 2
+                      ? 'Wow! That was fast. I see my suggestions based on my website.'
+                      : "Great! These are useful suggestions I can use to start cleaning up my website's HTML"}
               </p>
             </div>
           </div>
         </div>
 
         <div
-          className={`absolute transition-all duration-1000 flex gap-5 ${
-            tab === 0
+          className={`absolute transition-all duration-1000 flex gap-5 ${tab === 0
               ? 'top-[50px] right-0'
               : tab === 1
-              ? 'android:bottom-[100px] ipadmini:bottom-[50px] android:right-[0px] ipadmini:-right-[100px]'
-              : tab === 2
-              ? 'top-[50px] right-0'
-              : 'bottom-[200px] android:right-[0px] ipadmini:-right-[100px]'
-          }`}
+                ? 'android:bottom-[100px] ipadmini:bottom-[50px] android:right-[0px] ipadmini:-right-[100px]'
+                : tab === 2
+                  ? 'top-[50px] right-0'
+                  : 'bottom-[200px] android:right-[0px] ipadmini:-right-[100px]'
+            }`}
         >
           <div className="p-4 bg-[#7D55FA] rounded-xl relative mt-6">
             <svg
@@ -514,10 +505,10 @@ const Demo: FC<IDemoProps> = (props) => {
               {tab === 0
                 ? 'Filling out your company information will help us identify improvements'
                 : tab === 1
-                ? 'Exactly, we want to create targeted and useful optimizations for you to use instantly.'
-                : tab === 2
-                ? "It's that easy! Click view to see detailed instructions"
-                : 'Glad you agree! Use instructions to rank higher on search engines & increase traffic to your site.'}
+                  ? 'Exactly, we want to create targeted and useful optimizations for you to use instantly.'
+                  : tab === 2
+                    ? "It's that easy! Click view to see detailed instructions"
+                    : 'Glad you agree! Use instructions to rank higher on search engines & increase traffic to your site.'}
             </p>
           </div>
           <Avatar src="/images/home/demo/avatar2.svg" size="lg" />
