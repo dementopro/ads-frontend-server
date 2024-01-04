@@ -5,7 +5,7 @@ import axios from '@/lib/axios';
 const Creatomate = require('creatomate');
 
 const client = new Creatomate.Client(
-  'f1eb6e55562040c18f9b165a61aadefe1b9ff964f1d3ea3e5fb09e5e7adc586d4e40dfda4d32e633d7b343c3521d3557'
+  '1074e601121347a9a72c24119b9d4d29102e24d7deca58d929b9cd93e2c9ea36e30ee6260c93158b339ddf952220f649'
 );
 
 const createScene = (image: string, text: string) => {
