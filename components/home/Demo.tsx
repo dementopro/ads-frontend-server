@@ -431,7 +431,6 @@ const Demo: FC<IDemoProps> = (props) => {
             </div>
           </div>
         </div>
-
         <div
           className={`transition-all ease-linear duration-[2000] absolute flex items-end gap-2 ${tab === 0
               ? '-translate-x-1/2 translate-y-full android:left-[150px] android:bottom-[20px] ipadmini:left-[50px] ipadmini:bottom-1/2'
@@ -514,7 +513,7 @@ const Demo: FC<IDemoProps> = (props) => {
           <Avatar src="/images/home/demo/avatar2.svg" size="lg" />
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

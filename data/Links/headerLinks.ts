@@ -82,7 +82,7 @@ export const headerLinks = [
         ],
       },
       {
-        title: 'Compaisons',
+        title: 'Comparisons',
         links: [
           {
             label: 'AdsGency vs ChatGPT',

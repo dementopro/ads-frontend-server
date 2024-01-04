@@ -122,7 +122,7 @@ const Landing = () => {
         <div className={`android:w-[350px] ipad:w-[480px] android:h-[600px] ipad:h-full flex flex-row item-start justify-start gap-[16px] overflow-y-hidden`}>
           <div className={`w-full h-full flex flex-col gap-[16px] items-center justify-center`}
             style={{
-              whiteSpace: 'wrap',
+              whiteSpace: 'nowrap',
               animation: 'marquee 50s linear infinite',
             }}
           >
@@ -143,7 +143,7 @@ const Landing = () => {
           </div>
           <div className={`w-full h-full flex flex-col gap-[16px] items-center justify-center`}
             style={{
-              whiteSpace: 'wrap',
+              whiteSpace: 'nowrap',
               animation: 'marquee 50s linear infinite',
             }}
           >
