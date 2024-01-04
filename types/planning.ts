@@ -35,6 +35,7 @@ export interface CompanyDetailForm {
   marketing_template: string;
   schedule: any;
   assets: File[];
+  file_type: string;
 }
 
 export interface CompanyForm {

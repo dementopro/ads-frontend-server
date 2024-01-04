@@ -42,6 +42,8 @@ import type {
   IPlanningHistory,
   IPlanningObj,
 } from '@/types/planning';
+import VideoDetails from './AdditionalDetails/VideoDetails';
+import VideoRecommendations from './Recommendations/Video';
 import ComingSoonPopup from '@/components/comingSoonPopup/ComingSoonPopup';
 
 async function getHistory(): Promise<IPlanningObj[]>;
@@ -98,6 +100,7 @@ const PlanningPage = () => {
     marketing_template: '',
     schedule: {},
     assets: [],
+    file_type: '',
   });
   const { isInTutorialMode, tutorialCampaign, currentGuideMode } =
     useTutorialsContext();
@@ -375,7 +378,7 @@ const PlanningPage = () => {
                 formData={formData}
               />
             </>
-          ) : (
+          ) : formData.content_type.toLowerCase() === 'landing page' ? (
             <>
               <LandingPageDetails
                 formData={formData}
@@ -390,6 +393,33 @@ const PlanningPage = () => {
                   'Sales Converstion',
                   'Engagement',
                   'Educate Customers',
+                ]}
+                formData={formData}
+                setFormData={setFormData}
+              />
+              <SubmitAndBackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+                formik={formik}
+                formData={formData}
+              />
+            </>
+          ) : (
+            <>
+              <VideoDetails
+                formData={formData}
+                formik={formik}
+                setFormData={setFormData}
+              />
+              <BusinessObjectives
+                title="7. Choose your business objectives"
+                options={[
+                  'Product Features',
+                  'Brand Awareness',
+                  'Educate Customers',
+                  'Engagement',
+                  'Event Promotion',
+                  'Visualize Data',
                 ]}
                 formData={formData}
                 setFormData={setFormData}
@@ -510,9 +540,17 @@ const PlanningPage = () => {
                 setActiveButtonIndex={setActiveButtonIndex}
               />
             </>
-          ) : (
+          ) : formData.content_type.toLowerCase() === 'landing page' ? (
             <>
               <LandingPageRecommendation />
+              <BackButton
+                activeButtonIndex={activeButtonIndex}
+                setActiveButtonIndex={setActiveButtonIndex}
+              />
+            </>
+          ) : (
+            <>
+              <VideoRecommendations />
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}

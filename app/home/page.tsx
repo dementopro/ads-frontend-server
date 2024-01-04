@@ -107,10 +107,17 @@ const HomePage = () => {
     url: '',
     marketing_template: '',
     schedule: {},
-    assets: []
+    assets: [],
+    file_type: '',
   });
-  const { isOpen: isBugReportModalOpen, onOpen: onOpenBugReportModal, onOpenChange: onOpenBugReportModalChange, onClose: onCloseBugReportModal } = useDisclosure();
-  const { isInTutorialMode, tutorialCampaign, currentGuideMode } = useTutorialsContext();
+  const {
+    isOpen: isBugReportModalOpen,
+    onOpen: onOpenBugReportModal,
+    onOpenChange: onOpenBugReportModalChange,
+    onClose: onCloseBugReportModal,
+  } = useDisclosure();
+  const { isInTutorialMode, tutorialCampaign, currentGuideMode } =
+    useTutorialsContext();
 
   const formik = useFormik<CompanyForm>({
     initialValues: {
@@ -143,13 +150,13 @@ const HomePage = () => {
         sellingDescription: company.product_description,
         targetAudience: company.target_audice,
         websiteURL: company.website,
-        url: company.url
-      })
+        url: company.url,
+      });
       setFormData({
-        ...company
+        ...company,
       });
     }
-  }, [company])
+  }, [company]);
 
   async function onSubmit(
     values: CompanyForm,
@@ -175,7 +182,10 @@ const HomePage = () => {
         spinning={isGenerating}
         wrapperClassName="w-[80%] m-auto max-w-[1500px] text-[15px]"
       >
-        <section id='starting-menu' className="flex flex-col justify-center relative">
+        <section
+          id="starting-menu"
+          className="flex flex-col justify-center relative"
+        >
           <div className="flex gap-x-[8px] mb-6">
             <p className="w-[24px] h-[24px] text-black text-2xl not-italic font-medium leading-[normal]">
               ✨
@@ -191,32 +201,36 @@ const HomePage = () => {
             formData={formData}
           />
 
-          {
-            isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'GENERAL' && (
+          {isInTutorialMode &&
+            tutorialCampaign === 'HOME' &&
+            currentGuideMode.mode === 'GENERAL' && (
               <div className="absolute left-0 top-0 translate-x-[-80px] translate-y-[-20px]">
                 <CloseButton />
               </div>
-            )
-          }
+            )}
         </section>
         <div className="flex flex-col text-[15px]">
           <AddCompany formik={formik} />
           <ContentTypeSection setFormData={setFormData} formData={formData} />
-          <AddInfoButton
-            formik={formik}
-            formData={formData}
-          />
+          <AddInfoButton formik={formik} formData={formData} />
         </div>
         <div className="flex float-right mt-[32px] gap-[10px]">
           <p className="text-white text-[15px] text-[color:var(--primary-300,#ABABAB)]">
             Find a bug or encountering an error? Submit an issue report with
             us&nbsp;
-            <button className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline" onClick={() => {
-              onOpenBugReportModal();
-            }}>
+            <button
+              className="text-[#ABABAB] text-sm not-italic font-semibold leading-[normal] underline"
+              onClick={() => {
+                onOpenBugReportModal();
+              }}
+            >
               here
             </button>
-            <BugReportModal isOpen={isBugReportModalOpen} onOpenChange={onOpenBugReportModalChange} onClose={onCloseBugReportModal} />
+            <BugReportModal
+              isOpen={isBugReportModalOpen}
+              onOpenChange={onOpenBugReportModalChange}
+              onClose={onCloseBugReportModal}
+            />
           </p>
           <Image
             width={28}

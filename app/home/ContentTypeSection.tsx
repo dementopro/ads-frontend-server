@@ -15,7 +15,12 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
   setFormData,
   formData,
 }) => {
-  const { isInTutorialMode, tutorialCampaign, currentGuideMode, setIsInTutorialMode } = useTutorialsContext();
+  const {
+    isInTutorialMode,
+    tutorialCampaign,
+    currentGuideMode,
+    setIsInTutorialMode,
+  } = useTutorialsContext();
   const setContentType = (type: number) => {
     let temp = { ...formData };
     temp['content_type'] = (() => {
@@ -30,6 +35,8 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
           return 'Infographics';
         case 4:
           return 'Landing Page';
+        case 5:
+          return 'Video';
         default:
           return '';
       }
@@ -38,14 +45,14 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
   };
 
   return (
-    <div id='content-type' className={`${styles.mainDiv} mt-[32px] relative`}>
+    <div id="content-type" className={`${styles.mainDiv} mt-[32px] relative`}>
       <p className="w-full text-white h-[18px] mb-[24px] not-italic font-medium leading-[normal]">
         2.&nbsp;Choose your content type
       </p>
-      <div className="flex items-start gap-[32px] self-stretch h-[40px]">
+      <div className="flex flex-wrap items-start gap-[32px] self-stretch h-auto">
         <button
           className={`flex justify-center items-center text-[15px] w-[63px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
-            formData.content_type.toLowerCase() === "seo"
+            formData.content_type.toLowerCase() === 'seo'
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
@@ -59,7 +66,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
         </button>
         <button
           className={`flex justify-center items-center text-[15px] w-[123px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
-            formData.content_type.toLowerCase() === "social media"
+            formData.content_type.toLowerCase() === 'social media'
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
@@ -73,7 +80,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
         </button>
         <button
           className={`flex justify-center items-center text-[15px] w-[148px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
-            formData.content_type.toLowerCase() === "email marketing"
+            formData.content_type.toLowerCase() === 'email marketing'
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
@@ -87,7 +94,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
         </button>
         <button
           className={`flex justify-center items-center text-[15px] w-[148px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
-            formData.content_type.toLowerCase() === "infographics"
+            formData.content_type.toLowerCase() === 'infographics'
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
@@ -101,7 +108,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
         </button>
         <button
           className={`flex justify-center items-center text-[15px] w-[148px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
-            formData.content_type.toLowerCase() === "landing page"
+            formData.content_type.toLowerCase() === 'landing page'
               ? 'border border-[#ABABAB] text-white font-medium'
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
@@ -113,17 +120,38 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
             Landing Page
           </span>
         </button>
+        <button
+          className={`flex justify-center items-center text-[15px] w-[148px] h-[40px]  px-[16px] py-[8px] rounded-lg border-solid ${
+            formData.content_type.toLowerCase() === 'video'
+              ? 'border border-[#ABABAB] text-white font-medium'
+              : 'bg-[#35363A] text-[#ABABAB]'
+          }`}
+          onClick={() => {
+            setContentType(5);
+          }}
+        >
+          <span className="w-[120px] h-[24px] text-[#ABABAB] text-[15px]">
+            Video
+          </span>
+        </button>
       </div>
 
-      {
-        isInTutorialMode && tutorialCampaign === 'HOME' && currentGuideMode.mode === 'CONTENTTYPE' && (
+      {isInTutorialMode &&
+        tutorialCampaign === 'HOME' &&
+        currentGuideMode.mode === 'CONTENTTYPE' && (
           <Fragment>
             <div className="absolute right-full bottom-full translate-x-[-30px] translate-y-[-70px]">
               <CloseButton />
             </div>
             <div className="absolute left-[200px] bottom-full flex items-center z-[999]">
-              <TopToLeftCurveLineArrow width={100} height={84} className="tutorial-element" />
-              <div className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}>
+              <TopToLeftCurveLineArrow
+                width={100}
+                height={84}
+                className="tutorial-element"
+              />
+              <div
+                className={`w-[310px] bg-primary-purple rounded-md text-white p-3 text-md tutorial-element ml-5 mb-20`}
+              >
                 Choose which type of content you want to optimize.
               </div>
               <p className="text-white ml-20 mt-10">
@@ -134,8 +162,7 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
               <NavigationButtons onNext={() => setIsInTutorialMode(false)} />
             </div>
           </Fragment>
-        )
-      }
+        )}
     </div>
   );
 };

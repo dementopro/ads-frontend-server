@@ -847,6 +847,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
     setEmailInstruction,
     setSocialMedia,
     setInfographics,
+    setVideoTextsAndKeywords,
     setLandingPage,
   } = useSeoAnalyzerContext();
   const router = useRouter();
@@ -876,7 +877,7 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
   const isValidInfographics = (
     formData: any,
     company: CompanyDetailForm,
-    _values: any,
+    values: any,
     errors: any
   ) =>
     formData.content_type.toLowerCase() === 'infographics' &&
@@ -896,12 +897,25 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
     errors.idealCustomerProfile === '' &&
     errors.competitors === '';
 
+  const isValidVideo = (
+    formData: any,
+    company: CompanyDetailForm,
+    values: any,
+    errors: any
+  ) =>
+    formData.content_type.toLowerCase() === 'video' &&
+    formData.file_type.length > 0 &&
+    // company.assets.length > 0 &&
+    errors.targetAudience === '' &&
+    errors.idealCustomerProfile === '';
+
   const isValid = useMemo(() => {
     return (
       isValidSeo(formData.content_type, formik.errors) ||
       isValidEmailMarketing(formData.content_type, formik.errors) ||
       isValidSocialMedia(formData.content_type, formik.values, formik.errors) ||
       isValidInfographics(formData, company, formik.values, formik.errors) ||
+      isValidVideo(formData, company, formik.values, formik.errors) ||
       isValidLandingPage(formData.content_type, company, formik.errors)
     );
   }, [formData, formik.values, formik.errors, company]);
@@ -1159,6 +1173,60 @@ const SubmitAndBackButton: FC<SubmitAndBackButtonProps> = ({
                   infographicImage: res.data.infographic_images,
                 })
               );
+            } catch {}
+            setActiveButtonIndex(index);
+          } else {
+            messageApi.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          messageApi.error('Something went wrong');
+          console.warn('Error from /social_media_instruction_api', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else if (isValidVideo(formData, company, formik.values, formik.errors)) {
+      setIsLoading(true);
+      setCompany({
+        ...company,
+        name: formik.values.companyName,
+        website: formik.values.websiteURL,
+        business_objectives: formData.business_objectives,
+        file_type: formData.file_type,
+        target_audice: formik.values.targetAudience,
+        content_type: formData.content_type,
+        customer_profile: formik.values.idealCustomerProfile,
+        description: formik.values.description,
+      });
+
+      const bodyData = new FormData();
+      bodyData.append('company_name', formik.values.companyName);
+      bodyData.append('website_url', formValidUrl(formik.values.websiteURL));
+      bodyData.append('company_description', formik.values.description);
+      bodyData.append('target_audience', formik.values.targetAudience);
+      bodyData.append('customer_profile', formik.values.idealCustomerProfile);
+      bodyData.append(
+        'business_objectives',
+        formData.business_objectives.join(',')
+      );
+      bodyData.append('file_type', formData.file_type);
+      // company.assets.forEach((asset) => {
+      //   bodyData.append('media', asset);
+      // });
+
+      axios
+        .post('/fapi/video_get_instructions_api', bodyData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          if (res.data.status == true) {
+            try {
+              const video_string = res.data.video;
+              const video_obj = JSON.parse(video_string);
+              setVideoTextsAndKeywords(video_obj);
             } catch {}
             setActiveButtonIndex(index);
           } else {
