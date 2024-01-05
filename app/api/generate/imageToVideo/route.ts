@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
           source:
             'https://creatomate-static.s3.amazonaws.com' +
             '/demo/pixabay-best-summer-128473.mp3',
-          duration: undefined,
+          duration: 16,
           audioFadeOut: 2,
         }),
 

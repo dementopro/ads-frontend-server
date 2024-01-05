@@ -1,6 +1,10 @@
-"use client";
+'use client';
 
-export const popupCenter = (url: string, title: string, callback: () => void = () => {}) => {
+export const popupCenter = (
+  url: string,
+  title: string,
+  callback: () => void = () => {}
+) => {
   const dualScreenLeft = window.screenLeft ?? window.screenX;
   const dualScreenTop = window.screenTop ?? window.screenY;
 
@@ -20,15 +24,17 @@ export const popupCenter = (url: string, title: string, callback: () => void = (
   const newWindow = window.open(
     url,
     title,
-    `width=${500 / systemZoom},height=${550 / systemZoom
+    `width=${500 / systemZoom},height=${
+      550 / systemZoom
     },top=${top},left=${left}`
   );
   newWindow?.focus();
 
-  window.addEventListener("message", (event: MessageEvent) => {
-    if (event.origin === process.env.NEXT_PUBLIC_FRONTEND_URL as string) {
+  window.addEventListener('message', (event: MessageEvent) => {
+    console.log(event);
+    if (event.origin === (process.env.NEXT_PUBLIC_FRONTEND_URL as string)) {
       const { event: eventName } = event.data;
-      if (eventName === "close") {
+      if (eventName === 'close') {
         callback();
       }
     }

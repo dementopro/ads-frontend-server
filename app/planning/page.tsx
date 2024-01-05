@@ -550,7 +550,7 @@ const PlanningPage = () => {
             </>
           ) : (
             <>
-              <VideoRecommendations />
+              <VideoRecommendations router={router} />
               <BackButton
                 activeButtonIndex={activeButtonIndex}
                 setActiveButtonIndex={setActiveButtonIndex}

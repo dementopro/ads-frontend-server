@@ -1,18 +1,22 @@
-"use client"
+'use client';
 
-import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { signIn, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
-import LoadingSpin from "@/app/planning/LoadingSpin";
+import LoadingSpin from '@/app/planning/LoadingSpin';
 
 const SignInPage = ({ params }: { params: { website: string } }) => {
   const { data: session, status } = useSession();
   const website: string = params.website;
 
   useEffect(() => {
-    if (!(status === "loading") && !session) void signIn(website);
-    if (session && (session as any)[website] && status === "authenticated") {
-      window.opener.postMessage({ event: "close", data: `Closing ${website} auth window` }, process.env.NEXT_PUBLIC_FRONTEND_URL as string);
+    signIn(website);
+    // if (!(status === "loading") && !session) void signIn(website);
+    if (session && (session as any)[website] && status === 'authenticated') {
+      window.opener.postMessage(
+        { event: 'close', data: `Closing ${website} auth window` },
+        process.env.NEXT_PUBLIC_FRONTEND_URL as string
+      );
       setTimeout(() => {
         window.close();
       }, 100);
