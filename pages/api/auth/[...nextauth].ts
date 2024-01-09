@@ -67,6 +67,17 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
+  logger: {
+    error(code, metadata) {
+      console.error(code, metadata);
+    },
+    warn(code) {
+      console.warn(code);
+    },
+    debug(code, metadata) {
+      console.debug(code, metadata);
+    },
+  },
 };
 
 export default NextAuth(authOptions);

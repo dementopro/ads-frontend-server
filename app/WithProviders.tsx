@@ -6,6 +6,7 @@ import { AccountProvider } from "@/context/account"
 import { SeoAnalyzerProvider } from "@/context/seo";
 import { TutorialsProvider } from "@/context/tutorials";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ProjectProvider } from '@/context/project';
 
 const WithProviders = ({ children , session}: { children: React.ReactNode, session: Session | null }) => {
   return (
@@ -14,7 +15,9 @@ const WithProviders = ({ children , session}: { children: React.ReactNode, sessi
         <TutorialsProvider>
           <SeoAnalyzerProvider>
             <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
-              {children}
+              <ProjectProvider>
+                {children}
+              </ProjectProvider>
             </GoogleOAuthProvider>
           </SeoAnalyzerProvider>
         </TutorialsProvider>

@@ -92,6 +92,16 @@ const menuItems = [
         'View your ad performance, historical data, and receive optimized recommendations for each of you social accounts.',
     },
   },
+  {
+    text: 'Projects',
+    href: '/projects',
+    icon: '/images/sidebar/projects.svg',
+    activeIcon: '/images/sidebar/projects.svg',
+    tutorial: {
+      width: 310,
+      description: '',
+    },
+  },
   // {
   //   text: 'Ads Management',
   //   icon: '/images/sidebar/manage.svg',

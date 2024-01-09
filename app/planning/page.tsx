@@ -45,6 +45,9 @@ import type {
 import VideoDetails from './AdditionalDetails/VideoDetails';
 import VideoRecommendations from './Recommendations/Video';
 import ComingSoonPopup from '@/components/comingSoonPopup/ComingSoonPopup';
+import SaveProject from '@/components/saveProject/SaveProject';
+import SuccessPopup from '@/components/successPopup/SuccessPopup';
+import { useProjectContext } from '@/context/project';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -75,7 +78,8 @@ async function getHistory(id?: number) {
 const PlanningPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { company } = useSeoAnalyzerContext();
+  const { company, onpage, offpage, emailInstruction, infographics } =
+    useSeoAnalyzerContext();
   const [messageApi, contextHolder] = message.useMessage();
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -104,9 +108,11 @@ const PlanningPage = () => {
   });
   const { isInTutorialMode, tutorialCampaign, currentGuideMode } =
     useTutorialsContext();
+  const { projectData, setProjectData } = useProjectContext();
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState<boolean>(false);
   const {
     isOpen: isBugReportModalOpen,
     onOpen: onOpenBugReportModal,
@@ -171,6 +177,12 @@ const PlanningPage = () => {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    if (projectData && Object.keys(projectData).length > 0) {
+      console.log(projectData, 'Project Data');
+    }
+  }, [projectData]);
+
   async function onSubmit(
     values: CompanyForm,
     actions: FormikHelpers<CompanyForm>
@@ -179,6 +191,45 @@ const PlanningPage = () => {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value);
   }
+
+  const toggleSuccessPopup = () => {
+    setIsSuccessPopupOpen(!isSuccessPopupOpen);
+  };
+
+  const handleSaveProject = () => {
+    const newProjectData = {
+      project_name: `Project ${formik.values.companyName}`,
+      content_type: formData.content_type.toLowerCase(),
+      data: {},
+      created_at: new Date(),
+    };
+
+    if (formData.content_type.toLowerCase() == 'seo') {
+      newProjectData.data = {
+        on_page: onpage,
+        off_page: offpage,
+      };
+    } else if (formData.content_type.toLowerCase() == 'email marketing') {
+      newProjectData.data = {
+        email_instruction: emailInstruction,
+      };
+    } else if (formData.content_type.toLowerCase() === 'infographics') {
+      newProjectData.data = {
+        infographics,
+      };
+    }
+
+    let updatedProjectData = [];
+
+    if (projectData.length > 0) {
+      updatedProjectData = [...projectData, newProjectData];
+    } else {
+      updatedProjectData = [newProjectData];
+    }
+
+    setProjectData(updatedProjectData);
+    toggleSuccessPopup();
+  };
 
   return (
     <AdminLayout>
@@ -435,6 +486,7 @@ const PlanningPage = () => {
         {activeButtonIndex == 2 &&
           (formData.content_type.toLowerCase() == 'seo' ? (
             <>
+              <SaveProject saveProject={handleSaveProject} />
               <div
                 id="seo-page-tab"
                 className="flex items-center mt-8 relative"
@@ -476,6 +528,7 @@ const PlanningPage = () => {
             </>
           ) : formData.content_type.toLowerCase() === 'email marketing' ? (
             <>
+              <SaveProject saveProject={handleSaveProject} />
               <div className="flex items-center mt-8">
                 {tabsList.map((tab, i) => (
                   <Button
@@ -534,6 +587,7 @@ const PlanningPage = () => {
             </>
           ) : formData.content_type.toLowerCase() === 'infographics' ? (
             <>
+              <SaveProject saveProject={handleSaveProject} />
               <InfographicsRecommendation />
               <BackButton
                 activeButtonIndex={activeButtonIndex}
@@ -582,6 +636,11 @@ const PlanningPage = () => {
             alt="#"
           />
         </div>
+        <SuccessPopup
+          isOpen={isSuccessPopupOpen}
+          togglePopup={toggleSuccessPopup}
+          goToProjects={() => router.push('/projects')}
+        />
       </Spin>
     </AdminLayout>
   );
