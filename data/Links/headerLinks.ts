@@ -57,7 +57,7 @@ export const headerLinks = [
     ],
   },
   {
-    title: 'Resouces',
+    title: 'Resources',
     section: [
       {
         title: 'General',

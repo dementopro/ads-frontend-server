@@ -32,7 +32,7 @@ const Demo: FC<IDemoProps> = (props) => {
           </div>
           <span> ✨ </span>
         </h2>
-        <div className="w-full border-y-1 border-y-[#844FFF] p-6 bg-[#010314] rounded-[20px] min-h-[500px] mt-8">
+        <div className="w-full border-y-1 border-y-[#844FFF] p-6 bg-[#010314] rounded-[20px] min-h-[500px] mt-8 overflow-x-auto">
           <div className="flex rounded-[14px] bg-[#15161A] w-full items-stretch justify-self-stretch overflow-hidden p-0">
             <div className="ipad:w-[200px] bg-[#1B1C21] border-r border-r-[#3A3A3A] py-4">
               <div

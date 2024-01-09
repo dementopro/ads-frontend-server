@@ -2,7 +2,7 @@ import { useCases } from "@/data/UseCases/useCases";
 
 export const footerLinks = [
   {
-    title: 'Resouces',
+    title: 'Resources',
     section: [
       {
         title: 'General',
