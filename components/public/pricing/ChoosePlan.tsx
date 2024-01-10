@@ -21,7 +21,7 @@ const ChoosePlan = () => {
       <div className="android:px-[14px] ipad:px-[18px] android:py-[5px] bg-[#B3ACFF] android:rounded-[8px] ipad:rounded-[5px] text-black android:text-[14px] ipad:-[18px] font-normal font-open-sans">
         Choose a Plan
       </div>
-      <div className='w-[1000px] flex flex-rowgap-[32px] items-start justify-center'>
+      <div className='w-[1000px] flex flex-row gap-[32px] items-start justify-center'>
         {plan.map((plan, index) => (
           <div key={index} className={`w-full py-[1px] rounded-[19px] bg-light-purple-gradient cursor-pointer`}>
             <div className={`w-full flex flex-col gap-[16px] py-[16px] px-[20px] items-start justify-center bg-black drop-shadow-[0_16px_80px_rgba(104,89,255,0.20)] rounded-[18px]`}>
@@ -74,7 +74,7 @@ const ChoosePlan = () => {
           </div>
         ))}
       </div>
-      <div className='w-full text-[12px] font-opan-sans font-regular text-[#E0E0E0] flex flex-row gap-[10px] items-center justify-end'>
+      <div className='w-full text-[16px] font-opan-sans font-regular text-[#E0E0E0] flex flex-row gap-[10px] items-center justify-end'>
         <span>For Billings and invoice-related questions contact <a href="mailto:contactus@adsgency.ai" className='font-medium'>contactus@adsgency.ai</a></span>
         <IoMdInformationCircleOutline />
       </div>

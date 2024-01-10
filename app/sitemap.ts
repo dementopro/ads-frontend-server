@@ -81,6 +81,9 @@ const links = [
   {
     url: '/useCases',
   },
+  {
+    url: '/helpCenter',
+  },
 ]
 
 const blogs = Blogs.map(blog => {
