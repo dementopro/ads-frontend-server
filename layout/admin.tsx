@@ -97,11 +97,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           {/* Render the AdminSidebar component */}
           <AdminSidebar />
         </div>
-        <div
-          className={`admin-content max-h-full w-full ${
-            overFlowVisibleCases ? 'overflow-visible' : 'overflow-auto'
-          }`}
-        >
+        <div className={`admin-content max-h-full w-full overflow-auto`}>
           {/* Render the children components, which will represent the content of the admin pages */}
           {children}
         </div>

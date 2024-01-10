@@ -13,19 +13,19 @@ interface RefreshConfirmationModalProps {
   onOpenChange: () => void;
   onConfirm: () => void;
   onClose: () => void;
-};
+}
 
 const RefreshConfirmationModal: FC<RefreshConfirmationModalProps> = ({
   isOpen,
   onOpenChange,
-  onConfirm
+  onConfirm,
 }) => {
   return (
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       hideCloseButton
-      className='overflow-visible max-w-lg h-1/3'
+      className="overflow-visible max-w-lg"
     >
       <ModalContent className="p-6 text-white bg-background-100">
         {(onClose) => (
@@ -38,7 +38,10 @@ const RefreshConfirmationModal: FC<RefreshConfirmationModalProps> = ({
             </ModalHeader>
             <ModalBody>
               <p className="text-white">
-                Refreshing will create new optimizations for all media assets.<br/><br/>You won’t be able to see old optimizations anymore.
+                Refreshing will create new optimizations for all media assets.
+                <br />
+                <br />
+                You won’t be able to see old optimizations anymore.
               </p>
             </ModalBody>
             <ModalFooter className="flex w-full gap-6">
