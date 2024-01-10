@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext, useState } from 'react';
 
 import { TopToLeftCurveLineArrow } from '@/components/tutorial/Arrows';
 import CloseButton from '@/components/tutorial/CloseButton';
@@ -6,6 +6,9 @@ import NavigationButtons from '@/components/tutorial/NavigationButtons';
 import { useTutorialsContext } from '@/context/tutorials';
 import styles from '@/app/planning/planning.module.css';
 import type { CompanyDetailForm } from '@/types/planning';
+import { AccountContext } from '@/context/account';
+import SubscribePopup from '@/components/subscribePopup/SubscribePopup';
+import { useRouter } from 'next/navigation';
 
 interface ContentTypeSectionProps {
   formData: CompanyDetailForm;
@@ -21,6 +24,9 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
     currentGuideMode,
     setIsInTutorialMode,
   } = useTutorialsContext();
+  const { creditInfo } = useContext(AccountContext);
+  const [isSubscribePopupOpen, setIsSubscribePopupOpen] =
+    useState<boolean>(false);
   const setContentType = (type: number) => {
     let temp = { ...formData };
     temp['content_type'] = (() => {
@@ -42,6 +48,12 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
       }
     })();
     setFormData(temp);
+  };
+
+  const router = useRouter();
+
+  const toggleSubscribePopup = () => {
+    setIsSubscribePopupOpen(!isSubscribePopupOpen);
   };
 
   return (
@@ -127,7 +139,11 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
               : 'bg-[#35363A] text-[#ABABAB]'
           }`}
           onClick={() => {
-            setContentType(5);
+            if (creditInfo) {
+              setContentType(5);
+            } else {
+              toggleSubscribePopup();
+            }
           }}
         >
           <span className="w-[120px] h-[24px] text-[#ABABAB] text-[15px]">
@@ -163,6 +179,11 @@ const ContentTypeSection: FC<ContentTypeSectionProps> = ({
             </div>
           </Fragment>
         )}
+      <SubscribePopup
+        isOpen={isSubscribePopupOpen}
+        togglePopup={toggleSubscribePopup}
+        router={router}
+      />
     </div>
   );
 };
