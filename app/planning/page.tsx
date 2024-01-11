@@ -48,6 +48,7 @@ import ComingSoonPopup from '@/components/comingSoonPopup/ComingSoonPopup';
 import SaveProject from '@/components/saveProject/SaveProject';
 import SuccessPopup from '@/components/successPopup/SuccessPopup';
 import { useProjectContext } from '@/context/project';
+import { useAccountContext } from '@/context/account';
 
 async function getHistory(): Promise<IPlanningObj[]>;
 async function getHistory(id: number): Promise<IPlanningObj>;
@@ -109,6 +110,7 @@ const PlanningPage = () => {
   const { isInTutorialMode, tutorialCampaign, currentGuideMode } =
     useTutorialsContext();
   const { projectData, setProjectData } = useProjectContext();
+  const { account } = useAccountContext();
 
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(1);
   const [activeSeoType, setActiveSeoType] = useState<number>(0);
@@ -198,6 +200,7 @@ const PlanningPage = () => {
 
   const handleSaveProject = () => {
     const newProjectData = {
+      email: account?.email,
       project_name: `Project ${formik.values.companyName}`,
       content_type: formData.content_type.toLowerCase(),
       data: {},

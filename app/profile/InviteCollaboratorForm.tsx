@@ -10,9 +10,11 @@ import { InviteCollaboratorForm } from '@/types/invite';
 const InviteCollaboratorForm = ({
   onUpdated,
   setShow,
+  project_name = '',
 }: {
   onUpdated: () => void;
   setShow: (show: boolean) => void;
+  project_name?: string;
 }) => {
   const [form] = Form.useForm<Partial<InviteCollaboratorForm>>();
   const [loading, setLoading] = useState(false);
@@ -24,14 +26,23 @@ const InviteCollaboratorForm = ({
     const { f_name, l_name, email } = values;
     console.log('values ==> ', values);
     try {
+      const url =
+        project_name !== '' ? 'save_project_invite' : 'invite_user_api';
+      const data =
+        project_name !== ''
+          ? {
+              project_name,
+              email,
+            }
+          : {
+              f_name,
+              l_name,
+              email,
+            };
       const response = await axios({
-        url: '/fapi/invite_user_api',
+        url: `/fapi/${url}`,
         method: 'POST',
-        data: JSON.stringify({
-          f_name,
-          l_name,
-          email,
-        }),
+        data: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },

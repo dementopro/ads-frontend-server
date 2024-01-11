@@ -16,9 +16,15 @@ type Props = {
   show: boolean;
   setShow: (show: boolean) => void;
   onUpdated: () => void;
+  project_name?: string;
 };
 
-const InviteCollaborator = ({ show, setShow, onUpdated }: Props) => {
+const InviteCollaborator = ({
+  show,
+  setShow,
+  onUpdated,
+  project_name = '',
+}: Props) => {
   return (
     <>
       {show && (
@@ -39,6 +45,7 @@ const InviteCollaborator = ({ show, setShow, onUpdated }: Props) => {
             <div className="flex flex-col items-center">
               <InviteCollaboratorForm
                 setShow={setShow}
+                project_name={project_name}
                 onUpdated={() => {
                   onUpdated();
                   setTimeout(() => {

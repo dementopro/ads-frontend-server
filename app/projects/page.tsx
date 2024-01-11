@@ -7,8 +7,8 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useDisclosure } from '@nextui-org/react';
-import { Spin, message } from 'antd';
+import { Chip, useDisclosure } from '@nextui-org/react';
+import { Spin, Table, message } from 'antd';
 import Image from 'next/image';
 import { FormikHelpers, useFormik } from 'formik';
 import axios from '@/lib/axios';
@@ -26,6 +26,10 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import ProjectCard from '@/components/projectCard/ProjectCard';
 import ProjectRecommendations from '@/components/projectRecommendations/ProjectRecommendations';
+import { Icon } from '@iconify/react';
+import InviteCollaborator from '../profile/InviteCollaborator';
+import { IInviteLists, IInviteObj } from '@/types/invite';
+import { useAccountContext } from '@/context/account';
 
 const contentTypes = [
   'SEO',
@@ -37,7 +41,8 @@ const contentTypes = [
 ];
 
 const ProjectsPage = () => {
-  const { projectData, setProjectData } = useProjectContext();
+  const { projectData, setProjectData, fetchProjects } = useProjectContext();
+  const { account } = useAccountContext();
   const [messageApi, contextHolder] = message.useMessage();
   const {
     isOpen: isBugReportModalOpen,
@@ -50,12 +55,27 @@ const ProjectsPage = () => {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<any>(null);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [showInviteCollaborator, setShowInviteCollaborator] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [invites, setInvites] = useState<IInviteObj[]>([]);
 
   useEffect(() => {
-    if (projectData && Object.keys(projectData).length > 0) {
+    if (account?.email) {
+      fetchProjects(account.email);
+    }
+  }, [account]);
+
+  useEffect(() => {
+    if (projectData && projectData.length > 0) {
       console.log(projectData, 'Project Page');
     }
   }, [projectData]);
+
+  useEffect(() => {
+    if (selectedProject && Object.keys(selectedProject).length > 0) {
+      fetchInvites(selectedProject.project_name);
+    }
+  }, [selectedProject]);
 
   const toggleSuccessPopup = () => {
     setIsSuccessPopupOpen(!isSuccessPopupOpen);
@@ -66,6 +86,57 @@ const ProjectsPage = () => {
       console.log(projectData, 'Projects page');
       setProjectData(projectData);
       toggleSuccessPopup();
+    }
+  };
+
+  const loadInvites = async () => {
+    setLoading(true);
+
+    try {
+      const response = await axios({
+        url: '/fapi/get_all_invites_api',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200) {
+        const data: IInviteLists = response.data;
+        if (data.status === SUCCESS_CODE) {
+          if (data.invite_list) setInvites(data.invite_list);
+        } else {
+        }
+      }
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchInvites = async (project_name: string) => {
+    try {
+      const response = await axios({
+        url: '/fapi/project_invites',
+        method: 'POST',
+        data: JSON.stringify({ project_name }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200) {
+        const data: any = response.data;
+        if (data.status === SUCCESS_CODE) {
+          console.log('data.project_invites ==> ', data.project_invites);
+          if (data.project_invites) setInvites(data.project_invites);
+        } else {
+        }
+      }
+    } catch (error) {
+      console.log('error', error);
+    } finally {
     }
   };
 
@@ -164,12 +235,83 @@ const ProjectsPage = () => {
             </div>
           </div>
           {selectedProject && Object.keys(selectedProject).length > 0 && (
-            <button
-              className="flex items-center justify-center w-40 h-10 bg-[#27282F] rounded-lg my-4"
-              onClick={() => setSelectedProject(null)}
+            <div className="flex items-center justify-between">
+              <button
+                className="flex items-center justify-center w-40 h-10 bg-[#27282F] rounded-lg my-4"
+                onClick={() => setSelectedProject(null)}
+              >
+                Back to Projects
+              </button>
+              <button
+                className="flex items-center justify-center gap-2 bg-primary-purple text-white rounded-lg px-4 py-2 hover:opacity-80 text-base"
+                onClick={() => {
+                  setShowInviteCollaborator(true);
+                }}
+              >
+                <Icon icon="mdi:plus-circle-outline" />
+                <span>Invite Collaborators to Project</span>
+              </button>
+            </div>
+          )}
+          {invites.length > 0 && (
+            <Table
+              dataSource={invites}
+              pagination={false}
+              className={`my-5 table`}
+              rowClassName={`table-row`}
             >
-              Back to Projects
-            </button>
+              <Table.Column
+                title="Collaborator"
+                dataIndex="email"
+                key="email"
+                render={(_, data: any) => (
+                  <>
+                    <div className="flex gap-3">
+                      <div className="flex flex-col w-full">
+                        <p className="font-medium text-left">{data.email}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              />
+              <Table.Column
+                title="Project"
+                dataIndex="project_name"
+                key="project_name"
+                render={(_, data: any) => (
+                  <>
+                    <div className="flex gap-3">
+                      <div className="flex flex-col w-full">
+                        <p className="font-medium text-left">
+                          {data.project_name}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              />
+              <Table.Column
+                title="Date Added"
+                dataIndex="date"
+                key="date"
+                render={(_, data: any) => (
+                  <>
+                    {data.status == 0 && (
+                      <Chip
+                        color={'success'}
+                        variant="light"
+                        className="rounded-md bg-[#201641]"
+                      >
+                        {'Pending'}
+                      </Chip>
+                    )}
+                    {data.status == 1 && (
+                      <p className="font-medium text-left">{data.created_at}</p>
+                    )}
+                  </>
+                )}
+              />
+            </Table>
           )}
           <div className="flex flex-wrap items-center gap-4 w-full bg-[#27282F] p-5 rounded-bl-lg rounded-br-lg">
             {selectedProject && Object.keys(selectedProject).length > 0 ? (
@@ -219,6 +361,14 @@ const ProjectsPage = () => {
           isOpen={isSuccessPopupOpen}
           togglePopup={toggleSuccessPopup}
           goToProjects={() => {}}
+        />
+        <InviteCollaborator
+          show={showInviteCollaborator}
+          setShow={setShowInviteCollaborator}
+          project_name={selectedProject?.project_name}
+          onUpdated={() => {
+            loadInvites();
+          }}
         />
       </Spin>
     </AdminLayout>
