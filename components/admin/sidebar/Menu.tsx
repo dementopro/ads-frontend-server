@@ -14,6 +14,8 @@ import { useTutorialsContext } from '@/context/tutorials';
 import { LeftStraightLineArrow } from '@/components/tutorial/Arrows';
 import NavigationButtons from '@/components/tutorial/NavigationButtons';
 import CloseButton from '@/components/tutorial/CloseButton';
+import { FaPhotoVideo } from "react-icons/fa";
+
 
 // Define an array of menu items with their properties
 const menuItems = [
@@ -93,6 +95,17 @@ const menuItems = [
     },
   },
   {
+    text: 'Video Editor',
+    icon: <FaPhotoVideo className='mr-5' style={{fontSize:"20px"}}/>,
+    activeIcon: <FaPhotoVideo />,
+    href: '/videoeditor',
+    tutorial: {
+      width: 310,
+      description:
+        'You can edit videos, add text, animation and effects.',
+    },
+  },
+  {
     text: 'Projects',
     href: '/projects',
     icon: '/images/sidebar/projects.svg',
@@ -118,8 +131,8 @@ const menuItems = [
 type MenuSigleBtnProps = {
   text: string;
   isActive: boolean;
-  icon?: string;
-  activeIcon?: string;
+  icon?: any;
+  activeIcon?: any;
   href?: string;
 };
 
@@ -229,13 +242,14 @@ function MenuSigleBtn({
     >
       {contextHolder}
       {icon ? (
+        typeof icon == 'string' ? 
         <Image
           src={isActive ? activeIcon! : icon}
           alt={text}
           width={20}
           height={20}
           className="mr-5"
-        />
+        /> : icon
       ) : (
         <span className="ml-6" />
       )}

@@ -1,15 +1,23 @@
-import { Key, useEffect, useRef, useState, MouseEvent } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import { useSeoAnalyzerContext } from '@/context/seo';
 import styles from '@/./app/planning/planning.module.css';
 import { createClient } from 'pexels';
 import axios from '@/lib/axios';
-import LoadingSpin from '../LoadingSpin';
-import { MdOutlineSaveAlt } from 'react-icons/md';
-import SubscribePopup from '@/components/subscribePopup/SubscribePopup';
 import { message } from 'antd';
+import { useVideoContext } from '@/context/video';
+import { VideoProvider } from '@/context/video';
+import VideoEditor from './VideoEditor';
+
+export const EditorWithStore = ({ isEditVideo }: VideoRecommendationsProps) => {
+  return (
+    <VideoProvider>
+      <VideoRecommendations isEditVideo={isEditVideo} />
+    </VideoProvider>
+  );
+}
 
 interface VideoRecommendationsProps {
-  router: any;
+  isEditVideo: boolean;
 }
 
 const pexelsClient = createClient(
@@ -17,16 +25,20 @@ const pexelsClient = createClient(
 );
 
 const VideoRecommendations: React.FC<VideoRecommendationsProps> = ({
-  router,
+  isEditVideo
 }) => {
   const { videoTextsAndKeywords } = useSeoAnalyzerContext();
 
   const [mediaAssets, setMediaAssets] = useState<string[]>([]);
+  const [file, setFile] = useState('');
   const [video, setVideo] = useState<any>({});
   const [isGeneratingVideos, setIsGeneratingVideos] = useState<boolean>(true);
   const [isSubscribePopupOpen, setIsSubscribePopupOpen] =
     useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [selectedMenuOption, setSelectedMenuOption] = useState('Video');
+
+  const { videos, addVideoResource, addVideo } = useVideoContext()
 
   useEffect(() => {
     if (
@@ -98,41 +110,39 @@ const VideoRecommendations: React.FC<VideoRecommendationsProps> = ({
     // }
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    addVideoResource(URL.createObjectURL(file));
+  };
+
   return (
     <div className={`${styles.onPageDiv} overflow-x-auto`}>
-      <div className="flex align-center justify-center w-full">
-        {isGeneratingVideos ? (
-          <div className="flex flex-col items-center justify-center w-full">
-            <LoadingSpin />
-            <h1>
-              Your videos are being generated. Please be patient as this may
-              take a few minutes...
-            </h1>
+      {isEditVideo ?
+        <VideoEditor selectedMenuOption={selectedMenuOption} setSelectedMenuOption={setSelectedMenuOption} />
+        :
+        <>
+          <label className="flex w-[124.5px] h-11 justify-center items-center gap-4 border px-4 py-1.5 rounded-lg bg-[#844FFF] border-none" htmlFor="fileInput">
+            <input
+              id="fileInput"
+              type="file"
+              accept="video/mp4,video/x-m4v,video/*"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+            Upload
+          </label>
+          <div className="flex align-center justify-center w-full">
+            <div className="flex align-center justify-center w-full p-4">
+              {videos.length > 0 && (
+                <div className="flex flex-col gap-8 w-full">
+                  <video width={320} height={240} src={videos[0]} id="video-0" controls></video>
+                </div>
+              )}
+            </div>
           </div>
-        ) : (
-          <div className="flex align-center justify-center w-full p-4">
-            {video && (
-              <div className="flex flex-col gap-8 w-full">
-                <video width="320" height="240" controls>
-                  <source src={video.url} type="video/mp4" />
-                </video>
-                <button
-                  onClick={handleSaveVideo}
-                  className="flex items-center justify-center gap-2 w-28 h-12 bg-blue-600 text-md text-white py-2 rounded-md ml-auto"
-                >
-                  <MdOutlineSaveAlt className="w-4 h-4" />
-                  Save
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-      <SubscribePopup
-        isOpen={isSubscribePopupOpen}
-        togglePopup={toggleSubscribePopup}
-        router={router}
-      />
+        </>
+      }
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { TutorialsProvider } from "@/context/tutorials";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ProjectProvider } from '@/context/project';
 
-const WithProviders = ({ children , session}: { children: React.ReactNode, session: Session | null }) => {
+const WithProviders = ({ children, session }: { children: React.ReactNode, session: Session | null }) => {
   return (
     <AccountProvider>
       <SessionProvider session={session} refetchInterval={60} refetchOnWindowFocus>

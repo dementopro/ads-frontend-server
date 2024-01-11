@@ -188,7 +188,7 @@ const PlanningPage = () => {
   async function onSubmit(
     values: CompanyForm,
     actions: FormikHelpers<CompanyForm>
-  ) {}
+  ) { }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPrompt(e.target.value);

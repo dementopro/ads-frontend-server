@@ -29,15 +29,20 @@ const nextConfig = {
         ]
     },
     webpack: (config) => {
-      config.ignoreWarnings = [
-        // https://webpack.js.org/configuration/other-options/#ignorewarnings
-        {
-          module: /node-fetch/,
-          message: /.*Can't resolve 'encoding'.*/,
-        },
-      ];
+        config.ignoreWarnings = [
+            // https://webpack.js.org/configuration/other-options/#ignorewarnings
+            {
+                module: /node-fetch/,
+                message: /.*Can't resolve 'encoding'.*/,
+            },
+        ];
 
-      return config;
+        config.externals.push({
+            sharp: "commonjs sharp",
+            canvas: "commonjs canvas",
+        });
+
+        return config;
     },
     experimental: {
         proxyTimeout: 10 * 60 * 1000,
