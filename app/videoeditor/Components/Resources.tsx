@@ -1,18 +1,23 @@
 import React from "react";
-// import { ExportVideoPanel } from "./panels/ExportVideoPanel";
-// import { AnimationsPanel } from "./panels/AnimationsPanel";
-// import { FillPanel } from "./panels/FillPanel";
-// import { EffectsPanel } from "./panels/EffectsPanel";
+import { ExportVideoPanel } from "./ResourcePanels/ExportVideoPanel";
+import { AnimationsPanel } from "./ResourcePanels/AnimationsPanel";
+import { FillPanel } from "./ResourcePanels/FillPanel";
+import { EffectsPanel } from "./ResourcePanels/EffectPanel";
 import { TextResourcesPanel } from "./ResourcePanels/TextResourcePanel";
+import { AudioResourcesPanel } from "./ResourcePanels/AudioResourcesPanel";
+import { useVideoContext } from "@/context/video";
 
-const Resources = ({ selectedMenuOption }: { selectedMenuOption: string }) => {
+const Resources = () => {
+  const { selectedMenuOption } = useVideoContext();
+
   return (
     <>
       {selectedMenuOption === "Text" ? <TextResourcesPanel /> : null}
-      {/* {selectedMenuOption === "Animation" ? <AnimationsPanel /> : null}
-      {selectedMenuOption === "Effect" ? <EffectsPanel /> : null}
       {selectedMenuOption === "Export" ? <ExportVideoPanel /> : null}
-      {selectedMenuOption === "Fill" ? <FillPanel /> : null} */}
+      {selectedMenuOption === "Animation" ? <AnimationsPanel /> : null}
+      {selectedMenuOption === "Effects" ? <EffectsPanel /> : null}
+      {selectedMenuOption === "Fill" ? <FillPanel /> : null}
+      {selectedMenuOption === "Audio" ? <AudioResourcesPanel /> : null}
     </>
   );
 };

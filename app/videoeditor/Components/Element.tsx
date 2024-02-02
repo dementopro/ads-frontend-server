@@ -46,7 +46,7 @@ export const Element = (props: ElementProps) => {
         ) : null}
       </div>
       <button
-        className="bg-red-500 hover:bg-red-700 text-white mr-2 text-xs py-0 px-1 rounded"
+        className="bg-red-500 hover:bg-red-700 text-white mx-2 text-xs py-0 px-1 rounded"
         onClick={(e) => {
           removeEditorElement(element.id);
           refreshElements();

@@ -2,21 +2,23 @@
 
 import { useVideoContext } from "@/context/video";
 import { formatTimeToMinSecMili } from "@/utils/video";
+import { useEffect, useState } from "react";
 import { MdPlayArrow, MdPause } from "react-icons/md";
 
 export const SeekPlayer = () => {
-  const { playing, currentTimeInMs, maxTime, setPlaying, handleSeek } = useVideoContext();
+  const { playing, currentTimeInMs, maxTime, setPlaying1, handleSeek } = useVideoContext();
 
   const Icon = playing ? MdPause : MdPlayArrow;
   const formattedTime = formatTimeToMinSecMili(currentTimeInMs);
   const formattedMaxTime = formatTimeToMinSecMili(maxTime);
+
   return (
     <div className="seek-player flex flex-col">
       <div className="flex flex-row items-center px-2">
         <button
           className="w-[80px] rounded  px-2 py-2"
           onClick={() => {
-            setPlaying(!playing);
+            setPlaying1(!playing);
           }}
         >
           <Icon size="40"></Icon>

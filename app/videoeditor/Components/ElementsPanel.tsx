@@ -3,7 +3,7 @@ import { Element } from "./Element";
 import { useVideoContext } from "@/context/video";
 
 export const ElementsPanel = () => {
-  const { editorElements } = useVideoContext();
+  const { cEditorElements } = useVideoContext();
 
   return (
     <div>
@@ -11,7 +11,7 @@ export const ElementsPanel = () => {
         <div className="text-sm px-[16px] py-[7px] font-semibold">Elements</div>
       </div>
       <div className="flex flex-col">
-        {editorElements.map((element) => {
+        {cEditorElements.map((element) => {
           return <Element key={element.id} element={element} />;
         })}
       </div>

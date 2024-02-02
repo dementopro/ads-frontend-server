@@ -59,7 +59,7 @@ const Header = () => {
               ))}
             </div>
           </div>
-          <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-auto justify-end items-end gap-4 text-white text-semibold">
+          <div className="android:hidden ipadmini:hidden ipad:flex desktop:flex w-auto justify-end items-end gap-4 text-white text-semibold font-bold">
             <Link target="_self"  href="/login" className="w-36 h-11 px-4 py-1.5 bg-[#15161A] justify-center items-center gap-4 flex">
               <div className="w-[120px] text-center text-white text-base font-medium leading-[29.12px]">
                 Sign In

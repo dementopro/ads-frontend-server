@@ -201,6 +201,7 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
               </p>
             </div>
           </div>
+<<<<<<< Updated upstream
         </div>
         <div className="android:hidden ipad:block relative android:col-span-12 ipad:col-span-5">
           <div
@@ -219,6 +220,80 @@ const GetRecommendations: FC<IGetRecommendationsProps> = (props) => {
             <h5 className="uppercase bg-gradient-to-r from-[#6859FF] bg-clip-text text-transparent to-[#AF41FF] text-base tracking-[.2em]">
               How It Works
             </h5>
+=======
+          <div className="relative android:col-span-12 ipadmini:col-span-5 pt-7">
+            <div className="flex items-center gap-2">
+              <img
+                src="/images/home/sparkles.svg"
+                className="w-[26px] h-[26px]"
+                alt="sparkles"
+              />
+              <h5 className="uppercase bg-gradient-to-r from-[#6859FF] bg-clip-text text-transparent to-[#AF41FF] text-base tracking-[.2em]">
+                How It Works
+              </h5>
+            </div>
+            <div className={tab === 0 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Enhance Search Engine Ranking
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  SEO enhances your website's visibility and ranking on search engines,
+                  driving organic traffic and increasing the likelihood of reaching and engaging with your target audience.
+                </p>
+              </div>
+            </div>
+            <div className={tab === 1 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Connect with your Audience
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  Boost your business visibility, foster brand awareness, and cultivate meaningful connections with a wider audience.
+                </p>
+              </div>
+            </div>
+            <div className={tab === 2 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Propel Business Growth
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  Cultivate customer loyalty, drive conversions, and foster personalized communication, propelling business growth through targeted and effective messaging.
+                </p>
+              </div>
+            </div>
+            <div className={tab === 3 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Enhance Business Communication
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  Distill complex information into visually compelling and easily digestible formats, enhancing engagement, and information retention for a wider audience.
+                </p>
+              </div>
+            </div>
+            <div className={tab === 4 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Resonate with your Audience
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  Enhance marketing campaigns by delivering dynamic, visually captivating content that resonates with audiences, driving engagement and brand awareness.
+                </p>
+              </div>
+            </div>
+            <div className={tab === 5 ? "fade-in" : "hidden"}>
+              <div className="px-6 py-3">
+                <p className="mt-6 text-[42px] font-extrabold text-white leading-none tracking-tighter font-poppins">
+                  Grow your Audience
+                </p>
+                <p className="mt-6 text-white text-[20px] font-semibold">
+                  Serve as a focused and persuasive entry point that converts visitors into customers, driving conversions and maximizing marketing efforts.
+                </p>
+              </div>
+            </div>
+>>>>>>> Stashed changes
           </div>
           <p className="mt-6 text-[42px] font-extrabold text-white">
             Get Recommendations in seconds

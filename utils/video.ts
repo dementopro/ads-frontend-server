@@ -13,6 +13,19 @@ export function isHtmlVideoElement(
   return element.tagName === "VIDEO";
 }
 
+export function isHtmlAudioElement(
+  element:
+    | HTMLVideoElement
+    | HTMLImageElement
+    | HTMLCanvasElement
+    | null
+    | HTMLElement
+): element is HTMLAudioElement {
+  if (!element) return false;
+  return element.tagName === "AUDIO";
+}
+
+
 function appendZero(value: number, minDigits: number = 2) {
   return value.toString().padStart(minDigits, "0");
 }

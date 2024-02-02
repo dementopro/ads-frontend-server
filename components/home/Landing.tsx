@@ -106,7 +106,7 @@ const Landing = () => {
               alt='producthunt logo'
             />
           </div>
-          <div className='flex flex-row gap-[16px] items-center justify-start'>
+          <div className='flex flex-row gap-[16px] items-center justify-start font-bold'>
             <PrimaryButton icon={true}
               target="_self"
               href="/register"

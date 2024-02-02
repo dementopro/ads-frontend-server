@@ -2,7 +2,7 @@
 import * as React from 'react';
 import PrimaryButton from '../common/PrimaryButton';
 import Image from 'next/image';
-import { Avatar } from '@nextui-org/react';
+import { Avatar, CardProvider } from '@nextui-org/react';
 import { BiHeart, BiMessage } from 'react-icons/bi';
 
 type SampleCardProps = {
@@ -12,7 +12,36 @@ type SampleCardProps = {
   comment: string;
 };
 
+<<<<<<< Updated upstream
 const SampleCard = ({ avatar, name, comment, image }: SampleCardProps) => {
+=======
+type CardProps = {
+  title: string;
+  image: string;
+  className?: string;
+}
+
+const Card = ({ title, image, className }: CardProps) => {
+  return (
+    <div className={`py-[2px] rounded-[8px] bg-light-purple-gradient ${className}`}>
+      <div className="w-full h-full bg-black shrink-0 py-1 w-full android:w-[242px] rounded-[7px]">
+        <div className="flex gap-[10px] items-center px-8 py-2">
+          <h3 className="text-white font-semibold text-sm capitalize">
+            {title}
+          </h3>
+        </div>
+        <div
+          className="mt-3 h-[176px] w-full bg-cover bg-no-repeat bg-center"
+          style={{ backgroundImage: `url(${image})` }}
+        ></div>
+      </div>
+    </div>
+  );
+};
+
+
+const SampleCard = ({ avatar, name, comment, image, className }: SampleCardProps) => {
+>>>>>>> Stashed changes
   return (
     <div className={`py-[2px] rounded-[8px] bg-light-purple-gradient`}>
       <div className="w-full h-full bg-black shrink-0 py-1 w-full android:w-[242px] rounded-[7px]">
@@ -84,6 +113,7 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
               comment="Cultivate success with Sembrar.io - your growth partner in the..."
             />
           </div>
+<<<<<<< Updated upstream
         </div>
         <div className="android:hidden ipad:flex flex-wrap items-stretch justify-center w-full gap-4 mt-6">
           <SampleCard
@@ -135,6 +165,81 @@ const Samples: React.FunctionComponent<ISamplesProps> = (props) => {
                 <br />
                 🌈 Quality Prints: Turn your memories into works of art with our
                 top-notch printing...
+=======
+          <div className='w-full'>
+            <Marquee pauseOnHover={true} speed={20} autoFill={true}>
+              <div className="flex android:pb-[30px] ipad:pb-0 android:overflow-x-auto ipad:overflow-x-hidden ipad:flex-wrap items-stretch android:justify-start ipad:justify-center w-full gap-4 mt-10">
+                <SampleCard
+                  avatar="/images/home/samples/1.png"
+                  image="/images/home/samples/1.jfif"
+                  name="Mazelab"
+                  comment="Transforming visions into reality with Mazelab - where innovation meets..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/2.png"
+                  image="/images/home/samples/2.jfif"
+                  name="Ruul.io"
+                  comment="Unlock the power of collaboration with Ruul.io - your gateway to seamless..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/3.png"
+                  image="/images/home/samples/3.jfif"
+                  name="Earlz"
+                  comment="Elevate your tech game with Earlz.de - Discover cutting-edge..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/4.png"
+                  image="/images/home/samples/4.jpg"
+                  name="Market Karma"
+                  comment="Boost your online presence with MarketKarma.com – navigate the digit..."
+                />
+                <Card
+                  image="/images/home/samples/5.jpg"
+                  title="Inforgraphic"
+                />
+                <Card
+                  image="/images/home/samples/6.jpg"
+                  title="Video"
+                  className='mr-4'
+                />
+              </div>
+            </Marquee>
+            <Marquee pauseOnHover={true} speed={20} autoFill={true}>
+              <div className="android:hidden ipad:flex flex-wrap items-stretch justify-center w-full gap-4 mt-4">
+                <SampleCard
+                  avatar="/images/home/samples/7.png"
+                  image="/images/home/samples/7.jfif"
+                  name="Titan Ignite"
+                  comment="Elevate your brand, amplify your reach, and scale your impact. 🔥..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/8.png"
+                  image="/images/home/samples/8.jfif"
+                  name="Sembrar.Io"
+                  comment="Cultivate success with Sembrar.io-your growth partner in the..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/9.png"
+                  image="/images/home/samples/9.jfif"
+                  name="The Hayden Digital"
+                  comment="Discover the digital edge with TheHaydenDigital.com, and embark o..."
+                />
+                <SampleCard
+                  avatar="/images/home/samples/10.png"
+                  image="/images/home/samples/10.jpg"
+                  name="Click Trust"
+                  comment="Don't have the resources internally? We take care of your campaigns..."
+                />
+                <Card
+                  image="/images/home/samples/11.jpg"
+                  title="Landing Page"
+                />
+                <Card
+                  image="/images/home/samples/12.jpg"
+                  title="Email Marketing"
+                  className='mr-4'
+                />
+>>>>>>> Stashed changes
               </div>
             </div>
           </div>

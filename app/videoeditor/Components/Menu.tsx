@@ -1,3 +1,4 @@
+import { useVideoContext } from "@/context/video";
 import React from "react";
 import {
   MdDownload,
@@ -10,10 +11,8 @@ import {
   MdMovieFilter,
 } from "react-icons/md";
 
-const Menu = ({ selectedMenuOption, setSelectedMenuOption }: {
-  selectedMenuOption: any,
-  setSelectedMenuOption: any
-}) => {
+const Menu = () => {
+  const { selectedMenuOption, setSelectedMenuOption} = useVideoContext();
   return (
     <>
       {MENU_OPTIONS.map((option) => {
@@ -53,10 +52,10 @@ const MENU_OPTIONS = [
   //   name: "Video",
   //   icon: MdVideoLibrary,
   // },
-  // {
-  //   name: "Audio",
-  //   icon: MdAudiotrack,
-  // },
+  {
+    name: "Audio",
+    icon: MdAudiotrack,
+  },
   // {
   //   name: "Image",
   //   icon: MdImage,

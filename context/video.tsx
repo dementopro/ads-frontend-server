@@ -2,7 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { fabric } from "fabric";
 import anime from 'animejs';
 import { getUid } from "@/utils";
-import { FabricUitls, isHtmlVideoElement } from "@/utils/video";
+import { FabricUitls, isHtmlVideoElement, isHtmlAudioElement } from "@/utils/video";
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { toBlobURL } from '@ffmpeg/util';
 
 export type EditorElementBase<T extends string, P> = {
   readonly id: string;
@@ -118,7 +120,6 @@ export const VideoContext = createContext<{
   videos: string[],
   images: string[],
   audios: string[],
-  editorElements: EditorElement[],
   backgroundColor: string,
   maxTime: number,
   playing: boolean,
@@ -133,15 +134,13 @@ export const VideoContext = createContext<{
   setVideos: (value: string[]) => void,
   setImages: (value: string[]) => void,
   setAudios: (value: string[]) => void,
-  setEditorElements: (value: EditorElement[]) => void,
-  setBackgroundColor: (value: string) => void,
+  setBackgroundColor1: (value: string) => void,
   setMaxTime: (value: number) => void,
-  setPlaying: (value: boolean) => void,
+  setPlaying1: (value: boolean) => void,
   setCurrentKeyFrame: (value: number) => void,
   setSelectedElement1: (value: EditorElement | null) => void,
   setFps: (value: number) => void,
   setAnimations: (value: Animation[]) => void,
-  setAnimationTimeLine: (value: anime.AnimeTimelineInstance) => void,
   setSelectedMenuOption: (value: string) => void,
   setSelectedVideoFormat: (value: string) => void,
   addText: (options: {
@@ -151,17 +150,29 @@ export const VideoContext = createContext<{
   }) => void;
   setCanvas1: (canvas: fabric.Canvas | null) => void,
   addVideoResource: (value: string) => void,
+  addAudioResource: (value: string) => void,
   addVideo: (value: number) => void,
+  addAudio: (value: number) => void,
   refreshElements: () => void,
   removeEditorElement: (value: string) => void,
   currentTimeInMs: number,
   handleSeek: (value: number) => void,
   updateEditorElementTimeFrame: (editorElement: EditorElement, value: Partial<TimeFrame>) => void,
+  setVideoFormat: (foramt: 'mp4' | 'webm') => void,
+  saveCanvasToVideoWithAudio: () => void,
+  saveCanvasToVideoWithAudioWebmMp4: () => void,
+  removeAnimation: (value: string) => void,
+  updateAnimation: (id: string, animation: Animation) => void,
+  addAnimation: (animation: Animation) => void,
+  updateEffect: (id: string, effect: Effect) => void,
+  isEditorVideoElement: (element: EditorElement) => boolean,
+  isEditorImageElement: (element: EditorElement) => boolean,
+  isPlaying: boolean,
+  cEditorElements: EditorElement[]
 }>({
   videos: [],
   images: [],
   audios: [],
-  editorElements: [],
   backgroundColor: '#111111',
   maxTime: 30 * 1000,
   playing: false,
@@ -176,28 +187,46 @@ export const VideoContext = createContext<{
   setVideos: () => { },
   setImages: () => { },
   setAudios: () => { },
-  setEditorElements: () => { },
-  setBackgroundColor: () => { },
+  setBackgroundColor1: () => { },
   setMaxTime: () => { },
-  setPlaying: () => { },
+  setPlaying1: () => { },
   setCurrentKeyFrame: () => { },
   setSelectedElement1: () => { },
   setFps: () => { },
   setAnimations: () => { },
-  setAnimationTimeLine: () => { },
   setSelectedMenuOption: () => { },
   setSelectedVideoFormat: () => { },
   addText: () => { },
   addVideoResource: () => { },
+  addAudioResource: () => { },
   addVideo: () => { },
+  addAudio: () => {},
   refreshElements: () => { },
   removeEditorElement: () => { },
   currentTimeInMs: 0,
-  handleSeek: () => {},
-  updateEditorElementTimeFrame: () => {}
+  handleSeek: () => { },
+  updateEditorElementTimeFrame: () => { },
+  setVideoFormat: () => { },
+  saveCanvasToVideoWithAudio: () => { },
+  saveCanvasToVideoWithAudioWebmMp4: () => { },
+  removeAnimation: () => { },
+  updateAnimation: () => { },
+  addAnimation: () => { },
+  updateEffect: () => { },
+  isEditorVideoElement: () => false,
+  isEditorImageElement: () => false,
+  isPlaying: false,
+  cEditorElements: []
 });
 
 export const useVideoContext = () => useContext(VideoContext);
+
+let isPlaying = false;
+let currentSelectedElement: EditorElement | null = null;
+let currentCanvas: fabric.Canvas | null = null;
+const cEditorElements: EditorElement[] = [];
+const cAnimations: Animation[] = [];
+let animationTimeLine: anime.AnimeTimelineInstance = anime.timeline();
 
 // Create an VideoProvider component
 export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -207,7 +236,6 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   const [videos, setVideos] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
   const [audios, setAudios] = useState<string[]>([])
-  const [editorElements, setEditorElements] = useState<EditorElement[]>([])
   const [backgroundColor, setBackgroundColor] = useState<string>('#111111')
   const [maxTime, setMaxTime] = useState<number>(30 * 1000)
   const [playing, setPlaying] = useState<boolean>(false)
@@ -215,13 +243,13 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedElement, setSelectedElement] = useState<EditorElement | null>(null)
   const [fps, setFps] = useState<number>(60)
   const [animations, setAnimations] = useState<Animation[]>([])
-  const [animationTimeLine, setAnimationTimeLine] = useState<anime.AnimeTimelineInstance>(anime.timeline())
+  // const [animationTimeLine, setAnimationTimeLine] = useState<anime.AnimeTimelineInstance>(anime.timeline())
   const [selectedMenuOption, setSelectedMenuOption] = useState<string>("Video")
   const [selectedVideoFormat, setSelectedVideoFormat] = useState<string>('mp4')
   const [currentTimeInMs, setCurrentTimeInMs] = useState<number>(0)
 
   const updateVideoElements = () => {
-    editorElements.filter(
+    cEditorElements.filter(
       (element): element is VideoEditorElement =>
         element.type === "video"
     )
@@ -230,7 +258,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
         if (isHtmlVideoElement(video)) {
           const videoTime = (currentTimeInMs - element.timeFrame.start) / 1000;
           video.currentTime = videoTime;
-          if (playing) {
+          if (isPlaying) {
             video.play();
           } else {
             video.pause();
@@ -243,7 +271,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   let startedTimePlay = 0;
 
   const playFrames = () => {
-    if (!playing) {
+    if (!isPlaying) {
       return;
     }
     const elapsedTime = Date.now() - startedTime;
@@ -251,7 +279,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     updateTimeTo(newTime);
     if (newTime > maxTime) {
       setCurrentKeyFrame(0)
-      setPlaying(false);
+      setPlaying1(false);
     } else {
       requestAnimationFrame(() => {
         playFrames();
@@ -260,7 +288,8 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const setPlaying1 = (playing: boolean) => {
-    setPlaying(playing)
+    isPlaying = playing
+    setPlaying(isPlaying)
     updateVideoElements();
     if (playing) {
       startedTime = Date.now();
@@ -272,7 +301,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const handleSeek = (seek: number) => {
-    if (playing) {
+    if (isPlaying) {
       setPlaying1(false);
     }
     updateTimeTo(seek);
@@ -281,13 +310,13 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const refreshAnimations = () => {
     anime.remove(animationTimeLine);
-    setAnimationTimeLine(anime.timeline({
+    animationTimeLine = anime.timeline({
       duration: maxTime,
       autoplay: false,
-    }));
-    for (let i = 0; i < animations.length; i++) {
-      const animation = animations[i];
-      const editorElement = editorElements.find((element) => element.id === animation.targetId);
+    });
+    for (let i = 0; i < cAnimations.length; i++) {
+      const animation = cAnimations[i];
+      const editorElement = cEditorElements.find((element) => element.id === animation.targetId);
       const fabricObject = editorElement?.fabricObject;
       if (!editorElement || !fabricObject) {
         continue;
@@ -319,19 +348,19 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
             top: editorElement.placement.y,
           }
           const startPosition = {
-            left: (direction === "left" ? - editorElement.placement.width : direction === "right" ? canvas?.width : editorElement.placement.x),
-            top: (direction === "top" ? - editorElement.placement.height : direction === "bottom" ? canvas?.height : editorElement.placement.y),
+            left: (direction === "left" ? - editorElement.placement.width : direction === "right" ? currentCanvas?.width : editorElement.placement.x),
+            top: (direction === "top" ? - editorElement.placement.height : direction === "bottom" ? currentCanvas?.height : editorElement.placement.y),
           }
           if (animation.properties.useClipPath) {
             const clipRectangle = FabricUitls.getClipMaskRect(editorElement, 50);
             fabricObject.set('clipPath', clipRectangle)
           }
           if (editorElement.type === "text" && animation.properties.textType === "character") {
-            canvas?.remove(...editorElement.properties.splittedTexts)
+            currentCanvas?.remove(...editorElement.properties.splittedTexts)
             // @ts-ignore
             editorElement.properties.splittedTexts = getTextObjectsPartitionedByCharacters(editorElement.fabricObject, editorElement);
             editorElement.properties.splittedTexts.forEach((textObject) => {
-              canvas!.add(textObject);
+              currentCanvas!.add(textObject);
             })
             const duration = animation.duration / 2;
             const delay = duration / editorElement.properties.splittedTexts.length;
@@ -391,8 +420,8 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
             top: editorElement.placement.y,
           }
           const targetPosition = {
-            left: (direction === "left" ? - editorElement.placement.width : direction === "right" ? canvas?.width : editorElement.placement.x),
-            top: (direction === "top" ? -100 - editorElement.placement.height : direction === "bottom" ? canvas?.height : editorElement.placement.y),
+            left: (direction === "left" ? - editorElement.placement.width : direction === "right" ? currentCanvas?.width : editorElement.placement.x),
+            top: (direction === "top" ? -100 - editorElement.placement.height : direction === "bottom" ? currentCanvas?.height : editorElement.placement.y),
           }
           if (animation.properties.useClipPath) {
             const clipRectangle = FabricUitls.getClipMaskRect(editorElement, 50);
@@ -448,19 +477,19 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const updateEditorElement = (editorElement: EditorElement) => {
-    setEditorElements1(editorElements.map((element) =>
+    setEditorElements1(cEditorElements.map((element) =>
       element.id === editorElement.id ? editorElement : element
     ));
   }
 
   const refreshElements = () => {
-    if (!canvas) return;
-    canvas.remove(...canvas.getObjects());
-    for (let index = 0; index < editorElements.length; index++) {
-      const element = editorElements[index];
+    if (!currentCanvas) return;
+    currentCanvas.remove(...currentCanvas.getObjects())
+
+    for (let index = 0; index < cEditorElements.length; index++) {
+      const element = cEditorElements[index];
       switch (element.type) {
         case "video": {
-          console.log("elementid", element.properties.elementId);
           if (document.getElementById(element.properties.elementId) == null)
             continue;
           const videoElement = document.getElementById(
@@ -493,8 +522,8 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
           videoElement.width = 100;
           videoElement.height =
             (videoElement.videoHeight * 100) / videoElement.videoWidth;
-          canvas.add(videoObject);
-          canvas.on("object:modified", function (e) {
+          currentCanvas.add(videoObject);
+          currentCanvas.on("object:modified", function (e) {
             if (!e.target) return;
             const target = e.target;
             if (target != videoObject) return;
@@ -541,8 +570,8 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
             fill: "#ffffff",
           });
           element.fabricObject = textObject;
-          canvas.add(textObject);
-          canvas.on("object:modified", function (e) {
+          currentCanvas.add(textObject);
+          currentCanvas.on("object:modified", function (e) {
             if (!e.target) return;
             const target = e.target;
             if (target != textObject) return;
@@ -580,13 +609,13 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
         });
       }
     }
-    const selectedEditorElement = selectedElement;
+    const selectedEditorElement = currentSelectedElement;
     if (selectedEditorElement && selectedEditorElement.fabricObject) {
-      canvas!.setActiveObject(selectedEditorElement.fabricObject);
+      currentCanvas.setActiveObject(selectedEditorElement.fabricObject);
     }
     refreshAnimations();
     updateTimeTo(currentTimeInMs);
-    canvas.renderAll();
+    currentCanvas.renderAll();
   }
 
   const updateTimeTo = (newTime: number) => {
@@ -595,7 +624,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     if (canvas) {
       canvas.backgroundColor = backgroundColor;
     }
-    editorElements.forEach(
+    cEditorElements.forEach(
       e => {
         if (!e.fabricObject) return;
         const isInside = e.timeFrame.start <= newTime && newTime <= e.timeFrame.end;
@@ -608,33 +637,110 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentTimeInMs(currentKeyFrame * 1000 / fps);
   }, [currentKeyFrame, fps])
 
-  const updateSelectedElement = (selectedElement: EditorElement) => {
-    setSelectedElement(selectedElement)
+  const updateSelectedElement = () => {
+    currentSelectedElement = cEditorElements.find((element) => element.id === currentSelectedElement?.id) ?? null;
+    setSelectedElement(currentSelectedElement)
   }
 
   const setEditorElements1 = (editorElements: EditorElement[]) => {
-    setEditorElements(editorElements)
-    updateSelectedElement(editorElements[editorElements.length - 1]);
-    // refreshElements();
+    cEditorElements.splice(0, cEditorElements.length);
+    cEditorElements.push(...editorElements);
+    updateSelectedElement();
+    refreshElements();
+    // refreshAnimations();
   }
 
   const setSelectedElement1 = (selectedElement: EditorElement | null) => {
-    setSelectedElement(selectedElement);
+    currentSelectedElement = selectedElement;
     if (canvas) {
       if (selectedElement?.fabricObject)
         canvas.setActiveObject(selectedElement.fabricObject);
       else
         canvas.discardActiveObject();
     }
+    setSelectedElement(currentSelectedElement);
   }
 
   const addEditorElement = (editorElement: EditorElement) => {
-    const tempEditorElements = [...editorElements];
-    tempEditorElements.push(editorElement);
-    setEditorElements1([...editorElements, editorElement]);
+    const editorElements = [...cEditorElements, editorElement]
+    setEditorElements1(editorElements);
     refreshElements();
-    setSelectedElement1(tempEditorElements[tempEditorElements.length - 2]);
+    setSelectedElement1(editorElements[editorElements.length - 1]);
   }
+
+  const addVideo = (index: number) => {
+    const videoElement = document.getElementById(`video-${index}`)
+    if (!isHtmlVideoElement(videoElement)) {
+      return;
+    }
+    const videoDurationMs = videoElement.duration * 1000;
+    const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+    const id = getUid();
+    const currentIndex = cEditorElements.length;
+    addEditorElement(
+      {
+        id,
+        name: `Media(video) ${currentIndex + 1}`,
+        type: "video",
+        placement: {
+          x: 0,
+          y: 0,
+          width: 100 * aspectRatio,
+          height: 100,
+          rotation: 0,
+          scaleX: 1,
+          scaleY: 1,
+        },
+        timeFrame: {
+          start: 0,
+          end: videoDurationMs,
+        },
+        properties: {
+          elementId: `video-${id}`,
+          src: videoElement.src,
+          effect: {
+            type: "none",
+          }
+        },
+      },
+    );
+  }
+
+  const addAudio = (index: number) => {
+    const audioElement = document.getElementById(`audio-${index}`)
+    if (!isHtmlAudioElement(audioElement)) {
+      return;
+    }
+    const audioDurationMs = audioElement.duration * 1000;
+    const id = getUid();
+    const currentIndex = cEditorElements.length;
+    addEditorElement(
+      {
+        id,
+        name: `Media(audio) ${currentIndex + 1}`,
+        type: "audio",
+        placement: {
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          rotation: 0,
+          scaleX: 1,
+          scaleY: 1,
+        },
+        timeFrame: {
+          start: 0,
+          end: audioDurationMs,
+        },
+        properties: {
+          elementId: `audio-${id}`,
+          src: audioElement.src,
+        }
+      },
+    );
+
+  }
+
 
   const addText = (options: {
     text: string,
@@ -642,7 +748,7 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     fontWeight: number,
   }) => {
     const id = getUid();
-    const index = editorElements.length;
+    const index = cEditorElements.length;
     addEditorElement(
       {
         id,
@@ -672,8 +778,11 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const setCanvas1 = (canvas: fabric.Canvas | null) => {
-    canvas!.backgroundColor = backgroundColor;
-    setCanvas(canvas)
+    currentCanvas = canvas;
+    setCanvas(currentCanvas)
+    if (canvas) {
+      canvas.backgroundColor = backgroundColor
+    }
   }
 
   const addVideoResource = (video: string) => {
@@ -682,47 +791,18 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     setVideos(tVidoes)
   }
 
-  const addVideo = (index: number) => {
-    const videoElement = document.getElementById(`video-${index}`)
-    if (!isHtmlVideoElement(videoElement)) {
-      return;
-    }
-    const videoDurationMs = videoElement.duration * 1000;
-    const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
-    const id = getUid();
-    addEditorElement(
-      {
-        id,
-        name: `Media(video) ${index + 1}`,
-        type: "video",
-        placement: {
-          x: 0,
-          y: 0,
-          width: 100 * aspectRatio,
-          height: 100,
-          rotation: 0,
-          scaleX: 1,
-          scaleY: 1,
-        },
-        timeFrame: {
-          start: 0,
-          end: videoDurationMs,
-        },
-        properties: {
-          elementId: `video-${id}`,
-          src: videoElement.src,
-          effect: {
-            type: "none",
-          }
-        },
-      },
-    );
+  const addAudioResource = (audio: string) => {
+    const tAudios = [...audios]
+    tAudios.push(audio)
+    setAudios(tAudios)
   }
 
   const removeEditorElement = (id: string) => {
-    setEditorElements1(editorElements.filter(
-      (editorElement) => editorElement.id !== id
-    ));
+    const editIndex = cEditorElements.findIndex(editorElement => editorElement.id === id)
+    const editorElements = [...cEditorElements];
+    editorElements.splice(editIndex, 1);
+    cEditorElements.splice(0, cEditorElements.length);
+    cEditorElements.push(...editorElements);
     refreshElements();
   }
 
@@ -745,13 +825,149 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     refreshAnimations();
   }
 
+  const setVideoFormat = (format: 'mp4' | 'webm') => {
+    setSelectedVideoFormat(format);
+  }
+
+  const saveCanvasToVideoWithAudio = () => {
+    saveCanvasToVideoWithAudioWebmMp4();
+  }
+
+  const saveCanvasToVideoWithAudioWebmMp4 = () => {
+    let mp4 = selectedVideoFormat === 'mp4'
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    const stream = canvas.captureStream(30);
+    const audioElements = cEditorElements.filter(isEditorAudioElement)
+    const audioStreams: MediaStream[] = [];
+    audioElements.forEach((audio) => {
+      const audioElement = document.getElementById(audio.properties.elementId) as HTMLAudioElement;
+      let ctx = new AudioContext();
+      let sourceNode = ctx.createMediaElementSource(audioElement);
+      let dest = ctx.createMediaStreamDestination();
+      sourceNode.connect(dest);
+      sourceNode.connect(ctx.destination);
+      audioStreams.push(dest.stream);
+    });
+    audioStreams.forEach((audioStream) => {
+      stream.addTrack(audioStream.getAudioTracks()[0]);
+    });
+    const video = document.createElement("video");
+    video.srcObject = stream;
+    video.height = 500;
+    video.width = 800;
+    // video.controls = true;
+    // document.body.appendChild(video);
+    video.play().then(() => {
+      const mediaRecorder = new MediaRecorder(stream);
+      const chunks: Blob[] = [];
+      mediaRecorder.ondataavailable = function (e) {
+        chunks.push(e.data);
+
+      };
+      mediaRecorder.onstop = async function (e) {
+        const blob = new Blob(chunks, { type: "video/webm" });
+
+        if (mp4) {
+          // lets use ffmpeg to convert webm to mp4
+          const data = new Uint8Array(await (blob).arrayBuffer());
+          const ffmpeg = new FFmpeg();
+          const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd"
+          await ffmpeg.load({
+            coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+            wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+            // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript'),
+          });
+          await ffmpeg.writeFile('video.webm', data);
+          await ffmpeg.exec(["-y", "-i", "video.webm", "-c", "copy", "video.mp4"]);
+          // await ffmpeg.exec(["-y", "-i", "video.webm", "-c:v", "libx264", "video.mp4"]);
+
+          const output = await ffmpeg.readFile('video.mp4');
+          const outputBlob = new Blob([output], { type: "video/mp4" });
+          const outputUrl = URL.createObjectURL(outputBlob);
+          const a = document.createElement("a");
+          a.download = "video.mp4";
+          a.href = outputUrl;
+          a.click();
+
+        } else {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "video.webm";
+          a.click();
+        }
+      };
+      mediaRecorder.start();
+      setTimeout(() => {
+        mediaRecorder.stop();
+      }, maxTime);
+      video.remove();
+    })
+  }
+
+  const isEditorAudioElement = (
+    element: EditorElement
+  ): element is AudioEditorElement => {
+    return element.type === "audio";
+  }
+  const isEditorVideoElement = (
+    element: EditorElement
+  ): element is VideoEditorElement => {
+    return element.type === "video";
+  }
+
+  const isEditorImageElement = (
+    element: EditorElement
+  ): element is ImageEditorElement => {
+    return element.type === "image";
+  }
+
+  // Animation Part
+  const addAnimation = (animation: Animation) => {
+    const animations = [...cAnimations]
+    animations.push(animation)
+    cAnimations.splice(0, cAnimations.length);
+    cAnimations.push(...animations)
+    setAnimations(cAnimations)
+    refreshAnimations();
+  }
+
+  const removeAnimation = (id: string) => {
+    setAnimations(animations.filter(
+      (animation) => animation.id !== id
+    ));
+    refreshAnimations();
+  }
+
+  const updateAnimation = (id: string, animation: Animation) => {
+    const index = cAnimations.findIndex((a) => a.id === id);
+    cAnimations.splice(index, 1, animation);
+    refreshAnimations();
+  }
+
+  const updateEffect = (id: string, effect: Effect) => {
+    const index = cEditorElements.findIndex((element) => element.id === id);
+    const element = cEditorElements[index];
+    if (isEditorVideoElement(element) || isEditorImageElement(element)) {
+      element.properties.effect = effect;
+    }
+    refreshElements();
+  }
+
+  const setBackgroundColor1 = (backgroundColor: string) => {
+    setBackgroundColor(backgroundColor);
+    if (currentCanvas) {
+      currentCanvas.backgroundColor = backgroundColor;
+    }
+  }
+
+
   // Provide the video data through the context to child components
   return (
     <VideoContext.Provider value={{
       videos,
       images,
       audios,
-      editorElements,
       backgroundColor,
       maxTime,
       playing,
@@ -766,25 +982,36 @@ export const VideoProvider = ({ children }: { children: React.ReactNode }) => {
       setVideos,
       setImages,
       setAudios,
-      setEditorElements,
-      setBackgroundColor,
+      setBackgroundColor1,
       setMaxTime,
-      setPlaying,
+      setPlaying1,
       setCurrentKeyFrame,
       setSelectedElement1,
       setFps,
       setAnimations,
-      setAnimationTimeLine,
       setSelectedMenuOption,
       setSelectedVideoFormat,
       addText,
       addVideoResource,
+      addAudioResource,
       addVideo,
+      addAudio,
       refreshElements,
       removeEditorElement,
       currentTimeInMs,
       handleSeek,
-      updateEditorElementTimeFrame
+      updateEditorElementTimeFrame,
+      setVideoFormat,
+      saveCanvasToVideoWithAudio,
+      saveCanvasToVideoWithAudioWebmMp4,
+      removeAnimation,
+      updateAnimation,
+      addAnimation,
+      updateEffect,
+      isEditorVideoElement,
+      isEditorImageElement,
+      isPlaying,
+      cEditorElements
     }}>
       {children}
     </VideoContext.Provider>

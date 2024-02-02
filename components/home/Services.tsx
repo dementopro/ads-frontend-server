@@ -79,6 +79,7 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
           </div>
         </div>
 
+<<<<<<< Updated upstream
         <div className="shrink-0 w-[300px] h-[250px] px-5 py-3 flex flex-col gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314] shadow-[0_16px_80px_0px_rgba(104, 89, 255, 0.20)">
           <div className="flex items-center w-full gap-1">
             <BiSolidStar className="text-[#FFD74A] w-5 h-5" />
@@ -101,6 +102,34 @@ const Services: React.FunctionComponent<IServicesProps> = (props) => {
               <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
                 Software Engineer
               </p>
+=======
+        {DATA.slice(currentIndex, currentIndex + 3).map((data, index) => (
+          <div
+            key={index}
+            className="transition fade-in shrink-0 h-[250px] px-5 py-3 flex flex-col justify-center gap-3 rounded-2xl border-t border-t-[#7D55FA] border-b border-b-[#7D55FA] bg-[#010314]"
+            style={{
+              boxShadow: '0px 16px 80px 0px rgba(104, 89, 255, 0.20)'
+            }}
+          >
+            <div className="flex items-center w-full gap-1">
+              {[...Array(data.mark)].map((_, mIndex) => (
+                <BiSolidStar key={`mark_${mIndex}`} className="text-[#FFD74A] w-5 h-5" />
+              ))}
+            </div>
+            <div className="flex-1 max-h-[140px] overflow-hidden text-[13px]" style={{ overflowWrap: 'anywhere' }}>
+              {data.description}
+            </div>
+            <div className="flex items-center w-full gap-4">
+              <Avatar src={data.avata} size="md" />
+              <div>
+                <h6 className="text-xs font-semibold text-white font-poppins">
+                  {data.name}
+                </h6>
+                <p className="text-[#A09BAE] font-open-sans text-xs font-normal">
+                  {data.job}
+                </p>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>
